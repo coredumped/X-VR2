@@ -51,7 +51,6 @@ namespace xvr2{
 				var = u;
 #ifdef USE_DEBUG
 				debugmsg(this, "Increasing ");
-				std::cout << var << std::endl;
 #endif
 				unlock();
 				return u;
@@ -65,7 +64,6 @@ namespace xvr2{
 				var = u;
 #ifdef USE_DEBUG
 				debugmsg(this, "Decreasing ");
-				std::cout << var << std::endl;
 #endif
 				unlock();
 				return u;

@@ -14,6 +14,10 @@
 #include<string>
 #endif
 
+#ifdef GCC_REVISION4
+#include<cerrno>
+#endif
+
 
 namespace xvr2{
 

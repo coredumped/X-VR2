@@ -22,6 +22,9 @@
 #ifndef USING_GCC3
 #include<errno.h>
 #endif
+#ifdef GCC_REVISION4
+#include<cerrno>
+#endif
 namespace xvr2{
 
 #ifdef DONT_HAVE_REENTRANT_GETGRGID

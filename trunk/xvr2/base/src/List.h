@@ -9,6 +9,7 @@
 #define __XVR2_LIST_H__
 #include<Container.h>
 #include<ArrayIndexOutOfLimitsException.h>
+#include<ElementNotFoundException.h>
 
 namespace xvr2{
 	namespace Util {
@@ -45,7 +46,11 @@ namespace xvr2{
 					 * (NULL) and the next node to none 
 					 * by making it point to NULL
 					 */
+#ifndef USING_GCC3
 					nodeT():Container(xvr2::_xvr2List__nodeT){
+#else
+					nodeT():Container(){
+#endif
 						next = 0;
 						before = 0;
 					}

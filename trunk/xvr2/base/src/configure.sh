@@ -307,7 +307,7 @@ DEBUG=$MAINTAINER $DEBUGSTRING $DEBUG_MUTEXES
 #DEBUG=$MAINTAINER -DUSE_DEBUG=$DEBUGMODE
 #DEBUG=
 OPTIMIZE=
-CFLAGS=-Wall \$(DEBUG) \$(OPTIMIZE) -I../../common -I. -c $DEFINES -Wimplicit -Wreturn-type -Wunused -Wswitch -Wcomment -Wparentheses -Wpointer-arith -Wmissing-prototypes $SDLCFLAGS" >> Makefile
+CFLAGS=-Wall \$(DEBUG) \$(OPTIMIZE) -I../../common -I. -c $DEFINES -Wimplicit -Wreturn-type -Wunused -Wswitch -Wcomment -Wparentheses -Wpointer-arith $SDLCFLAGS" >> Makefile
 if [ $THREADMODE = 'SDL_THREADS' ]; then
 	echo "LIBS=-ldl -lrt $SDLCMD $NETLIB" >> Makefile
 else
