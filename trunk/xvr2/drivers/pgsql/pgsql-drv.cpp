@@ -6,6 +6,7 @@
 #include<pg_config.h>
 #include<libpq-fe.h>
 #include"pgsql-drv.h"
+extern long timezone;
 
 #ifndef DRV_VERSION
 #define DRV_VERSION 0
@@ -72,6 +73,15 @@ class __pgsql_conn {
 					return tmapping[i].localType;
 			}
 			return DB::Field::CHAR;
+		}
+
+		const char *getLocalTypeName(Oid o){
+			int i;
+			for(i = 0; i < 32; i++){
+				if(o == tmapping[i].oid)
+					return tmapping[i].typeName;
+			}
+			return 0;
 		}
 		
 		void requestMappings(){
@@ -187,6 +197,7 @@ class __pgsql_conn {
 
 					if(have_type){
 						tmapping[j].oid = o;
+						tmapping[j].typeName = strdup(typname);
 						tmapping[j].localType = ltype;
 						j++;
 					}
@@ -364,6 +375,15 @@ DB::Field *__drv_fetch_next_row(void *__res_handle){
 	char *data;
 	unsigned int num, n;
 	int thetype;
+	bool bdat;
+	Int16 tint;
+	Int32 iint;
+	Int64 bint;
+	float float4;
+	double float8;
+	xvr2::Date *tdate;
+	xvr2::Time *ttime;
+	xvr2::Timestamp *tstamp;
 	__pgsql_res *r;
 	r = (__pgsql_res *)__res_handle;
 	if(r->curr_row >= r->row_count)
@@ -382,7 +402,6 @@ DB::Field *__drv_fetch_next_row(void *__res_handle){
 			//DATA IS TEXT
 			switch(r->conn->getLocalType(thetype)){
 				case DB::Field::BIT:
-					bool bdat;
 					if(data[0] == 't'){
 						bdat = true;
 						s[n].init(xvr2::DB::Field::BIT, (void *)&bdat, sizeof(bool));
@@ -393,31 +412,40 @@ DB::Field *__drv_fetch_next_row(void *__res_handle){
 					}
 					break;
 				case DB::Field::TINYINT:
-					Int16 tint;
 					tint = atoi(data);
 					s[n].init(xvr2::DB::Field::TINYINT, (void *)&tint, sizeof(Int16));
 					break;
 				case DB::Field::INTEGER:
-					Int32 iint;
 					iint = atol(data);
 					s[n].init(xvr2::DB::Field::INTEGER, (void *)&iint, sizeof(Int32));
 					break;
 				case DB::Field::BIGINT:
-					Int64 bint;
 					bint = atoll(data);
 					s[n].init(xvr2::DB::Field::BIGINT, (void *)&bint, sizeof(Int64));
 					break;
 				case DB::Field::FLOAT:
-					float float4;
 					float4 = atof(data);
 					s[n].init(xvr2::DB::Field::FLOAT, (void *)&float4, sizeof(float));
 					break;
 				case DB::Field::DOUBLE:
-					double float8;
 					float8 = atof(data);
 					s[n].init(xvr2::DB::Field::DOUBLE, (void *)&float8, sizeof(double));
 					break;
-
+				case DB::Field::DATE:
+					tdate = new Date("%Y-%m-%d", data);
+					s[n].init(xvr2::DB::Field::DATE, (void *)tdate, sizeof(xvr2::Date));
+					xvr2_delete(tdate);
+					break;
+				case DB::Field::TIME:
+					ttime = new Time(data);
+					s[n].init(xvr2::DB::Field::TIME, (void *)ttime, sizeof(xvr2::Time));
+					xvr2_delete(ttime);
+					break;
+				case DB::Field::TIMESTAMP:
+					tstamp = new Timestamp("%Y-%m-%d %T", data);
+					s[n].init(xvr2::DB::Field::TIMESTAMP, (void *)tstamp, sizeof(xvr2::Timestamp));
+					xvr2_delete(tstamp);
+					break;
 				case DB::Field::VARCHAR:
 				default:
 					s[n].init(xvr2::DB::Field::VARCHAR, (void *)data, PQgetlength(r->result, r->curr_row, n) + 1);
