@@ -53,9 +53,9 @@ namespace xvr2{
 			__drv_free_resultset = (bool (*)(void *))__drv->getSymbol("__drv_free_resultset");
 	
 			try{
-				__drv_bulk_begin = (bool (*)(void *, const char *, const char *, const char))__drv->getSymbol("__drv_bulk_begin");
+				__drv_bulk_begin = (bool (*)(void *, const char *, const char *, const char *))__drv->getSymbol("__drv_bulk_begin");
 				has__drv_bulk_begin = true;
-				__drv_bulk_insert = (bool (*)(void *, const char *))__drv->getSymbol("__drv_bulk_insert");
+				__drv_bulk_insert = (bool (*)(void *, const char *, const char *))__drv->getSymbol("__drv_bulk_insert");
 				has__drv_bulk_insert = true;
 				__drv_bulk_end = (bool (*)(void *))__drv->getSymbol("__drv_bulk_end");
 				has__drv_bulk_end = true;
@@ -150,7 +150,7 @@ namespace xvr2{
 			return __drv_free_resultset(__res_handle);
 		}
 
-		const bool Driver::bulkBegin(void *conn_handle, const char *tablename, const char *cols, const char delim){
+		const bool Driver::bulkBegin(void *conn_handle, const char *tablename, const char *cols, const char *delim){
 			bool ret;
 			if(!has__drv_bulk_begin){
 #ifdef USE_DEBUG
@@ -167,7 +167,7 @@ namespace xvr2{
 			return ret;
 		}
 
-		const bool Driver::bulkAddData(void *conn_handle, const char *data){
+		const bool Driver::bulkAddData(void *conn_handle, const char *data, const char *delim){
 			bool ret;
 			if(!has__drv_bulk_insert){
 #ifdef USE_DEBUG
@@ -176,7 +176,7 @@ namespace xvr2{
 				return false;
 			}
 			try{
-				ret = __drv_bulk_insert(conn_handle, data);
+				ret = __drv_bulk_insert(conn_handle, data, delim);
 			}
 			catch(...){
 				throw;

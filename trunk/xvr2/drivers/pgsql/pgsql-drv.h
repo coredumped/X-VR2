@@ -34,8 +34,8 @@ int	__drv_numcols(void *handle);
 int	__drv_numrows(void *handle);
 bool	__drv_free_resultset(void *handle);
 
-bool	__drv_bulk_begin(void *conn_handle, const char *tablename, const char *columns, const char delim);
-bool	__drv_bulk_insert(void *conn_handle, const char *data);
+bool	__drv_bulk_begin(void *conn_handle, const char *tablename, const char *columns, const char *delim);
+bool	__drv_bulk_insert(void *conn_handle, const char *data, const char *delim);
 bool	__drv_bulk_end(void *conn_handle);
 
 };

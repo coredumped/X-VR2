@@ -484,14 +484,14 @@ bool	__drv_free_resultset(void *__res_handle){
 	return true;
 }
 
-bool	__drv_bulk_begin(void *conn_handle, const char *table, const char *columns, const char delim){
+bool	__drv_bulk_begin(void *conn_handle, const char *table, const char *columns, const char *delim){
 	bool ret;
 	char *sqlcmd;
 	PGresult *result;
 	__pgsql_conn *conn;
 	conn = (__pgsql_conn *)conn_handle;
 	sqlcmd = new char(50);
-	sprintf(sqlcmd, "COPY %s (%s) FROM STDIN WITH DELIMITER '%c'", table, columns, delim);
+	sprintf(sqlcmd, "COPY %s (%s) FROM STDIN WITH DELIMITER '%s'", table, columns, delim);
 	result = PQexec (conn->conn, sqlcmd);
 	delete sqlcmd;
 	if(result == NULL){
@@ -513,7 +513,7 @@ bool	__drv_bulk_begin(void *conn_handle, const char *table, const char *columns,
 	return ret;
 }
 
-bool	__drv_bulk_insert(void *conn_handle, const char *data){
+bool	__drv_bulk_insert(void *conn_handle, const char *data, const char *delim){
 	int ret;
 	__pgsql_conn *conn;
 	conn = (__pgsql_conn *)conn_handle;

@@ -42,8 +42,8 @@ namespace xvr2{
 				int		(*__drv_numcols)(void *__res_handle);
 				int		(*__drv_numrows)(void *__res_handle);
 				bool		(*__drv_free_resultset)(void *__res_handle);
-				bool		(*__drv_bulk_begin)(void *conn_handle, const char *table, const char *cols, const char delim);
-				bool		(*__drv_bulk_insert)(void *conn_handle, const char *data);
+				bool		(*__drv_bulk_begin)(void *conn_handle, const char *table, const char *cols, const char *delim);
+				bool		(*__drv_bulk_insert)(void *conn_handle, const char *data, const char *delim);
 				bool		(*__drv_bulk_end)(void *conn_handle);
 				bool		__is_loaded;
 				bool 		has__drv_bulk_begin;
@@ -131,13 +131,13 @@ namespace xvr2{
 				 *  \param tablename The table where you want to upload your data
 				 *  \param cols A comma delimited list of column names specifiying
 				 *  which columns are to be affected by the operation. */
-				virtual const bool bulkBegin(void *conn_handle, const char *tablename, const char *cols, const char delim);
+				virtual const bool bulkBegin(void *conn_handle, const char *tablename, const char *cols, const char *delim);
 				/** Use this method to actually load data during a bolk load process
 				 *  started by the bulkBegin method.
 				 *  \param conn_handle Connection handle
 				 *  \param data The data to be loaded, every field must be delimited
 				 *  as previuosly specified during the bulkBegin method call. */
-				virtual const bool bulkAddData(void *conn_handle, const char *data);
+				virtual const bool bulkAddData(void *conn_handle, const char *data, const char *delim);
 				/** Flushes all data sent by bulkAddData and tells the server to actually
 				 *  insert it into the table.
 				 *  \param conn_handle The connection handle */
