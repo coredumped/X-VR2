@@ -76,7 +76,7 @@ namespace xvr2{
 #endif
 	}
 
-#ifdef USING_GCC3
+#ifndef USING_GCC3
 	Object::~Object(){
 		__cls_name = 0;
 	}
