@@ -53,14 +53,14 @@ step6: base/src/libxvr2.so.${VERSION} step2 gui/src/*.h gui/src/*.cpp
 	cd gui/src ; make -f Makefile
 	@echo
 	@echo
-	@echo "Now type make drivers"
+	@echo "Now type make install"
 
 drivers: base/src/libxvr2.so.${VERSION} all
 	cd drivers ; make -f Makefile
 	@echo
 	@echo
 	@echo "You can now safely install everything, type"
-	@echo "make install"
+	@echo "make drivers-install"
 
 drivers-install: drivers
 	cd drivers ; make -f Makefile install
@@ -88,7 +88,7 @@ install:
 	cd gui/src ; make -f Makefile install
 	@echo
 	@echo "To install compiled in drivers type:"
-	@echo "make drivers-install"
+	@echo "make drivers"
 
 rebuild: clean all
 
