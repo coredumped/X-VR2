@@ -27,7 +27,7 @@ static void __debug_comment(const char *msg){
 [0-9]+\.[0-9]+\.[0-9]+\.[0-9]+	__xvr2_cfg_yylval.string = strdup((const char *)__xvr2_cfg_yytext); __debug_msg("IPV4_ADDR "); return TOK_IPV4;
 [+-]?[0-9]+[.[0-9]+]?		__xvr2_cfg_yylval.fp = atof((const char *)__xvr2_cfg_yytext); __debug_msg("FLOAT "); return TOK_FLOAT;
 [_a-zA-Z][_0-9A-Za-z]*		__xvr2_cfg_yylval.string = strdup((const char *)__xvr2_cfg_yytext); __debug_msg("STRING "); return TOK_VARIABLE;
-[/\._a-zA-Z0-9][/\._0-9A-Za-z]*		__xvr2_cfg_yylval.string = strdup((const char *)__xvr2_cfg_yytext); __debug_msg("PATH "); return TOK_PATH;
+[/\._a-zA-Z0-9\-][/\._0-9A-Za-z\-]*		__xvr2_cfg_yylval.string = strdup((const char *)__xvr2_cfg_yytext); __debug_msg("PATH "); return TOK_PATH;
 [:=]				__debug_msg("ASSIGN "); return TOK_ASSIGNMENT;
 [ \t]+				/* ignore this thing */
 \n				/* ignore this thing too */
