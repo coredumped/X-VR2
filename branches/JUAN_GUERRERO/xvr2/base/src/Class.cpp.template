@@ -1,0 +1,36 @@
+/*
+ * This class has the following description: ....
+ *
+ * $Id$
+ */
+#include<Class.h>
+
+namespace xvr2{
+
+	// Start definition of local variables
+	// End definition of local variables
+
+	// Start definition of local functions
+	// End definition of local functions
+
+
+
+
+	//Start implementation of class: Class
+
+	Class::Class(){
+		setClassName(xvr2::_xvr2Class);
+	}
+
+	Class::~Class(){
+	}
+
+	//void Class::(){
+	//}
+	//void Class::(){
+	//}
+	//void Class::(){
+	//}
+
+	//End implementation of class: Class
+};
