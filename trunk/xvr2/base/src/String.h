@@ -459,10 +459,6 @@ class String:public System{
 		/**
 		 * Checks if the parameter <b>s</b> is equal to <b>buffer</b>
 		 */
-		bool equals(const String &s);
-		/**
-		 * Checks if the parameter <b>s</b> is equal to <b>buffer</b>
-		 */
 		bool equals(const char *s);
 		/**
 		 * Transforms and checks if the parameter <b>n</b> is equal 
@@ -494,6 +490,12 @@ class String:public System{
 		 * to <b>buffer</b>
 		 */
 		bool equals(const Int64 n);
+		/**
+		 * Checks if the String <b>s</b> is equal to the <b>buffer</b>
+		 * contained within this String object.
+		 * \param s The String to compare with.
+		 */
+		bool equals(const String &s);
 
 		/**
 		 * Tells if the substring <b>s</b> is inside the current String
@@ -592,7 +594,6 @@ class String:public System{
 		 * method
 		 */
 		char *getSubstr(unsigned int start, unsigned int end);
-
 };
 
 };
