@@ -233,6 +233,7 @@ namespace xvr2{
 				/** This will be the name for this field as configured 
 				 *  during the table creation */
 				const String &getFieldName();
+				const bool isNull();
 		};
 	};
 };

@@ -91,6 +91,10 @@ namespace xvr2{
 			tmpDouble = 0;
 			dataLen = size;
 			dataType = type;
+			if(data == 0){
+				dataPtr = 0;
+				return;
+			}
 			switch(dataType){
 				case BIT:
 					tmpBool = new bool();
@@ -175,6 +179,8 @@ namespace xvr2{
 			Int16 val = 0;
 			Time   *t = 0;
 			String str;
+			if(isNull())
+				return 0;
 			switch(dataType){
 				case  TINYINT:
 				case  INTEGER:
@@ -238,6 +244,8 @@ namespace xvr2{
 			Date   *d = 0;
 			Timestamp *tm = 0;
 			String str;
+			if(isNull())
+				return 0;
 			switch(dataType){
 				case  TINYINT:
 				case  INTEGER:
@@ -303,6 +311,8 @@ namespace xvr2{
 			Date   *d = 0;
 			Timestamp *tm = 0;
 			String str;
+			if(isNull())
+				return 0;
 			switch(dataType){
 				case  TINYINT:
 				case  INTEGER:
@@ -368,6 +378,8 @@ namespace xvr2{
 			Date   *d = 0;
 			Timestamp *tm = 0;
 			String str;
+			if(isNull())
+				return 0;
 			switch(dataType){
 				case  TINYINT:
 				case  INTEGER:
@@ -429,6 +441,8 @@ namespace xvr2{
 			Date   *d = 0;
 			Timestamp *tm = 0;
 			String str;
+			if(isNull())
+				return 0;
 			switch(dataType){
 				case  TINYINT:
 				case  INTEGER:
@@ -487,6 +501,8 @@ namespace xvr2{
 		const char *Field::toChar(){
 			char *ret;
 			void *ttmp;
+			if(isNull())
+				return 0;
 			switch(dataType){
 				case  TINYINT:
 					Int16 n1;
@@ -644,6 +660,8 @@ namespace xvr2{
 		const String *Field::toString(){
 			String *ret;
 			void *ttmp;
+			if(isNull())
+				return 0;
 			switch(dataType){
 				case  TINYINT:
 					Int16 n1;
@@ -780,8 +798,8 @@ namespace xvr2{
 		const Date *Field::toDate(){
 			Date *ret = 0;
 			struct tm tt;
-			if(dataPtr == 0)
-				throw Exception::NullPointer();
+			if(isNull())
+				return 0;
 			switch(dataType){
 				case  TINYINT:
 					throw Exception::DateParse();
@@ -906,8 +924,8 @@ namespace xvr2{
 		const Time *Field::toTime(){
 			Time *ret = 0;
 			struct tm tt;
-			if(dataPtr == 0)
-				throw Exception::NullPointer();
+			if(isNull())
+				return 0;
 			switch(dataType){
 				case  TINYINT:
 					throw Exception::DateParse();
@@ -1013,8 +1031,8 @@ namespace xvr2{
 	
 		const Timestamp *Field::toTimestamp(){
 			Timestamp *ret = 0;
-			if(dataPtr == 0)
-				throw Exception::NullPointer();
+			if(isNull())
+				return 0;
 			switch(dataType){
 				case  TINYINT:
 					throw Exception::DateParse();
@@ -1088,6 +1106,8 @@ namespace xvr2{
 	
 		bool Field::toBit(){
 			bool ret;
+			if(isNull())
+				return 0;
 			switch(dataType){
 				case  TINYINT:
 				case  INTEGER:
@@ -1139,6 +1159,8 @@ namespace xvr2{
 	
 		const Byte *Field::toByte(){
 			Byte *ret;
+			if(isNull())
+				return 0;
 			switch(dataType){
 				case  TINYINT:
 				case  INTEGER:
@@ -1203,7 +1225,7 @@ namespace xvr2{
 					break;
 			}
 		}*/
-	
+
 		const int Field::getDatatype(){
 			return dataType;
 		}
@@ -1222,6 +1244,12 @@ namespace xvr2{
 	
 		const String &Field::getFieldName(){
 			return colname;
+		}
+	
+		const bool Field::isNull(){
+			if(dataPtr == 0)
+				return true;
+			return false;
 		}
 	
 		//End implementation of class: Field
