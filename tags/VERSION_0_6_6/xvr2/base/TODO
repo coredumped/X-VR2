@@ -1,0 +1,21 @@
+* Create a decent and usable File or Stream class
+* Math				NOT IMPLEMENTED
+* Matrix			NOT IMPLEMENTED
+* Process			NOT IMPLEMENTED
+* Regex				NOT IMPLEMENTED
+* SSLSocket			not started
+* SSLSocketServer		not started
+* UDPSocket			not started
+* UNIXSocket			not started
+* UNIXServerSocket		not started
+* FS::Directory			not started
+* PostgreSQL driver		not started
+* MySQL driver			incomplete
+* Sybase driver			not started
+* Oracle driver			not started
+* AIX support			not started
+* UP-UX support			not started
+* Solaris support		incomplete
+* IPv6 support			not started
+* Fix the addClass.sh  addException.sh  addMessageString.sh scripts, they are currently broken
+* Redocument EVERYTHING using doxygen specific formatting commands
