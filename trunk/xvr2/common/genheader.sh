@@ -38,7 +38,7 @@ namespace xvr2 {
 	namespace DB {;};
 
 	/** Base namespace for Networking related objects */
-	namespace Network {;};
+	namespace Net {;};
 
 	/** This namespace holds utility related classes and objects like 
 	 *  configuration file readers and others.
