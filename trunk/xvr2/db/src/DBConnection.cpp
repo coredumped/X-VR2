@@ -122,7 +122,8 @@ namespace xvr2{
 				if(bulk_delim != 0)
 					xvr2_delete(bulk_delim);
 				bulk_delim = new String(((String *)&_delim)->toCharPtr());
-				driver->bulkBegin(__conn, ((String *)&table)->toCharPtr(), ((String *)&cols)->toCharPtr(), bulk_delim->toCharPtr());
+				if(!driver->bulkBegin(__conn, ((String *)&table)->toCharPtr(), ((String *)&cols)->toCharPtr(), bulk_delim->toCharPtr()))
+					throw Exception::BulkUploadStart();
 			}
 			catch(...){
 				throw;
@@ -133,7 +134,8 @@ namespace xvr2{
 			if(!__connected)
 				throw Exception::DBConnectFirst();
 			try{
-				driver->bulkAddData(__conn, ((String *)&data)->toCharPtr(), bulk_delim->toCharPtr());
+				if(!driver->bulkAddData(__conn, ((String *)&data)->toCharPtr(), bulk_delim->toCharPtr()))
+					throw Exception::BulkDataParse();
 			}
 			catch(...){
 				throw;
@@ -144,7 +146,8 @@ namespace xvr2{
 			if(!__connected)
 				throw Exception::DBConnectFirst();
 			try{
-				driver->bulkEnd(__conn);
+				if(!driver->bulkEnd(__conn))
+					throw Exception::BulkUploadFailed();
 			}
 			catch(...){
 				throw;

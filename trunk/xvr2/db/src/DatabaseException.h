@@ -116,6 +116,31 @@ namespace xvr2 {
 				 */
 				UnableToParseQuery();
 		};
+
+		class BulkUploadFailed:public Database{
+			public:
+				/**
+				 * Default constructor
+				 */
+				BulkUploadFailed();
+		};
+
+		class BulkDataParse:public Database{
+			public:
+				/**
+				 * Default constructor
+				 */
+				BulkDataParse();
+		};
+
+		class BulkUploadStart:public Database{
+			public:
+				/**
+				 * Default constructor
+				 */
+				BulkUploadStart();
+		};
+		
 	};
 };
 
