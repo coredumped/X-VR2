@@ -2,7 +2,8 @@ THIS_DIR=`pwd`
 VERSION=`cat ../VERSION`
 #DEPS="../../base/src/Plugin.h ../../base/src/System.h ../../base/src/Exception.h "
 ALL=
-for dir in *
+DRIVERS=`ls | grep -v CVS`
+for dir in `echo $DRIVERS`
 do
 	if [ -d $dir ]; then
 		echo "Configuring $dir driver..."
@@ -20,7 +21,7 @@ all: ${ALL}
 
 #### Generate per-project build targets
 
-for dir in *
+for dir in `echo $DRIVERS`
 do
 	if [ -d $dir ]; then
 		echo "${dir}/${dir}-driver.so.${VERSION}: ${DEPS} ${dir}/*.h ${dir}/*.cpp" >> Makefile
@@ -36,7 +37,7 @@ done
 #### Generate per-project clean targets
 echo "
 clean:" >> Makefile
-for dir in *
+for dir in `echo $DRIVERS`
 do
 	if [ -d $dir ]; then
 		echo -e "\tcd ${dir} ; make -f Makefile clean" >> Makefile
@@ -46,7 +47,7 @@ done
 #### Generate per-project install targets
 echo "
 install:" >> Makefile
-for dir in *
+for dir in `echo $DRIVERS`
 do
 	if [ -d $dir ]; then
 		echo -e "\tcd ${dir} ; make -f Makefile install" >> Makefile
