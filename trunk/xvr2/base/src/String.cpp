@@ -572,39 +572,13 @@ namespace xvr2{
 	const int String::toInt(){
 #ifdef HAVE_STRTOL
 		int num = 0;
-		char *resp;
 #endif
-/*		int low = 0;
-		int i, j, signo = 1;*/
 		if(buffer == 0)
 			return 0;
 		if(buffer[0] == 0)
 			return 0;
-/*
-		if(buffer[0] == '+')
-			low = 1;
-		if(buffer[0] == '-'){
-			low = 1;
-			signo = -1;
-		}
-		if(isdigit(buffer[0]) || buffer[0] == '+' || buffer[0] == '-'){
-			for(i = (len - 1), j = 0; i >= low; i--, j++){
-				if(!isdigit(buffer[i]))
-					throw Exception::Number();
-				num = num + (buffer[i] - '0')* __power(j);
-			}
-		}
-		else
-			if(buffer[0] != '-' && buffer[0] != '+')
-				throw Exception::Number();
-		return signo * num;*/
 #ifdef HAVE_STRTOL
-		//resp = Memory::duplicate((void *)buffer, len);
-		num = strtol(buffer, &resp, 10);
-		if(resp != 0x0){
-			throw Exception::Number();
-		}
-
+		num = strtol(buffer, 0, 10);
 		return num;
 #else
 		return atoi(buffer);
@@ -636,113 +610,35 @@ namespace xvr2{
 	}
 	
 	const float String::toFloat(){
+		if(buffer == 0)
+			return 0;
+		if(buffer[0] == 0)
+			return 0;
 		return (float)toDouble();
 	}
 	
 	const double String::toDouble(){
-	/*
-	
-		//OLD AND INCOMPLETE IMPLEMENTATION
-	
-	
-		int low = 0;
-		int i, j;
-		double num, numN, buf, sign = 1;
-		char *integer;
-		char *fractional;
-		bool hasfrac = false;
-		String Int;
-		String Frac;
 		if(buffer == 0)
 			return 0;
 		if(buffer[0] == 0)
 			return 0;
-		if(buffer[0] == '+')
-			low = 1;
-		if(buffer[0] == '-'){
-			low = 1;
-			sign = -1;
-		}
-		integer = new char[len];
-		fractional = new char[len];
-		fractional[0] = 0;
-		for(i = low, j = 0; buffer[i] != '\0'; i++){
-			if(buffer[i] == '.'){
-				i++;
-				hasfrac = true;
-				break;
-			}
-			else{
-				integer[j++] = buffer[i];
-			}
-		}
-		integer[j] = 0;
-		if(hasfrac){
-			for(j = 0; buffer[i] != '\0'; j++){
-				fractional[j] = buffer[i++];
-			}
-			fractional[j] = 0;
-		}
-		Int = integer;
-		numN = Int.toInt();
-		if(hasfrac){
-			Frac = fractional;
-			num = Frac.toInt();
-			if(num != 0)
-				num = num / (float)__power(Frac.size());
-		}
-		else
-			num = 0;
-		delete integer;
-		delete fractional;
-		buf = num + numN;
-		return buf * sign;
-	*/
-		double d;
-		char *endptr = 0;
-		d = strtod(buffer, &endptr);
-		if(d == 0 && strcmp(buffer, endptr) == 0)
-			throw Exception::Number();
-		if(errno == ERANGE)
-			throw Exception::BufferTooSmall();
-		return d;
+		return atof(buffer);
 	}
 	
 	const long double String::toLongDouble(){
-		long double d;
-		char *endptr = 0;
-		d = strtold(buffer, &endptr);
-		if(d == 0 && strcmp(buffer, endptr) == 0)
-			throw Exception::Number();
-		if(errno == ERANGE)
-			throw Exception::BufferTooSmall();
-		return d;
-	}
-	
-	const Int64 String::toInt64(){
-		Int64 num = 0, low = 0;
-		Int64 i, j, signo = 1;
 		if(buffer == 0)
 			return 0;
 		if(buffer[0] == 0)
 			return 0;
-		if(buffer[0] == '+')
-			low = 1;
-		if(buffer[0] == '-'){
-			low = 1;
-			signo = -1;
-		}
-		if(isdigit(buffer[0]) || buffer[0] == '+' || buffer[0] == '-'){
-			for(i = (len - 1), j = 0; i >= low; i--, j++){
-				if(!isdigit(buffer[i]))
-					throw Exception::Number();
-				num = num + (buffer[i] - '0')* __power(j);
-			}
-		}
-		else
-			if(buffer[0] != '-' && buffer[0] != '+')
-				throw Exception::Number();
-		return signo * num;
+		return strtold(buffer, 0);
+	}
+	
+	const Int64 String::toInt64(){
+		if(buffer == 0)
+			return 0;
+		if(buffer[0] == 0)
+			return 0;
+		return atoll(buffer);
 	}
 
 	bool String::operator==(const String &s){
