@@ -37,12 +37,21 @@ namespace xvr2{
 					      int port = 0);
 				/** cleanup routine */
 				~Connection();
+				Connection();
 				/** This routine will connect you to the specified <b>server</b>
 				 *  using the username <b>u</b>, password <b>p</b> and port
 				 *  <b>port</b>.
 				 *  If the connection is not successfull this method will
 				 *  throw an appropiate exception.  */
 				void connect(const String &server, const String &u, 
+					     const String &dbname,
+					     const String &p, int port = 0);
+				/** This routine will connect you to the specified <b>server</b>
+				 *  using the username <b>u</b>, password <b>p</b> and port
+				 *  <b>port</b>.
+				 *  If the connection is not successfull this method will
+				 *  throw an appropiate exception.  */
+				void connect(Driver *d, const String &server, const String &u, 
 					     const String &dbname,
 					     const String &p, int port = 0);
 				/** This method will attempt to connect using the last

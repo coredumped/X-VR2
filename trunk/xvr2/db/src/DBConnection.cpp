@@ -12,6 +12,17 @@ namespace xvr2{
 	namespace DB {
 
 
+		Connection::Connection(){
+#ifndef USING_GCC3
+			setClassName(xvr2::_xvr2Connection);
+#endif
+			driver = 0;
+			bulk_delim = 0;
+			__conn = 0;
+			_server.deleteString();
+			__connected = false;	
+		}
+	
 		Connection::Connection(Driver *d){
 #ifndef USING_GCC3
 			setClassName(xvr2::_xvr2Connection);
@@ -51,6 +62,31 @@ namespace xvr2{
 		}
 	
 		void Connection::connect(const String &s, const String &dbname, const String &u, const String &p, int port){
+			if(__connected)
+				throw Exception::AlreadyConnected2DB();
+			if(bulk_delim != 0)
+				xvr2_delete(bulk_delim);
+			try{
+				__conn = driver->connect(s, dbname, u, p, port);
+			}
+			catch(...){
+				throw;
+			}
+	
+			if(__conn == 0){
+				throw Exception::Database();
+			}
+			__connected = true;
+		}
+	
+		void Connection::connect(Driver *d, const String &s, const String &dbname, const String &u, const String &p, int port){
+			if(driver == 0){
+				bulk_delim = 0;
+				__conn = 0;
+				_server.deleteString();
+				__connected = false;	
+			}
+			driver = d;
 			if(__connected)
 				throw Exception::AlreadyConnected2DB();
 			if(bulk_delim != 0)
