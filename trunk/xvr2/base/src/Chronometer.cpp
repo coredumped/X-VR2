@@ -10,7 +10,7 @@ namespace xvr2{
 	static struct timezone __currentTZGMT0;
 
 	/* this function was extracted from the libc info manual */
-	int timeval_subtract (struct timeval *result, struct timeval *x, struct timeval *y){
+	/*int timeval_subtract (struct timeval *result, struct timeval *x, struct timeval *y){
 		if (x->tv_usec < y->tv_usec) {
 			int nsec = (y->tv_usec - x->tv_usec) / 1000000 + 1;
 			y->tv_usec -= 1000000 * nsec;
@@ -25,8 +25,24 @@ namespace xvr2{
 		result->tv_usec = x->tv_usec - y->tv_usec;
 		return x->tv_sec < y->tv_sec;
 	}
+	*/
 
-
+	static int timeval_subtract (struct timeval *result, struct timeval *x, struct timeval *y){
+		int nsec;
+		if (x->tv_usec < y->tv_usec) {
+			nsec = (y->tv_usec - x->tv_usec) / 1000000 + 1;
+			y->tv_usec -= 1000000 * nsec;
+			y->tv_sec += nsec;
+		}
+		if (x->tv_usec - y->tv_usec > 1000000) {
+			nsec = (x->tv_usec - y->tv_usec) / 1000000;
+			y->tv_usec += 1000000 * nsec;
+			y->tv_sec -= nsec;
+		}
+		result->tv_sec = x->tv_sec - y->tv_sec;
+		result->tv_usec = x->tv_usec - y->tv_usec;
+		return x->tv_sec < y->tv_sec;
+	}
 
 
 	Chronometer::Chronometer(){
@@ -37,7 +53,8 @@ namespace xvr2{
 	}
 
 	void Chronometer::start(){
-		gettimeofday(&_startedOn, &__currentTZGMT0);
+		if(gettimeofday(&_startedOn, &__currentTZGMT0) != 0)
+			throw Exception::Exception();
 		_counting = true;
 	}
 
@@ -105,14 +122,18 @@ namespace xvr2{
 		if(_counting){
 			gettimeofday(&current, &__currentTZGMT0);
 			timeval_subtract (&result, &current, &_startedOn);
-			value = _finishedOn.tv_usec;
-			value = result.tv_sec;
+			if(current.tv_sec == _startedOn.tv_sec){
+				value = (current.tv_usec - _startedOn.tv_usec) * 1000;
+			}
+			else{
+				value = result.tv_sec / 1000;
+			}
 		}
 		else{
 			timeval_subtract (&result, &_finishedOn, &_startedOn);
 			value = result.tv_usec;
 		}
-		return value % 1000;
+		return value;
 	}
 
 	long int Chronometer::elapsedMicrosecond(){
