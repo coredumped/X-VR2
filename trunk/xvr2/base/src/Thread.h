@@ -25,9 +25,6 @@ namespace xvr2{
 	 * it, then you have to override the run method and put there
 	 * whatever code you want your program run concurrently.
 	 *
-	 * \bug For some reason after the thread finishes some resource is
-	 * not released correctly creating a memory leak.
-	 * \todo Find and fix the memory leak.
 	 */
 	class	Thread:public	Threading{
 		private:
