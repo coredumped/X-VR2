@@ -432,17 +432,26 @@ DB::Field *__drv_fetch_next_row(void *__res_handle){
 					s[n].init(xvr2::DB::Field::DOUBLE, (void *)&float8, sizeof(double));
 					break;
 				case DB::Field::DATE:
-					tdate = new Date("%Y-%m-%d", data);
+					if(!PQgetisnull(r->result, r->curr_row, n))
+						tdate = new Date("%Y-%m-%d", data);
+					else
+						tdate = 0;
 					s[n].init(xvr2::DB::Field::DATE, (void *)tdate, sizeof(xvr2::Date));
 					xvr2_delete(tdate);
 					break;
 				case DB::Field::TIME:
-					ttime = new Time(data);
+					if(!PQgetisnull(r->result, r->curr_row, n))
+						ttime = new Time(data);
+					else
+						ttime = 0;
 					s[n].init(xvr2::DB::Field::TIME, (void *)ttime, sizeof(xvr2::Time));
 					xvr2_delete(ttime);
 					break;
 				case DB::Field::TIMESTAMP:
-					tstamp = new Timestamp("%Y-%m-%d %T", data);
+					if(!PQgetisnull(r->result, r->curr_row, n))
+						tstamp = new Timestamp("%Y-%m-%d %T", data);
+					else
+						tstamp = 0;
 					s[n].init(xvr2::DB::Field::TIMESTAMP, (void *)tstamp, sizeof(xvr2::Timestamp));
 					xvr2_delete(tstamp);
 					break;
