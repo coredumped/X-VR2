@@ -34,6 +34,9 @@ int	__drv_numrows(void *handle);
 bool	__drv_free_resultset(void *handle);
 bool    __drv_usedb(void *handle, const char *dbname);
 
+char	*__drv_quote_string(const char *in);
+char 	*__drv_error_message(void *handle);
+char 	*__drv_result_error_message(void *r_handle);
 };
 
 

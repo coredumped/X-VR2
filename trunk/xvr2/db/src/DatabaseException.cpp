@@ -102,14 +102,14 @@ namespace xvr2 {
 			description = (char *)xvr2::excepUnableToParseQuery;
 		}
 
-		BulkUploadFailed::BulkUploadFailed():Database(){
+		BulkUploadFailed::BulkUploadFailed():SQLQuery(){
 #ifndef USING_GCC3
 			setClassName((char *)_excepblkfn);
 #endif
 			description = (char *)_excepblkf;
 		}
 
-		BulkDataParse::BulkDataParse():Database(){
+		BulkDataParse::BulkDataParse():SQLQuery(){
 #ifndef USING_GCC3
 			setClassName((char *)_excepblk_dpn);
 #endif
@@ -117,7 +117,7 @@ namespace xvr2 {
 		}
 
 
-		BulkUploadStart::BulkUploadStart():Database(){
+		BulkUploadStart::BulkUploadStart():SQLQuery(){
 #ifndef USING_GCC3
 			setClassName((char *)_excepblk_stn);
 #endif

@@ -148,5 +148,9 @@ namespace xvr2{
 		const UInt64 ResultSet::affectedRows(){
 			return afrows;
 		}
+
+		const char *ResultSet::errorMessage(){
+			return driver->resultErrorMessage(r_handle);
+		}
 	};
 };

@@ -67,6 +67,9 @@ namespace xvr2{
 				 *  content of a tables, this method will tell you how
 				 *  many rows got affected as a result of the operation */
 				const UInt64 affectedRows();
+				/** Returns the error message as returned by the RDBMS after
+				 *  this query was sent */
+				const char *errorMessage();
 		};
 
 	};

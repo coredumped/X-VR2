@@ -71,6 +71,9 @@ namespace xvr2{
 				void bulkUploadBegin(const String &table, const String &cols, const String &_delim);
 				void bulkUploadData(const String &data);
 				void bulkUploadEnd();
+
+				char *escapeString(const char *);
+				const char *errorMessage();
 		};
 	};
 };

@@ -559,3 +559,27 @@ bool	__drv_bulk_end(void *conn_handle){
 	throw Exception::SQLQuery();
 	return false;
 }
+
+char *__drv_quote_string(const char *in){
+//size_t PQescapeString (char *to, const char *from, size_t length);
+	char *buf;
+	int len;
+	len = strlen(in);
+	buf = new char(len * 2 + 1);
+	PQescapeString(buf, in, len);
+	return buf;
+}
+
+char *__drv_error_message(void *handle){
+//char *PQerrorMessage(const PGconn* conn);
+	__pgsql_conn *conn;
+	conn = (__pgsql_conn *)handle;
+	return PQerrorMessage(conn->conn);
+}
+
+char *__drv_result_error_message(void *__res_handle){
+//char *PQresultErrorMessage(const PGresult *res);
+	__pgsql_res *r;
+	r = (__pgsql_res *)__res_handle;
+	return PQresultErrorMessage(r->result);
+}

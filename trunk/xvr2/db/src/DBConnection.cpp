@@ -154,6 +154,14 @@ namespace xvr2{
 			}
 		}
 
+		char *Connection::escapeString(const char *str){
+			return driver->quoteString(str);
+		}
+
+		const char *Connection::errorMessage(){
+			return driver->errorMessage(__conn);
+		}
+
 		//void Connection::(){
 		//}
 

@@ -277,3 +277,24 @@ bool	__drv_free_resultset(void *__res_handle){
 	mysql_free_result((MYSQL_RES *)__res_handle);
 	return true;
 }
+
+char	*__drv_quote_string(const char *in){
+//unsigned long mysql_real_escape_string(MYSQL *mysql, char *to, const char *from, unsigned long length)
+	char *buf;
+	int len;
+	len = strlen(in);
+	buf = new char(len * 2 + 1);
+	mysql_real_escape_string(&mysql_hdlr, buf, in, strlen(in));
+	return buf;
+}
+
+char 	*__drv_error_message(void *handle){
+	return mysql_error((MYSQL *)handle);
+}
+
+char 	*__drv_result_error_message(void *r_handle){
+	MYSQL_RES *r;
+	r = (MYSQL_RES *)r_handle;
+	return mysql_error(r->handle);
+}
+

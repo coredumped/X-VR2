@@ -71,6 +71,10 @@ namespace xvr2{
 				std::cerr << "  WARNING: driver is not bulk load capable";
 #endif
 			}
+
+			__drv_quote_string = (char *(*)(const char *))__drv->getSymbol("__drv_quote_string");
+			__drv_error_message = (char *(*)(void *))__drv->getSymbol("__drv_error_message");
+			__drv_result_error_message = (char *(*)(void *))__drv->getSymbol("__drv_result_error_message");
 #ifdef USE_DEBUG
 			std::cerr << "  initializing driver...";
 #endif
@@ -199,6 +203,21 @@ namespace xvr2{
 				throw;
 			}
 			return ret;
+		}
+
+		char *Driver::quoteString(const char *str){
+			//char *__drv_quote_string(const char *in);
+			return __drv_quote_string(str);
+		}
+
+		const char *Driver::errorMessage(void *conn_handle){
+			//char *__drv_error_message(void *handle);
+			return __drv_error_message(conn_handle);
+		}
+
+		const char *Driver::resultErrorMessage(void *res_handle){
+			//char *__drv_result_error_message(void *r);
+			return __drv_result_error_message(res_handle);
 		}
 	};
 };

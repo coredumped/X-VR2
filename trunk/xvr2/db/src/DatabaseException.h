@@ -117,7 +117,7 @@ namespace xvr2 {
 				UnableToParseQuery();
 		};
 
-		class BulkUploadFailed:public Database{
+		class BulkUploadFailed:public SQLQuery{
 			public:
 				/**
 				 * Default constructor
@@ -125,7 +125,7 @@ namespace xvr2 {
 				BulkUploadFailed();
 		};
 
-		class BulkDataParse:public Database{
+		class BulkDataParse:public SQLQuery{
 			public:
 				/**
 				 * Default constructor
@@ -133,7 +133,7 @@ namespace xvr2 {
 				BulkDataParse();
 		};
 
-		class BulkUploadStart:public Database{
+		class BulkUploadStart:public SQLQuery{
 			public:
 				/**
 				 * Default constructor

@@ -49,6 +49,10 @@ namespace xvr2{
 				bool 		has__drv_bulk_begin;
 				bool 		has__drv_bulk_insert;
 				bool 		has__drv_bulk_end;
+
+				char		*(*__drv_quote_string)(const char *in);
+				char 		*(*__drv_error_message)(void *handle);
+				char 		*(*__drv_result_error_message)(void *r);
 			public:
 				/** Default constructor it initialzes some 
 				 *  defaults only */
@@ -142,6 +146,22 @@ namespace xvr2{
 				 *  insert it into the table.
 				 *  \param conn_handle The connection handle */
 				virtual const bool bulkEnd(void *conn_handle);
+				/** Quotes a string to be passed in an SQL query this is neccesary since
+				 *  some chars can confuse the SQL command parser in the RDBMS, after 
+				 *  calling this method you must free all memory allocated from the it.
+				 *  \param str The string to be escaped
+				 *  \return The escaped string, you must free this pointer after used */
+				virtual char *quoteString(const char *str);
+				/** Returns a specific error message returned by the latest operation
+				 *  executed at the connection level.
+				 *  \param The connection handle
+				 *  \return The error string*/
+				virtual const char *errorMessage(void *conn_handle);
+				/** Returns a specific error message returned by the latest operation
+				 *  executed at the query's ResultSet level.
+				 *  \param The connection handle
+				 *  \return The error string*/
+				virtual const char *resultErrorMessage(void *res_handle);
 		};
 	};
 };
