@@ -122,6 +122,18 @@ namespace xvr2{
 					*tmpDouble = *((double *)data);
 					dataPtr = (void *)tmpDouble;
 					break;
+				case DATE:
+					tmpDate = new Date((Date *)data);
+					dataPtr = (void *)tmpDate;
+					break;
+				case TIME:
+					tmpTime = new Time((Time *)data);
+					dataPtr = (void *)tmpTime;
+					break;
+				case TIMESTAMP:
+					tmpTimestamp = new Timestamp((Timestamp *)data);
+					dataPtr = (void *)tmpTimestamp;
+					break;
 				default:
 					dataPtr = (void *)data;
 			};		
@@ -569,7 +581,7 @@ namespace xvr2{
 						//#  I need a better way to implement
 						//#  this, please HELP!!!!!!!!!
 						//#################################
-						ret = (char *)((String *)&(((Date *)dataPtr)->toString()))->toCharPtr();
+						ret = (char *)((String *)(((Date *)dataPtr)->toString()))->toCharPtr();
 					}
 					catch(...){
 						throw Exception::UndefinedClass();
@@ -581,7 +593,7 @@ namespace xvr2{
 						//#  I need a better way to implement
 						//#  this, please HELP!!!!!!!!!
 						//#################################
-						ret = (char *)((String *)&(((Time *)dataPtr)->toString()))->toCharPtr();
+						ret = (char *)((String *)(((Time *)dataPtr)->toString()))->toCharPtr();
 					}
 					catch(...){
 						throw Exception::UndefinedClass();
@@ -593,7 +605,7 @@ namespace xvr2{
 						//#  I need a better way to implement
 						//#  this, please HELP!!!!!!!!!
 						//#################################
-						ret = (char *)((String *)&(((Timestamp *)dataPtr)->toString()))->toCharPtr();
+						ret = (char *)((String *)(((Timestamp *)dataPtr)->toString()))->toCharPtr();
 					}
 					catch(...){
 						throw Exception::UndefinedClass();
@@ -704,7 +716,7 @@ namespace xvr2{
 						//#  I need a better way to implement
 						//#  this, please HELP!!!!!!!!!
 						//#################################
-						ret = ((String *)&(((Date *)dataPtr)->toString()));
+						ret = ((String *)(((Date *)dataPtr)->toString()));
 					}
 					catch(...){
 						throw Exception::UndefinedClass();
@@ -716,7 +728,7 @@ namespace xvr2{
 						//#  I need a better way to implement
 						//#  this, please HELP!!!!!!!!!
 						//#################################
-						ret = ((String *)&(((Time *)dataPtr)->toString()));
+						ret = ((String *)(((Time *)dataPtr)->toString()));
 					}
 					catch(...){
 						throw Exception::UndefinedClass();
@@ -728,7 +740,7 @@ namespace xvr2{
 						//#  I need a better way to implement
 						//#  this, please HELP!!!!!!!!!
 						//#################################
-						ret = ((String *)&(((Timestamp *)dataPtr)->toString()));
+						ret = ((String *)(((Timestamp *)dataPtr)->toString()));
 					}
 					catch(...){
 						throw Exception::UndefinedClass();
