@@ -115,18 +115,10 @@ DB::ResultSet *__drv_query(void *handle, const char *cmd){
 	DB::ResultSet *r = 0;
 	int qret;
 	MYSQL_RES *result;
-	char *sqlcmd;
-	int cmdlen;
 
 	//Modify query replacing conflictive characters with escape secuences
-	cmdlen = strlen(cmd);
-	sqlcmd = (char *)xvr2::Memory::allocBuffer(cmdlen * 2 + 1);
 
-	if(mysql_real_escape_string((MYSQL *)handle, sqlcmd, cmd, cmdlen) == 0)
-		throw Exception::UnableToParseQuery();
-
-	qret = mysql_query((MYSQL *)handle, sqlcmd);
-	xvr2::Memory::freeBuffer((void **)&sqlcmd);
+	qret = mysql_query((MYSQL *)handle, cmd);
 	if(qret != 0){
 #ifdef USE_DEBUG
 		std::cerr << "While executing query: \"" << cmd << "\"... " << mysql_error((MYSQL *)handle) << std::endl;

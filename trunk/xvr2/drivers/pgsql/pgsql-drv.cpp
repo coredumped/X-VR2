@@ -324,21 +324,14 @@ DB::ResultSet *__drv_query(void *handle, const char *cmd){
 	//of a library self-pointer
 	DB::ResultSet *r = 0;
 	PGresult *result;
-	char *sqlcmd;
-	int cmdlen;
 	__pgsql_res *rres;
 	__pgsql_conn *conn;
 	conn = (__pgsql_conn *)handle;
 
 	//Modify query replacing conflictive characters with escape secuences
-	cmdlen = strlen(cmd);
-	sqlcmd = (char *)xvr2::Memory::allocBuffer(cmdlen * 2 + 1);
 
-	if(PQescapeString(sqlcmd, cmd, cmdlen) == 0)
-		throw Exception::UnableToParseQuery();
 
-	result = PQexec (conn->conn, sqlcmd);
-	xvr2::Memory::freeBuffer((void **)&sqlcmd);
+	result = PQexec (conn->conn, cmd);
 	if(result == NULL){
 #ifdef USE_DEBUG
 		std::cerr << "While executing query: \"" << cmd << "\"... " <<  PQerrorMessage (conn->conn) << std::endl;
@@ -499,10 +492,10 @@ bool	__drv_bulk_begin(void *conn_handle, const char *table, const char *columns,
 	PGresult *result;
 	__pgsql_conn *conn;
 	conn = (__pgsql_conn *)conn_handle;
-	sqlcmd = new char(50);
+	sqlcmd = new char[500 + strlen(table) + strlen(columns) + strlen(delim)];
 	sprintf(sqlcmd, "COPY %s (%s) FROM STDIN WITH DELIMITER '%s'", table, columns, delim);
 	result = PQexec (conn->conn, sqlcmd);
-	delete sqlcmd;
+	xvr2_delete_array(sqlcmd);
 	if(result == NULL){
 #ifdef USE_DEBUG
 		std::cerr << "COPY command failure!!! " <<  PQerrorMessage (conn->conn) << std::endl;
