@@ -72,8 +72,13 @@ echo "" >> xvr2.h
 echo "#include<xvr2config.h>" >> xvr2.h
 for file in `find ../ -name "*.h" | grep -v "/xvr2" | grep -v '__Destruct' | grep -v drivers | grep -v parser`
 do
-	filex=`basename $file`
-	echo "#include<xvr2/$filex>" >> xvr2.h
+	echo $file | egrep '\.\./demos' > /dev/null
+	if [ $? -eq 0 ]; then
+		echo -ne '.'
+	else
+		filex=`basename $file`
+		echo "#include<xvr2/$filex>" >> xvr2.h
+	fi
 done
 
 echo "#ifdef USE_SDL

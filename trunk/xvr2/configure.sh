@@ -25,20 +25,20 @@ echo "all: base/src/libxvr2.so.${VERSION} step2 step3 step4 step5 step6
 
 docs: step7
 
-base/src/libxvr2.so.${VERSION}:
-	cd base ; make -f Makefile
+base/src/libxvr2.so.${VERSION}: base/src/*.h base/src/*.cpp
+	cd base/src ; make -f Makefile
 
-step2: base/src/libxvr2.so.${VERSION}
-	cd util ; make -f Makefile
+step2: base/src/libxvr2.so.${VERSION} util/src/*.h util/src/*.cpp
+	cd util/src ; make -f Makefile
 
-step3: base/src/libxvr2.so.${VERSION}
-	cd gfx ; make -f Makefile
+step3: base/src/libxvr2.so.${VERSION} gfx/src/*.h gfx/src/*.cpp
+	cd gfx/src ; make -f Makefile
 
-step4: base/src/libxvr2.so.${VERSION} step2
-	cd gui ; make -f Makefile
+step4: base/src/libxvr2.so.${VERSION} step2 gui/src/*.h gui/src/*.cpp
+	cd gui/src ; make -f Makefile
 
-step5: base/src/libxvr2.so.${VERSION}
-	cd db ; make -f Makefile
+step5: base/src/libxvr2.so.${VERSION} step2 db/src/*.h db/src/*.cpp
+	cd db/src ; make -f Makefile
 
 step6: base/src/libxvr2.so.${VERSION} step2 step5
 	cd drivers ; make -f Makefile
