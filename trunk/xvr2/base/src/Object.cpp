@@ -78,6 +78,10 @@ namespace xvr2{
 
 #ifdef USING_GCC3
 	Object::~Object(){
+		__cls_name = 0;
+	}
+#else
+	Object::~Object(){
 		if(__cls_name != 0){
 			free(__cls_name);
 			__cls_name = 0;

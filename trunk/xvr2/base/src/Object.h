@@ -54,9 +54,8 @@ namespace xvr2{
 			Object(const char *n){
 				setClassName(n);
 			}
-#else
-			virtual ~Object();
 #endif
+			virtual ~Object();
 			/**
 			 * Will print a debug message to the screen */
 			static void debugmsg(Object *obj, const char *msg);
