@@ -38,7 +38,7 @@ namespace xvr2{
 			driver = drv;
 			_status = __status;
 			row = 0;
-			if(_status == true)
+			if(_status == true && r_handle != 0)
 				fetchNextRow();
 	
 			nrows = driver->numRows(__handle);
