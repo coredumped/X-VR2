@@ -203,32 +203,37 @@ DB::Field *__drv_fetch_next_row(void *__res_handle){
 		f = mysql_fetch_field((MYSQL_RES *)__res_handle);
 		s[n].setFieldName(f->name);
 		thetype = f->type;
-		/*
-		 * NOTE: 
-		 * For some reason MySQL returns rows as a two-dimensional
-		 * array of chars
-		 */
-#warning Remember that MySQL returns data as an array of chars, you must do \
- type conversion on your side
 		switch(thetype){
-			case FIELD_TYPE_BLOB:
-				s[n].init(xvr2::DB::Field::BLOB, (void *)(row[n]), f->length);
-				break;
-			/*case FIELD_TYPE_TINY:
-				short int tmpt1;
+			/*case FIELD_TYPE_BLOB:
+				s[n].init(xvr2::DB::Field::BLOB, (void *)(row[n]), f->length + 1);
+				break;*/
+			case FIELD_TYPE_TINY:
+				Int16 tmpt1;
 				tmpt1 = atoi((char *)(row[n]));
-				s[n].init(xvr2::Field::TINYINT, &tmpt1, f->length);
+				s[n].init(xvr2::DB::Field::TINYINT, &tmpt1, sizeof(Int16));
 				break;
 			case FIELD_TYPE_SHORT:
 			case FIELD_TYPE_INT24:
 			case FIELD_TYPE_LONG:
-				int tmpt2;
+				Int32 tmpt2;
 				tmpt2 = atoi((char *)(row[n]));
-				s[n].init(xvr2::Field::INTEGER, &tmpt2, sizeof(int));
+				s[n].init(xvr2::DB::Field::INTEGER, &tmpt2, sizeof(Int32));
 				break;
 			case FIELD_TYPE_LONGLONG:
-				s[n].init(xvr2::Field::BIGINT, atol((char *)&row[n]), sizeof(Int64));
-				break;*/
+				Int64 nlong;
+				nlong = atoll((char *)(row[n]));
+				s[n].init(xvr2::DB::Field::BIGINT, &nlong, sizeof(Int64));
+				break;
+			case FIELD_TYPE_FLOAT:
+				float nfloat;
+				nfloat = atof((char *)(row[n]));
+				s[n].init(xvr2::DB::Field::FLOAT, &nfloat, sizeof(float));
+				break;
+			case FIELD_TYPE_DOUBLE:
+				double ndouble;
+				ndouble = atof((char *)(row[n]));
+				s[n].init(xvr2::DB::Field::DOUBLE, &ndouble, sizeof(double));
+				break;
 			default:
 				s[n].init(xvr2::DB::Field::VARCHAR, (void *)(row[n]), f->length);
 				break;
