@@ -14,7 +14,7 @@ namespace xvr2{
 		 *  by GLIBC.
 		 *  This class provides abstraction over the regex compilation process
 		 *  since it is performed implicitly after you add a new pattern
-		 *  expression.
+		 *  expression.<br>
 		 *  .  <br>
 		 *  .  <br>
 		 *  .  <br>
