@@ -39,11 +39,14 @@ static char *db_pass;
 static char *db_name;
 static int db_port;
 
+static bool loopit;
+
 bool parse_args(int argc, char *argv[]){
 	int i;
 	String s;
 	String *tmp;
 	std::string foo;
+	loopit = false;
 	for(i = 1; i < argc; i++){
 		s = argv[i];
 		Tokenizer *t;
@@ -90,6 +93,9 @@ bool parse_args(int argc, char *argv[]){
 			if(tmp->toCharPtr() != 0){
 				select_statement = strdup(tmp->toCharPtr());
 			}
+		}
+		else if(s.endsWith("loop")){
+			loopit = true;
 		}
 		xvr2_delete(t);
 	}
@@ -196,7 +202,12 @@ int rundemo(int demo_type){
 		}
 		std::cout.flush();
 		for(cj = 0; cj < r->numCols(); cj++){
-			std::cout << "\t" << ff[cj].toChar();
+			if(ff[cj].isNull()){
+				std::cout << "\tNULL";
+			}
+			else{
+				std::cout << "\t" << ff[cj].toChar();
+			}
 			std::cout.flush();
 		}
 		std::cout << std::endl;
@@ -227,5 +238,8 @@ int rundemo(int demo_type){
 	std::cout << "succeeded" << std::endl;
 	xvr2_delete(conn);
 	xvr2_delete(drv);
+	if(loopit){
+		sleep(180);
+	}
 	return 0;
 }
