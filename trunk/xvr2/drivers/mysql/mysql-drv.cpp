@@ -247,10 +247,16 @@ DB::Field *__drv_fetch_next_row(void *__res_handle){
 				xvr2_delete(ddate);
 				break;
 			case FIELD_TYPE_DATETIME:
-				Timestamp *tdate;
-				tdate = new Timestamp("%Y-%m-%d %T", (char *)(row[n]));
-				s[n].init(xvr2::DB::Field::TIMESTAMP, tdate, sizeof(xvr2::Timestamp));
+				Date *tdate;
+				tdate = new Date("%Y-%m-%d %T", (char *)(row[n]));
+				s[n].init(xvr2::DB::Field::DATE, tdate, sizeof(xvr2::Date));
 				xvr2_delete(tdate);
+				break;
+			case FIELD_TYPE_TIMESTAMP:
+				Timestamp *tdate1;
+				tdate1 = new Timestamp("%Y%m%d%H%M%S", (char *)(row[n]));
+				s[n].init(xvr2::DB::Field::TIMESTAMP, tdate1, sizeof(xvr2::Timestamp));
+				xvr2_delete(tdate1);
 				break;
 			default:
 				s[n].init(xvr2::DB::Field::VARCHAR, (void *)(row[n]), f->length);
