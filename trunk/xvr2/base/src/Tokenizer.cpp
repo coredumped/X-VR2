@@ -43,7 +43,7 @@ namespace xvr2{
 		if(delim != 0)
 			free(delim);
 		if(tstr != 0)
-			delete tstr;
+			xvr2_delete(tstr);
 	}
 
 	char *Tokenizer::cnext(){
@@ -98,7 +98,7 @@ namespace xvr2{
 		char *ptr;
 		ptr = cnext();
 		if(tstr != 0){
-			delete tstr;
+			xvr2_delete(tstr);
 		}
 		if(ptr == 0){
 			if(throwexception)
