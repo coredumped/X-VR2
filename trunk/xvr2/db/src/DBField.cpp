@@ -597,7 +597,7 @@ namespace xvr2{
 						//#  I need a better way to implement
 						//#  this, please HELP!!!!!!!!!
 						//#################################
-						ret = (char *)((String *)(((Date *)dataPtr)->toString()))->toCharPtr();
+						ret = ((Date *)dataPtr)->toString()->toCharPtr();
 					}
 					catch(...){
 						throw Exception::UndefinedClass();
@@ -609,7 +609,7 @@ namespace xvr2{
 						//#  I need a better way to implement
 						//#  this, please HELP!!!!!!!!!
 						//#################################
-						ret = (char *)((String *)(((Time *)dataPtr)->toString()))->toCharPtr();
+						ret = ((Time *)dataPtr)->toString()->toCharPtr();
 					}
 					catch(...){
 						throw Exception::UndefinedClass();
@@ -621,7 +621,7 @@ namespace xvr2{
 						//#  I need a better way to implement
 						//#  this, please HELP!!!!!!!!!
 						//#################################
-						ret = (char *)((String *)(((Timestamp *)dataPtr)->toString()))->toCharPtr();
+						ret = ((Timestamp *)dataPtr)->toString()->toCharPtr();
 					}
 					catch(...){
 						throw Exception::UndefinedClass();
@@ -853,7 +853,7 @@ namespace xvr2{
 				case  TEXT:
 					char *dataStr;
 					try{
-						dataStr = (char *)(((String *)dataPtr)->toCharPtr());
+						dataStr = ((String *)dataPtr)->toCharPtr();
 					}
 					catch(...){
 						throw Exception::UndefinedClass();
@@ -979,7 +979,7 @@ namespace xvr2{
 				case  TEXT:
 					char *dataStr;
 					try{
-						dataStr = (char *)(((String *)dataPtr)->toCharPtr());
+						dataStr = ((String *)dataPtr)->toCharPtr();
 					}
 					catch(...){
 						throw Exception::UndefinedClass();
@@ -1239,7 +1239,7 @@ namespace xvr2{
 		}
 	
 		void Field::setFieldName(const String &nam){
-			colname = ((String *)&nam)->toCharPtr();
+			colname = nam.toCharPtr();
 		}
 	
 		const String &Field::getFieldName(){

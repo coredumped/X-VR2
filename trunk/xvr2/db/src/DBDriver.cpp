@@ -92,13 +92,16 @@ namespace xvr2{
 		void *Driver::connect(const String &server, const String &__dbname, const String &user, const String &pass, int port){
 			void *ret;
 			try{
-				ret = __drv_connect(((String *)&server)->toCharPtr(), ((String *)&__dbname)->toCharPtr(), ((String *)&user)->toCharPtr(), ((String *)&pass)->toCharPtr(), port);
+				ret = __drv_connect(server.toCharPtr(), __dbname.toCharPtr(), user.toCharPtr(), pass.toCharPtr(), port);
 			}
 			catch(...){
 				throw;
 			}
 			return ret;
 		}
+
+		static const char *__upd_str = "update";
+		static const char *__del_str = "delete";
 	
 		ResultSet *Driver::query(void *__handle, const String &cmd){
 			ResultSet *r = 0;
@@ -108,7 +111,7 @@ namespace xvr2{
 			catch(...){
 				throw;
 			}
-			if((((String *)&cmd)->startsIWith("update") || ((String *)&cmd)->startsIWith("delete")) && __do_auto_commit){
+			if((((String *)&cmd)->startsIWith(__upd_str) || ((String *)&cmd)->startsIWith(__del_str)) && __do_auto_commit){
 				commit(__handle);
 			}
 			return r;

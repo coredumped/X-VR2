@@ -32,10 +32,14 @@ namespace xvr2{
 			__conn = 0;
 			_server.deleteString();
 			__connected = false;	
-			_server.assign(((String *)&s)->toCharPtr());
+			/*_server.assign(((String *)&s)->toCharPtr());
 			_user.assign(((String *)&u)->toCharPtr());
 			_password.assign(((String *)&p)->toCharPtr());
-			_dbname.assign(((String *)&dbname)->toCharPtr());
+			_dbname.assign(((String *)&dbname)->toCharPtr());*/
+			_server.assign(s);
+			_user.assign(u);
+			_password.assign(p);
+			_dbname.assign(dbname);
 			_port = port;
 		}
 	
@@ -121,8 +125,10 @@ namespace xvr2{
 			try{
 				if(bulk_delim != 0)
 					xvr2_delete(bulk_delim);
-				bulk_delim = new String(((String *)&_delim)->toCharPtr());
-				if(!driver->bulkBegin(__conn, ((String *)&table)->toCharPtr(), ((String *)&cols)->toCharPtr(), bulk_delim->toCharPtr()))
+				//bulk_delim = new String(((String *)&_delim)->toCharPtr());
+				bulk_delim = new String(_delim.toCharPtr());
+				//if(!driver->bulkBegin(__conn, ((String *)&table)->toCharPtr(), ((String *)&cols)->toCharPtr(), bulk_delim->toCharPtr()))
+				if(!driver->bulkBegin(__conn, table.toCharPtr(), cols.toCharPtr(), bulk_delim->toCharPtr()))
 					throw Exception::BulkUploadStart();
 			}
 			catch(...){
@@ -134,7 +140,8 @@ namespace xvr2{
 			if(!__connected)
 				throw Exception::DBConnectFirst();
 			try{
-				if(!driver->bulkAddData(__conn, ((String *)&data)->toCharPtr(), bulk_delim->toCharPtr()))
+				//if(!driver->bulkAddData(__conn, ((String *)&data)->toCharPtr(), bulk_delim->toCharPtr()))
+				if(!driver->bulkAddData(__conn, data.toCharPtr(), bulk_delim->toCharPtr()))
 					throw Exception::BulkDataParse();
 			}
 			catch(...){

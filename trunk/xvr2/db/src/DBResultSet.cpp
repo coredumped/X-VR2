@@ -126,7 +126,7 @@ namespace xvr2{
 				throw Exception::NoDataFetch();
 			}
 			for(index = 0; index < ncols ; index++){
-				if(    ((String *)&(row[index].getFieldName()))->equals(((String *)&colname)->toCharPtr())){
+				if(((String *)&(row[index].getFieldName()))->equals(colname.toCharPtr())){
 					found = true;
 					break;
 				}
