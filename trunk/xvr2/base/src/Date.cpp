@@ -153,7 +153,7 @@ namespace xvr2{
 		setClassName(xvr2::_xvr2Date);
 #endif
 		drep = 0;
-		if(strptime(((String *)&date_text)->toCharPtr(), ((String *)&format)->toCharPtr(), &t) == NULL)
+		if(strptime(date_text.toCharPtr(), format.toCharPtr(), &t) == NULL)
 			throw Exception::DateParse();
 		hour = t.tm_hour;
 		if(hour > 12){
