@@ -19,7 +19,7 @@ namespace xvr2{
 			driver = drv;
 			_status = __status;
 			row = 0;
-			if(_status == true)
+			if(_status == true && r_handle != 0)
 				fetchNextRow();
 	
 			afrows = _afrows;
@@ -52,7 +52,8 @@ namespace xvr2{
 				xvr2_delete_array(row);
 			//Call here a driver provided resultset cleanup
 			try{
-				driver->freeResultSet(r_handle);
+				if(r_handle != 0)
+					driver->freeResultSet(r_handle);
 			}
 			catch(...){
 				throw;
