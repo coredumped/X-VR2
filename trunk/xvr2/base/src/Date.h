@@ -8,6 +8,7 @@
 #include<System.h>
 #include<time.h>
 #include<String.h>
+#include<ParseException.h>
 
 namespace xvr2{
 	
@@ -20,12 +21,19 @@ namespace xvr2{
 			time_t unixtime;
 			/** This member holds the String representation of the 
 			 *  current Date */
-			String drep;
+			String *drep;
 			void setTStamp(UInt32 tstamp);
+			void decode(const char *format, const char *date_text);
 		public:
 			enum DateAMPM{
 				AM,
 				PM
+			};
+			enum DateARITHParts{
+				DAYS,
+				HOURS,
+				MINUTES,
+				SECONDS
 			};
 			/** This member stores the hour 0-23*/
 			int hour;
@@ -64,6 +72,25 @@ namespace xvr2{
 			 *  minute: __mi <br>
 			 *  second: __s */
 			Date(int __y, int __m, int __dw, int __dm, int __h, int __mi, int __s = 0);
+			/** By calling this constructor you'll be able to initialize a
+			 *  Date object from a string with the specified format.
+			 *  This method makes use of the strptime(3) C function, for
+			 *  more information on the format string read the manpage for
+			 *  strptime.
+			 *  \param format The format as a valid strptime format string
+			 *  \param date_text The date as a string matching the given 
+			 *  format */
+			Date(const char *format, const char *date_text);
+			/** By calling this constructor you'll be able to initialize a
+			 *  Date object from a string with the specified format.
+			 *  This method makes use of the strptime(3) C function, for
+			 *  more information on the format string read the manpage for
+			 *  strptime.
+			 *  \param format The format as a valid strptime format string
+			 *  \param date_text The date as a string matching the given 
+			 *  format */
+			Date(const String &format, const String &date_text);
+			Date(const Date *d);
 			virtual ~Date();
 			/** This method will update the value of unixtime and all the other <i>broken-time</i> values */
 			virtual time_t getCurrentTime();
@@ -75,7 +102,8 @@ namespace xvr2{
 			 * This will convert the current date object to the following
 			 * format:   YYYY-MM-DD HH:MM:SS
 			 */
-			virtual const String &toString();
+			virtual const String *toString();
+			virtual void add(DateARITHParts component, int value);
 	};
 
 };

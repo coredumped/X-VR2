@@ -1,7 +1,7 @@
 /*
  * $Id$
  *
- *                 Juan V. Guerrero <coredumped@esolutions4all.com>
+ *                 Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
  */
 #include<Date.h>
 #include<time.h>
@@ -38,7 +38,24 @@ namespace xvr2{
 #ifndef USING_GCC3
 		setClassName(xvr2::_xvr2Date);
 #endif
+		drep = 0;
 		getCurrentTime();
+	}
+
+	Date::Date(const Date *d){
+#ifndef USING_GCC3
+		setClassName(xvr2::_xvr2Date);
+#endif
+		drep = 0;
+		minute = d->minute;
+		second = d->second;
+		hour = d->hour;
+		dayofweek = d->dayofweek;
+		dayofyear = d->dayofyear;
+		dayofmonth = d->dayofmonth;
+		month = d->month;
+		year = d->year;
+		unixtime = d->unixtime;
 	}
 
 	Date::Date(int __y, int __m, int __dw, int __dm, int __h, int __mi, int __s){
@@ -46,6 +63,7 @@ namespace xvr2{
 #ifndef USING_GCC3
 		setClassName(xvr2::_xvr2Date);
 #endif
+		drep = 0;
 		hour       = __h;
 		if(hour > 12){
 			hr12hour = hour - 12;
@@ -82,10 +100,92 @@ namespace xvr2{
 #ifndef USING_GCC3
 		setClassName(xvr2::_xvr2Date);
 #endif
+		drep = 0;
 		setTStamp(__unixtime);
 	}
 
-	Date::~Date(){;}
+	void Date::decode(const char *format, const char *date_text){
+		struct tm t;
+		if(strptime(date_text, format, &t) == NULL)
+			throw Exception::DateParse();
+		hour = t.tm_hour;
+		if(hour > 12){
+			hr12hour = hour - 12;
+			hr12ampm = Date::PM;
+		}
+		else{
+			if(hour == 0){
+				hr12hour = 12;
+			}
+			else{
+				hr12hour = hour;
+			}
+			hr12ampm = Date::AM;
+		}
+		minute = t.tm_min;
+		second = t.tm_sec;
+		dayofweek = t.tm_wday;
+		dayofyear = t.tm_yday;
+		dayofmonth = t.tm_mday;
+		month = t.tm_mon + 1;
+		if(t.tm_year < 1900){
+			year = t.tm_year + 1900;
+		}
+		else{
+			year = t.tm_year;
+		}
+		unixtime = mktime(&t);
+	}
+
+	Date::Date(const char *format, const char *date_text){
+		drep = 0;
+#ifndef USING_GCC3
+		setClassName(xvr2::_xvr2Date);
+#endif
+		decode(format, date_text);
+	}
+
+	Date::Date(const String &format, const String &date_text){
+		struct tm t;
+#ifndef USING_GCC3
+		setClassName(xvr2::_xvr2Date);
+#endif
+		drep = 0;
+		if(strptime(((String *)&date_text)->toCharPtr(), ((String *)&format)->toCharPtr(), &t) == NULL)
+			throw Exception::DateParse();
+		hour = t.tm_hour;
+		if(hour > 12){
+			hr12hour = hour - 12;
+			hr12ampm = Date::PM;
+		}
+		else{
+			if(hour == 0){
+				hr12hour = 12;
+			}
+			else{
+				hr12hour = hour;
+			}
+			hr12ampm = Date::AM;
+		}
+		minute = t.tm_min;
+		second = t.tm_sec;
+		dayofweek = t.tm_wday;
+		dayofyear = t.tm_yday;
+		dayofmonth = t.tm_mday;
+		month = t.tm_mon;
+		if(t.tm_year < 1900){
+			year = t.tm_year + 1900;
+		}
+		else{
+			year = t.tm_year;
+		}
+		unixtime = mktime(&t);
+	}
+
+	Date::~Date(){
+		if(drep != 0)
+			xvr2_delete(drep);
+	}
 
 	time_t Date::getCurrentTime(){
 		struct tm t;
@@ -118,30 +218,50 @@ namespace xvr2{
 		return unixtime;
 	}
 
-	const String &Date::toString(){
-		drep.deleteString();
-		drep = year;
-		drep += "-";
+	const String *Date::toString(){
+		if(drep == 0){
+			drep = new String(year);
+		}
+		drep->assign(year);
+		drep->concat("-");
 		if(month <= 9)
-			drep += "0";
-		drep += month;
-		drep += "-";
+			drep->concat(0);
+		drep->concat(month);
+		drep->concat("-");
 		if(dayofmonth <= 9)
-			drep += "0";
-		drep += dayofmonth;
-		drep += " ";
+			drep->concat(0);
+		drep->concat(dayofmonth);
+		drep->concat(" ");
 		if(hour <= 9)
-			drep += "0";
-		drep += hour;
-		drep += ":";
+			drep->concat(0);
+		drep->concat(hour);
+		drep->concat(":");
 		if(minute <= 9)
-			drep += "0";
-		drep += minute;
-		drep += ":";
+			drep->concat(0);
+		drep->concat(minute);
+		drep->concat(":");
 		if(second <= 9)
-			drep += "0";
-		drep += second;
+			drep->concat(0);
+		drep->concat(second);
 		return drep;
+	}
+
+	void Date::add(DateARITHParts component, int value){
+		int fsec;
+		switch(component){
+			case DAYS:
+				fsec = value * 86400;
+				break;
+			case HOURS:
+				fsec = value * 3600;
+				break;
+			case MINUTES:
+				fsec = value * 60;
+				break;
+			default:
+				fsec = value;
+		}
+		setTStamp(unixtime + fsec);
 	}
 };
 

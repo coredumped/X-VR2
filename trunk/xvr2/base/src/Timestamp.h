@@ -15,7 +15,10 @@ namespace xvr2{
 	class Timestamp:public Time{
 		public:
 			Timestamp();
+			Timestamp(const Timestamp *t);
+			Timestamp(const char *f, const char *t);
 			Timestamp(UInt32 tstamp);
+			~Timestamp(){;}
 			/** Returns the current hour */
 			int Hour();
 			/** Returns the current minute */
@@ -24,6 +27,7 @@ namespace xvr2{
 			int Second();
 			/** Returns the current timestamp as unix time */
 			UInt32 timestamp();
+			const String *toString();
 	};
 };
 

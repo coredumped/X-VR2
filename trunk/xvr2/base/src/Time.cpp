@@ -18,6 +18,18 @@ namespace xvr2{
 		setTStamp(tstamp);
 	}
 
+	Time::Time(const char *time_text):Date("%T", time_text){
+#ifndef USING_GCC3
+		setClassName(xvr2::_xvr2Time);
+#endif
+	}
+
+	Time::Time(const String &time_text):Date("%T", time_text){
+#ifndef USING_GCC3
+		setClassName(xvr2::_xvr2Time);
+#endif
+	}
+
 	const UInt32 Time::timestamp(){
 		return unixTime();
 	}
@@ -35,6 +47,12 @@ namespace xvr2{
 		year      = 0;
 	}
 
+	Time::Time(const Time *t):Date(t){
+#ifndef USING_GCC3
+		setClassName(xvr2::_xvr2Time);
+#endif
+	}
+
 	int Time::Hour(){
 		getCurrentTime();
 		return hour;
@@ -50,14 +68,15 @@ namespace xvr2{
 		return second;
 	}
 	
-	const String &Time::toString(){
-		drep.deleteString();
+	const String *Time::toString(){
+		/*drep->deleteString();
 		drep = Hour();
 		drep += ":";
-		drep = Minute();
+		drep += Minute();
 		drep += ":";
-		drep = Second();
-		return drep;
+		drep += Second();
+		return drep;*/
+		return 0;
 	}
 };
 

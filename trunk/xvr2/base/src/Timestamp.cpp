@@ -11,11 +11,25 @@ namespace xvr2{
 		setTStamp(tstamp);
 	}
 
-	Timestamp::Timestamp(){
-		getCurrentTime();
+	Timestamp::Timestamp(const Timestamp *d):Time(d){
 #ifndef USING_GCC3
 		setClassName(_xvr2Timestamp);
 #endif
+	}
+
+	Timestamp::Timestamp(const char *f, const char *t){
+		drep = 0;
+#ifndef USING_GCC3
+		setClassName(_xvr2Timestamp);
+#endif
+		decode(f, t);
+	}
+
+	Timestamp::Timestamp(){
+#ifndef USING_GCC3
+		setClassName(_xvr2Timestamp);
+#endif
+		getCurrentTime();
 	}
 
 	int Timestamp::Hour(){
@@ -32,5 +46,13 @@ namespace xvr2{
 
 	UInt32 Timestamp::timestamp(){
 		return unixtime;
+	}
+
+	const String *Timestamp::toString(){
+		/*if(drep == 0)
+			drep = new String((unsigned int)unixtime);
+		else
+			drep->assign((unsigned int)unixtime);*/
+		return Date::toString();
 	}
 };
