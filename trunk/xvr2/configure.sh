@@ -16,21 +16,13 @@ cd db
 ./configure.sh "$@"
 cd $THIS_DIR
 
-cd gfx
-./configure.sh "$@"
-cd $THIS_DIR
-
-cd gui
-./configure.sh "$@"
-cd $THIS_DIR
-
 cd drivers
 ./configure.sh "$@"
 cd $THIS_DIR
 
 
 
-echo "all: base/src/libxvr2.so.${VERSION} step2 step3 step4 step5 step6
+echo "all: base/src/libxvr2.so.${VERSION} step2 step3 step4
 
 docs: step100
 
@@ -45,21 +37,15 @@ step3: base/src/libxvr2.so.${VERSION} step2 db/src/*.h db/src/*.cpp
 
 step4: base/src/libxvr2.so.${VERSION} step2 net/src/*.h net/src/*.cpp
 	cd net/src ; make -f Makefile
-
-step5: base/src/libxvr2.so.${VERSION} gfx/src/*.h gfx/src/*.cpp
-	cd gfx/src ; make -f Makefile
-
-step6: base/src/libxvr2.so.${VERSION} step2 gui/src/*.h gui/src/*.cpp
-	cd gui/src ; make -f Makefile
 	@echo
 	@echo
-	@echo "Now type make install"
+	@echo 'Now (as root) type: make install'
 
 drivers: base/src/libxvr2.so.${VERSION} all
 	cd drivers ; make -f Makefile
 	@echo
 	@echo
-	@echo "You can now safely install everything, type"
+	@echo 'You can now safely install everything, (as root) type'
 	@echo "make drivers-install"
 
 drivers-install: drivers
@@ -74,8 +60,6 @@ clean:
 	cd base/src ; make -f Makefile clean
 	cd util/src ; make -f Makefile clean
 	cd net/src ; make -f Makefile clean
-	cd gfx/src ; make -f Makefile clean
-	cd gui/src ; make -f Makefile clean
 	cd db/src ; make -f Makefile clean
 	cd drivers ; make -f Makefile clean
 
@@ -84,10 +68,8 @@ install:
 	cd util/src ; make -f Makefile install
 	cd db/src ; make -f Makefile install
 	cd net/src ; make -f Makefile install
-	cd gfx/src ; make -f Makefile install
-	cd gui/src ; make -f Makefile install
 	@echo
-	@echo "To install compiled in drivers type:"
+	@echo "To compile the provided drivers type:"
 	@echo "make drivers"
 
 rebuild: clean all
