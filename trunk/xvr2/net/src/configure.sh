@@ -75,6 +75,7 @@ usage()
 
 THREADMODE=PTHREADS
 NETLIB=-lsocket
+NETCFLAGS=" -I../base/src "
 SDLCMD=''
 SDLCFLAGS=''
 DEBUGMODE=1

@@ -39,7 +39,7 @@
 #include<Thread.h>
 
 namespace xvr2{
-	namespace Network {
+	namespace Net {
 
 		/** This variable has a static reference to the localhost 
 		 *  string */

@@ -11,7 +11,7 @@
 #include"TCPSocket.h"
 
 namespace xvr2{
-	namespace Network{
+	namespace Net {
 		/**
 		 * This class handles the socket server interface
 		 */

@@ -1,8 +1,8 @@
 /*
  * $Id$
  */
-#ifndef ___SOCKET_H__
-#define ___SOCKET_H__
+#ifndef __XVR2_SOCKET_H__
+#define __XVR2_SOCKET_H__
 #include<sys/socket.h>
 
 #include<String.h>
@@ -15,14 +15,14 @@
 #include<NoIPForYouException.h>
 
 namespace xvr2{
-	namespace Network{
+	namespace Net {
 
 		/**
 		 * \class TCPSocket
 		 * \version $Revision$
 		 * \brief This class provides all the functionality for working with TCP 
 		 * sockets, from connection to sending a receiving data from a connected
-		 * peer,
+		 * peer
 		 */
 		class TCPSocket:public Socket{
 			protected:

@@ -21,7 +21,7 @@
 #endif
 
 namespace xvr2{
-	namespace Network{
+	namespace Net{
 
 		Socket::Socket(){
 #ifndef USING_GCC3

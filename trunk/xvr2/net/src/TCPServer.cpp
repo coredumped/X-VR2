@@ -6,7 +6,7 @@
 #include<TCPServer.h>
 
 namespace xvr2{
-	namespace Network {
+	namespace Net {
 
 		// Start definition of local variables
 		// End definition of local variables

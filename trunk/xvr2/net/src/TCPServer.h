@@ -12,7 +12,7 @@
 #include<NullPointerException.h>
 
 namespace xvr2{
-	namespace Network {
+	namespace Net {
 		//class TCPServerSession;
 		/**
 		 * TCP oriented server, top-level class

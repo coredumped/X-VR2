@@ -27,7 +27,7 @@
 #include<Exception.h>
 
 namespace xvr2{
-	namespace Network{
+	namespace Net{
 
 		TCPServerSocket::TCPServerSocket(){
 #ifndef USING_GCC3

@@ -7,7 +7,7 @@
 #include<DataTypes.h>
 
 namespace xvr2{
-	namespace Network{
+	namespace Net{
 
 		/**
 		 * This is the socket parent class, this one contains
