@@ -1,7 +1,5 @@
 /*
  * $Id$
- *
- *                 Juan V. Guerrero <coredumped@esolutions4all.com>
  */
 #ifndef __XVR2_DATE_H__
 #define __XVR2_DATE_H__

@@ -1,7 +1,5 @@
 /*
  * $Id$
- *
- *                Juan V. Guerrero <coredumped@esolutions4all.com>
  */
 #include<Unix.h>
 #include<Mutex.h>

@@ -1,7 +1,5 @@
 /*
  * $Id$
- *
- *               Juan V. Guerrero <coredumped@esolutions4all.com>
  */
 #include<MessageStrings.h>
 #include<BaseFile.h>
