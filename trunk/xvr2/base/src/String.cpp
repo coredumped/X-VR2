@@ -61,7 +61,7 @@ namespace xvr2{
 		buf[idx] = 0;
 	}
 	
-	const char *String::toCharPtr(){
+	char *String::toCharPtr() const {
 		if(this == 0x0)
 			throw Exception::NullPointer();
 		return buffer;
