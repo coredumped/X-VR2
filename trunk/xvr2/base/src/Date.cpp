@@ -1,7 +1,5 @@
 /*
  * $Id$
- *
- *                 Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
  */
 #include<Date.h>
 #include<time.h>
@@ -105,10 +103,13 @@ namespace xvr2{
 	}
 
 	void Date::decode(const char *format, const char *date_text){
-		struct tm t;
-		if(strptime(date_text, format, &t) == NULL)
+		struct tm *t = 0;
+		t = new tm();
+		if(strptime(date_text, format, t) == NULL){
+			xvr2_delete(t);
 			throw Exception::DateParse();
-		hour = t.tm_hour;
+		}
+		hour = t->tm_hour;
 		if(hour > 12){
 			hr12hour = hour - 12;
 			hr12ampm = Date::PM;
@@ -122,19 +123,20 @@ namespace xvr2{
 			}
 			hr12ampm = Date::AM;
 		}
-		minute = t.tm_min;
-		second = t.tm_sec;
-		dayofweek = t.tm_wday;
-		dayofyear = t.tm_yday;
-		dayofmonth = t.tm_mday;
-		month = t.tm_mon + 1;
-		if(t.tm_year < 1900){
-			year = t.tm_year + 1900;
+		minute = t->tm_min;
+		second = t->tm_sec;
+		dayofweek = t->tm_wday;
+		dayofyear = t->tm_yday;
+		dayofmonth = t->tm_mday;
+		month = t->tm_mon + 1;
+		if(t->tm_year < 1900){
+			year = t->tm_year + 1900;
 		}
 		else{
-			year = t.tm_year;
+			year = t->tm_year;
 		}
-		unixtime = mktime(&t);
+		unixtime = mktime(t);
+		xvr2_delete(t);
 	}
 
 	Date::Date(const char *format, const char *date_text){
