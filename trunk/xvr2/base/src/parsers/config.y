@@ -71,6 +71,7 @@ double fp;
 }
 
 %token <integer>TOK_INTEGER
+%token <string>TOK_IPV4
 %token <fp>TOK_FLOAT
 %token <string>TOK_STRING
 %token <string>TOK_VARIABLE
@@ -92,6 +93,8 @@ expr:	/* empty */
 	assig_litstr
 	|
 	assig_int
+	|
+	assig_ipv4
 	|
 	assig_float
 	|
@@ -117,6 +120,16 @@ assig_litstr:
 
 assig_str:
 	TOK_VARIABLE TOK_ASSIGNMENT TOK_VARIABLE
+	{
+#ifdef USE_DEBUG
+		printf("\nPARAM[%s]=VALUE[%s]\n", $1, $3);
+#endif
+		param_value_add(__pvStore, (const char *)$1, (const char *)$3);
+		xvr2::Memory::freeBuffer((void **)&($3));
+	}
+
+assig_ipv4:
+	TOK_VARIABLE TOK_ASSIGNMENT TOK_IPV4
 	{
 #ifdef USE_DEBUG
 		printf("\nPARAM[%s]=VALUE[%s]\n", $1, $3);

@@ -24,6 +24,7 @@ static void __debug_comment(const char *msg){
 %%
 \".*\"				__xvr2_cfg_yylval.string = strdup((const char *)__xvr2_cfg_yytext); __debug_msg("LITERAL_STRING "); return TOK_LITERAL_STRING;
 [0-9]+				__xvr2_cfg_yylval.integer = atoi((const char *)__xvr2_cfg_yytext); __debug_msg("INTEGER ") ; return TOK_INTEGER;
+[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+	__xvr2_cfg_yylval.string = strdup((const char *)__xvr2_cfg_yytext); __debug_msg("IPV4_ADDR "); return TOK_IPV4;
 [+-]?[0-9]+[.[0-9]+]?		__xvr2_cfg_yylval.fp = atof((const char *)__xvr2_cfg_yytext); __debug_msg("FLOAT "); return TOK_FLOAT;
 [_a-zA-Z][_0-9A-Za-z]*		__xvr2_cfg_yylval.string = strdup((const char *)__xvr2_cfg_yytext); __debug_msg("STRING "); return TOK_VARIABLE;
 [/\._a-zA-Z0-9][/\._0-9A-Za-z]*		__xvr2_cfg_yylval.string = strdup((const char *)__xvr2_cfg_yytext); __debug_msg("PATH "); return TOK_PATH;
