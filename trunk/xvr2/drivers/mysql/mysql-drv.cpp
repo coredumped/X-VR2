@@ -234,6 +234,24 @@ DB::Field *__drv_fetch_next_row(void *__res_handle){
 				ndouble = atof((char *)(row[n]));
 				s[n].init(xvr2::DB::Field::DOUBLE, &ndouble, sizeof(double));
 				break;
+			case FIELD_TYPE_TIME:
+				Time *ttime;
+				ttime = new Time((char *)(row[n]));
+				s[n].init(xvr2::DB::Field::TIME, ttime, sizeof(xvr2::Time));
+				xvr2_delete(ttime);
+				break;
+			case FIELD_TYPE_DATE:
+				Date *ddate;
+				ddate = new Date("%Y-%m-%d", (char *)(row[n]));
+				s[n].init(xvr2::DB::Field::DATE, ddate, sizeof(xvr2::Date));
+				xvr2_delete(ddate);
+				break;
+			case FIELD_TYPE_DATETIME:
+				Timestamp *tdate;
+				tdate = new Timestamp("%Y-%m-%d %T", (char *)(row[n]));
+				s[n].init(xvr2::DB::Field::TIMESTAMP, tdate, sizeof(xvr2::Timestamp));
+				xvr2_delete(tdate);
+				break;
 			default:
 				s[n].init(xvr2::DB::Field::VARCHAR, (void *)(row[n]), f->length);
 				break;
