@@ -49,7 +49,11 @@ namespace xvr2{
 				 * \brief Default constructor, it initializes the array pointer and sets its datasize
 				 * to zero
 				 */
+			#ifdef USING_GCC3
+				Array(){
+			#else
 				Array():Container(xvr2::_xvr2Array){
+			#endif
 					array = 0;
 					num_data = 0;
 				}
