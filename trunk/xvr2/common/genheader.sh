@@ -9,7 +9,7 @@ echo "/*--------------------------------------------------------------------
 
 
   Authors:
-  		Juan V. Guerrero <coredumped@esolutions4all.com>
+  		Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
  *--------------------------------------------------------------------*/
 
 #ifndef __XVR2_MAIN_HEADER
@@ -25,7 +25,7 @@ echo "/*--------------------------------------------------------------------
 
 
   Authors:
-  		Juan V. Guerrero <coredumped@esolutions4all.com>
+  		Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
  *--------------------------------------------------------------------*/
 
 #ifndef __XVR2_CONFIG_HEADER__
