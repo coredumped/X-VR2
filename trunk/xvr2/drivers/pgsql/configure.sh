@@ -158,7 +158,7 @@ fi
 echo "Processor: $PROCESSOR, platform is $PLATFORM"
 
 echo -ne "Checking g++..."
-GPP=`slocate g++ | egrep '\/g\+\+$'`
+GPP=`slocate g++ | egrep '.*bin.*\/g\+\+$'`
 if [ $? -ne 0 ]; then
 	echo "FAILED"
 	echo "Unable to find g++, do you have slocate or g++ installed??"
