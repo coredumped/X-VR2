@@ -69,14 +69,21 @@ namespace xvr2{
 	}
 	
 	const String *Time::toString(){
-		/*drep->deleteString();
-		drep = Hour();
-		drep += ":";
-		drep += Minute();
-		drep += ":";
-		drep += Second();
-		return drep;*/
-		return 0;
+		if(drep == 0){
+			drep = new String();
+		}
+		if(hour <= 9)
+			drep->concat(0);
+		drep->concat(hour);
+		drep->concat(":");
+		if(minute <= 9)
+			drep->concat(0);
+		drep->concat(minute);
+		drep->concat(":");
+		if(second <= 9)
+			drep->concat(0);
+		drep->concat(second);
+		return drep;
 	}
 };
 
