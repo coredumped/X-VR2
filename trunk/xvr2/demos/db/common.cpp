@@ -158,7 +158,7 @@ int rundemo(int demo_type){
 		return 1;
 	}
 	drv->getVersionInfo(&q);
-	std::cout << "X-VR2 " << dnames[demo_type] << " " << q->version() << "." << q->revision() << " by: " << ((String *)&q->vendor())->toCharPtr() << " using: " << ((String *)&q->description())->toCharPtr() << std::endl;
+	std::cout << "X-VR2 " << dnames[demo_type] << " " << q->version() << "." << q->revision() << " by: " << q->vendor().toCharPtr() << " using: " << q->description().toCharPtr() << std::endl;
 
 	conn = new DB::Connection(drv, server_location, db_name, db_user, db_pass, db_port);
 
@@ -195,7 +195,7 @@ int rundemo(int demo_type){
 		DB::Field *ff = (DB::Field *)r->getRow();
 		if(!capshown){
 			for(cj = 0; cj < r->numCols(); cj++){
-				std::cout << ((String *)&ff[cj].getFieldName())->toCharPtr() << "\t";
+				std::cout << ff[cj].getFieldName().toCharPtr() << "\t";
 			}
 			std::cout << std::endl;
 			capshown = true;
