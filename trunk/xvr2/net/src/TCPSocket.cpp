@@ -309,7 +309,7 @@ namespace xvr2{
 		}
 
 		void TCPSocket::writeLine(const String &str){
-			writeLine(((String *)&str)->toCharPtr());
+			writeLine(str.toCharPtr());
 		}
 		
 		void TCPSocket::write(const void *buffer, unsigned long size){

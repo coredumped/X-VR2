@@ -32,7 +32,7 @@ namespace xvr2{
 #ifndef USING_GCC3
 		setClassName(xvr2::_xvr2Plugin);
 #endif
-		dso = ((String *)&plName)->toCharPtr();
+		dso = plName.toCharPtr();
 	}
 
 	void Plugin::load(){
