@@ -134,12 +134,14 @@ namespace xvr2{
 				 *  \param conn_handle The connection handle
 				 *  \param tablename The table where you want to upload your data
 				 *  \param cols A comma delimited list of column names specifiying
+				 *  \param delim The string used to separate every field
 				 *  which columns are to be affected by the operation. */
 				virtual const bool bulkBegin(void *conn_handle, const char *tablename, const char *cols, const char *delim);
 				/** Use this method to actually load data during a bolk load process
 				 *  started by the bulkBegin method.
 				 *  \param conn_handle Connection handle
 				 *  \param data The data to be loaded, every field must be delimited
+				 *  \param delim The string used to separate every field
 				 *  as previuosly specified during the bulkBegin method call. */
 				virtual const bool bulkAddData(void *conn_handle, const char *data, const char *delim);
 				/** Flushes all data sent by bulkAddData and tells the server to actually
@@ -154,12 +156,12 @@ namespace xvr2{
 				virtual char *quoteString(const char *str);
 				/** Returns a specific error message returned by the latest operation
 				 *  executed at the connection level.
-				 *  \param The connection handle
+				 *  \param conn_handle The connection handle
 				 *  \return The error string*/
 				virtual const char *errorMessage(void *conn_handle);
 				/** Returns a specific error message returned by the latest operation
 				 *  executed at the query's ResultSet level.
-				 *  \param The connection handle
+				 *  \param res_handle The ResultSet handle
 				 *  \return The error string*/
 				virtual const char *resultErrorMessage(void *res_handle);
 		};
