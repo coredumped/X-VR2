@@ -172,8 +172,8 @@ namespace xvr2{
 		//int n;
 		if(s == 0)
 			return;
-		if(s[0] == 0)
-			return;
+		/*if(s[0] == 0)
+			return;*/
 		destroy();
 		len = strlen(s);
 		//len = n;
@@ -1173,4 +1173,5 @@ namespace xvr2{
 		}
 		return nbuf;
 	}
+
 };
