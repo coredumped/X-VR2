@@ -24,6 +24,7 @@ namespace xvr2{
 				String		_dbname;
 				int		_port;
 				bool		__connected;
+				String		*bulk_delim;
 			public:
 				/** This constructor will require an instatiated Driver */
 				Connection(Driver *drv);
@@ -67,6 +68,9 @@ namespace xvr2{
 				 *  they will execute each other in 
 				 *  sequence */
 				void commit();
+				void bulkUploadBegin(const String &table, const String &cols, const String &_delim);
+				void bulkUploadData(const String &data);
+				void bulkUploadEnd();
 		};
 	};
 };

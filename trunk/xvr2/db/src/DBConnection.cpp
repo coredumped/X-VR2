@@ -17,6 +17,7 @@ namespace xvr2{
 			setClassName(xvr2::_xvr2Connection);
 #endif
 			driver = d;
+			bulk_delim = 0;
 			__conn = 0;
 			_server.deleteString();
 			__connected = false;	
@@ -27,6 +28,7 @@ namespace xvr2{
 			setClassName(xvr2::_xvr2Connection);
 #endif
 			driver = d;
+			bulk_delim = 0;
 			__conn = 0;
 			_server.deleteString();
 			__connected = false;	
@@ -40,12 +42,15 @@ namespace xvr2{
 		Connection::~Connection(){
 			if(__connected)
 				disconnect();
+			if(bulk_delim != 0)
+				xvr2_delete(bulk_delim);
 		}
 	
 		void Connection::connect(const String &s, const String &dbname, const String &u, const String &p, int port){
 			if(__connected)
 				throw Exception::AlreadyConnected2DB();
-	
+			if(bulk_delim != 0)
+				xvr2_delete(bulk_delim);
 			try{
 				__conn = driver->connect(s, dbname, u, p, port);
 			}
@@ -110,6 +115,42 @@ namespace xvr2{
 			}
 		}
 	
+		void Connection::bulkUploadBegin(const String &table, const String &cols, const String &_delim){
+			if(!__connected)
+				throw Exception::DBConnectFirst();
+			try{
+				if(bulk_delim != 0)
+					xvr2_delete(bulk_delim);
+				bulk_delim = new String(((String *)&_delim)->toCharPtr());
+				driver->bulkBegin(__conn, ((String *)&table)->toCharPtr(), ((String *)&cols)->toCharPtr(), bulk_delim->toCharPtr());
+			}
+			catch(...){
+				throw;
+			}
+		}
+
+		void Connection::bulkUploadData(const String &data){
+			if(!__connected)
+				throw Exception::DBConnectFirst();
+			try{
+				driver->bulkAddData(__conn, ((String *)&data)->toCharPtr(), bulk_delim->toCharPtr());
+			}
+			catch(...){
+				throw;
+			}
+		}
+
+		void Connection::bulkUploadEnd(){
+			if(!__connected)
+				throw Exception::DBConnectFirst();
+			try{
+				driver->bulkEnd(__conn);
+			}
+			catch(...){
+				throw;
+			}
+		}
+
 		//void Connection::(){
 		//}
 
