@@ -176,6 +176,20 @@ fi
 
 echo "CC=$GPP" >> Makefile
 
+echo "Checking for MYSQL development libraries"
+which mysql_configxx > /dev/null 2>&1
+if [ $? -ne 0 ]; then
+echo 'all:
+
+clean:
+
+install:
+
+rebuild: clean all
+' > Makefile
+	echo "MYSQL driver will not be built, no header files found!!!"
+	exit 0
+fi
 
 #echo -ne "Checking sdl-config..."
 #sdl-config --libs > /dev/null 2>&1
