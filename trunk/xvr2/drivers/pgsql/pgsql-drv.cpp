@@ -15,13 +15,6 @@
 #define DRV_REVISION 1
 #endif
 
-//
-// TODO: 
-// 1. Keep a mapping of the local SQL Datatypes and the server datatypes, for
-//    postgresql all datatypes can be correlated to a specific OID, use this to
-//    correlated to a an xvr2:DB Field datatype
-//
-
 using namespace xvr2;
 
 /** This has to be a pointer to the parent Driver object, sometimes it is needed
@@ -461,4 +454,78 @@ bool	__drv_free_resultset(void *__res_handle){
 	PQclear(r->result);
 	delete r;
 	return true;
+}
+
+bool	__drv_bulk_begin(void *conn_handle, const char *table, const char *columns, const char delim){
+	bool ret;
+	char *sqlcmd;
+	PGresult *result;
+	__pgsql_conn *conn;
+	conn = (__pgsql_conn *)conn_handle;
+	sqlcmd = new char(50);
+	sprintf(sqlcmd, "COPY %s (%s) FROM STDIN WITH DELIMITER '%c'", table, columns, delim);
+	result = PQexec (conn->conn, sqlcmd);
+	delete sqlcmd;
+	if(result == NULL){
+#ifdef USE_DEBUG
+		std::cerr << "COPY command failure!!! " <<  PQerrorMessage (conn->conn) << std::endl;
+#endif
+		throw Exception::SQLQuery();
+	}
+	switch(PQresultStatus(result)){
+		case PGRES_TUPLES_OK:
+		case PGRES_COMMAND_OK:
+		case PGRES_COPY_IN:
+			ret = true;
+			break;
+		default:
+			ret = false;
+	}
+	PQclear(result);
+	return ret;
+}
+
+bool	__drv_bulk_insert(void *conn_handle, const char *data){
+	int ret;
+	__pgsql_conn *conn;
+	conn = (__pgsql_conn *)conn_handle;
+	ret = PQputCopyData(conn->conn, data, strlen(data));
+	if(ret == 1)
+		return true;
+	else if(ret == -1){
+#ifdef USE_DEBUG
+		std::cerr << "COPY command failure: " <<  PQerrorMessage (conn->conn) << std::endl;
+#endif
+		throw Exception::SQLQuery();
+	}
+	return false;
+}
+
+bool	__drv_bulk_end(void *conn_handle){
+	int ret;
+	PGresult *result;
+	__pgsql_conn *conn;
+	conn = (__pgsql_conn *)conn_handle;
+	ret = PQputCopyEnd(conn->conn, NULL);
+	if(ret == 1){
+		result = PQgetResult(conn->conn);
+		if(result == NULL){
+#ifdef USE_DEBUG
+			std::cerr << "COPY command failure: " <<  PQerrorMessage (conn->conn) << std::endl;
+#endif
+			throw Exception::SQLQuery();
+		}
+		else {
+			if(PQresultStatus(result) == PGRES_COMMAND_OK){
+				PQclear(result);
+				return true;
+			}
+			PQclear(result);
+		}
+	}
+#ifdef USE_DEBUG
+	std::cerr << "COPY command failure: " <<  PQerrorMessage (conn->conn) << std::endl;
+#endif
+	throw Exception::SQLQuery();
+	return false;
 }

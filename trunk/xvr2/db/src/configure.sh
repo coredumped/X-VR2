@@ -263,7 +263,7 @@ DEBUG=$MAINTAINER $DEBUGSTRING $DEBUG_MUTEXES
 OPTIMIZE=" >> Makefile
 OSVER=`uname -r | sed 's/5\.//'`
 echo $OSVER
-echo "CFLAGS=-Wall \$(DEBUG) \$(OPTIMIZE) -DSOLARIS=1 -DSOLARIS2$OSVER=1 -I../../common -I../../base/src -I. -c -DUSE_NEW=1  -D_STRUCTURED_PROC $SDLCMD $DEFINES" >> Makefile
+echo "CFLAGS=-Wall \$(DEBUG) \$(OPTIMIZE) -DSOLARIS=1 -DSOLARIS2$OSVER=1 -I. -I../../common -I../../base/src -c -DUSE_NEW=1  -D_STRUCTURED_PROC $SDLCMD $DEFINES" >> Makefile
 if [ $OSVER -eq 8 ]; then
 	DEFINES="$DEFINES -DSOLARIS8"
 	if [ $THREADMODE = 'SDL_THREADS' ]; then

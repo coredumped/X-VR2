@@ -42,7 +42,13 @@ namespace xvr2{
 				int		(*__drv_numcols)(void *__res_handle);
 				int		(*__drv_numrows)(void *__res_handle);
 				bool		(*__drv_free_resultset)(void *__res_handle);
+				bool		(*__drv_bulk_begin)(void *conn_handle, const char *table, const char *cols, const char delim);
+				bool		(*__drv_bulk_insert)(void *conn_handle, const char *data);
+				bool		(*__drv_bulk_end)(void *conn_handle);
 				bool		__is_loaded;
+				bool 		has__drv_bulk_begin;
+				bool 		has__drv_bulk_insert;
+				bool 		has__drv_bulk_end;
 			public:
 				/** Default constructor it initialzes some 
 				 *  defaults only */
@@ -115,6 +121,27 @@ namespace xvr2{
 				 *  by the resultset, this method must be call to release
 				 *  that memory and avoid a memory leak */
 				const bool freeResultSet(void *__res_handle);
+				/** Call this method to start a bulk loading process.
+				 *  Bulk load is a process provided by many RDBMSs where
+				 *  you can load big amounts of data without requiring to
+				 *  perform a lot of insert commands, this method is usually
+				 *  faster and recommended in scenarios where you load data
+				 *  which is contained in files, like .csv stuff
+				 *  \param conn_handle The connection handle
+				 *  \param tablename The table where you want to upload your data
+				 *  \param cols A comma delimited list of column names specifiying
+				 *  which columns are to be affected by the operation. */
+				virtual const bool bulkBegin(void *conn_handle, const char *tablename, const char *cols, const char delim);
+				/** Use this method to actually load data during a bolk load process
+				 *  started by the bulkBegin method.
+				 *  \param conn_handle Connection handle
+				 *  \param data The data to be loaded, every field must be delimited
+				 *  as previuosly specified during the bulkBegin method call. */
+				virtual const bool bulkAddData(void *conn_handle, const char *data);
+				/** Flushes all data sent by bulkAddData and tells the server to actually
+				 *  insert it into the table.
+				 *  \param conn_handle The connection handle */
+				virtual const bool bulkEnd(void *conn_handle);
 		};
 	};
 };

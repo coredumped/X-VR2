@@ -52,7 +52,25 @@ namespace xvr2{
 			__drv_numrows = (int (*)(void *))__drv->getSymbol("__drv_numrows");
 			__drv_free_resultset = (bool (*)(void *))__drv->getSymbol("__drv_free_resultset");
 	
-	
+			try{
+				__drv_bulk_begin = (bool (*)(void *, const char *, const char *, const char))__drv->getSymbol("__drv_bulk_begin");
+				has__drv_bulk_begin = true;
+				__drv_bulk_insert = (bool (*)(void *, const char *))__drv->getSymbol("__drv_bulk_insert");
+				has__drv_bulk_insert = true;
+				__drv_bulk_end = (bool (*)(void *))__drv->getSymbol("__drv_bulk_end");
+				has__drv_bulk_end = true;
+			}
+			catch(...){
+				__drv_bulk_begin = 0;
+				__drv_bulk_insert = 0;
+				__drv_bulk_end = 0;
+				has__drv_bulk_begin = false;
+				has__drv_bulk_insert = false;
+				has__drv_bulk_end = false;
+#ifdef USE_DEBUG
+				std::cerr << "  WARNING: driver is not bulk load capable";
+#endif
+			}
 #ifdef USE_DEBUG
 			std::cerr << "  initializing driver...";
 #endif
@@ -130,6 +148,57 @@ namespace xvr2{
 	
 		const bool Driver::freeResultSet(void *__res_handle){
 			return __drv_free_resultset(__res_handle);
+		}
+
+		const bool Driver::bulkBegin(void *conn_handle, const char *tablename, const char *cols, const char delim){
+			bool ret;
+			if(!has__drv_bulk_begin){
+#ifdef USE_DEBUG
+				std::cerr << "  WARNING: driver is not bulk load capable";
+#endif
+				return false;
+			}
+			try{
+				ret = __drv_bulk_begin(conn_handle, tablename, cols, delim);
+			}
+			catch(...){
+				throw;
+			}
+			return ret;
+		}
+
+		const bool Driver::bulkAddData(void *conn_handle, const char *data){
+			bool ret;
+			if(!has__drv_bulk_insert){
+#ifdef USE_DEBUG
+				std::cerr << "  WARNING: driver is not bulk load capable";
+#endif
+				return false;
+			}
+			try{
+				ret = __drv_bulk_insert(conn_handle, data);
+			}
+			catch(...){
+				throw;
+			}
+			return ret;
+		}
+
+		const bool Driver::bulkEnd(void *conn_handle){
+			bool ret;
+			if(!has__drv_bulk_end){
+#ifdef USE_DEBUG
+				std::cerr << "  WARNING: driver is not bulk load capable";
+#endif
+				return false;
+			}
+			try{
+				ret = __drv_bulk_end(conn_handle);
+			}
+			catch(...){
+				throw;
+			}
+			return ret;
 		}
 	};
 };

@@ -20,7 +20,7 @@ extern "C" {
  * It must first verify that this pointer is not null, then call any client RDBMS
  * initialization methods and finally filling the <b>info</b> DBDriverInfo object
  * with data appropiate for the current driver implementation.
- * \var __me This is a pointer the driver object who invoques this driver call*/
+ * \param __me A pointer the driver object who invoqued this driver*/
 bool	__drv_init(xvr2::DB::Driver *__me);
 bool	__drv_cleanup();
 void *__drv_connect(const char *srvr, const char *dbname, const char *usr, const char *pass, const int port);
@@ -34,13 +34,9 @@ int	__drv_numcols(void *handle);
 int	__drv_numrows(void *handle);
 bool	__drv_free_resultset(void *handle);
 
-//TODO:
-// Add bulk data insert callbacks
-//
-// void *__drv_bulk_start();
-// bool __drv_bulk_add(void *bulk_handle, const char *data);
-// bool __drv_bulk_send(void *bulk_handle);
-//
+bool	__drv_bulk_begin(void *conn_handle, const char *tablename, const char *columns, const char delim);
+bool	__drv_bulk_insert(void *conn_handle, const char *data);
+bool	__drv_bulk_end(void *conn_handle);
 
 };
 
