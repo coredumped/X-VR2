@@ -1,0 +1,28 @@
+/*
+ * $Id$
+ */
+#ifndef __XVR2_CLASS_H__
+#define __XVR2_CLASS_H__
+
+#include<ParentClass.h>
+
+namespace xvr2{
+	/**
+	 * \class Class
+	 * \author Juan V. Guerrero
+	 * \version $Revision$
+	 * \brief
+	 * This class has the following description: ....
+	 * \note
+	 * <b>NOT IMPLEMENTED</b>
+	 */
+	class Class:public ParentClass{
+		private:
+		protected:
+		public:
+			Class();
+			~Class();
+	};
+};
+
+#endif
