@@ -337,6 +337,7 @@ echo "done"
 echo "\$(LIBNAME): $DEPS parsers/config-parser.o parsers/config-lexer.o" >> Makefile
 echo -ne "\t\$(CC) \$(BUILDLIB) -o \$(LIBNAME) $DEPS parsers/config-lexer.o parsers/config-parser.o\n" >> Makefile
 echo -ne "\tcd ../../common ; ./genheader.sh $DEFINES -D'__XVR2_PREFIX_DIR \"${PREFIX}\"'\n" >> Makefile
+echo -ne "\tcd ../../scripts ; ./gen-config.sh ${PREFIX}\n" >> Makefile
 echo -ne "\tcp -vf \$(LIBNAME) ../../libs/ \n" >> Makefile
 echo -ne "\tcd ../../libs ; ln -sf \$(LIBNAME) \$(SONAME) \n" >> Makefile
 echo -ne "\t@echo -ne \"\\\\nNow type make install to install this package\\\\n\"\n\n" >> Makefile
@@ -380,11 +381,13 @@ install: all
 	mkdir -p $(INSTALLDIR)/include
 	mkdir -p $(INSTALLDIR)/include/xvr2
 	mkdir -p $(INSTALLDIR)/lib
+	mkdir -p $(INSTALLDIR)/bin
 	cp *.h $(INSTALLDIR)/include/xvr2
 	cp ../../common/*.h $(INSTALLDIR)/include/
 	cp $(LIBNAME) $(INSTALLDIR)/lib
 	rm -f $(INSTALLDIR)/lib/$(SONAME)
 	ln -s $(INSTALLDIR)/lib/$(LIBNAME) $(INSTALLDIR)/lib/$(SONAME)
+	cp ../../scripts/xvr2-config.sh $(INSTALLDIR)/bin/
 	/sbin/ldconfig
 
 cleaninstall: clean install' >> Makefile
