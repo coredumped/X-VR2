@@ -25,7 +25,7 @@
 
 namespace xvr2{
 
-	int __str_shrink(char **buf){
+	static int __str_shrink(char **buf){
 		char *tmp;
 		int n, i;
 		if(*buf == 0)
@@ -35,7 +35,8 @@ namespace xvr2{
 		for(i = 0; i < n; i++)
 			tmp[i] = *buf[i];
 		tmp[n] = 0;
-		xvr2_delete_array(buf);
+		//xvr2_delete_array(buf);
+		delete[] buf;
 		*buf = tmp;
 		return n;
 	}
@@ -164,7 +165,9 @@ namespace xvr2{
 		if(buffer == 0 || len == 0)
 			return;
 #endif
-		xvr2_delete_array(buffer);
+		//xvr2_delete_array(buffer);
+		delete[] buffer;
+		buffer = 0;
 		len = 0;
 	}
 	
@@ -266,10 +269,14 @@ namespace xvr2{
 		tmp[i] = 0;*/
 		tmp[0] = 0;
 		strcat(tmp, buffer);
-		xvr2_delete_array(buffer);
+		//xvr2_delete_array(buffer);
+		delete[] buffer;
+		buffer = 0;
 		strcat(tmp, s);
 		assign(tmp);
-		xvr2_delete_array(tmp);
+		//xvr2_delete_array(tmp);
+		delete tmp;
+		tmp = 0;
 	}
 	
 	void String::concat(String &s){
@@ -281,7 +288,9 @@ namespace xvr2{
 		buf = new char[14];
 		int2char(n, buf);
 		concat(buf);
-		xvr2_delete_array(buf);
+		//xvr2_delete_array(buf);
+		delete buf;
+		buf = 0;
 	}
 	
 	void String::concat(const unsigned int n){
@@ -289,7 +298,9 @@ namespace xvr2{
 		buf = new char[14];
 		sprintf(buf, "%u", n);
 		concat(buf);
-		xvr2_delete_array(buf);
+		//xvr2_delete_array(buf);
+		delete buf;
+		buf = 0;
 	}
 	
 	void String::concat(const float n){
@@ -297,7 +308,9 @@ namespace xvr2{
 		buf = new char[256];
 		sprintf(buf, "%f", n);
 		concat(buf);
-		xvr2_delete_array(buf);
+		//xvr2_delete_array(buf);
+		delete buf;
+		buf = 0;
 	}
 	
 	void String::concat(const double n){
@@ -305,7 +318,9 @@ namespace xvr2{
 		buf = new char[256];
 		sprintf(buf, "%f", n);
 		concat(buf);
-		xvr2_delete_array(buf);
+		//xvr2_delete_array(buf);
+		delete buf;
+		buf = 0;
 	}
 	
 	void String::concat(const long double n){
@@ -313,7 +328,9 @@ namespace xvr2{
 		buf = new char[256];
 		sprintf(buf, "%Lf", n);
 		concat(buf);
-		xvr2_delete_array(buf);
+		//xvr2_delete_array(buf);
+		delete buf;
+		buf = 0;
 	}
 	
 	void String::concat(const Int64 n){
@@ -321,7 +338,9 @@ namespace xvr2{
 		buf = new char[25];
 		sprintf(buf, "%lld", n);
 		concat(buf);
-		xvr2_delete_array(buf);
+		//xvr2_delete_array(buf);
+		delete buf;
+		buf = 0;
 	}
 	
 	void String::concat(const UInt64 n){
@@ -329,7 +348,9 @@ namespace xvr2{
 		buf = new char[25];
 		sprintf(buf, "%llu", n);
 		concat(buf);
-		xvr2_delete_array(buf);
+		//xvr2_delete_array(buf);
+		delete buf;
+		buf = 0;
 	}
 
 	void String::concat(const char c){
@@ -511,7 +532,9 @@ namespace xvr2{
 #endif
 		//destroy();
 		assign(buf);
-		xvr2_delete_array(buf);
+		//xvr2_delete_array(buf);
+		delete[] buf;
+		buf = 0;
 		return *this;
 	}
 	
@@ -670,6 +693,37 @@ namespace xvr2{
 	
 	bool String::operator==(const Int64 n){
 		return equals(n);
+	}
+
+	bool String::operator!=(const String &s){
+		return equals(s);
+	}
+	
+	bool String::operator!=(const char *s){
+		return equals(s)?false:true;
+	}
+	
+	bool String::operator!=(const int n){
+		return equals(n)?false:true;
+	}
+	bool String::operator!=(const unsigned int n){
+		return equals(n)?false:true;
+	}
+	
+	bool String::operator!=(const float n){
+		return equals(n)?false:true;
+	}
+	
+	bool String::operator!=(const double n){
+		return equals(n)?false:true;
+	}
+	
+	bool String::operator!=(const long double n){
+		return equals(n)?false:true;
+	}
+	
+	bool String::operator!=(const Int64 n){
+		return equals(n)?false:true;
 	}
 	
 	/*bool String::equals(const String &s){
@@ -1024,7 +1078,8 @@ namespace xvr2{
 		}
 		tmp[j] = '\0';
 		len--;
-		xvr2_delete_array(buffer);
+		//xvr2_delete_array(buffer);
+		delete[] buffer;
 		buffer = tmp;
 		return *this;
 	}
@@ -1042,7 +1097,8 @@ namespace xvr2{
 		}
 		tmp[j] = '\0';
 		len++;
-		xvr2_delete_array(buffer);
+		//xvr2_delete_array(buffer);
+		delete[] buffer;
 		buffer = tmp;
 		return *this;
 	}
@@ -1069,5 +1125,4 @@ namespace xvr2{
 		}
 		return nbuf;
 	}
-
 };

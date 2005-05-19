@@ -277,9 +277,30 @@ class String:public System{
 		/** Transforms and checks if the parameter <b>n</b> is equal 
 		 * to <b>buffer</b> */
 		bool operator==(const Int64 n);
+		/** Checks if the parameter <b>s</b> is not equal to <b>buffer</b> */
+		bool operator!=(const String &s);
+		/** Checks if the parameter <b>s</b> is not equal to <b>buffer</b> */
+		bool operator!=(const char *s);
+		/** Transforms and checks if the parameter <b>n</b> is not equal 
+		 * to <b>buffer</b> */
+		bool operator!=(const int n);
+		/** Transforms and checks if the parameter <b>n</b> is not equal 
+		 * to <b>buffer</b> */
+		bool operator!=(const unsigned int n);
+		/** Transforms and checks if the parameter <b>n</b> is not equal 
+		 *  to <b>buffer</b> */
+		bool operator!=(const float n);
+		/** Transforms and checks if the parameter <b>n</b> is not equal 
+		 * to <b>buffer</b> */
+		bool operator!=(const double n);
+		/** Transforms and checks if the parameter <b>n</b> is not equal 
+		 * to <b>buffer</b> */
+		bool operator!=(const long double n);
+		/** Transforms and checks if the parameter <b>n</b> is not equal 
+		 * to <b>buffer</b> */
+		bool operator!=(const Int64 n);
 		/** Checks if the parameter <b>s1</b> is equal to <b>s2</b> */
 		static bool equals(const String &s1, const String &s2);
-
 		/** Checks if the parameter <b>s</b> is equal to <b>buffer</b> */
 		bool equals(const char *s);
 		/** Transforms and checks if the parameter <b>n</b> is equal 
