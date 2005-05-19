@@ -21,10 +21,61 @@ namespace xvr2{
 	 * \brief
 	 * This class encapsulates the thread library functionality using 
 	 * POSIX-THREADS.\n
-	 * In order to use this class you have to create a sun-class from
+	 * In order to use this class you have to create a sub-class from
 	 * it, then you have to override the run method and put there
 	 * whatever code you want your program run concurrently.
+	 * Example:
+	 * \code
+	 * #include<xvr2.h>
+	 * 
+	 * using namespace xvr2;
+	 * using namespace std;
+	 * class SumBase: public Thread {
+	 * 	protected:
+	 * 		int startnum;
+	 * 		int endnum;
+	 * 		int total;
+	 * 	public:
+	 * 		SumBase(int s, int e){
+	 * 			startnum = s;
+	 * 			endnum = e;
+	 * 			total = 0;
+	 * 		}
+	 * 		void *run();
+	 * 		int getStartnum(){
+	 * 			return startnum;
+	 * 		}
+	 * 		int getEndnum(){
+	 * 			return startnum;
+	 * 		}
+	 * 		int getTotal(){
+	 * 			return total;
+	 * 		}
+	 * };
 	 *
+	 * void *SumBase::run(){
+	 * 	total = 0;
+	 * 	for(int i = startnum; i <= endnum; i++){
+	 * 		total += i;
+	 * 	}
+	 * }
+	 *
+	 * void main(){
+	 * 	SumBase t0(0, 99999);
+	 * 	SumBase t1(100000, 199999);
+	 * 	SumBase t2(200000, 299999);
+	 * 	SumBase t3(300000, 399999);
+	 * 	t0->start();
+	 * 	t1->start();
+	 * 	t2->start();
+	 * 	t3->start();
+	 * 	while(t0->isRunning() || t1->isRunning() || t2->isRunning() || t3->isRunning()){
+	 * 		//Wait until all calculations are complete.
+	 * 		sleep(1);
+	 * 	}
+	 * 	cout << "total: " << t0->getTotal() +  t1->getTotal() +  t2->getTotal() +  t3->getTotal() << endl;
+	 * }
+	 * \endcode
 	 */
 	class	Thread:public	Threading{
 		private:
