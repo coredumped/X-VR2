@@ -7,7 +7,7 @@
 namespace xvr2 {
 	namespace Exception{
 
-		String::String(){
+		Stringe::Stringe(){
 #ifndef USING_GCC3
 			setClassName((char *)xvr2::_xvr2StringException);
 #endif

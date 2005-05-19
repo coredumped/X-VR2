@@ -9,12 +9,12 @@ namespace xvr2 {
 	namespace Exception{
 
 		/** Generic String exception */
-		class String:public Exception{
+		class Stringe:public Exception{
 			public:
 				/**
 				 * Default constructor
 				 */
-				String();
+				Stringe();
 		};
 
 	};
