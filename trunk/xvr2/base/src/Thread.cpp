@@ -91,20 +91,12 @@ namespace xvr2{
 	int Thread::_start(){
 		int y;
 		y = start();
-#ifdef USE_GNUPTH
-		void *rr;
-		pth_join(thread, &rr);
-#endif
 		return y;
 	}
 
 	int Thread::_start(void *arg){
 		int y;
 		y = start(arg);
-#ifdef USE_GNUPTH
-		void *rr;
-		pth_join(thread, &rr);
-#endif
 		return y;
 	}
 
@@ -222,4 +214,11 @@ namespace xvr2{
 #endif
 	}
 	
+	void *Thread::join(){
+		void *ret = 0;
+#ifdef USE_POSIX_THREADS
+		pthread_join(thread, &ret);
+#endif
+		return ret;
+	}
 };

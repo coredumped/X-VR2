@@ -212,6 +212,11 @@ namespace xvr2{
 		         * This method will return a 32 bit integer 
 			 * representing the current thread */
 			static unsigned int numericID();
+
+			/**
+			 * Waits for this thread to finish successfully joining the
+			 * calling thread with this one. */
+			void *join();
 	};	
 
 };
