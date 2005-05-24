@@ -4,7 +4,7 @@
 #ifndef __XVR2_ARRAY_H__
 #define __XVR2_ARRAY_H__
 #include<Container.h>
-#ifdef USE_MEMCPY
+#ifdef HAVE_MEMCPY
 #include<string.h>
 #endif
 
@@ -34,7 +34,7 @@ namespace xvr2{
 				 * \param n Is the amount of elements to be copied from src to dst
 				 */
 				void copy(T *dst, T *src, unsigned int n){
-#ifdef USE_MEMCPY
+#ifdef HAVE_MEMCPY
 					memcpy(dst, src, n * sizeof(T));
 #else
 					unsigned int i;
