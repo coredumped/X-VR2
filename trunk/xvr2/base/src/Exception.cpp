@@ -17,7 +17,7 @@ namespace xvr2{
 
 		Exception::Exception(){
 #ifndef USING_GCC3
-			setClassName(xvr2::_xvr2Exception){
+			setClassName(xvr2::_xvr2Exception);
 #endif
 			description = (char *)xvr2::strGenericException;
 		}
@@ -26,7 +26,7 @@ namespace xvr2{
 
 		Exception::Exception(const char *d){
 #ifndef USING_GCC3
-			setClassName(xvr2::_xvr2Exception){
+			setClassName(xvr2::_xvr2Exception);
 #endif
 			if(d == 0)
 				description = (char *)xvr2::strGenericException;
