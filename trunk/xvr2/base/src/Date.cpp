@@ -1,6 +1,9 @@
 /*
  * $Id$
  */
+#ifdef GCC_2_96
+#define _XOPEN_SOURCE
+#endif
 #include<Date.h>
 #include<time.h>
 
