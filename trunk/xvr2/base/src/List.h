@@ -13,6 +13,7 @@
 
 namespace xvr2{
 	namespace Util {
+		using namespace xvr2;
 		/**
 		 * This class handles single linked lists using templates, 
 		 * don't use this class if you intend to share it's data 
@@ -47,7 +48,7 @@ namespace xvr2{
 					 * by making it point to NULL
 					 */
 #ifndef USING_GCC3
-					nodeT():Container(xvr2::_xvr2List__nodeT){
+					nodeT():Container(_xvr2List__nodeT){
 #else
 					nodeT():Container(){
 #endif
@@ -62,7 +63,7 @@ namespace xvr2{
 					 */
 					nodeT(T d){
 #ifndef USING_GCC3
-						setClassName(xvr2::_xvr2List__nodeT);
+						setClassName(_xvr2List__nodeT);
 #endif
 						data = d;
 						next = 0;
@@ -89,7 +90,7 @@ namespace xvr2{
 				 */
 				List(){
 #ifndef USING_GCC3
-					Container(xvr2::_xvr2List);
+					Container(_xvr2List);
 #endif
 					list = 0;
 					end = 0;
