@@ -99,6 +99,7 @@ namespace xvr2{
 			BaseFile(const char *fname);
 			BaseFile(const String &fname);
 			virtual ~BaseFile(){
+				filename.deleteString();
 				close();
 			}
 			virtual void setFilename(const char *fname);

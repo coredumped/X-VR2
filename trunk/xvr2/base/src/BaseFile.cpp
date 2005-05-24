@@ -34,7 +34,7 @@ namespace xvr2{
 #ifndef USING_GCC3
 		setClassName(xvr2::_xvr2BaseFile);
 #endif
-		filename = fname;
+		filename.assign(fname);
 		filemode = -1;
 		_opened = false;
 	}
@@ -44,11 +44,11 @@ namespace xvr2{
 	}
 
 	void BaseFile::setFilename(const String &fname){
-		filename = fname;
+		filename.assign(fname);
 	}
 
 	void BaseFile::open(const String &fname, BaseFile::FileOpenMode mode){
-		filename = fname;
+		filename.assign(fname);
 		open(mode);
 	}
 
