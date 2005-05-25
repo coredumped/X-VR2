@@ -77,7 +77,7 @@ NETLIB=-lsocket
 SDLCMD=''
 SDLCFLAGS=''
 DEBUGMODE=1
-MAINTAINER="-g"
+MAINTAINER="-gstabs+"
 PREFIX="/usr/local"
 rm -f ../../common/xvr2.h
 rm -f ../../common/xvr2config.h
@@ -215,14 +215,18 @@ else
 	echo "OK"
 fi
 
-GCCVERSION=`gcc --version | grep gcc | awk '{print $3}' | cut -f1 -d'.'`
+GCCVERSION=`gcc -v 2>&1 | grep ^gcc | awk '{print $3}' | cut -f1 -d'.'`
+GCCREVISION=`gcc -v 2>&1 | grep ^gcc | awk '{print $3}' | cut -f2 -d'.'`
 if [ "$GCCVERSION" -ge 3 ]; then
 DEFINES="$DEFINES -DUSING_GCC3 "
 else
-DEFINES="$DEFINES -std=c99 "
+        if [ "GCC_${GCCVERSION}_${GCCREVISION}" != "GCC_2_96" ]; then
+                DEFINES="$DEFINES -std=c99 "
+	else
+                DEFINES="$DEFINES -D__USE_ISOC99 "
+        fi
 fi
 
-GCCREVISION=`gcc --version | grep gcc | awk '{print $3}' | cut -f2 -d'.'`
 if [ "$GCCREVISION" -ge 3 ]; then
 DEFINES="$DEFINES -DGCC_REVISION${GCCREVISION} -DGCC_${GCCVERSION}_${GCCREVISION}"
 fi
