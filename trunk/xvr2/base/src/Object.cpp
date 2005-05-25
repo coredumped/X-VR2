@@ -30,7 +30,6 @@ namespace xvr2{
 #ifndef USING_GCC3
 		setClassName(xvr2::_xvr2Object);
 #endif
-		__cls_name = 0;
 #ifdef USE_DEBUG
 #ifdef USING_GCC3
 #ifndef GCC_3_4
@@ -51,6 +50,7 @@ namespace xvr2{
 
 	const char *Object::getClassName(){
 #ifdef USING_GCC3
+		char *__cls_name;
 		int status;
 		__cls_name = abi::__cxa_demangle(typeid(*this).name(), 0, 0, &status);
 #endif
@@ -78,14 +78,14 @@ namespace xvr2{
 
 #ifndef USING_GCC3
 	Object::~Object(){
-		__cls_name = 0;
+		//__cls_name = 0;
 	}
 #else
 	Object::~Object(){
-		if(__cls_name != 0){
+		/*if(__cls_name != 0){
 			free(__cls_name);
 			__cls_name = 0;
-		}
+		}*/
 	}
 #endif
 };

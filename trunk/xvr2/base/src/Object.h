@@ -24,7 +24,9 @@ namespace xvr2{
 			/**
 			 * Stores the name of the current class
 			 */
+#ifndef USING_GCC3
 			char *__cls_name;
+#endif
 		protected:
 			/**
 			 * Call this method when you need to set the name of the class you're
