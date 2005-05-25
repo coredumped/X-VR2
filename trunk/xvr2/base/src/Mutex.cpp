@@ -4,6 +4,12 @@
  * This class handles thread synchronization using MUTEXes
  *
  */
+#ifndef USE_GNUPTH
+#ifdef GCC_2_96
+#define __USE_UNIX98
+#include<pthread.h>
+#endif
+#endif
 #include<Mutex.h>
 #include<iostream>
 #include<errno.h>
@@ -30,9 +36,13 @@ void Mutex::init(){
 		#else
 			#ifdef USING_LINUX
 				//Set error checking attributes
+				#ifdef GCC_2_96
+				pthread_mutex_init(&mutex, NULL);
+				#else
 				pthread_mutexattr_init(&m_attr);
 				pthread_mutexattr_settype(&m_attr, PTHREAD_MUTEX_ERRORCHECK_NP);
 				pthread_mutex_init(&mutex, &m_attr);
+				#endif
 			#else
 				pthread_mutex_init(&mutex, NULL);
 			#endif
