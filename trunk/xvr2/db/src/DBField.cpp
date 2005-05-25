@@ -856,7 +856,7 @@ namespace xvr2{
 				case  TEXT:
 					char *dataStr;
 					try{
-						dataStr = ((String *)dataPtr)->toCharPtr();
+						dataStr = (char *)(((String *)dataPtr)->toCharPtr());
 					}
 					catch(...){
 						throw Exception::UndefinedClass();
@@ -982,7 +982,7 @@ namespace xvr2{
 				case  TEXT:
 					char *dataStr;
 					try{
-						dataStr = ((String *)dataPtr)->toCharPtr();
+						dataStr = (char *)(((String *)dataPtr)->toCharPtr());
 					}
 					catch(...){
 						throw Exception::UndefinedClass();
