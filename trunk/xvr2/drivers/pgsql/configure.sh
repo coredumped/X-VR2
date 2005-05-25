@@ -67,7 +67,7 @@ THREADMODE=PTHREADS
 NETLIB=-lsocket
 SQLLIBS=' -L`pg_config --libdir` -lpq -lxvr2 '
 DEBUGMODE=0
-MAINTAINER="-g"
+MAINTAINER="-gstabs+"
 PREFIX="/usr/local"
 
 echo " "
@@ -158,7 +158,7 @@ fi
 echo "Processor: $PROCESSOR, platform is $PLATFORM"
 
 echo -ne "Checking g++..."
-GPP=`slocate g++ | egrep '.*bin.*\/g\+\+$'`
+GPP=`slocate g++ | egrep '.*bin.*\/g\+\+$' | grep bin`
 if [ $? -ne 0 ]; then
 	echo "FAILED"
 	echo "Unable to find g++, do you have slocate or g++ installed??"

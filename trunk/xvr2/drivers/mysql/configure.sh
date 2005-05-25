@@ -67,7 +67,7 @@ THREADMODE=PTHREADS
 NETLIB=-lsocket
 SQLLIBS="`mysql_config --libs` -lxvr2"
 DEBUGMODE=0
-MAINTAINER="-g"
+MAINTAINER="-gstabs+"
 PREFIX="/usr/local"
 
 echo " "
