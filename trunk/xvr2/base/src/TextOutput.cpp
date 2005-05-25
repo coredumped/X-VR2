@@ -4,6 +4,7 @@
 #include<TextOutput.h>
 #include<MessageStrings.h>
 #include<iostream>
+#include<cstdio>
 
 namespace xvr2{
 
