@@ -10,12 +10,15 @@
 #include<sys/utsname.h>
 #ifndef USING_GCC3
 #include<string.h>
+#include<stdlib.h>
 #else
 #include<string>
 #endif
 
 #ifdef GCC_REVISION4
 #include<cerrno>
+#else
+#include<errno.h>
 #endif
 
 
