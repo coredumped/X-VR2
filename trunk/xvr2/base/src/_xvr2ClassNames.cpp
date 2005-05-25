@@ -156,5 +156,8 @@ namespace xvr2 {
 	const char *_xvr2NSFatalException = "NSFatalException";
 	const char *_xvr2NoIPForYouException = "NoIPForYouException";
 	const char *_xvr2ConnectionResetByPeerException = "ConnectionResetByPeerException";
+	const char *_xvr2Connection = "DB::Conection";
+	const char *_xvr2DBDriver = "DB::Driver";
+	const char *_xvr2Field = "DB::Field";
 #endif
 };

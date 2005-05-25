@@ -155,6 +155,9 @@ namespace xvr2 {
 	extern const char *_xvr2NSFatalException;
 	extern const char *_xvr2NoIPForYouException;
 	extern const char *_xvr2ConnectionResetByPeerException;
+	extern const char *_xvr2Connection;
+	extern const char *_xvr2DBDriver;
+	extern const char *_xvr2Field;
 	
 	
 #endif
