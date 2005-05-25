@@ -3,16 +3,16 @@
  *
  * $Id$
  */
+#ifndef _XOPEN_SOURCE
+#define _XOPEN_SOURCE
+#endif
+#include<time.h>
 #include<ctype.h>
 #include<unistd.h>
 #include<DBField.h>
 #include<NumberException.h>
 #include<NullPointerException.h>
 #include<Memory.h>
-#ifndef _XOPEN_SOURCE
-#define _XOPEN_SOURCE
-#endif
-#include<time.h>
 #ifndef USING_GCC3
 #define __USE_SVID
 #include<errno.h>
@@ -592,7 +592,7 @@ namespace xvr2{
 					}
 					break;
 				case  BLOB:
-					throw Exception::String();
+					throw Exception::Stringe();
 					break;
 				case  DATE:
 					try{
@@ -729,7 +729,7 @@ namespace xvr2{
 					}
 					break;
 				case  BLOB:
-					throw Exception::String();
+					throw Exception::Stringe();
 					break;
 				case  DATE:
 					try{
