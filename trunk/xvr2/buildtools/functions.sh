@@ -5,6 +5,28 @@
 
 STANDARD_BIN_PATHS="/opt/sfw/bin:/bin:/usr/bin:/usr/local/bin:/sbin:/usr/sbin:/usr/local/sbin:${HOME}/bin"
 
+stage1=`dirname $0`
+if [ "$stage1" = "." ]; then
+	stage1=`pwd`
+else
+	echo $stage1 | grep '^\./' > /dev/null 2>&1
+	if [ $? -eq 0 ]; then
+		stage1=`pwd`
+	else
+		echo $stage1 | grep '/' > /dev/null 2>&1
+		if [ $? -ne 0 ]; then
+			stage1=`pwd`
+		fi
+	fi
+fi
+echo $stage1 | grep 'xvr2$' > /dev/null 2>&1
+if [ $? -eq 0 ]; then
+	XVR2_SOURCE_DIR=$stage1
+else
+	XVR2_SOURCE_DIR=`dirname $stage1`
+fi
+
+
 find_binary()
 {
 	binname=$1
@@ -78,3 +100,19 @@ get_gcc_full_version()
 	bin=$1
 	$bin -v 2>&1 | grep ^gcc | awk '{print $3}' | sed 's/\./_/g'
 }
+
+get_platform()
+{
+	uname -sr
+}
+
+get_processor()
+{
+	uname -m
+}
+
+get_os()
+{
+	uname -s
+}
+
