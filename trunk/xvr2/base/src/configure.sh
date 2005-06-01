@@ -4,78 +4,14 @@
 # Este script genera el makefile
 #
 #
-MYVERSION="0.6.6"
-PLATFORM=`uname -sr`
-OS=`uname -s`
-PROCESSOR=`uname -m`
+source ../../buildtools/functions.sh
+
+PLATFORM=`get_platform`
+OS=`get_os`
+PROCESSOR=`get_processor`
 echo "" > Makefile
 
-find_binary()
-{
-	binname=$1
-	echo -ne "Checking g++..."
-	
-	BIN=`slocate ${binname} | grep bin | egrep "${binname}\$"`
-	if [ $? -ne 0 ]; then
-		echo "FAILED"
-		echo "Unable to find g++, do you have slocate or g++ installed??"
-		echo " "
-		exit 1
-	else
-		echo "OK"
-	fi
-}
-
-get_value()
-{
-	echo $1 | cut -f2 -d'='
-}
-
-get_include_deps()
-{
-	include=$1
-	ddeps=""
-	for inc in `cat $include | grep include | sed 's/.*[\"|<]\(.*\)[\"|>]/\1/'`
-	do
-		if [ -f $inc ]; then
-			ddeps="$ddeps $inc"
-#		else
-#			ninc=`slocate $inc | grep usr | grep include | egrep "\/$inc\$" | head -1`
-#			if [ $? -eq 0 ]; then
-#				ddeps="$ddeps $ninc"
-#			fi
-		fi
-	done
-	echo $ddeps
-}
-
-usage()
-{
-	echo " "
-	echo "Usage (parameters with an asterisk are enabled by default): "
-	echo "--with-pth			* Use GNU Portable threads (GNU Pth)"
-	echo "--with-pthreads			Use POSIX Threads"
-	echo "--with-sdl-threads		Use SDL POSIX threads encapsulation"
-	echo "--help				Print this usage message"
-	echo "--use-debug			* Activate debug message printing"
-	echo "--no-debug			Dectivate debug message printing"
-	echo "--disable-mantainer-mode	Disable maintainer mode (Remove symbols in object files)"
-	echo "--enable-mantainer-mode		Enable maintainer mode (Leave symbols in object files)"
-	echo "--debug-mutexes			Show status messages while locking/unlocking mutexes"
-	echo "--dont-use-sdl			Disables the use of SDL for network and threads"
-	echo "					(reduces portability)"
-	echo "--sock-chunk-size		Change socket buffer chunk size in bytes while sending"
-	echo "				huge amounts of data through the net (default: 4096)"
-	echo "--prefix			Specifies the prefix installation directory"
-	echo " "
-	echo " "
-	exit 0
-}
-
 THREADMODE=PTHREADS
-NETLIB=-lsocket
-SDLCMD=''
-SDLCFLAGS=''
 DEBUGMODE=1
 MAINTAINER="-gstabs+"
 PREFIX="/usr/local"
@@ -112,7 +48,7 @@ do
 								MAINTAINER=''
 							else
 								if [ "$option" = '--enable-maintainer-mode' ]; then
-									MAINTAINER="-g"
+									MAINTAINER="-gstabs+"
 								else 
 									if [ "$option" = '--debug-mutexes' ]; then
 										DEBUG_MUTEXES=" -DDEBUG_MUTEXES=1"
@@ -135,9 +71,14 @@ do
 													if [ $? -eq 0 ]; then
 														MYVERSION=`get_value $option`
 													else
-														echo "$option" | egrep '^--prefix=' > /dev/null 2>&1
+														echo "$option" | egrep '^--with-name=' > /dev/null 2>&1
 														if [ $? -eq 0 ]; then
-															PREFIX=`get_value $option`
+															MYLIBNAME=`get_value $option`
+														else
+															echo "$option" | egrep '^--prefix=' > /dev/null 2>&1
+															if [ $? -eq 0 ]; then
+																PREFIX=`get_value $option`
+															fi
 														fi
 													fi
 												fi
@@ -159,17 +100,9 @@ done
 DEFINES="$SCHUNK"
 echo $SCHUNK
 
-if [ "$SDLCMD" ]; then
-	DEFINES="$DEFINES -DUSE_SDL"
-else
-	DEFINES="$DEFINES -DUNIX_SOCKETS -DUSE_POSIX_THREADS -D_REENTRANT -D_THREAD_SAFE"
-fi
-
+DEFINES="$DEFINES -DUNIX_SOCKETS -DUSE_POSIX_THREADS -D_REENTRANT -D_THREAD_SAFE"
 if [ "$DEBUGMODE" -eq 1 ]; then
 	DEFINES="$DEFINES -DUSE_DEBUG "
-	#if [ "$OS" = "Linux" ]; then
-	#	DEFINES="$DEFINES --with-dwarf2 "
-	#fi
 fi
 
 ######################## PRE-DEFINES ##########################
@@ -182,53 +115,34 @@ if [ $THREADMODE = 'PTH' ]; then
 fi
 echo "Processor: $PROCESSOR, platform is $PLATFORM"
 
-echo -ne "Checking g++..."
-GPP=`slocate g++ | grep bin | egrep '\/g\+\+$'`
+GPP=`find_gplusplus`
 if [ $? -ne 0 ]; then
-	echo "FAILED"
-	echo "Unable to find g++, do you have slocate or g++ installed??"
-	echo " "
 	exit 1
-else
-	echo "OK"
+fi
+YACC=`find_bison`
+if [ $? -ne 0 ]; then
+	exit 1
+fi
+LEX=`find_flex`
+if [ $? -ne 0 ]; then
+	exit 1
 fi
 
-echo -ne "Checking GNU Bison..."
-YACC=`slocate bison | grep bin | egrep '\/bison$'`
-if [ $? -ne 0 ]; then
-	echo "FAILED"
-	echo "Unable to find GNU Bison, do you have slocate or GNU Bison installed??"
-	echo " "
-	exit 1
-else
-	echo "OK"
-fi
-
-echo -ne "Checking GNU Flex..."
-LEX=`slocate flex | grep bin | egrep '\/flex$'`
-if [ $? -ne 0 ]; then
-	echo "FAILED"
-	echo "Unable to find GNU Flex, do you have slocate or GNU Flex installed??"
-	echo " "
-	exit 1
-else
-	echo "OK"
-fi
-
-GCCVERSION=`gcc -v 2>&1 | grep ^gcc | awk '{print $3}' | cut -f1 -d'.'`
-GCCREVISION=`gcc -v 2>&1 | grep ^gcc | awk '{print $3}' | cut -f2 -d'.'`
+GCCVERSION=`get_gcc_version $GPP`
+GCCREVISION=`get_gcc_revision $GPP`
+GCCFULLVERSION=`get_gcc_full_version $GPP`
 if [ "$GCCVERSION" -ge 3 ]; then
-DEFINES="$DEFINES -DUSING_GCC3 "
+	DEFINES="$DEFINES -DUSING_GCC3 "
 else
-        if [ "GCC_${GCCVERSION}_${GCCREVISION}" != "GCC_2_96" ]; then
+        if [ "GCC_${GCCFULLVERSION}" != "GCC_2_96" ]; then
                 DEFINES="$DEFINES -std=c99 "
-	else
+		else
                 DEFINES="$DEFINES -D__USE_ISOC99 "
         fi
 fi
 
 if [ "$GCCREVISION" -ge 3 ]; then
-DEFINES="$DEFINES -DGCC_REVISION${GCCREVISION} -DGCC_${GCCVERSION}_${GCCREVISION}"
+	DEFINES="$DEFINES -DGCC_REVISION${GCCREVISION} -DGCC_${GCCVERSION}_${GCCREVISION}"
 fi
 
 
@@ -236,94 +150,65 @@ echo "CC=$GPP
 YACC=$YACC
 LEX=$LEX" >> Makefile
 
-
-#echo -ne "Checking sdl-config..."
-#sdl-config --libs > /dev/null 2>&1
-#if [ $? -ne 0 ]; then
-#	echo "FAILED"
-#	echo "Unable to find sdl-config, do you have SDL installed??"
-#	echo " "
-#	exit 1
-#else
-#	echo "OK"
-#	echo "SDL version: $(sdl-config --version)"
-#fi
-
 if [ $OS = 'SunOS' ]; then
-echo -ne "$OS 2."
-if [ $DEBUGMODE -eq 1 ]; then
-	DEBUGSTRING="-DUSE_DEBUG=$DEBUGMODE"
-fi
-DEFINES="$DEFINES -DSOLARIS"
-echo "
+	echo -ne "$OS 2."
+	if [ $DEBUGMODE -eq 1 ]; then
+		DEBUGSTRING="-DUSE_DEBUG=$DEBUGMODE"
+	fi
+	DEFINES="$DEFINES -DSOLARIS"
+	echo "
 DEBUG=$MAINTAINER $DEBUGSTRING $DEBUG_MUTEXES
 #DEBUG=
 OPTIMIZE=" >> Makefile
-OSVER=`uname -r | sed 's/5\.//'`
-echo $OSVER
-echo "CFLAGS=-Wall \$(DEBUG) \$(OPTIMIZE) -DSOLARIS=1 -DSOLARIS2$OSVER=1 -I../../common -I. -c -DUSE_NEW=1  -D_STRUCTURED_PROC $SDLCMD $DEFINES" >> Makefile
-if [ $OSVER -eq 8 ]; then
-	DEFINES="$DEFINES -DSOLARIS8"
-	if [ $THREADMODE = 'SDL_THREADS' ]; then
- 			echo "LIBS=-lposix4 -lsocket -ldl $SDLCMD $NETLIB" >> Makefile
-	else
+	OSVER=`uname -r | sed 's/5\.//'`
+	echo $OSVER
+	echo "CFLAGS=-Wall \$(DEBUG) \$(OPTIMIZE) -DSOLARIS=1 -DSOLARIS2$OSVER=1 -I../../common -I ${XVR2_SOURCE_DIR}/include -I. -c -DUSE_NEW=1  -D_STRUCTURED_PROC $DEFINES" >> Makefile
+	if [ $OSVER -eq 8 ]; then
+		DEFINES="$DEFINES -DSOLARIS8"
 		if [ $THREADMODE = 'PTHREADS' ]; then
- 			echo "LIBS=-lposix4 -lsocket -ldl -lposix -lpthread $SDLCMD $NETLIB" >> Makefile
+			echo "LIBS=-lposix4 -ldl -lposix -lpthread" >> Makefile
 		else
-			if [ $THREADMODE = 'SDL_THREADS' ]; then
- 				echo "LIBS=-lposix4 -lsocket -ldl -lposix $SDLCMD $NETLIB" >> Makefile
-			else
-				echo "LIBS=-I`$(PTHCONFIG) --libdir` `$(PTHCONFIG) --libs` -lrt -lsocket -ldl $SDLCMD $NETLIB" >> Makefile
-			fi
-		fi
-	fi
-else
-	if [ $OSVER -eq 6 ]; then
-		DEFINES="$DEFINES -DSOLARIS6"
-		if [ $THREADMODE = 'SDL_THREADS' ]; then
- 				echo "LIBS=-lposix4 -lsocket -ldl $SDLCMD $NETLIB" >> Makefile
-		else
-			if [ $THREADMODE = 'PTHREADS' ]; then
- 				echo "LIBS=-lposix4 -lsocket -ldl -lposix -lpthread $SDLCMD $NETLIB" >> Makefile
-			else
-				echo "LIBS=-I`$(PTHCONFIG) --libdir` `$(PTHCONFIG) --libs` -lposix4 -lsocket -ldl $SDLCMD $NETLIB" >> Makefile
-			fi
+			echo "LIBS=-I`$(PTHCONFIG) --libdir` `$(PTHCONFIG) --libs` -lrt -ldl" >> Makefile
 		fi
 	else
-		echo "We haven't tested this on Solaris 7 yet"
-		DEFINES="$DEFINES -DSOLARIS7"
-		exit 1
+		if [ $OSVER -eq 6 ]; then
+			DEFINES="$DEFINES -DSOLARIS6"
+			if [ $THREADMODE = 'PTHREADS' ]; then
+				echo "LIBS=-lposix4 -ldl -lposix -lpthread" >> Makefile
+			else
+				echo "LIBS=-I`$(PTHCONFIG) --libdir` `$(PTHCONFIG) --libs` -lposix4 -ldl" >> Makefile
+			fi
+		else
+			echo "We haven't tested this on Solaris 7 yet"
+			DEFINES="$DEFINES -DSOLARIS7"
+			exit 1
+		fi
 	fi
-fi
 
-echo "INSTALLDIR=$PREFIX
-LIBNAME=libxvr2.so.${MYVERSION}
-SONAME=libxvr2.so
+	echo "INSTALLDIR=$PREFIX
+LIBNAME=${MYLIBNAME}.${MYVERSION}
+SONAME=${MYLIBNAME}
 BUILDLIB=-G
 all: \$(LIBNAME)" >> Makefile
 else
-if [ "$NETLIB" = "-lsocket" ]; then
-	NETLIB=""
-fi
-DEFINES="$DEFINES -DUSING_LINUX -D__GNU"
-echo "
+	if [ "$NETLIB" = "-lsocket" ]; then
+		NETLIB=""
+	fi
+	DEFINES="$DEFINES -DUSING_LINUX -D__GNU"
+	echo "
 DEBUG=$MAINTAINER $DEBUGSTRING $DEBUG_MUTEXES
 #DEBUG=$MAINTAINER -DUSE_DEBUG=$DEBUGMODE
 #DEBUG=
 OPTIMIZE=
-CFLAGS=-Wall \$(DEBUG) \$(OPTIMIZE) -I../../common -I. -c $DEFINES -Wimplicit -Wreturn-type -Wunused -Wswitch -Wcomment -Wparentheses -Wpointer-arith $SDLCFLAGS" >> Makefile
-if [ $THREADMODE = 'SDL_THREADS' ]; then
-	echo "LIBS=-ldl -lrt $SDLCMD $NETLIB" >> Makefile
-else
+CFLAGS=-Wall \$(DEBUG) \$(OPTIMIZE) -I../../common -I ${XVR2_SOURCE_DIR}/include -I. -c $DEFINES -Wimplicit -Wreturn-type -Wunused -Wswitch -Wcomment -Wparentheses -Wpointer-arith " >> Makefile
 	if [ $THREADMODE = 'PTHREADS' ]; then
-		echo "LIBS=-ldl -lrt -lpthread $NETLIB" >> Makefile
+		echo "LIBS=-ldl -lrt -lpthread" >> Makefile
 	else
-		echo 'LIBS=-I`$(PTHCONFIG) --libdir` `$(PTHCONFIG) --libs` -lrt -ldl `sdl-config --libs` $NETLIB' >> Makefile
+		echo 'LIBS=-I`$(PTHCONFIG) --libdir` `$(PTHCONFIG) --libs` -lrt -ldl' >> Makefile
 	fi
-fi
-echo "INSTALLDIR=$PREFIX
-LIBNAME=libxvr2.so.${MYVERSION}
-SONAME=libxvr2.so
+	echo "INSTALLDIR=$PREFIX
+LIBNAME=${MYLIBNAME}.${MYVERSION}
+SONAME=${MYLIBNAME}
 BUILDLIB=-shared -Wl,-soname,\$(LIBNAME) \$(LIBS)
 all: \$(LIBNAME)" >> Makefile
 fi
@@ -332,9 +217,9 @@ echo -ne "Serching for dependencies"
 DEPS=""
 for src in `ls *.cpp`
 do
- OUTPUT=`echo $src | sed 's/cpp/o/'`
- DEPS="$DEPS $OUTPUT"
- echo -ne "."
+	OUTPUT=`echo $src | sed 's/cpp/o/'`
+	DEPS="$DEPS $OUTPUT"
+	echo -ne "."
 done
 echo "done"
 
@@ -348,24 +233,24 @@ echo -ne "\t@echo -ne \"\\\\nNow type make install to install this package\\\\n\
 
 for src in `ls *.cpp`
 do
- OUTPUT=`echo $src | sed 's/cpp/o/'`
- HEADER=`echo $src | sed 's/cpp/h/'`
- DDEPS="$OUTPUT: $src "
- echo -ne "\nAdding: $src\n"
- for inc in `cat $src | grep "#include" | sed 's/#include.*[\"|\<]\(.*\)[\"|\>]/\1/'`
- do
-	 if  [ -f "$inc" ] ; then
-		DDEPS="$DDEPS $inc"
-	 	echo -ne "\tDepends on: $inc "
-		NDEPS=`get_include_deps $inc`
-		echo $NDEPS
-		DDEPS="$DDEPS $NDEPS"
-		#echo " "
-	 fi
- done
- echo $DDEPS >> Makefile
- #echo "$OUTPUT: $src $HEADER" >> Makefile 
- echo -ne "\t\$(CC) \$(CFLAGS) -o $OUTPUT $src\n\n" >> Makefile
+	OUTPUT=`echo $src | sed 's/cpp/o/'`
+	HEADER=`echo $src | sed 's/cpp/h/'`
+	DDEPS="$OUTPUT: $src "
+	echo -ne "\nAdding: $src\n"
+	for inc in `cat $src | grep "#include" | sed 's/#include.*[\"|\<]\(.*\)[\"|\>]/\1/' | grep xvr2 | sed 's/xvr2\///'`
+	do
+		#if  [ -f "$inc" ] ; then
+			DDEPS="$DDEPS $inc"
+			echo -ne "\tDepends on: $inc "
+			NDEPS=`get_include_deps $inc`
+			echo $NDEPS
+			DDEPS="$DDEPS $NDEPS"
+			#echo " "
+		#fi
+	done
+	echo $DDEPS >> Makefile
+	#echo "$OUTPUT: $src $HEADER" >> Makefile 
+	echo -ne "\t\$(CC) \$(CFLAGS) -o $OUTPUT $src\n\n" >> Makefile
 done
 echo "parsers/config-parser.o: parsers/config.y parsers/config.lex" >> Makefile
 echo -ne "\tcd parsers ; export CFLAGS=\"\$(CFLAGS)\" ; export YACC=\"\$(YACC)\" ; export LEX=\"\$(LEX)\" ; make config-parser.o\n\n" >> Makefile
@@ -374,10 +259,10 @@ echo -ne "\tcd parsers ; export CFLAGS=\"\$(CFLAGS)\" ; export YACC=\"\$(YACC)\"
 
 
 echo 'clean:
-	cd parsers ; make clean
 	rm -f *.o $(LIBNAME) core ../../common/xvr2.h ../../common/xvr2config.h
 	touch ../../common/xvr2config.h
 	touch ../../common/xvr2.h
+	cd parsers ; make clean
 
 rebuild: clean all
 
@@ -411,28 +296,19 @@ fi
 if [ $THREADMODE = 'PTH' ]; then
 	echo "	Threads:		GNU Pth"
 else
-	if [ $THREADMODE = 'SDL_THREADS' ]; then
-		echo "	Threads:		POSIX Threads (SDL Encapsulation)"
-	else
+	if [ $THREADMODE = 'PTHREADS' ]; then
 		echo "	Threads:		POSIX Threads"
+	else
+		echo "	Threads:		GNU PTh"
 	fi
 fi
 
-if [ "$MAINTAINER" = "-g" ]; then
+if [ "$MAINTAINER" = "-gstabs+" ]; then
 	echo "	Maintainer:		ON"
 else
 	echo "	Maintainer:		OFF"
 fi
 
-if [ "$SCHUNK" ]; then
-	echo "	Socket chunk size:	$SCHUNK"
-fi
-
-if [ ! "$SDLCMD" ]; then
-	echo "	SDL encapsulation:	OFF"
-else
-	echo "	SDL encapsulation:	ON"
-fi
 echo "	----------------------------------"
 echo " "
 echo " "
