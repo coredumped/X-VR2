@@ -1,9 +1,9 @@
 /*
  * $Id$
  */
-#include<DBResultSet.h>
-#include<NullPointerException.h>
-#include<ArrayIndexOutOfLimitsException.h>
+#include<xvr2/DBResultSet.h>
+#include<xvr2/NullPointerException.h>
+#include<xvr2/ArrayIndexOutOfLimitsException.h>
 
 namespace xvr2{
 
@@ -108,7 +108,7 @@ namespace xvr2{
 				throw Exception::NoDataFetch();
 			}
 			for(index = 0; index < ncols ; index++){
-				if(    ((String *)&(row[index].getFieldName()))->equals(colname)){
+				if(row[index].getFieldName().equals(colname)){
 					found = true;
 					break;
 				}
@@ -126,7 +126,7 @@ namespace xvr2{
 				throw Exception::NoDataFetch();
 			}
 			for(index = 0; index < ncols ; index++){
-				if(((String *)&(row[index].getFieldName()))->equals(colname.toCharPtr())){
+				if(row[index].getFieldName().equals(colname.toCharPtr())){
 					found = true;
 					break;
 				}

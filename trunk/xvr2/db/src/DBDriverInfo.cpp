@@ -3,8 +3,8 @@
  *
  * $Id$
  */
-#include<DBDriverInfo.h>
-#include<MessageStrings.h>
+#include<xvr2/DBDriverInfo.h>
+#include<xvr2/MessageStrings.h>
 
 namespace xvr2{
 	namespace DB {
@@ -35,7 +35,7 @@ namespace xvr2{
 #endif
 			__version = ver;
 			__revision = rev;
-			__vendor = ((String *)&vend)->toCharPtr();
+			__vendor = vend.toCharPtr();
 		}
 	
 		DriverInfo::DriverInfo(int ver, int rev, const String &vend, const String &desc){
@@ -44,8 +44,8 @@ namespace xvr2{
 #endif
 			__version = ver;
 			__revision = rev;
-			__vendor = ((String *)&vend)->toCharPtr();
-			__description = ((String *)&desc)->toCharPtr();
+			__vendor = vend.toCharPtr();
+			__description = desc.toCharPtr();
 		}
 	
 		DriverInfo::~DriverInfo(){

@@ -3,10 +3,10 @@
  */
 #ifndef __XVR2_DB_DRIVER_H__
 #define __XVR2_DB_DRIVER_H__
-#include<Plugin.h>
-#include<DBResultSet.h>
-#include<DBDriverInfo.h>
-#include<DBField.h>
+#include<xvr2/Plugin.h>
+#include<xvr2/DBResultSet.h>
+#include<xvr2/DBDriverInfo.h>
+#include<xvr2/DBField.h>
 
 namespace xvr2{
 

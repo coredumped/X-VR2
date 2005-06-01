@@ -9,10 +9,10 @@
 #include<time.h>
 #include<ctype.h>
 #include<unistd.h>
-#include<DBField.h>
-#include<NumberException.h>
-#include<NullPointerException.h>
-#include<Memory.h>
+#include<xvr2/DBField.h>
+#include<xvr2/NumberException.h>
+#include<xvr2/NullPointerException.h>
+#include<xvr2/Memory.h>
 #ifndef USING_GCC3
 #define __USE_SVID
 #include<errno.h>

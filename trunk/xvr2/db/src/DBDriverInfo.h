@@ -2,8 +2,8 @@
  * $Id$
  */
 
-#include<Object.h>
-#include<String.h>
+#include<xvr2/Object.h>
+#include<xvr2/String.h>
 
 #ifndef __XVR2_DB_DriverInfo_H__
 #define __XVR2_DB_DriverInfo_H__

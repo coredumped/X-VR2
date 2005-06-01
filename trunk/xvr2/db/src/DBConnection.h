@@ -4,7 +4,7 @@
 #ifndef __XVR2_DB_Connection_H__
 #define __XVR2_DB_Connection_H__
 
-#include<DBDriver.h>
+#include<xvr2/DBDriver.h>
 
 namespace xvr2{
 	namespace DB {

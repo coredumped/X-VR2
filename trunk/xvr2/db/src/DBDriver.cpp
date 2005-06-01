@@ -1,9 +1,9 @@
 /*
  * $Id$
  */
-#include<DBDriver.h>
+#include<xvr2/DBDriver.h>
 #ifdef USE_DEBUG
-#include<Console.h>
+#include<xvr2/Console.h>
 #endif
 
 namespace xvr2{
@@ -106,12 +106,12 @@ namespace xvr2{
 		ResultSet *Driver::query(void *__handle, const String &cmd){
 			ResultSet *r = 0;
 			try{
-				r = __drv_query(__handle, ((String *)&cmd)->toCharPtr());
+				r = __drv_query(__handle, cmd.toCharPtr());
 			}
 			catch(...){
 				throw;
 			}
-			if((((String *)&cmd)->startsIWith(__upd_str) || ((String *)&cmd)->startsIWith(__del_str)) && __do_auto_commit){
+			if((cmd.startsIWith(__upd_str) || cmd.startsIWith(__del_str)) && __do_auto_commit){
 				commit(__handle);
 			}
 			return r;

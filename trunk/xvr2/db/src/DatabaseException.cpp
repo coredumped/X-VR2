@@ -1,8 +1,8 @@
 /*
  * $Id$
  */
-#include<DatabaseException.h>
-#include<MessageStrings.h>
+#include<xvr2/DatabaseException.h>
+#include<xvr2/MessageStrings.h>
 
 namespace xvr2 {
 	namespace Exception {
