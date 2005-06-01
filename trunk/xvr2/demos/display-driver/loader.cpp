@@ -1,0 +1,40 @@
+/* $Id$ */
+/* TODO
+ * Parse command-line arguments in order to permit the user to load the driver
+ * he/she wants */
+#include<xvr2.h>
+#include<xglDisplayDriver.h>
+
+using namespace std;
+using namespace xvr2;
+using namespace xvr2::gl;
+
+static char *driver_path = "/usr/local/lib/xvr2/xvr2_sdl_driver.so.0.0.1";
+
+int main(int argc, char *argv[]){
+	DisplayDriver *x;
+	void *instance = 0x0;
+	int retcode = 0;
+	try{
+		cout << "Using: " << driver_path << "..." << endl;
+       		x = new DisplayDriver(driver_path);
+		cout << "Initializing... ";
+		cout.flush();
+		instance = x->init();
+		if(instance == 0x0){
+			cerr << "failure" << endl;
+			retcode = 1;
+		}
+		else{
+			cout << "success" << endl;
+		}
+		cout << "Deallocating... ";
+		cout.flush();
+		xvr2_delete(x);
+		cout << "done" << endl;
+	}
+	catch(Exception::Exception e){
+		cerr << "Operation failed: " << e.toString() << endl;
+	}
+	return retcode;
+}
