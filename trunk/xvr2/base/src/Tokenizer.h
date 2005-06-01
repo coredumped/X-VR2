@@ -3,9 +3,9 @@
  */
 #ifndef __XVR2_TOKENIZER_H__
 #define __XVR2_TOKENIZER_H__
-#include<System.h>
-#include<String.h>
-#include<NoMoreTokensException.h>
+#include<xvr2/System.h>
+#include<xvr2/String.h>
+#include<xvr2/NoMoreTokensException.h>
 
 namespace xvr2{
 
@@ -24,7 +24,7 @@ namespace xvr2{
 			/** Stores the delimiter */
 			char *delim;
 			/** Stores a temporal copy of buffer as a String */
-			String *tstr;
+			String tstr;
 		protected:
 			/** When called returns the next token in the string */
 			char *cnext();
@@ -38,7 +38,7 @@ namespace xvr2{
 			 * <b>string</b>: is the string to be splitted
 			 * <b>delim</b>: the delimiter
 			 */
-			Tokenizer(String string, String delim) ;
+			Tokenizer(const String &string, const String &delim) ;
 			/** This destructor takes charge of releasing all the memory 
 			 * allocated by all the private members */
 			~Tokenizer ();
@@ -46,7 +46,7 @@ namespace xvr2{
 			    please note that this is a new String instance,
 			    therefore you are encouraged to delete it after
 			    used, in order to prevent a memory leak. */
-			String *next(bool throwexception = false);
+			const String &next(bool throwexception = false);
 	};
 
 

@@ -1,9 +1,9 @@
 /*
  * $Id$
  */
-#include<Tokenizer.h>
-#include<Exception.h>
-#include<_xvr2ClassNames.h>
+#include<xvr2/Tokenizer.h>
+#include<xvr2/Exception.h>
+#include<xvr2/_xvr2ClassNames.h>
 #include<string.h>
 #include<stdlib.h>
 
@@ -15,19 +15,17 @@ namespace xvr2{
 #endif
 		temp = 0;
 		token = 0;
-		tstr = 0;
 		buffer = strdup(phrase);
 		temp = strdup(phrase);
 		delim = strdup(d);
 	}
 
-	Tokenizer::Tokenizer(String phrase, String d){
+	Tokenizer::Tokenizer(const String &phrase, const String &d){
 #ifndef USING_GCC3
 		setClassName(xvr2::_xvr2Tokenizer);
 #endif
 		temp = 0;
 		token = 0;
-		tstr = 0;
 		buffer = strdup(phrase.toCharPtr());
 		temp = strdup(phrase.toCharPtr());
 		delim = strdup(d.toCharPtr());
@@ -42,8 +40,6 @@ namespace xvr2{
 			free(token);
 		if(delim != 0)
 			free(delim);
-		if(tstr != 0)
-			xvr2_delete(tstr);
 	}
 
 	char *Tokenizer::cnext(){
@@ -94,19 +90,16 @@ namespace xvr2{
 		return token;
 	}
 
-	String *Tokenizer::next(bool throwexception){
+	const String &Tokenizer::next(bool throwexception){
 		char *ptr;
 		ptr = cnext();
-		if(tstr != 0){
-			xvr2_delete(tstr);
-		}
 		if(ptr == 0){
 			if(throwexception)
 				throw Exception::NoMoreTokens();
 			else
 				return 0;
 		}
-		tstr = new String((const char *)ptr);
+		tstr = ptr;
 		return tstr;
 	}
 
