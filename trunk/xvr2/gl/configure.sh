@@ -1,39 +1,23 @@
-THIS_DIR=`pwd`
-VERSION=`cat VERSION`
-LIBNAME=libxvr2gl
-cd src
-./configure.sh "$@" --version=${VERSION} --with-name=${LIBNAME}
-cd ..
-cd drivers
-./configure.sh "$@" --version=${VERSION}
-cd ..
-echo "VERSION=${VERSION}
+#!/bin/bash
+#
+# $Id$
 
-all: src/${LIBNAME}.so.${VERSION} drivers demo
+source ../buildtools/functions.sh
+get_libname "$@"
+get_libversion "$@"
+LIBNAMEX="${MYLIBNAME}.${MYVERSION}"
+THIS_DIR=`pwd`
+cd src
+./configure.sh "$@"
+cd $THIS_DIR
+echo "
+all: src/${LIBNAMEX}
 
 clean:
 	cd src ; make -f Makefile clean
-	cd demos ; make -f Makefile clean
-	cd drivers ; make -f Makefile clean
 
 install:
 	cd src ; make -f Makefile install
 
-demo:
-	cd demos ; make -f Makefile
-
-drivers: alldrivers
-
-alldrivers: drivers/sdl/xvr2_sdl_driver.so.$VERSION
-
-drivers/sdl/xvr2_sdl_driver.so.$VERSION:
-	cd drivers ; make -f Makefile
-
-src/${LIBNAME}.so.${VERSION}: src/*.cpp src/*.h
-	cd src ; make -f Makefile
-
-drivers-install: alldrivers
-	cd drivers ; make -f Makefile install
-
-rebuild: clean all
-" > Makefile
+src/${LIBNAMEX}: src/*.h src/*.cpp
+	cd src ; make -f Makefile" > Makefile

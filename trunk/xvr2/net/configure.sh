@@ -1,11 +1,17 @@
-THIS_DIR=`pwd`
-VERSION=`cat ../VERSION`
-cd src
-./configure.sh "$@" --version=${VERSION} --with-name=libxvr2net
-cd ..
-echo "VERSION=${VERSION}
+#!/bin/bash
+#
+# $Id$
 
-all: src/libxvr2net.so.${VERSION}
+source ../buildtools/functions.sh
+get_libname "$@"
+get_libversion "$@"
+LIBNAMEX="${MYLIBNAME}.${MYVERSION}"
+THIS_DIR=`pwd`
+cd src
+./configure.sh "$@"
+cd $THIS_DIR
+echo "
+all: src/${LIBNAMEX}
 
 clean:
 	cd src ; make -f Makefile clean
@@ -13,5 +19,5 @@ clean:
 install:
 	cd src ; make -f Makefile install
 
-src/libxvr2net.so.${VERSION}:
+src/${LIBNAMEX}: src/*.h src/*.cpp
 	cd src ; make -f Makefile" > Makefile
