@@ -24,6 +24,10 @@ if [ $? -eq 0 ]; then
 	XVR2_SOURCE_DIR=$stage1
 else
 	XVR2_SOURCE_DIR=`dirname $stage1`
+	echo $XVR_SOURCE_DIR | grep 'xvr2$' > /dev/null 2>&1
+	if [ $? -ne 0 ]; then
+		XVR2_SOURCE_DIR=`dirname $XVR2_SOURCE_DIR`
+	fi
 fi
 
 
@@ -32,8 +36,8 @@ find_binary()
 	binname=$1
 	echo -ne "Checking ${binname}... " >&2
 	#FIRST SEE IF THE FILE IS ALREADY IN THE CACHE, IF IT IS THEN GRAB IT FROM THERE
-	if [ -f .build_tools.fscache ]; then
-		BINX=`grep "^${binname}:" .build_tools.fscache`
+	if [ -f ${XVR2_SOURCE_DIR}/.build_tools.fscache ]; then
+		BINX=`grep "^${binname}:" ${XVR2_SOURCE_DIR}/.build_tools.fscache`
 		if [ $? -eq 0 ]; then
 			echo -ne "cached " >&2
 			echo $BINX | cut -f2 -d:
@@ -50,7 +54,7 @@ find_binary()
 			if [ "$ffile" = "$binname" ]; then
 				if [ -x $dir/$binname ]; then
 					echo $dir/$binname
-					echo "$binname:$dir/$binname" >> .build_tools.fscache
+					echo "$binname:$dir/$binname" >> ${XVR2_SOURCE_DIR}/.build_tools.fscache
 					gotsomething=1
 				fi
 			fi
@@ -92,7 +96,7 @@ get_gcc_version()
 get_gcc_revision()
 {
 	bin=$1
-	$bin -v 2>&1 | grep ^gcc | awk '{print $3}' | cut -f2- -d. | sed 's/\./_/g'
+	$bin -v 2>&1 | grep ^gcc | awk '{print $3}' | cut -f2 -d. | sed 's/\./_/g'
 }
 
 get_gcc_full_version()
@@ -116,3 +120,71 @@ get_os()
 	uname -s
 }
 
+get_include_deps()
+{
+	includex=$1
+	ddepsx=""
+	for incx in `cat $includex | grep include | sed 's/.*[\"|<]\(.*\)[\"|>]/\1/' | grep xvr2 | sed 's/xvr2\///'`
+	do
+		if [ -f $incx ]; then
+			ddepsx="$ddepsx $inc"
+		fi
+	done
+	echo $ddepsx
+}
+
+usage()
+{
+	echo " "
+	echo "Usage (parameters with an asterisk are enabled by default): "
+	echo "--with-pth			* Use GNU Portable threads (GNU Pth)"
+	echo "--with-pthreads			Use POSIX Threads"
+	echo "--with-sdl-threads		Use SDL POSIX threads encapsulation"
+	echo "--help				Print this usage message"
+	echo "--use-debug			* Activate debug message printing"
+	echo "--no-debug			Dectivate debug message printing"
+	echo "--disable-mantainer-mode	Disable maintainer mode (Remove symbols in object files)"
+	echo "--enable-mantainer-mode		Enable maintainer mode (Leave symbols in object files)"
+	echo "--debug-mutexes			Show status messages while locking/unlocking mutexes"
+	echo "--dont-use-sdl			Disables the use of SDL for network and threads"
+	echo "					(reduces portability)"
+	echo "--sock-chunk-size		Change socket buffer chunk size in bytes while sending"
+	echo "				huge amounts of data through the net (default: 4096)"
+	echo "--prefix			Specifies the prefix installation directory"
+	echo " "
+	echo " "
+	exit 0
+}
+
+get_value()
+{
+	echo $1 | cut -f2 -d'='
+}
+
+
+get_valuex()
+{
+	echo $1 | cut -f2 -d'='
+}
+
+get_libname()
+{
+	for option in `echo "$@"`
+	do
+		echo "$option" | egrep '^--with-name=' > /dev/null 2>&1
+		if [ $? -eq 0 ]; then
+			MYLIBNAME=`get_valuex $option`
+		fi
+	done
+}
+
+get_libversion()
+{
+	for option in `echo "$@"`
+	do
+		echo "$option" | egrep '^--version=' > /dev/null 2>&1
+		if [ $? -eq 0 ]; then
+			MYVERSION=`get_valuex $option`
+		fi
+	done
+}
