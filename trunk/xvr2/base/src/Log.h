@@ -4,9 +4,9 @@
 #ifndef __XVR2_Log_H__
 #define __XVR2_Log_H__
 
-#include<System.h>
-#include<BaseFile.h>
-#include<Mutex.h>
+#include<xvr2/System.h>
+#include<xvr2/BaseFile.h>
+#include<xvr2/Mutex.h>
 
 namespace xvr2{
 	/**

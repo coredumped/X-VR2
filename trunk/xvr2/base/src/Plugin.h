@@ -3,10 +3,10 @@
  */
 #ifndef __XVR2_PLUGIN_H__
 #define __XVR2_PLUGIN_H__
-#include<System.h>
-#include<Exception.h>
-#include<String.h>
-#include<DSOException.h>
+#include<xvr2/System.h>
+#include<xvr2/Exception.h>
+#include<xvr2/String.h>
+#include<xvr2/DSOException.h>
 
 #ifndef _WIN32
 
@@ -53,7 +53,7 @@ namespace xvr2{
 			 * Loads the dso defined by <b>plName</b> and updates the
 			 * contents of the dso variable name
 			 */
-			void load(String plName);
+			void load(const String &plName);
 			/**
 			 * Unloads the dso from memory
 			 */
@@ -66,7 +66,7 @@ namespace xvr2{
 			/**
 			 * This method returns the name of the dso itself
 			 */
-			String &getDSOName();
+			const String &getDSOName();
 	};
 
 }

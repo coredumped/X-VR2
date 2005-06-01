@@ -1,8 +1,8 @@
 /*
  * $Id$
  */
-#include<DSOException.h>
-#include<MessageStrings.h>
+#include<xvr2/DSOException.h>
+#include<xvr2/MessageStrings.h>
 #include<errno.h>
 #ifndef _WIN32
 #include<dlfcn.h>

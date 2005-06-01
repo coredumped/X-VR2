@@ -3,10 +3,10 @@
  */
 #ifndef __GARBAGE_COLECTOR_H__
 #define __GARBAGE_COLECTOR_H__
-#include<System.h>
-#include<TemporalBuffer.h>
-#include<ElementNotFoundException.h>
-#include<List.h>
+#include<xvr2/System.h>
+#include<xvr2/TemporalBuffer.h>
+#include<xvr2/ElementNotFoundException.h>
+#include<xvr2/List.h>
 
 namespace xvr2{
 	/**

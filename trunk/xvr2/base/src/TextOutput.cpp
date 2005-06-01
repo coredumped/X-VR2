@@ -1,8 +1,8 @@
 /*
  * $Id$
  */
-#include<TextOutput.h>
-#include<MessageStrings.h>
+#include<xvr2/TextOutput.h>
+#include<xvr2/MessageStrings.h>
 #include<iostream>
 #include<cstdio>
 

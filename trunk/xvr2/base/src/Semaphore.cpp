@@ -1,9 +1,9 @@
 /*
  * $Id$
  */
-#include<Exception.h>
-#include<Semaphore.h>
-#include<Thread.h>
+#include<xvr2/Exception.h>
+#include<xvr2/Semaphore.h>
+#include<xvr2/Thread.h>
 #ifdef USE_POSIX_THREADS
 #include<pthread.h>
 #endif

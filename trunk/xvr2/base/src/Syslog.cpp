@@ -3,7 +3,7 @@
  *
  * $Id$
  */
-#include<Syslog.h>
+#include<xvr2/Syslog.h>
 #include<syslog.h>
 
 namespace xvr2{
@@ -40,15 +40,13 @@ namespace xvr2{
 	}
 
 	void Syslog::Log(const String &logmsg1, int type){
-		String *l;
-		l = (String *)&logmsg1;
 		if(type == -666){
 			//Do an INFO log on facility LOG_USER
-			syslog(LOG_USER|LOG_INFO, "%s", l->toCharPtr());
+			syslog(LOG_USER|LOG_INFO, "%s", logmsg1.toCharPtr());
 		}
 		else{
 			//Do a proper log as specified in type
-			syslog(type, "%s", l->toCharPtr());
+			syslog(type, "%s", logmsg1.toCharPtr());
 		}
 	}
 

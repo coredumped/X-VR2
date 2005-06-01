@@ -3,8 +3,8 @@
  */
 #ifndef __XVR2_CONTAINER_H__
 #define __XVR2_CONTAINER_H__
-#include<Object.h>
-#include<Exception.h>
+#include<xvr2/Object.h>
+#include<xvr2/Exception.h>
 
 namespace xvr2{
 	namespace Util {

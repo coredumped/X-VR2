@@ -3,7 +3,7 @@
  *
  * $Id$
  */
-#include<Log.h>
+#include<xvr2/Log.h>
 #include<string>
 
 namespace xvr2{

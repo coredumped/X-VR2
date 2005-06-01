@@ -3,7 +3,7 @@
  */
 #ifndef __NO_MORE_TOKENS_EXCEPTION_H__
 #define __NO_MORE_TOKENS_EXCEPTION_H__
-#include<Exception.h>
+#include<xvr2/Exception.h>
 
 namespace xvr2{
 	namespace Exception{

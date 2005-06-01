@@ -1,8 +1,8 @@
 /*
  * $Id$
  */
-#include<TextInput.h>
-#include<MessageStrings.h>
+#include<xvr2/TextInput.h>
+#include<xvr2/MessageStrings.h>
 #ifdef USING_GCC3
 #include<iostream>
 #include<string>

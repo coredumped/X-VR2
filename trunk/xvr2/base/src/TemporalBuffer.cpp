@@ -1,9 +1,9 @@
 /*
  * $Id$
  */
-#include<TemporalBuffer.h>
-#include<Memory.h>
-#include<Timestamp.h>
+#include<xvr2/TemporalBuffer.h>
+#include<xvr2/Memory.h>
+#include<xvr2/Timestamp.h>
 
 
 namespace xvr2{

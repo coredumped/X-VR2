@@ -5,7 +5,7 @@
  * sure that they're saved in the data segment of the binary
  *
  */
-#include <MessageStrings.h>
+#include <xvr2/MessageStrings.h>
 
 
 namespace xvr2{

@@ -3,10 +3,10 @@
  */
 #ifndef __XVR2_CONSOLE_H__
 #define __XVR2_CONSOLE_H__
-#include<Unix.h>
-#include<TextOutput.h>
-#include<TextInput.h>
-#include<NullPointerException.h>
+#include<xvr2/Unix.h>
+#include<xvr2/TextOutput.h>
+#include<xvr2/TextInput.h>
+#include<xvr2/NullPointerException.h>
 
 namespace xvr2{
 	

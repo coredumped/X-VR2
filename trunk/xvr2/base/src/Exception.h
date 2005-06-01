@@ -8,7 +8,7 @@
 #ifndef __XVR2_EXCEPTION_H__
 #define __XVR2_EXCEPTION_H__
 
-#include<Object.h>
+#include<xvr2/Object.h>
 
 namespace xvr2{
 	namespace Exception{

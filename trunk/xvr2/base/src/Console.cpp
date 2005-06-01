@@ -1,11 +1,11 @@
 /*
  * $Id$
  */
-#include<Console.h>
-#include<StandardError.h>
-#include<StandardOutput.h>
-#include<StandardInput.h>
-#include<Mutex.h>
+#include<xvr2/Console.h>
+#include<xvr2/StandardError.h>
+#include<xvr2/StandardOutput.h>
+#include<xvr2/StandardInput.h>
+#include<xvr2/Mutex.h>
 
 namespace xvr2{
 	
@@ -108,13 +108,11 @@ namespace xvr2{
 		else throw Exception::NullPointer();
 	}
 
-	void Console::outWrite(const String& text){
-		String *t;
-		t = (String *)&text;
+	void Console::outWrite(const String &text){
 		if(out != 0){
 			__conm.lock();
 			try{
-				out->write(t->toCharPtr(), t->size());
+				out->write(text.toCharPtr(), text.size());
 			}
 			catch(...){
 				__conm.unlock();
@@ -141,12 +139,10 @@ namespace xvr2{
 	}
 
 	void Console::outWriteLine(const String& text){
-		String *t;
-		t = (String *)&text;
 		if(out != 0){
 			__conm.lock();
 			try{
-				out->writeLine(t->toCharPtr(), t->size());
+				out->writeLine(text.toCharPtr(), text.size());
 			}
 			catch(...){
 				__conm.unlock();
@@ -175,12 +171,10 @@ namespace xvr2{
 	}
 
 	void Console::errWrite(const String& text){
-		String *t;
-		t = (String *)&text;
 		if(err != 0){
 			__conm.lock();
 			try{
-				err->write(t->toCharPtr(), t->size());
+				err->write(text.toCharPtr(), text.size());
 			}
 			catch(...){
 				__conm.unlock();
@@ -212,7 +206,7 @@ namespace xvr2{
 		if(err != 0){
 			__conm.lock();
 			try{
-				err->writeLine(t->toCharPtr(), t->size());
+				err->writeLine(text.toCharPtr(), t->size());
 			}
 			catch(...){
 				__conm.unlock();

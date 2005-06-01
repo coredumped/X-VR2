@@ -1,8 +1,8 @@
 /*
  * $Id$
  */
-#include<Memory.h>
-#include<Exception.h>
+#include<xvr2/Memory.h>
+#include<xvr2/Exception.h>
 #include<cstdlib>
 #include<string>
 

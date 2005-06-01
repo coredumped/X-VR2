@@ -1,8 +1,8 @@
 /*
  * $Id$
  */
-#include<GroupException.h>
-#include<MessageStrings.h>
+#include<xvr2/GroupException.h>
+#include<xvr2/MessageStrings.h>
 
 namespace xvr2 {
 	namespace Exception{

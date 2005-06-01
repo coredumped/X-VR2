@@ -1,7 +1,7 @@
 /*
  * $Id$
  */
-#include<StandardError.h>
+#include<xvr2/StandardError.h>
 #include<iostream>
 
 namespace xvr2{

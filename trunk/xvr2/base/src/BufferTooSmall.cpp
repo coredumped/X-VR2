@@ -1,8 +1,8 @@
 /*
  * $Id$
  */
-#include<BufferTooSmall.h>
-#include<MessageStrings.h>
+#include<xvr2/BufferTooSmall.h>
+#include<xvr2/MessageStrings.h>
 
 namespace xvr2 {
 	namespace Exception {

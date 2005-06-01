@@ -4,11 +4,11 @@
  Here we define a parent class, THE OBJECT
 
  */
-#include<Object.h>
+#include<xvr2/Object.h>
 #include<iostream>
 #include<pthread.h>
 #ifdef USE_DEBUG
-#include<Console.h>
+#include<xvr2/Console.h>
 #endif
 #ifdef USING_GCC3
 #include<stdlib.h>

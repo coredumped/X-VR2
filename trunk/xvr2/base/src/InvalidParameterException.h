@@ -3,7 +3,7 @@
  */
 #ifndef __XVR2_INVALID_PARAMETER_EXCEPTION_H__
 #define __XVR2_INVALID_PARAMETER_EXCEPTION_H__
-#include<Exception.h>
+#include<xvr2/Exception.h>
 /** This exception is thrown whenever you call a system call with
  *  an invalid parameter */
 namespace xvr2{

@@ -1,8 +1,8 @@
 /*
  * $Id$
  */
-#include<MutexException.h>
-#include<MessageStrings.h>
+#include<xvr2/MutexException.h>
+#include<xvr2/MessageStrings.h>
 
 namespace xvr2 {
 	namespace Exception{

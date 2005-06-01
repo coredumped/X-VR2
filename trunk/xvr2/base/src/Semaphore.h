@@ -4,8 +4,8 @@
 #ifndef __SEMAPHORE_h__
 #define __SEMAPHORE_h__
 
-#include<Threading.h>
-#include<SemaphoreException.h>
+#include<xvr2/Threading.h>
+#include<xvr2/SemaphoreException.h>
 #ifdef USE_POSIX_THREADS
 #include<semaphore.h>
 #endif

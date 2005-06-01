@@ -7,9 +7,9 @@
  */
 #ifndef __XVR2_LIST_H__
 #define __XVR2_LIST_H__
-#include<Container.h>
-#include<ArrayIndexOutOfLimitsException.h>
-#include<ElementNotFoundException.h>
+#include<xvr2/Container.h>
+#include<xvr2/ArrayIndexOutOfLimitsException.h>
+#include<xvr2/ElementNotFoundException.h>
 
 namespace xvr2{
 	namespace Util {

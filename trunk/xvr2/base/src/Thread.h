@@ -9,9 +9,9 @@
 #else
 	#include<pthread.h>
 #endif
-#include<Object.h>
-#include<Threading.h>
-#include<Mutex.h>
+#include<xvr2/Object.h>
+#include<xvr2/Threading.h>
+#include<xvr2/Mutex.h>
 
 namespace xvr2{
 	/**

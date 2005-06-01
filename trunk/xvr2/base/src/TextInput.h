@@ -3,8 +3,8 @@
  */
 #ifndef __XVR2_TEXT_INPUT_H__
 #define __XVR2_TEXT_INPUT_H__
-#include<System.h>
-#include<String.h>
+#include<xvr2/System.h>
+#include<xvr2/String.h>
 
 namespace xvr2{
 

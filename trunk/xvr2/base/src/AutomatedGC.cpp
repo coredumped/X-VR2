@@ -1,7 +1,7 @@
 /*
  * $Id$
  */
-#include<AutomatedGC.h>
+#include<xvr2/AutomatedGC.h>
 #include<unistd.h>
 
 namespace xvr2{

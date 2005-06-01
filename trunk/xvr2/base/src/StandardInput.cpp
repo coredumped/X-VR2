@@ -1,7 +1,7 @@
 /*
  * $Id$
  */
-#include<StandardInput.h>
+#include<xvr2/StandardInput.h>
 #include<iostream>
 
 namespace xvr2{

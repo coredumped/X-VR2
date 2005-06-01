@@ -3,7 +3,7 @@
  */
 #ifndef __XVR2_UNIX_GROUP_H__
 #define __XVR2_UNIX_GROUP_H__
-#include<Group.h>
+#include<xvr2/Group.h>
 #include<sys/types.h>
 #include<unistd.h>
 #include<grp.h>

@@ -3,7 +3,7 @@
  */
 #ifndef __SHARED_VAR_H__
 #define __SHARED_VAR_H__
-#include<Mutex.h>
+#include<xvr2/Mutex.h>
 
 
 namespace xvr2{

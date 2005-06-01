@@ -3,8 +3,8 @@
  */
 #ifndef __XVR2_FILE_EXCEPTION_H__
 #define __XVR2_FILE_EXCEPTION_H__
-#include<Exception.h>
-#include<IOException.h>
+#include<xvr2/Exception.h>
+#include<xvr2/IOException.h>
 
 namespace xvr2 {
 	namespace Exception{

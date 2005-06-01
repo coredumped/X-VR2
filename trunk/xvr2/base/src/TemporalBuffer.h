@@ -3,7 +3,7 @@
  */
 #ifndef __TEMPORAL_BUFFER_H__
 #define __TEMPORAL_BUFFER_H__
-#include<System.h>
+#include<xvr2/System.h>
 
 namespace xvr2{
 

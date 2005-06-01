@@ -3,7 +3,7 @@
  */
 #ifndef __XVR2_STANDARD_INPUT_H__
 #define __XVR2_STANDARD_INPUT_H__
-#include<TextInput.h>
+#include<xvr2/TextInput.h>
 
 namespace xvr2{
 

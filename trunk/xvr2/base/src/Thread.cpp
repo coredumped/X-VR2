@@ -15,8 +15,8 @@
 #endif
 #include<stdlib.h>
 #include<errno.h>
-#include<Thread.h>
-#include<MessageStrings.h>
+#include<xvr2/Thread.h>
+#include<xvr2/MessageStrings.h>
 
 namespace xvr2{
 

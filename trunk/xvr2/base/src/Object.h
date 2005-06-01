@@ -7,13 +7,9 @@
 #ifndef __XVR2_OBJECT_H__
 #define __XVR2_OBJECT_H__
 #include<xvr2config.h>
-#include<_xvr2ClassNames.h>
-#ifndef USE_SDL
-#include<DataTypes.h>
-#else
-#include<SDL.h>
-#endif
-#include<__Destruct.h>
+#include<xvr2/_xvr2ClassNames.h>
+#include<xvr2/DataTypes.h>
+#include<xvr2/__Destruct.h>
 
 namespace xvr2{
 	/**

@@ -3,7 +3,7 @@
  *
  * $Id$
  */
-#include<Byte.h>
+#include<xvr2/Byte.h>
 #include<endian.h>
 
 namespace xvr2{
@@ -212,16 +212,14 @@ namespace xvr2{
 	void Byte::setValue(const String &v){
 		_b_byte data;
 		UInt8 *tmp, x;
-		String *vx;
-		vx = (String *)&v;
-		data.b0 = vx->charAt(7) - '0';
-		data.b1 = vx->charAt(6) - '0';
-		data.b2 = vx->charAt(5) - '0';
-		data.b3 = vx->charAt(4) - '0';
-		data.b4 = vx->charAt(3) - '0';
-		data.b5 = vx->charAt(2) - '0';
-		data.b6 = vx->charAt(1) - '0';
-		data.b7 = vx->charAt(0) - '0';
+		data.b0 = v.charAt(7) - '0';
+		data.b1 = v.charAt(6) - '0';
+		data.b2 = v.charAt(5) - '0';
+		data.b3 = v.charAt(4) - '0';
+		data.b4 = v.charAt(3) - '0';
+		data.b5 = v.charAt(2) - '0';
+		data.b6 = v.charAt(1) - '0';
+		data.b7 = v.charAt(0) - '0';
 
 		tmp = (UInt8 *)&data;
 		x = *tmp;

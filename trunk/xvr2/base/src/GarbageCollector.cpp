@@ -1,7 +1,7 @@
 /*
  * $Id$
  */
-#include<GarbageCollector.h>
+#include<xvr2/GarbageCollector.h>
 #include<unistd.h>
 
 #ifndef GARBAGE_DELETE_PAUSE

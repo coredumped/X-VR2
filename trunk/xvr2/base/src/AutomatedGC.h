@@ -1,8 +1,8 @@
 /*
  * $Id$
  */
-#include<GarbageCollector.h>
-#include<Thread.h>
+#include<xvr2/GarbageCollector.h>
+#include<xvr2/Thread.h>
 
 #ifndef __AUTOMATED_GC_H__
 #define __AUTOMATED_GC_H__

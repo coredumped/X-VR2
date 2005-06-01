@@ -4,7 +4,7 @@
 #ifndef __XVR2_Syslog_H__
 #define __XVR2_Syslog_H__
 
-#include<Unix.h>
+#include<xvr2/Unix.h>
 
 namespace xvr2{
 	/**

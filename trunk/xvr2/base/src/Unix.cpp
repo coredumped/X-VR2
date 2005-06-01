@@ -1,8 +1,8 @@
 /*
  * $Id$
  */
-#include<Unix.h>
-#include<Mutex.h>
+#include<xvr2/Unix.h>
+#include<xvr2/Mutex.h>
 #include<sys/types.h>
 #include<pwd.h>
 #include<grp.h>
@@ -63,10 +63,8 @@ namespace xvr2{
 		struct passwd p1;
 		struct passwd *p2;
 		char *buffer;
-		String *u;
 		buffer = new char[1024];
-		u = (String *)&username;
-		getpwnam_r(u->toCharPtr(), &p1, buffer, 1024, &p2);
+		getpwnam_r(username.toCharPtr(), &p1, buffer, 1024, &p2);
 		userid = p1.pw_uid;
 		delete[] buffer;
 		return userid;
@@ -81,11 +79,9 @@ namespace xvr2{
 		struct group *p1;
 		struct group *p2;
 		char *buffer;
-		String *u;
 		buffer = new char[1024];
-		u = (String *)&groupname;
 		//getpwnam_r(u->toCharPtr(), &p1, buffer, 1024, &p2);
-		getgrnam_r(u->toCharPtr(), p1, buffer, 1024, &p2);
+		getgrnam_r(groupname.toCharPtr(), p1, buffer, 1024, &p2);
 		if(p2 == 0){
 			//TODO: remember to code whatever goes here
 		}
@@ -100,9 +96,7 @@ namespace xvr2{
 
 	int Unix::chown(const String &fname, int userid, int groupid){
 		int ret;
-		String *c;
-		c = (String *)&fname;
-		ret = ::chown(c->toCharPtr(), userid, (gid_t)(groupid));
+		ret = ::chown(fname.toCharPtr(), userid, (gid_t)(groupid));
 		if(ret == -1){
 			switch(errno){
 				case EPERM:
@@ -150,11 +144,9 @@ namespace xvr2{
 	int Unix::chown(const String &fname, const String &owner){
 		int ret;
 		int userid;
-		String *c;
-		c = (String *)&fname;
 		userid = Unix::getuid(owner);
 		try{
-			ret = Unix::chown(c->toCharPtr(), userid, (gid_t)(-1));
+			ret = Unix::chown(fname.toCharPtr(), userid, (gid_t)(-1));
 		}
 		catch(...){
 			throw;
@@ -164,9 +156,7 @@ namespace xvr2{
 
 	int Unix::chgrp(const String &fname, int groupid){
 		int ret;
-		String *c;
-		c = (String *)&fname;
-		ret = ::chown(c->toCharPtr(), (uid_t)(-1), (gid_t)(groupid));
+		ret = ::chown(fname.toCharPtr(), (uid_t)(-1), (gid_t)(groupid));
 		if(ret == -1){
 			switch(errno){
 				case EPERM:
@@ -214,10 +204,8 @@ namespace xvr2{
 	int Unix::chgrp(const String &fname, const String &groupname){
 		int ret;
 		int userid;
-		String *c;
-		c = (String *)&fname;
 		userid = Unix::getgid(groupname);
-		ret = Unix::chown(c->toCharPtr(), userid, (gid_t)(-1));
+		ret = Unix::chown(fname.toCharPtr(), userid, (gid_t)(-1));
 		return ret;
 	}
 

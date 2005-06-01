@@ -1,7 +1,7 @@
 /*
  * $Id$
  */
-#include<Chronometer.h>
+#include<xvr2/Chronometer.h>
 
 
 namespace xvr2{

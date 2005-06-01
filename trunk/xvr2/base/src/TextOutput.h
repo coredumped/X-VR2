@@ -3,8 +3,8 @@
  */
 #ifndef __XVR2_TEXT_OUTPUT_H__
 #define __XVR2_TEXT_OUTPUT_H__
-#include<System.h>
-#include<String.h>
+#include<xvr2/System.h>
+#include<xvr2/String.h>
 
 namespace xvr2{
 	/** This class is like a PIPE, it holds a method for 

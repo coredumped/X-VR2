@@ -3,7 +3,7 @@
  */
 #ifndef __ELEMENT_NOT_FOUND_EXCEPTION_H__
 #define __ELEMENT_NOT_FOUND_EXCEPTION_H__
-#include<Exception.h>
+#include<xvr2/Exception.h>
 
 namespace xvr2 {
 	namespace Exception{

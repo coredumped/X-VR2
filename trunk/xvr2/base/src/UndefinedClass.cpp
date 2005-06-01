@@ -1,8 +1,8 @@
 /*
  * $Id$
  */
-#include<UndefinedClass.h>
-#include<MessageStrings.h>
+#include<xvr2/UndefinedClass.h>
+#include<xvr2/MessageStrings.h>
 
 namespace xvr2 {
 	namespace Exception {

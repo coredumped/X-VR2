@@ -3,10 +3,10 @@
  */
 #ifndef __XVR2_UNIX_H__
 #define __XVR2_UNIX_H__
-#include<System.h>
-#include<Mutex.h>
-#include<String.h>
-#include<SecurityException.h>
+#include<xvr2/System.h>
+#include<xvr2/Mutex.h>
+#include<xvr2/String.h>
+#include<xvr2/SecurityException.h>
 
 namespace xvr2{
 

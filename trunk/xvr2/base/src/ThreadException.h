@@ -3,7 +3,7 @@
  */
 #ifndef __E4AL_THREAD_EXCEPTION_H__
 #define __E4AL_THREAD_EXCEPTION_H__
-#include<Exception.h>
+#include<xvr2/Exception.h>
 
 namespace xvr2 {
 	namespace Exception{

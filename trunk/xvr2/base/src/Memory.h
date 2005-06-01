@@ -3,10 +3,10 @@
  */
 #ifndef __XVR2_MEMORY_H__
 #define __XVR2_MEMORY_H__
-#include<System.h>
-#include<Array.h>
-#include<AutomatedGC.h>
-#include<MemoryException.h>
+#include<xvr2/System.h>
+#include<xvr2/Array.h>
+#include<xvr2/AutomatedGC.h>
+#include<xvr2/MemoryException.h>
 
 namespace xvr2{
 	/**

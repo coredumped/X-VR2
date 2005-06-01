@@ -4,8 +4,8 @@
 #ifndef __XVR2_USER_H__
 #define __XVR2_USER_H__
 
-#include<Unix.h>
-#include<UserException.h>
+#include<xvr2/Unix.h>
+#include<xvr2/UserException.h>
 
 namespace xvr2{
 	/**

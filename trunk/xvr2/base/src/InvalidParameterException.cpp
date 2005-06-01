@@ -1,9 +1,9 @@
 /*
  * $Id$
  */
-#include<InvalidParameterException.h>
-#include<Memory.h>
-#include<MessageStrings.h>
+#include<xvr2/InvalidParameterException.h>
+#include<xvr2/Memory.h>
+#include<xvr2/MessageStrings.h>
 #include<string>
 #ifndef USING_GCC3
 #include<stdio.h>

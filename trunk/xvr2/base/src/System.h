@@ -3,9 +3,9 @@
  */
 #ifndef __XVR2_SYSTEM_H__
 #define __XVR2_SYSTEM_H__
-#include<Object.h>
-#include<FileException.h>
-#include<NumberException.h>
+#include<xvr2/Object.h>
+#include<xvr2/FileException.h>
+#include<xvr2/NumberException.h>
 
 namespace xvr2{
 	/**

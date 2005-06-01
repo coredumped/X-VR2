@@ -1,10 +1,10 @@
-#include<System.h>
+#include<xvr2/System.h>
 #include<unistd.h>
 #ifdef USING_LINUX
-#include<SharedVar.h>
+#include<xvr2/SharedVar.h>
 #include<cstdio>
 #include<Memory.h>
-#include<String.h>
+#include<xvr2/String.h>
 #endif
 
 namespace xvr2{

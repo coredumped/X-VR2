@@ -8,14 +8,14 @@
 #include<pth.h>
 #else
 #ifdef USE_SDL
-#include<SDL.h>
+#include<xvr2/SDL.h>
 #else
 #include<pthread.h>
 #endif
 #endif
 
-#include<MutexException.h>
-#include<Threading.h>
+#include<xvr2/MutexException.h>
+#include<xvr2/Threading.h>
 namespace xvr2{
 
 

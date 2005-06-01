@@ -4,10 +4,10 @@
 #ifndef __XVR2_GROUP_H__
 #define __XVR2_GROUP_H__
 
-#include<Unix.h>
-#include<MemoryException.h>
-#include<GroupException.h>
-#include<BufferTooSmall.h>
+#include<xvr2/Unix.h>
+#include<xvr2/MemoryException.h>
+#include<xvr2/GroupException.h>
+#include<xvr2/BufferTooSmall.h>
 
 namespace xvr2{
 	/**

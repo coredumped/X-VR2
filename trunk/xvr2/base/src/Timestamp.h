@@ -4,7 +4,7 @@
 #ifndef __XVR2_TIMESTAMP_H__
 #define __XVR2_TIMESTAMP_H__
 
-#include<Time.h>
+#include<xvr2/Time.h>
 
 namespace xvr2{
 

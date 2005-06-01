@@ -1,8 +1,8 @@
 /*
  * $Id$
  */
-#include<SemaphoreException.h>
-#include<MessageStrings.h>
+#include<xvr2/SemaphoreException.h>
+#include<xvr2/MessageStrings.h>
 
 namespace xvr2 {
 	namespace Exception{

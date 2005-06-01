@@ -4,7 +4,7 @@
 #ifndef __XVR2_CRONOMETER_H__
 #define __XVR2_CRONOMETER_H__
 
-#include<Time.h>
+#include<xvr2/Time.h>
 #include<sys/time.h>
 
 namespace xvr2{

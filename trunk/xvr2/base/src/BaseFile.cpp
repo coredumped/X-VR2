@@ -1,8 +1,8 @@
 /*
  * $Id$
  */
-#include<MessageStrings.h>
-#include<BaseFile.h>
+#include<xvr2/MessageStrings.h>
+#include<xvr2/BaseFile.h>
 #include<unistd.h>
 #include<sys/stat.h>
 #include<sys/types.h>
@@ -34,7 +34,7 @@ namespace xvr2{
 #ifndef USING_GCC3
 		setClassName(xvr2::_xvr2BaseFile);
 #endif
-		filename.assign(fname);
+		filename.assign(fname.toCharPtr());
 		filemode = -1;
 		_opened = false;
 	}
@@ -44,11 +44,11 @@ namespace xvr2{
 	}
 
 	void BaseFile::setFilename(const String &fname){
-		filename.assign(fname);
+		filename.assign(fname.toCharPtr());
 	}
 
 	void BaseFile::open(const String &fname, BaseFile::FileOpenMode mode){
-		filename.assign(fname);
+		filename.assign(fname.toCharPtr());
 		open(mode);
 	}
 

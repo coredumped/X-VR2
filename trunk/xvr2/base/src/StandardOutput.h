@@ -3,7 +3,7 @@
  */
 #ifndef __XVR2_STANDARD_OUTPUT_H__
 #define __XVR2_STANDARD_OUTPUT_H__
-#include<TextOutput.h>
+#include<xvr2/TextOutput.h>
 
 namespace xvr2{
 	/** This class represents the Standard Output output stream */

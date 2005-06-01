@@ -1,7 +1,7 @@
 /*
  * $Id$
  */
-#include<Timestamp.h>
+#include<xvr2/Timestamp.h>
 
 namespace xvr2{
 	Timestamp::Timestamp(UInt32 tstamp){

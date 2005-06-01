@@ -3,7 +3,7 @@
  */
 #ifndef __XVR2_ARRAY_H__
 #define __XVR2_ARRAY_H__
-#include<Container.h>
+#include<xvr2/Container.h>
 #ifdef HAVE_MEMCPY
 #include<string.h>
 #endif

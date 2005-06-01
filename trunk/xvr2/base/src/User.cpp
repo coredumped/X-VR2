@@ -1,7 +1,7 @@
 /*
  * $Id$
  */
-#include<User.h>
+#include<xvr2/User.h>
 #include<pwd.h>
 #include<unistd.h>
 #include<string>
@@ -44,13 +44,11 @@ namespace xvr2{
 	}
 
 	User::User(const String &uname){
-		String *u;
 #ifndef USING_GCC3
 		setClassName(xvr2::_xvr2User);
 #endif
-		u = (String *)&uname;
 		_userid = Unix::getuid(uname);
-		_username = u->toCharPtr();
+		_username = uname.toCharPtr();
 	}
 
 	int User::getUserID(){
@@ -64,12 +62,10 @@ namespace xvr2{
 	int User::getUserID(const String &uname){
 		struct passwd *u1;
 		struct passwd *u2;
-		String *u;
 		char *buffer;
 		int x_uid;
-		u = (String *)&uname;
 		buffer = new char[1024];
-		getpwnam_r(u->toCharPtr(), u1, buffer, 1024, &u2);
+		getpwnam_r(uname.toCharPtr(), u1, buffer, 1024, &u2);
 		if(u2 == 0)
 			throw Exception::User();
 		x_uid = u2->pw_uid;

@@ -3,10 +3,10 @@
  */
 #ifndef __XVR2_DATE_H__
 #define __XVR2_DATE_H__
-#include<System.h>
+#include<xvr2/System.h>
 #include<time.h>
-#include<String.h>
-#include<ParseException.h>
+#include<xvr2/String.h>
+#include<xvr2/ParseException.h>
 
 namespace xvr2{
 	

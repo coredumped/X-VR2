@@ -3,7 +3,7 @@
  */
 #ifndef __E4AL_SEMAPHORE_EXCEPTION_H__
 #define __E4AL_SEMAPHORE_EXCEPTION_H__
-#include<ThreadException.h>
+#include<xvr2/ThreadException.h>
 
 namespace xvr2 {
 	namespace Exception{

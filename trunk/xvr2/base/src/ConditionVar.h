@@ -4,8 +4,8 @@
 #ifndef __SHARED_VAR_h__
 #define __SHARED_VAR_h__
 
-#include<Threading.h>
-#include<Mutex.h>
+#include<xvr2/Threading.h>
+#include<xvr2/Mutex.h>
 #ifdef USE_POSIX_THREADS
 #include<pthread.h>
 #endif

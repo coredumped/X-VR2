@@ -1,7 +1,7 @@
 /*
  * $Id$
  */
-#include<ConditionVar.h>
+#include<xvr2/ConditionVar.h>
 #include<time.h>
 #include<sys/time.h>
 #include<errno.h>

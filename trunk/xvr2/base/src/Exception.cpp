@@ -5,13 +5,13 @@
  * is going to be completely rewritten
  *
  */
-#include<Exception.h>
+#include<xvr2/Exception.h>
 #include<errno.h>
 #include<string.h>
 #include<iostream>
 #include<cstdio>
-#include<_xvr2ClassNames.h>
-#include<MessageStrings.h>
+#include<xvr2/_xvr2ClassNames.h>
+#include<xvr2/MessageStrings.h>
 namespace xvr2{
 	namespace Exception {
 

@@ -3,8 +3,8 @@
  */
 #ifndef __XVR2_THREADING_H__
 #define __XVR2_THREADING_H__
-#include<System.h>
-#include<ThreadException.h>
+#include<xvr2/System.h>
+#include<xvr2/ThreadException.h>
 
 namespace xvr2{
 	/**

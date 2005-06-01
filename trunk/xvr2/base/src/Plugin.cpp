@@ -1,10 +1,10 @@
 /*
  * $Id$
  */
-#include<Plugin.h>
+#include<xvr2/Plugin.h>
 #ifndef _WIN32
 #include<dlfcn.h>
-#include<MessageStrings.h>
+#include<xvr2/MessageStrings.h>
 
 namespace xvr2{
 
@@ -45,7 +45,7 @@ namespace xvr2{
 		}
 	}
 
-	void Plugin::load(String plName){
+	void Plugin::load(const String &plName){
 		dso = plName;
 		load();
 	}
@@ -64,14 +64,12 @@ namespace xvr2{
 
 	void *Plugin::getSymbol(const String &sym){
 		void *ptr;
-		String *s;
 		if(!handle)
 			throw Exception::DSO("Load the DSO first!!!");
-		s = (String *)&sym;
 #ifdef USE_DEBUG
-		std::cerr << "\tloading: " << s->toCharPtr() << "... ";
+		std::cerr << "\tloading: " << sym.toCharPtr() << "... ";
 #endif
-		ptr = dlsym(handle, s->toCharPtr());
+		ptr = dlsym(handle, sym.toCharPtr());
 		if(ptr == 0){
 			throw Exception::DSOSymbol();
 		}

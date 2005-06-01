@@ -3,11 +3,11 @@
  */
 #ifndef __XVR2_FILE_H__
 #define __XVR2_FILE_H__
-#include<System.h>
-#include<String.h>
-#include<SecurityException.h>
-#include<InvalidParameterException.h>
-#include<FileException.h>
+#include<xvr2/System.h>
+#include<xvr2/String.h>
+#include<xvr2/SecurityException.h>
+#include<xvr2/InvalidParameterException.h>
+#include<xvr2/FileException.h>
 
 namespace xvr2{
 

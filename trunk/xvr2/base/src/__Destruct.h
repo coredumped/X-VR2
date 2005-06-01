@@ -5,7 +5,7 @@
 
 */
 #ifndef __XVR2_OBJECT_H__
-#error "Don't include this file directly, instead include Object.h"
+#error "Don't include this file directly, instead include xvr2/Object.h"
 #endif
 
 #ifndef ____XVR2_DESTRUCT_H__
