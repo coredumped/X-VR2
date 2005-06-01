@@ -1,8 +1,8 @@
 #include<xvr2.h>
 #include "common.h"
 
-#define MYSQL_DRIVER_LOCATION  __XVR2_PREFIX_DIR "/lib/xvr2/mysql_driver.so"
-#define PGSQL_DRIVER_LOCATION  __XVR2_PREFIX_DIR "/lib/xvr2/pgsql_driver.so"
+static const char *MYSQL_DRIVER_LOCATION = __XVR2_PREFIX_DIR"/lib/xvr2/mysql_driver.so.0.6.9";
+static const char *PGSQL_DRIVER_LOCATION = __XVR2_PREFIX_DIR"/lib/xvr2/pgsql_driver.so.0.6.9";
 
 
 using namespace xvr2;
@@ -44,7 +44,7 @@ static bool loopit;
 bool parse_args(int argc, char *argv[]){
 	int i;
 	String s;
-	String *tmp;
+	String tmp;
 	std::string foo;
 	loopit = false;
 	for(i = 1; i < argc; i++){
@@ -65,23 +65,23 @@ bool parse_args(int argc, char *argv[]){
 		else if(s.startsWith("host=")){
 			tmp = t->next();
 			tmp = t->next();
-			server_location = strdup(tmp->toCharPtr());
+			server_location = strdup(tmp.toCharPtr());
 		}
 		else if(s.startsWith("user=")){
 			tmp = t->next();
 			tmp = t->next();
-			db_user = strdup(tmp->toCharPtr());
+			db_user = strdup(tmp.toCharPtr());
 		}
 		else if(s.startsWith("database=")){
 			tmp = t->next();
 			tmp = t->next();
-			db_name = strdup(tmp->toCharPtr());
+			db_name = strdup(tmp.toCharPtr());
 		}
 		else if(s.startsWith("password=")){
 			tmp = t->next();
 			tmp = t->next();
-			if(tmp->toCharPtr() != 0){
-				db_pass = strdup(tmp->toCharPtr());
+			if(tmp.toCharPtr() != 0){
+				db_pass = strdup(tmp.toCharPtr());
 			}
 			else{
 				db_pass = "";
@@ -90,8 +90,8 @@ bool parse_args(int argc, char *argv[]){
 		else if(s.startsWith("select=")){
 			tmp = t->next();
 			tmp = t->next();
-			if(tmp->toCharPtr() != 0){
-				select_statement = strdup(tmp->toCharPtr());
+			if(tmp.toCharPtr() != 0){
+				select_statement = strdup(tmp.toCharPtr());
 			}
 		}
 		else if(s.endsWith("loop")){
@@ -140,12 +140,12 @@ int rundemo(int demo_type){
 	switch(demo_type){
 		case XVR2_MYSQL:
 			if(driver_location == 0)
-				driver_location = MYSQL_DRIVER_LOCATION;
+				driver_location = (char *)MYSQL_DRIVER_LOCATION;
 			db_port = 3306;
 			break;
 		case XVR2_POSTGRESQL:
 			if(driver_location == 0)
-				driver_location = PGSQL_DRIVER_LOCATION;
+				driver_location = (char *)PGSQL_DRIVER_LOCATION;
 			db_port = 5432;
 			break;
 	}
