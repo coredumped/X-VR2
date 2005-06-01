@@ -3,9 +3,9 @@
  */
 #ifndef __XVR2_UTIL_REGEX_H__
 #define __XVR2_UTIL_REGEX_H__
-#include<String.h>
-#include<RegexException.h>
-#include<NullPointerException.h>
+#include<xvr2/String.h>
+#include<xvr2/RegexException.h>
+#include<xvr2/NullPointerException.h>
 
 namespace xvr2{
 	namespace Util {

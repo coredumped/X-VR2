@@ -3,8 +3,8 @@
  * This is the socket's parent class
  */
 
-#include"Socket.h"
-#include"Thread.h"
+#include"xvr2/Socket.h"
+#include"xvr2/Thread.h"
 #ifdef UNIX_SOCKETS
 #include<sys/socket.h>
 #include<sys/types.h>
@@ -16,8 +16,8 @@
 #include<iostream>
 
 #ifdef USE_DEBUG
-#include<Console.h>
-#include<String.h>
+#include<xvr2/Console.h>
+#include<xvr2/String.h>
 #endif
 
 namespace xvr2{

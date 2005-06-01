@@ -1,8 +1,8 @@
 /*
  * $Id$
  */
-#include<NoIPForYouException.h>
-#include<MessageStrings.h>
+#include<xvr2/NoIPForYouException.h>
+#include<xvr2/MessageStrings.h>
 
 namespace xvr2{
 	namespace Exception{

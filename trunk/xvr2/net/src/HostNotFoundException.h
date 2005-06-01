@@ -2,8 +2,8 @@
  * $Id$
  */
 
-#include<Exception.h>
-#include<NetworkException.h>
+#include<xvr2/Exception.h>
+#include<xvr2/NetworkException.h>
 #ifndef __xvr2_HostNotFoundException_H__
 #define __xvr2_HostNotFoundException_H__
 

@@ -1,7 +1,7 @@
 /*
  * $Id$
  */
-#include"Event.h"
+#include<xvr2/Event.h>
 
 namespace xvr2 {
 namespace ui {

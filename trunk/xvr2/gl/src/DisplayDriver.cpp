@@ -1,7 +1,7 @@
 /*
  * $Id$
  */
-#include"xglDisplayDriver.h"
+#include"xvr2/xglDisplayDriver.h"
 namespace xvr2 {
 namespace gl {
 	DisplayDriver::DisplayDriver(){

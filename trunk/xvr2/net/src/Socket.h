@@ -3,8 +3,8 @@
  */
 #ifndef __SOCKET_BASE_H__
 #define __SOCKET_BASE_H__
-#include<Object.h>
-#include<DataTypes.h>
+#include<xvr2/Object.h>
+#include<xvr2/DataTypes.h>
 
 namespace xvr2{
 	namespace Net{

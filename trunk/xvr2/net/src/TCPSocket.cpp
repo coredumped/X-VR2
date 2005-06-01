@@ -8,7 +8,7 @@
  * redundant and for sanity we took the desicion to upgrade the class this 
  * way</b>
  */
-#include<stdio.h>
+#include<cstdio>
 #ifdef USING_GCC3
 #include<iostream>
 #include<string>
@@ -16,8 +16,8 @@
 #include<iostream.h>
 #include<string.h>
 #endif
-#include<TCPSocket.h>
-#include<Memory.h>
+#include<xvr2/TCPSocket.h>
+#include<xvr2/Memory.h>
 #include<errno.h>
 #ifdef UNIX_SOCKETS
 #include<sys/types.h>
@@ -36,7 +36,7 @@
 #define READ_TIMEOUT 30000
 #endif
 
-#include<Thread.h>
+#include<xvr2/Thread.h>
 
 namespace xvr2{
 	namespace Net {

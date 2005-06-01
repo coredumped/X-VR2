@@ -2,6 +2,7 @@
  * $Id$
  */
 #include<xvr2/Object3D.h>
+#include<xvr2/Vector3.h>
 
 namespace xvr2 {
 namespace ui {

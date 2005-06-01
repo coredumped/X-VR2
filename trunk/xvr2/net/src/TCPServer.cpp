@@ -3,7 +3,7 @@
  *
  * $Id$
  */
-#include<TCPServer.h>
+#include<xvr2/TCPServer.h>
 
 namespace xvr2{
 	namespace Net {

@@ -1,7 +1,7 @@
 /*
  * $Id$
  */
-#include"Vector2.h"
+#include<xvr2/Vector2.h>
 #include<math.h>
 
 namespace xvr2 {

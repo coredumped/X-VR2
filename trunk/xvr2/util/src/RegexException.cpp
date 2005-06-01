@@ -1,8 +1,8 @@
 /*
  * $Id$
  */
-#include<RegexException.h>
-#include<MessageStrings.h>
+#include<xvr2/RegexException.h>
+#include<xvr2/MessageStrings.h>
 #include<regex.h>
 
 namespace xvr2{

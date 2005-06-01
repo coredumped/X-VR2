@@ -5,12 +5,12 @@
  */
 #ifndef __XVR2_CONFIG_FILE__
 #define __XVR2_CONFIG_FILE__
-#include<Object.h>
-#include<String.h>
-#include<Mutex.h>
-#include<Array.h>
-#include<List.h>
-#include<ElementNotFoundException.h>
+#include<xvr2/Object.h>
+#include<xvr2/String.h>
+#include<xvr2/Mutex.h>
+#include<xvr2/Array.h>
+#include<xvr2/List.h>
+#include<xvr2/ElementNotFoundException.h>
 
 namespace xvr2 {
 	namespace Util {

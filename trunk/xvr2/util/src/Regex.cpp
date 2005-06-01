@@ -2,7 +2,7 @@
  * $Id$
  */
 #include<regex.h>
-#include<Regex.h>
+#include<xvr2/Regex.h>
 
 namespace xvr2 {
 	namespace Util {

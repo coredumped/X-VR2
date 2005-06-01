@@ -5,14 +5,14 @@
 #define __XVR2_SOCKET_H__
 #include<sys/socket.h>
 
-#include<String.h>
-#include<Socket.h>
-#include<NetworkException.h>
-#include<ConnectionResetByPeerException.h>
-#include<HostNotFoundException.h>
-#include<NSTryAgainException.h>
-#include<NSFatalException.h>
-#include<NoIPForYouException.h>
+#include<xvr2/String.h>
+#include<xvr2/Socket.h>
+#include<xvr2/NetworkException.h>
+#include<xvr2/ConnectionResetByPeerException.h>
+#include<xvr2/HostNotFoundException.h>
+#include<xvr2/NSTryAgainException.h>
+#include<xvr2/NSFatalException.h>
+#include<xvr2/NoIPForYouException.h>
 
 namespace xvr2{
 	namespace Net {

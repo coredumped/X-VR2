@@ -3,8 +3,8 @@
  *
  *			Juan V. Guerrero <coredumped@esolutions4all.com>
  */
-#include<ConfigFile.h>
-#include<Memory.h>
+#include<xvr2/ConfigFile.h>
+#include<xvr2/Memory.h>
 #ifndef USING_GCC3
 #include<string.h>
 #include<stdio.h>

@@ -7,8 +7,8 @@
 #include <SDL_net.h>
 #endif
 
-#include<InvalidParameterException.h>
-#include"TCPSocket.h"
+#include<xvr2/InvalidParameterException.h>
+#include<xvr2/TCPSocket.h>
 
 namespace xvr2{
 	namespace Net {

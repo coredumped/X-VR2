@@ -23,8 +23,8 @@
 #include<iostream.h>
 #endif
 #include<fcntl.h>
-#include<TCPServerSocket.h>
-#include<Exception.h>
+#include<xvr2/TCPServerSocket.h>
+#include<xvr2/Exception.h>
 
 namespace xvr2{
 	namespace Net{

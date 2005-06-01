@@ -1,7 +1,7 @@
 /*
  * $Id$
  */
-#include<xglDisplay.h>
+#include<xvr2/xglDisplay.h>
 
 
 namespace xvr2 {

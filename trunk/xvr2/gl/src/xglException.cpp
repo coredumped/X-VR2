@@ -1,8 +1,8 @@
 /*
  * $Id$
  */
-#include"xglException.h"
-#include"xglDisplayDriver.h"
+#include"xvr2/xglException.h"
+#include"xvr2/xglDisplayDriver.h"
 
 namespace xvr2 {
 namespace gl {

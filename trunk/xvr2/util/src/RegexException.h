@@ -1,7 +1,7 @@
 /*
  * $Id$
  */
-#include<Exception.h>
+#include<xvr2/Exception.h>
 #ifndef __xvr2_RegexException_H__
 #define __xvr2_RegexException_H__
 

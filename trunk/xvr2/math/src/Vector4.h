@@ -3,9 +3,9 @@
  */
 #ifndef __XVR2_GFX_VECTOR4_H__
 #define __XVR2_GFX_VECTOR4_H__
-#include<xvr2mathdefs.h>
+#include<xvr2/xvr2mathdefs.h>
 #include<xvr2/String.h>
-#include<Vector3.h>
+#include<xvr2/Vector3.h>
 
 namespace xvr2 {
 namespace math {

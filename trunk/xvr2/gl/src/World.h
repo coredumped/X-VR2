@@ -6,8 +6,9 @@
 #include<xvr2/Object.h>
 
 namespace xvr2 {
-namespace xvr2 {
-	class World:public xvr2::Object {
+namespace gl {
+	using namespace xvr2;
+	class World:public Object {
 	};
 };
 };

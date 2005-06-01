@@ -1,7 +1,7 @@
 /*
  * $Id$
  */
-#include"Object3D.h"
+#include"xvr2/Object3D.h"
 
 namespace xvr2 {
 namespace gl {

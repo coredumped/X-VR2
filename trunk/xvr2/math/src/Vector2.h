@@ -3,7 +3,7 @@
  */
 #ifndef __XVR2_GFX_VECTOR2_H__
 #define __XVR2_GFX_VECTOR2_H__
-#include<xvr2mathdefs.h>
+#include<xvr2/xvr2mathdefs.h>
 #include<xvr2/String.h>
 
 namespace xvr2 {
