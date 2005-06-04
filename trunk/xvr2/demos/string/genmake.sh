@@ -23,4 +23,23 @@ do
 	fi
 done
 
+allbins=`echo $CPPFILES | sed 's/\.cpp//g'`
+
+echo 'CC=g++
+DEBUG=-gstabs+
+' > Makefile
+echo "all: $allbins" >> Makefile
+echo >> Makefile
+
 # Process every gathered source .cpp file and generate its corresponding Makefile entry
+for file in $CPPFILES
+do
+	binfile=`echo $file | sed 's/\.cpp//'`
+	echo "$binfile: $file" >> Makefile
+	echo "	\$(CC) \$(DEBUG) -o $binfile $file \`xvr2-config.sh --cflags --libs\`" >> Makefile
+	echo >> Makefile
+done
+echo "clean: " >> Makefile
+echo "	rm -f $allbins" >> Makefile
+echo "" >> Makefile
+echo "rebuild: clean all" >> Makefile
