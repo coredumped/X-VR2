@@ -9,7 +9,7 @@ using namespace std;
 using namespace xvr2;
 using namespace xvr2::gl;
 
-static char *driver_path = "/usr/local/lib/xvr2/xvr2_sdl_driver.so.0.0.1";
+static char *driver_path = __XVR2_PREFIX_DIR "/lib/xvr2/xvr2_sdl_driver.so." __XVR2_VERSION_STRING;
 
 int main(int argc, char *argv[]){
 	DisplayDriver *x;

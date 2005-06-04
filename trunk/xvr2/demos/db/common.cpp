@@ -1,8 +1,8 @@
 #include<xvr2.h>
 #include "common.h"
 
-static const char *MYSQL_DRIVER_LOCATION = __XVR2_PREFIX_DIR"/lib/xvr2/mysql_driver.so.0.6.9";
-static const char *PGSQL_DRIVER_LOCATION = __XVR2_PREFIX_DIR"/lib/xvr2/pgsql_driver.so.0.6.9";
+static const char *MYSQL_DRIVER_LOCATION = __XVR2_PREFIX_DIR"/lib/xvr2/mysql_driver.so." __XVR2_VERSION_STRING;
+static const char *PGSQL_DRIVER_LOCATION = __XVR2_PREFIX_DIR"/lib/xvr2/pgsql_driver.so." __XVR2_VERSION_STRING;
 
 
 using namespace xvr2;
