@@ -46,6 +46,9 @@ namespace xvr2 {
 	namespace Util {;};
 	/** This namespace is where we group all exception classes */
 	namespace Exception {;};
+	namespace math {;};
+	namespace gl {;};
+	namespace ui {;};
 };
 
 
