@@ -4,13 +4,13 @@
 #ifndef __PGSQL_DRIVER_H__
 #define __PGSQL_DRIVER_H__
 
-#include<DBResultSet.h>
-#include<DBField.h>
-#include<DBDriver.h>
-#include<DataTypes.h>
-#include<NullPointerException.h>
-#include<Mutex.h>
-#include<Memory.h>
+#include<xvr2/DBResultSet.h>
+#include<xvr2/DBField.h>
+#include<xvr2/DBDriver.h>
+#include<xvr2/DataTypes.h>
+#include<xvr2/NullPointerException.h>
+#include<xvr2/Mutex.h>
+#include<xvr2/Memory.h>
 
 extern "C" { 
 /** 
