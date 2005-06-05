@@ -225,7 +225,7 @@ echo "done"
 
 echo "\$(LIBNAME): $DEPS parsers/config-parser.o parsers/config-lexer.o" >> Makefile
 echo -ne "\t\$(CC) \$(BUILDLIB) -o \$(LIBNAME) $DEPS parsers/config-lexer.o parsers/config-parser.o\n" >> Makefile
-echo -ne "\tcd ../../common ; ./genheader.sh $DEFINES -D'__XVR2_PREFIX_DIR \"${PREFIX}\"'\n" >> Makefile
+echo -ne "\tcd ../../common ; ./genheader.sh $DEFINES -D'__XVR2_PREFIX_DIR \"${PREFIX}\"' -D'__XVR2_VERSION_STRING \"${MYVERSION}\"'\n" >> Makefile
 echo -ne "\tcd ../../scripts ; ./gen-config.sh ${PREFIX}\n" >> Makefile
 echo -ne "\tcp -vf \$(LIBNAME) ../../libs/ \n" >> Makefile
 echo -ne "\tcd ../../libs ; ln -sf \$(LIBNAME) \$(SONAME) \n" >> Makefile
