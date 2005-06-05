@@ -121,11 +121,11 @@ namespace xvr2 {
 					copy(tmp, s, l2, len);
 					delete[] buffer;
 					len = len + l2;
+					buffer = tmp;
 				}
 				else{
 					assign(s);
 				}
-				buffer = tmp;
 			}
 			/*void concat(const BasicString<CharT> &s){
 				CharT *tmp;
@@ -156,6 +156,7 @@ namespace xvr2 {
 				if(buffer != 0){
 					delete[] buffer;
 					len = 0;
+					buffer = 0;
 				}
 			}
 			const void clear(){
