@@ -4,71 +4,21 @@
 # Este script genera el makefile
 #
 #
-MYVERSION="0.1.0"
-DRV_VERSION=0
-DRV_REVISION=2
-PLATFORM=`uname -sr`
-OS=`uname -s`
-PROCESSOR=`uname -m`
+source ../../buildtools/functions.sh
+
+PLATFORM=`get_platform`
+OS=`get_os`
+PROCESSOR=`get_processor`
 echo "" > Makefile
-
-get_value()
-{
-	echo $1 | cut -f2 -d'='
-}
-
-get_include_deps()
-{
-	include=$1
-	ddeps=""
-	for inc in `cat $include | grep include | sed 's/.*[\"|<]\(.*\)[\"|>]/\1/'`
-	do
-		if [ -f $inc ]; then
-			ddeps="$ddeps $inc"
-#		else
-#			ninc=`slocate $inc | grep usr | grep include | egrep "\/$inc\$" | head -1`
-#			if [ $? -eq 0 ]; then
-#				ddeps="$ddeps $ninc"
-#			fi
-		fi
-	done
-	echo $ddeps
-}
-
-usage()
-{
-	echo " "
-	echo "Usage (parameters with an asterisk are enabled by default): "
-	echo "--with-pth			* Use GNU Portable threads (GNU Pth)"
-	echo "--with-pthreads			Use POSIX Threads"
-	echo "--with-sdl-threads		Use SDL POSIX threads encapsulation"
-	echo "--help				Print this usage message"
-	echo "--use-debug			* Activate debug message printing"
-	echo "--no-debug			Dectivate debug message printing"
-	echo "--disable-mantainer-mode	Disable maintainer mode (Remove symbols in object files)"
-	echo "--enable-mantainer-mode		Enable maintainer mode (Leave symbols in object files)"
-	echo "--debug-mutexes			Show status messages while locking/unlocking mutexes"
-	echo "--dont-use-sdl			Disables the use of SDL for network and threads"
-	echo "					(reduces portability)"
-	echo "--sock-chunk-size		Change socket buffer chunk size in bytes while sending"
-	echo "				huge amounts of data through the net (default: 4096)"
-	echo "--prefix			Specifies the prefix installation directory"
-	echo " "
-	echo " "
-	exit 0
-}
-
-#THREADMODE=SDL_THREADS
-#NETLIB=-lSDL_net
-#SDLCMD='`sdl-config --libs`'
-#SDLCFLAGS='`sdl-config --cflags`'
-SQLFLAGS=' -I`pg_config --includedir` -I../../db/src -I../../base/src -I../../common -I../../exception/src '
+SQLFLAGS=" -I\`pg_config --includedir\` -I../../common "
 THREADMODE=PTHREADS
-NETLIB=-lsocket
-SQLLIBS=' -L`pg_config --libdir` -lpq -lxvr2 '
+SQLLIBS=' -L`pg_config --libdir` -lpq -lxvr2 -lxvr2db -lxvr2util '
 DEBUGMODE=0
 MAINTAINER="-gstabs+"
 PREFIX="/usr/local"
+DRV_VERSION=0
+DRV_REVISION=1
+
 
 echo " "
 for option in `echo "$@"`
@@ -100,7 +50,7 @@ do
 								MAINTAINER=''
 							else
 								if [ "$option" = '--enable-maintainer-mode' ]; then
-									MAINTAINER="-g"
+									MAINTAINER="-gstabs+"
 								else 
 									if [ "$option" = '--debug-mutexes' ]; then
 										DEBUG_MUTEXES=" -DDEBUG_MUTEXES=1"
@@ -140,54 +90,51 @@ done
 DEFINES="$SCHUNK"
 echo $SCHUNK
 
-if [ "$SDLCMD" ]; then
-	DEFINES="$DEFINES -DUSE_SDL"
-else
-	DEFINES="$DEFINES -DUNIX_SOCKETS -DUSE_POSIX_THREADS -D_REENTRANT -D_THREAD_SAFE"
-fi
-
+DEFINES="$DEFINES -DUNIX_SOCKETS -DUSE_POSIX_THREADS -D_REENTRANT -D_THREAD_SAFE"
 if [ "$DEBUGMODE" -eq 1 ]; then
 	DEFINES="$DEFINES -DUSE_DEBUG "
 fi
 
 echo "DEFINES: $DEFINES"
 
-if [ "$THREADMODE" = 'PTH' ]; then
-	echo "PTHCONFIG=pth-config" >> Makefile
-fi
 echo "Processor: $PROCESSOR, platform is $PLATFORM"
 
-echo -ne "Checking g++..."
-GPP=`slocate g++ | egrep '.*bin.*\/g\+\+$' | grep bin`
-if [ $? -ne 0 ]; then
-	echo "FAILED"
-	echo "Unable to find g++, do you have slocate or g++ installed??"
-	echo " "
-	exit 1
-else
-	echo "OK"
-fi
-
-GCCVERSION=`gcc --version | grep gcc | awk '{print $3}' | sed 's/\..*//'`
 if [ "$GCCVERSION" -ge 3 ]; then
 #DEFINES="$DEFINES -Wno-deprecated "
 DEFINES="$DEFINES -DUSING_GCC3 "
 fi
 
+GPP=`find_gplusplus`
+if [ $? -ne 0 ]; then
+	exit 1
+fi
+YACC=`find_bison`
+if [ $? -ne 0 ]; then
+	exit 1
+fi
+LEX=`find_flex`
+if [ $? -ne 0 ]; then
+	exit 1
+fi
+
+GCCVERSION=`get_gcc_version $GPP`
+GCCREVISION=`get_gcc_revision $GPP`
+GCCFULLVERSION=`get_gcc_full_version $GPP`
+if [ "$GCCVERSION" -ge 3 ]; then
+	DEFINES="$DEFINES -DUSING_GCC3 "
+else
+        if [ "GCC_${GCCFULLVERSION}" != "GCC_2_96" ]; then
+                DEFINES="$DEFINES -std=c99 "
+		else
+                DEFINES="$DEFINES -D__USE_ISOC99 "
+        fi
+fi
+
+if [ "$GCCREVISION" -ge 3 ]; then
+	DEFINES="$DEFINES -DGCC_REVISION${GCCREVISION} -DGCC_${GCCVERSION}_${GCCREVISION}"
+fi
+
 echo "CC=$GPP" >> Makefile
-
-
-#echo -ne "Checking sdl-config..."
-#sdl-config --libs > /dev/null 2>&1
-#if [ $? -ne 0 ]; then
-#	echo "FAILED"
-#	echo "Unable to find sdl-config, do you have SDL installed??"
-#	echo " "
-#	exit 1
-#else
-#	echo "OK"
-#	echo "SDL version: $(sdl-config --version)"
-#fi
 
 if [ $OS = 'SunOS' ]; then
 echo -ne "$OS 2."
@@ -201,33 +148,21 @@ DEBUG=$MAINTAINER $DEBUGSTRING $DEBUG_MUTEXES
 OPTIMIZE=" >> Makefile
 OSVER=`uname -r | sed 's/5\.//'`
 echo $OSVER
-echo "CFLAGS=-Wall \$(DEBUG) \$(OPTIMIZE) -DSOLARIS=1 -DSOLARIS2$OSVER=1 -I../../src -I. -c -DUSE_NEW=1  -D_STRUCTURED_PROC $SDLCMD $DEFINES $SQLFLAGS" >> Makefile
+echo "CFLAGS=-Wall \$(DEBUG) \$(OPTIMIZE) -DSOLARIS=1 -DSOLARIS2$OSVER=1 -I ${XVR2_SOURCE_DIR}/include -I. -c -DUSE_NEW=1  -D_STRUCTURED_PROC $DEFINES $SQLFLAGS" >> Makefile
 if [ $OSVER -eq 8 ]; then
 	DEFINES="$DEFINES -DSOLARIS8"
-	if [ $THREADMODE = 'SDL_THREADS' ]; then
- 			echo "LIBS=-lposix4 -lsocket -ldl $SDLCMD $NETLIB $SQLLIBS" >> Makefile
+	if [ $THREADMODE = 'PTHREADS' ]; then
+ 		echo "LIBS=-lposix4 -lposix $SQLLIBS" >> Makefile
 	else
-		if [ $THREADMODE = 'PTHREADS' ]; then
- 			echo "LIBS=-lposix4 -lsocket -ldl -lposix -lpthread $SDLCMD $NETLIB" $SQLLIBS >> Makefile
-		else
-			if [ $THREADMODE = 'SDL_THREADS' ]; then
- 				echo "LIBS=-lposix4 -lsocket -ldl -lposix $SDLCMD $NETLIB $SQLLIBS" >> Makefile
-			else
-				echo "LIBS=-I`$(PTHCONFIG) --libdir` `$(PTHCONFIG) --libs` -lrt -lsocket -ldl $SDLCMD $NETLIB $SQLLIBS" >> Makefile
-			fi
-		fi
+		echo "LIBS=-lposix4 $SQLLIBS" >> Makefile
 	fi
 else
 	if [ $OSVER -eq 6 ]; then
 		DEFINES="$DEFINES -DSOLARIS6"
-		if [ $THREADMODE = 'SDL_THREADS' ]; then
- 				echo "LIBS=-lposix4 -lsocket -ldl $SDLCMD $NETLIB $SQLLIBS" >> Makefile
+		if [ $THREADMODE = 'PTHREADS' ]; then
+ 			echo "LIBS=-lposix4 -lposix $SQLLIBS" >> Makefile
 		else
-			if [ $THREADMODE = 'PTHREADS' ]; then
- 				echo "LIBS=-lposix4 -lsocket -ldl -lposix -lpthread $SDLCMD $NETLIB $SQLLIBS" >> Makefile
-			else
-				echo "LIBS=-I`$(PTHCONFIG) --libdir` `$(PTHCONFIG) --libs` -lposix4 -lsocket -ldl $SDLCMD $NETLIB $SQLLIBS" >> Makefile
-			fi
+			echo "LIBS=-lposix4 $SQLLIBS" >> Makefile
 		fi
 	else
 		echo "We haven't tested this on Solaris 7 yet"
@@ -253,16 +188,8 @@ DEBUG=$MAINTAINER $DEBUGSTRING $DEBUG_MUTEXES
 #DEBUG=$MAINTAINER -DUSE_DEBUG=$DEBUGMODE
 #DEBUG=
 OPTIMIZE=
-CFLAGS=-Wall \$(DEBUG) \$(OPTIMIZE) -I. -I../.,/src -c $DEFINES -Wimplicit -Wreturn-type -Wunused -Wswitch -Wcomment -Wparentheses -Wpointer-arith $SDLCFLAGS $SQLFLAGS" >> Makefile
-if [ $THREADMODE = 'SDL_THREADS' ]; then
-	echo "LIBS=-ldl -lrt $SDLCMD $NETLIB $SQLLIBS" >> Makefile
-else
-	if [ $THREADMODE = 'PTHREADS' ]; then
-		echo "LIBS=-ldl -lrt -lpthread $NETLIB $SQLLIBS" >> Makefile
-	else
-		echo 'LIBS=-I`$(PTHCONFIG) --libdir` `$(PTHCONFIG) --libs` -lrt -ldl `sdl-config --libs` $NETLIB $SQLLIBS' >> Makefile
-	fi
-fi
+CFLAGS=-Wall \$(DEBUG) \$(OPTIMIZE) -I ${XVR2_SOURCE_DIR}/include -I. -c $DEFINES -Wimplicit -Wreturn-type -Wunused -Wswitch -Wcomment -Wparentheses -Wpointer-arith $SDLCFLAGS $SQLFLAGS" >> Makefile
+echo "LIBS=$SQLLIBS" >> Makefile
 echo "INSTALLDIR=$PREFIX
 LIBNAME=pgsql_driver.so.${MYVERSION}
 SONAME=pgsql_driver.so
@@ -330,31 +257,12 @@ else
 	echo "	Debugmode:		OFF"
 fi
 
-if [ $THREADMODE = 'PTH' ]; then
-	echo "	Threads:		GNU Pth"
-else
-	if [ $THREADMODE = 'SDL_THREADS' ]; then
-		echo "	Threads:		POSIX Threads (SDL Encapsulation)"
-	else
-		echo "	Threads:		POSIX Threads"
-	fi
-fi
-
-if [ "$MAINTAINER" = "-g" ]; then
+if [ "$MAINTAINER" = "-gstabs+" ]; then
 	echo "	Maintainer:		ON"
 else
 	echo "	Maintainer:		OFF"
 fi
 
-if [ "$SCHUNK" ]; then
-	echo "	Socket chunk size:	$SCHUNK"
-fi
-
-if [ ! "$SDLCMD" ]; then
-	echo "	SDL encapsulation:	OFF"
-else
-	echo "	SDL encapsulation:	ON"
-fi
 echo "	----------------------------------"
 echo " "
 echo " "
