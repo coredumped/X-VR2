@@ -9,6 +9,29 @@
 
 namespace xvr2{
 
+	void Date::encode(){
+		drep.assign(year);
+		drep.concat("-");
+		if(month <= 9)
+			drep.concat(0);
+		drep.concat(month);
+		drep.concat("-");
+		if(dayofmonth <= 9)
+			drep.concat(0);
+		drep.concat(dayofmonth);
+		drep.concat(" ");
+		if(hour <= 9)
+			drep.concat(0);
+		drep.concat(hour);
+		drep.concat(":");
+		if(minute <= 9)
+			drep.concat(0);
+		drep.concat(minute);
+		drep.concat(":");
+		if(second <= 9)
+			drep.concat(0);
+		drep.concat(second);
+	}
 	void Date::setTStamp(UInt32 tstamp){
 		struct tm t;
 		unixtime = tstamp;
@@ -33,13 +56,14 @@ namespace xvr2{
 		dayofmonth = t.tm_mday;
 		month      = t.tm_mon + 1;
 		year       = t.tm_year + 1900;
+		encode();
 	}
 
 	Date::Date(){
 #ifndef USING_GCC3
 		setClassName(xvr2::_xvr2Date);
 #endif
-		drep = 0;
+		//drep = 0;
 		getCurrentTime();
 	}
 
@@ -47,7 +71,7 @@ namespace xvr2{
 #ifndef USING_GCC3
 		setClassName(xvr2::_xvr2Date);
 #endif
-		drep = 0;
+		//drep = 0;
 		minute = d->minute;
 		second = d->second;
 		hour = d->hour;
@@ -57,6 +81,8 @@ namespace xvr2{
 		month = d->month;
 		year = d->year;
 		unixtime = d->unixtime;
+
+		encode();
 	}
 
 	Date::Date(int __y, int __m, int __dw, int __dm, int __h, int __mi, int __s){
@@ -64,7 +90,7 @@ namespace xvr2{
 #ifndef USING_GCC3
 		setClassName(xvr2::_xvr2Date);
 #endif
-		drep = 0;
+		//drep = 0;
 		hour       = __h;
 		if(hour > 12){
 			hr12hour = hour - 12;
@@ -95,6 +121,7 @@ namespace xvr2{
 		t.tm_year = year;
 
 		unixtime = mktime(&t);
+		encode();
 	}
 
 	Date::Date(UInt32 __unixtime){
@@ -140,14 +167,16 @@ namespace xvr2{
 		}
 		unixtime = mktime(t);
 		xvr2_delete(t);
+		encode();
 	}
 
 	Date::Date(const char *format, const char *date_text){
-		drep = 0;
+		//drep = 0;
 #ifndef USING_GCC3
 		setClassName(xvr2::_xvr2Date);
 #endif
 		decode(format, date_text);
+		encode();
 	}
 
 	Date::Date(const String &format, const String &date_text){
@@ -155,7 +184,7 @@ namespace xvr2{
 #ifndef USING_GCC3
 		setClassName(xvr2::_xvr2Date);
 #endif
-		drep = 0;
+		//drep = 0;
 		if(strptime(date_text.toCharPtr(), format.toCharPtr(), &t) == NULL)
 			throw Exception::DateParse();
 		hour = t.tm_hour;
@@ -185,11 +214,12 @@ namespace xvr2{
 			year = t.tm_year;
 		}
 		unixtime = mktime(&t);
+		encode();
 	}
 
 	Date::~Date(){
-		if(drep != 0)
-			xvr2_delete(drep);
+		/*if(drep != 0)
+			xvr2_delete(drep);*/
 	}
 
 	time_t Date::getCurrentTime(){
@@ -216,6 +246,7 @@ namespace xvr2{
 		dayofmonth = t.tm_mday;
 		month      = t.tm_mon + 1;
 		year       = t.tm_year + 1900;
+		encode();
 		return unixtime;
 	}
 
@@ -223,31 +254,7 @@ namespace xvr2{
 		return unixtime;
 	}
 
-	const String *Date::toString(){
-		if(drep == 0){
-			drep = new String(year);
-		}
-		drep->assign(year);
-		drep->concat("-");
-		if(month <= 9)
-			drep->concat(0);
-		drep->concat(month);
-		drep->concat("-");
-		if(dayofmonth <= 9)
-			drep->concat(0);
-		drep->concat(dayofmonth);
-		drep->concat(" ");
-		if(hour <= 9)
-			drep->concat(0);
-		drep->concat(hour);
-		drep->concat(":");
-		if(minute <= 9)
-			drep->concat(0);
-		drep->concat(minute);
-		drep->concat(":");
-		if(second <= 9)
-			drep->concat(0);
-		drep->concat(second);
+	const String &Date::toString() const{
 		return drep;
 	}
 
