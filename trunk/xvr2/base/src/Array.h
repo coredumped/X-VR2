@@ -4,6 +4,7 @@
 #ifndef __XVR2_ARRAY_H__
 #define __XVR2_ARRAY_H__
 #include<xvr2/Container.h>
+#include<xvr2/c_utilities.h>
 #ifdef HAVE_MEMCPY
 #include<string.h>
 #endif
@@ -34,14 +35,15 @@ namespace xvr2{
 				 * \param n Is the amount of elements to be copied from src to dst
 				 */
 				void copy(T *dst, T *src, unsigned int n){
-#ifdef HAVE_MEMCPY
-					memcpy(dst, src, n * sizeof(T));
-#else
+/*#ifdef HAVE_MEMCPY
+					::memcpy(dst, src, n * sizeof(T));
+#else*/
 					unsigned int i;
 					for(i = 0; i < n; i++){
 						dst[i] = src[i];
 					}
-#endif
+//#endif
+//					Util::memcpy<T>(dst, src, n);
 				}
 			public:
 				/**
@@ -72,13 +74,14 @@ namespace xvr2{
 					if(array){
 						tmp = new T[num_data];
 						copy(tmp, array, num_data);
-						xvr2_delete_array(array);
+						delete[] array;
 						tmp[num_data - 1] = data;
 						array = tmp;
 					}
 					else{
-						array = new T[num_data];
+						array = new T[1];
 						array[0] = data;
+						num_data = 1;
 					}
 					return *this;
 				}
