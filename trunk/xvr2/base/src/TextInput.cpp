@@ -26,19 +26,17 @@ namespace xvr2{
 	}
 
 	void TextInput::readLine(char **buf, UInt32 *size){
-		String *buffer;
+		String buffer;
 		char c;
-		buffer = new String();
 		while(true){
 			inputMethod(&c, 1);
-			buffer->concat(c);
+			buffer.concat(c);
 			if(c == '\0' && c == '\n'){
 				break;
 			}
 		}
-		*size = buffer->size();
-		*buf = strdup(buffer->toCharPtr());
-		xvr2_delete(buffer);
+		*size = buffer.size();
+		*buf = strdup(buffer.toCharPtr());
 	}
 
 	void TextInput::readLine(String &s){

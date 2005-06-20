@@ -23,9 +23,7 @@ namespace xvr2{
 	}
 
 	void TextOutput::write(const String &text){
-		String *g;
-		g = (String *)&text;
-		outputMethod(g->toCharPtr(), g->size());
+		outputMethod(text.toCharPtr(), text.size());
 	}
 
 	void TextOutput::writeLine(const void *text, UInt32 size){
@@ -34,9 +32,7 @@ namespace xvr2{
 	}
 
 	void TextOutput::writeLine(const String &text){
-		String *g;
-		g = (String *)&text;
-		outputMethod(g->toCharPtr(), g->size());
+		outputMethod(text.toCharPtr(), text.size());
 		outputMethod(__ENDOFLINE, 1);
 	}
 
