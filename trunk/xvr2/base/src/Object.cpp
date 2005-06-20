@@ -76,6 +76,24 @@ namespace xvr2{
 #endif
 	}
 
+	void Object::debugmsgln(Object *obj, const char *msg){
+		if(obj == 0)
+			return;
+#ifdef USE_DEBUG
+		String s;
+		s = obj->getClassName();
+		s += "[ptr=";
+		s.concat((unsigned int)obj);
+		s += ",tid=";
+		s.concat((unsigned int)pthread_self());
+		s += "]: ";
+		__debug_console.errWrite(s);
+		__debug_console.errWriteLine(msg);
+#else
+		std::cout << obj->getClassName() << "[ptr=" << (unsigned int)obj << ",tid=" << pthread_self() << "]: " << msg << std::endl;
+#endif
+	}
+
 #ifndef USING_GCC3
 	Object::~Object(){
 		//__cls_name = 0;
