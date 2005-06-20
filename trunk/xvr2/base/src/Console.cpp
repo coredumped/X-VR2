@@ -108,7 +108,7 @@ namespace xvr2{
 		else throw Exception::NullPointer();
 	}
 
-	void Console::outWrite(const String &text){
+	void Console::outWrite(const String &text) const {
 		if(out != 0){
 			__conm.lock();
 			try{
@@ -170,7 +170,7 @@ namespace xvr2{
 		else throw Exception::NullPointer();
 	}
 
-	void Console::errWrite(const String& text){
+	void Console::errWrite(const String& text) const{
 		if(err != 0){
 			__conm.lock();
 			try{
@@ -201,12 +201,10 @@ namespace xvr2{
 	}
 
 	void Console::errWriteLine(const String& text){
-		String *t;
-		t = (String *)&text;
 		if(err != 0){
 			__conm.lock();
 			try{
-				err->writeLine(text.toCharPtr(), t->size());
+				err->writeLine(text.toCharPtr(), text.size());
 			}
 			catch(...){
 				__conm.unlock();
@@ -246,5 +244,10 @@ namespace xvr2{
 		}
 		else throw Exception::NullPointer();
 	}
-};
 
+	const Console &Console::operator<<(const String &s) const {
+		outWrite(s);
+		return *this;
+	}
+	
+};
