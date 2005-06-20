@@ -27,7 +27,7 @@ namespace xvr2{
 			int Second();
 			/** Returns the current timestamp as unix time */
 			UInt32 timestamp();
-			const String *toString();
+			const String &toString();
 	};
 };
 

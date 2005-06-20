@@ -5,6 +5,19 @@
 
 namespace xvr2{
 
+	void Time::encode(){
+		if(hour <= 9)
+			drep.concat(0);
+		drep.concat(hour);
+		drep.concat(":");
+		if(minute <= 9)
+			drep.concat(0);
+		drep.concat(minute);
+		drep.concat(":");
+		if(second <= 9)
+			drep.concat(0);
+		drep.concat(second);
+	}
 	Time::Time(){
 #ifndef USING_GCC3
 		setClassName(xvr2::_xvr2Time);
@@ -45,6 +58,7 @@ namespace xvr2{
 		dayofyear = 0;
 		month     = 0;
 		year      = 0;
+		encode();
 	}
 
 	Time::Time(const Time *t):Date(t){
@@ -68,21 +82,7 @@ namespace xvr2{
 		return second;
 	}
 	
-	const String *Time::toString(){
-		if(drep == 0){
-			drep = new String();
-		}
-		if(hour <= 9)
-			drep->concat(0);
-		drep->concat(hour);
-		drep->concat(":");
-		if(minute <= 9)
-			drep->concat(0);
-		drep->concat(minute);
-		drep->concat(":");
-		if(second <= 9)
-			drep->concat(0);
-		drep->concat(second);
+	const String &Time::toString() const{
 		return drep;
 	}
 };

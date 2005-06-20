@@ -11,6 +11,8 @@ namespace xvr2{
 	 * This class represents the time object
 	 */
 	class Time:public Date{
+		protected:
+			virtual void encode();
 		public:
 			/** Default constructor, it does nothing */
 			Time();
@@ -37,7 +39,7 @@ namespace xvr2{
 			/** Returns the current second */
 			virtual int Second();
 			/** Returns time in the following format:  HH:MM:SS */
-			const String *toString();
+			const String &toString() const;
 			/** This will return the time as a Unix formatted timestamp
 			 *  counting the seconds from january 1st 1970 */
 			const UInt32 timestamp();
