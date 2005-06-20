@@ -53,11 +53,12 @@ bool parse_args(int argc, char *argv[]){
 		t = new Tokenizer(argv[i], "=");
 		if(s.startsWith("--help")){
 			std::cout << "Syntax: " << std::endl;
-			std::cout << argv[0] << " [host=LOC] [database=DBNAME] [user=DBUSER] [select=STMT]" << std::endl;
+			std::cout << argv[0] << " [host=LOC] [database=DBNAME] [user=DBUSER] [pass=PASSWORD] [select=STMT]" << std::endl;
 			std::cout << "where..." << std::endl;
 			std::cout << "LOC is the ip address or hostname corresponding to your test database server" << std::endl;
 			std::cout << "DBNAME is the database name to be used" << std::endl;
 			std::cout << "DBUSER correspond to a valid user in that database" << std::endl;
+			std::cout << "PASSWORD correspond to the user's password" << std::endl;
 			std::cout << "STMT is a valid select statement for that database" << std::endl;
 			//std::cout << "" << std::endl;
 			exit(0);
@@ -137,6 +138,7 @@ int rundemo(int demo_type){
 	DB::ResultSet *r = 0;
 	void *dbhandle;
 	int ci, cj;
+	bool capshown;
 	switch(demo_type){
 		case XVR2_MYSQL:
 			if(driver_location == 0)
@@ -175,7 +177,7 @@ int rundemo(int demo_type){
 	std::cout << "succeeded" << std::endl;
 
 /******  BEGIN QUERY *******/
-	std::cout << "\n2. Querying database with \"" << select_statement << "\"... ";
+	std::cout << "2. Querying database with \"" << select_statement << "\"... ";
 	try{
 		r = conn->query(select_statement);
 	}
@@ -186,11 +188,8 @@ int rundemo(int demo_type){
 	}
 	std::cout << "suceeded" << std::endl;
 
-	std::cout << "Number of columns: " << r->numCols() << std::endl;
-	std::cout << "Number of rows: " << r->numRows() << std::endl << std::endl;
-
-	std::cout << "\n3. Reading ResultSet... " << std::endl;
-	bool capshown = false;
+	std::cout << "3. Reading ResultSet with r->getRow()" << std::endl;
+	capshown = false;
 	for(ci = 0; ci < r->numRows(); ci++){
 		DB::Field *ff = (DB::Field *)r->getRow();
 		if(!capshown){
@@ -202,11 +201,13 @@ int rundemo(int demo_type){
 		}
 		std::cout.flush();
 		for(cj = 0; cj < r->numCols(); cj++){
+			if(cj > 0)
+				std::cout << "\t";
 			if(ff[cj].isNull()){
 				std::cout << "\tNULL";
 			}
 			else{
-				std::cout << "\t" << ff[cj].toChar();
+				std::cout << ff[cj].toString();
 			}
 			std::cout.flush();
 		}
@@ -214,8 +215,47 @@ int rundemo(int demo_type){
 		r->fetchNextRow();
 	}
 	std::cout << "suceeded" << std::endl;
+	std::cout << "4. Reading ResultSet with r->get()" << std::endl;
+	delete r;
+	try{
+		r = conn->query(select_statement);
+	}
+	catch(Exception::Exception ex1){
+		std::cout << "failed" << std::endl;
+		std::cerr << ex1.toString() << std::endl;
+		return 1;
+	}
+	capshown = false;
+	for(ci = 0; ci < r->numRows(); ci++){
+		if(!capshown){
+			for(cj = 0; cj < r->numCols(); cj++){
+				std::cout << r->get(cj).getFieldName().toCharPtr() << "\t";
+			}
+			std::cout << std::endl;
+			capshown = true;
+		}
+		std::cout.flush();
+		for(cj = 0; cj < r->numCols(); cj++){
+			if(cj > 0)
+				std::cout << "\t";
+			if(r->get(cj).isNull()){
+				std::cout << "\tNULL";
+			}
+			else{
+				std::cout << r->get(cj).toString();
+			}
+			std::cout.flush();
+		}
+		std::cout << std::endl;
+		r->fetchNextRow();
+	}
+	std::cout << "suceeded" << std::endl;
+
+
+
+
 /******  END QUERY *******/
-	std::cout << "\n4. Releasing ResultSet... ";
+	std::cout << "5. Releasing ResultSet... ";
 	std::cout.flush();
 	try{
 		xvr2_delete(r);
@@ -226,7 +266,7 @@ int rundemo(int demo_type){
 	}
 	std::cout << "succeeded" << std::endl;
 
-	std::cout << "\n5. Disconnecting from database... ";
+	std::cout << "6. Disconnecting from database... ";
 	std::cout.flush();
 	try{
 		conn->disconnect();
