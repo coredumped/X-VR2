@@ -73,7 +73,7 @@ done
 echo "#endif" >> xvr2config.h
 echo "" >> xvr2.h
 echo "#include<xvr2config.h>" >> xvr2.h
-for file in `find ../ -name "*.h" | grep -v "/xvr2" | grep -v '__Destruct' | grep -v drivers | grep -v parser`
+for file in `find ../ -name "*.h" | grep -v "/xvr2" | grep -v '__Destruct' | grep -v drivers | grep -v parser | grep -v BasicStringBuffer`
 do
 	echo $file | egrep '\.\./demos' > /dev/null
 	if [ $? -eq 0 ]; then
