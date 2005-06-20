@@ -39,7 +39,13 @@ namespace xvr2{
 #ifndef USING_GCC3
 			setClassName(xvr2::_xvr2Field);
 #endif
-			tmpStr = 0;
+			tmpStrTINYINT = 0;
+			tmpStrINTEGER = 0;
+			tmpStrBIGINT = 0;
+			tmpStrFLOAT = 0;
+			tmpStrDOUBLE = 0;
+			tmpStrBIT = 0;
+			tmpStrBYTE = 0;
 			tmpString = 0;
 			tmpDate = 0;
 			tmpTime = 0;
@@ -81,7 +87,14 @@ namespace xvr2{
 #ifndef USING_GCC3
 			setClassName(xvr2::_xvr2Field);
 #endif
-			tmpStr = 0;
+			void *ttmp;
+			tmpStrTINYINT = 0;
+			tmpStrINTEGER = 0;
+			tmpStrBIGINT = 0;
+			tmpStrFLOAT = 0;
+			tmpStrDOUBLE = 0;
+			tmpStrBIT = 0;
+			tmpStrBYTE = 0;
 			tmpString = 0;
 			tmpDate = 0;
 			tmpTime = 0;
@@ -103,43 +116,144 @@ namespace xvr2{
 					tmpBool = new bool();
 					*tmpBool = *((bool *)data);
 					dataPtr = (void *)tmpBool;
+					//Perform char conversion for bits
+					if(tmpStrBIT != 0){
+						ttmp = (void *)tmpStrBIT;
+						Memory::freeBuffer(&ttmp);
+					}
+					tmpStrBIT = (char *)Memory::allocBuffer(2);
+					tmpStrBIT[1] = 0;
+					if(*((bool *)dataPtr)){
+						tmpStrBIT[0] = '1';
+					}
+					else{
+						tmpStrBIT[0] = '0';
+					}
+					tmpString.assign(tmpStrBIT);
+					break;
+				case BYTE:
+					//Perform char conversion for bytes
+					if(tmpStrBYTE == 0){
+						ttmp = (void *)tmpStrBYTE;
+						Memory::freeBuffer(&ttmp);
+					}
+					tmpStrBYTE = (char *)Memory::allocBuffer(7);
+					if(sprintf(tmpStrBYTE, "0x%x", *((int *)dataPtr)) != 1)
+						throw Exception::Number();
+					tmpString.assign(tmpStrBYTE);
 					break;
 				case TINYINT:
 					tmpInt16 = new Int16();
 					*tmpInt16 = *((Int16 *)data);
 					dataPtr = (void *)tmpInt16;
+					//Perform char conversion for tinyints
+					Int16 n1;
+					//void *ttmp;
+					n1 = *((Int16 *)dataPtr);
+					if(tmpStrTINYINT != 0){
+						ttmp = (void *)tmpStrTINYINT;
+						Memory::freeBuffer(&ttmp);
+					}
+					tmpStrTINYINT = (char *)Memory::allocBuffer(20);
+					sprintf(tmpStrTINYINT, "%d", n1);
+					tmpString.assign(tmpStrTINYINT);
 					break;
 				case INTEGER:
 					tmpInt32 = new Int32();
 					*tmpInt32 = *((Int32 *)data);
 					dataPtr = (void *)tmpInt32;
+					//Perform char conversion for integers
+					Int32 _n2;
+					_n2 = *((Int32 *)dataPtr);
+					if(tmpStrINTEGER != 0){
+						ttmp = (void *)tmpStrINTEGER;
+						Memory::freeBuffer(&ttmp);
+					}
+					tmpStrINTEGER = (char *)Memory::allocBuffer(40);
+					sprintf(tmpStrINTEGER, "%d", _n2);
+					tmpString.assign(tmpStrINTEGER);
 					break;
 				case BIGINT:
 					tmpInt64 = new Int64();
 					*tmpInt64 = *((Int64 *)data);
 					dataPtr = (void *)tmpInt64;
+					//Perform char conversion for bigints
+					Int64 n3;
+					n3 = *((Int64 *)dataPtr);
+					if(tmpStrBIGINT != 0){
+						ttmp = (void *)tmpStrBIGINT;
+						Memory::freeBuffer(&ttmp);
+					}
+					tmpStrBIGINT = (char *)Memory::allocBuffer(64);
+					sprintf(tmpStrBIGINT, "%lld", n3);
+					tmpString.assign(tmpStrBIGINT);
 					break;
 				case FLOAT:
 					tmpFloat = new float();
 					*tmpFloat = *((float *)data);
 					dataPtr = (void *)tmpFloat;
+					//Perform char conversion for floats
+					float n4;
+					n4 = *((float *)dataPtr);
+					if(tmpStrFLOAT != 0){
+						ttmp = (void *)tmpStrFLOAT;
+						Memory::freeBuffer(&ttmp);
+					}
+					tmpStrFLOAT = (char *)Memory::allocBuffer(32);
+#if ( defined USING_LINUX || defined SOLARIS )
+					if(gcvt(n4, 8, tmpStrFLOAT) != tmpStrFLOAT){
+						throw Exception::Number();
+					}
+#else
+					if(sprintf(tmpStrFLOAT, "%f", n4) != 1){
+						throw Exception::Number();
+					}
+#endif
+					tmpString.assign(tmpStrFLOAT);
 					break;
 				case DOUBLE:
 					tmpDouble = new double();
 					*tmpDouble = *((double *)data);
 					dataPtr = (void *)tmpDouble;
+					//Perform char conversion for doubles
+					double n5;
+					n5 = *((double *)dataPtr);
+					if(tmpStrDOUBLE != 0){
+						ttmp = (void *)tmpStrDOUBLE;
+						Memory::freeBuffer(&ttmp);
+					}
+					tmpStrDOUBLE = (char *)Memory::allocBuffer(128);
+#if ( defined USING_LINUX || defined SOLARIS )
+					if(gcvt(n5, 8, tmpStrDOUBLE) != tmpStrDOUBLE){
+						throw Exception::Number();
+					}
+#else
+					if(sprintf(tmpStrDOUBLE, "%f", n5) != 1){
+						throw Exception::Number();
+					}
+#endif
+					tmpString.assign(tmpStrDOUBLE);
 					break;
 				case DATE:
 					tmpDate = new Date((Date *)data);
 					dataPtr = (void *)tmpDate;
+					tmpString.assign(tmpDate->toString().toCharPtr());
 					break;
 				case TIME:
 					tmpTime = new Time((Time *)data);
 					dataPtr = (void *)tmpTime;
+					tmpString.assign(tmpTime->toString().toCharPtr());
 					break;
 				case TIMESTAMP:
 					tmpTimestamp = new Timestamp((Timestamp *)data);
 					dataPtr = (void *)tmpTimestamp;
+					tmpString.assign(tmpTimestamp->toString().toCharPtr());
+					break;
+				case CHAR:
+				case TEXT:
+				case VARCHAR:
+					dataPtr = (void *)data;
+					tmpString.assign((char *)data);
 					break;
 				default:
 					dataPtr = (void *)data;
@@ -152,12 +266,30 @@ namespace xvr2{
 			dataPtr = 0;
 			dataLen = 0;
 			dataType = 0;
-			if(tmpStr != 0){
-				ttmp = tmpStr;
+			if(tmpStrTINYINT != 0){
+				ttmp = tmpStrTINYINT;
 				Memory::freeBuffer(&ttmp);
 			}
-			if(tmpString != 0)
-				xvr2_delete(tmpString);
+			if(tmpStrINTEGER!= 0){
+				ttmp = tmpStrINTEGER;
+				Memory::freeBuffer(&ttmp);
+			}
+			if(tmpStrBIGINT!= 0){
+				ttmp = tmpStrBIGINT;
+				Memory::freeBuffer(&ttmp);
+			}
+			if(tmpStrFLOAT!= 0){
+				ttmp = tmpStrFLOAT;
+				Memory::freeBuffer(&ttmp);
+			}
+			if(tmpStrBIT!= 0){
+				ttmp = tmpStrBIT;
+				Memory::freeBuffer(&ttmp);
+			}
+			if(tmpStrBYTE!= 0){
+				ttmp = tmpStrBYTE;
+				Memory::freeBuffer(&ttmp);
+			}
 			if(tmpDate != 0)
 				xvr2_delete(tmpDate);
 			if(tmpTime != 0)
@@ -178,7 +310,7 @@ namespace xvr2{
 				xvr2_delete(tmpDouble);
 		}
 	
-		Int16 Field::toTinyInt(){
+		Int16 Field::toTinyInt() const{
 			Int16 val = 0;
 			Time   *t = 0;
 			String str;
@@ -237,11 +369,11 @@ namespace xvr2{
 			return val;
 		}
 	
-		UInt16 Field::toUTinyInt(){
+		UInt16 Field::toUTinyInt() const{
 			return (UInt16)toTinyInt();
 		}
 	
-		Int32 Field::toInteger(){
+		Int32 Field::toInteger() const{
 			Int32 val = 0;
 			Time   *t;
 			Date   *d = 0;
@@ -304,11 +436,11 @@ namespace xvr2{
 			return val;
 		}
 	
-		UInt32 Field::toUInteger(){
+		UInt32 Field::toUInteger() const{
 			return (UInt32)toInteger();
 		}
 	
-		Int64 Field::toBigInt(){
+		Int64 Field::toBigInt() const{
 			Int64 val = 0;
 			Time   *t;
 			Date   *d = 0;
@@ -371,11 +503,11 @@ namespace xvr2{
 			return val;
 		}
 	
-		UInt64 Field::toUBigInt(){
+		UInt64 Field::toUBigInt() const{
 			return (UInt64)toBigInt();
 		}
 	
-		float Field::toFloat(){
+		float Field::toFloat() const{
 			float val = 0;
 			Time   *t;
 			Date   *d = 0;
@@ -438,7 +570,7 @@ namespace xvr2{
 			return val;
 		}
 	
-		double Field::toDouble(){
+		double Field::toDouble() const{
 			double val = 0;
 			Time   *t;
 			Date   *d = 0;
@@ -501,82 +633,26 @@ namespace xvr2{
 			return val;
 		}
 	
-		const char *Field::toChar(){
+		char *Field::toChar() const{
 			char *ret;
-			void *ttmp;
+			//void *ttmp;
 			if(isNull())
 				return 0;
 			switch(dataType){
 				case  TINYINT:
-					Int16 n1;
-					n1 = *((Int16 *)dataPtr);
-					if(tmpStr != 0){
-						ttmp = (void *)tmpStr;
-						Memory::freeBuffer(&ttmp);
-					}
-					tmpStr = (char *)Memory::allocBuffer(20);
-					sprintf(tmpStr, "%d", n1);
-					ret = tmpStr;
+					ret = tmpStrTINYINT;
 					break;
 				case  INTEGER:
-					Int32 n2;
-					n2 = *((Int32 *)dataPtr);
-					if(tmpStr != 0){
-						ttmp = (void *)tmpStr;
-						Memory::freeBuffer(&ttmp);
-					}
-					tmpStr = (char *)Memory::allocBuffer(40);
-					sprintf(tmpStr, "%d", n2);
-					ret = tmpStr;
+					ret = tmpStrINTEGER;
 					break;
 				case  BIGINT:
-					Int64 n3;
-					n3 = *((Int64 *)dataPtr);
-					if(tmpStr != 0){
-						ttmp = (void *)tmpStr;
-						Memory::freeBuffer(&ttmp);
-					}
-					tmpStr = (char *)Memory::allocBuffer(64);
-					sprintf(tmpStr, "%lld", n3);
-					ret = tmpStr;
+					ret = tmpStrBIGINT;
 					break;
 				case  FLOAT:
-					float n4;
-					n4 = *((float *)dataPtr);
-					if(tmpStr != 0){
-						ttmp = (void *)tmpStr;
-						Memory::freeBuffer(&ttmp);
-					}
-					tmpStr = (char *)Memory::allocBuffer(32);
-#if ( defined USING_LINUX || defined SOLARIS )
-					if(gcvt(n4, 8, tmpStr) != tmpStr){
-						throw Exception::Number();
-					}
-#else
-					if(sprintf(tmpStr, "%f", n4) != 1){
-						throw Exception::Number();
-					}
-#endif
-					ret = tmpStr;
+					ret = tmpStrFLOAT;
 					break;
 				case  DOUBLE:
-					double n5;
-					n5 = *((double *)dataPtr);
-					if(tmpStr != 0){
-						ttmp = (void *)tmpStr;
-						Memory::freeBuffer(&ttmp);
-					}
-					tmpStr = (char *)Memory::allocBuffer(128);
-#if ( defined USING_LINUX || defined SOLARIS )
-					if(gcvt(n5, 8, tmpStr) != tmpStr){
-						throw Exception::Number();
-					}
-#else
-					if(sprintf(tmpStr, "%f", n5) != 1){
-						throw Exception::Number();
-					}
-#endif
-					ret = tmpStr;
+					ret = tmpStrDOUBLE;
 					break;
 				case  CHAR:
 				case  VARCHAR:
@@ -600,7 +676,7 @@ namespace xvr2{
 						//#  I need a better way to implement
 						//#  this, please HELP!!!!!!!!!
 						//#################################
-						ret = ((Date *)dataPtr)->toString()->toCharPtr();
+						ret = ((Date *)dataPtr)->toString().toCharPtr();
 					}
 					catch(...){
 						throw Exception::UndefinedClass();
@@ -612,7 +688,7 @@ namespace xvr2{
 						//#  I need a better way to implement
 						//#  this, please HELP!!!!!!!!!
 						//#################################
-						ret = ((Time *)dataPtr)->toString()->toCharPtr();
+						ret = ((Time *)dataPtr)->toString().toCharPtr();
 					}
 					catch(...){
 						throw Exception::UndefinedClass();
@@ -624,178 +700,30 @@ namespace xvr2{
 						//#  I need a better way to implement
 						//#  this, please HELP!!!!!!!!!
 						//#################################
-						ret = ((Timestamp *)dataPtr)->toString()->toCharPtr();
+						ret = ((Timestamp *)dataPtr)->toString().toCharPtr();
 					}
 					catch(...){
 						throw Exception::UndefinedClass();
 					}
 					break;
 				case  BIT:
-					if(tmpStr != 0){
-						ttmp = (void *)tmpStr;
-						Memory::freeBuffer(&ttmp);
-					}
-					tmpStr = (char *)Memory::allocBuffer(2);
-					tmpStr[1] = 0;
-					if(*((bool *)dataPtr)){
-						tmpStr[0] = '1';
-					}
-					else{
-						tmpStr[0] = '0';
-					}
-					ret = tmpStr;
+					ret = tmpStrBIT;
 					break;
 				case  BYTE:
-					if(tmpStr == 0){
-						ttmp = (void *)tmpStr;
-						Memory::freeBuffer(&ttmp);
-					}
-					tmpStr = (char *)Memory::allocBuffer(7);
-					if(sprintf(tmpStr, "0x%x", *((int *)dataPtr)) != 1)
-						throw Exception::Number();
-					ret = tmpStr;
+					ret = tmpStrBYTE;
 					break;
 			}
 			return ret;
 		}
 	
 	
-		const String *Field::toString(){
-			String *ret;
-			void *ttmp;
-			if(isNull())
-				return 0;
-			switch(dataType){
-				case  TINYINT:
-					Int16 n1;
-					n1 = *((Int16 *)dataPtr);
-					if(tmpString != 0){
-						xvr2_delete(tmpString);
-					}
-					tmpString = new String(n1);
-					ret = tmpString;
-					break;
-				case  INTEGER:
-					Int32 n2;
-					n2 = *((Int32 *)dataPtr);
-					if(tmpString != 0){
-						xvr2_delete(tmpString);
-					}
-					tmpString = new String(n2);
-					ret = tmpString;
-					break;
-				case  BIGINT:
-					Int64 n3;
-					n3 = *((Int64 *)dataPtr);
-					if(tmpString != 0){
-						xvr2_delete(tmpString);
-					}
-					tmpString = new String(n3);
-					ret = tmpString;
-					break;
-				case  FLOAT:
-					float n4;
-					n4 = *((float *)dataPtr);
-					if(tmpString != 0){
-						xvr2_delete(tmpString);
-					}
-					tmpString = new String(n4);
-					ret = tmpString;
-					break;
-				case  DOUBLE:
-					double n5;
-					n5 = *((double *)dataPtr);
-					if(tmpString != 0){
-						xvr2_delete(tmpString);
-					}
-					tmpString = new String(n5);
-					ret = tmpString;
-					break;
-				case  CHAR:
-				case  VARCHAR:
-					if(tmpString != 0){
-						xvr2_delete(tmpString);
-					}
-					tmpString = new String((char *)dataPtr);
-					ret = tmpString;
-					break;
-				case  STRING:
-				case  TEXT:
-					try{
-						ret = ((String *)dataPtr);
-					}
-					catch(...){
-						throw Exception::UndefinedClass();
-					}
-					break;
-				case  BLOB:
-					throw Exception::Stringe();
-					break;
-				case  DATE:
-					try{
-						//#################################
-						//#  I need a better way to implement
-						//#  this, please HELP!!!!!!!!!
-						//#################################
-						ret = ((String *)(((Date *)dataPtr)->toString()));
-					}
-					catch(...){
-						throw Exception::UndefinedClass();
-					}
-					break;
-				case  TIME:
-					try{
-						//#################################
-						//#  I need a better way to implement
-						//#  this, please HELP!!!!!!!!!
-						//#################################
-						ret = ((String *)(((Time *)dataPtr)->toString()));
-					}
-					catch(...){
-						throw Exception::UndefinedClass();
-					}
-					break;
-				case  TIMESTAMP:
-					try{
-						//#################################
-						//#  I need a better way to implement
-						//#  this, please HELP!!!!!!!!!
-						//#################################
-						ret = ((String *)(((Timestamp *)dataPtr)->toString()));
-					}
-					catch(...){
-						throw Exception::UndefinedClass();
-					}
-					break;
-				case  BIT:
-					if(tmpString != 0){
-						xvr2_delete(tmpString);
-					}
-					if(*((bool *)dataPtr)){
-						tmpString = new String("1");
-					}
-					else{
-						tmpString = new String("0");
-					}
-					ret = tmpString;
-					break;
-				case  BYTE:
-					if(tmpStr == 0){
-						ttmp = (void *)tmpStr;
-						Memory::freeBuffer(&ttmp);
-					}
-					tmpStr = (char *)Memory::allocBuffer(7);
-					if(sprintf(tmpStr, "0x%x", *((int *)dataPtr)) != 1)
-						throw Exception::Number();
-					ret = tmpString;
-					break;
-			}
-			return ret;
+		const String &Field::toString() const{
+			return tmpString;
 		}
 	
 	
-		const String *Field::toText(){
-			return this->toString();
+		const String &Field::toText() const{
+			return tmpString;
 		}
 	
 		const Date *Field::toDate(){
@@ -1245,11 +1173,11 @@ namespace xvr2{
 			colname = nam.toCharPtr();
 		}
 	
-		const String &Field::getFieldName(){
+		const String &Field::getFieldName() const {
 			return colname;
 		}
 	
-		const bool Field::isNull(){
+		bool Field::isNull() const{
 			if(dataPtr == 0)
 				return true;
 			return false;

@@ -28,8 +28,24 @@ namespace xvr2{
 				void		*dataPtr;
 				UInt32		dataLen;
 				int		dataType;
-				char		*tmpStr;
-				String		*tmpString;
+				//Temporary char pointers for datatypes
+				char		*tmpStrTINYINT;
+				char		*tmpStrINTEGER;
+				char		*tmpStrBIGINT;
+				char		*tmpStrFLOAT;
+				char		*tmpStrDOUBLE;
+				char		*tmpStrBIT;
+				char		*tmpStrBYTE;
+
+				String		tmpString;
+				/*String		tmpStringTINYINT;
+				String		tmpStringINTEGER;
+				String		tmpStringBIGINT;
+				String		tmpStringFLOAT;
+				String		tmpStringDOUBLE;
+				String		tmpStringBIT;
+				String		tmpStringBYTE;*/
+
 				Date		*tmpDate;
 				Time		*tmpTime;
 				Timestamp	*tmpTimestamp;
@@ -134,10 +150,10 @@ namespace xvr2{
 				 *  A NumberException is thrown only if the source datatype
 				 *  is of the type VARCHAR, TEXT or STRING and one or more
 				 *  of its characters is NOT a digit */
-				Int16		toTinyInt();
+				Int16		toTinyInt() const;
 				/** Is the same as toTinyInt but instead of returning a
 				 *  signed quantity this method returns an unsigned one */
-				UInt16		toUTinyInt();
+				UInt16		toUTinyInt() const;
 				/** Returns the data as a 32 bit (4 bytes) signed integer.
 				 *  If the data on this cell is coming from a TEXT or
 				 *  VARCHAR column type then be prepared to receive the
@@ -146,10 +162,10 @@ namespace xvr2{
 				 *  Also the BufferTooSmallException may be thrown if the
 				 *  number of digits is bigger than <b>10</b>.
 				 */
-				Int32		toInteger();
+				Int32		toInteger() const;
 				/** Is the same as toInteger but instead of returning a
 				 *  signed quantity this method returns an unsigned one */
-				UInt32		toUInteger();
+				UInt32		toUInteger() const;
 				/** Returns the data as a 64 bit (8 bytes) signed integer.
 				 *  If the data on this cell is coming from a TEXT or
 				 *  VARCHAR column type then be prepared to receive the
@@ -158,11 +174,11 @@ namespace xvr2{
 				 *  Also the BufferTooSmallException may be thrown if the
 				 *  number of digits is bigger than <b>20</b>.
 				 */
-				Int64		toBigInt();
+				Int64		toBigInt() const;
 				/** Is the same as xvr2::ResultSet::toBigInt but instead
 				 *  of returning a signed quantity this method returns an 
 				 *  unsigned one */
-				UInt64		toUBigInt();
+				UInt64		toUBigInt() const;
 				/** Returns the data as a 32 bit (4 bytes) floating number
 				 *  conforming to the IEEE 754 standard.
 				 *  If the data on this cell is coming from a TEXT or
@@ -173,7 +189,7 @@ namespace xvr2{
 				 *  number of digits is bigger than <b>10</b> plus 3 for the
 				 *  exponent and 2 more for signs.
 				 */
-				float		toFloat();
+				float		toFloat() const;
 				/** Returns the data as a 64 bit (8 bytes) floating number
 				 *  conforming to the IEEE 754 standard.
 				 *  If the data on this cell is coming from a TEXT or
@@ -184,18 +200,18 @@ namespace xvr2{
 				 *  number of digits is bigger than <b>20</b> plus 3 for the
 				 *  exponent and 2 more for signs.
 				 */
-				double		toDouble();
+				double		toDouble() const;
 				/** Returns the data as a null-terminated string of
 				 *  char, <b>len</b> is the length of the string. */
-				const char	*toChar();
+				char	*toChar() const;
 				/** Returns the data as a String if the data is numeric
 				 *  then it will be translated also if it is a Date, Time
 				 *  Byte, Bit or Timestamp */
-				const String	*toString();
+				const String	&toString() const;
 				/** Returns the data as a String if the data is numeric
 				 *  then it will be translated also if it is a Date, Time
 				 *  Byte, Bit or Timestamp */
-				const String	*toText();
+				const String	&toText() const;
 				/** This will return a void data pointer, please take special
 				 *  care with BLOBs and try not to pass their addressing
 				 *  limits, please use allways the size(); method in order
@@ -232,8 +248,8 @@ namespace xvr2{
 				void setFieldName(const String &nam);
 				/** This will be the name for this field as configured 
 				 *  during the table creation */
-				const String &getFieldName();
-				const bool isNull();
+				const String &getFieldName() const;
+				bool isNull() const;
 		};
 	};
 };
