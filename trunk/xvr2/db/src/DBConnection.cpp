@@ -157,7 +157,6 @@ namespace xvr2{
 			try{
 				if(bulk_delim != 0)
 					xvr2_delete(bulk_delim);
-				//bulk_delim = new String(((String *)&_delim)->toCharPtr());
 				bulk_delim = new String(_delim.toCharPtr());
 				if(!driver->bulkBegin(__conn, table.toCharPtr(), cols.toCharPtr(), bulk_delim->toCharPtr()))
 					throw Exception::BulkUploadStart();

@@ -44,7 +44,7 @@ namespace xvr2{
 				const int numCols();
 				/** Returns the name of a column */
 				const String &getColName(const int index);
-				/** This will return the current retrieved column as an 
+				/** This will return the current retrieved row as an 
 				 *  array of Field elements */
 				const Field *getRow();
 				/** This will return the value of the given column: <b>index</b>
