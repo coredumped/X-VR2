@@ -33,9 +33,9 @@ namespace xvr2{
 #ifdef USE_DEBUG
 		if(__thMshow){
 #ifdef USE_POSIX_THREADS
-			debugmsg(this, "Thread engine is compiled against current POSIX threads implementation\n");
+			debugmsgln(this, "Thread engine is compiled against current POSIX threads implementation\n");
 #else
-			debugmsg(this, "Thread engine is compiled against GNU Pth\n");
+			debugmsgln(this, "Thread engine is compiled against GNU Pth\n");
 #endif
 			__thMshow = true;
 		}
@@ -81,7 +81,7 @@ namespace xvr2{
 
 	void Thread::detach(){
 #ifdef USE_DEBUG
-		debugmsg(this, xvr2::msgDetachingThread);
+		debugmsgln(this, xvr2::msgDetachingThread);
 #endif
 #ifndef USE_GNUPTH
 		pthread_detach(numericID());	
@@ -117,7 +117,7 @@ namespace xvr2{
 		data_stack = (__thArgs_t *)ds;
 		Thread *me = (Thread *)data_stack->thread;
 #ifdef USE_DEBUG
-		debugmsg(me, "starting a new parameterized thread\n");
+		debugmsgln(me, "starting a new parameterized thread\n");
 #endif
 		me->run(data_stack->arg);
 #ifdef USE_GNUPTH
@@ -134,7 +134,7 @@ namespace xvr2{
 #endif
 		Thread *me = (Thread *)meptr;
 #ifdef USE_DEBUG
-		debugmsg(me, "starting a new thread\n");
+		debugmsgln(me, "starting a new thread\n");
 #endif
 		me->run();
 #ifdef USE_GNUPTH
@@ -145,12 +145,12 @@ namespace xvr2{
 	}
 
 	void *Thread::run(){
-		debugmsg(this, xvr2::msgThreadOverride);
+		debugmsgln(this, xvr2::msgThreadOverride);
 		return NULL;
 	}
 
 	void *Thread::run(void *arg){
-		debugmsg(this, xvr2::msgThreadOverride);		
+		debugmsgln(this, xvr2::msgThreadOverride);		
 		return NULL;
 	}
 
