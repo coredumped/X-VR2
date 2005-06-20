@@ -69,6 +69,8 @@ class __pgsql_conn {
 		const int getLocalType(Oid o){
 			int i;
 			for(i = 0; i < 32; i++){
+				if(tmapping[i].typeName == NULL)
+					continue;
 				if(o == tmapping[i].oid)
 					return tmapping[i].localType;
 			}
@@ -78,6 +80,8 @@ class __pgsql_conn {
 		const char *getLocalTypeName(Oid o){
 			int i;
 			for(i = 0; i < 32; i++){
+				if(tmapping[i].typeName == NULL)
+					continue;
 				if(o == tmapping[i].oid)
 					return tmapping[i].typeName;
 			}
@@ -450,7 +454,10 @@ DB::Field *__drv_fetch_next_row(void *__res_handle){
 					break;
 				case DB::Field::VARCHAR:
 				default:
-					s[n].init(xvr2::DB::Field::VARCHAR, (void *)data, PQgetlength(r->result, r->curr_row, n) + 1);
+					if(PQgetisnull(r->result, r->curr_row, n))
+						s[n].init(xvr2::DB::Field::VARCHAR, (void *)0, PQgetlength(r->result, r->curr_row, n) + 1);
+					else
+						s[n].init(xvr2::DB::Field::VARCHAR, (void *)data, PQgetlength(r->result, r->curr_row, n) + 1);
 			}
 		}
 		else{
