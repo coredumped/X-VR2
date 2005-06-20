@@ -57,6 +57,7 @@ namespace xvr2{
 			/**
 			 * Will print a debug message to the screen */
 			static void debugmsg(Object *obj, const char *msg);
+			static void debugmsgln(Object *obj, const char *msg);
 	};
 };
 #endif
