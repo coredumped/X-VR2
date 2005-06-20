@@ -95,6 +95,7 @@ namespace xvr2 {
 			}
 			void concat(const CharT c){
 				CharT *tmp;
+				if(c == 0) return;
 				if(buffer != 0){
 					tmp = new CharT[len + 2];
 					copy(tmp, buffer, len);
@@ -116,12 +117,14 @@ namespace xvr2 {
 				int l2;
 				if(buffer != 0){
 					l2 = getlen(s);
-					tmp = new CharT[len + l2 + 1];
-					copy(tmp, buffer, len);
-					copy(tmp, s, l2, len);
-					delete[] buffer;
-					len = len + l2;
-					buffer = tmp;
+					if(l2 > 0){
+						tmp = new CharT[len + l2 + 1];
+						copy(tmp, buffer, len);
+						copy(tmp, s, l2, len);
+						delete[] buffer;
+						len = len + l2;
+						buffer = tmp;
+					}
 				}
 				else{
 					assign(s);
