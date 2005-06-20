@@ -61,7 +61,7 @@ namespace xvr2{
 			/**
 			 * This will write the contents of <b>text</b>
 			 * to the current out TextOutput */
-			void outWrite(const String &text);
+			void outWrite(const String &text) const;
 			/** This will write <b>siz</b> bytes of 
 			 *  <b>buf</b> buffer to the current out 
 			 *  TextOutput plus a newline character*/
@@ -76,7 +76,7 @@ namespace xvr2{
 			void errWrite(const void *buf, UInt32 siz);
 			/** This will write the contents of <b>text</b>
 			 *  to the current err TextOutput */
-			void errWrite(const String &text);
+			void errWrite(const String &text) const;
 			/** This will write <b>siz</b> bytes of 
 			 *  <b>buf</b> buffer to the current err 
 			 *  TextOutput plus a newline character*/
@@ -93,6 +93,7 @@ namespace xvr2{
 			 *  is a string terminated by \\n or \\0
 			 *  the result will be stored on <b>line</b> */
 			void readLine(String &line);
+			const Console &operator<<(const String &s) const;
 	};
 #ifdef USE_DEBUG
 	extern Console __debug_console;
