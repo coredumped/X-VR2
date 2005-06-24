@@ -5,15 +5,11 @@
 #define __XVR2_ARRAY_H__
 #include<xvr2/Container.h>
 #include<xvr2/c_utilities.h>
-#ifdef HAVE_MEMCPY
-#include<string.h>
-#endif
 
 namespace xvr2{
 	namespace Util {
 		/**
 		 * \class Array Array.h
-		 * \author Juan V. Guerrero
 		 * \brief Please use this class to implement dynamic arrays of objects
 		 */
 		template<class T>
@@ -34,16 +30,11 @@ namespace xvr2{
 				 * \param src This pointer holds the data to be copied onto dst
 				 * \param n Is the amount of elements to be copied from src to dst
 				 */
-				void copy(T *dst, T *src, unsigned int n){
-/*#ifdef HAVE_MEMCPY
-					::memcpy(dst, src, n * sizeof(T));
-#else*/
+				void copy(T dst[], T src[], unsigned int n){
 					unsigned int i;
 					for(i = 0; i < n; i++){
 						dst[i] = src[i];
 					}
-//#endif
-//					Util::memcpy<T>(dst, src, n);
 				}
 			public:
 				/**
@@ -60,6 +51,10 @@ namespace xvr2{
 					num_data = 0;
 				}
 
+				~Array(){
+					delete[] array;
+				}
+
 				/**
 				 * \fn Array &add(T data)
 				 * \brief Dinamically allocates space for the new datum and then copies it
@@ -68,22 +63,21 @@ namespace xvr2{
 				 * \param data The value to be added to the array.
 				 * \return Returns a reference to the Array class instantiated.
 				 */
-				Array &add(T data){
+				void add(T data){
 					T *tmp;
-					num_data++;
-					if(array){
-						tmp = new T[num_data];
-						copy(tmp, array, num_data);
-						delete[] array;
-						tmp[num_data - 1] = data;
-						array = tmp;
-					}
-					else{
+					if(array == 0){
 						array = new T[1];
 						array[0] = data;
 						num_data = 1;
 					}
-					return *this;
+					else{
+						tmp = new T[num_data + 1];
+						copy(tmp, array, num_data);
+						delete[] array;
+						tmp[num_data] = data;
+						array = tmp;
+						num_data++;
+					}
 				}
 
 				/**
@@ -94,7 +88,10 @@ namespace xvr2{
 				 * \return a copy of the datum
 				 * \todo Validate the idx number to be >= 0 and <= size()
 				 */
-				T operator[](int idx){
+				T &operator[](int idx) const{
+					return array[idx];
+				}
+				T &operator[](int idx) {
 					return array[idx];
 				}
 
@@ -105,7 +102,10 @@ namespace xvr2{
  				 * \return a copy of the datum
 				 * \todo Validate the idx number to be >= 0 and <= size()
 				 */
-				T get(int idx){
+				T &get(int idx) const{
+					return array[idx];
+				}
+				T &get(int idx) {
 					return array[idx];
 				}
 		};
