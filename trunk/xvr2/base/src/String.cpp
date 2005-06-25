@@ -27,23 +27,6 @@ namespace xvr2{
 
 	void int2char(int num, char buf[]){
 		sprintf(buf, "%d", num);
-		return;
-		float tmp;
-		int dec;
-		int idx = 0;
-		unsigned int flat;
-		if(num < 0){
-			buf[idx++] = '-';
-			num = num * -1;
-		}
-		while(num != 0){
-			tmp = num / 10.0;
-			flat = num / 10;
-			dec = (int)((tmp - (float)flat) * 10);
-			buf[idx++] = dec + '0';
-			num = num / 10;
-		}
-		buf[idx] = 0;
 	}
 	
 	/*char *String::toCharPtr() const {
