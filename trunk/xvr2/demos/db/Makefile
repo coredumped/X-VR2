@@ -10,6 +10,6 @@ common.o: common.cpp common.h
 	g++ -c -gstabs+ -o common.o common.cpp `xvr2-config.sh --cflags`
 
 clean:
-	rm -f pgsql-query-test mysql-query-test
+	rm -f pgsql-query-test mysql-query-test *.o
 
 rebuild: clean all
