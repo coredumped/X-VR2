@@ -50,7 +50,7 @@ namespace xvr2{
 				u++;
 				var = u;
 #ifdef USE_DEBUG
-				debugmsg(this, "Increasing ");
+				debugmsgln(this, "Increasing ");
 #endif
 				unlock();
 				return u;
@@ -63,7 +63,7 @@ namespace xvr2{
 				u--;
 				var = u;
 #ifdef USE_DEBUG
-				debugmsg(this, "Decreasing ");
+				debugmsgln(this, "Decreasing ");
 #endif
 				unlock();
 				return u;
