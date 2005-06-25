@@ -44,8 +44,11 @@ namespace xvr2 {
 			virtual CharT *duplicate(const CharT *s, int l){
 				CharT *c;
 				int i;
-				if(l == 0 || s == 0)
-					return 0;
+				if(l == 0 || s == 0){
+					c = new CharT[1];
+					c[0] = 0;
+					return c;
+				}
 				c = new CharT[l + 1];
 				for(i = 0; i < l; i++)
 					c[i] = s[i];
@@ -54,7 +57,10 @@ namespace xvr2 {
 			}
 		public:
 			BasicString(){
-				buffer = 0;
+				CharT *c;
+				c = new CharT[1];
+				c[0] = 0;
+				buffer = c;
 				len = 0;
 			}
 			BasicString(const CharT *s){

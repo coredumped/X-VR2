@@ -25,6 +25,8 @@ namespace xvr2{
 			char *delim;
 			/** Stores a temporal copy of buffer as a String */
 			String tstr;
+			/** Flag to say if there are more tokens or not */
+			bool _fin;
 		protected:
 			/** When called returns the next token in the string */
 			char *cnext();
@@ -43,10 +45,12 @@ namespace xvr2{
 			 * allocated by all the private members */
 			~Tokenizer ();
 			/** When called returns the next token in the string,
-			    please note that this is a new String instance,
-			    therefore you are encouraged to delete it after
-			    used, in order to prevent a memory leak. */
-			const String &next(bool throwexception = false);
+			 *  if there are not any more tokens, then this method will
+			 *  throw an Exception::NoMoreTokens() */
+			const String &next();
+			/** Call this method in order to know if there are any
+			 *  more tokens to read */
+			bool finished();
 	};
 
 

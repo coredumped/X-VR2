@@ -15,6 +15,7 @@ namespace xvr2{
 #endif
 		temp = 0;
 		token = 0;
+		_fin = false;
 		buffer = strdup(phrase);
 		temp = strdup(phrase);
 		delim = strdup(d);
@@ -26,6 +27,7 @@ namespace xvr2{
 #endif
 		temp = 0;
 		token = 0;
+		_fin = false;
 		buffer = strdup(phrase.toCharPtr());
 		temp = strdup(phrase.toCharPtr());
 		delim = strdup(d.toCharPtr());
@@ -42,17 +44,24 @@ namespace xvr2{
 			free(delim);
 	}
 
+	bool Tokenizer::finished(){
+		return _fin;
+	}
+
 	char *Tokenizer::cnext(){
 		unsigned int i;
 		unsigned int len;
 		char *ptr, *tptr;;
-		if(buffer == 0)
+		if(buffer == 0){
+			_fin = true;
 			return 0;
+		}
 		if(strstr(buffer, delim) == 0){
 				if(token == 0)
 					token = strdup(buffer);
 				free(buffer);
 				buffer = 0;
+				_fin = true;
 				return token;
 		}
 		if(temp == 0){
@@ -62,6 +71,7 @@ namespace xvr2{
 			buffer = 0;
 			free(delim);
 			delim = 0;
+			_fin = true;
 			return 0;
 		}
 		else{
@@ -73,6 +83,7 @@ namespace xvr2{
 				token = strdup(temp);
 				free(temp);
 				temp = 0;
+				_fin = true;
 			}
 			else{
 				token = (char *)malloc(strlen(temp) * sizeof(char));
@@ -90,14 +101,12 @@ namespace xvr2{
 		return token;
 	}
 
-	const String &Tokenizer::next(bool throwexception){
+	const String &Tokenizer::next(){
 		char *ptr;
 		ptr = cnext();
 		if(ptr == 0){
-			if(throwexception)
-				throw Exception::NoMoreTokens();
-			else
-				return 0;
+			throw Exception::NoMoreTokens();
+			return 0;
 		}
 		tstr = ptr;
 		return tstr;
