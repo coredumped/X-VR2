@@ -16,7 +16,6 @@
 namespace xvr2{
 	/**
 	 * \class Thread
-	 * \author Juan V. Guerrero
 	 * \version $Revision$
 	 * \brief
 	 * This class encapsulates the thread library functionality using 

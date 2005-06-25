@@ -11,7 +11,6 @@ namespace xvr2{
 
 	/**
 	 * \class AutomatedGC AutomatedGC.h
-	 * \author Juan V. Guerrero
 	 * \brief This class is a more advanced interface for the garbage colletor, it
 	 * will automatically check its garbage list to see if some TemporalBuffers
 	 * has expired. It will do the checking every <b>_scanperiod</b> milliseconds
