@@ -15,6 +15,7 @@ namespace xvr2{
 	namespace Util {
 		using namespace xvr2;
 		/**
+		 * \class List List.h
 		 * This class handles single linked lists using templates, 
 		 * don't use this class if you intend to share it's data 
 		 * between threads if you do please use the appropiate 
@@ -223,7 +224,7 @@ namespace xvr2{
 				/** 
 				 * Same as List::get(i)
 				 */
-				T &operator[](unsigned int i){
+				T &operator[](unsigned int i) const{
 					return get(i);
 				}
 	
