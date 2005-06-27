@@ -1,25 +1,23 @@
-THIS_DIR=`pwd`
-VERSION=`cat VERSION`
-LIBNAME=libxvr2math
-cd src
-./configure.sh "$@" --version=${VERSION} --with-name=${LIBNAME}
-cd ..
-echo "VERSION=${VERSION}
+#!/bin/bash
+#
+# $Id$
 
-all: src/${LIBNAME}.so.${VERSION} demo
+source ../buildtools/functions.sh
+get_libname "$@"
+get_libversion "$@"
+LIBNAMEX="${MYLIBNAME}.${MYVERSION}"
+THIS_DIR=`pwd`
+cd src
+./configure.sh "$@"
+cd $THIS_DIR
+echo "
+all: src/${LIBNAMEX}
 
 clean:
 	cd src ; make -f Makefile clean
-	cd demos ; make -f Makefile clean
 
 install:
 	cd src ; make -f Makefile install
 
-demo:
-	cd demos ; make -f Makefile
-
-src/${LIBNAME}.so.${VERSION}: src/*.cpp src/*.h
-	cd src ; make -f Makefile
-
-rebuild: clean all
-" > Makefile
+src/${LIBNAMEX}: src/*.h src/*.cpp
+	cd src ; make -f Makefile" > Makefile
