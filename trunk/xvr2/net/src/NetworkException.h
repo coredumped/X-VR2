@@ -60,6 +60,12 @@ namespace xvr2 {
 				SocketAlreadyUsed();
 		};
 
+		/** Exception thrown whenever an SSLContext object failed instatiation */
+		class SSLContextCreation:public Network{
+			public:
+				SSLContextCreation();
+		};
+
 	};
 };
 

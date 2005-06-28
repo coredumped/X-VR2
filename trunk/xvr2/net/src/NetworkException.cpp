@@ -3,6 +3,7 @@
  */
 #include<xvr2/NetworkException.h>
 #include<xvr2/MessageStrings.h>
+#include<openssl/err.h>
 
 namespace xvr2 {
 	namespace Exception{
@@ -51,6 +52,14 @@ namespace xvr2 {
 			setClassName((char *)xvr2::_xvr2SocketAlreadyUsedException);
 #endif
 			description = (char *)xvr2::excepSockListening;
+		}
+
+
+		SSLContextCreation::SSLContextCreation(){
+/*#ifndef USING_GCC3
+			setClassName((char *)xvr2::_xvr2SocketAlreadyUsedException);
+#endif*/
+			description = (char *)ERR_lib_error_string(ERR_get_error());
 		}
 	};
 };
