@@ -12,7 +12,7 @@ PROCESSOR=`get_processor`
 echo "" > Makefile
 
 THREADMODE=PTHREADS
-NETLIB=-lsocket
+NETLIB=-lsocket -lssl -lcrypto
 DEBUGMODE=1
 MAINTAINER="-gstabs+"
 PREFIX="/usr/local"
@@ -166,11 +166,11 @@ OPTIMIZE=" >> Makefile
 	echo "CFLAGS=-Wall \$(DEBUG) \$(OPTIMIZE) -DSOLARIS=1 -DSOLARIS2$OSVER=1 -I../../common -I ${XVR2_SOURCE_DIR}/include -I. -c -DUSE_NEW=1  -D_STRUCTURED_PROC $SDLCMD $DEFINES" >> Makefile
 	if [ $OSVER -eq 8 ]; then
 		DEFINES="$DEFINES -DSOLARIS8"
-		echo "LIBS=-lposix4 -lsocket -lposix" >> Makefile
+		echo "LIBS=-lposix4 -lsocket -lposix -lssl -lcrypto" >> Makefile
 	else
 		if [ $OSVER -eq 6 ]; then
 			DEFINES="$DEFINES -DSOLARIS6"
- 			echo "LIBS=-lposix4 -lsocket -lposix" >> Makefile
+ 			echo "LIBS=-lposix4 -lsocket -lposix -lssl -lcrypto" >> Makefile
 		else
 			echo "We haven't tested this on Solaris 7 yet"
 			DEFINES="$DEFINES -DSOLARIS7"
@@ -184,7 +184,7 @@ SONAME=${MYLIBNAME}
 BUILDLIB=-G
 all: \$(LIBNAME)" >> Makefile
 else
-	if [ "$NETLIB" = "-lsocket" ]; then
+	if [ "$NETLIB" = "-lsocket -lssl -lcrypto" ]; then
 		NETLIB=""
 	fi
 	DEFINES="$DEFINES -DUSING_LINUX -D__GNU"
@@ -194,7 +194,7 @@ DEBUG=$MAINTAINER $DEBUGSTRING $DEBUG_MUTEXES
 #DEBUG=
 OPTIMIZE=
 CFLAGS=-Wall \$(DEBUG) \$(OPTIMIZE) -I../../common -I ${XVR2_SOURCE_DIR}/include -I. -c $DEFINES -Wimplicit -Wreturn-type -Wunused -Wswitch -Wcomment -Wparentheses -Wpointer-arith " >> Makefile
-	echo "LIBS=" >> Makefile
+	echo "LIBS=-lssl -lcrypto" >> Makefile
 	echo "INSTALLDIR=$PREFIX
 LIBNAME=${MYLIBNAME}.${MYVERSION}
 SONAME=${MYLIBNAME}

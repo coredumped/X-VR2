@@ -57,6 +57,8 @@ namespace xvr2 {
 #ifndef USING_GCC3
 			setClassName((char *)_local_class_name_${name});
 #endif
-			description = _desc_${name};
+			description = (char *)_desc_${name};
 		}
+	};
+};
 " > ${sourcecpp}
