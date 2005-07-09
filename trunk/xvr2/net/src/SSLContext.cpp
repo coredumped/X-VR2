@@ -162,16 +162,16 @@ namespace Net {
 		debugmsgln(this, "Loading private key file in PEM format");
 #endif
 		switch(type){
-			case SSLContext::KEYFILE_DEFAULT:
+			case KEYFILE_DEFAULT:
 				if(!SSL_CTX_use_PrivateKey_file((SSL_CTX *)ctx, file.toCharPtr(), X509_FILETYPE_DEFAULT))
 					throw Exception::KeyfileUnreadable();
 				break;
-			case SSLContext::KEYFILE_ASN1:
+			case KEYFILE_ASN1:
 				if(!SSL_CTX_use_PrivateKey_file((SSL_CTX *)ctx, file.toCharPtr(), X509_FILETYPE_ASN1))
 					throw Exception::KeyfileUnreadable();
 				break;
 			default:
-			case SSLContext::KEYFILE_PEM:
+			case KEYFILE_PEM:
 				if(!SSL_CTX_use_PrivateKey_file((SSL_CTX *)ctx, file.toCharPtr(), X509_FILETYPE_PEM))
 					throw Exception::KeyfileUnreadable();
 				break;
@@ -179,11 +179,11 @@ namespace Net {
 	}
 	void SSLContext::rsaPrivateKeyfile(const String &file, int type){
 		switch(type){
-			case SSLContext::KEYFILE_DEFAULT:
+			case KEYFILE_DEFAULT:
 				if(!SSL_CTX_use_RSAPrivateKey_file((SSL_CTX *)ctx, file.toCharPtr(), X509_FILETYPE_DEFAULT))
 					throw Exception::KeyfileUnreadable();
 				break;
-			case SSLContext::KEYFILE_ASN1:
+			case KEYFILE_ASN1:
 #ifdef USE_DEBUG
 		debugmsgln(this, "Loading RSA private key file in ASN1 format");
 #endif
@@ -191,7 +191,7 @@ namespace Net {
 					throw Exception::KeyfileUnreadable();
 				break;
 			default:
-			case SSLContext::KEYFILE_PEM:
+			case KEYFILE_PEM:
 #ifdef USE_DEBUG
 		debugmsgln(this, "Loading RSA private key file in PEM format");
 #endif
@@ -218,5 +218,12 @@ namespace Net {
 		return false;
 	}
 
+	void SSLContext::addCipher(const String &cyp){
+		if(c_list.toString().size() > 1)
+			c_list << ":";
+		c_list << cyp;
+		if(!SSL_CTX_set_cipher_list((SSL_CTX *)ctx, c_list.toCharPtr()))
+			throw Exception::NoValidCipherInList();
+	}
 };
 };
