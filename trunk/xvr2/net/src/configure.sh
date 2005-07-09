@@ -12,7 +12,7 @@ PROCESSOR=`get_processor`
 echo "" > Makefile
 
 THREADMODE=PTHREADS
-NETLIB=-lsocket -lssl -lcrypto
+NETLIB="-lsocket -lssl -lcrypto"
 DEBUGMODE=1
 MAINTAINER="-gstabs+"
 PREFIX="/usr/local"
