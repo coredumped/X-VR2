@@ -50,6 +50,7 @@ namespace xvr2{
 				 * socket would try to connect with the remote 
 				 * host inmediately */
 				TCPSocket(const char *thehost, int theport);
+				TCPSocket(const String &thehost, int theport);
 				/**
 				 * This constructor tekas as an argument the host 
 				 * location as an IP number or as a name, also the
@@ -71,7 +72,7 @@ namespace xvr2{
 				/**
 				 * This destructor does nothing
 				 */
-				~TCPSocket();
+				virtual ~TCPSocket();
 				/**
 				 * Closes the communications channel with the 
 				 * remote host inmmediately
@@ -102,7 +103,8 @@ namespace xvr2{
 				 * out of memory error that might be caused if you
 				 * attempt to send a very big buffer of data
 				 */
-				void write(const void *buffer, unsigned long size);
+				virtual void write(const void *buffer, unsigned long size);
+				//const TCPSocket &operator << (const String &str) const;
 				/**
 				 * Attempts to read a continuos byte string, it will
 				 * stop reading data when it finds the 0x00 or \n 
@@ -114,7 +116,7 @@ namespace xvr2{
 				 * str pointer so please remember to release the 
 				 * allocated block using Memory::freeBuffer
 				 */
-				void readLine(char **str);
+				virtual void readLine(char **str);
 				/**
 				 * Use this method when you need to receive a 
 				 * fixed lenght buffer of bytes from the remote 
@@ -124,7 +126,7 @@ namespace xvr2{
 				 * caused if you attempt to receive a very big 
 				 * buffer of data
 				 */
-				void read(void *buffer, unsigned long size);
+				virtual int read(void *buffer, unsigned long size);
 		};
 	}; //End of Network namespace directive
 }; //End of xvr2 namespace directive

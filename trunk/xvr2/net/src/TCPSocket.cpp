@@ -251,7 +251,7 @@ namespace xvr2{
 			host = s->host;
 			port = s->port;
 #ifdef USE_DEBUG
-			debugmsg(this, " cloned\n");
+			debugmsgln(this, " cloned\n");
 #endif
 		}
 		
@@ -272,7 +272,7 @@ namespace xvr2{
 			tcpsock = s;
 			port = pport;
 #ifdef USE_DEBUG
-			debugmsg(this, "connected to a TCPServerSocket\n");
+			debugmsgln(this, "connected to a TCPServerSocket\n");
 #endif
 		}
 		
@@ -375,7 +375,10 @@ namespace xvr2{
 			}
 		}
 		
-		
+		/*const TCPSocket &TCPSocket::operator << (const String &str) const {
+			write((void *)str.toCharPtr(), str.size());
+			return *this;
+		}*/
 		
 		void TCPSocket::readLine(char **str){
 			//This one is quite awful because what one has to do  
@@ -408,13 +411,14 @@ namespace xvr2{
 			*str = tmpbuf;
 		}
 		
-		void TCPSocket::read(void *buffer, unsigned long size){
+		int TCPSocket::read(void *buffer, unsigned long size){
 		//////// ############  BEGIN UNIX CODE #####################
 			unsigned int i;
 			char *tmpbuf;
 			char *ptr;
 			unsigned int siz;
 			struct pollfd fd;
+			int readed = 0;
 			fd.fd = tcpsock;
 			fd.events = POLLIN | POLLPRI;
 			if(poll(&fd, 1, READ_TIMEOUT) == 0){
@@ -424,7 +428,7 @@ namespace xvr2{
 				throw Exception::ConnectionTimeout();
 			}
 			if(size < SOCK_CHUNK_SIZE){
-				if(::recv(tcpsock, buffer, size, MSG_NOSIGNAL|MSG_DONTWAIT) == -1){
+				if((readed = ::recv(tcpsock, buffer, size, MSG_NOSIGNAL|MSG_DONTWAIT)) == -1){
 					switch(errno){
 						case EINVAL:
 							throw Exception::SocketUnableToRead();
@@ -451,7 +455,7 @@ namespace xvr2{
 #endif
 						throw Exception::ConnectionTimeout();
 					}
-					if(::recv(tcpsock, tmpbuf, SOCK_CHUNK_SIZE, MSG_NOSIGNAL|MSG_DONTWAIT) == -1){
+					if((readed += ::recv(tcpsock, tmpbuf, SOCK_CHUNK_SIZE, MSG_NOSIGNAL|MSG_DONTWAIT)) == -1){
 						switch(errno){
 							case EINVAL:
 								throw Exception::SocketUnableToRead();
@@ -472,7 +476,7 @@ namespace xvr2{
 #endif
 						throw Exception::ConnectionTimeout();
 					}
-					if(::recv(tcpsock, tmpbuf, size - siz, MSG_NOSIGNAL|MSG_DONTWAIT) == -1){
+					if((readed += ::recv(tcpsock, tmpbuf, size - siz, MSG_NOSIGNAL|MSG_DONTWAIT)) == -1){
 						switch(errno){
 							case EINVAL:
 								throw Exception::SocketUnableToRead();
@@ -488,6 +492,7 @@ namespace xvr2{
 				}
 				delete tmpbuf;
 			}
+			return readed;
 		}
 	};
 };
