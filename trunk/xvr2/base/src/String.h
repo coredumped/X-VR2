@@ -46,6 +46,7 @@ class String:public CharString{
 		/** This constructor initializes an instance of this class
 		 *  by transforming an integer to an array of chars and
 		 *  then calling assign(const char *s); */
+		String(const long n);
 		String(const int n);
 		/** This constructor initializes an instance of this class
 		 *  by transforming an unsigned integer to an array 
@@ -74,6 +75,7 @@ class String:public CharString{
 		//void assign(const char *s);
 		/** Transforms and assigns <b>n</b> to the current String */
 		const String &assign(const int n);
+		const String &assign(const long n);
 		/** Transforms and assigns <b>n</b> to the current String */
 		const String &assign(const unsigned int n);
 		/** Transforms and assigns <b>n</b> to the current String */
@@ -109,6 +111,7 @@ class String:public CharString{
 		const String &concat(const UInt64 n);
 		/** Transforms n and assigns it to buffer by calling 
 		 *  assign(const char *); */
+		const String& operator=(const long n);
 		const String& operator=(const int n);
 		/** Transforms n and assigns it to buffer by calling 
 		 * assign(const char *); */

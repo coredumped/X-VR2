@@ -28,6 +28,10 @@ namespace xvr2{
 	void int2char(int num, char buf[]){
 		sprintf(buf, "%d", num);
 	}
+
+	void long2char(long num, char buf[]){
+		sprintf(buf, "%ld", num);
+	}
 	
 	/*char *String::toCharPtr() const {
 		if(this == 0x0)
@@ -63,6 +67,13 @@ namespace xvr2{
 	}
 	
 	String::String(const int n):CharString(){
+#ifndef USING_GCC3
+		Object::setClassName(xvr2::_xvr2String);
+#endif
+		assign(n);
+	}
+
+	String::String(const long n):CharString(){
 #ifndef USING_GCC3
 		Object::setClassName(xvr2::_xvr2String);
 #endif
@@ -111,6 +122,13 @@ namespace xvr2{
 	const String &String::assign(const int n){
 		char num[14];
 		int2char(n, num);
+		assign(num);
+		return *this;
+	}
+
+	const String &String::assign(const long n){
+		char num[24];
+		long2char(n, num);
 		assign(num);
 		return *this;
 	}
@@ -263,6 +281,11 @@ namespace xvr2{
 	}
 	
 	const String& String::operator=(const int n){
+		assign(n);
+		return *this;
+	}
+
+	const String& String::operator=(const long n){
 		assign(n);
 		return *this;
 	}
