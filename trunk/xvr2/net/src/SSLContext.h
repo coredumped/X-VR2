@@ -7,6 +7,7 @@
 #include<xvr2/Object.h>
 #include<xvr2/TCPSocket.h>
 #include<xvr2/StringBuffer.h>
+#include<xvr2/X509.h>
 #include<xvr2/SSLContextCreationException.h>
 #include<xvr2/KeyfileUnreadableException.h>
 #include<xvr2/CertificateLoadLocationsException.h>
@@ -33,6 +34,7 @@ namespace Net {
 			void *mydata;
 			/** Cypher list */
 			StringBuffer c_list;
+			X509 *pem;
 		public:
 			/** Instantiates an uninitialized SSL Context with the specified
 			 *  connection method. */
@@ -60,6 +62,7 @@ namespace Net {
 				return ctx;
 			}
 			void addCipher(const String &cyp);
+			const X509 *getX509();
 	};
 }
 };

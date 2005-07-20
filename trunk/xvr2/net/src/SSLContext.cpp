@@ -7,6 +7,7 @@
 #include<openssl/ssl.h>
 #include<openssl/x509.h>
 #include<openssl/err.h>
+#include<openssl/pem.h>
 
 namespace xvr2 {
 namespace Net {
@@ -48,6 +49,7 @@ namespace Net {
 	
 	SSLContext::SSLContext(int _method){
 		__init_ssl_library(this);
+		pem = 0;
 		method = _method;
 		ctx = 0;
 		mydata = 0;
@@ -108,6 +110,9 @@ namespace Net {
 				delete x;
 			}
 		}
+		if(pem != 0){
+			delete pem;
+		}
 	}
 
 
@@ -155,6 +160,11 @@ namespace Net {
 #endif
 		if(!(SSL_CTX_use_certificate_chain_file((SSL_CTX *)ctx, chain_file.toCharPtr()))) 
 			throw Exception::KeyfileUnreadable();
+		::BIO *sx;
+		sx = BIO_new(BIO_s_file());
+		BIO_read_filename(sx, chain_file.toCharPtr());
+		pem = new X509((void *)PEM_read_bio_X509(sx, 0, 0, 0));
+		BIO_free(sx);
 	}
 
 	void SSLContext::privateKeyfile(const String &file, int type){
@@ -224,6 +234,9 @@ namespace Net {
 		c_list << cyp;
 		if(!SSL_CTX_set_cipher_list((SSL_CTX *)ctx, c_list.toCharPtr()))
 			throw Exception::NoValidCipherInList();
+	}
+	const X509 *SSLContext::getX509(){
+		return pem;
 	}
 };
 };
