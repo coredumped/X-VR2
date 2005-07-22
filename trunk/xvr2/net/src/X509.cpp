@@ -16,6 +16,7 @@ namespace Net {
 	X509::X509(){
 		_startDate = 0;
 		_endDate = 0;
+		_issuer = 0;
 		dont_free = false;
 		idata = (::X509 *)X509_new();
 	}
@@ -27,11 +28,11 @@ namespace Net {
 		char *tmp;
 		//Get Issuer
 		tmp = X509_NAME_oneline(X509_get_issuer_name((::X509 *)idata), 0, 0);
-		_issuer = tmp;
+		_issuer = new X509Issuer(tmp);
 		Memory::freeBuffer((void **)&tmp);
 		//Get subject
 		tmp = X509_NAME_oneline(X509_get_subject_name((::X509 *)idata), 0, 0);
-		_subject = tmp;
+		_subject = new X509Subject(tmp);
 		Memory::freeBuffer((void **)&tmp);
 		//Get serial number
 		BIGNUM *serialBN = ASN1_INTEGER_to_BN(X509_get_serialNumber((::X509 *)idata),NULL);
@@ -64,12 +65,16 @@ namespace Net {
 			delete _startDate;
 		if(_endDate)
 			delete _endDate;
+		if(_issuer)
+			delete _issuer;
+		if(_subject)
+			delete _subject;
 	}
-	const String &X509::issuer() const {
-		return _issuer;
+	const X509Issuer &X509::issuer() const {
+		return *_issuer;
 	}
-	const String &X509::subject() const {
-		return _subject;
+	const X509Subject &X509::subject() const {
+		return *_subject;
 	}
 	const String &X509::serial() const {
 		return _serial;

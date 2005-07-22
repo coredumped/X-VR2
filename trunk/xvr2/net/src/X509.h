@@ -6,6 +6,8 @@
 #include<xvr2/netdefs.h>
 #include<xvr2/String.h>
 #include<xvr2/Date.h>
+#include<xvr2/X509Issuer.h>
+#include<xvr2/X509Subject.h>
 
 namespace xvr2 {
 namespace Net {
@@ -14,8 +16,8 @@ namespace Net {
 		private:
 		protected:
 			void *idata;
-			String _issuer;
-			String _subject;
+			X509Issuer *_issuer;
+			X509Subject *_subject;
 			String _serial;
 			String _hash;
 			Date *_startDate;
@@ -26,8 +28,8 @@ namespace Net {
 			X509();
 			X509(void *x509_ptr);
 			~X509();
-			const String &issuer() const;
-			const String &subject() const;
+			const X509Issuer &issuer() const;
+			const X509Subject &subject() const;
 			const String &serial() const;
 			const String &hash() const;
 			const Date &startDate() const;
