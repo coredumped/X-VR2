@@ -37,6 +37,7 @@ namespace Net {
 			}
 			else {
 				tmp_blen += bmem;
+				Memory::freeBuffer((void **)&tmp_buf);
 			}
 			switch(h_errnop){
 				case HOST_NOT_FOUND:
