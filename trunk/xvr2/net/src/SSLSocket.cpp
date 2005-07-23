@@ -41,6 +41,9 @@ namespace Net {
 		SSL_set_bio(stack->ssl, stack->sbio, stack->sbio);
     		if(SSL_connect(stack->ssl) <= 0)
 			throw Exception::SSLConnectFailed();
+		//Verify certificate now
+		if(SSL_get_verify_result(stack->ssl) != X509_V_OK)
+			throw Exception::SSLInvalidCertificate();
 	}
 
 	SSLSocket::SSLSocket(const SSLContext &_ctx){

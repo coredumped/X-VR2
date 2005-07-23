@@ -12,6 +12,7 @@
 #include<xvr2/SSLGenericException.h>
 #include<xvr2/SSLSocketAddIOFailureException.h>
 #include<xvr2/NotConnectedException.h>
+#include<xvr2/SSLInvalidCertificateException.h>
 
 namespace xvr2 {
 	namespace Net {
