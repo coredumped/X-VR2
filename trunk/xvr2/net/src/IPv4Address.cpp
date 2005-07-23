@@ -3,6 +3,7 @@
  */
 #include"xvr2/IPv4Address.h"
 #include"xvr2/Memory.h"
+#include<arpa/inet.h>
 #include<errno.h>
 
 namespace xvr2 {
@@ -53,12 +54,19 @@ namespace Net {
 	}
 	String *IPv4Address::toString(){
 		String *str_ip;
+		char buf[32];
+		char *ptr;
 		//Generate a string representation of the addr info, I dont know how yet
+		//const char * inet_ntop (int AF, const void *CP, char *BUF, size_t LEN)
+		ptr = (char *)inet_ntop(addr.sin_family, (void*)&addr.sin_addr, buf, 32);
+		str_ip = new String(ptr);
 		return str_ip;
 	}
 	std::ostream& operator<<(std::ostream& stream, const IPv4Address &s){
-		char *thedata;
-		stream << thedata;
+		String *ts;
+	        ts = ((IPv4Address *)&s)->toString();
+		stream << ts->toCharPtr();
+		delete ts;
 	}
 
 };
