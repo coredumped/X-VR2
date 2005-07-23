@@ -25,8 +25,8 @@ echo "/*
 #ifndef __XVR2_NET_${defname}_H__
 #define __XVR2_NET_${defname}_H__
 #include<xvr2/Exception.h>
-#include<xvr2/IOException.h>
 #include<xvr2/NetworkException.h>
+#include<xvr2/${parent}Exception.h>
 namespace xvr2 {
 	namespace Exception{
 
