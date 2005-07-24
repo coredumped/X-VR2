@@ -26,18 +26,20 @@ namespace Net {
 		int bmem;
 		struct ::hostent *hp;
 		struct ::sockaddr_in name;
+		int result;
 		bmem = 2 * ip_or_host.size() + sizeof(hostent) ;
 		tmp_blen = bmem;
 		while(true){
 			tmp_buf = (char *)Memory::allocBuffer(tmp_blen);
-			
-			if(gethostbyname_r(ip_or_host.toCharPtr(), &ret, tmp_buf, tmp_blen, &hp, &h_errnop) != ERANGE){
-
+			result = gethostbyname_r(ip_or_host.toCharPtr(), &ret, tmp_buf, tmp_blen, &hp, &h_errnop);
+			/*if(gethostbyname_r(ip_or_host.toCharPtr(), &ret, tmp_buf, tmp_blen, &hp, &h_errnop) != ERANGE){
 				break;
 			}
-			else {
+			else {*/
+			if(result == ERANGE){
 				tmp_blen += bmem;
 				Memory::freeBuffer((void **)&tmp_buf);
+				continue;
 			}
 			switch(h_errnop){
 				case HOST_NOT_FOUND:
