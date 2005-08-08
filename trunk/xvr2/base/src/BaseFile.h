@@ -140,7 +140,7 @@ namespace xvr2{
 			/** Retrieves <b>size</b> bytes from the data buffer specified by <b>buffer</b> from the current file */
 			virtual UInt32 read(void *buffer, UInt32 size);
 			/** Will tell you if the file is currently open */
-			bool isOpen(){
+			bool isOpen() const {
 				return _opened;
 			}
 
