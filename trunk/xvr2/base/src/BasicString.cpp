@@ -20,4 +20,20 @@ namespace xvr2 {
 		assign(s);
 		return *this;
 	}
+	int CharString::index(const char *s, const int start) const{
+		int i, j;
+		if(len == 0 || s == 0)
+			return -1;
+		else if(s[0] == 0) return -1;
+		for(i = start; i < len; i++){
+			if(buffer[i] == s[0]){
+				for(j = 0; buffer[i + j] != 0; j++){
+					if(buffer[i + j] != s[j])
+						continue;
+				}
+				return i;
+			}
+		}
+		return -1;
+	}
 };

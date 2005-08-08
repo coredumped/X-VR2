@@ -32,13 +32,13 @@ namespace xvr2 {
 				for(l = 0; s[l] != 0; l++);
 				return l;
 			}
-			virtual const CharT *copy(CharT *in, const CharT *s, int l, int offset = 0){
+			virtual const CharT *copy(CharT *in, const CharT *s, int l, int in_offset = 0, int s_offset = 0){
 				int i;
 				if(l == 0 || s == 0)
 					return in;
 				for(i = 0; i < l; i++)
-					in[offset + i] = s[i];
-				in[offset + i] = 0;
+					in[in_offset + i] = s[i + s_offset];
+				in[in_offset + i] = 0;
 				return in;
 			}
 			virtual CharT *duplicate(const CharT *s, int l){
@@ -341,6 +341,22 @@ namespace xvr2 {
 			inline const bool operator!=(const BasicString<CharT> &s){
 				return (equals(s))?false:true;
 			}
+			inline const void biteLeft(const int n){
+				if(n >= len){
+					delete[] buffer;
+					buffer = new CharT[1];
+					buffer[0] = 0;
+					len = 0;
+				}
+				else{
+					CharT *tmp;
+					tmp = new CharT[len];
+					copy(tmp, buffer, len - n, 0, n);
+					delete[] buffer;
+					buffer = tmp;
+					len -= n;
+				}
+			}
 	};
 
 	class CharString:public BasicString<char>{
@@ -350,6 +366,13 @@ namespace xvr2 {
 			CharString(const CharString &s);
 			virtual const CharString &operator=(const char *s);
 			virtual const CharString &operator=(const CharString &s);
+			int index(const char *s, const int start = 0) const;
+			inline bool startsWith(const char *s) const{
+				return (index(s, 0) == 0)?true:false;
+			}
+			inline bool startsWith(const CharString &s) const{
+				return (index(s.buffer) == 0)?true:false;
+			}
 	};
 };
 #endif
