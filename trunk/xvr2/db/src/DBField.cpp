@@ -13,9 +13,9 @@
 #include<xvr2/NumberException.h>
 #include<xvr2/NullPointerException.h>
 #include<xvr2/Memory.h>
+#include<errno.h>
 #ifndef USING_GCC3
 #define __USE_SVID
-#include<errno.h>
 #include<stdlib.h>
 #include<stdio.h>
 #endif
