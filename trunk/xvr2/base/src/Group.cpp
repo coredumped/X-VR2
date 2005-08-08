@@ -19,9 +19,7 @@
 #define GROUP_INFO_BUFFER_SIZE 256
 #endif
 
-#ifndef USING_GCC3
 #include<errno.h>
-#endif
 #ifdef GCC_REVISION4
 #include<cerrno>
 #endif
