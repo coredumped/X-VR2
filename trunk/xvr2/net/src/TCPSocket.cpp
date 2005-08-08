@@ -58,6 +58,50 @@ namespace xvr2{
 #endif
 #endif
 		
+		int TCPSocket::CreateSocket(const IPv4Address *ip4, int theport){
+			struct sockaddr_in name;
+			struct linger opt;
+			//host = (char *)thehost;
+			port = theport;
+			tcpsock = socket(ip4->sockAddr().sin_family, SOCK_STREAM, 0);
+			if(tcpsock < 0){
+				switch(errno){
+					case EMFILE:
+						throw Exception::ProcOutOfFileDescriptors();
+					break;
+					case ENFILE:
+						throw Exception::SysOutOfFileDescriptors();
+					break;
+					default:
+						throw Exception::IO();
+				}
+			}
+			name.sin_family = ip4->sockAddr().sin_family;
+			name.sin_port = htons (port);
+			name.sin_addr = ip4->sockAddr().sin_addr;
+			opt.l_onoff = 1;
+			opt.l_linger = 0; 
+			setSockOption(SO_LINGER, &opt, sizeof(opt));
+			if(::connect(tcpsock, (struct sockaddr *)&name, sizeof(name)) != 0){
+				tcpsock = -1;
+				switch(errno){
+					case ETIMEDOUT:
+						throw Exception::ConnectionTimeout();
+						break;
+					case ECONNREFUSED:
+						throw Exception::ConnectionRefused();
+						break;
+					case ENETUNREACH:
+						throw Exception::NetworkUnreachable();
+						break;
+					default:
+						throw Exception::Network();
+				}
+				return 0;
+			}
+			return 1;
+		}
+
 		int TCPSocket::CreateSocket(const char *thehost, int theport){
 #ifdef USING_LINUX
 			struct hostent ret;
@@ -243,6 +287,28 @@ namespace xvr2{
 			return 1;
 		}
 
+		TCPSocket::TCPSocket(const IPv4Address *ip, int theport){
+#ifndef USING_GCC3
+			setClassName(xvr2::_xvr2TCPSocket);
+#endif
+			try{
+				CreateSocket(ip, theport);
+			}
+			catch(...){
+				throw;
+			}
+		}
+		TCPSocket::TCPSocket(const IPv4Address &ip, int theport){
+#ifndef USING_GCC3
+			setClassName(xvr2::_xvr2TCPSocket);
+#endif
+			try{
+				CreateSocket(&ip, theport);
+			}
+			catch(...){
+				throw;
+			}
+		}
 		TCPSocket::TCPSocket(TCPSocket *s){
 #ifndef USING_GCC3
 		   	setClassName(xvr2::_xvr2TCPSocket);

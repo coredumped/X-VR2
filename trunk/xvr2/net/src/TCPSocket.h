@@ -7,6 +7,7 @@
 
 #include<xvr2/String.h>
 #include<xvr2/Socket.h>
+#include<xvr2/IPv4Address.h>
 #include<xvr2/NetworkException.h>
 #include<xvr2/ConnectionResetByPeerException.h>
 #include<xvr2/HostNotFoundException.h>
@@ -37,6 +38,7 @@ namespace xvr2{
 				 * this socket is connected to the port 
 				 * \b theport
 				 */
+				int CreateSocket(const IPv4Address *addr, int theport);
 				int CreateSocket(const char *thehost, int theport);
 			public:
 				/** This is a default constructor that does 
@@ -65,6 +67,8 @@ namespace xvr2{
 				 * This is a copy constructor
 				 */
 				TCPSocket(const TCPSocket &s);
+				TCPSocket(const IPv4Address *ip, int theport);
+				TCPSocket(const IPv4Address &ip, int theport);
 				/**
 				 * Use this operator to create copies of an already
 				 * existent TCPSocket */
