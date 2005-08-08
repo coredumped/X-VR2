@@ -67,6 +67,7 @@ namespace Net {
 	        ts = ((IPv4Address *)&s)->toString();
 		stream << ts->toCharPtr();
 		delete ts;
+		return stream;
 	}
 
 };
