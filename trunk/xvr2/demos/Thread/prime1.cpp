@@ -60,12 +60,10 @@ int main(){
 	a->start();
 	b->start();
 	c->start();
-	sleep(5);
-	while(tnum.getValue() > 0){
-		sleep(1);
+	while(ThreadManager::activeCount() == 0);
+
+	while(ThreadManager::activeCount() > 0){
+		usleep(10);
 	}
-	delete a;
-	delete b;
-	delete c;
 	return 0;
 }

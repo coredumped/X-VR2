@@ -15,17 +15,9 @@ class Prime:public Thread {
 			f = _f;
 			t = _t;
 		}
-		void joinTo(Prime *to);
 		void *run();
 };
 
-Prime *a;
-Prime *b;
-Prime *c;
-
-void Prime::joinTo(Prime *to){
-	to->join();
-}
 
 void *Prime::run(){
 	int i, j;
@@ -37,8 +29,6 @@ void *Prime::run(){
 	output += " to ";
 	output += t;
 	output += ":\n";
-	if(this == b)
-		c->join();
 	for(i = f; i < t; i++){
 		flag = true;
 		for(j = 2; j < i; j++){
@@ -60,18 +50,21 @@ void *Prime::run(){
 }
 
 int main(){
+	Prime *a;
+	Prime *b;
+	Prime *c;
 	tnum.setValue(0);
 
-	a = new Prime(10000, 120000);
-	b = new Prime(20000, 220000);
-	c = new Prime(60000, 610000);
+	a = new Prime(1000, 1200);
+	b = new Prime(2000, 2200);
+	c = new Prime(6000, 6100);
 
-	a->start();
-	b->start();
-	c->start();
-	while(ThreadManager::activeCount() == 0);
+	ThreadManager::start(a);
+	ThreadManager::start(b);
+	ThreadManager::start(c);
+	sleep(5);
 	while(tnum.getValue() > 0){
-		usleep(1);
+		sleep(1);
 	}
 	return 0;
 }
