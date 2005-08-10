@@ -34,6 +34,8 @@ int main(){
 	cout << "pi: \"" << pi << "\"" << endl;
 	r->toUpperCase();
 	cout << "Uppercase r: \"" << r->toCharPtr() << "\"" << endl;
+	r->biteLeft(5);
+	cout << "r->biteLeft(5): \"" << r->toCharPtr() << "\"" << endl;
 	delete r;
 	return 0;
 }

@@ -1,20 +1,17 @@
 #include<xvr2.h>
 using namespace xvr2;
-using namespace std;
+using std::cout;
+using std::endl;
 
 int main(int argc, char *argv[]){
-	Tokenizer *tok;
-	if(argc <= 1 || argc > 3){
+	//Tokenizer *tok;
+	String str;
+	if(argc < 3){
 		return 1;
 	}
-	tok = new Tokenizer(argv[1], argv[2]);
-	while(true){
-		try{
-			cout << tok->next(true) << endl;
-		}
-		catch(...){
-			break;
-		}
-	}
+	Tokenizer tok(argv[1], argv[2]);
+	while(!tok.finished()){
+		cout << tok.next() << endl;
+	};
 	return 0;
 }
