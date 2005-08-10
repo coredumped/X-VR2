@@ -60,10 +60,14 @@ namespace xvr2{
 	 * }
 	 *
 	 * void main(){
-	 * 	SumBase t0(0, 99999);
-	 * 	SumBase t1(100000, 199999);
-	 * 	SumBase t2(200000, 299999);
-	 * 	SumBase t3(300000, 399999);
+	 * 	SumBase *t0;
+	 * 	SumBase *t1;
+	 * 	SumBase *t2;
+	 * 	SumBase *t3;
+	 * 	t0 = new SumBase (100000, 199999);
+	 * 	t1 = new SumBase (200000, 299999);
+	 * 	t2 = new SumBase (300000, 399999);
+	 * 	t3 = new SumBase (400000, 499999);
 	 * 	t0->start();
 	 * 	t1->start();
 	 * 	t2->start();
@@ -78,59 +82,27 @@ namespace xvr2{
 	 */
 	class	Thread:public	Threading{
 		private:
-			/** This flag will say if this thread is 
-			 *  running or not */
-			bool _running;
-			bool _haveargs;
 	#ifdef	GNU_PTH
 			/** Thread identifier this one is used when 
 			 *  GNU Pth has been activated */
 			pth_t thread;
-			/**
-			 * This is the wrapping function which calls the 
-			 * run method so it can be executed as a thread, 
-			 * for GNU Pth this function must return 
-			 * a <b>void *</b>
-			 */
-			static void *runMethod(void *thethread);
 	#else
 			/** Thread identifier this one is used when 
 			 *  GNU Pth has been activated */
 			pthread_t thread;
-			/**
-			 * This member will hold the attributes for 
-			 * the current thread
-			 */
-			pthread_attr_t t_attr;
-			/** This is the wrapping function which calls 
-			 *  the run method so it can be* executed as a 
-			 *  thread, for GNU Pth this function must 
-			 *  return an \b int */
-			static void *runMethod(void *thethread);
-			/** This is the wrapping function which calls 
-			 *  the run method so it can be* executed as a 
-			 *  thread, for GNU Pth this function must 
-			 *  return an \b int.
-			 *  \note This method will be call if a call to the
-			 *  start() method had any parameters in it. Most commonly
-			 *  this method will be called if this ois a 
-			 *  multi-startable thread.\n
-			 *  A multi-startable thread is a thread which might be
-			 *  started any number of times, because of this it will
-			 *  need to have its own data stack in order to be fully
-			 *  reentrant */
-			static void *runMethod_args(void *data_stack);
 	#endif
+			friend class ThreadManager;
 		protected:
-			/** This is a wrapper and is intended to be 
-			 *  used only for derived classes */
-			int _start();
-			int _start(void *arg);
+			bool detached;
 			/** This method detaches the thread from the 
 			 *  current running program */
 			void detach();
 			int policy;
+			int priority;
 		public:
+			/*void getAttrs(pthread_attr_t *tt){
+				tt = &t_attr;
+			}*/
 			/**
 			 * Please use this set of constants to define or
 			 * stablish a thread execution policy
@@ -146,12 +118,6 @@ namespace xvr2{
 				 *  scheduling policy */
 				FIFO
 			};
-			/** 
-			 * This variable is just for knowing if the thread 
-			 * can be autodetached or no,* currently it 
-			 * does nothing, but is here for backward 
-			 * compatibility */
-			bool autodetach;
 			/** Default constructor */
 			Thread();
 			/** This is the class destructor, it simply 
@@ -163,12 +129,12 @@ namespace xvr2{
 			 *  your thread, however please note that everytime 
 			 *  you call this method, the thread will be
 			 *  spawned again as a totally new instance. */
-			int start();
+			unsigned long int start();
 			/** Call this method when you want to start running 
 			 *  your thread, however please note that everytime 
 			 *  you call this method, the thread will be
 			 *  spawned again as a totally new instance. */
-			int start(void *arg);
+			unsigned long int start(void *arg);
 			/** <b>Very important</b>\n
 			 * You must override this method so you can provide
 			 * the thread process itself
@@ -190,9 +156,7 @@ namespace xvr2{
 			/**
 			 * Use this method to verify if your thread 
 			 * is running; */
-			bool isRunning(){
-			  return _running;
-			}
+			bool isRunning();
 			/** This method will set the scheduling policy for 
 			 *  the current thread, there are two types 
 			 *  scheduling policies:\n
@@ -210,12 +174,13 @@ namespace xvr2{
 			/**
 		         * This method will return a 32 bit integer 
 			 * representing the current thread */
-			static unsigned int numericID();
+			unsigned long int numericID();
 
 			/**
 			 * Waits for this thread to finish successfully joining the
 			 * calling thread with this one. */
 			void *join();
+			bool joinable();
 	};	
 
 };

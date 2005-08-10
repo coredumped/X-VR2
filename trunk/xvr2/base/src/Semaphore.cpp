@@ -1,9 +1,10 @@
 /*
  * $Id$
  */
-#include<xvr2/Exception.h>
-#include<xvr2/Semaphore.h>
-#include<xvr2/Thread.h>
+#include"xvr2/Exception.h"
+#include"xvr2/Semaphore.h"
+#include"xvr2/Thread.h"
+#include"xvr2/ThreadManager.h"
 #ifdef USE_POSIX_THREADS
 #include<pthread.h>
 #endif
@@ -99,8 +100,15 @@ namespace xvr2{
 
 	void Semaphore::debugmsg(Semaphore *obj, const char *msg){
 		int y;
+		Thread *t;
 		getvalue(&y);
-		std::cout << obj->getClassName() << "[ptr=" << (unsigned int)obj << ",tid=" << Thread::numericID() << ",val=" << y << "]: " << msg;
+		t = (Thread *)ThreadManager::getCurrentThread();
+		if(t == 0){
+			std::cout << obj->getClassName() << "[ptr=" << (unsigned int)obj << ",tid=[MAIN],val=" << y << "]: " << msg;
+		}
+		else{
+			std::cout << obj->getClassName() << "[ptr=" << (unsigned int)obj << ",tid=" << t->numericID() << ",val=" << y << "]: " << msg;
+		}
 		std::cout.flush();
 	}
 };
