@@ -59,6 +59,7 @@ namespace Net {
 					throw Exception::NoIPForYou();
 					break;
 			}
+			break;
 		}
 		if(hp != NULL){
 			name.sin_family = AF_INET;
@@ -71,5 +72,11 @@ namespace Net {
 		Memory::freeBuffer((void **)&tmp_buf);
 		return ipv4;
 	}
+
+	/*static String *IPv4Address::reverse_lookup(const String &ip_address){
+		String *h = 0;
+
+		return h;
+	}*/
 };
 };
