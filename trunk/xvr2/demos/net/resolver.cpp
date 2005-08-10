@@ -8,12 +8,17 @@ int main(int argc, char *argv[]){
 	String *ip;
 	if(argc > 1){
 		for(int i = 1; i < argc; i++){
-			addr = IPv4Resolver::resolve(argv[i]);
-			ip = addr->toString();
 			std::cout << argv[i] << " is at ";
-			std::cout << ip->toCharPtr() << std::endl;
-			delete addr;
-			delete ip;
+			try{
+				addr = IPv4Resolver::resolve(argv[i]);
+				ip = addr->toString();
+				std::cout << ip->toCharPtr() << std::endl;
+				delete addr;
+				delete ip;
+			}
+			catch(Exception::Exception e1){
+				std::cout << e1.toString() << std::endl;
+			}
 		}
 	}
 	else{
