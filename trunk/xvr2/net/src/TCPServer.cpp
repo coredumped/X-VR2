@@ -88,7 +88,7 @@ namespace xvr2{
 #endif
 				throw Exception::NullPointer();
 			}
-			killMe();
+			//killMe();
 			return 0;
 		}
 
