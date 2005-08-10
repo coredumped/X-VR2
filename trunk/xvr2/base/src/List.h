@@ -206,7 +206,17 @@ namespace xvr2{
 				/**
 				 * Obtains the current element
 				 */
-				T get(){
+				T &get() const{
+					if(act != 0){
+						return act->data;
+						act = act->next;
+					}
+					return (T)0;
+				}
+				/**
+				 * Obtains the current element
+				 */
+				T &get(){
 					if(act != 0){
 						return act->data;
 						act = act->next;
@@ -221,14 +231,6 @@ namespace xvr2{
 					act = list;
 				}
 	
-				/** 
-				 * Same as List::get(i)
-				 */
-				T &operator[](unsigned int i) const{
-					return get(i);
-				}
-	
-				
 		};
 	};
 };
