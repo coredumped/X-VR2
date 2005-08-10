@@ -99,11 +99,6 @@ echo "DEFINES: $DEFINES"
 
 echo "Processor: $PROCESSOR, platform is $PLATFORM"
 
-if [ "$GCCVERSION" -ge 3 ]; then
-#DEFINES="$DEFINES -Wno-deprecated "
-DEFINES="$DEFINES -DUSING_GCC3 "
-fi
-
 GPP=`find_gplusplus`
 if [ $? -ne 0 ]; then
 	exit 1
