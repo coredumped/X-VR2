@@ -24,6 +24,10 @@ namespace Net {
 			static void setRecvTimeout(int t);
 			static int  getRecvTimeout();
 			virtual int receive(void *buf, int size);
+			template<class T>
+			int receive(T buf){
+				return receive(buf, sizeof(T));
+			}
 	};
 };
 };

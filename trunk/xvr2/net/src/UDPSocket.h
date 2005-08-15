@@ -26,7 +26,10 @@ namespace Net {
 			static void setSendTimeout(int t);
 			static int  getSendTimeout();
 			virtual void send(void *buf, int size);
-			//void send(const UDPPacket &packet);
+			template<class T>
+			void send(T buf){
+				send(buf, sizeof(T));
+			}
 	};
 };
 };
