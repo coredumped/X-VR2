@@ -7,6 +7,9 @@
 #include"xvr2/UDPSocket.h"
 #include"xvr2/UDPServerSocket.h"
 #include"xvr2/UDPReceiveTimeoutException.h"
+#include"xvr2/ConnectionResetByPeerException.h"
+#include"xvr2/NetworkException.h"
+#include"xvr2/MemoryException.h"
 #include<sys/types.h>
 #include<sys/socket.h>
 #include<sys/poll.h>
@@ -50,7 +53,14 @@ namespace Net{
 		}
 		bytes = ::recvfrom(s.tsock, buf, size, flags, (struct ::sockaddr *)&s.ipv4addr, &ret);
 		if(bytes < -1){
-			perror("UDP::receive");
+			switch(errno){
+				case ECONNRESET:
+					throw Exception::ConnectionResetByPeer();
+				case ENOMEM:
+					throw Exception::Memory();
+				default:
+					throw Exception::Network();
+			}
 		}
 		return bytes;
 	}
@@ -68,7 +78,14 @@ namespace Net{
 		}
 		bytes = ::recvfrom(s.tsock, buf, size, flags, (struct ::sockaddr *)&ipv4addr, &ret);
 		if(bytes < -1){
-			perror("UDP::receive");
+			switch(errno){
+				case ECONNRESET:
+					throw Exception::ConnectionResetByPeer();
+				case ENOMEM:
+					throw Exception::Memory();
+				default:
+					throw Exception::Network();
+			}
 		}
 		return bytes;
 	}
