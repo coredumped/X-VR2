@@ -26,7 +26,7 @@ namespace Net {
 			IPv4Address(const IPv4Address &ip);
 			IPv4Address(const struct ::sockaddr_in *x_addr);
 			~IPv4Address();
-			const struct ::sockaddr_in sockAddr() const;
+			const struct ::sockaddr_in *sockAddr() const;
 			/* Will return a String representation of the IP address, you
 			 * must explicitely release the allocated memory after use. */
 			String *toString();

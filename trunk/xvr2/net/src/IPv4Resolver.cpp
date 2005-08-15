@@ -26,6 +26,7 @@ namespace Net {
 		int bmem;
 		struct ::hostent *hp;
 		struct ::sockaddr_in name;
+		bzero(&name, sizeof(struct ::sockaddr_in));
 		int result;
 		bmem = 2 * ip_or_host.size() + sizeof(hostent) ;
 		tmp_blen = bmem;

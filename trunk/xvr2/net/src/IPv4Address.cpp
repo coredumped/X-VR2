@@ -13,8 +13,10 @@ namespace Net {
 		IPv4Address *tmp;
 		try{
 			tmp = IPv4Resolver::resolve(ip_or_host);
+			bzero(&addr, sizeof(struct ::sockaddr_in));
 			addr.sin_addr = tmp->addr.sin_addr;
 			addr.sin_family = tmp->addr.sin_family;
+			addr.sin_port = tmp->addr.sin_port;
 			delete tmp;
 		}
 		catch(...){
@@ -30,8 +32,10 @@ namespace Net {
 		IPv4Address *tmp;
 		try{
 			tmp = IPv4Resolver::resolve(tmpx);
+			bzero(&addr, sizeof(struct ::sockaddr_in));
 			addr.sin_family = tmp->addr.sin_family;
 			addr.sin_addr = tmp->addr.sin_addr;
+			addr.sin_port = tmp->addr.sin_port;
 			delete tmp;
 		}
 		catch(...){
@@ -40,17 +44,21 @@ namespace Net {
 		}
 	}
 	IPv4Address::IPv4Address(const IPv4Address &ip){
-		addr.sin_addr = ip.sockAddr().sin_addr;
-		addr.sin_family = ip.sockAddr().sin_family;
+		bzero(&addr, sizeof(struct ::sockaddr_in));
+		addr.sin_addr = ip.sockAddr()->sin_addr;
+		addr.sin_family = ip.sockAddr()->sin_family;
+		addr.sin_port = ip.sockAddr()->sin_port ;
 	}
 	IPv4Address::IPv4Address(const struct ::sockaddr_in *x_addr){
+		bzero(&addr, sizeof(struct ::sockaddr_in));
 		addr.sin_addr = x_addr->sin_addr;
 		addr.sin_family = x_addr->sin_family;
+		addr.sin_port = x_addr->sin_port;
 	}
 	IPv4Address::~IPv4Address(){
 	}
-	const struct ::sockaddr_in IPv4Address::sockAddr() const{
-		return addr;
+	const struct ::sockaddr_in *IPv4Address::sockAddr() const{
+		return &addr;
 	}
 	String *IPv4Address::toString(){
 		String *str_ip;

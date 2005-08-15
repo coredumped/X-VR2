@@ -35,15 +35,35 @@ namespace Net {
 		}
 		stack = new ssl_internal_stack();
 		stack->ssl = SSL_new((SSL_CTX *)ctx.getInternal());
-    		stack->sbio=BIO_new_socket(tcpsock,BIO_NOCLOSE);
+    		stack->sbio=BIO_new_socket(tsock,BIO_NOCLOSE);
 		if(stack->sbio == 0x00)
 			throw Exception::SSLSocketAddIOFailure();
 		SSL_set_bio(stack->ssl, stack->sbio, stack->sbio);
     		if(SSL_connect(stack->ssl) <= 0)
 			throw Exception::SSLConnectFailed();
 		//Verify certificate now
-		if(SSL_get_verify_result(stack->ssl) != X509_V_OK)
-			throw Exception::SSLInvalidCertificate();
+		int vres;
+		if((vres = SSL_get_verify_result(stack->ssl)) != X509_V_OK){
+#ifdef USE_DEBUG
+			::X509 *x5;
+			x5 = SSL_get_peer_certificate(stack->ssl);
+			X509 cert(x5);
+			X509_free(x5);
+#endif
+			switch(vres){
+				case X509_V_ERR_UNABLE_TO_GET_ISSUER_CERT:
+					throw Exception::X509IssuerCertificateNotFound();
+				case X509_V_ERR_UNABLE_TO_DECRYPT_CERT_SIGNATURE:
+					throw Exception::X509UnableToDecryptCertificate();
+				case X509_V_ERR_UNABLE_TO_GET_ISSUER_CERT_LOCALLY:
+#ifdef USE_DEBUG
+					debugmsg(this, "Certificate not found locally.\n");
+#endif
+					throw Exception::CertificateIssuerNotFoundLocally();
+				default:
+					throw Exception::SSLInvalidCertificate();
+			}
+		}
 	}
 
 	SSLSocket::SSLSocket(const SSLContext &_ctx){
@@ -56,7 +76,7 @@ namespace Net {
 			throw;
 		}
 	}
-	SSLSocket::SSLSocket(const SSLContext &_ctx, const char *thehost, int theport){
+	SSLSocket::SSLSocket(const SSLContext &_ctx, const char *thehost, int theport):TCPSocket(thehost, theport){
 		idata = 0;
 		ctx = _ctx;
 		try{
@@ -66,7 +86,7 @@ namespace Net {
 			throw;
 		}
 	}
-	SSLSocket::SSLSocket(const SSLContext &_ctx, const String &thehost, int theport){
+	SSLSocket::SSLSocket(const SSLContext &_ctx, const String &thehost, int theport):TCPSocket(thehost.toCharPtr(), theport){
 		idata = 0;
 		ctx = _ctx;
 		try{

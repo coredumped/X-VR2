@@ -13,6 +13,9 @@
 #include<xvr2/SSLSocketAddIOFailureException.h>
 #include<xvr2/NotConnectedException.h>
 #include<xvr2/SSLInvalidCertificateException.h>
+#include<xvr2/X509IssuerCertificateNotFoundException.h>
+#include<xvr2/X509UnableToDecryptCertificateException.h>
+#include<xvr2/CertificateIssuerNotFoundLocallyException.h>
 
 namespace xvr2 {
 	namespace Net {

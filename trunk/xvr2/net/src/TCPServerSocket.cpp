@@ -60,11 +60,11 @@ namespace xvr2{
 #ifdef SOLARIS
 		 	char *ptr;
 #endif
-		 	tcpsock = -1;
+		 	tsock = -1;
 		 	port = p;
 		 	maxConn = m;
-		 	tcpsock = socket (PF_INET, SOCK_STREAM, 0);
-		 	if (tcpsock < 0){
+		 	tsock = socket (PF_INET, SOCK_STREAM, 0);
+		 	if (tsock < 0){
 				 switch(errno){
 				 	case EMFILE:
 						_created = false;
@@ -87,20 +87,20 @@ namespace xvr2{
 		 	opt.l_linger = 0; 
 			if(nonblock){
 #ifdef USE_DEBUG
-				if(fcntl(tcpsock, F_SETFL, O_NONBLOCK) != 0){
+				if(fcntl(tsock, F_SETFL, O_NONBLOCK) != 0){
 					debugmsg(this, "fcntl to nonblock failed, check it!!!!!!");
 				}
 #else
-				fcntl(tcpsock, F_SETFL, O_NONBLOCK);
+				fcntl(tsock, F_SETFL, O_NONBLOCK);
 #endif
 				_nonblock = nonblock;
 			}
 /*#ifdef SOLARIS
 		 	ptr = (char *)&opt;
-		 	ret = setsockopt(tcpsock, SOL_SOCKET, SO_LINGER, ptr, 
+		 	ret = setsockopt(tsock, SOL_SOCKET, SO_LINGER, ptr, 
 					sizeof(opt)); 
 #else
-		 	ret = setsockopt(tcpsock, SOL_SOCKET, SO_LINGER, 
+		 	ret = setsockopt(tsock, SOL_SOCKET, SO_LINGER, 
 					(struct linger*)&opt, sizeof(opt)); 
 #endif*/
 			setSockOption(SO_LINGER, (void *)&opt, sizeof(opt));
@@ -109,7 +109,7 @@ namespace xvr2{
 				throw Exception::Network();
 			}
 			 
-		 	if (::bind (tcpsock, (struct sockaddr *) &name, sizeof (name)) < 0){
+		 	if (::bind (tsock, (struct sockaddr *) &name, sizeof (name)) < 0){
 				switch(errno){
 					case EINVAL:
 						_created = false;
@@ -133,7 +133,7 @@ namespace xvr2{
 				size_t size;
 	#endif
 			CreateSocket(port);
-			if(listen(tcpsock, maxConn) != 0){
+			if(listen(tsock, maxConn) != 0){
 			        switch(errno){
 			                case EADDRINUSE:
 						throw Exception::SocketAlreadyUsed();
@@ -143,7 +143,7 @@ namespace xvr2{
 		        	}
 			}
 			size = sizeof(client);
-			if((ss = ::accept(tcpsock, (sockaddr *)&client, &size)) == -1)
+			if((ss = ::accept(tsock, (sockaddr *)&client, &size)) == -1)
 				return NULL; 
 			TCPSocket *r = new TCPSocket(ss, port);
 			return r;
@@ -158,7 +158,7 @@ namespace xvr2{
 				size_t size;
 	#endif
 			CreateSocket(port, true);
-			if(listen(tcpsock, maxConn) != 0){
+			if(listen(tsock, maxConn) != 0){
 			        switch(errno){
 			                case EADDRINUSE:
 						throw Exception::SocketAlreadyUsed();
@@ -168,18 +168,18 @@ namespace xvr2{
 		        	}
 			}
 			size = sizeof(client);
-			if((ss = ::accept(tcpsock, (sockaddr *)&client, &size)) == -1)
+			if((ss = ::accept(tsock, (sockaddr *)&client, &size)) == -1)
 				return 0x0; 
 			TCPSocket *r = new TCPSocket(ss, port);
 			return r;
 		}
 		
 		void TCPServerSocket::close(){
-			if(tcpsock >= 0){
+			if(tsock >= 0){
 				if(!is_a_copy){
-					::close(tcpsock);	 
+					::close(tsock);	 
 				}
-				tcpsock = -1;
+				tsock = -1;
 			}
 		}
 

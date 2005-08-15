@@ -60,7 +60,7 @@ namespace xvr2{
 				 * very moment that this class is instantiated the
 				 * socket would try to connect with the remote 
 				 * host inmediately */
-				TCPSocket(TCPsocket s, int pport);
+				TCPSocket(int s, int pport);
 				/** Pointer copy-constructor */
 				TCPSocket(TCPSocket *s);
 				/**
