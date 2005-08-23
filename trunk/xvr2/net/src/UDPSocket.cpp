@@ -12,6 +12,7 @@
 #include<sys/types.h>
 #include"xvr2/NetworkException.h"
 #include"xvr2/MemoryException.h"
+#include<errno.h>
 
 namespace xvr2 {
 	namespace Net {
@@ -19,13 +20,15 @@ namespace xvr2 {
 		xvr2::Mutex udtim;
 #endif
 
+		static int sendTimeout;
+
 		int UDPSocket::getSendTimeout(){
 #ifdef XVR2_THREAD_UNSAFE
-			return UDPSocket::sendTimeout;
+			return sendTimeout;
 #else
 			int t;
 			udtim.lock();
-			t = UDPSocket::sendTimeout;
+			t = sendTimeout;
 			udtim.unlock();
 			return t;
 #endif
@@ -35,7 +38,7 @@ namespace xvr2 {
 #ifndef XVR2_THREAD_UNSAFE
 			udtim.lock();
 #endif
-			UDPSocket::sendTimeout = t;
+			sendTimeout = t;
 #ifndef XVR2_THREAD_UNSAFE
 			udtim.unlock();
 #endif
@@ -90,7 +93,7 @@ namespace xvr2 {
 				}
 			}
 		}
-		void UDPSocket::send(void *buf, int size){
+		void UDPSocket::send(const void *buf, int size){
 			int r;
 			r = ::sendto(tsock, buf, size, flags, (struct ::sockaddr *)&ipv4addr, sizeof(ipv4addr));
 			if(r == -1){

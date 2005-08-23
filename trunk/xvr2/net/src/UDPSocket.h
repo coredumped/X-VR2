@@ -17,7 +17,6 @@ namespace Net {
 			friend class UDPServerSocket;
 		protected:
 			int flags;
-			static int sendTimeout;
 		public:
 			UDPSocket();
 			UDPSocket(const String &_addr, int _port);
@@ -25,10 +24,10 @@ namespace Net {
 			virtual ~UDPSocket();
 			static void setSendTimeout(int t);
 			static int  getSendTimeout();
-			virtual void send(void *buf, int size);
+			virtual void send(const void *buf, int size);
 			template<class T>
-			void send(T buf){
-				send(buf, sizeof(T));
+			void send(const T *buf){
+				send((void *)buf, sizeof(T));
 			}
 	};
 };
