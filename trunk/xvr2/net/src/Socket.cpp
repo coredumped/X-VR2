@@ -18,8 +18,8 @@
 #ifdef USE_DEBUG
 #include"xvr2/Console.h"
 #include"xvr2/String.h"
-#include"xvr2/ThreadManager.h"
 #endif
+#include"xvr2/ThreadManager.h"
 #include"xvr2/IPv4Address.h"
 
 namespace xvr2{
@@ -87,7 +87,12 @@ namespace xvr2{
 			__debug_console.errWrite(s);
 			__debug_console.errWrite(msg);
 #else
-			std::cout << obj->getClassName() << "[ptr=" << (unsigned int)obj << ",tid: " << Thread::numericID() << ",sockid=" << tsock << "]: " << msg;
+			if(ThreadManager::getCurrentThread() == 0){
+				std::cout << obj->getClassName() << "[ptr=" << (unsigned int)obj << ",tid: MAIN,sockid=" << tsock << "]: " << msg;
+			}
+			else{
+				std::cout << obj->getClassName() << "[ptr=" << (unsigned int)obj << ",tid: " << ThreadManager::getCurrentThread() << ",sockid=" << tsock << "]: " << msg;
+			}
 			std::cout.flush();
 #endif
 		}
@@ -113,7 +118,12 @@ namespace xvr2{
 			__debug_console.errWrite(msg);
 			__debug_console.errWrite("\n");
 #else
-			std::cout << obj->getClassName() << "[ptr=" << (unsigned int)obj << ",tid: " << Thread::numericID() << ",sockid=" << tsock << "]: " << msg << std::endl;
+			if(ThreadManager::getCurrentThread() == 0){
+				std::cout << obj->getClassName() << "[ptr=" << (unsigned int)obj << ",tid: MAIN,sockid=" << tsock << "]: " << msg << std::endl;
+			}
+			else{
+				std::cout << obj->getClassName() << "[ptr=" << (unsigned int)obj << ",tid: " << ThreadManager::getCurrentThread() << ",sockid=" << tsock << "]: " << msg << std::endl;
+			}
 #endif
 		}
 		

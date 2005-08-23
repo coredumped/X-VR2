@@ -10,7 +10,7 @@ namespace xvr2 {
 namespace Net {
 
 	IPv4Address::IPv4Address(const String &ip_or_host){
-		IPv4Address *tmp;
+		IPv4Address *tmp = 0;
 		try{
 			tmp = IPv4Resolver::resolve(ip_or_host);
 			bzero(&addr, sizeof(struct ::sockaddr_in));
@@ -20,7 +20,8 @@ namespace Net {
 			delete tmp;
 		}
 		catch(...){
-			delete tmp;
+			if(tmp != 0)
+				delete tmp;
 			throw;
 		}
 	}
@@ -29,7 +30,7 @@ namespace Net {
 		tmpx.concat((int)b);
 		tmpx.concat((int)c);
 		tmpx.concat((int)d);
-		IPv4Address *tmp;
+		IPv4Address *tmp = 0;
 		try{
 			tmp = IPv4Resolver::resolve(tmpx);
 			bzero(&addr, sizeof(struct ::sockaddr_in));
@@ -39,7 +40,8 @@ namespace Net {
 			delete tmp;
 		}
 		catch(...){
-			delete tmp;
+			if(tmp != 0)
+				delete tmp;
 			throw;
 		}
 	}
