@@ -14,6 +14,7 @@
 #include<xvr2/NSTryAgainException.h>
 #include<xvr2/NSFatalException.h>
 #include<xvr2/NoIPForYouException.h>
+#include<errno.h>
 
 namespace xvr2 {
 namespace Net {

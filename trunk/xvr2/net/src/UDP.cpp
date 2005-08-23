@@ -13,6 +13,7 @@
 #include<sys/types.h>
 #include<sys/socket.h>
 #include<sys/poll.h>
+#include<errno.h>
 
 namespace xvr2{
 namespace Net{
