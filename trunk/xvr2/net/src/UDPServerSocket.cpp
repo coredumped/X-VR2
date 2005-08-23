@@ -8,6 +8,7 @@
 #include"xvr2/String.h"
 #include"xvr2/Mutex.h"
 #include<sys/poll.h>
+#include<errno.h>
 #include"xvr2/UDPReceiveTimeoutException.h"
 
 namespace xvr2 {
@@ -16,13 +17,15 @@ namespace xvr2 {
 		xvr2::Mutex udtimx;
 #endif
 
+		static int recvTimeout;
+
 		int UDPServerSocket::getRecvTimeout(){
 #ifdef XVR2_THREAD_UNSAFE
-			return UDPServerSocket::recvTimeout;
+			return recvTimeout;
 #else
 			int t;
 			udtimx.lock();
-			t = UDPServerSocket::recvTimeout;
+			t = recvTimeout;
 			udtimx.unlock();
 			return t;
 #endif
@@ -32,7 +35,7 @@ namespace xvr2 {
 #ifndef XVR2_THREAD_UNSAFE
 			udtimx.lock();
 #endif
-			UDPServerSocket::recvTimeout = t;
+			recvTimeout = t;
 #ifndef XVR2_THREAD_UNSAFE
 			udtimx.unlock();
 #endif
@@ -140,6 +143,14 @@ namespace xvr2 {
 				}
 			}
 			return bytes;
+		}
+		int UDPServerSocket::peek(void *buf, int size){
+			int fx = flags;
+			int ret;
+			flags |= MSG_PEEK;
+			ret = receive(buf, size);
+			flags = fx;
+			return ret;
 		}
 	};
 };

@@ -15,7 +15,6 @@ namespace Net {
 		private:
 		protected:
 			int flags;
-			static int recvTimeout;
 			void bind();
 		public:
 			UDPServerSocket(int _port);
@@ -23,10 +22,15 @@ namespace Net {
 			UDPServerSocket(const String &addr, int _port);
 			static void setRecvTimeout(int t);
 			static int  getRecvTimeout();
+			int peek(void *buf, int size);
 			virtual int receive(void *buf, int size);
 			template<class T>
-			int receive(T buf){
-				return receive(buf, sizeof(T));
+			int receive(T *buf){
+				return receive((void *)buf, sizeof(T));
+			}
+			template<class T>
+			int peek(T *buf){
+				return peek((void *)buf, sizeof(T));
 			}
 	};
 };
