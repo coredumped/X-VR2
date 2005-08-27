@@ -132,6 +132,10 @@ namespace xvr2{
 	unsigned long int Thread::numericID(){
 		return thread;
 	}
+
+	unsigned long int Thread::numericID() const {
+		return thread;
+	}
 	
 	void *Thread::join(){
 		void *ret = 0;

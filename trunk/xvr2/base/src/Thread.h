@@ -72,7 +72,7 @@ namespace xvr2{
 	 * 	t1->start();
 	 * 	t2->start();
 	 * 	t3->start();
-	 * 	while(t0->isRunning() || t1->isRunning() || t2->isRunning() || t3->isRunning()){
+	 * 	while(ThreadManager::activeCount() > 0){
 	 * 		//Wait until all calculations are complete.
 	 * 		sleep(1);
 	 * 	}
@@ -175,6 +175,7 @@ namespace xvr2{
 		         * This method will return a 32 bit integer 
 			 * representing the current thread */
 			unsigned long int numericID();
+			unsigned long int numericID() const ;
 
 			/**
 			 * Waits for this thread to finish successfully joining the

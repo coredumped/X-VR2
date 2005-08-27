@@ -63,7 +63,7 @@ namespace xvr2 {
 		addThread(t, pthread_self()); //Add the thread to the thread list
 		val = t->run();
 		removeThread(t, pthread_self()); //Remove thread from the thread list
-		delete t;
+		//delete t; //Temporarily commented out, please report any memory leaks
 		return val;
 	}
 
@@ -128,5 +128,8 @@ namespace xvr2 {
 	}
 	const Thread *ThreadManager::getCurrentThread(){
 		return findThread(pthread_self());
+	}
+	const unsigned long int ThreadManager::getCurrentThreadID(){
+		return pthread_self();
 	}
 };

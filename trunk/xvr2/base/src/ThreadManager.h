@@ -26,6 +26,7 @@ class ThreadManager:public Threading {
 		static bool isRunning(Thread *t);
 		/** Returns the currently running Thread Object or 0 if the method is called from a non-Thread.*/
 		static const Thread *getCurrentThread();
+		static const unsigned long int getCurrentThreadID();
 		/** Returns how many threads are actively running. */
 		static unsigned int activeCount();
 };
