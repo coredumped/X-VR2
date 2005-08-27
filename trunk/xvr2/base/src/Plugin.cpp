@@ -51,7 +51,7 @@ namespace xvr2{
 	}
 
 	void Plugin::unload(){
-		if(handle){
+		if(handle != 0){
 #ifdef USE_DEBUG
 			std::cerr << " Plugin::unload " << std::endl;
 #endif
