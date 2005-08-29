@@ -37,14 +37,6 @@ namespace xvr2{
 			void writeLine(const String &text);
 	};
 
-#ifdef USE_DEBUG
-	class __xvr2_DebugOutput:public TextOutput{
-				void outputMethod(const void *buf, UInt32 size);
-				bool redirect_to_file;
-		public:
-			__xvr2_DebugOutput(bool rf = true);
-	};
-#endif
 };
 
 #endif

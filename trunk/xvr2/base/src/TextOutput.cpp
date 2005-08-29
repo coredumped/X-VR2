@@ -39,26 +39,5 @@ namespace xvr2{
 	void TextOutput::outputMethod(const void *buf, UInt32 size){
 		std::cerr << __PRETTY_FUNCTION__ << ' ' << msgPleaseOverride << std::endl;
 	}
-#ifdef USE_DEBUG
-	__xvr2_DebugOutput::__xvr2_DebugOutput(bool rf){
-#ifndef USING_GCC3
-		setClassName(_xvr2__xvr2_DebugOutput);
-#endif
-		redirect_to_file = rf;
-	}
-	
-	void __xvr2_DebugOutput::outputMethod(const void *buf, UInt32 siz){
-		if(redirect_to_file){
-			FILE *fptr;
-			fptr = fopen("xvr2-debug.log", "a");
-			fwrite(buf, 1, siz, fptr);
-			fclose(fptr);
-		}
-		else{
-			std::cout << (char *)buf;
-			std::cout.flush();
-		}
-	}
-#endif
 };
 

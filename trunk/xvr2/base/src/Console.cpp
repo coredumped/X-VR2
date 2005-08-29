@@ -8,10 +8,6 @@
 #include<xvr2/Mutex.h>
 
 namespace xvr2{
-	
-#ifdef USE_DEBUG
-	Console __debug_console;
-#endif
 
 	/** Mutex for I/O ops under the Console class */
 	static Mutex __conm;
@@ -31,12 +27,12 @@ namespace xvr2{
 	}
 
 	Console::~Console(){
-		if(using_builtin_out && (out != 0))
-				xvr2_delete(out);
-		if(using_builtin_err && (err != 0))
-				xvr2_delete(err);
-		if(using_builtin_in && (in != 0))
-				xvr2_delete(in);
+		if(using_builtin_out == true && (out != 0))
+				delete out;
+		if(using_builtin_err == true && (err != 0))
+				delete err;
+		if(using_builtin_in == true && (in != 0))
+				delete in;
 	}
 
 	void Console::setOutput(TextOutput *to){

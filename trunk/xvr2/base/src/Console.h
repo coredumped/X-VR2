@@ -95,9 +95,6 @@ namespace xvr2{
 			void readLine(String &line);
 			const Console &operator<<(const String &s) const;
 	};
-#ifdef USE_DEBUG
-	extern Console __debug_console;
-#endif
 };
 
 #endif

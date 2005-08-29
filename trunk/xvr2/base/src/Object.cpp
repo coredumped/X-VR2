@@ -6,23 +6,16 @@
  */
 #include<xvr2/Object.h>
 #include<iostream>
-#include<pthread.h>
-#ifdef USE_DEBUG
-#include<xvr2/Console.h>
-#endif
+#include<xvr2/DebugConsole.h>
 #ifdef USING_GCC3
 #include<stdlib.h>
 #include<cxxabi.h>
 #endif
+#include"xvr2/ThreadManager.h"
 
 namespace xvr2{
-#ifdef USE_DEBUG
-	extern Console __debug_console;
-#ifdef USING_GCC3
 #ifndef GCC_3_4
 	bool vterm;
-#endif
-#endif
 #endif
 	
 
@@ -60,38 +53,22 @@ namespace xvr2{
 	void Object::debugmsg(Object *obj, const char *msg){
 		if(obj == 0)
 			return;
-#ifdef USE_DEBUG
-		String s;
-		s = obj->getClassName();
-		s += "[ptr=";
-		s.concat((unsigned int)obj);
-		s += ",tid=";
-		s.concat((unsigned int)pthread_self());
-		s += "]: ";
-		__debug_console.errWrite(s);
-		__debug_console.errWrite(msg);
-#else
-		std::cout << obj->getClassName() << "[ptr=" << (unsigned int)obj << ",tid=" << pthread_self() << "]: " << msg;
-		std::cout.flush();
-#endif
+		//String s;
+		debugConsole << obj->getClassName() << "[ptr=" << (unsigned int)obj << ",tid=";
+		if(ThreadManager::getCurrentThreadID() == 0){
+			debugConsole << "MAIN";
+		}
+		else{
+			debugConsole << (unsigned int)ThreadManager::getCurrentThreadID();
+		}
+		debugConsole << "]: " << msg;
 	}
 
 	void Object::debugmsgln(Object *obj, const char *msg){
 		if(obj == 0)
 			return;
-#ifdef USE_DEBUG
-		String s;
-		s = obj->getClassName();
-		s += "[ptr=";
-		s.concat((unsigned int)obj);
-		s += ",tid=";
-		s.concat((unsigned int)pthread_self());
-		s += "]: ";
-		__debug_console.errWrite(s);
-		__debug_console.errWriteLine(msg);
-#else
-		std::cout << obj->getClassName() << "[ptr=" << (unsigned int)obj << ",tid=" << pthread_self() << "]: " << msg << std::endl;
-#endif
+		debugmsg(obj, msg);
+		debugConsole << "\n";
 	}
 
 #ifndef USING_GCC3

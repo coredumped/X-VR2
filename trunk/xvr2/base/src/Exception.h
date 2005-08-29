@@ -9,6 +9,7 @@
 #define __XVR2_EXCEPTION_H__
 
 #include<xvr2/Object.h>
+#include<xvr2/TraceDumper.h>
 
 namespace xvr2{
 	namespace Exception{
@@ -16,7 +17,7 @@ namespace xvr2{
 		 * \class Exception Exception.h
 		 * This is the parent class of all the exceptions
 		 */
-		class Exception:public Object{
+		class Exception:public ExceptionTracer {
 			private:
 			protected:
 				/**
