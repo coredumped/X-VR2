@@ -15,10 +15,8 @@
 #endif
 #include<iostream>
 
-#ifdef USE_DEBUG
-#include"xvr2/Console.h"
+#include"xvr2/DebugConsole.h"
 #include"xvr2/String.h"
-#endif
 #include"xvr2/ThreadManager.h"
 #include"xvr2/IPv4Address.h"
 
@@ -31,100 +29,28 @@ namespace xvr2{
 #endif
 		}
 
-		/*Socket::Socket(int _port){
-#ifndef USING_GCC3
-			setClassName(xvr2::_xvr2Socket);
-#endif
-			port = _port;
-			bzero(&ipv4addr, sizeof(struct ::sockaddr_in));
-			ipv4addr.sin_family = AF_INET;
-			ipv4addr.sin_port = htons(_port);
-			ipv4addr.sin_addr.s_addr = INADDR_ANY;
-			tsock = socket(ipv4addr.sin_family, SOCK_DGRAM, 0);
-			if (bind(tsock,(struct sockaddr *)&ipv4addr,sizeof(struct ::sockaddr_in))<0) {
-				switch(errno){
-					case EINVAL:
-						throw Exception::SocketAlreadyBounded();
-						break;
-					default:
-						throw Exception::Network();
-				}
-			}
-			if(tsock < 0){
-				switch(errno){
-					case EMFILE:
-						throw Exception::ProcOutOfFileDescriptors();
-					break;
-					case ENFILE:
-						throw Exception::SysOutOfFileDescriptors();
-					break;
-					default:
-						throw Exception::IO();
-				}
-			}
-		}*/
-
 		Socket::~Socket(){
 		}
 
 		void Socket::debugmsg(Socket *obj, const char *msg){
-#ifdef USE_DEBUG
-			xvr2::String s;
-			s = obj->getClassName();
-			s += "[ptr=";
-			s.concat((unsigned int)obj);
-			s += ",tid=";
-			//s.concat((unsigned int)pthread_self());
-			if(ThreadManager::getCurrentThread() == 0){
-				s.concat("MAIN");
+			if(obj == 0)
+				return;
+			//xvr2::String s;
+			debugConsole << obj->getClassName() << "[ptr=" << (unsigned int)obj << ",tid=";
+			if(ThreadManager::getCurrentThreadID() == 0){
+				debugConsole << "MAIN";
 			}
 			else{
-				s.concat((unsigned int)ThreadManager::getCurrentThread());
+				debugConsole << (unsigned int)ThreadManager::getCurrentThreadID();
 			}
-			s += ",sockid=";
-			s.concat((int)tsock);
-			s += "]: ";
-			__debug_console.errWrite(s);
-			__debug_console.errWrite(msg);
-#else
-			if(ThreadManager::getCurrentThread() == 0){
-				std::cout << obj->getClassName() << "[ptr=" << (unsigned int)obj << ",tid: MAIN,sockid=" << tsock << "]: " << msg;
-			}
-			else{
-				std::cout << obj->getClassName() << "[ptr=" << (unsigned int)obj << ",tid: " << ThreadManager::getCurrentThread() << ",sockid=" << tsock << "]: " << msg;
-			}
-			std::cout.flush();
-#endif
+			debugConsole << ",sockid=" << (int)tsock << "]: " << msg;
 		}
 
 		void Socket::debugmsgln(Socket *obj, const char *msg){
-#ifdef USE_DEBUG
-			xvr2::String s;
-			s = obj->getClassName();
-			s += "[ptr=";
-			s.concat((unsigned int)obj);
-			s += ",tid=";
-			//s.concat((unsigned int)pthread_self());
-			if(ThreadManager::getCurrentThread() == 0){
-				s.concat("MAIN");
-			}
-			else{
-				s.concat((unsigned int)ThreadManager::getCurrentThread());
-			}
-			s += ",sockid=";
-			s.concat((int)tsock);
-			s += "]: ";
-			__debug_console.errWrite(s);
-			__debug_console.errWrite(msg);
-			__debug_console.errWrite("\n");
-#else
-			if(ThreadManager::getCurrentThread() == 0){
-				std::cout << obj->getClassName() << "[ptr=" << (unsigned int)obj << ",tid: MAIN,sockid=" << tsock << "]: " << msg << std::endl;
-			}
-			else{
-				std::cout << obj->getClassName() << "[ptr=" << (unsigned int)obj << ",tid: " << ThreadManager::getCurrentThread() << ",sockid=" << tsock << "]: " << msg << std::endl;
-			}
-#endif
+			if(obj == 0)
+				return;
+			debugmsg(obj, msg);
+			debugConsole << "\n";
 		}
 		
 		int Socket::setSockOption(int opname, void *optval, 
