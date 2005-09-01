@@ -83,6 +83,8 @@ namespace xvr2{
 
 				char *escapeString(const char *);
 				const char *errorMessage();
+				/** Checks to see if the connection is still ok */
+				const bool isConnected();
 		};
 	};
 };

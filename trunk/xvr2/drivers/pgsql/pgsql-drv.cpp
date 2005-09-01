@@ -584,6 +584,12 @@ char *__drv_error_message(void *handle){
 	return PQerrorMessage(conn->conn);
 }
 
+bool __drv_connected(void *handle){
+	__pgsql_conn *conn;
+	conn = (__pgsql_conn *)handle;
+	return PQstatus(conn->conn) == CONNECTION_OK ? true : false;
+}
+
 char *__drv_result_error_message(void *__res_handle){
 //char *PQresultErrorMessage(const PGresult *res);
 	__pgsql_res *r;

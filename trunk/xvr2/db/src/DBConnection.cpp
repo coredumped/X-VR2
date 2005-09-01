@@ -51,14 +51,14 @@ namespace xvr2{
 		}
 	
 		Connection::~Connection(){
-			if(__connected)
+			if(isConnected())
 				disconnect();
 			if(bulk_delim != 0)
 				xvr2_delete(bulk_delim);
 		}
 	
 		void Connection::connect(const String &s, const String &dbname, const String &u, const String &p, int port){
-			if(__connected)
+			if(isConnected())
 				throw Exception::AlreadyConnected2DB();
 			if(bulk_delim != 0)
 				xvr2_delete(bulk_delim);
@@ -83,7 +83,7 @@ namespace xvr2{
 				__connected = false;	
 			}
 			driver = d;
-			if(__connected)
+			if(isConnected())
 				throw Exception::AlreadyConnected2DB();
 			if(bulk_delim != 0)
 				xvr2_delete(bulk_delim);
@@ -112,7 +112,7 @@ namespace xvr2{
 		}
 	
 		void Connection::disconnect(){
-			if(!__connected)
+			if(!isConnected())
 				throw Exception::DBConnectFirst();
 			try{
 				driver->disconnect(__conn);
@@ -126,7 +126,7 @@ namespace xvr2{
 	
 		ResultSet *Connection::query(const String &cmd){
 			ResultSet *r = 0;
-			if(!__connected)
+			if(!isConnected())
 				throw Exception::DBConnectFirst();
 			try{
 				r = driver->query(__conn, cmd);
@@ -141,7 +141,7 @@ namespace xvr2{
 		}
 	
 		void Connection::commit(){
-			if(!__connected)
+			if(!isConnected())
 				throw Exception::DBConnectFirst();
 			try{
 				driver->commit(__conn);
@@ -152,7 +152,7 @@ namespace xvr2{
 		}
 	
 		void Connection::bulkUploadBegin(const String &table, const String &cols, const String &_delim){
-			if(!__connected)
+			if(!isConnected())
 				throw Exception::DBConnectFirst();
 			try{
 				if(bulk_delim != 0)
@@ -167,7 +167,7 @@ namespace xvr2{
 		}
 
 		void Connection::bulkUploadData(const String &data){
-			if(!__connected)
+			if(!isConnected())
 				throw Exception::DBConnectFirst();
 			try{
 				if(!driver->bulkAddData(__conn, data.toCharPtr(), bulk_delim->toCharPtr()))
@@ -179,7 +179,7 @@ namespace xvr2{
 		}
 
 		void Connection::bulkUploadEnd(){
-			if(!__connected)
+			if(!isConnected())
 				throw Exception::DBConnectFirst();
 			try{
 				if(!driver->bulkEnd(__conn))
@@ -196,6 +196,16 @@ namespace xvr2{
 
 		const char *Connection::errorMessage(){
 			return driver->errorMessage(__conn);
+		}
+
+		const bool Connection::isConnected(){
+			if(__conn == 0){
+				__connected = false;
+			}
+			else if(driver->hasConnPolling()){
+				__connected = driver->isConnected(__conn);
+			}
+			return __connected;
 		}
 
 	//End implementation of class: Connection

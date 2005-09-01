@@ -72,6 +72,15 @@ namespace xvr2{
 #endif
 			}
 
+			try {
+				__drv_connected = (bool (*)(void *))__drv->getSymbol("__drv_connected");
+				has_conn_polling = true;
+			}
+			catch(...){
+				__drv_connected = 0;
+				has_conn_polling = false;
+			}
+
 			__drv_quote_string = (char *(*)(const char *))__drv->getSymbol("__drv_quote_string");
 			__drv_error_message = (char *(*)(void *))__drv->getSymbol("__drv_error_message");
 			__drv_result_error_message = (char *(*)(void *))__drv->getSymbol("__drv_result_error_message");
@@ -221,6 +230,13 @@ namespace xvr2{
 		const char *Driver::resultErrorMessage(void *res_handle){
 			//char *__drv_result_error_message(void *r);
 			return __drv_result_error_message(res_handle);
+		}
+
+		const bool Driver::isConnected(void *conn_handle){
+			if(hasConnPolling()){
+				return __drv_connected(conn_handle);
+			}
+			return false;
 		}
 	};
 };

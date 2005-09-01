@@ -53,6 +53,10 @@ namespace xvr2{
 				char		*(*__drv_quote_string)(const char *in);
 				char 		*(*__drv_error_message)(void *handle);
 				char 		*(*__drv_result_error_message)(void *r);
+
+				// Connection status polling
+				bool		(*__drv_connected)(void *conn_handle);
+				bool		has_conn_polling;
 			public:
 				/** Default constructor it initialzes some 
 				 *  defaults only */
@@ -164,6 +168,10 @@ namespace xvr2{
 				 *  \param res_handle The ResultSet handle
 				 *  \return The error string*/
 				virtual const char *resultErrorMessage(void *res_handle);
+				virtual const bool isConnected(void *conn_handle);
+				const bool hasConnPolling(){
+					return has_conn_polling;
+				}
 		};
 	};
 };

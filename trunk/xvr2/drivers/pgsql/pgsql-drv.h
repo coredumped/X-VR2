@@ -42,6 +42,7 @@ char			*__drv_quote_string(const char *in);
 char 			*__drv_error_message(void *handle);
 char 			*__drv_result_error_message(void *r_handle);
 
+bool			__drv_connected(void *handle); //Tells if the connection is valid or not
 };
 
 
