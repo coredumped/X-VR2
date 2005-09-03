@@ -24,7 +24,7 @@ static DB::Driver *me;
 static DB::DriverInfo *info;
 static MYSQL mysql_hdlr;
 
-xvr2::Mutex __sqlGlobalMutex;
+//xvr2::Mutex __sqlGlobalMutex;
 
 void _init(){
 	//Default library loading function
@@ -56,17 +56,17 @@ void *__drv_connect(const char *srvr, const char *dbname, const char *usr, const
 	pport = port;
 	if(port == 0)
 		pport = 3306;
-	__sqlGlobalMutex.lock();
+	//__sqlGlobalMutex.lock();
 	mysql_init(&mysql_hdlr);
 	if(!(conn = mysql_real_connect(&mysql_hdlr, srvr, usr, pass, 0, pport, 0, 0))){
 		#ifdef USE_DEBUG
 		std::cerr << mysql_error(&mysql_hdlr) << std::endl;
 		#endif
-		__sqlGlobalMutex.unlock();
+		//__sqlGlobalMutex.unlock();
 		throw Exception::DBConnectionFailed();
 		return 0;
 	}
-	__sqlGlobalMutex.unlock();
+	//__sqlGlobalMutex.unlock();
 	try{
 		__drv_usedb((void *)conn, dbname);
 	}
@@ -81,9 +81,9 @@ UInt32 __drv_disconnect(void *handle){
 	//A call to this method will disconnect you from the database
 	MYSQL *conn;
 	conn = (MYSQL *)handle;
-	__sqlGlobalMutex.lock();
+	//__sqlGlobalMutex.lock();
 	mysql_close(conn);
-	__sqlGlobalMutex.unlock();
+	//__sqlGlobalMutex.unlock();
 #if ( MYSQL_VERSION_ID >= 41000 )
 	mysql_thread_end();
 #endif

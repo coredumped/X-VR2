@@ -224,7 +224,7 @@ class __pgsql_res {
 		}
 };
 
-xvr2::Mutex __sqlGlobalMutex;
+//xvr2::Mutex __sqlGlobalMutex;
 
 void _init(){
 	//Default library loading function
@@ -264,7 +264,7 @@ void *__drv_connect(const char *srvr, const char *dbname, const char *usr, const
 	pport = port;
 	if(port == 0)
 		pport = 5432;
-	__sqlGlobalMutex.lock();
+	//__sqlGlobalMutex.lock();
 	cstr = "host=";
 	cstr += srvr;
 	cstr += " user=";
@@ -276,12 +276,12 @@ void *__drv_connect(const char *srvr, const char *dbname, const char *usr, const
 	cstr += " dbname=";
 	cstr += dbname;
 	if(!(conn = PQconnectdb(cstr.toCharPtr()))){
-		__sqlGlobalMutex.unlock();
+		//__sqlGlobalMutex.unlock();
 		throw Exception::DBConnectionFailed();
 		return 0;
 	}
 	
-	__sqlGlobalMutex.unlock();
+	//__sqlGlobalMutex.unlock();
 	connx = new __pgsql_conn(conn);
 	try{
 		connx->requestMappings();
@@ -301,10 +301,10 @@ UInt32 __drv_disconnect(void *handle){
 	//A call to this method will disconnect you from the database
 	__pgsql_conn *conn;
 	conn = (__pgsql_conn *)handle;
-	__sqlGlobalMutex.lock();
+	//__sqlGlobalMutex.lock();
 	PQfinish(conn->conn);
 	xvr2_delete(conn);
-	__sqlGlobalMutex.unlock();
+	//__sqlGlobalMutex.unlock();
 	return 1;
 }
 
