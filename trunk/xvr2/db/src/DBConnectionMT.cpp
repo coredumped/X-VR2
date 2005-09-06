@@ -42,6 +42,9 @@ namespace xvr2{
 			mt.lock();
 			try{
 				Connection::connect(s, dbname, u, p, port);
+#ifdef USE_DEBUG
+				debugmsgln(this, "connected");
+#endif
 			}
 			catch(...){
 				mt.unlock();
@@ -54,6 +57,9 @@ namespace xvr2{
 			mt.lock();
 			try{
 				Connection::connect(d, s, dbname, u, p, port);
+#ifdef USE_DEBUG
+				debugmsgln(this, "connected");
+#endif
 			}
 			catch(...){
 				mt.unlock();
@@ -66,6 +72,9 @@ namespace xvr2{
 			mt.lock();
 			try{
 				Connection::connect();
+#ifdef USE_DEBUG
+				debugmsgln(this, "connected");
+#endif
 			}
 			catch(...){
 				mt.unlock();
@@ -78,6 +87,9 @@ namespace xvr2{
 			mt.lock();
 			try{
 				Connection::disconnect();
+#ifdef USE_DEBUG
+				debugmsgln(this, "disconnected");
+#endif
 			}
 			catch(...){
 				mt.unlock();
@@ -90,6 +102,9 @@ namespace xvr2{
 			ResultSet *r = 0;
 			mt.lock();
 			try{
+#ifdef USE_DEBUG
+				debugmsgln(this, cmd.toCharPtr());
+#endif
 				r = Connection::query(cmd);
 			}
 			catch(...){
@@ -104,6 +119,9 @@ namespace xvr2{
 			mt.lock();
 			try{
 				Connection::commit();
+#ifdef USE_DEBUG
+				debugmsgln(this, "commit");
+#endif
 			}
 			catch(...){
 				mt.unlock();
@@ -116,6 +134,9 @@ namespace xvr2{
 			mt.lock();
 			try{
 				Connection::bulkUploadBegin(table, cols, _delim);
+#ifdef USE_DEBUG
+				debugmsgln(this, "BulkUploadBegin");
+#endif
 			}
 			catch(...){
 				mt.unlock();
@@ -128,6 +149,9 @@ namespace xvr2{
 			mt.lock();
 			try{
 				Connection::bulkUploadData(data);
+#ifdef USE_DEBUG
+				debugmsgln(this, "BulkUploadData");
+#endif
 			}
 			catch(...){
 				mt.unlock();
@@ -140,6 +164,9 @@ namespace xvr2{
 			mt.lock();
 			try{
 				Connection::bulkUploadEnd();
+#ifdef USE_DEBUG
+				debugmsgln(this, "BulkUploadEnd");
+#endif
 			}
 			catch(...){
 				mt.unlock();
@@ -181,6 +208,9 @@ namespace xvr2{
 			mt.lock();
 			try{
 				ret = Connection::isConnected();
+#ifdef USE_DEBUG
+				debugmsgln(this, "Connection status verified by user.");
+#endif
 			}
 			catch(...){
 				mt.unlock();
