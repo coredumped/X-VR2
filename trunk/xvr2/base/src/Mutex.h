@@ -1,8 +1,8 @@
 /*
  * $Id$
  */
-#ifndef ___MUTEX_H__
-#define ___MUTEX_H__
+#ifndef __XVR2_MUTEX_H__
+#define __XVR2_MUTEX_H__
 
 #ifdef USE_GNUPTH
 #include<pth.h>
