@@ -40,7 +40,8 @@ namespace xvr2{
 #ifndef USING_GCC3
 				setClassName(_xvr2SharedVar);
 #endif
-				setValue(v);
+				//setValue(v);
+				var = v;
 			}
 			/** Increases the shared variable's value in one unit*/
 			T operator++(int XXX = 0){
