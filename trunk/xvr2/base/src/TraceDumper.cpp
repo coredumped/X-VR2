@@ -22,8 +22,13 @@
 namespace xvr2{
 	namespace Exception{
 
-		static xvr2::Mutex _tm;
+		//static xvr2::Mutex _tm;
 		static bool __enabled;
+#ifdef USE_POSIX_THREADS
+		static pthread_mutex_t _tm;
+		static bool __inited = false;
+		static pthread_mutexattr_t _tm_attr;
+#endif
 
 		static char *demangle_symbol(const char *symbol){
 			char *ret, *dm;
@@ -66,22 +71,34 @@ namespace xvr2{
 
 		bool ExceptionTracer::isEnabled(){
 			bool ret;
-			_tm.lock();
+#ifdef USE_POSIX_THREADS
+			pthread_mutex_lock(&_tm);
+#endif
 			ret = __enabled;
-			_tm.unlock();
+#ifdef USE_POSIX_THREADS
+			pthread_mutex_unlock(&_tm);
+#endif
 			return ret;
 		}
 
 		void ExceptionTracer::enable(){
-			_tm.lock();
+#ifdef USE_POSIX_THREADS
+			pthread_mutex_lock(&_tm);
+#endif
 			__enabled = true;
-			_tm.unlock();
+#ifdef USE_POSIX_THREADS
+			pthread_mutex_unlock(&_tm);
+#endif
 		}
 
 		void ExceptionTracer::disable(){
-			_tm.lock();
+#ifdef USE_POSIX_THREADS
+			pthread_mutex_lock(&_tm);
+#endif
 			__enabled = false;
-			_tm.unlock();
+#ifdef USE_POSIX_THREADS
+			pthread_mutex_unlock(&_tm);
+#endif
 		}
 
 		void ExceptionTracer::dumpTrace(){
@@ -91,7 +108,9 @@ namespace xvr2{
 			int nSize;
 			char ** symbols;
 			long int tid;
-			_tm.lock();
+#ifdef USE_POSIX_THREADS
+			pthread_mutex_lock(&_tm);
+#endif
 			bzero((char *)array, EXCEPTION_DEPTH_TRACE);
 		        nSize = backtrace(array, EXCEPTION_DEPTH_TRACE);
 		        symbols = backtrace_symbols(array, nSize);
@@ -113,11 +132,20 @@ namespace xvr2{
 				free(demangled);
 			}
 			free(symbols);
-			_tm.unlock();
+#ifdef USE_POSIX_THREADS
+			pthread_mutex_unlock(&_tm);
+#endif
 		}
 
 
 		ExceptionTracer::ExceptionTracer(){
+#ifdef USE_POSIX_THREADS
+			if(!__inited){
+				pthread_mutexattr_init(&_tm_attr);
+				pthread_mutexattr_settype(&_tm_attr, PTHREAD_MUTEX_ERRORCHECK_NP);
+				pthread_mutex_init(&_tm, &_tm_attr);
+			}
+#endif
 #ifdef USE_DEBUG
 			dumpTrace();
 #else
