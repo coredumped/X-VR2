@@ -10,7 +10,7 @@
 namespace xvr2{
 
 	/** Mutex for I/O ops under the Console class */
-	static Mutex __conm;
+	//static Mutex __conm;
 
 	Console::Console(){
 #ifndef USING_GCC3
@@ -91,60 +91,60 @@ namespace xvr2{
 
 	void Console::outWrite(const void *buf, UInt32 siz){
 		if(out != 0){
-			__conm.lock();
+			//__conm.lock();
 			try{
 				out->write(buf, siz);
 			}
 			catch(...){
-				__conm.unlock();
+				//__conm.unlock();
 				throw;
 			}
-			__conm.unlock();
+			//__conm.unlock();
 		}
 		else throw Exception::NullPointer();
 	}
 
 	void Console::outWrite(const String &text) const {
 		if(out != 0){
-			__conm.lock();
+			//__conm.lock();
 			try{
 				out->write(text.toCharPtr(), text.size());
 			}
 			catch(...){
-				__conm.unlock();
+				//__conm.unlock();
 				throw;
 			}
-			__conm.unlock();
+			//__conm.unlock();
 		}
 		else throw Exception::NullPointer();
 	}
 
 	void Console::outWriteLine(const void *buf, UInt32 siz){
 		if(out != 0){
-			__conm.lock();
+			//__conm.lock();
 			try{
 				out->writeLine(buf, siz);
 			}
 			catch(...){
-				__conm.unlock();
+				//__conm.unlock();
 				throw;
 			}
-			__conm.unlock();
+			//__conm.unlock();
 		}
 		else throw Exception::NullPointer();
 	}
 
 	void Console::outWriteLine(const String& text){
 		if(out != 0){
-			__conm.lock();
+			//__conm.lock();
 			try{
 				out->writeLine(text.toCharPtr(), text.size());
 			}
 			catch(...){
-				__conm.unlock();
+				//__conm.unlock();
 				throw;
 			}
-			__conm.unlock();
+			//__conm.unlock();
 		}
 		else throw Exception::NullPointer();
 	}
@@ -153,90 +153,90 @@ namespace xvr2{
 
 	void Console::errWrite(const void *buf, UInt32 siz){
 		if(err != 0){
-			__conm.lock();
+			//__conm.lock();
 			try{
 				err->write(buf, siz);
 			}
 			catch(...){
-				__conm.unlock();
+				//__conm.unlock();
 				throw;
 			}
-			__conm.unlock();
+			//__conm.unlock();
 		}
 		else throw Exception::NullPointer();
 	}
 
 	void Console::errWrite(const String& text) const{
 		if(err != 0){
-			__conm.lock();
+			//__conm.lock();
 			try{
 				err->write(text.toCharPtr(), text.size());
 			}
 			catch(...){
-				__conm.unlock();
+				//__conm.unlock();
 				throw;
 			}
-			__conm.unlock();
+			//__conm.unlock();
 		}
 		else throw Exception::NullPointer();
 	}
 
 	void Console::errWriteLine(const void *buf, UInt32 siz){
 		if(err != 0){
-			__conm.lock();
+			//__conm.lock();
 			try{
 				err->writeLine(buf, siz);
 			}
 			catch(...){
-				__conm.unlock();
+				//__conm.unlock();
 				throw;
 			}
-			__conm.unlock();
+			//__conm.unlock();
 		}
 		else throw Exception::NullPointer();
 	}
 
 	void Console::errWriteLine(const String& text){
 		if(err != 0){
-			__conm.lock();
+			//__conm.lock();
 			try{
 				err->writeLine(text.toCharPtr(), text.size());
 			}
 			catch(...){
-				__conm.unlock();
+				//__conm.unlock();
 				throw;
 			}
-			__conm.unlock();
+			//__conm.unlock();
 		}
 		else throw Exception::NullPointer();
 	}
 
 	void Console::read(void *buf, UInt32 size){
 		if(in != 0){
-			__conm.lock();
+			//__conm.lock();
 			try{
 				in->read(buf, size);
 			}
 			catch(...){
-				__conm.unlock();
+				//__conm.unlock();
 				throw;
 			}
-			__conm.unlock();
+			//__conm.unlock();
 		}
 		else throw Exception::NullPointer();
 	}
 
 	void Console::readLine(String &line){
 		if(in != 0){
-			__conm.lock();
+			//__conm.lock();
 			try{
 				in->readLine(line);
 			}
 			catch(...){
-				__conm.unlock();
+				//__conm.unlock();
 				throw;
 			}
-			__conm.unlock();
+			//__conm.unlock();
 		}
 		else throw Exception::NullPointer();
 	}
