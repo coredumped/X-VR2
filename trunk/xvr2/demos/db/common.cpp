@@ -139,6 +139,7 @@ int rundemo(int demo_type){
 	void *dbhandle;
 	int ci, cj;
 	bool capshown;
+	Exception::ExceptionTracer::enable();
 	switch(demo_type){
 		case XVR2_MYSQL:
 			if(driver_location == 0)
