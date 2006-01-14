@@ -17,7 +17,8 @@ DEBUGMODE=0
 MAINTAINER="-gstabs+"
 PREFIX="/usr/local"
 DRV_VERSION=0
-DRV_REVISION=1
+DRV_REVISION=2
+DRIVER_FILENAME=pgsql_driver
 
 
 echo " "
@@ -169,8 +170,8 @@ fi
 LIBS="$LIBS "
 
 echo "INSTALLDIR=$PREFIX
-LIBNAME=pgsql_driver_old.so.${MYVERSION}
-SONAME=pgsql_driver_old.so
+LIBNAME=$DRIVER_FILENAME.so.${MYVERSION}
+SONAME=$DRIVER_FILENAME.so
 BUILDLIB=-G
 all: \$(LIBNAME)" >> Makefile
 else
@@ -186,8 +187,8 @@ OPTIMIZE=
 CFLAGS=-Wall \$(DEBUG) \$(OPTIMIZE) -I ${XVR2_SOURCE_DIR}/include -I. -c $DEFINES -Wimplicit -Wreturn-type -Wunused -Wswitch -Wcomment -Wparentheses -Wpointer-arith $SDLCFLAGS $SQLFLAGS" >> Makefile
 echo "LIBS=$SQLLIBS" >> Makefile
 echo "INSTALLDIR=$PREFIX
-LIBNAME=pgsql_driver_old.so.${MYVERSION}
-SONAME=pgsql_driver_old.so
+LIBNAME=$DRIVER_FILENAME.so.${MYVERSION}
+SONAME=$DRIVER_FILENAME.so
 BUILDLIB=-shared -Wl,-soname,\$(LIBNAME) \$(LIBS)
 all: \$(LIBNAME)" >> Makefile
 fi

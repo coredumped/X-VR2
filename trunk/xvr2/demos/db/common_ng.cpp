@@ -1,8 +1,8 @@
 #include<xvr2.h>
 #include "common.h"
 
-static const char *MYSQL_DRIVER_LOCATION = __XVR2_PREFIX_DIR"/lib/xvr2/mysql_driver_old.so." __XVR2_VERSION_STRING;
-static const char *PGSQL_DRIVER_LOCATION = __XVR2_PREFIX_DIR"/lib/xvr2/pgsql_driver_old.so." __XVR2_VERSION_STRING;
+static const char *MYSQL_DRIVER_LOCATION = __XVR2_PREFIX_DIR"/lib/xvr2/mysql_driver.so." __XVR2_VERSION_STRING;
+static const char *PGSQL_DRIVER_LOCATION = __XVR2_PREFIX_DIR"/lib/xvr2/pgsql_driver.so." __XVR2_VERSION_STRING;
 
 
 using namespace xvr2;
@@ -132,9 +132,10 @@ bool parse_args(int argc, char *argv[]){
 }
 
 int rundemo(int demo_type){
-	DB::OldDriver *drv;
+	DB::Driver *drv;
+	DB::DriverManager *manager;
 	DB::Connection *conn = 0;
-	DB::DriverInfo *q = 0;
+	DB::DriverInfo q;
 	DB::ResultSet *r = 0;
 	void *dbhandle;
 	int ci, cj;
@@ -152,16 +153,19 @@ int rundemo(int demo_type){
 			db_port = 5432;
 			break;
 	}
-	drv = new DB::OldDriver(driver_location);
+
+	manager = new DB::DriverManager(driver_location);
+	
 	try{
-		drv->load();
+		//drv->load();
+		drv = manager->load();
 	}
 	catch(Exception::DSOSymbol e){
 		std::cerr << e.getClassName() << ": " << e.toString() << std::endl;
 		return 1;
 	}
-	drv->getVersionInfo(&q);
-	std::cout << "X-VR2 " << dnames[demo_type] << " " << q->version() << "." << q->revision() << " by: " << q->vendor().toCharPtr() << " using: " << q->description().toCharPtr() << std::endl;
+	q = drv->getVersionInfo();
+	std::cout << "X-VR2 " << dnames[demo_type] << " " << q.version() << "." << q.revision() << " by: " << q.vendor() << " using: " << q.description() << std::endl;
 
 	conn = new DB::Connection(drv, server_location, db_name, db_user, db_pass, db_port);
 
@@ -278,7 +282,9 @@ int rundemo(int demo_type){
 	}
 	std::cout << "succeeded" << std::endl;
 	xvr2_delete(conn);
-	xvr2_delete(drv);
+	//xvr2_delete(drv);
+	manager->unload(drv);
+	delete manager;
 	if(loopit){
 		sleep(180);
 	}
