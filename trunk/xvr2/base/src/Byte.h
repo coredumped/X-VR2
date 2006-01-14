@@ -28,7 +28,7 @@ namespace xvr2{
 		protected:
 			/** As the name says this is the binary value */
 			UInt8 value;
-			String str_value;
+			//String str_value;
 		public:
 			/** Default constructor, it will initialize value to zero */
 			Byte();

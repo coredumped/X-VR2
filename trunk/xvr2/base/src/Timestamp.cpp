@@ -18,7 +18,7 @@ namespace xvr2{
 	}
 
 	Timestamp::Timestamp(const char *f, const char *t){
-		drep = 0;
+		//drep = 0;
 #ifndef USING_GCC3
 		setClassName(_xvr2Timestamp);
 #endif

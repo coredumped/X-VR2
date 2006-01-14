@@ -17,7 +17,7 @@ namespace xvr2{
 			/** This member stores the numeric user id */
 			int _userid;
 			/** This member stores the username as a string*/
-			String _username;
+			//String _username;
 			/** This will translate a numeric user id into a null terminated character array */
 			static char *_getUsername(int uid);
 		public:

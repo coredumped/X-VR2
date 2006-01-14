@@ -5,6 +5,7 @@
  */
 #include<xvr2/Byte.h>
 #include<endian.h>
+#include<sstream>
 
 namespace xvr2{
 
@@ -181,7 +182,7 @@ namespace xvr2{
 		tmp = v;
 		value = tmp;
 		data = (_b_byte *)&tmp;
-		str_value.deleteString();
+		/*str_value.deleteString();
 		str_value = (int)data->b7;
 		str_value += (int)data->b6;
 		str_value += (int)data->b5;
@@ -189,7 +190,13 @@ namespace xvr2{
 		str_value += (int)data->b3;
 		str_value += (int)data->b2;
 		str_value += (int)data->b1;
-		str_value += (int)data->b0;
+		str_value += (int)data->b0;*/
+		std::stringstream stream;
+		if(string_representation != 0){
+			delete string_representation;
+		}
+		stream << (int)data->b7 << data->b6 << data->b5 << data->b4 << data->b3 << data->b2 << data->b1 << data->b0;
+		string_representation = new std::string(stream.str());
 	}
 
 	void Byte::setValue(const char *v){
@@ -230,7 +237,8 @@ namespace xvr2{
 		return str_value;
 	}*/
 	const std::string &Byte::toString(){
-		return str_value.toString();
+		//return str_value.toString();
+		return *string_representation;
 	}
 	//End implementation of class: Byte
 };

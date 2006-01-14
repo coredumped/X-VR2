@@ -20,7 +20,7 @@ namespace xvr2{
 			/** Internal numeric group id reference member */
 			int _groupid;
 			/** Internal numeric group id reference member */
-			String _groupname;
+			//String _groupname;
 			/**
 			 * This method will return a groupname based on a
 			 * numeric group id.

@@ -28,7 +28,8 @@ namespace xvr2{
 #endif
 		_userid = User::getCurrentUserID();
 		tmpptr = _getUsername(_userid);
-		_username = tmpptr;
+		//_username = tmpptr;
+		string_representation = new std::string(tmpptr);
 		xvr2_delete(tmpptr);
 	}
 
@@ -39,7 +40,8 @@ namespace xvr2{
 #endif
 		_userid = uid;
 		tmpptr = _getUsername(_userid);
-		_username = tmpptr;
+		//_username = tmpptr;
+		string_representation = new std::string(tmpptr);
 		xvr2_delete(tmpptr);
 	}
 
@@ -48,7 +50,8 @@ namespace xvr2{
 		setClassName(xvr2::_xvr2User);
 #endif
 		_userid = Unix::getuid(uname);
-		_username = uname.toCharPtr();
+		//_username = uname.toCharPtr();
+		string_representation = new std::string(uname.toCharPtr());
 	}
 
 	int User::getUserID(){
@@ -112,6 +115,7 @@ namespace xvr2{
 	}
 
 	const std::string &User::toString(){
-		return _username.toString();
+		//return _username.toString();
+		return *string_representation;
 	}
 };

@@ -78,7 +78,8 @@ namespace xvr2{
 #endif
 		_groupid = Group::getCurrentGroupID();
 		tmpptr = getGroupName(_groupid);
-		_groupname = tmpptr;
+		//_groupname = tmpptr;
+		string_representation = new std::string(tmpptr);
 		free(tmpptr);
 	}
 
@@ -89,7 +90,8 @@ namespace xvr2{
 #endif
 		_groupid = gid;
 		tmpptr = getGroupName(gid);
-		_groupname = tmpptr;
+		//_groupname = tmpptr;
+		string_representation = new std::string(tmpptr);
 		free(tmpptr);
 	}
 
@@ -97,12 +99,14 @@ namespace xvr2{
 #ifndef USING_GCC3
 		setClassName(xvr2::_xvr2Group);
 #endif
-		_groupname = gname;
+		//_groupname = gname;
+		string_representation = new std::string(gname.toCharPtr());
 		_groupid = Unix::getgid(gname);
 	}
 
 	const std::string &Group::toString(){
-		return _groupname.toString();
+		//return _groupname.toString();
+		return *string_representation;
 	}
 
 	int Group::getGroupID(){

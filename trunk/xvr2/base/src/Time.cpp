@@ -2,11 +2,12 @@
  * $Id$
  */
 #include<xvr2/Time.h>
+#include<sstream>
 
 namespace xvr2{
 
 	void Time::encode(){
-		if(hour <= 9)
+		/*if(hour <= 9)
 			drep.concat(0);
 		drep.concat(hour);
 		drep.concat(":");
@@ -16,7 +17,21 @@ namespace xvr2{
 		drep.concat(":");
 		if(second <= 9)
 			drep.concat(0);
-		drep.concat(second);
+		drep.concat(second);*/
+		if(string_representation != 0){
+			delete string_representation;
+		}
+		std::stringstream stream;
+		if(hour <= 9)
+			stream << "0";
+		stream << hour << ":";
+		if(minute <= 9)
+			stream << "0";
+		stream << minute << ":";
+		if(second <= 9)
+			stream << "0";
+		stream << second;
+		string_representation = new std::string(stream.str());
 	}
 	Time::Time(){
 #ifndef USING_GCC3
@@ -83,7 +98,7 @@ namespace xvr2{
 	}
 	
 	const String &Time::toString() const{
-		return drep;
+		//return drep;
+		return *string_representation;
 	}
 };
-

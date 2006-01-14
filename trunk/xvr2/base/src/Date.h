@@ -19,7 +19,7 @@ namespace xvr2{
 			time_t unixtime;
 			/** This member holds the String representation of the 
 			 *  current Date */
-			String drep;
+			//String drep;
 			void setTStamp(UInt32 tstamp);
 			void decode(const char *format, const char *date_text);
 			virtual void encode();

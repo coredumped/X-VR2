@@ -6,11 +6,12 @@
 #endif
 #include<xvr2/Date.h>
 #include<time.h>
+#include<sstream>
 
 namespace xvr2{
 
 	void Date::encode(){
-		drep.assign(year);
+		/*drep.assign(year);
 		drep.concat("-");
 		if(month <= 9)
 			drep.concat(0);
@@ -30,7 +31,28 @@ namespace xvr2{
 		drep.concat(":");
 		if(second <= 9)
 			drep.concat(0);
-		drep.concat(second);
+		drep.concat(second);*/
+		if(string_representation != 0){
+			delete string_representation;
+		}
+		std::stringstream stream;
+		stream << year << "-";
+		if(month <= 9)
+			stream << "0";
+		stream << month << "-";
+		if(dayofmonth <= 9)
+			stream << "0";
+		stream << dayofmonth << " ";
+		if(hour <= 9)
+			stream << "0";
+		stream << hour << ":";
+		if(minute <= 9)
+			stream << "0";
+		stream << minute << ":";
+		if(second <= 9)
+			stream << "0";
+		stream << second;
+		string_representation = new std::string(stream.str());
 	}
 	void Date::setTStamp(UInt32 tstamp){
 		struct tm t;
@@ -128,7 +150,7 @@ namespace xvr2{
 #ifndef USING_GCC3
 		setClassName(xvr2::_xvr2Date);
 #endif
-		drep = 0;
+		//drep = 0;
 		setTStamp(__unixtime);
 	}
 
@@ -255,7 +277,8 @@ namespace xvr2{
 	}
 
 	const std::string &Date::toString(){
-		return drep.toString();
+		//return drep.toString();
+		return *string_representation;
 	}
 
 	void Date::add(DateARITHParts component, int value){
@@ -276,4 +299,3 @@ namespace xvr2{
 		setTStamp(unixtime + fsec);
 	}
 };
-
