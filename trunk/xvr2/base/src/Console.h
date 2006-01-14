@@ -93,7 +93,9 @@ namespace xvr2{
 			 *  is a string terminated by \\n or \\0
 			 *  the result will be stored on <b>line</b> */
 			void readLine(String &line);
+			//const Console &operator<<(const std::string &s) const;
 			const Console &operator<<(const String &s) const;
+			const Console &operator<<(const Object &s) const;
 	};
 };
 

@@ -151,6 +151,7 @@ namespace xvr2{
 
 
 
+
 	void Console::errWrite(const void *buf, UInt32 siz){
 		if(err != 0){
 			//__conm.lock();
@@ -245,5 +246,10 @@ namespace xvr2{
 		outWrite(s);
 		return *this;
 	}
-	
+
+	const Console &Console::operator<<(const Object &s) const {
+		outWrite(((Object *)&s)->toString().c_str());
+		return *this;
+	}
+
 };
