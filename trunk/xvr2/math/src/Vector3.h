@@ -30,7 +30,8 @@ namespace math {
 			const Vector3 operator*=(const Scalar  s);
 			const Vector3 unit();
 			const Scalar  magnitude();
-			const String *toString();
+			//const String *toString();
+			const std::string &toString();
 			const Scalar x(){
 				return c[0];
 			}

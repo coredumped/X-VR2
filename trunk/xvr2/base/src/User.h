@@ -60,7 +60,7 @@ namespace xvr2{
 			/** This will set the current process effective user id to <b>usrobj</b>*/
 			static void setEffectiveUserID(const User &usrobj);
 
-			const String &toString();
+			const std::string &toString();
 	};
 };
 

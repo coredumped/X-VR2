@@ -97,7 +97,8 @@ namespace math {
 			/** Computes a String representation of the current vector and returns
 			 * it as a pointer to a String object, after using this object dont
 			 * forget to delete it from memory by using the xvr2_delete function.*/
-			const String *toString();
+			//const String *toString();
+			const std::string &toString();
 			/** Return the value of the x component by extracting it from the c[]
 			 * array, the x component correspond to c[0] */
 			const Scalar x(){

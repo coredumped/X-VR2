@@ -226,8 +226,11 @@ namespace xvr2{
 		setValue(x);
 	}
 
-	const String &Byte::toString(){
+	/*const String &Byte::toString(){
 		return str_value;
+	}*/
+	const std::string &Byte::toString(){
+		return str_value.toString();
 	}
 	//End implementation of class: Byte
 };

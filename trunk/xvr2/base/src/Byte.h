@@ -75,7 +75,8 @@ namespace xvr2{
 			bool bit7();
 			/** Returns a string representation of this Byte using 
 			 *  0s and 1s */
-			const String &toString();
+			//const String &toString();
+			const std::string &toString();
 	};
 };
 

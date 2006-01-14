@@ -48,7 +48,7 @@ namespace xvr2{
 		return unixtime;
 	}
 
-	const String &Timestamp::toString(){
+	const std::string &Timestamp::toString(){
 		/*if(drep == 0)
 			drep = new String((unsigned int)unixtime);
 		else

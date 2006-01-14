@@ -254,8 +254,8 @@ namespace xvr2{
 		return unixtime;
 	}
 
-	const String &Date::toString() const{
-		return drep;
+	const std::string &Date::toString(){
+		return drep.toString();
 	}
 
 	void Date::add(DateARITHParts component, int value){

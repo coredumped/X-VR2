@@ -110,4 +110,8 @@ namespace xvr2{
 		u = (User *)&usrobj;
 		setEffectiveUserID(u->getUserID());
 	}
+
+	const std::string &User::toString(){
+		return _username.toString();
+	}
 };

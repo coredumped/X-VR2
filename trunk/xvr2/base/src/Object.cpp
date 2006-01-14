@@ -33,6 +33,7 @@ namespace xvr2{
 #endif
 #endif
 #endif
+		string_representation = 0;
 	}
 
 #ifndef USING_GCC3
@@ -42,7 +43,7 @@ namespace xvr2{
 #endif
 
 	const char *Object::getClassName(){
-#ifdef USING_GCC3
+#if defined(USING_GCC3) || defined(GCC_3_4) 
 		char *__cls_name;
 		int status;
 		__cls_name = abi::__cxa_demangle(typeid(*this).name(), 0, 0, &status);
@@ -74,6 +75,8 @@ namespace xvr2{
 #ifndef USING_GCC3
 	Object::~Object(){
 		//__cls_name = 0;
+		delete string_representation;
+		string_representation = 0;
 	}
 #else
 	Object::~Object(){
@@ -81,6 +84,20 @@ namespace xvr2{
 			free(__cls_name);
 			__cls_name = 0;
 		}*/
+		delete string_representation;
+		string_representation = 0;
 	}
 #endif
+
+	const std::string &Object::toString(){
+		if(string_representation == 0){
+			string_representation = new std::string(getClassName());
+		}
+		return *string_representation;
+	}
+
+	std::ostream& operator<<(std::ostream& stream, const Object &s){
+		stream << ((Object *)&s)->toString();
+		return stream;
+	}
 };

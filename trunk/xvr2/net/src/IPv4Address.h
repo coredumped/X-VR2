@@ -27,9 +27,10 @@ namespace Net {
 			IPv4Address(const struct ::sockaddr_in *x_addr);
 			~IPv4Address();
 			const struct ::sockaddr_in *sockAddr() const;
-			/* Will return a String representation of the IP address, you
-			 * must explicitely release the allocated memory after use. */
-			String *toString();
+			//   /* Will return a String representation of the IP address, you
+			//    * must explicitely release the allocated memory after use. */
+			//String *toString();
+			const std::string &toString();
 			friend std::ostream& operator<<(std::ostream& stream, const IPv4Address &s);
 	};
 };

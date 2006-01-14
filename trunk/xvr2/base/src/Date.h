@@ -101,7 +101,7 @@ namespace xvr2{
 			 * This will convert the current date object to the following
 			 * format:   YYYY-MM-DD HH:MM:SS
 			 */
-			virtual const String &toString() const;
+			virtual const std::string &toString();
 			virtual void add(DateARITHParts component, int value);
 	};
 

@@ -34,6 +34,8 @@ namespace Net {
 			const String &hash() const;
 			const Date &startDate() const;
 			const Date &endDate() const;
+			//Date &startDate() const;
+			//Date &endDate() const;
 			const String &version() const;
 			void *getInternal(){
 				return idata;

@@ -68,7 +68,7 @@ namespace xvr2{
 			/** This will set the current process effective group to <b>grpobj</b>*/
 			static void setEffectiveGroupID(const Group &grpobj);
 			/** This will return the corresponding groupname as a string */
-			const String &toString();
+			const std::string &toString();
 	};
 };
 

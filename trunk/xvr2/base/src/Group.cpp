@@ -101,8 +101,8 @@ namespace xvr2{
 		_groupid = Unix::getgid(gname);
 	}
 
-	const String &Group::toString(){
-		return _groupname;
+	const std::string &Group::toString(){
+		return _groupname.toString();
 	}
 
 	int Group::getGroupID(){

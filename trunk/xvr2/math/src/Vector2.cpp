@@ -3,6 +3,7 @@
  */
 #include<xvr2/Vector2.h>
 #include<math.h>
+#include<sstream>
 
 namespace xvr2 {
 namespace math {
@@ -64,7 +65,7 @@ namespace math {
 			mag = ::hypotf(c[0], c[1]);
 		return mag;
 	}
-	const String *Vector2::toString(){
+	/*const String *Vector2::toString(){
 		String *str;
 		str = new String("(");
 		str->concat(c[0]);
@@ -72,6 +73,16 @@ namespace math {
 		str->concat(c[1]);
 		str->concat(")");
 		return str;
+	}*/
+	const std::string &Vector2::toString(){
+		std::stringstream buf;
+		if(string_representation != 0){
+			delete string_representation;
+			string_representation = 0;
+		}
+		buf << "(" << c[0] << "," << c[1] << ")";
+		string_representation = new std::string(buf.str());
+		return *string_representation;
 	}
 
 	static char *__v_open_paren = "(";

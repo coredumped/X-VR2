@@ -62,7 +62,7 @@ namespace Net {
 	const struct ::sockaddr_in *IPv4Address::sockAddr() const{
 		return &addr;
 	}
-	String *IPv4Address::toString(){
+	/*String *IPv4Address::toString(){
 		String *str_ip;
 		char buf[32];
 		char *ptr;
@@ -71,12 +71,28 @@ namespace Net {
 		ptr = (char *)inet_ntop(addr.sin_family, (void*)&addr.sin_addr, buf, 32);
 		str_ip = new String(ptr);
 		return str_ip;
+	}*/
+	const std::string &IPv4Address::toString(){
+		//String *str_ip;
+		char buf[32];
+		char *ptr;
+		if(string_representation != 0){
+			delete string_representation;
+		}
+		//Generate a string representation of the addr info, I dont know how yet
+		//const char * inet_ntop (int AF, const void *CP, char *BUF, size_t LEN)
+		ptr = (char *)inet_ntop(addr.sin_family, (void*)&addr.sin_addr, buf, 32);
+		string_representation = new std::string(ptr);
+		//str_ip = new String(ptr);
+		//return str_ip;
+		return *string_representation;
 	}
 	std::ostream& operator<<(std::ostream& stream, const IPv4Address &s){
-		String *ts;
+		/*String *ts;
 	        ts = ((IPv4Address *)&s)->toString();
-		stream << ts->toCharPtr();
-		delete ts;
+		stream << ts->toCharPtr();*/
+		stream << ((IPv4Address *)&s)->toString().c_str();
+		//delete ts;
 		return stream;
 	}
 
