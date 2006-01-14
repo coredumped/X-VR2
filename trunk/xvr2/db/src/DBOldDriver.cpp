@@ -2,6 +2,7 @@
  * $Id$
  */
 #include<xvr2/DBDriver.h>
+#include<xvr2/DBOldDriver.h>
 #ifdef USE_DEBUG
 #include<xvr2/Console.h>
 #endif
@@ -10,7 +11,7 @@ namespace xvr2{
 
 	namespace DB {
 
-		Driver::Driver(const String &soname){
+		OldDriver::OldDriver(const String &soname){
 #ifndef USING_GCC3
 			setClassName(xvr2::_xvr2Driver);
 #endif
@@ -19,13 +20,13 @@ namespace xvr2{
 			__do_auto_commit = false;
 		}
 	
-		Driver::~Driver(){
+		OldDriver::~OldDriver(){
 			if(__is_loaded)
 				__drv_cleanup();
 			xvr2_delete(__drv);
 		}
 	
-		void Driver::load(){
+		void OldDriver::load(){
 #ifdef USE_DEBUG
 			std::cerr << "loading driver..." << std::endl;
 #endif
@@ -39,7 +40,7 @@ namespace xvr2{
 			std::cerr << "  loading driver symbols..." << std::endl;
 #endif
 			__drv_cleanup = (bool (*)())__drv->getSymbol("__drv_cleanup");
-			__drv_init = (bool (*)(Driver *))__drv->getSymbol("__drv_init");
+			__drv_init = (bool (*)(OldDriver *))__drv->getSymbol("__drv_init");
 			__drv_connect = (void *(*)(const char *, const char *, const char *, const char *, int))__drv->getSymbol("__drv_connect");
 			__drv_disconnect = (UInt32 (*)(void *))__drv->getSymbol("__drv_disconnect");
 			__drv_getVersionInfo = (bool (*)(DB::DriverInfo **))__drv->getSymbol("__drv_getVersionInfo");
@@ -94,11 +95,11 @@ namespace xvr2{
 			__is_loaded = true;
 		}
 	
-		void Driver::getVersionInfo(DB::DriverInfo **info){
+		void OldDriver::getVersionInfo(DB::DriverInfo **info){
 			__drv_getVersionInfo(info);
 		}
 	
-		void *Driver::connect(const String &server, const String &__dbname, const String &user, const String &pass, int port){
+		void *OldDriver::connect(const String &server, const String &__dbname, const String &user, const String &pass, int port){
 			void *ret;
 			try{
 				ret = __drv_connect(server.toCharPtr(), __dbname.toCharPtr(), user.toCharPtr(), pass.toCharPtr(), port);
@@ -112,7 +113,7 @@ namespace xvr2{
 		static const char *__upd_str = "update";
 		static const char *__del_str = "delete";
 	
-		ResultSet *Driver::query(void *__handle, const String &cmd){
+		ResultSet *OldDriver::query(void *__handle, const String &cmd){
 			ResultSet *r = 0;
 			try{
 				r = __drv_query(__handle, cmd.toCharPtr());
@@ -126,7 +127,7 @@ namespace xvr2{
 			return r;
 		}
 	
-		bool Driver::disconnect(void *__handle){
+		bool OldDriver::disconnect(void *__handle){
 			bool ret;
 			try{
 				ret = __drv_disconnect(__handle);
@@ -137,11 +138,11 @@ namespace xvr2{
 			return ret;
 		}
 	
-		void Driver::setAutoCommit(bool val){
+		void OldDriver::setAutoCommit(bool val){
 			__do_auto_commit = val;
 		}
 	
-		void Driver::commit(void *__handle){
+		void OldDriver::commit(void *__handle){
 			try{
 				__drv_commit(__handle);
 			}
@@ -150,23 +151,23 @@ namespace xvr2{
 			}
 		}
 	
-		const int Driver::numRows(void *__res_handle){
+		const int OldDriver::numRows(void *__res_handle){
 			return __drv_numrows(__res_handle);
 		}
 	
-		const int Driver::numCols(void *__res_handle){
+		const int OldDriver::numCols(void *__res_handle){
 			return __drv_numcols(__res_handle);
 		}
 	
-		Field *Driver::fetchRow(void *__res_handle){
+		Field *OldDriver::fetchRow(void *__res_handle){
 			return __drv_fetch_next_row(__res_handle);
 		}
 	
-		const bool Driver::freeResultSet(void *__res_handle){
+		const bool OldDriver::freeResultSet(void *__res_handle){
 			return __drv_free_resultset(__res_handle);
 		}
 
-		const bool Driver::bulkBegin(void *conn_handle, const char *tablename, const char *cols, const char *delim){
+		const bool OldDriver::bulkBegin(void *conn_handle, const char *tablename, const char *cols, const char *delim){
 			bool ret;
 			if(!has__drv_bulk_begin){
 #ifdef USE_DEBUG
@@ -183,7 +184,7 @@ namespace xvr2{
 			return ret;
 		}
 
-		const bool Driver::bulkAddData(void *conn_handle, const char *data, const char *delim){
+		const bool OldDriver::bulkAddData(void *conn_handle, const char *data, const char *delim){
 			bool ret;
 			if(!has__drv_bulk_insert){
 #ifdef USE_DEBUG
@@ -200,7 +201,7 @@ namespace xvr2{
 			return ret;
 		}
 
-		const bool Driver::bulkEnd(void *conn_handle){
+		const bool OldDriver::bulkEnd(void *conn_handle){
 			bool ret;
 			if(!has__drv_bulk_end){
 #ifdef USE_DEBUG
@@ -217,22 +218,22 @@ namespace xvr2{
 			return ret;
 		}
 
-		char *Driver::quoteString(const char *str){
+		char *OldDriver::quoteString(const char *str){
 			//char *__drv_quote_string(const char *in);
 			return __drv_quote_string(str);
 		}
 
-		const char *Driver::errorMessage(void *conn_handle){
+		const char *OldDriver::errorMessage(void *conn_handle){
 			//char *__drv_error_message(void *handle);
 			return __drv_error_message(conn_handle);
 		}
 
-		const char *Driver::resultErrorMessage(void *res_handle){
+		const char *OldDriver::resultErrorMessage(void *res_handle){
 			//char *__drv_result_error_message(void *r);
 			return __drv_result_error_message(res_handle);
 		}
 
-		const bool Driver::isConnected(void *conn_handle){
+		const bool OldDriver::isConnected(void *conn_handle){
 			if(hasConnPolling()){
 				return __drv_connected(conn_handle);
 			}

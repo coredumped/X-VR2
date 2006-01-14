@@ -5,6 +5,7 @@
 #define __XVR2_DB_Connection_H__
 
 #include<xvr2/DBDriver.h>
+#include<xvr2/DatabaseException.h>
 
 namespace xvr2{
 	namespace DB {

@@ -237,7 +237,8 @@ namespace xvr2{
 				case DATE:
 					tmpDate = new Date((Date *)data);
 					dataPtr = (void *)tmpDate;
-					tmpString.assign(tmpDate->toString().toCharPtr());
+					//tmpString.assign(tmpDate->toString().toCharPtr());
+					tmpString.assign(tmpDate->toString());
 					break;
 				case TIME:
 					tmpTime = new Time((Time *)data);
@@ -247,7 +248,8 @@ namespace xvr2{
 				case TIMESTAMP:
 					tmpTimestamp = new Timestamp((Timestamp *)data);
 					dataPtr = (void *)tmpTimestamp;
-					tmpString.assign(tmpTimestamp->toString().toCharPtr());
+					//tmpString.assign(tmpTimestamp->toString().toCharPtr());
+					tmpString.assign(tmpTimestamp->toString());
 					break;
 				case CHAR:
 				case TEXT:
@@ -676,7 +678,7 @@ namespace xvr2{
 						//#  I need a better way to implement
 						//#  this, please HELP!!!!!!!!!
 						//#################################
-						ret = ((Date *)dataPtr)->toString().toCharPtr();
+						ret = (char *)(((Date *)dataPtr)->toString().c_str());
 					}
 					catch(...){
 						throw Exception::UndefinedClass();
@@ -700,7 +702,7 @@ namespace xvr2{
 						//#  I need a better way to implement
 						//#  this, please HELP!!!!!!!!!
 						//#################################
-						ret = ((Timestamp *)dataPtr)->toString().toCharPtr();
+						ret = (char *)(((Timestamp *)dataPtr)->toString().c_str());
 					}
 					catch(...){
 						throw Exception::UndefinedClass();

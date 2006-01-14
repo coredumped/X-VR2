@@ -4,6 +4,7 @@
  * $Id$
  */
 #include<xvr2/DBConnection.h>
+#include<xvr2/DatabaseException.h>
 
 namespace xvr2{
 

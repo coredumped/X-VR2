@@ -12,6 +12,7 @@ namespace xvr2{
 	namespace DB {
 
 		class Driver;
+		//class BasicDriver;
 	
 		/**
 		 * This class deals with result sets obtained from select queries
