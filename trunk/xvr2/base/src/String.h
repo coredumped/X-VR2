@@ -68,6 +68,11 @@ class String:public CharString{
 		 *  by transforming a Int64 to an array of chars and
 		 *  then calling assign(const char *s); */
 		String(const Int64 n);
+
+		/**
+		 * Compatibility constructors for the std::string class */
+		String(const std::string &s);
+		String(const std::string *s);
 		/** Destructor, eliminates the contents of buffer and
 		 *  sets len to zero by calling the method destroy(); */
 		~String();
@@ -90,6 +95,8 @@ class String:public CharString{
 		const String &assign(const char *sstr);
 		//const String &assign(const char c);
 		const String &assign(const String &sstr);
+		const String &assign(const std::string &s);
+		const String &assign(const std::string *s);
 		/** transforms and concatenates s to the current String */
 		const String &concat(const char *s);
 		const String &concat(const char c);
@@ -282,6 +289,7 @@ class String:public CharString{
 		 * to free it after you use it while calling the Memory::freeBuffer
 		 * method */
 		char *getSubstr(int start, int end);
+		virtual const std::string &toString();
 };
 
 };

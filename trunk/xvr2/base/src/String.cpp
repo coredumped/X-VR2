@@ -739,4 +739,32 @@ namespace xvr2{
 		}
 		return nbuf;
 	}
+
+	const std::string &String::toString(){
+		if(string_representation == 0){
+			string_representation = new std::string(toCharPtr());
+		}
+		return *string_representation;
+	}
+
+	String::String(const std::string &s):CharString(s.c_str()){
+#ifndef USING_GCC3
+		Object::setClassName(xvr2::_xvr2String);
+#endif
+	}
+	String::String(const std::string *s):CharString(s->c_str()){
+#ifndef USING_GCC3
+		Object::setClassName(xvr2::_xvr2String);
+#endif
+	}
+
+	const String &String::assign(const std::string &sstr){
+		CharString::assign(sstr.c_str());
+		return *this;
+	}
+
+	const String &String::assign(const std::string *sstr){
+		CharString::assign(sstr->c_str());
+		return *this;
+	}
 };
