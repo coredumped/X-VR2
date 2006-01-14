@@ -243,13 +243,14 @@ namespace xvr2 {
 			}
 			virtual int rindex(const CharT *s, int end = 0) const{
 				int i, j, ssize, e;
+				bool is_ok = true;
 				if(len == 0 || s == 0) return -1;
 				else{
 				       	if(s[0] == 0) return -1;
 				}
 				ssize = getlen(s);
 				if(end == 0)
-					e = len - 1;
+					e = len - ssize;
 				else{
 					if(end > (len - ssize))
 						return -1;
@@ -258,11 +259,14 @@ namespace xvr2 {
 				}
 				for(i = e; i >= 0; i--){
 					if(buffer[i] == s[0]){
-						for(j = 0; j < ssize; j++){
-							if(charAt(i + j) != s[j])
-								continue;
+						for(j = 0; j < ssize - 1; j++){
+							if(charAt(i + j) != s[j]){
+								is_ok = false;
+								break;
+							}
 						}
-						return i;
+						if(is_ok)
+							return len - (i + j + 1);
 					}
 				}
 				return -1;
@@ -367,6 +371,7 @@ namespace xvr2 {
 			virtual const CharString &operator=(const char *s);
 			virtual const CharString &operator=(const CharString &s);
 			int index(const char *s, const int start = 0) const;
+			int rindex(const char *s, const int end = 0) const;
 			inline bool startsWith(const char *s) const{
 				return (index(s, 0) == 0)?true:false;
 			}

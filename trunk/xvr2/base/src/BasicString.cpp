@@ -36,4 +36,35 @@ namespace xvr2 {
 		}
 		return -1;
 	}
+	int CharString::rindex(const char *s, int end) const{
+		int i, j, ssize, e;
+		bool is_ok = true;
+		if(len == 0 || s == 0) return -1;
+		else{
+		       	if(s[0] == 0) return -1;
+		}
+		ssize = getlen(s);
+		if(end == 0)
+			//e = len - 1 - ssize;
+			e = len - ssize;
+		else{
+			if(end > (len - ssize))
+				return -1;
+			else
+				e = end;
+		}
+		for(i = e; i >= 0; i--){
+			if(buffer[i] == s[0]){
+				for(j = 0; j < ssize - 1; j++){
+					if(charAt(i + j) != s[j]){
+						is_ok = false;
+						break;
+					}
+				}
+				if(is_ok)
+					return len - (i + j + 1);
+			}
+		}
+		return -1;
+	}
 };
