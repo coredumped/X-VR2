@@ -43,10 +43,12 @@ class String:public CharString{
 		/** This constructor initializes an instance of this class
 		 *  by taking an array of chars */
 		String(const char *s);
+#ifndef __x86_64__
 		/** This constructor initializes an instance of this class
 		 *  by transforming an integer to an array of chars and
 		 *  then calling assign(const char *s); */
 		String(const long n);
+#endif
 		String(const int n);
 		/** This constructor initializes an instance of this class
 		 *  by transforming an unsigned integer to an array 
@@ -118,7 +120,9 @@ class String:public CharString{
 		const String &concat(const UInt64 n);
 		/** Transforms n and assigns it to buffer by calling 
 		 *  assign(const char *); */
+#ifndef __x86_64__
 		const String& operator=(const long n);
+#endif
 		const String& operator=(const int n);
 		/** Transforms n and assigns it to buffer by calling 
 		 * assign(const char *); */

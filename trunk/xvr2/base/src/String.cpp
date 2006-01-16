@@ -73,12 +73,14 @@ namespace xvr2{
 		assign(n);
 	}
 
+#ifndef __x86_64__
 	String::String(const long n):CharString(){
 #if GCC_MAJOR_VERSION < 3
 		Object::setClassName(xvr2::_xvr2String);
 #endif
 		assign(n);
 	}
+#endif
 	
 	String::String(const unsigned int n):CharString(){
 #if GCC_MAJOR_VERSION < 3
@@ -285,10 +287,12 @@ namespace xvr2{
 		return *this;
 	}
 
+#ifndef __x86_64__
 	const String& String::operator=(const long n){
 		assign(n);
 		return *this;
 	}
+#endif
 	
 	const String& String::operator=(const unsigned int n){
 		assign(n);
