@@ -11,8 +11,8 @@ int main(int argc, char *argv[]){
 			std::cout << argv[i] << " is at ";
 			try{
 				addr = IPv4Resolver::resolve(argv[i]);
-				ip = addr->toString();
-				std::cout << ip->toCharPtr() << std::endl;
+				//ip = addr->toString();
+				std::cout << addr->toString() << std::endl;
 				delete addr;
 				delete ip;
 			}
@@ -23,9 +23,9 @@ int main(int argc, char *argv[]){
 	}
 	else{
 		addr = IPv4Resolver::resolve("www.google.com");
-		ip = addr->toString();
+		//ip = addr->toString();
 		std::cout << "www.google.com is at ";
-		std::cout << ip->toCharPtr() << std::endl;
+		std::cout << addr->toString() << std::endl;
 		delete addr;
 		delete ip;
 	}
