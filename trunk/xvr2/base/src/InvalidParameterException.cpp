@@ -5,7 +5,7 @@
 #include<xvr2/Memory.h>
 #include<xvr2/MessageStrings.h>
 #include<string>
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 #include<stdio.h>
 #endif
 
@@ -14,14 +14,14 @@ namespace xvr2 {
 	namespace Exception{
 
 		InvalidParameter::InvalidParameter(){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName((char *)xvr2::_xvr2InvalidParameterException);
 #endif
 			description = (char *)xvr2::excepInvalidParameter;	
 		}
 
 		InvalidParameter::InvalidParameter(const char *param_name){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName((char *)xvr2::_xvr2InvalidParameterException);
 #endif
 			description = (char *)xvr2::Memory::allocBuffer(strlen((char *)xvr2::excepInvalidParameter) + 30 + strlen(param_name));

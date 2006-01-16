@@ -8,7 +8,7 @@
 namespace xvr2{
 	namespace Exception {
 
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 		static const char *_xvr2RegexException = "xvr2::Exception::Regex";
 #endif
 		static const char *excepRegex = "Generic Regex exception";
@@ -28,7 +28,7 @@ namespace xvr2{
 		static const char *__rexp_REG_ESPACE = "The regex routines ran out of memory.";
 
 		Regex::Regex(){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName((char *)_xvr2RegexException);
 #endif
 			description = (char *)excepRegex;
@@ -38,7 +38,7 @@ namespace xvr2{
 
 
 		Regex::Regex(int errx){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName((char *)_xvr2RegexException);
 #endif
 			switch(errx){

@@ -48,7 +48,7 @@ namespace xvr2{
 					 * (NULL) and the next node to none 
 					 * by making it point to NULL
 					 */
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 					nodeT():Container(_xvr2List__nodeT){
 #else
 					nodeT():Container(){
@@ -63,7 +63,7 @@ namespace xvr2{
 					 * by making it point to <b>NULL</b>
 					 */
 					nodeT(T d){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 						setClassName(_xvr2List__nodeT);
 #endif
 						data = d;
@@ -90,7 +90,7 @@ namespace xvr2{
 				 * initilizes all data to zero
 				 */
 				List(){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 					Container(_xvr2List);
 #endif
 					list = 0;

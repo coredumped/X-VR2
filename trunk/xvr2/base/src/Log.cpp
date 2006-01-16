@@ -20,7 +20,7 @@ namespace xvr2{
 	//Start implementation of class: Log
 
 	Log::Log(const String &fname){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 		setClassName(xvr2::_xvr2Log);
 #endif
 		f = new BaseFile(fname);

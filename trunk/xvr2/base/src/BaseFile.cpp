@@ -13,7 +13,7 @@
 namespace xvr2{
 
 	BaseFile::BaseFile(){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 		setClassName(xvr2::_xvr2BaseFile);
 #endif
 		filename.assign(constDEVNULL);
@@ -22,7 +22,7 @@ namespace xvr2{
 	}
 
 	BaseFile::BaseFile(const char *fname){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 		setClassName(xvr2::_xvr2BaseFile);
 #endif
 		filename.assign(fname);
@@ -31,7 +31,7 @@ namespace xvr2{
 	}
 
 	BaseFile::BaseFile(const String &fname){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 		setClassName(xvr2::_xvr2BaseFile);
 #endif
 		filename.assign(fname.toCharPtr());

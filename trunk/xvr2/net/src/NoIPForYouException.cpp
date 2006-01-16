@@ -8,7 +8,7 @@ namespace xvr2{
 	namespace Exception{
 
 		NoIPForYou::NoIPForYou(){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName((char *)xvr2::_xvr2NoIPForYouException);
 #endif
 			description = (char *)xvr2::excepNoIPForYou;

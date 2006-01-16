@@ -34,26 +34,26 @@ namespace xvr2{
 		string_representation = new std::string(stream.str());
 	}
 	Time::Time(){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 		setClassName(xvr2::_xvr2Time);
 #endif
 	}
 
 	Time::Time(UInt32 tstamp){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 		setClassName(xvr2::_xvr2Time);
 #endif
 		setTStamp(tstamp);
 	}
 
 	Time::Time(const char *time_text):Date("%T", time_text){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 		setClassName(xvr2::_xvr2Time);
 #endif
 	}
 
 	Time::Time(const String &time_text):Date("%T", time_text){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 		setClassName(xvr2::_xvr2Time);
 #endif
 	}
@@ -63,7 +63,7 @@ namespace xvr2{
 	}
 
 	Time::Time(int __hour, int __min, int __sec){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 		setClassName(xvr2::_xvr2Time);
 #endif
 		hour      = __hour;
@@ -77,7 +77,7 @@ namespace xvr2{
 	}
 
 	Time::Time(const Time *t):Date(t){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 		setClassName(xvr2::_xvr2Time);
 #endif
 	}

@@ -30,7 +30,7 @@ namespace xvr2{
 	namespace Net{
 
 		TCPServerSocket::TCPServerSocket(){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName(xvr2::_xvr2TCPServerSocket);
 #endif
 			_created = false;
@@ -39,7 +39,7 @@ namespace xvr2{
 		}
 		
 		TCPServerSocket::TCPServerSocket(const int p, const int m){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName(xvr2::_xvr2TCPServerSocket);
 #endif
 			_created = false;

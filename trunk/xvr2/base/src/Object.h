@@ -22,7 +22,7 @@ namespace xvr2{
 			/**
 			 * Stores the name of the current class
 			 */
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			char *__cls_name;
 #endif
 		protected:
@@ -36,7 +36,7 @@ namespace xvr2{
 			 * the classname for every class you create, that way you can have more
 			 * information while debugging
 			 */
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			void setClassName(const char *n);
 #else
 			/* Under GCC 3 this is just a placebo */
@@ -51,7 +51,7 @@ namespace xvr2{
 			 * Returns the name of the current class
 			 */
 			const char *getClassName();
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			/**
 			 * This constructor sets the name of the current class to <b>n</b>
 			 */

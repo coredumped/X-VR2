@@ -7,7 +7,7 @@
 #include<xvr2/Object.h>
 #include<iostream>
 #include<xvr2/DebugConsole.h>
-#if GCC_MAJOR_VERSION >= 3
+#if __GNUC__ >= 3
 #include<stdlib.h>
 #include<cxxabi.h>
 #endif
@@ -16,17 +16,17 @@
 
 namespace xvr2{
 //#ifndef GCC_3_4
-#if GCC_MAJOR_VERSION == 3 && GCC_MINOR_VERSION < 4
+#if __GNUC__ == 3 && __GNUC_MINOR__ < 4
 	bool vterm;
 #endif
 	
 
 	Object::Object(){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 		setClassName(xvr2::_xvr2Object);
 #endif
 #ifdef USE_DEBUG
-#if GCC_MAJOR_VERSION == 3 && GCC_MINOR_VERSION < 4
+#if __GNUC__ == 3 && __GNUC_MINOR__ < 4
 		if(!vterm){
 			std::set_terminate (__gnu_cxx::__verbose_terminate_handler);
 			vterm = true;
@@ -37,14 +37,14 @@ namespace xvr2{
 		string_representation = 0;
 	}
 
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 	void Object::setClassName(const char *n){
 		__cls_name = (char *)n;
 	}
 #endif
 
 	const char *Object::getClassName(){
-#if GCC_MAJOR_VERSION >= 3
+#if __GNUC__ >= 3
 		char *__cls_name;
 		int status;
 		__cls_name = abi::__cxa_demangle(typeid(*this).name(), 0, 0, &status);

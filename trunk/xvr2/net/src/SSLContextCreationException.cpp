@@ -6,13 +6,13 @@
 
 namespace xvr2 {
 	namespace Exception{
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 		static const char *_local_class_name_SSLContextCreation = "xvr2::Exception::SSLContextCreation";
 #endif
 		//static const char *_desc_SSLContextCreation = "SSLContextCreation exception thrown";
 
 		SSLContextCreation::SSLContextCreation(){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName((char *)_local_class_name_SSLContextCreation);
 #endif
 			//description = _desc_SSLContextCreation;

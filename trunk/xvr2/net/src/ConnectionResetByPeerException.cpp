@@ -8,7 +8,7 @@ namespace xvr2{
 	namespace Exception{
 
 		ConnectionResetByPeer::ConnectionResetByPeer(){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName((char *)xvr2::_xvr2ConnectionResetByPeerException);
 #endif
 			description = (char *)xvr2::excepConnectionResetByPeer;

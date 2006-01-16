@@ -6,7 +6,7 @@
 
 namespace xvr2 {
 	namespace Exception {
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 		const char *_excepblkfn = "xvr2::BulkUploadFailed";
 		const char *_excepblk_dpn = "xvr2::BulkDataParseFailed";
 		const char *_excepblk_stn = "xvr2::BulkUploadStart";
@@ -17,7 +17,7 @@ namespace xvr2 {
 		const char *_excepblk_st = "Bulk load initialization error";
 
 		Database::Database(){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName((char *)xvr2::_xvr2DatabaseException);
 #endif
 			description = (char *)xvr2::excepDatabaseException;
@@ -25,7 +25,7 @@ namespace xvr2 {
 
 
 		DBServerUnreachable::DBServerUnreachable(){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName((char *)xvr2::_xvr2DBServerUnreachableException);
 #endif
 			description = (char *)xvr2::excepDBServerUnreachable;
@@ -33,7 +33,7 @@ namespace xvr2 {
 
 
 		AlreadyConnected2DB::AlreadyConnected2DB(){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName((char *)xvr2::_xvr2AlreadyConnected2DBException);
 #endif
 			description = (char *)xvr2::excepAlreadyConnected2DB;
@@ -41,14 +41,14 @@ namespace xvr2 {
 
 
 		DBConnectFirst::DBConnectFirst(){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName((char *)xvr2::_xvr2DBConnectFirstException);
 #endif
 			description = (char *)xvr2::excepDBConnectFirst;
 		}
 
 		NoDataFetch::NoDataFetch(){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName((char *)xvr2::_xvr2NoDataFetchException);
 #endif
 			description = (char *)xvr2::excepNoDataFetch;
@@ -56,7 +56,7 @@ namespace xvr2 {
 
 
 		NoMoreRows::NoMoreRows(){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName((char *)xvr2::_xvr2NoMoreRowsException);
 #endif
 			description = (char *)xvr2::excepNoMoreRows;
@@ -64,7 +64,7 @@ namespace xvr2 {
 
 
 		DBConnectionFailed::DBConnectionFailed(){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName((char *)xvr2::_xvr2DBConnectionFailedException);
 #endif
 			description = (char *)xvr2::excepDBConnectionFailed;
@@ -72,7 +72,7 @@ namespace xvr2 {
 
 
 		ServerDisconnected::ServerDisconnected(){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName((char *)xvr2::_xvr2ServerDisconnectedException);
 #endif
 			description = (char *)xvr2::excepServerDisconnected;
@@ -80,7 +80,7 @@ namespace xvr2 {
 
 
 		SQLQuery::SQLQuery(){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName((char *)xvr2::_xvr2SQLQueryException);
 #endif
 			description = (char *)xvr2::excepSQLQuery;
@@ -88,7 +88,7 @@ namespace xvr2 {
 
 
 		SQLQueryRDBMSDisconnected::SQLQueryRDBMSDisconnected(){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName((char *)xvr2::_xvr2SQLQueryRDBMSDisconnectedException);
 #endif
 			description = (char *)xvr2::excepSQLQueryRDBMSDisconnected;
@@ -96,21 +96,21 @@ namespace xvr2 {
 
 
 		UnableToParseQuery::UnableToParseQuery(){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName((char *)xvr2::_xvr2UnableToParseQueryException);
 #endif
 			description = (char *)xvr2::excepUnableToParseQuery;
 		}
 
 		BulkUploadFailed::BulkUploadFailed():SQLQuery(){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName((char *)_excepblkfn);
 #endif
 			description = (char *)_excepblkf;
 		}
 
 		BulkDataParse::BulkDataParse():SQLQuery(){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName((char *)_excepblk_dpn);
 #endif
 			description = (char *)_excepblk_dp;
@@ -118,7 +118,7 @@ namespace xvr2 {
 
 
 		BulkUploadStart::BulkUploadStart():SQLQuery(){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName((char *)_excepblk_stn);
 #endif
 			description = (char *)_excepblk_st;

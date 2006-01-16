@@ -24,7 +24,7 @@ namespace xvr2{
 	}
 
 	ConditionVar::ConditionVar(){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 		setClassName(xvr2::_xvr2ConditionVar);
 #endif
 		init();

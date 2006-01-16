@@ -11,7 +11,7 @@ namespace xvr2{
 	static const char __ENDOFLINE[] = { '\n' };
 
 	TextOutput::TextOutput(){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 		setClassName(xvr2::_xvr2TextOutput);
 #endif
 	}

@@ -289,7 +289,7 @@ namespace xvr2{
 		}
 
 		TCPSocket::TCPSocket(const IPv4Address *ip, int theport){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName(xvr2::_xvr2TCPSocket);
 #endif
 			try{
@@ -300,7 +300,7 @@ namespace xvr2{
 			}
 		}
 		TCPSocket::TCPSocket(const IPv4Address &ip, int theport){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName(xvr2::_xvr2TCPSocket);
 #endif
 			try{
@@ -311,7 +311,7 @@ namespace xvr2{
 			}
 		}
 		TCPSocket::TCPSocket(TCPSocket *s){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 		   	setClassName(xvr2::_xvr2TCPSocket);
 #endif
 			tsock = s->tsock;
@@ -323,7 +323,7 @@ namespace xvr2{
 		}
 		
 		TCPSocket::TCPSocket(const TCPSocket &s){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 		   	setClassName(xvr2::_xvr2TCPSocket);
 #endif
 			tsock = s.tsock;
@@ -332,7 +332,7 @@ namespace xvr2{
 		}
 		
 		TCPSocket::TCPSocket(int s, int pport){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName(xvr2::_xvr2TCPSocket);
 #endif
 			host = (char *)__w6_localhost;
@@ -344,7 +344,7 @@ namespace xvr2{
 		}
 		
 		TCPSocket::TCPSocket(const char *thehost, const int theport){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName(xvr2::_xvr2TCPSocket);
 #endif
 			try{

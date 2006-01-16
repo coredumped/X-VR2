@@ -6,13 +6,13 @@
 
 namespace xvr2 {
 	namespace Exception{
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 		static const char *_local_class_name_SSLGeneric = "xvr2::Exception::SSLGeneric";
 #endif
 		//static const char *_desc_SSLGeneric = "SSLGeneric exception thrown";
 
 		SSLGeneric::SSLGeneric(){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName((char *)_local_class_name_SSLGeneric);
 #endif
 			//description = (char *)_desc_SSLGeneric;

@@ -16,7 +16,7 @@ namespace xvr2{
 	namespace Exception {
 
 		Exception::Exception(){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName(xvr2::_xvr2Exception);
 #endif
 			description = (char *)xvr2::strGenericException;
@@ -25,7 +25,7 @@ namespace xvr2{
 		}
 
 		Exception::Exception(const char *d){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName(xvr2::_xvr2Exception);
 #endif
 			if(d == 0)

@@ -8,7 +8,7 @@ namespace xvr2 {
 	namespace Exception{
 
 		Group::Group(){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName((char *)xvr2::_xvr2GroupException);
 #endif
 			description = (char *)xvr2::excepGroup;
@@ -16,7 +16,7 @@ namespace xvr2 {
 
 
 		GroupNotFound::GroupNotFound(){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName((char *)xvr2::_xvr2GroupNotFoundException);
 #endif
 			description = (char *)xvr2::excepGroupNotFound;

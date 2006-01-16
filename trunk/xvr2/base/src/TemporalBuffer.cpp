@@ -9,7 +9,7 @@
 namespace xvr2{
 
 	TemporalBuffer::TemporalBuffer(){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 		setClassName(xvr2::_xvr2TemporalBuffer);
 #endif
 		buffer = 0x0000;
@@ -18,7 +18,7 @@ namespace xvr2{
 	}
 
 	TemporalBuffer::TemporalBuffer(UInt32 size, UInt32 t){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 		setClassName(xvr2::_xvr2TemporalBuffer);
 #endif
 		alloc(size);

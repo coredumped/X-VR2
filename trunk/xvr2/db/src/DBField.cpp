@@ -14,7 +14,7 @@
 #include<xvr2/NullPointerException.h>
 #include<xvr2/Memory.h>
 #include<errno.h>
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 #define __USE_SVID
 #include<stdlib.h>
 #include<stdio.h>
@@ -36,7 +36,7 @@ namespace xvr2{
 		//Start implementation of class: Field
 	
 		Field::Field(const void *data, const UInt32 size){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName(xvr2::_xvr2Field);
 #endif
 			tmpStrTINYINT = 0;
@@ -84,7 +84,7 @@ namespace xvr2{
 		}
 	
 		void Field::init(const int type, const void *data, const UInt32 size){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName(xvr2::_xvr2Field);
 #endif
 			void *ttmp;

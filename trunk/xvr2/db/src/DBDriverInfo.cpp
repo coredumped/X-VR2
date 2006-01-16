@@ -21,7 +21,7 @@ namespace xvr2{
 		//Start implementation of class: DriverInfo
 	
 		DriverInfo::DriverInfo(){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName(xvr2::_xvr2DBDriverInfo);
 #endif
 			__version = 0;
@@ -30,7 +30,7 @@ namespace xvr2{
 		}
 	
 		DriverInfo::DriverInfo(int ver, int rev, const String &vend){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName(xvr2::_xvr2DBDriverInfo);
 #endif
 			__version = ver;
@@ -39,7 +39,7 @@ namespace xvr2{
 		}
 	
 		DriverInfo::DriverInfo(int ver, int rev, const String &vend, const String &desc){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName(xvr2::_xvr2DBDriverInfo);
 #endif
 			__version = ver;

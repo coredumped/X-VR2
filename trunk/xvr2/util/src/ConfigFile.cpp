@@ -5,7 +5,7 @@
  */
 #include<xvr2/ConfigFile.h>
 #include<xvr2/Memory.h>
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 #include<string.h>
 #include<stdio.h>
 #endif
@@ -36,7 +36,7 @@ namespace xvr2 {
 		static Mutex ConfigFileLock;
 
 		ConfigFile::ConfigFile(const char *fname){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName(xvr2::_xvr2ConfigFile);
 #endif
 			filepath = strdup(fname);
@@ -174,7 +174,7 @@ namespace xvr2 {
 		}
 
 		__ParamAndVal::__ParamAndVal(){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName(xvr2::_xvr2__ParamAndVal);
 #endif
 			myname = 0;
@@ -184,7 +184,7 @@ namespace xvr2 {
 		}
 
 		__ParamAndVal::__ParamAndVal(const char *pname){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName(xvr2::_xvr2__ParamAndVal);
 #endif
 			sval = 0;

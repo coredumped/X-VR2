@@ -8,14 +8,14 @@ namespace xvr2 {
 	namespace Exception{
 
 		Thread::Thread(){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName((char *)xvr2::_xvr2ThreadException);
 #endif
 			description = (char *)xvr2::excepGenThread;
 		}
 
 		ThreadNotRunning::ThreadNotRunning(){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName((char *)xvr2::_xvr2ThreadNotRunningException);
 #endif
 			description = (char *)xvr2::excepThreadNotRunning;
@@ -23,7 +23,7 @@ namespace xvr2 {
 
 
 		ConditionVarWaitTimedOut::ConditionVarWaitTimedOut(){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName((char *)xvr2::_xvr2ConditionVarWaitTimedOutException);
 #endif
 			description = (char *)xvr2::excepConditionVarWaitTimedOut;

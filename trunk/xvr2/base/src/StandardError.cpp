@@ -6,7 +6,7 @@
 
 namespace xvr2{
 	StandardError::StandardError(){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 		setClassName(xvr2::_xvr2StandardError);
 #endif
 	}

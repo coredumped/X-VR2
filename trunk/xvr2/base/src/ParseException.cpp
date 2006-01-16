@@ -8,7 +8,7 @@ namespace xvr2 {
 	namespace Exception{
 
 		Parse::Parse(){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName((char *)xvr2::_xvr2ParseException);
 #endif
 			description = (char *)xvr2::excepParse;
@@ -16,7 +16,7 @@ namespace xvr2 {
 
 
 		DateParse::DateParse(){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName((char *)xvr2::_xvr2DateParseException);
 #endif
 			description = (char *)xvr2::excepDateParse;
@@ -24,7 +24,7 @@ namespace xvr2 {
 
 
 		TimeParse::TimeParse(){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName((char *)xvr2::_xvr2TimeParseException);
 #endif
 			description = (char *)xvr2::excepTimeParse;
@@ -32,7 +32,7 @@ namespace xvr2 {
 
 
 		BitParse::BitParse(){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName((char *)xvr2::_xvr2BitParseException);
 #endif
 			description = (char *)xvr2::excepBitParse;
@@ -40,7 +40,7 @@ namespace xvr2 {
 
 
 		ByteParse::ByteParse(){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName((char *)xvr2::_xvr2ByteParseException);
 #endif
 			description = (char *)xvr2::excepByteParse;

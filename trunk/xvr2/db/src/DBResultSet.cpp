@@ -10,7 +10,7 @@ namespace xvr2{
 	namespace DB {
 
 		ResultSet::ResultSet(Driver *drv, void *__handle, bool __status, UInt64 _afrows){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName(xvr2::_xvr2ResultSet);
 #endif
 			r_handle = __handle;
@@ -29,7 +29,7 @@ namespace xvr2{
 		}
 	
 		ResultSet::ResultSet(Driver *drv, void *__handle, bool __status){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 			setClassName(xvr2::_xvr2ResultSet);
 #endif
 			r_handle = __handle;

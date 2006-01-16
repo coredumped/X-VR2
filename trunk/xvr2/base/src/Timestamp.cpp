@@ -5,28 +5,28 @@
 
 namespace xvr2{
 	Timestamp::Timestamp(UInt32 tstamp){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 		setClassName(_xvr2Timestamp);
 #endif
 		setTStamp(tstamp);
 	}
 
 	Timestamp::Timestamp(const Timestamp *d):Time(d){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 		setClassName(_xvr2Timestamp);
 #endif
 	}
 
 	Timestamp::Timestamp(const char *f, const char *t){
 		//drep = 0;
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 		setClassName(_xvr2Timestamp);
 #endif
 		decode(f, t);
 	}
 
 	Timestamp::Timestamp(){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 		setClassName(_xvr2Timestamp);
 #endif
 		getCurrentTime();

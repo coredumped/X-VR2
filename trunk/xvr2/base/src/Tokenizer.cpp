@@ -11,7 +11,7 @@
 namespace xvr2{
 
 	Tokenizer::Tokenizer(char *phrase, char *d){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 		setClassName(xvr2::_xvr2Tokenizer);
 #endif
 		temp = 0;
@@ -23,7 +23,7 @@ namespace xvr2{
 	}
 
 	Tokenizer::Tokenizer(const String &phrase, const String &d){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 		setClassName(xvr2::_xvr2Tokenizer);
 #endif
 		temp = 0;

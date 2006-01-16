@@ -11,7 +11,7 @@ namespace xvr2{
 	DSO::DSO(){
 		loaded = false;
 		handle = 0;
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 		setClassName(xvr2::_xvr2DSO);
 #endif
 		dso = (char *)msgNothingLoaded;
@@ -29,7 +29,7 @@ namespace xvr2{
 	DSO::DSO(const String &plName){
 		loaded = false;
 		handle = 0;
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 		setClassName(xvr2::_xvr2DSO);
 #endif
 		dso = plName.toCharPtr();

@@ -56,28 +56,28 @@ namespace xvr2{
 	//Start implementation of class: Byte
 
 	Byte::Byte(){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 		setClassName(xvr2::_xvr2Byte);
 #endif
 		setValue();
 	}
 
 	Byte::Byte(UInt8 v){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 		setClassName(xvr2::_xvr2Byte);
 #endif
 		setValue(v);
 	}
 
 	Byte::Byte(const char *v){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 		setClassName(xvr2::_xvr2Byte);
 #endif
 		setValue(v);
 	}
 
 	Byte::Byte(const String &v){
-#if GCC_MAJOR_VERSION < 3
+#if __GNUC__ < 3
 		setClassName(xvr2::_xvr2Byte);
 #endif
 		setValue(v);
