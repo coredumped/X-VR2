@@ -12,7 +12,7 @@ namespace xvr2 {
 	namespace Exception{
 
 		DSO::DSO(const char *msg){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 			setClassName((char *)xvr2::_xvr2DSOException);
 #endif
 			if(msg)
@@ -22,7 +22,7 @@ namespace xvr2 {
 		}
 
 		CantLoadDSO::CantLoadDSO(){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 			setClassName((char *)xvr2::_xvr2CantLoadDSOException);
 #endif
 #ifdef _WIN32		
@@ -33,7 +33,7 @@ namespace xvr2 {
 		}
 
 		CantUnloadDSO::CantUnloadDSO(){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 			setClassName((char *)xvr2::_xvr2CantUnloadDSOException);
 #endif
 #ifdef _WIN32		
@@ -44,7 +44,7 @@ namespace xvr2 {
 		}
 
 		DSOSymbol::DSOSymbol(){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 			setClassName((char *)xvr2::_xvr2DSOSymbolException);
 #endif
 #ifdef _WIN32

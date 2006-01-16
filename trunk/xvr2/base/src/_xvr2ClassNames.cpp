@@ -6,7 +6,7 @@
  */
 
 namespace xvr2 {
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 	const char *_xvr2Array = "Array";
 	const char *_xvr2ArrayIndexOutOfLimitsException = "ArrayIndexOutOfLimitsException";
 	const char *_xvr2BrokenPipeException = "BrokenPipeException";

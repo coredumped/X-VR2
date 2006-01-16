@@ -73,7 +73,7 @@ namespace xvr2{
 
 	Group::Group(){
 		char *tmpptr;
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 		setClassName(xvr2::_xvr2Group);
 #endif
 		_groupid = Group::getCurrentGroupID();
@@ -85,7 +85,7 @@ namespace xvr2{
 
 	Group::Group(int gid){
 		char *tmpptr;
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 		setClassName(xvr2::_xvr2Group);
 #endif
 		_groupid = gid;
@@ -96,7 +96,7 @@ namespace xvr2{
 	}
 
 	Group::Group(const String &gname){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 		setClassName(xvr2::_xvr2Group);
 #endif
 		//_groupname = gname;

@@ -7,7 +7,7 @@
 namespace xvr2{
 
 	AutomatedGC::AutomatedGC(UInt32 speriod){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 		Thread::setClassName(xvr2::_xvr2AutomatedGC);
 #endif
 		_scanperiod = speriod;

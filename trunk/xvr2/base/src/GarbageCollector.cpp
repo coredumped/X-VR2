@@ -11,7 +11,7 @@
 namespace xvr2{
 
 	GarbageCollector::GarbageCollector(){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 		setClassName(xvr2::_xvr2GarbageCollector);
 #endif
 		garbage = new Util::List<TemporalBuffer *>();

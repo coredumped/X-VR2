@@ -20,7 +20,7 @@ namespace xvr2{
 	//Start implementation of class: Syslog
 
 	Syslog::Syslog(){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 		setClassName(xvr2::_xvr2Syslog);
 #endif
 	}

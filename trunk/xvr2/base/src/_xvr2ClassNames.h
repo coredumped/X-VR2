@@ -8,7 +8,7 @@
 #define __xvr2ClassNames_H__
 
 namespace xvr2 {
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 	extern const char *_xvr2Array;
 	extern const char *_xvr2ArrayIndexOutOfLimitsException;
 	extern const char *_xvr2BrokenPipeException;

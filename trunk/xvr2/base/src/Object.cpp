@@ -7,43 +7,43 @@
 #include<xvr2/Object.h>
 #include<iostream>
 #include<xvr2/DebugConsole.h>
-#ifdef USING_GCC3
+#if GCC_MAJOR_VERSION >= 3
 #include<stdlib.h>
 #include<cxxabi.h>
 #endif
 #include"xvr2/ThreadManager.h"
 
 namespace xvr2{
-#ifndef GCC_3_4
+//#ifndef GCC_3_4
+#if GCC_MAJOR_VERSION == 3 && GCC_MINOR_VERSION < 4
 	bool vterm;
 #endif
 	
 
 	Object::Object(){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 		setClassName(xvr2::_xvr2Object);
 #endif
 #ifdef USE_DEBUG
-#ifdef USING_GCC3
-#ifndef GCC_3_4
+#if GCC_MAJOR_VERSION == 3 && GCC_MINOR_VERSION < 4
 		if(!vterm){
 			std::set_terminate (__gnu_cxx::__verbose_terminate_handler);
 			vterm = true;
 		}
-#endif
+//#endif
 #endif
 #endif
 		string_representation = 0;
 	}
 
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 	void Object::setClassName(const char *n){
 		__cls_name = (char *)n;
 	}
 #endif
 
 	const char *Object::getClassName(){
-#if defined(USING_GCC3) || defined(GCC_3_4) 
+#if GCC_MAJOR_VERSION >= 3
 		char *__cls_name;
 		int status;
 		__cls_name = abi::__cxa_demangle(typeid(*this).name(), 0, 0, &status);
@@ -72,22 +72,11 @@ namespace xvr2{
 		debugConsole << "\n";
 	}
 
-#ifndef USING_GCC3
+
 	Object::~Object(){
-		//__cls_name = 0;
 		delete string_representation;
 		string_representation = 0;
 	}
-#else
-	Object::~Object(){
-		/*if(__cls_name != 0){
-			free(__cls_name);
-			__cls_name = 0;
-		}*/
-		delete string_representation;
-		string_representation = 0;
-	}
-#endif
 
 	const std::string &Object::toString(){
 		if(string_representation == 0){

@@ -49,67 +49,67 @@ namespace xvr2{
 	}
 	
 	String::String():CharString(){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 		Object::setClassName(xvr2::_xvr2String);
 #endif
 	}
 	
 	String::String(const String &s):CharString(s.buffer){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 		Object::setClassName(xvr2::_xvr2String);
 #endif
 	}
 	
 	String::String(const char *s):CharString(s){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 		Object::setClassName(xvr2::_xvr2String);
 #endif
 	}
 	
 	String::String(const int n):CharString(){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 		Object::setClassName(xvr2::_xvr2String);
 #endif
 		assign(n);
 	}
 
 	String::String(const long n):CharString(){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 		Object::setClassName(xvr2::_xvr2String);
 #endif
 		assign(n);
 	}
 	
 	String::String(const unsigned int n):CharString(){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 		Object::setClassName(xvr2::_xvr2String);
 #endif
 		assign(n);
 	}
 	
 	String::String(const float n):CharString(){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 		Object::setClassName(xvr2::_xvr2String);
 #endif
 		assign(n);
 	}
 	
 	String::String(const double n):CharString(){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 		Object::setClassName(xvr2::_xvr2String);
 #endif
 		assign(n);
 	}
 	
 	String::String(const long double n):CharString(){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 		Object::setClassName(xvr2::_xvr2String);
 #endif
 		assign(n);
 	}
 	
 	String::String(const Int64 n):CharString(){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 		Object::setClassName(xvr2::_xvr2String);
 #endif
 		assign(n);
@@ -748,12 +748,12 @@ namespace xvr2{
 	}
 
 	String::String(const std::string &s):CharString(s.c_str()){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 		Object::setClassName(xvr2::_xvr2String);
 #endif
 	}
 	String::String(const std::string *s):CharString(s->c_str()){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 		Object::setClassName(xvr2::_xvr2String);
 #endif
 	}

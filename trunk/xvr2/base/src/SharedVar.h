@@ -31,13 +31,13 @@ namespace xvr2{
 			}
 			/**Constructor that does nothing*/
 			SharedVar(){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 				setClassName(_xvr2SharedVar);
 #endif
 			}
 			/**This constructor initializes the value of the shared variable */
 			SharedVar(T v){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 				setClassName(_xvr2SharedVar);
 #endif
 				//setValue(v);

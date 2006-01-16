@@ -8,7 +8,7 @@ namespace xvr2 {
 	namespace Exception{
 
 		ArrayIndexOutOfLimits::ArrayIndexOutOfLimits(){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 			setClassName((char *)xvr2::_xvr2ArrayIndexOutOfLimitsException);
 #endif
 			description = (char *)xvr2::excepAOB;	

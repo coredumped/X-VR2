@@ -34,26 +34,26 @@ namespace xvr2{
 		string_representation = new std::string(stream.str());
 	}
 	Time::Time(){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 		setClassName(xvr2::_xvr2Time);
 #endif
 	}
 
 	Time::Time(UInt32 tstamp){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 		setClassName(xvr2::_xvr2Time);
 #endif
 		setTStamp(tstamp);
 	}
 
 	Time::Time(const char *time_text):Date("%T", time_text){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 		setClassName(xvr2::_xvr2Time);
 #endif
 	}
 
 	Time::Time(const String &time_text):Date("%T", time_text){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 		setClassName(xvr2::_xvr2Time);
 #endif
 	}
@@ -63,7 +63,7 @@ namespace xvr2{
 	}
 
 	Time::Time(int __hour, int __min, int __sec){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 		setClassName(xvr2::_xvr2Time);
 #endif
 		hour      = __hour;
@@ -77,7 +77,7 @@ namespace xvr2{
 	}
 
 	Time::Time(const Time *t):Date(t){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 		setClassName(xvr2::_xvr2Time);
 #endif
 	}
@@ -97,8 +97,8 @@ namespace xvr2{
 		return second;
 	}
 	
-	const String &Time::toString() const{
+	/*const String &Time::toString() const{
 		//return drep;
 		return *string_representation;
-	}
+	}*/
 };

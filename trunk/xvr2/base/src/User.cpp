@@ -23,7 +23,7 @@ namespace xvr2{
 
 	User::User(){
 		char *tmpptr;
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 		setClassName(xvr2::_xvr2User);
 #endif
 		_userid = User::getCurrentUserID();
@@ -35,7 +35,7 @@ namespace xvr2{
 
 	User::User(int uid){
 		char *tmpptr;
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 		setClassName(xvr2::_xvr2User);
 #endif
 		_userid = uid;
@@ -46,7 +46,7 @@ namespace xvr2{
 	}
 
 	User::User(const String &uname){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 		setClassName(xvr2::_xvr2User);
 #endif
 		_userid = Unix::getuid(uname);

@@ -10,7 +10,7 @@
 namespace xvr2{
 
 	Tokenizer::Tokenizer(char *phrase, char *d){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 		setClassName(xvr2::_xvr2Tokenizer);
 #endif
 		temp = 0;
@@ -22,7 +22,7 @@ namespace xvr2{
 	}
 
 	Tokenizer::Tokenizer(const String &phrase, const String &d){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 		setClassName(xvr2::_xvr2Tokenizer);
 #endif
 		temp = 0;
@@ -106,7 +106,7 @@ namespace xvr2{
 		ptr = cnext();
 		if(ptr == 0){
 			throw Exception::NoMoreTokens();
-			return 0;
+			//return 0;
 		}
 		tstr = ptr;
 		return tstr;

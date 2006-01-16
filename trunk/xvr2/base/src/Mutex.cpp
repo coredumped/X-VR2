@@ -23,7 +23,7 @@ using std::endl;
 namespace xvr2{
 
 Mutex::Mutex(int autoinit){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
  Object::setClassName(xvr2::_xvr2Mutex);
 #endif
  if(autoinit)

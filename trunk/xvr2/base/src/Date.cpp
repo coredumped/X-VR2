@@ -82,7 +82,7 @@ namespace xvr2{
 	}
 
 	Date::Date(){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 		setClassName(xvr2::_xvr2Date);
 #endif
 		//drep = 0;
@@ -90,7 +90,7 @@ namespace xvr2{
 	}
 
 	Date::Date(const Date *d){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 		setClassName(xvr2::_xvr2Date);
 #endif
 		//drep = 0;
@@ -109,7 +109,7 @@ namespace xvr2{
 
 	Date::Date(int __y, int __m, int __dw, int __dm, int __h, int __mi, int __s){
 		struct tm t;
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 		setClassName(xvr2::_xvr2Date);
 #endif
 		//drep = 0;
@@ -147,7 +147,7 @@ namespace xvr2{
 	}
 
 	Date::Date(UInt32 __unixtime){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 		setClassName(xvr2::_xvr2Date);
 #endif
 		//drep = 0;
@@ -194,7 +194,7 @@ namespace xvr2{
 
 	Date::Date(const char *format, const char *date_text){
 		//drep = 0;
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 		setClassName(xvr2::_xvr2Date);
 #endif
 		decode(format, date_text);
@@ -203,7 +203,7 @@ namespace xvr2{
 
 	Date::Date(const String &format, const String &date_text){
 		struct tm t;
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 		setClassName(xvr2::_xvr2Date);
 #endif
 		//drep = 0;

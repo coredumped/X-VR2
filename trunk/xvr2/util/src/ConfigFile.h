@@ -1,7 +1,5 @@
 /*
  * $Id$
- *
- *			Juan V. Guerrero <coredumped@esolutions4all.com>
  */
 #ifndef __XVR2_CONFIG_FILE__
 #define __XVR2_CONFIG_FILE__

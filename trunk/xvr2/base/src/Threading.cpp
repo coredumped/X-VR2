@@ -3,7 +3,7 @@
 namespace xvr2{
 
 	Threading::Threading(){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 		setClassName(xvr2::_xvr2Threading);
 #endif
 	}

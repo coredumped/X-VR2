@@ -8,7 +8,7 @@ namespace xvr2 {
 	namespace Exception {
 		
 		BufferTooSmall::BufferTooSmall(){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 			setClassName((char *)xvr2::_xvr2BufferTooSmallException);
 #endif
 			description = (char *)xvr2::excepBufferTooSmall;

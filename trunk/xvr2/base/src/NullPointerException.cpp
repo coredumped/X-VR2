@@ -8,7 +8,7 @@ namespace xvr2 {
 	namespace Exception{
 
 		NullPointer::NullPointer(){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 			setClassName((char *)xvr2::_xvr2NullPointerException);
 #endif
 			description = (char *)xvr2::excepNullPtr;
