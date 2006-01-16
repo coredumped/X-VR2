@@ -136,11 +136,11 @@ namespace xvr2{
 			CreateSocket(port);
 			if(listen(tsock, maxConn) != 0){
 			        switch(errno){
-			                case EADDRINUSE:
-						throw Exception::SocketAlreadyUsed();
-		                        break;
-			                default:
-			                        throw Exception::Network();
+						case EADDRINUSE:
+							throw Exception::SocketAlreadyUsed();
+							break;
+						default:
+							throw Exception::Network();
 		        	}
 			}
 			size = sizeof(client);
@@ -158,19 +158,21 @@ namespace xvr2{
 				int size;
 	#else
 				size_t size;
+				socklen_t tlen;
 	#endif
 			CreateSocket(port, true);
 			if(listen(tsock, maxConn) != 0){
 			        switch(errno){
-			                case EADDRINUSE:
-						throw Exception::SocketAlreadyUsed();
-		                        break;
-			                default:
-			                        throw Exception::Network();
+						case EADDRINUSE:
+							throw Exception::SocketAlreadyUsed();
+							break;
+						default:
+							throw Exception::Network();
 		        	}
 			}
 			size = sizeof(client);
-			if((ss = ::accept(tsock, (sockaddr *)&client, &size)) == -1)
+			tlen = size;
+			if((ss = ::accept(tsock, (sockaddr *)&client, &tlen)) == -1)
 				return 0x0; 
 			TCPSocket *r = new TCPSocket(ss, port);
 			return r;
