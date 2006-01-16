@@ -55,7 +55,7 @@ namespace xvr2{
 	void Object::debugmsg(Object *obj, const char *msg){
 		if(obj == 0)
 			return;
-#if __WORDSIZE == 64 && defined(__86_64__)
+#if __WORDSIZE == 64 && defined(__x86_64__)
 		debugConsole << obj->getClassName() << "[ptr=" << (Int64)obj << ",tid=";
 #else
 		debugConsole << obj->getClassName() << "[ptr=" << (unsigned int)obj << ",tid=";
