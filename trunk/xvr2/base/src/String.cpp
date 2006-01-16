@@ -128,12 +128,14 @@ namespace xvr2{
 		return *this;
 	}
 
+#ifndef __x86_64__
 	const String &String::assign(const long n){
 		char num[24];
 		long2char(n, num);
 		assign(num);
 		return *this;
 	}
+#endif
 	
 	const String &String::assign(const unsigned int n){
 		char num[14];

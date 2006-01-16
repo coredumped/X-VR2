@@ -82,7 +82,9 @@ class String:public CharString{
 		//void assign(const char *s);
 		/** Transforms and assigns <b>n</b> to the current String */
 		const String &assign(const int n);
+#ifndef __x86_64__
 		const String &assign(const long n);
+#endif
 		/** Transforms and assigns <b>n</b> to the current String */
 		const String &assign(const unsigned int n);
 		/** Transforms and assigns <b>n</b> to the current String */

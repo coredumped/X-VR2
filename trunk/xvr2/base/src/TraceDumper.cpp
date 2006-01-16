@@ -107,7 +107,7 @@ namespace xvr2{
 			void * array[EXCEPTION_DEPTH_TRACE];
 			int nSize;
 			char ** symbols;
-			long int tid;
+			Int64 tid;
 #ifdef USE_POSIX_THREADS
 			pthread_mutex_lock(&_tm);
 #endif
@@ -117,7 +117,7 @@ namespace xvr2{
 			debugConsole << "\n [EE] [THREAD: ";
 			tid = ThreadManager::getCurrentThreadID();
 			if(tid != 0){
-				debugConsole << (long int)tid << "] ";
+				debugConsole << (Int64)tid << "] ";
 			}
 			else{
 				debugConsole << "MAIN] ";
