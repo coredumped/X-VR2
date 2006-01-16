@@ -59,15 +59,24 @@ do
 	echo $def | egrep '\-D' > /dev/null 2>&1
 	if [ $? -eq 0 ]; then
 		define=`echo "$def" | sed 's/^-D//'`
-		echo $define | grep ' '
+		echo $define | grep ' ' > /dev/null 2>&1
 		if [ $? -eq 0 ]; then
 			definexxx=`echo $define | cut -f1 -d' '`
 		else
 			definexxx=$define
 		fi
+#FIX defines with the '=' symbol
+		echo $definexxx | egrep '=' > /dev/null 2>&1
+		if [ $? -eq 0 ]; then
+			definexxx=`echo $definexxx | cut -f1 -d'='`
+			define=`echo $define | sed 's/=/ /'`
+		fi
 		echo "#ifndef $definexxx" >> xvr2config.h
 		echo "#define $define
 #endif" >> xvr2config.h
+		echo "#ifndef $definexxx"
+		echo "#define $define"
+		echo "#endif"
 	fi
 done
 echo "#endif" >> xvr2config.h
