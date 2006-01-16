@@ -48,13 +48,13 @@ echo "/*
 
 namespace xvr2 {
 	namespace Exception{
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 		static const char *_local_class_name_${name} = \"xvr2::Exception::${name}\";
 #endif
 		static const char *_desc_${name} = \"${name} exception thrown\";
 
 		${name}::${name}(){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 			setClassName((char *)_local_class_name_${name});
 #endif
 			description = (char *)_desc_${name};

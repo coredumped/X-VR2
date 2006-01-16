@@ -14,7 +14,7 @@
 #include<xvr2/NullPointerException.h>
 #include<xvr2/Memory.h>
 #include<errno.h>
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 #define __USE_SVID
 #include<stdlib.h>
 #include<stdio.h>
@@ -36,7 +36,7 @@ namespace xvr2{
 		//Start implementation of class: Field
 	
 		Field::Field(const void *data, const UInt32 size){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 			setClassName(xvr2::_xvr2Field);
 #endif
 			tmpStrTINYINT = 0;
@@ -84,7 +84,7 @@ namespace xvr2{
 		}
 	
 		void Field::init(const int type, const void *data, const UInt32 size){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 			setClassName(xvr2::_xvr2Field);
 #endif
 			void *ttmp;
@@ -243,7 +243,7 @@ namespace xvr2{
 				case TIME:
 					tmpTime = new Time((Time *)data);
 					dataPtr = (void *)tmpTime;
-					tmpString.assign(tmpTime->toString().toCharPtr());
+					tmpString.assign(tmpTime->toString());
 					break;
 				case TIMESTAMP:
 					tmpTimestamp = new Timestamp((Timestamp *)data);
@@ -690,7 +690,7 @@ namespace xvr2{
 						//#  I need a better way to implement
 						//#  this, please HELP!!!!!!!!!
 						//#################################
-						ret = ((Time *)dataPtr)->toString().toCharPtr();
+						ret = (char *)(((Time *)dataPtr)->toString().c_str());
 					}
 					catch(...){
 						throw Exception::UndefinedClass();

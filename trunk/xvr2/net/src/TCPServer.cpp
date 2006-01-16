@@ -20,7 +20,7 @@ namespace xvr2{
 		//Start implementation of class: TCPServer
 	
 		TCPServer::TCPServer(int pport):TCPServerSocket(pport){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 			TCPServerSocket::setClassName(xvr2::_xvr2TCPServer);
 #endif
 		}
@@ -94,7 +94,7 @@ namespace xvr2{
 
 		void TCPServer::sessionDialog(TCPSocket *client){
 			static int h;
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 			std::cout << xvr2::_xvr2TCPServer << ": please create a subclass from this one and override the sessionDialog method from there. " << std::endl;
 			client->writeLine(xvr2::_xvr2TCPServer);
 			client->writeLine(": please create a subclass from this one and override the sessionDialog method from there");

@@ -9,24 +9,24 @@ namespace xvr2{
 
 	namespace DB {
 
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 		_xvr2ConnectionMT = "ConnectionMT";
 #endif
 
 		ConnectionMT::ConnectionMT():Connection(){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 			setClassName(_xvr2ConnectionMT);
 #endif
 		}
 	
 		ConnectionMT::ConnectionMT(Driver *d):Connection(d){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 			setClassName(_xvr2ConnectionMT);
 #endif
 		}
 	
 		ConnectionMT::ConnectionMT(Driver *d, const String &s, const String &dbname, const String &u, const String &p, int port):Connection(d, s, dbname, u, p, port){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 			setClassName(_xvr2ConnectionMT);
 #endif
 		}

@@ -24,7 +24,7 @@ namespace xvr2{
 	namespace Net{
 
 		Socket::Socket(){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 			setClassName(xvr2::_xvr2Socket);
 #endif
 		}

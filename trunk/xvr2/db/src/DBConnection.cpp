@@ -14,7 +14,7 @@ namespace xvr2{
 
 
 		Connection::Connection(){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 			setClassName(xvr2::_xvr2Connection);
 #endif
 			driver = 0;
@@ -25,7 +25,7 @@ namespace xvr2{
 		}
 	
 		Connection::Connection(Driver *d){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 			setClassName(xvr2::_xvr2Connection);
 #endif
 			driver = d;
@@ -36,7 +36,7 @@ namespace xvr2{
 		}
 	
 		Connection::Connection(Driver *d, const String &s, const String &dbname, const String &u, const String &p, int port){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 			setClassName(xvr2::_xvr2Connection);
 #endif
 			driver = d;

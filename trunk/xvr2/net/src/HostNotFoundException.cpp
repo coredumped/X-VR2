@@ -7,7 +7,7 @@ namespace xvr2 {
 	namespace Exception{
 
 		HostNotFound::HostNotFound(){
-#ifndef USING_GCC3
+#if GCC_MAJOR_VERSION < 3
 			setClassName((char *)xvr2::_xvr2HostNotFoundException);
 #endif
 			description = (char *)xvr2::excepHostNotFound;
