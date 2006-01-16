@@ -124,6 +124,8 @@ if [ "$THREADMODE" = 'PTH' ]; then
 fi
 echo "Processor: $PROCESSOR, platform is $PLATFORM"
 
+CC_OPTIONS=-fPIC
+
 echo -ne "Checking g++..."
 GPP=`slocate g++ | egrep '.*bin.*\/g\+\+$'`
 if [ $? -ne 0 ]; then
@@ -204,7 +206,7 @@ DEBUG=$MAINTAINER $DEBUGSTRING $DEBUG_MUTEXES
 #DEBUG=$MAINTAINER -DUSE_DEBUG=$DEBUGMODE
 #DEBUG=
 OPTIMIZE=
-CFLAGS=-Wall \$(DEBUG) \$(OPTIMIZE) -I. -I../.,/src -c $DEFINES -Wimplicit -Wreturn-type -Wunused -Wswitch -Wcomment -Wparentheses -Wpointer-arith  `xvr2-config.sh --cflags` $SDLCFLAGS" >> Makefile
+CFLAGS=-Wall \$(DEBUG) \$(OPTIMIZE) -I. -I../.,/src -c $CC_OPTIONS -Wimplicit -Wreturn-type -Wunused -Wswitch -Wcomment -Wparentheses -Wpointer-arith  `xvr2-config.sh --cflags` $SDLCFLAGS $DEFINES" >> Makefile
 echo "LIBS=`xvr2-config.sh --libs` $SDLLIBS" >> Makefile
 echo "INSTALLDIR=$PREFIX
 LIBNAME=xvr2_sdl_driver.so.${MYVERSION}

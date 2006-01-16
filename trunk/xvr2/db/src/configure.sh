@@ -96,6 +96,7 @@ do
 
 done
 
+CC_OPTIONS=-fPIC
 
 DEFINES="$SCHUNK"
 echo $SCHUNK
@@ -203,7 +204,7 @@ DEBUG=$MAINTAINER $DEBUGSTRING $DEBUG_MUTEXES
 #DEBUG=$MAINTAINER -DUSE_DEBUG=$DEBUGMODE
 #DEBUG=
 OPTIMIZE=
-CFLAGS=-Wall \$(DEBUG) \$(OPTIMIZE) -I../../common -I ${XVR2_SOURCE_DIR}/include -I. -c $DEFINES -Wimplicit -Wreturn-type -Wunused -Wswitch -Wcomment -Wparentheses -Wpointer-arith " >> Makefile
+CFLAGS=-Wall \$(DEBUG) \$(OPTIMIZE) -I../../common -I ${XVR2_SOURCE_DIR}/include -I. -c $CC_OPTIONS -Wimplicit -Wreturn-type -Wunused -Wswitch -Wcomment -Wparentheses -Wpointer-arith $DEFINES " >> Makefile
 	if [ $THREADMODE = 'PTHREADS' ]; then
 		echo "LIBS=-ldl -lrt -lpthread" >> Makefile
 	else

@@ -97,6 +97,7 @@ do
 
 done
 
+CC_OPTIONS=-fPIC
 
 DEFINES="$SCHUNK"
 echo $SCHUNK
@@ -166,7 +167,7 @@ DEBUG=$MAINTAINER $DEBUGSTRING $DEBUG_MUTEXES
 OPTIMIZE=" >> Makefile
 	OSVER=`uname -r | sed 's/5\.//'`
 	echo $OSVER
-	echo "CFLAGS=-Wall \$(DEBUG) \$(OPTIMIZE) -DSOLARIS=1 -DSOLARIS2$OSVER=1 -I../../common -I ${XVR2_SOURCE_DIR}/include -I. -c -DUSE_NEW=1  -D_STRUCTURED_PROC $SDLCMD $DEFINES" >> Makefile
+	echo "CFLAGS=-Wall \$(DEBUG) \$(OPTIMIZE) -DSOLARIS=1 -DSOLARIS2$OSVER=1 -I../../common -I ${XVR2_SOURCE_DIR}/include -I. -c -DUSE_NEW=1  -D_STRUCTURED_PROC $SDLCMD $CC_OPTIONS $DEFINES" >> Makefile
 	if [ $OSVER -eq 8 ]; then
 		DEFINES="$DEFINES -DSOLARIS8"
 		echo "LIBS=-lposix4 -lsocket -lposix -lssl -lcrypto" >> Makefile
@@ -196,7 +197,7 @@ DEBUG=$MAINTAINER $DEBUGSTRING $DEBUG_MUTEXES
 #DEBUG=$MAINTAINER -DUSE_DEBUG=$DEBUGMODE
 #DEBUG=
 OPTIMIZE=
-CFLAGS=-Wall \$(DEBUG) \$(OPTIMIZE) -I../../common -I ${XVR2_SOURCE_DIR}/include -I. -c $DEFINES -Wimplicit -Wreturn-type -Wunused -Wswitch -Wcomment -Wparentheses -Wpointer-arith " >> Makefile
+CFLAGS=-Wall \$(DEBUG) \$(OPTIMIZE) -I../../common -I ${XVR2_SOURCE_DIR}/include -I. -c $CC_OPTIONS -Wimplicit -Wreturn-type -Wunused -Wswitch -Wcomment -Wparentheses -Wpointer-arith $DEFINES " >> Makefile
 	echo "LIBS=-lssl -lcrypto" >> Makefile
 	echo "INSTALLDIR=$PREFIX
 LIBNAME=${MYLIBNAME}.${MYVERSION}

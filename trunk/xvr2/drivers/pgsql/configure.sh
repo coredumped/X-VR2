@@ -99,6 +99,8 @@ echo "DEFINES: $DEFINES"
 
 echo "Processor: $PROCESSOR, platform is $PLATFORM"
 
+CC_OPTIONS=-fPIC
+
 GPP=`find_gplusplus`
 if [ $? -ne 0 ]; then
 	exit 1
@@ -183,7 +185,7 @@ DEBUG=$MAINTAINER $DEBUGSTRING $DEBUG_MUTEXES
 #DEBUG=$MAINTAINER -DUSE_DEBUG=$DEBUGMODE
 #DEBUG=
 OPTIMIZE=
-CFLAGS=-Wall \$(DEBUG) \$(OPTIMIZE) -I ${XVR2_SOURCE_DIR}/include -I. -c $DEFINES -Wimplicit -Wreturn-type -Wunused -Wswitch -Wcomment -Wparentheses -Wpointer-arith $SDLCFLAGS $SQLFLAGS" >> Makefile
+CFLAGS=-Wall \$(DEBUG) \$(OPTIMIZE) -I ${XVR2_SOURCE_DIR}/include -I. -c $CC_OPTIONS -Wimplicit -Wreturn-type -Wunused -Wswitch -Wcomment -Wparentheses -Wpointer-arith $SDLCFLAGS $SQLFLAGS $DEFINES " >> Makefile
 echo "LIBS=$SQLLIBS" >> Makefile
 echo "INSTALLDIR=$PREFIX
 LIBNAME=pgsql_driver_old.so.${MYVERSION}

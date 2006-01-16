@@ -157,6 +157,8 @@ if [ "$THREADMODE" = 'PTH' ]; then
 fi
 echo "Processor: $PROCESSOR, platform is $PLATFORM"
 
+CC_OPTIONS=-fPIC
+
 echo -ne "Checking g++..."
 GPP=`slocate g++ | egrep '\/g\+\+$'`
 if [ $? -ne 0 ]; then
@@ -267,7 +269,7 @@ DEBUG=$MAINTAINER $DEBUGSTRING $DEBUG_MUTEXES
 #DEBUG=$MAINTAINER -DUSE_DEBUG=$DEBUGMODE
 #DEBUG=
 OPTIMIZE=
-CFLAGS=-Wall \$(DEBUG) \$(OPTIMIZE) -I. -I../.,/src -c $DEFINES -Wimplicit -Wreturn-type -Wunused -Wswitch -Wcomment -Wparentheses -Wpointer-arith $SDLCFLAGS $SQLFLAGS" >> Makefile
+CFLAGS=-Wall \$(DEBUG) \$(OPTIMIZE) -I. -I../.,/src -c $CC_OPTIONS -Wimplicit -Wreturn-type -Wunused -Wswitch -Wcomment -Wparentheses -Wpointer-arith $SDLCFLAGS $SQLFLAGS $DEFINES " >> Makefile
 if [ $THREADMODE = 'SDL_THREADS' ]; then
 	echo "LIBS=-ldl -lrt $SDLCMD $NETLIB $SQLLIBS" >> Makefile
 else
