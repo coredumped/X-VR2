@@ -19,6 +19,7 @@
 #include"xvr2/String.h"
 #include"xvr2/ThreadManager.h"
 #include"xvr2/IPv4Address.h"
+#include<limits.h>
 
 namespace xvr2{
 	namespace Net{
@@ -36,7 +37,11 @@ namespace xvr2{
 			if(obj == 0)
 				return;
 			//xvr2::String s;
+#if __WORDSIZE == 64 && defined(__x86_64__)
+			debugConsole << obj->getClassName() << "[ptr=" << (Int64)obj << ",tid=";
+#else
 			debugConsole << obj->getClassName() << "[ptr=" << (unsigned int)obj << ",tid=";
+#endif
 			if(ThreadManager::getCurrentThreadID() == 0){
 				debugConsole << "MAIN";
 			}

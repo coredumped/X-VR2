@@ -9,7 +9,7 @@
 #include<string.h>
 #include<stdio.h>
 #endif
-
+#include<limits.h>
 
 extern int config_parse(xvr2::Util::ConfigFile *store, const char *);
 
@@ -199,7 +199,11 @@ namespace xvr2 {
 			if(sval != 0)
 				Memory::freeBuffer((void **)&sval);
 #ifdef USE_DEBUG
+#if __WORDSIZE == 64 && defined(__x86_64__)
+			std::cerr << "__ParamAndVal " << ((Int64)this) << " destroyed" << std::endl;
+#else
 			std::cerr << "__ParamAndVal " << ((unsigned int)this) << " destroyed" << std::endl;
+#endif
 #endif
 		}
 

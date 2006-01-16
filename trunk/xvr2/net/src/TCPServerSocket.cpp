@@ -131,6 +131,7 @@ namespace xvr2{
 				int size;
 	#else
 				size_t size;
+				socklen_t tlen;
 	#endif
 			CreateSocket(port);
 			if(listen(tsock, maxConn) != 0){
@@ -143,7 +144,8 @@ namespace xvr2{
 		        	}
 			}
 			size = sizeof(client);
-			if((ss = ::accept(tsock, (sockaddr *)&client, &size)) == -1)
+			tlen = size;
+			if((ss = ::accept(tsock, (sockaddr *)&client, &tlen)) == -1)
 				return NULL; 
 			TCPSocket *r = new TCPSocket(ss, port);
 			return r;
