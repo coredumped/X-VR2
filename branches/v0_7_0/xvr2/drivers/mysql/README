@@ -1,0 +1,17 @@
+Please develop the MySQL driver for xvr2 under this directory
+
+
+Driver methods:
+
+bool	__drv_init(xvr2::DB::SQLDriver *__me);
+bool	__drv_cleanup();
+void *__drv_connect(const char *srvr, const char *usr, const char *pass, const int port);
+UInt32 __drv_disconnect(void *handle);
+bool	__drv_getVersionInfo(xvr2::DB::DriverInfo **i);
+bool	__drv_commit(void *handle);
+xvr2::DB::ResultSet *__drv_query(void *handle, const char *cmd);
+bool	__drv_usedb(void *handle, const char *dbname);
+xvr2::DB::SQLField *__drv_fetch_next_row(void *handle);
+int	__drv_numcols(void *handle);
+int	__drv_numrows(void *handle);
+bool	__drv_free_resultset(void *handle);
