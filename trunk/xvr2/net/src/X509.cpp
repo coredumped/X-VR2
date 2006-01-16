@@ -42,7 +42,11 @@ namespace Net {
 		Memory::freeBuffer((void **)&tmp);
 
 		//Read subject hash
+#if __WORDSIZE == 64 && defined(__x86_64__)
+		_hash = (Int64)X509_subject_name_hash((::X509 *)idata);
+#else
 		_hash = (long)X509_subject_name_hash((::X509 *)idata);
+#endif
 
 		//Read not before
 		bio = BIO_new(BIO_s_mem());
@@ -55,8 +59,11 @@ namespace Net {
 		ASN1_TIME_print(bio, X509_get_notAfter((::X509 *)idata));
 		_endDate = new Date("%b %d %H:%M:%S %Y GMT", tmp);
 		BIO_free(bio);
-
+#if __WORDSIZE == 64 && defined(__x86_64__)
+		_version = (Int64)X509_get_version((::X509 *)idata);
+#else
 		_version = X509_get_version((::X509 *)idata);
+#endif
 	}
 	X509::~X509(){
 		if(!dont_free)
