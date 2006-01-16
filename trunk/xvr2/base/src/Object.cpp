@@ -12,6 +12,7 @@
 #include<cxxabi.h>
 #endif
 #include"xvr2/ThreadManager.h"
+#include<limits.h>
 
 namespace xvr2{
 //#ifndef GCC_3_4
@@ -54,8 +55,11 @@ namespace xvr2{
 	void Object::debugmsg(Object *obj, const char *msg){
 		if(obj == 0)
 			return;
-		//String s;
+#if __WORDSIZE == 64 && defined(__86_64__)
+		debugConsole << obj->getClassName() << "[ptr=" << (Int64)obj << ",tid=";
+#else
 		debugConsole << obj->getClassName() << "[ptr=" << (unsigned int)obj << ",tid=";
+#endif
 		if(ThreadManager::getCurrentThreadID() == 0){
 			debugConsole << "MAIN";
 		}

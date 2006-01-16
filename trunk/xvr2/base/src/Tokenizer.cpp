@@ -6,6 +6,7 @@
 #include<xvr2/_xvr2ClassNames.h>
 #include<string.h>
 #include<stdlib.h>
+#include<limits.h>
 
 namespace xvr2{
 
@@ -49,8 +50,13 @@ namespace xvr2{
 	}
 
 	char *Tokenizer::cnext(){
+#if __WORDSIZE == 64 && defined(__x86_64__)
+		unsigned long i;
+		unsigned long len;
+#else
 		unsigned int i;
 		unsigned int len;
+#endif
 		char *ptr, *tptr;;
 		if(buffer == 0){
 			_fin = true;
@@ -88,7 +94,11 @@ namespace xvr2{
 			else{
 				token = (char *)malloc(strlen(temp) * sizeof(char));
 				memset((void *)token, 0, strlen(temp));
+#if __WORDSIZE == 64 && defined(__x86_64__)
+				len = (((unsigned long)ptr)- (unsigned long)temp);
+#else
 				len = (((unsigned int)ptr)- (unsigned int)temp);
+#endif			
 				for(i = 0; i < len; i++){
 					token[i] = temp[i];
 				}

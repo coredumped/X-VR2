@@ -10,6 +10,7 @@
 #endif
 #include<errno.h>
 #include<iostream>
+#include<limits.h>
 
 namespace xvr2{
 
@@ -103,13 +104,21 @@ namespace xvr2{
 		Thread *t;
 		getvalue(&y);
 		t = (Thread *)ThreadManager::getCurrentThread();
+#if __WORDSIZE == 64 && defined(__x86_64__)
+		if(t == 0){
+			std::cout << obj->getClassName() << "[ptr=" << (unsigned long)obj << ",tid=[MAIN],val=" << y << "]: " << msg;
+		}
+		else{
+			std::cout << obj->getClassName() << "[ptr=" << (unsigned long)obj << ",tid=" << t->numericID() << ",val=" << y << "]: " << msg;
+		}
+#else
 		if(t == 0){
 			std::cout << obj->getClassName() << "[ptr=" << (unsigned int)obj << ",tid=[MAIN],val=" << y << "]: " << msg;
 		}
 		else{
 			std::cout << obj->getClassName() << "[ptr=" << (unsigned int)obj << ",tid=" << t->numericID() << ",val=" << y << "]: " << msg;
 		}
+#endif
 		std::cout.flush();
 	}
 };
-
