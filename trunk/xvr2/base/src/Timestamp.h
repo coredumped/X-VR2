@@ -12,7 +12,7 @@ namespace xvr2{
 	 * This class implements the Timestamp functionality, it will store
 	 * the timestamp the first time it is instanciated
 	 */
-	class Timestamp:public Time{
+	class Timestamp:public Date{
 		public:
 			Timestamp();
 			Timestamp(const Timestamp *t);
@@ -27,7 +27,7 @@ namespace xvr2{
 			int Second();
 			/** Returns the current timestamp as unix time */
 			UInt32 timestamp();
-			const std::string &toString();
+			//const std::string &toString();
 	};
 };
 

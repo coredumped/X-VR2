@@ -11,7 +11,7 @@ namespace xvr2{
 		setTStamp(tstamp);
 	}
 
-	Timestamp::Timestamp(const Timestamp *d):Time(d){
+	Timestamp::Timestamp(const Timestamp *d):Date(d){
 #if __GNUC__ < 3
 		setClassName(_xvr2Timestamp);
 #endif
@@ -48,11 +48,7 @@ namespace xvr2{
 		return unixtime;
 	}
 
-	const std::string &Timestamp::toString(){
-		/*if(drep == 0)
-			drep = new String((unsigned int)unixtime);
-		else
-			drep->assign((unsigned int)unixtime);*/
-		return Date::toString();
-	}
+	/*const std::string &Timestamp::toString(){
+		return toString();
+	}*/
 };
