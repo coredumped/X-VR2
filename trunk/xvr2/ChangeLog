@@ -1,3 +1,8 @@
+VERSION 0.7.0.1
+Juan V. Guerrero <mindstorm2600@users.sourceforge.net> - Jan 17 2006
+	* Timestamp class is now derived from Date instead of Time, this
+	change has to be performed before, sorry for the inconvinience.
+
 VERSION 0.7.0 
 Juan V. Guerrero <mindstorm2600@users.sourceforge.net> - Jan 16 2006
 	* SQL Driver Interface has been updated to be more object oriented
