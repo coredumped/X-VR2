@@ -323,6 +323,7 @@ ResultSet *PostgreSQLDriver::query(void *__conn_handle, const String &command){
 				break;
 			case PGRES_COMMAND_OK: //This is an update or delete type command
 				r = new DB::ResultSet(this, 0, true, PQntuples(result));
+				PQclear(result);
 				break;
 			default: //Some sort of extrange error ocurred
 				r = new DB::ResultSet(this, 0, false);
