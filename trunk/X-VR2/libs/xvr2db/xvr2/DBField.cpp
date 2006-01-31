@@ -149,7 +149,7 @@ namespace xvr2{
 					}
 					tmpStrBYTE = (char *)Memory::allocBuffer(7);
 					if(sprintf(tmpStrBYTE, "0x%x", *((int *)dataPtr)) != 1)
-						throw Number();
+						throw NumberException();
 					tmpString.assign(tmpStrBYTE);
 					break;
 				case TINYINT:
@@ -212,11 +212,11 @@ namespace xvr2{
 					tmpStrFLOAT = (char *)Memory::allocBuffer(32);
 #if ( defined USING_LINUX || defined SOLARIS )
 					if(gcvt(n4, 8, tmpStrFLOAT) != tmpStrFLOAT){
-						throw Number();
+						throw NumberException();
 					}
 #else
 					if(sprintf(tmpStrFLOAT, "%f", n4) != 1){
-						throw Number();
+						throw NumberException();
 					}
 #endif
 					tmpString.assign(tmpStrFLOAT);
@@ -235,11 +235,11 @@ namespace xvr2{
 					tmpStrDOUBLE = (char *)Memory::allocBuffer(128);
 #if ( defined USING_LINUX || defined SOLARIS )
 					if(gcvt(n5, 8, tmpStrDOUBLE) != tmpStrDOUBLE){
-						throw Number();
+						throw NumberException();
 					}
 #else
 					if(sprintf(tmpStrDOUBLE, "%f", n5) != 1){
-						throw Number();
+						throw NumberException();
 					}
 #endif
 					tmpString.assign(tmpStrDOUBLE);
@@ -1000,7 +1000,7 @@ namespace xvr2{
 					UInt32 nx1;
 					nx1 = strtoul((const char *)dataPtr, (char **)0, 10);
 					if(errno == ERANGE)
-						throw Number();
+						throw NumberException();
 					if(tmpTimestamp != 0)
 						xvr2_delete(tmpTimestamp);
 					tmpTimestamp = new Timestamp(nx1);
