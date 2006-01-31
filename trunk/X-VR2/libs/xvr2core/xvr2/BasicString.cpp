@@ -6,66 +6,127 @@
 #include"BasicString.h"
 
 namespace xvr2 {
-	CharString::CharString(const CharString &s){
-		assign(s.buffer);
-	}
-	CharString::CharString(const char *s){
-		assign(s);
+
+	/////////////////////////////////////////////////////////
+	// BasicString
+	/////////////////////////////////////////////////////////
+	BasicString::BasicString(){
+#ifdef USE_EMBEDDED_CLASSNAMES
+		setClassName(BasicString);
+#endif
 	}
 
-	const CharString &CharString::operator=(const CharString &s){
-		assign(s.buffer);
+	int BasicString::index(const char *s){
+		return std::string::find(s);
+	}
+
+	int BasicString::index(const char *s) const {
+		return std::string::find(s);
+	}
+
+	int BasicString::index(const BasicString &s){
+		return std::string::find(s.c_str());
+	}
+
+	int BasicString::rindex(const char *s) const{
+		return std::string::find_last_of(s);
+	}
+
+	int BasicString::rindex(const char *s){
+		return std::string::find_last_of(s);
+	}
+
+	int BasicString::rindex(const BasicString &s){
+		return std::string::find_last_of(s.c_str());
+	}
+	
+	BasicString &BasicString::biteLeft(int howmany){
+		std::string::erase(begin(), begin() + howmany);
 		return *this;
 	}
-	const CharString &CharString::operator=(const char *s){
-		assign(s);
+
+	BasicString &BasicString::biteRight(int howmany){
+		//std::string::erase(std::string::size() - 1);
+		std::string::erase(end() - howmany, end());
 		return *this;
 	}
-	int CharString::index(const char *s, const int start) const{
-		int i, j;
-		if(len == 0 || s == 0)
-			return -1;
-		else if(s[0] == 0) return -1;
-		for(i = start; i < len; i++){
-			if(buffer[i] == s[0]){
-				for(j = 0; buffer[i + j] != 0; j++){
-					if(buffer[i + j] != s[j])
-						continue;
-				}
-				return i;
-			}
+
+	BasicString &BasicString::trimLeft(const char c){
+		while(size() > 0 && at(0) == c){
+			std::string::erase(0);
 		}
-		return -1;
+		return *this;
 	}
-	int CharString::rindex(const char *s, int end) const{
-		int i, j, ssize, e;
-		bool is_ok = true;
-		if(len == 0 || s == 0) return -1;
-		else{
-		       	if(s[0] == 0) return -1;
+
+	BasicString &BasicString::trimRight(const char c){
+		while(size() > 0 && at(size() - 1) == c){
+			std::string::erase(size() - 1);
 		}
-		ssize = getlen(s);
-		if(end == 0)
-			//e = len - 1 - ssize;
-			e = len - ssize;
-		else{
-			if(end > (len - ssize))
-				return -1;
-			else
-				e = end;
+		return *this;
+	}
+	bool BasicString::equals(const char *s){
+		return (std::string::compare(s) == 0)?true:false;
+	}
+	bool BasicString::operator==(const char *s){
+		return (std::string::compare(s) == 0)?true:false;
+	}
+
+
+	/////////////////////////////////////////////////////////
+	// BasicWString
+	/////////////////////////////////////////////////////////
+	BasicWString::BasicWString(){
+
+#ifdef USE_EMBEDDED_CLASSNAMES
+		setClassName(BasicWString);
+#endif
+	}
+
+	int BasicWString::index(const wchar_t *s){
+		return std::wstring::find(s);
+	}
+
+	int BasicWString::index(const wchar_t *s) const {
+		return std::wstring::find(s);
+	}
+
+	int BasicWString::index(const BasicWString &s){
+		return std::wstring::find(s.c_str());
+	}
+
+	int BasicWString::rindex(const wchar_t *s) const{
+		return std::wstring::find_last_of(s);
+	}
+
+	int BasicWString::rindex(const wchar_t *s){
+		return std::wstring::find_last_of(s);
+	}
+
+	int BasicWString::rindex(const BasicWString &s){
+		return std::wstring::find_last_of(s.c_str());
+	}
+	
+	BasicWString &BasicWString::biteLeft(int howmany){
+		std::wstring::erase(begin(), begin() + howmany);
+		return *this;
+	}
+
+	BasicWString &BasicWString::biteRight(int howmany){
+		std::wstring::erase(end() - howmany, end());
+		return *this;
+	}
+
+	BasicWString &BasicWString::trimLeft(const wchar_t c){
+		while(at(0) == c){
+			std::wstring::erase(0);
 		}
-		for(i = e; i >= 0; i--){
-			if(buffer[i] == s[0]){
-				for(j = 0; j < ssize - 1; j++){
-					if(charAt(i + j) != s[j]){
-						is_ok = false;
-						break;
-					}
-				}
-				if(is_ok)
-					return len - (i + j + 1);
-			}
+		return *this;
+	}
+
+	BasicWString &BasicWString::trimRight(const wchar_t c){
+		while(at(size() - 1) == c){
+			std::wstring::erase(size() - 1);
 		}
-		return -1;
+		return *this;
 	}
 };
