@@ -7,15 +7,11 @@
 #include "MessageStrings.h"
 
 namespace xvr2 {
-	namespace Exception{
-
-		Number::Number(){
+	NumberException::NumberException(){
 #if __GNUC__ < 3
-			setClassName((char *)xvr2::_xvr2NumberException);
+		setClassName((char *)xvr2::_xvr2NumberException);
 #endif
-			description = (char *)xvr2::excepNumeric;
-		}
-
-	};
+		description = (char *)xvr2::excepNumeric;
+	}
 };
 

@@ -10,12 +10,12 @@ namespace xvr2{
 	 * Throw this exception when expecting a number in an operation and and receiving
 	 * something different
 	 */
-	class Number:public Exception{
+	class NumberException:public Exception{
 		public:
 			/**
 			 * Default constructor
 			 */
-			Number();
+			NumberException();
 	};
 };
 

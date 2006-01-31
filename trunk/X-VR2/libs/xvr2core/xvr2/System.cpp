@@ -39,7 +39,7 @@ namespace xvr2{
 				if(tester.startsWith("cpu MHz")){
 					ok = sscanf((const char *)(buffer + tester.index(":") + 1), "%lf", &speed);
 					if(ok != 1){
-						throw Number();
+						throw NumberException();
 					}
 				}
 				else{
