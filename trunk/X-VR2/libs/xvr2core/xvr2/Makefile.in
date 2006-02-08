@@ -95,10 +95,10 @@ RC = @RC@
 STRIP = @STRIP@
 VERSION = @VERSION@
 
-h_sources = ArrayIndexOutOfLimitsException.h AutomatedGC.h BaseFile.h BasicStringBuffer.h 	BasicString.h BufferTooSmall.h Byte.h Calendar.h Chronograph.h Chronometer.h 	ConditionVar.h Console.h DataTypes.h Date.h DebugConsole.h __Destruct.h 	DetachedThread.h DSObject.h DSOException.h DSO.h ElementNotFoundException.h 	Exception.h FileException.h GarbageCollector.h GroupException.h Group.h 	InvalidParameterException.h IOException.h JoinableThread.h Log.h 	MemoryException.h Memory.h MessageStrings.h MutexException.h Mutex.h 	NoMoreTokensException.h NullPointerException.h NumberException.h Object.h 	ParseException.h Plugin.h Process.h SecurityException.h SemaphoreException.h 	Semaphore.h SharedVar.h StandardError.h StandardInput.h StandardOutput.h 	StringBuffer.h StringException.h String.h Syslog.h System.h TemporalBuffer.h 	TextInput.h TextOutput.h ThreadException.h Thread.h Threading.h ThreadManager.h 	Time.h Timestamp.h Tokenizer.h TraceDumper.h UndefinedClass.h Unix.h UserException.h 	User.h _xvr2ClassNames.h xvr2config.h
+h_sources = CoreExceptions.h AutomatedGC.h BaseFile.h BasicStringBuffer.h 	BasicString.h Byte.h Calendar.h Chronograph.h Chronometer.h 	ConditionVar.h Console.h DataTypes.h Date.h DebugConsole.h __Destruct.h 	DetachedThread.h DSObject.h DSO.h GarbageCollector.h Group.h 	JoinableThread.h Log.h Memory.h MessageStrings.h Mutex.h Object.h 	Process.h  Semaphore.h SharedVar.h StandardError.h StandardInput.h 	StandardOutput.h StringBuffer.h String.h Syslog.h System.h 	TemporalBuffer.h TextInput.h TextOutput.h Thread.h Threading.h 	ThreadManager.h Time.h Timestamp.h Tokenizer.h TraceDumper.h Unix.h 	User.h _xvr2ClassNames.h xvr2config.h Conversion.h
 
 
-cc_sources = ArrayIndexOutOfLimitsException.cpp AutomatedGC.cpp BaseFile.cpp BasicString.cpp BufferTooSmall.cpp 	Byte.cpp Chronometer.cpp ConditionVar.cpp Console.cpp Date.cpp DebugConsole.cpp 	DetachedThread.cpp DSObject.cpp DSO.cpp DSOException.cpp ElementNotFoundException.cpp Exception.cpp 	FileException.cpp GarbageCollector.cpp Group.cpp GroupException.cpp InvalidParameterException.cpp 	IOException.cpp JoinableThread.cpp Log.cpp Memory.cpp MemoryException.cpp 	MessageStrings.cpp Mutex.cpp MutexException.cpp NoMoreTokensException.cpp NullPointerException.cpp 	NumberException.cpp Object.cpp ParseException.cpp Plugin.cpp SecurityException.cpp Semaphore.cpp 	SemaphoreException.cpp StandardError.cpp StandardInput.cpp StandardOutput.cpp StringBuffer.cpp 	String.cpp StringException.cpp Syslog.cpp System.cpp TemporalBuffer.cpp TextInput.cpp TextOutput.cpp 	Thread.cpp ThreadException.cpp Threading.cpp ThreadManager.cpp Time.cpp Timestamp.cpp Tokenizer.cpp 	TraceDumper.cpp UndefinedClass.cpp Unix.cpp User.cpp UserException.cpp _xvr2ClassNames.cpp
+cc_sources = CoreExceptions.cpp AutomatedGC.cpp BaseFile.cpp BasicString.cpp 	Byte.cpp Chronometer.cpp ConditionVar.cpp Console.cpp Date.cpp 	DebugConsole.cpp DetachedThread.cpp DSObject.cpp DSO.cpp 	GarbageCollector.cpp Group.cpp JoinableThread.cpp Log.cpp Memory.cpp 	MessageStrings.cpp Mutex.cpp Object.cpp Semaphore.cpp StandardError.cpp 	StandardInput.cpp StandardOutput.cpp StringBuffer.cpp String.cpp 	Syslog.cpp System.cpp TemporalBuffer.cpp TextInput.cpp TextOutput.cpp 	Thread.cpp Threading.cpp ThreadManager.cpp Time.cpp Timestamp.cpp 	Tokenizer.cpp TraceDumper.cpp Unix.cpp User.cpp _xvr2ClassNames.cpp 	Conversion.cpp
 
 
 library_includedir = $(includedir)/$(GENERIC_LIBRARY_NAME)
@@ -120,22 +120,15 @@ CPPFLAGS = @CPPFLAGS@
 LDFLAGS = @LDFLAGS@
 LIBS = @LIBS@
 libxvr2core_0_7_1_0_la_LIBADD = 
-libxvr2core_0_7_1_0_la_OBJECTS =  ArrayIndexOutOfLimitsException.lo \
-AutomatedGC.lo BaseFile.lo BasicString.lo BufferTooSmall.lo Byte.lo \
-Chronometer.lo ConditionVar.lo Console.lo Date.lo DebugConsole.lo \
-DetachedThread.lo DSObject.lo DSO.lo DSOException.lo \
-ElementNotFoundException.lo Exception.lo FileException.lo \
-GarbageCollector.lo Group.lo GroupException.lo \
-InvalidParameterException.lo IOException.lo JoinableThread.lo Log.lo \
-Memory.lo MemoryException.lo MessageStrings.lo Mutex.lo \
-MutexException.lo NoMoreTokensException.lo NullPointerException.lo \
-NumberException.lo Object.lo ParseException.lo Plugin.lo \
-SecurityException.lo Semaphore.lo SemaphoreException.lo \
-StandardError.lo StandardInput.lo StandardOutput.lo StringBuffer.lo \
-String.lo StringException.lo Syslog.lo System.lo TemporalBuffer.lo \
-TextInput.lo TextOutput.lo Thread.lo ThreadException.lo Threading.lo \
-ThreadManager.lo Time.lo Timestamp.lo Tokenizer.lo TraceDumper.lo \
-UndefinedClass.lo Unix.lo User.lo UserException.lo _xvr2ClassNames.lo
+libxvr2core_0_7_1_0_la_OBJECTS =  CoreExceptions.lo AutomatedGC.lo \
+BaseFile.lo BasicString.lo Byte.lo Chronometer.lo ConditionVar.lo \
+Console.lo Date.lo DebugConsole.lo DetachedThread.lo DSObject.lo DSO.lo \
+GarbageCollector.lo Group.lo JoinableThread.lo Log.lo Memory.lo \
+MessageStrings.lo Mutex.lo Object.lo Semaphore.lo StandardError.lo \
+StandardInput.lo StandardOutput.lo StringBuffer.lo String.lo Syslog.lo \
+System.lo TemporalBuffer.lo TextInput.lo TextOutput.lo Thread.lo \
+Threading.lo ThreadManager.lo Time.lo Timestamp.lo Tokenizer.lo \
+TraceDumper.lo Unix.lo User.lo _xvr2ClassNames.lo Conversion.lo
 CXXFLAGS = @CXXFLAGS@
 CXXCOMPILE = $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
 LTCXXCOMPILE = $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
@@ -155,27 +148,19 @@ DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
 
 TAR = tar
 GZIP_ENV = --best
-DEP_FILES =  .deps/ArrayIndexOutOfLimitsException.P .deps/AutomatedGC.P \
-.deps/BaseFile.P .deps/BasicString.P .deps/BufferTooSmall.P \
+DEP_FILES =  .deps/AutomatedGC.P .deps/BaseFile.P .deps/BasicString.P \
 .deps/Byte.P .deps/Chronometer.P .deps/ConditionVar.P .deps/Console.P \
-.deps/DSO.P .deps/DSOException.P .deps/DSObject.P .deps/Date.P \
-.deps/DebugConsole.P .deps/DetachedThread.P \
-.deps/ElementNotFoundException.P .deps/Exception.P \
-.deps/FileException.P .deps/GarbageCollector.P .deps/Group.P \
-.deps/GroupException.P .deps/IOException.P \
-.deps/InvalidParameterException.P .deps/JoinableThread.P .deps/Log.P \
-.deps/Memory.P .deps/MemoryException.P .deps/MessageStrings.P \
-.deps/Mutex.P .deps/MutexException.P .deps/NoMoreTokensException.P \
-.deps/NullPointerException.P .deps/NumberException.P .deps/Object.P \
-.deps/ParseException.P .deps/Plugin.P .deps/SecurityException.P \
-.deps/Semaphore.P .deps/SemaphoreException.P .deps/StandardError.P \
+.deps/Conversion.P .deps/CoreExceptions.P .deps/DSO.P .deps/DSObject.P \
+.deps/Date.P .deps/DebugConsole.P .deps/DetachedThread.P \
+.deps/GarbageCollector.P .deps/Group.P .deps/JoinableThread.P \
+.deps/Log.P .deps/Memory.P .deps/MessageStrings.P .deps/Mutex.P \
+.deps/Object.P .deps/Semaphore.P .deps/StandardError.P \
 .deps/StandardInput.P .deps/StandardOutput.P .deps/String.P \
-.deps/StringBuffer.P .deps/StringException.P .deps/Syslog.P \
-.deps/System.P .deps/TemporalBuffer.P .deps/TextInput.P \
-.deps/TextOutput.P .deps/Thread.P .deps/ThreadException.P \
-.deps/ThreadManager.P .deps/Threading.P .deps/Time.P .deps/Timestamp.P \
-.deps/Tokenizer.P .deps/TraceDumper.P .deps/UndefinedClass.P \
-.deps/Unix.P .deps/User.P .deps/UserException.P .deps/_xvr2ClassNames.P
+.deps/StringBuffer.P .deps/Syslog.P .deps/System.P \
+.deps/TemporalBuffer.P .deps/TextInput.P .deps/TextOutput.P \
+.deps/Thread.P .deps/ThreadManager.P .deps/Threading.P .deps/Time.P \
+.deps/Timestamp.P .deps/Tokenizer.P .deps/TraceDumper.P .deps/Unix.P \
+.deps/User.P .deps/_xvr2ClassNames.P
 SOURCES = $(libxvr2core_0_7_1_0_la_SOURCES)
 OBJECTS = $(libxvr2core_0_7_1_0_la_OBJECTS)
 
