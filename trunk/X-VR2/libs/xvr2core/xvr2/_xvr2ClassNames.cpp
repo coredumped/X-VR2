@@ -1,7 +1,7 @@
 /*
  * $Id$
  */
-#include "xvr2config.h"
+#include<xvr2/xvr2config.h>
  
 #ifdef USE_EMBEDDED_CLASSNAMES
 namespace xvr2 {
@@ -10,7 +10,6 @@ namespace xvr2 {
 	const char *_xvr2ArrayIndexOutOfLimits = "xvr2::ArrayIndexOutOfLimits";
 	const char *_xvr2AutomatedGC = "xvr2::AutomatedGC";
 	const char *_xvr2BaseFile = "xvr2::BaseFile";
-	const char *_xvr2BasicString = "xvr2::BasicString";
 	const char *_xvr2BasicStringBuffer = "xvr2::BasicStringBuffer";
 	const char *_xvr2BitParseException = "xvr2::BitParseException";
 	const char *_xvr2BrokenPipe = "xvr2::BrokenPipe";
@@ -20,7 +19,6 @@ namespace xvr2 {
 	const char *_xvr2Calendar = "xvr2::Calendar";
 	const char *_xvr2CantLoadDSO = "xvr2::CantLoadDSO";
 	const char *_xvr2CantUnloadDSO = "xvr2::CantUnloadDSO";
-	const char *_xvr2CharString = "xvr2::CharString";
 	const char *_xvr2Chronograph = "xvr2::Chronograph";
 	const char *_xvr2Chronometer = "xvr2::Chronometer";
 	const char *_xvr2ConditionVar = "xvr2::ConditionVar";
@@ -36,7 +34,7 @@ namespace xvr2 {
 	const char *_xvr2DSO = "xvr2::DSO";
 	const char *_xvr2DSObjectFactory = "xvr2::DSObjectFactory";
 	const char *_xvr2DSOException = "xvr2::DSOException";
-	const char *_xvr2DSOSymbol = "xvr2::DSOSymbol";
+	const char *_xvr2DSOSymbolException = "xvr2::DSOSymbolException";
 	const char *_xvr2ElementNotFound = "xvr2::ElementNotFound";
 	const char *_xvr2Exception = "xvr2::Exception";
 	const char *_xvr2ExceptionTracer = "xvr2::ExceptionTracer";
@@ -68,18 +66,19 @@ namespace xvr2 {
 	const char *_xvr2NotEnoughKernelMemory = "xvr2::NotEnoughKernelMemory";
 	const char *_xvr2NotEnoughStorageSpace = "xvr2::NotEnoughStorageSpace";
 	const char *_xvr2NullPointer = "xvr2::NullPointer";
-	const char *_xvr2Number = "xvr2::Number";
+	const char *_xvr2NumberException = "xvr2::NumberException";
 	const char *_xvr2Object = "xvr2::Object";
 	const char *_xvr2ParseException = "xvr2::ParseException";
 	const char *_xvr2PermissionDenied = "xvr2::PermissionDenied";
 	const char *_xvr2Plugin = "xvr2::Plugin";
 	const char *_xvr2Process = "xvr2::Process";
 	const char *_xvr2ProcOutOfFileDescriptors = "xvr2::ProcOutOfFileDescriptors";
+	const char *_xvr2publicObject,publicstd = "xvr2::publicObject,publicstd";
 	const char *_xvr2ReallocFailed = "xvr2::ReallocFailed";
-	const char *_xvr2Security = "xvr2::Security";
+	const char *_xvr2SecurityException = "xvr2::SecurityException";
 	const char *_xvr2Semaphore = "xvr2::Semaphore";
 	const char *_xvr2SemaphoreException = "xvr2::SemaphoreException";
-	const char *_xvr2SemaphoreInitValue = "xvr2::SemaphoreInitValue";
+	const char *_xvr2SemaphoreInitValueException = "xvr2::SemaphoreInitValueException";
 	const char *_xvr2SemaphoreUnableToDecrease = "xvr2::SemaphoreUnableToDecrease";
 	const char *_xvr2SemaphoreUnableToDestroy = "xvr2::SemaphoreUnableToDestroy";
 	const char *_xvr2SemaphoreUnableToIncrease = "xvr2::SemaphoreUnableToIncrease";
@@ -91,7 +90,6 @@ namespace xvr2 {
 	const char *_xvr2StandardOutput = "xvr2::StandardOutput";
 	const char *_xvr2String = "xvr2::String";
 	const char *_xvr2StringBuffer = "xvr2::StringBuffer";
-	const char *_xvr2Stringe = "xvr2::Stringe";
 	const char *_xvr2SumBase = "xvr2::SumBase";
 	const char *_xvr2Syslog = "xvr2::Syslog";
 	const char *_xvr2SysOutOfFileDescriptors = "xvr2::SysOutOfFileDescriptors";
@@ -115,7 +113,7 @@ namespace xvr2 {
 	const char *_xvr2UnableToUnlockMutex = "xvr2::UnableToUnlockMutex";
 	const char *_xvr2UnableToWriteOnReadOnlyFile = "xvr2::UnableToWriteOnReadOnlyFile";
 	const char *_xvr2UnableToWriteOnRunningExecutableFile = "xvr2::UnableToWriteOnRunningExecutableFile";
-	const char *_xvr2UndefinedClass = "xvr2::UndefinedClass";
+	const char *_xvr2UndefinedClassException = "xvr2::UndefinedClassException";
 	const char *_xvr2Unix = "xvr2::Unix";
 	const char *_xvr2User = "xvr2::User";
 	const char *_xvr2UserException = "xvr2::UserException";

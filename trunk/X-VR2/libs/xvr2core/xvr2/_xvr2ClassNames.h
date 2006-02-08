@@ -14,7 +14,6 @@ namespace xvr2 {
 	extern const char *_xvr2ArrayIndexOutOfLimits;
 	extern const char *_xvr2AutomatedGC;
 	extern const char *_xvr2BaseFile;
-	extern const char *_xvr2BasicString;
 	extern const char *_xvr2BasicStringBuffer;
 	extern const char *_xvr2BitParseException;
 	extern const char *_xvr2BrokenPipe;
@@ -24,7 +23,6 @@ namespace xvr2 {
 	extern const char *_xvr2Calendar;
 	extern const char *_xvr2CantLoadDSO;
 	extern const char *_xvr2CantUnloadDSO;
-	extern const char *_xvr2CharString;
 	extern const char *_xvr2Chronograph;
 	extern const char *_xvr2Chronometer;
 	extern const char *_xvr2ConditionVar;
@@ -40,7 +38,7 @@ namespace xvr2 {
 	extern const char *_xvr2DSO;
 	extern const char *_xvr2DSObjectFactory;
 	extern const char *_xvr2DSOException;
-	extern const char *_xvr2DSOSymbol;
+	extern const char *_xvr2DSOSymbolException;
 	extern const char *_xvr2ElementNotFound;
 	extern const char *_xvr2Exception;
 	extern const char *_xvr2ExceptionTracer;
@@ -72,18 +70,19 @@ namespace xvr2 {
 	extern const char *_xvr2NotEnoughKernelMemory;
 	extern const char *_xvr2NotEnoughStorageSpace;
 	extern const char *_xvr2NullPointer;
-	extern const char *_xvr2Number;
+	extern const char *_xvr2NumberException;
 	extern const char *_xvr2Object;
 	extern const char *_xvr2ParseException;
 	extern const char *_xvr2PermissionDenied;
 	extern const char *_xvr2Plugin;
 	extern const char *_xvr2Process;
 	extern const char *_xvr2ProcOutOfFileDescriptors;
+	extern const char *_xvr2publicObject,publicstd;
 	extern const char *_xvr2ReallocFailed;
-	extern const char *_xvr2Security;
+	extern const char *_xvr2SecurityException;
 	extern const char *_xvr2Semaphore;
 	extern const char *_xvr2SemaphoreException;
-	extern const char *_xvr2SemaphoreInitValue;
+	extern const char *_xvr2SemaphoreInitValueException;
 	extern const char *_xvr2SemaphoreUnableToDecrease;
 	extern const char *_xvr2SemaphoreUnableToDestroy;
 	extern const char *_xvr2SemaphoreUnableToIncrease;
@@ -95,7 +94,6 @@ namespace xvr2 {
 	extern const char *_xvr2StandardOutput;
 	extern const char *_xvr2String;
 	extern const char *_xvr2StringBuffer;
-	extern const char *_xvr2Stringe;
 	extern const char *_xvr2SumBase;
 	extern const char *_xvr2Syslog;
 	extern const char *_xvr2SysOutOfFileDescriptors;
@@ -119,7 +117,7 @@ namespace xvr2 {
 	extern const char *_xvr2UnableToUnlockMutex;
 	extern const char *_xvr2UnableToWriteOnReadOnlyFile;
 	extern const char *_xvr2UnableToWriteOnRunningExecutableFile;
-	extern const char *_xvr2UndefinedClass;
+	extern const char *_xvr2UndefinedClassException;
 	extern const char *_xvr2Unix;
 	extern const char *_xvr2User;
 	extern const char *_xvr2UserException;
