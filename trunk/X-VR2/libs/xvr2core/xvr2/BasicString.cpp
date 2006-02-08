@@ -10,7 +10,7 @@ namespace xvr2 {
 	/////////////////////////////////////////////////////////
 	// BasicString
 	/////////////////////////////////////////////////////////
-	BasicString::BasicString(){
+	/*BasicString::BasicString(){
 #ifdef USE_EMBEDDED_CLASSNAMES
 		setClassName(BasicString);
 #endif
@@ -75,7 +75,7 @@ namespace xvr2 {
 	/////////////////////////////////////////////////////////
 	// BasicWString
 	/////////////////////////////////////////////////////////
-	BasicWString::BasicWString(){
+	/*BasicWString::BasicWString(){
 
 #ifdef USE_EMBEDDED_CLASSNAMES
 		setClassName(BasicWString);
@@ -128,5 +128,5 @@ namespace xvr2 {
 			std::wstring::erase(size() - 1);
 		}
 		return *this;
-	}
+	}*/
 };
