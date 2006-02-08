@@ -4,9 +4,8 @@
 #ifndef __XVR2_DSO_H__
 #define __XVR2_DSO_H__
 #include<xvr2/System.h>
-#include<xvr2/Exception.h>
 #include<xvr2/String.h>
-#include<xvr2/DSOException.h>
+#include<xvr2/CoreExceptions.h>
 
 #ifndef _WIN32
 
@@ -68,7 +67,7 @@ namespace xvr2{
 			 */
 			const String &getDSOName();
 			template<class T>
-			T *createObject(const String &createfuncname = "__xvr2_create_dsobject"){
+			inline T *createObject(const String &createfuncname = "__xvr2_create_dsobject"){
 				T *obj = 0;
 				T *(*dso_create)();
 				dso_create = (T * (*)())getSymbol(createfuncname);
@@ -76,7 +75,7 @@ namespace xvr2{
 				return obj;
 			}
 			template<class T>
-			void destroyObject(T *obj, const String &destroyfuncname = "__xvr2_destroy_dsobject"){
+			inline void destroyObject(T *obj, const String &destroyfuncname = "__xvr2_destroy_dsobject"){
 				void (*dso_destroy)(T *);
 				dso_destroy = (void (*)(T *))getSymbol(destroyfuncname);
 				dso_destroy(obj);
