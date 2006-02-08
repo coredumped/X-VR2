@@ -6,13 +6,14 @@
 #ifndef _WIN32
 #include<dlfcn.h>
 #include"MessageStrings.h"
+#include"DebugConsole.h"
 
 namespace xvr2{
 
 	DSO::DSO(){
 		loaded = false;
 		handle = 0;
-#if __GNUC__ < 3
+#ifdef USE_EMBEDDED_CLASNAMES
 		setClassName(xvr2::_xvr2DSO);
 #endif
 		dso = (char *)msgNothingLoaded;
@@ -21,7 +22,7 @@ namespace xvr2{
 	DSO::~DSO(){
 #ifdef USE_DEBUG
 	#if DEBUG_LEVEL == 5
-			std::cerr << " DSO::~DSO " << std::endl;
+			debugConsole << " DSO::~DSO\n";
 	#endif
 #endif
 		unload();
@@ -30,7 +31,7 @@ namespace xvr2{
 	DSO::DSO(const String &plName){
 		loaded = false;
 		handle = 0;
-#if __GNUC__ < 3
+#if USE_EMBEDDED_CLASNAMES
 		setClassName(xvr2::_xvr2DSO);
 #endif
 		dso = plName.toCharPtr();
@@ -40,10 +41,11 @@ namespace xvr2{
 		handle = dlopen(dso.toCharPtr(), RTLD_NOW);
 		if(!handle){
 #ifdef USE_DEBUG
-			std::cerr << "Error while loading \"" << dso.toCharPtr() << "\"\t" << dlerror() << std::endl;
+			debugConsole << "Error while loading \"" << dso << "\"\t" << dlerror() << "\n";
 #endif
 			throw CantLoadDSO();
 		}
+		loaded = true;
 	}
 
 	void DSO::load(const String &plName){
@@ -54,12 +56,13 @@ namespace xvr2{
 	void DSO::unload(){
 		if(handle != 0){
 #ifdef USE_DEBUG
-			std::cerr << " DSO::unload " << std::endl;
+			debugConsole << " DSO::unload " << "\n";
 #endif
 			if(dlclose(handle) != 0){
 				throw CantUnloadDSO();
 			}
 			handle = 0;
+			loaded = false;
 		}
 	}
 
@@ -68,14 +71,14 @@ namespace xvr2{
 		if(!handle)
 			throw DSO("Load the DSO first!!!");
 #ifdef USE_DEBUG
-		std::cerr << "\tloading: " << sym.toCharPtr() << "... ";
+		debugConsole << "\tloading: " << sym << "... ";
 #endif
 		ptr = dlsym(handle, sym.toCharPtr());
 		if(ptr == 0){
-			throw DSOSymbol();
+			throw DSOSymbolException();
 		}
 #ifdef USE_DEBUG
-		std::cerr << "done" << std::endl;
+		debugConsole << "done\n";
 #endif
 		return ptr;
 	}
