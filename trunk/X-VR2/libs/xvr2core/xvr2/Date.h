@@ -4,9 +4,9 @@
 #ifndef __XVR2_DATE_H__
 #define __XVR2_DATE_H__
 #include<xvr2/System.h>
-#include<time.h>
+#include<sys/types.h>
 #include<xvr2/String.h>
-#include<xvr2/ParseException.h>
+#include<xvr2/CoreExceptions.h>
 
 namespace xvr2{
 	
@@ -23,6 +23,7 @@ namespace xvr2{
 			void setTStamp(UInt32 tstamp);
 			void decode(const char *format, const char *date_text);
 			virtual void encode();
+			std::string *string_representation;
 		public:
 			enum DateAMPM{
 				AM,
@@ -101,7 +102,7 @@ namespace xvr2{
 			 * This will convert the current date object to the following
 			 * format:   YYYY-MM-DD HH:MM:SS
 			 */
-			virtual const std::string &toString();
+			virtual std::string toString();
 			virtual void add(DateARITHParts component, int value);
 	};
 

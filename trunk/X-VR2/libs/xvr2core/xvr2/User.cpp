@@ -22,6 +22,9 @@ namespace xvr2{
 		return uname;
 	}
 
+	User::~User(){
+		delete string_representation;
+	}
 	User::User(){
 		char *tmpptr;
 #if __GNUC__ < 3
@@ -115,8 +118,9 @@ namespace xvr2{
 		setEffectiveUserID(u->getUserID());
 	}
 
-	const std::string &User::toString(){
+	std::string User::toString(){
 		//return _username.toString();
-		return *string_representation;
+		//return *string_representation;
+		return std::string(string_representation->c_str());
 	}
 };

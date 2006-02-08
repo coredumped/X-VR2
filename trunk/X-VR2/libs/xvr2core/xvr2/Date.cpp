@@ -6,7 +6,6 @@
 #define _XOPEN_SOURCE
 #endif
 #include"Date.h"
-#include"ParseException.h"
 #include<time.h>
 #include<sstream>
 
@@ -88,6 +87,7 @@ namespace xvr2{
 		setClassName(xvr2::_xvr2Date);
 #endif
 		//drep = 0;
+		string_representation = 0;
 		getCurrentTime();
 	}
 
@@ -95,6 +95,7 @@ namespace xvr2{
 #if __GNUC__ < 3
 		setClassName(xvr2::_xvr2Date);
 #endif
+		string_representation = 0;
 		//drep = 0;
 		minute = d->minute;
 		second = d->second;
@@ -114,6 +115,7 @@ namespace xvr2{
 #if __GNUC__ < 3
 		setClassName(xvr2::_xvr2Date);
 #endif
+		string_representation = 0;
 		//drep = 0;
 		hour       = __h;
 		if(hour > 12){
@@ -152,6 +154,7 @@ namespace xvr2{
 #if __GNUC__ < 3
 		setClassName(xvr2::_xvr2Date);
 #endif
+		string_representation = 0;
 		//drep = 0;
 		setTStamp(__unixtime);
 	}
@@ -199,6 +202,7 @@ namespace xvr2{
 #if __GNUC__ < 3
 		setClassName(xvr2::_xvr2Date);
 #endif
+		string_representation = 0;
 		decode(format, date_text);
 		encode();
 	}
@@ -208,6 +212,7 @@ namespace xvr2{
 #if __GNUC__ < 3
 		setClassName(xvr2::_xvr2Date);
 #endif
+		string_representation = 0;
 		//drep = 0;
 		if(strptime(date_text.toCharPtr(), format.toCharPtr(), &t) == NULL)
 			throw DateParseException();
@@ -244,6 +249,10 @@ namespace xvr2{
 	Date::~Date(){
 		/*if(drep != 0)
 			xvr2_delete(drep);*/
+		if(string_representation != 0){
+			delete string_representation;
+			string_representation = 0;
+		}
 	}
 
 	time_t Date::getCurrentTime(){
@@ -278,9 +287,10 @@ namespace xvr2{
 		return unixtime;
 	}
 
-	const std::string &Date::toString(){
+	std::string Date::toString(){
 		//return drep.toString();
-		return *string_representation;
+		//return *string_representation;
+		return std::string(string_representation->c_str());
 	}
 
 	void Date::add(DateARITHParts component, int value){

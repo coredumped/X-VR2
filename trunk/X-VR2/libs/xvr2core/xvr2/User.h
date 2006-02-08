@@ -5,7 +5,7 @@
 #define __XVR2_USER_H__
 
 #include<xvr2/Unix.h>
-#include<xvr2/UserException.h>
+#include<xvr2/CoreExceptions.h>
 
 namespace xvr2{
 	/**
@@ -18,6 +18,7 @@ namespace xvr2{
 			int _userid;
 			/** This member stores the username as a string*/
 			//String _username;
+			std::string *string_representation;
 			/** This will translate a numeric user id into a null terminated character array */
 			static char *_getUsername(int uid);
 		public:
@@ -27,6 +28,7 @@ namespace xvr2{
 			 * current executing process
 			 */
 			User();
+			~User();
 			/** 
 			 * This will create a new User object with userid <b>uid</b>
 			 */
@@ -60,7 +62,7 @@ namespace xvr2{
 			/** This will set the current process effective user id to <b>usrobj</b>*/
 			static void setEffectiveUserID(const User &usrobj);
 
-			const std::string &toString();
+			std::string toString();
 	};
 };
 

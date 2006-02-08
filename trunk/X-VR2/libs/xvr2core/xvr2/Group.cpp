@@ -71,6 +71,9 @@ namespace xvr2{
 		return g_ptr;
 	}
 
+	Group::~Group(){
+		delete string_representation;
+	}
 	Group::Group(){
 		char *tmpptr;
 #if __GNUC__ < 3
@@ -104,9 +107,10 @@ namespace xvr2{
 		_groupid = Unix::getgid(gname);
 	}
 
-	const std::string &Group::toString(){
+	std::string Group::toString(){
 		//return _groupname.toString();
-		return *string_representation;
+		//return *string_representation;
+		return std::string(string_representation->c_str());
 	}
 
 	int Group::getGroupID(){

@@ -5,9 +5,7 @@
 #define __XVR2_GROUP_H__
 
 #include<xvr2/Unix.h>
-#include<xvr2/MemoryException.h>
-#include<xvr2/GroupException.h>
-#include<xvr2/BufferTooSmall.h>
+#include<xvr2/CoreExceptions.h>
 
 namespace xvr2{
 	/**
@@ -21,6 +19,7 @@ namespace xvr2{
 			int _groupid;
 			/** Internal numeric group id reference member */
 			//String _groupname;
+			std::string *string_representation;
 			/**
 			 * This method will return a groupname based on a
 			 * numeric group id.
@@ -36,6 +35,7 @@ namespace xvr2{
 			 * current executing process
 			 */
 			Group();
+			~Group();
 			/** 
 			 * This will create a new Group object with groupid <b>gid</b>
 			 */
@@ -68,7 +68,7 @@ namespace xvr2{
 			/** This will set the current process effective group to <b>grpobj</b>*/
 			static void setEffectiveGroupID(const Group &grpobj);
 			/** This will return the corresponding groupname as a string */
-			const std::string &toString();
+			std::string toString();
 	};
 };
 

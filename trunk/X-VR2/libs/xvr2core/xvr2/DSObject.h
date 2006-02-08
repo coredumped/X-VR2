@@ -6,7 +6,7 @@
 #include<xvr2/Object.h>
 #include<xvr2/String.h>
 #include<xvr2/DSO.h>
-#include<xvr2/DSOException.h>
+#include<xvr2/CoreExceptions.h>
 
 namespace xvr2 {
 

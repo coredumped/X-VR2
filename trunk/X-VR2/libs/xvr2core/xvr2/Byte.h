@@ -6,6 +6,7 @@
 
 #include<xvr2/System.h>
 #include<xvr2/String.h>
+#include<xvr2/CoreExceptions.h>
 
 namespace xvr2{
 	/**
@@ -29,6 +30,7 @@ namespace xvr2{
 			/** As the name says this is the binary value */
 			UInt8 value;
 			//String str_value;
+			std::string *string_representation;
 		public:
 			/** Default constructor, it will initialize value to zero */
 			Byte();
@@ -76,7 +78,7 @@ namespace xvr2{
 			/** Returns a string representation of this Byte using 
 			 *  0s and 1s */
 			//const String &toString();
-			const std::string &toString();
+			std::string toString();
 	};
 };
 

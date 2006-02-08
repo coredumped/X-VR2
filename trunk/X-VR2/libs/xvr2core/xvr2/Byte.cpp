@@ -60,6 +60,7 @@ namespace xvr2{
 #if __GNUC__ < 3
 		setClassName(xvr2::_xvr2Byte);
 #endif
+		string_representation = 0;
 		setValue();
 	}
 
@@ -67,6 +68,7 @@ namespace xvr2{
 #if __GNUC__ < 3
 		setClassName(xvr2::_xvr2Byte);
 #endif
+		string_representation = 0;
 		setValue(v);
 	}
 
@@ -74,6 +76,7 @@ namespace xvr2{
 #if __GNUC__ < 3
 		setClassName(xvr2::_xvr2Byte);
 #endif
+		string_representation = 0;
 		setValue(v);
 	}
 
@@ -81,10 +84,14 @@ namespace xvr2{
 #if __GNUC__ < 3
 		setClassName(xvr2::_xvr2Byte);
 #endif
+		string_representation = 0;
 		setValue(v);
 	}
 
 	Byte::~Byte(){
+		if(string_representation == 0){
+			delete string_representation;
+		}
 	}
 
 	UInt8 Byte::theByte(){
@@ -237,9 +244,10 @@ namespace xvr2{
 	/*const String &Byte::toString(){
 		return str_value;
 	}*/
-	const std::string &Byte::toString(){
+	std::string Byte::toString(){
 		//return str_value.toString();
-		return *string_representation;
+		//return *string_representation;
+		return std::string(string_representation->c_str());
 	}
 	//End implementation of class: Byte
 };
