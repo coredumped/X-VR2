@@ -1,6 +1,7 @@
 /*
  * $Id$
  */
+#include<xvr2/CoreExceptions.h>
 #include<xvr2/GarbageCollector.h>
 #include<xvr2/Thread.h>
 

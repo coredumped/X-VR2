@@ -3,7 +3,6 @@
  */
 #include"config.h"
 #include "Tokenizer.h"
-#include "Exception.h"
 #include "_xvr2ClassNames.h"
 #include<string.h>
 #include<stdlib.h>

@@ -4,6 +4,7 @@
 #ifndef __XVR2_SHARED_VAR_H__
 #define __XVR2_SHARED_VAR_H__
 #include<xvr2/Mutex.h>
+#include<xvr2/CoreExceptions.h>
 
 
 namespace xvr2{

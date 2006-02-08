@@ -14,8 +14,8 @@
 #endif
 #endif
 
-#include<xvr2/MutexException.h>
 #include<xvr2/Threading.h>
+#include<xvr2/CoreExceptions.h>
 namespace xvr2{
 
 	/**

@@ -5,7 +5,6 @@
 #include"Object.h"
 #include"Thread.h"
 #include"ThreadManager.h"
-#include"ThreadException.h"
 #include<pthread.h>
 #include<errno.h>
 #if __GNUC__ >= 3

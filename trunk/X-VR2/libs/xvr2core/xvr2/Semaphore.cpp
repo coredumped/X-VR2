@@ -2,7 +2,6 @@
  * $Id$
  */
 #include"config.h"
-#include"Exception.h"
 #include"Semaphore.h"
 #include"Thread.h"
 #include"ThreadManager.h"
@@ -29,7 +28,7 @@ namespace xvr2{
 #ifdef USE_DEBUG
 					debugmsg(this, "invalid value.");
 #endif
-					throw SemaphoreInitValue();
+					throw SemaphoreInitValueException();
 					break;
 				default:
 					throw SemaphoreException();

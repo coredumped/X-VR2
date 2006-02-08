@@ -5,6 +5,7 @@
 #define __XVR2_CRONOGRAPH_H__
 
 #include<xvr2/Time.h>
+#include<xvr2/CoreExceptions.h>
 
 namespace xvr2{
 	/**

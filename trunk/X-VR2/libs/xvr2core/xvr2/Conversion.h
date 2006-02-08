@@ -5,7 +5,7 @@
 #define __XVR2_CONVERSION_H__
 #include<xvr2/xvr2config.h>
 #include<xvr2/Object.h>
-#include<xvr2/NumberException.h>
+#include<xvr2/CoreExceptions.h>
 
 namespace xvr2 {
 

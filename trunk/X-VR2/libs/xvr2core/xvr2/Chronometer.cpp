@@ -2,8 +2,9 @@
  * $Id$
  */
 #include"config.h"
-#include"Exception.h"
 #include"Chronometer.h"
+#include<sys/time.h>
+#include<time.h>
 
 
 namespace xvr2{

@@ -1,11 +1,11 @@
 /*
  * $Id$
  */
-#ifndef __SEMAPHORE_h__
-#define __SEMAPHORE_h__
+#ifndef __XVR2_SEMAPHORE_H__
+#define __XVR2_SEMAPHORE_H__
 
 #include<xvr2/Threading.h>
-#include<xvr2/SemaphoreException.h>
+#include<xvr2/CoreExceptions.h>
 #ifdef USE_POSIX_THREADS
 #include<semaphore.h>
 #endif

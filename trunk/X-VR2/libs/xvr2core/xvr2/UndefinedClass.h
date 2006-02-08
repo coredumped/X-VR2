@@ -4,21 +4,10 @@
  */
 #ifndef __XVR2_UNDEFINED_CLASS_H__
 #define __XVR2_UNDEFINED_CLASS_H__
-#include<xvr2/Exception.h>
+#include<xvr2/CoreExceptions.h>
 
 namespace xvr2 {
-	/**
-	 * \class UndefinedClass UndefinedClass.h
-	 * This exception is thrown whenever you try to access a class by a name
-	 * which is not the class's name.
-	 */
-	class UndefinedClass:public Exception{
-		public:
-			/**
-			 * Default constructor
-			 */
-			UndefinedClass();
-	};
+	
 };
  
 #endif

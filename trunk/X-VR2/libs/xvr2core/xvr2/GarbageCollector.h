@@ -5,7 +5,7 @@
 #define __GARBAGE_COLECTOR_H__
 #include<xvr2/System.h>
 #include<xvr2/TemporalBuffer.h>
-#include<xvr2/ElementNotFoundException.h>
+#include<xvr2/CoreExceptions.h>
 #if __GNUC__ >= 3
 #include<vector>
 #else

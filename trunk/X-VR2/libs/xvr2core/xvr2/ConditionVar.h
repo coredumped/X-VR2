@@ -4,6 +4,7 @@
 #ifndef __SHARED_VAR_h__
 #define __SHARED_VAR_h__
 
+#include<xvr2/CoreExceptions.h>
 #include<xvr2/Threading.h>
 #include<xvr2/Mutex.h>
 #ifdef USE_POSIX_THREADS

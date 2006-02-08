@@ -5,6 +5,7 @@
 #define __XVR2_PROCESS_H__
 
 #include<xvr2/Unix.h>
+#include<xvr2/CoreExceptions.h>
 
 namespace xvr2{
 	/**

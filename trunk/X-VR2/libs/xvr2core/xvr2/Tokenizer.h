@@ -5,7 +5,7 @@
 #define __XVR2_TOKENIZER_H__
 #include<xvr2/System.h>
 #include<xvr2/String.h>
-#include<xvr2/NoMoreTokensException.h>
+#include<xvr2/CoreExceptions.h>
 
 namespace xvr2{
 

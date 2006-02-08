@@ -4,9 +4,10 @@
 #ifndef __XVR2_CRONOMETER_H__
 #define __XVR2_CRONOMETER_H__
 
-#include<xvr2/Exception.h>
+#include<xvr2/xvr2config.h>
+#include<xvr2/CoreExceptions.h>
 #include<xvr2/Time.h>
-#include<sys/time.h>
+#include<sys/types.h>
 
 namespace xvr2{
 	/**

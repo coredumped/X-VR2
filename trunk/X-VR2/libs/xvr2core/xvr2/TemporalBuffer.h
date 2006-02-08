@@ -4,6 +4,7 @@
 #ifndef __TEMPORAL_BUFFER_H__
 #define __TEMPORAL_BUFFER_H__
 #include<xvr2/System.h>
+#include<xvr2/CoreExceptions.h>
 
 namespace xvr2{
 

@@ -6,7 +6,7 @@
 #include<xvr2/Unix.h>
 #include<xvr2/TextOutput.h>
 #include<xvr2/TextInput.h>
-#include<xvr2/NullPointerException.h>
+#include<xvr2/CoreExceptions.h>
 
 namespace xvr2{
 	

@@ -4,9 +4,8 @@
 #ifndef __XVR2_PLUGIN_H__
 #define __XVR2_PLUGIN_H__
 #include<xvr2/System.h>
-#include<xvr2/Exception.h>
 #include<xvr2/String.h>
-#include<xvr2/DSOException.h>
+#include<xvr2/CoreExceptions.h>
 
 #ifndef _WIN32
 

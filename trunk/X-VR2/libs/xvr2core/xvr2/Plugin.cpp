@@ -6,6 +6,7 @@
 #ifndef _WIN32
 #include<dlfcn.h>
 #include "MessageStrings.h"
+#include "DebugConsole.h"
 
 namespace xvr2{
 
@@ -21,7 +22,7 @@ namespace xvr2{
 	Plugin::~Plugin(){
 #ifdef USE_DEBUG
 	#if DEBUG_LEVEL == 5
-			std::cerr << " Plugin::~Plugin " << std::endl;
+			debugConsole << " Plugin::~Plugin\n";
 	#endif
 #endif
 		unload();
@@ -40,7 +41,7 @@ namespace xvr2{
 		handle = dlopen(dso.toCharPtr(), RTLD_NOW);
 		if(!handle){
 #ifdef USE_DEBUG
-			std::cerr << "Error while loading \"" << dso.toCharPtr() << "\"\t" << dlerror() << std::endl;
+			debugConsole << "Error while loading \"" << dso << "\"\t" << dlerror() << "\n";
 #endif
 			throw CantLoadDSO();
 		}
@@ -54,7 +55,7 @@ namespace xvr2{
 	void Plugin::unload(){
 		if(handle != 0){
 #ifdef USE_DEBUG
-			std::cerr << " Plugin::unload " << std::endl;
+			debugConsole << " Plugin::unload\n";
 #endif
 			if(dlclose(handle) != 0){
 				throw CantUnloadDSO();
@@ -68,14 +69,14 @@ namespace xvr2{
 		if(!handle)
 			throw DSOException("Load the DSO first!!!");
 #ifdef USE_DEBUG
-		std::cerr << "\tloading: " << sym.toCharPtr() << "... ";
+		debugConsole << "\tloading: " << sym.toCharPtr() << "... ";
 #endif
 		ptr = dlsym(handle, sym.toCharPtr());
 		if(ptr == 0){
-			throw DSOSymbol();
+			throw DSOSymbolException();
 		}
 #ifdef USE_DEBUG
-		std::cerr << "done" << std::endl;
+		debugConsole << "done\n";
 #endif
 		return ptr;
 	}

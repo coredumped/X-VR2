@@ -5,9 +5,7 @@
 #define __XVR2_FILE_H__
 #include<xvr2/System.h>
 #include<xvr2/String.h>
-#include<xvr2/SecurityException.h>
-#include<xvr2/InvalidParameterException.h>
-#include<xvr2/FileException.h>
+#include<xvr2/CoreExceptions.h>
 
 namespace xvr2{
 

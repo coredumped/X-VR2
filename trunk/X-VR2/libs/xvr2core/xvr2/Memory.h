@@ -5,7 +5,7 @@
 #define __XVR2_MEMORY_H__
 #include<xvr2/System.h>
 #include<xvr2/AutomatedGC.h>
-#include<xvr2/MemoryException.h>
+#include<xvr2/CoreExceptions.h>
 
 namespace xvr2{
 	/**

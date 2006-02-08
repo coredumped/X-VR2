@@ -4,6 +4,7 @@
 #ifndef __XVR2_STANDARD_INPUT_H__
 #define __XVR2_STANDARD_INPUT_H__
 #include<xvr2/TextInput.h>
+#include<xvr2/CoreExceptions.h>
 
 namespace xvr2{
 

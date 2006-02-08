@@ -7,6 +7,7 @@
 #include<xvr2/System.h>
 #include<xvr2/BaseFile.h>
 #include<xvr2/Mutex.h>
+#include<xvr2/CoreExceptions.h>
 
 namespace xvr2{
 	/**

@@ -12,6 +12,7 @@
 #include<xvr2/Object.h>
 #include<xvr2/Threading.h>
 #include<xvr2/Mutex.h>
+#include<xvr2/CoreExceptions.h>
 
 namespace xvr2{
 	/**

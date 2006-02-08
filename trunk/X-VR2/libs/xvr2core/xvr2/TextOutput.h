@@ -5,6 +5,7 @@
 #define __XVR2_TEXT_OUTPUT_H__
 #include<xvr2/System.h>
 #include<xvr2/String.h>
+#include<xvr2/CoreExceptions.h>
 
 namespace xvr2{
 	/** This class is like a PIPE, it holds a method for 

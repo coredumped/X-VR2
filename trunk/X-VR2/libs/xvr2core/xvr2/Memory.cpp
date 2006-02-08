@@ -3,7 +3,6 @@
  */
 #include"config.h"
 #include"Memory.h"
-#include"Exception.h"
 #include<cstdlib>
 #include<string>
 

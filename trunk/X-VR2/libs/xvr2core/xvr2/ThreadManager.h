@@ -5,7 +5,7 @@
 #define __XVR2_THREAD_MANAGER_H__
 #include<xvr2/Threading.h>
 #include<xvr2/Thread.h>
-#include<xvr2/ThreadException.h>
+#include<xvr2/CoreExceptions.h>
 
 namespace xvr2 {
 
