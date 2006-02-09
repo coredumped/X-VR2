@@ -56,6 +56,7 @@ namespace xvr2 {
 	
 		void DriverManager::unload(Driver *drv){
 			DriverManager::unload(drv, dso);
+			dso->unload();
 		}
 	};
 };
