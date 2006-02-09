@@ -4,7 +4,7 @@
 #ifndef __XVR2_MATH_POLYGON_ALIGNMENT_EXCEPTION_H__
 #define __XVR2_MATH_POLYGON_ALIGNMENT_EXCEPTION_H__
 #include<xvr2/xvr2config.h>
-#include<xvr2/Exception.h>
+#include<xvr2/CoreExceptions.h>
 
 namespace xvr2{
         namespace Math {
