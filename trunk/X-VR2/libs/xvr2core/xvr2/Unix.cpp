@@ -4,6 +4,7 @@
 #include"config.h"
 #include "Unix.h"
 #include "Mutex.h"
+#include "DebugConsole.h"
 #include<sys/types.h>
 #include<pwd.h>
 #include<grp.h>
@@ -220,7 +221,9 @@ namespace xvr2{
 			OSMutex.lock();
 		}
 		catch(Exception e1){
-			std::cerr << "Unable to lock OSMutex while calling Unix::getKernelInfo, read more below\n" << e1.toString() << std::endl;
+#ifdef USE_DEBUG
+			debugConsole << "Unable to lock OSMutex while calling Unix::getKernelInfo, read more below\n" << e1.toString() << "\n";
+#endif
 		}
 		uname(&data);
 		sysname   = strdup(data.sysname);
@@ -232,7 +235,9 @@ namespace xvr2{
 			OSMutex.unlock();
 		}
 		catch(Exception e1){
-			std::cerr << "Unable to unlock OSMutex while calling Unix::getKernelInfo, read more below\n" << e1.toString() << std::endl;
+#ifdef USE_DEBUG
+			debugConsole << "Unable to lock OSMutex while calling Unix::getKernelInfo, read more below\n" << e1.toString() << "\n";
+#endif
 		}
 	}
 
