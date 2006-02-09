@@ -54,7 +54,7 @@ namespace Net {
 #if __WORDSIZE == 64 && defined(__x86_64__)
 		_hash = (Int64)X509_subject_name_hash((::X509 *)idata);
 #else
-		_hash = (long)X509_subject_name_hash((::X509 *)idata);
+		_hash = (Int32)X509_subject_name_hash((::X509 *)idata);
 #endif
 
 		//Read not before
@@ -71,7 +71,7 @@ namespace Net {
 #if __WORDSIZE == 64 && defined(__x86_64__)
 		_version = (Int64)X509_get_version((::X509 *)idata);
 #else
-		_version = X509_get_version((::X509 *)idata);
+		_version = (UInt32)X509_get_version((::X509 *)idata);
 #endif
 	}
 	X509::~X509(){
