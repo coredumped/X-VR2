@@ -1,4 +1,15 @@
 VERSION 0.7.0.1
+Juan V. Guerrero <mindstorm2600@users.sourceforge.net> - Feb 8 2006
+	* Lots of changes has goind on with the String class, now it is
+	derived from BasicString which is derived from std::basic_string this
+	will give us the flexibility of also being able to wrapper the
+	std::wstring class, which is good.
+	* There's also being some work with the Exceptions in fact, I've tried
+	to trim down the number of source files as much as possible, so far
+	I've been able to generate 2 files the CoreExceptions.h and the
+	CoreExceptions.cpp, I'm not entirely sure if this has to be this way
+	since now when yo include CoreExceptions.h your codesize will increase
+	I think this will be changed, we'll see.
 Juan V. Guerrero <mindstorm2600@users.sourceforge.net> - Jan 17 2006
 	* Timestamp class is now derived from Date instead of Time, this
 	change has to be performed before, sorry for the inconvinience.

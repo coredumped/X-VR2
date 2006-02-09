@@ -871,6 +871,12 @@ ${ac_dA}HAVE_STRTOL${ac_dB}HAVE_STRTOL${ac_dC}1${ac_dD}
 ${ac_dA}HAVE_STRCPY${ac_dB}HAVE_STRCPY${ac_dC}1${ac_dD}
 ${ac_dA}HAVE_MEMCPY${ac_dB}HAVE_MEMCPY${ac_dC}1${ac_dD}
 ${ac_dA}HAVE_POW${ac_dB}HAVE_POW${ac_dC}1${ac_dD}
+${ac_dA}HAVE_STRTOUL${ac_dB}HAVE_STRTOUL${ac_dC}1${ac_dD}
+${ac_dA}HAVE_STRTOLL${ac_dB}HAVE_STRTOLL${ac_dC}1${ac_dD}
+${ac_dA}HAVE_STRTOULL${ac_dB}HAVE_STRTOULL${ac_dC}1${ac_dD}
+${ac_dA}HAVE_STRTOF${ac_dB}HAVE_STRTOF${ac_dC}1${ac_dD}
+${ac_dA}HAVE_STRTOD${ac_dB}HAVE_STRTOD${ac_dC}1${ac_dD}
+${ac_dA}HAVE_STRTOLD${ac_dB}HAVE_STRTOLD${ac_dC}1${ac_dD}
 ${ac_dA}HAVE_GETGRGID_R${ac_dB}HAVE_GETGRGID_R${ac_dC}1${ac_dD}
 ${ac_dA}HAVE_PTHREAD_SELF${ac_dB}HAVE_PTHREAD_SELF${ac_dC}1${ac_dD}
 CEOF
@@ -906,6 +912,12 @@ ${ac_uA}HAVE_STRTOL${ac_uB}HAVE_STRTOL${ac_uC}1${ac_uD}
 ${ac_uA}HAVE_STRCPY${ac_uB}HAVE_STRCPY${ac_uC}1${ac_uD}
 ${ac_uA}HAVE_MEMCPY${ac_uB}HAVE_MEMCPY${ac_uC}1${ac_uD}
 ${ac_uA}HAVE_POW${ac_uB}HAVE_POW${ac_uC}1${ac_uD}
+${ac_uA}HAVE_STRTOUL${ac_uB}HAVE_STRTOUL${ac_uC}1${ac_uD}
+${ac_uA}HAVE_STRTOLL${ac_uB}HAVE_STRTOLL${ac_uC}1${ac_uD}
+${ac_uA}HAVE_STRTOULL${ac_uB}HAVE_STRTOULL${ac_uC}1${ac_uD}
+${ac_uA}HAVE_STRTOF${ac_uB}HAVE_STRTOF${ac_uC}1${ac_uD}
+${ac_uA}HAVE_STRTOD${ac_uB}HAVE_STRTOD${ac_uC}1${ac_uD}
+${ac_uA}HAVE_STRTOLD${ac_uB}HAVE_STRTOLD${ac_uC}1${ac_uD}
 ${ac_uA}HAVE_GETGRGID_R${ac_uB}HAVE_GETGRGID_R${ac_uC}1${ac_uD}
 ${ac_uA}HAVE_PTHREAD_SELF${ac_uB}HAVE_PTHREAD_SELF${ac_uC}1${ac_uD}
 s,^[	 ]*#[	 ]*undef[	 ][	 ]*[a-zA-Z_][a-zA-Z_0-9]*,/* & */,
