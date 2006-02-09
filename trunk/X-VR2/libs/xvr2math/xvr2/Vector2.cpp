@@ -17,9 +17,13 @@ namespace xvr2 {
 			mag = -1;
 		}
 		Vector2::Vector2(const Scalar *_c){
+#ifdef USE_EMBEDDED_CLASSNAMES
+			setClassName(__xvr2_Math_Vector2);
+#endif
 			c[0] = _c[0];
 			c[1] = _c[1];
 			mag = -1;
+			
 		}
 		Vector2::Vector2(const Scalar x, const Scalar y){
 #ifdef USE_EMBEDDED_CLASSNAMES
@@ -86,15 +90,16 @@ namespace xvr2 {
 			str->concat(")");
 			return str;
 		}*/
-		const std::string &Vector2::toString(){
+		std::string Vector2::toString(){
 			std::stringstream buf;
-			if(string_representation != 0){
+			/*if(string_representation != 0){
 				delete string_representation;
 				string_representation = 0;
-			}
+			}*/
 			buf << "(" << c[0] << "," << c[1] << ")";
-			string_representation = new std::string(buf.str());
-			return *string_representation;
+			//string_representation = new std::string(buf.str());
+			//return *string_representation;
+			return std::string(buf.str());
 		}
 
 		static char *__v_open_paren = "(";

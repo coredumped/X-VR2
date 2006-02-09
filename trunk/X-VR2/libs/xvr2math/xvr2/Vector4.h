@@ -32,7 +32,7 @@ namespace Math {
 			const Vector4 unit();
 			const Scalar  magnitude();
 			//const String *toString();
-			const std::string &toString();
+			std::string toString();
 			const Scalar x(){
 				return c[0];
 			}
@@ -85,4 +85,3 @@ namespace Math {
 };
 
 #endif
-

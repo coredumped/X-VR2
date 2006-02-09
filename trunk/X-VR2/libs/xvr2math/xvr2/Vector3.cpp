@@ -104,15 +104,16 @@ namespace xvr2 {
 			str->concat(")");
 			return str;
 		}*/
-		const std::string &Vector3::toString(){
+		std::string Vector3::toString(){
 			std::stringstream buf;
-			if(string_representation != 0){
+			/*if(string_representation != 0){
 				delete string_representation;
 				string_representation = 0;
-			}
+			}*/
 			buf << "(" << c[0] << "," << c[1] << "," << c[2] << ")";
-			string_representation = new std::string(buf.str());
-			return *string_representation;
+			/*string_representation = new std::string(buf.str());
+			return *string_representation;*/
+			return std::string(buf.str());
 		}
 };
 };
