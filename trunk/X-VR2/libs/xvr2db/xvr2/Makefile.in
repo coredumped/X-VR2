@@ -91,10 +91,10 @@ RC = @RC@
 STRIP = @STRIP@
 VERSION = @VERSION@
 
-h_sources = DatabaseException.h DBConnection.h DBConnectionMT.h DBDriver.h 	    DBDriverInfo.h DBDriverManager.h DBField.h DBOldDriver.h DBResultSet.h 	     _xvr2dbClassNames.h
+h_sources = DatabaseException.h DBConnection.h DBConnectionMT.h DBDriver.h 	    DBDriverInfo.h DBDriverManager.h DBField.h DBResultSet.h 	     _xvr2dbClassNames.h
 
 
-cc_sources = DatabaseException.cpp DBConnection.cpp DBConnectionMT.cpp 	     DBDriverInfo.cpp DBDriverManager.cpp DBField.cpp DBOldDriver.cpp 	     DBResultSet.cpp _xvr2dbClassNames.cpp
+cc_sources = DatabaseException.cpp DBConnection.cpp DBConnectionMT.cpp 	     DBDriverInfo.cpp DBDriverManager.cpp DBField.cpp 	     DBResultSet.cpp _xvr2dbClassNames.cpp
 
 
 library_includedir = $(includedir)/$(GENERIC_LIBRARY_NAME)
@@ -118,7 +118,7 @@ LIBS = @LIBS@
 libxvr2db_0_7_1_0_la_LIBADD = 
 libxvr2db_0_7_1_0_la_OBJECTS =  DatabaseException.lo DBConnection.lo \
 DBConnectionMT.lo DBDriverInfo.lo DBDriverManager.lo DBField.lo \
-DBOldDriver.lo DBResultSet.lo _xvr2dbClassNames.lo
+DBResultSet.lo _xvr2dbClassNames.lo
 CXXFLAGS = @CXXFLAGS@
 CXXCOMPILE = $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
 LTCXXCOMPILE = $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
@@ -140,8 +140,7 @@ TAR = tar
 GZIP_ENV = --best
 DEP_FILES =  .deps/DBConnection.P .deps/DBConnectionMT.P \
 .deps/DBDriverInfo.P .deps/DBDriverManager.P .deps/DBField.P \
-.deps/DBOldDriver.P .deps/DBResultSet.P .deps/DatabaseException.P \
-.deps/_xvr2dbClassNames.P
+.deps/DBResultSet.P .deps/DatabaseException.P .deps/_xvr2dbClassNames.P
 SOURCES = $(libxvr2db_0_7_1_0_la_SOURCES)
 OBJECTS = $(libxvr2db_0_7_1_0_la_OBJECTS)
 

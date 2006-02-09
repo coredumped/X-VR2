@@ -1,11 +1,11 @@
 ## Source directory
 
 h_sources = DatabaseException.h DBConnection.h DBConnectionMT.h DBDriver.h \
-	    DBDriverInfo.h DBDriverManager.h DBField.h DBOldDriver.h DBResultSet.h \
+	    DBDriverInfo.h DBDriverManager.h DBField.h DBResultSet.h \
 	     _xvr2dbClassNames.h
 
 cc_sources = DatabaseException.cpp DBConnection.cpp DBConnectionMT.cpp \
-	     DBDriverInfo.cpp DBDriverManager.cpp DBField.cpp DBOldDriver.cpp \
+	     DBDriverInfo.cpp DBDriverManager.cpp DBField.cpp \
 	     DBResultSet.cpp _xvr2dbClassNames.cpp
 
 library_includedir=$(includedir)/$(GENERIC_LIBRARY_NAME)
