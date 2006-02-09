@@ -4,15 +4,15 @@
 #ifndef __XVR2_GL_DISPLAY_DRIVER_H__
 #define __XVR2_GL_DISPLAY_DRIVER_H__
 #include<xvr2/Object.h>
-#include<xvr2/Plugin.h>
-#include<xvr2/NullPointerException.h>
-#include<xglExceptions.h>
+#include<xvr2/DSO.h>
+#include<xvr2/CoreExceptions.h>
+#include<xvr2/xglExceptions.h>
 
 namespace xvr2 {
 namespace GL {
 	class DisplayDriver: public xvr2::Object{
 		protected:
-			Plugin *drv;
+			DSO	 *drv;
 			void		*(*__ddrv_init)		(void);
 			void		(*__ddrv_setresolution)	(void *, int, int);
 			void		(*__ddrv_getresolution)	(void *, int *, int *);

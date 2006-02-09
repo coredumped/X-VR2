@@ -17,7 +17,7 @@ namespace GL {
 #ifdef USE_EMBEDDED_CLASSNAMES
 		setClassName(__xvr2_GL_DisplayDriver);
 #endif
-		drv = new xvr2::Plugin(driver_path);
+		drv = new xvr2::DSO(driver_path);
 	}
 	DisplayDriver::~DisplayDriver(){
 		xvr2_delete(drv);
