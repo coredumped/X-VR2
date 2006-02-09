@@ -13,8 +13,6 @@
 #include<xvr2/xvr2config.h>
 #include<xvr2/_xvr2dbClassNames.h>
 #include<xvr2/DBField.h>
-#include<xvr2/NumberException.h>
-#include<xvr2/NullPointerException.h>
 #include<xvr2/Memory.h>
 #include<errno.h>
 #if __GNUC__ < 3
@@ -374,7 +372,7 @@ namespace xvr2{
 							val = (Int16)((String *)dataPtr)->toInt();
 						}
 						catch(...){
-							throw UndefinedClass();
+							throw UndefinedClassException();
 						}
 					}
 			}
@@ -441,7 +439,7 @@ namespace xvr2{
 							val = (Int32)((String *)dataPtr)->toInt();
 						}
 						catch(...){
-							throw UndefinedClass();
+							throw UndefinedClassException();
 						}
 					}
 			}
@@ -508,7 +506,7 @@ namespace xvr2{
 							val = (Int64)((String *)dataPtr)->toInt64();
 						}
 						catch(...){
-							throw UndefinedClass();
+							throw UndefinedClassException();
 						}
 					}
 			}
@@ -575,7 +573,7 @@ namespace xvr2{
 							val = (float)((String *)dataPtr)->toFloat();
 						}
 						catch(...){
-							throw UndefinedClass();
+							throw UndefinedClassException();
 						}
 					}
 			}
@@ -638,7 +636,7 @@ namespace xvr2{
 							val = (double)((String *)dataPtr)->toDouble();
 						}
 						catch(...){
-							throw UndefinedClass();
+							throw UndefinedClassException();
 						}
 					}
 			}
@@ -676,11 +674,11 @@ namespace xvr2{
 						ret = (char *)((String *)dataPtr)->toCharPtr();
 					}
 					catch(...){
-						throw UndefinedClass();
+						throw UndefinedClassException();
 					}
 					break;
 				case  BLOB:
-					throw Stringe();
+					throw Exception();
 					break;
 				case  DATE:
 					try{
@@ -691,7 +689,7 @@ namespace xvr2{
 						ret = (char *)(((Date *)dataPtr)->toString().c_str());
 					}
 					catch(...){
-						throw UndefinedClass();
+						throw UndefinedClassException();
 					}
 					break;
 				case  TIME:
@@ -703,7 +701,7 @@ namespace xvr2{
 						ret = (char *)(((Time *)dataPtr)->toString().c_str());
 					}
 					catch(...){
-						throw UndefinedClass();
+						throw UndefinedClassException();
 					}
 					break;
 				case  TIMESTAMP:
@@ -715,7 +713,7 @@ namespace xvr2{
 						ret = (char *)(((Timestamp *)dataPtr)->toString().c_str());
 					}
 					catch(...){
-						throw UndefinedClass();
+						throw UndefinedClassException();
 					}
 					break;
 				case  BIT:
@@ -799,7 +797,7 @@ namespace xvr2{
 						dataStr = (char *)(((String *)dataPtr)->toCharPtr());
 					}
 					catch(...){
-						throw UndefinedClass();
+						throw UndefinedClassException();
 					}
 					if(strptime((char *)dataStr, "%Y-%m-%d %H:%M:%S", &tt) != 0){
 						throw DateParseException();
@@ -925,7 +923,7 @@ namespace xvr2{
 						dataStr = (char *)(((String *)dataPtr)->toCharPtr());
 					}
 					catch(...){
-						throw UndefinedClass();
+						throw UndefinedClassException();
 					}
 					if(strptime((char *)dataStr, "%H:%M:%S", &tt) != 0){
 						throw DateParseException();

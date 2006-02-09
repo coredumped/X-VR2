@@ -5,8 +5,6 @@
 #include<xvr2/xvr2config.h>
 #include"_xvr2dbClassNames.h"
 #include<xvr2/DBResultSet.h>
-#include<xvr2/NullPointerException.h>
-#include<xvr2/ArrayIndexOutOfLimitsException.h>
 
 namespace xvr2{
 

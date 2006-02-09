@@ -10,9 +10,7 @@
 #include<xvr2/Timestamp.h>
 #include<xvr2/Byte.h>
 #include<xvr2/String.h>
-#include<xvr2/ParseException.h>
-#include<xvr2/BufferTooSmall.h>
-#include<xvr2/UndefinedClass.h>
+#include<xvr2/CoreExceptions.h>
 
 namespace xvr2{
 	namespace DB {
