@@ -8,7 +8,7 @@
 #include<xvr2/Mutex.h>
 //#include<xvr2/Array.h>
 //#include<xvr2/List.h>
-#include<xvr2/ElementNotFoundException.h>
+#include<xvr2/CoreExceptions.h>
 #if __GNUC__ >= 3
 #include<vector>
 #else

@@ -12,8 +12,7 @@
 #include<xvr2/_xvr2utilClassNames.h>
 #endif
 #include<xvr2/Container.h>
-#include<xvr2/ArrayIndexOutOfLimitsException.h>
-#include<xvr2/ElementNotFoundException.h>
+#include<xvr2/CoreExceptions.h>
 
 namespace xvr2{
 	namespace Util {

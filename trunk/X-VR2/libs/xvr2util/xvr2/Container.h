@@ -4,7 +4,7 @@
 #ifndef __XVR2_CONTAINER_H__
 #define __XVR2_CONTAINER_H__
 #include<xvr2/Object.h>
-#include<xvr2/Exception.h>
+#include<xvr2/CoreExceptions.h>
 
 namespace xvr2{
 	namespace Util {
