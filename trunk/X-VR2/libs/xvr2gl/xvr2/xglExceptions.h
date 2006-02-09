@@ -3,14 +3,14 @@
  */
 #ifndef __XVR2_GL_EXCEPTION_H__
 #define __XVR2_GL_EXCEPTION_H__
-#include<xvr2/Exception.h>
+#include<xvr2/CoreExceptions.h>
 
 
 namespace xvr2 {
 namespace GL {
 	class DisplayDriver;
 
-	class XGLException:public xvr2::Exception::Exception {
+	class XGLException:public xvr2::Exception {
 		protected:
 			DisplayDriver *drv;
 		public:
