@@ -27,10 +27,6 @@ namespace xvr2{
 #endif
 		protected:
 			/**
-			 * Stores a string representation of the current instantiated
-			 * object */
-			std::string *string_representation;
-			/**
 			 * Call this method when you need to set the name of the class you're
 			 * creating, typically in it's constructor, remember that you must set
 			 * the classname for every class you create, that way you can have more
@@ -57,7 +53,6 @@ namespace xvr2{
 			 */
 			Object(const char *n){
 				setClassName(n);
-				string_representation = 0;
 			}
 #endif
 			virtual ~Object();
@@ -65,7 +60,7 @@ namespace xvr2{
 			 * Will print a debug message to the screen */
 			static void debugmsg(Object *obj, const char *msg);
 			static void debugmsgln(Object *obj, const char *msg);
-			virtual const std::string &toString();
+			virtual std::string toString();
 			friend std::ostream& operator<<(std::ostream& stream, const Object &s);
 	};
 

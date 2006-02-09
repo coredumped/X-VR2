@@ -33,7 +33,6 @@ namespace xvr2{
 		}
 #endif
 #endif
-		string_representation = 0;
 	}
 
 #ifdef USE_EMBEDDED_CLASSNAMES
@@ -77,15 +76,10 @@ namespace xvr2{
 
 
 	Object::~Object(){
-		delete string_representation;
-		string_representation = 0;
 	}
 
-	const std::string &Object::toString(){
-		if(string_representation == 0){
-			string_representation = new std::string(getClassName());
-		}
-		return *string_representation;
+	std::string Object::toString(){
+		return std::string(getClassName());
 	}
 
 	std::ostream& operator<<(std::ostream& stream, const Object &s){
