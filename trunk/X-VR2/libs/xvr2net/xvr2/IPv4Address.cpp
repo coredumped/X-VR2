@@ -87,20 +87,21 @@ namespace Net {
 		str_ip = new String(ptr);
 		return str_ip;
 	}*/
-	const std::string &IPv4Address::toString(){
+	std::string IPv4Address::toString(){
 		//String *str_ip;
 		char buf[32];
 		char *ptr;
-		if(string_representation != 0){
+		/*if(string_representation != 0){
 			delete string_representation;
-		}
+		}*/
 		//Generate a string representation of the addr info, I dont know how yet
 		//const char * inet_ntop (int AF, const void *CP, char *BUF, size_t LEN)
 		ptr = (char *)inet_ntop(addr.sin_family, (void*)&addr.sin_addr, buf, 32);
-		string_representation = new std::string(ptr);
+		//string_representation = new std::string(ptr);
 		//str_ip = new String(ptr);
 		//return str_ip;
-		return *string_representation;
+		//return *string_representation;
+		return std::string(ptr);
 	}
 	std::ostream& operator<<(std::ostream& stream, const IPv4Address &s){
 		/*String *ts;

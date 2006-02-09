@@ -9,7 +9,6 @@
 //#include<xvr2/TCPServerSession.h>
 #include<xvr2/SharedVar.h>
 #include<xvr2/Thread.h>
-#include<xvr2/NullPointerException.h>
 #include<xvr2/NetworkExceptions.h>
 
 namespace xvr2{

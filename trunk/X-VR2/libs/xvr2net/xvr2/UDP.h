@@ -8,7 +8,6 @@
 #include<xvr2/UDPSocket.h>
 #include<xvr2/UDPServerSocket.h>
 #include<xvr2/NetworkExceptions.h>
-#include<xvr2/MemoryException.h>
 
 namespace xvr2{
 namespace Net{

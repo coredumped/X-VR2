@@ -4,12 +4,11 @@
 #include"config.h"
 #include<xvr2/xvr2config.h>
 #include"_xvr2netClassNames.h"
-#include"xvr2/UDP.h"
-#include"xvr2/IPv4Address.h"
-#include"xvr2/Socket.h"
-#include"xvr2/UDPSocket.h"
-#include"xvr2/UDPServerSocket.h"
-#include"xvr2/MemoryException.h"
+#include"UDP.h"
+#include"IPv4Address.h"
+#include"Socket.h"
+#include"UDPSocket.h"
+#include"UDPServerSocket.h"
 #include<sys/types.h>
 #include<sys/socket.h>
 #include<sys/poll.h>

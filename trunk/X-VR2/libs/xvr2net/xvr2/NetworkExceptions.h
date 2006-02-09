@@ -3,8 +3,7 @@
  */
 #ifndef __XVR2_NETWORK_EXCEPTION_H__
 #define __XVR2_NETWORK_EXCEPTION_H__
-#include<xvr2/Exception.h>
-#include<xvr2/IOException.h>
+#include<xvr2/CoreExceptions.h>
 namespace xvr2 {
 	namespace Net {
 		/** This is a generic exception it is supposed to be throw n for undefined or

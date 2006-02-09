@@ -7,7 +7,6 @@
 #include <SDL_net.h>
 #endif
 
-#include<xvr2/InvalidParameterException.h>
 #include<xvr2/NetworkExceptions.h>
 #include<xvr2/TCPSocket.h>
 

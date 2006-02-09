@@ -4,16 +4,15 @@
 #include"config.h"
 #include<xvr2/xvr2config.h>
 #include"_xvr2netClassNames.h"
-#include"xvr2/IPv4Address.h"
-#include"xvr2/String.h"
-#include"xvr2/Socket.h"
-#include"xvr2/UDPSocket.h"
+#include<xvr2/String.h>
+#include"IPv4Address.h"
+#include"Socket.h"
+#include"UDPSocket.h"
 #ifndef XVR2_THREAD_UNSAFE
 #include"xvr2/Mutex.h"
 #endif
 #include<sys/socket.h>
 #include<sys/types.h>
-#include<xvr2/MemoryException.h>
 #include<errno.h>
 
 namespace xvr2 {

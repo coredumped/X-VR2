@@ -31,7 +31,7 @@ namespace Net {
 			//   /* Will return a String representation of the IP address, you
 			//    * must explicitely release the allocated memory after use. */
 			//String *toString();
-			const std::string &toString();
+			std::string toString();
 			friend std::ostream& operator<<(std::ostream& stream, const IPv4Address &s);
 	};
 };
