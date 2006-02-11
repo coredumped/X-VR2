@@ -1,7 +1,7 @@
 ## top directory
 
 #Build in these directories:
-SUBDIRS= $(GENERIC_LIBRARY_NAME)
+SUBDIRS= $(GENERIC_LIBRARY_NAME) $(DOXYGEN_INPUT_DIR)
 
 #Distribute these directories:
 DIST_SUBDIRS = $(GENERIC_LIBRARY_NAME)
