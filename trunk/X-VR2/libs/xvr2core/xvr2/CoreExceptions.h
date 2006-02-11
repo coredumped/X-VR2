@@ -8,67 +8,50 @@
 
 namespace xvr2{
 
-	/**
-	 * \class Exception Exception.h
-	 * This is the parent class of all the exceptions
-	 */
+	/** \class Exception Exception.h <xvr2/CoreExceptions.h>
+	 *  \brief This is the parent class of all the exceptions */
 	class Exception:public ExceptionTracer {
 		private:
 		protected:
-			/**
-			 * \var char *description
-			 * Stores the exception's description as a string
-			 */
+			/** \var char *description
+			 *  Stores the exception's description as a string */
 			char *description;
 		public:
-			/**
-			 * \fn Exception();
-			 * \brief Default constructor
-			 */
+			/** \fn Exception();
+			 *  \brief Default constructor */
 			Exception();
 			~Exception();
-			/**
-			 * \fn Exception(const char *d)
-			 * \brief This constructor assigns to the description the string
-			 * contained in d
-			 * \param d Description string (the name and or description of the exception
-			 */
+			/** \fn Exception(const char *d)
+			 *  \brief This constructor assigns to the description the string
+			 *  contained in d
+			 *  \param d Description string (the name and or description of the exception */
 			Exception(const char *d);
-			/**
-			 * \fn const char *toString();
-			 * \brief Displays the description of the exception
-			 */
+			/** \fn const char *toString();
+			 *  \brief Displays the description of the exception */
 			const char *toString() const;
 	};
 
 
 
 	/////////// EXCEPTIONS DERIVED FROM xvr2::Exception //////////////////
-	/**
-	 * \class BufferTooSmall BufferTooSmall.h
-	 * To be thrown when you are trying to write data in a buffer whose storage size is too small
-	 */
+	/** \class BufferTooSmall CoreExceptions.h <xvr2/CoreExceptions.h>
+	 *  \brief To be thrown when you are trying to write data in a buffer whose storage size is too small */
 	class BufferTooSmall:public Exception{
 		public:
-			/**
-			 * Default constructor
-			 */
+			/** Default constructor */
 			BufferTooSmall();
 	};
-	/**
+	/** \class ArrayIndexOutOfLimits CoreExceptions.h <xvr2/CoreExceptions.h>
 	 * Throw this exception when an operation over an array exceeds is inbound
-	 * and outbound limits
-	 */
+	 * and outbound limits */
 	class ArrayIndexOutOfLimits:public Exception{
 		public:
-			/**
-			 * Default constructor
-			 */
+			/** Default constructor */
 			ArrayIndexOutOfLimits();
 	};
 	
-	/**
-	 * Use this exception when a search for an element returned no results or the results
+	/** \class ElementNotFound CoreExceptions.h <xvr2/CoreExceptions.h>
+	 *  \brief Use this exception when a search for an element returned no results or the results
 	 * given doens't match what you were looking for
 	 */
 	class ElementNotFound:public Exception{
@@ -676,9 +659,8 @@ namespace xvr2{
 
 
 	/////////// EXCEPTIONS DERIVED FROM xvr2::SecurityException //////////////////
-	/**
-	 * This is a generic exception for security-related events
-	 */
+	/** \class UserIDDoesNotMatch CoreExceptions.h <xvr2/CoreExceptions.h>
+	 *  \brief This is a generic exception for security-related events */
 	class UserIDDoesNotMatch:public SecurityException{
 		public:
 			/**
@@ -689,31 +671,34 @@ namespace xvr2{
 
 
 	/////////// EXCEPTIONS DERIVED FROM xvr2::ThreadException //////////////////
-	/** Generic semaphore exception */
+	/** \class SemaphoreException CoreExceptions.h <xvr2/CoreExceptions.h>
+	 *  \brief Generic semaphore exception */
 	class SemaphoreException:public ThreadException{
 		public:
-			/**
-			 * Default constructor
-			 */
+			/** Default constructor */
 			SemaphoreException();
 	};
-	/**
-	 * If you try to execute an operation that can only be placed
-	 * over a running Thred and you're current thread is not running yet
-	 * this is the exception that is going to be thrown */
+	/** \class ThreadNotRunning CoreExceptions.h <xvr2/CoreExceptions.h>
+	 *  \brief If you try to execute an operation that can only be placed
+	 *  over a running Thred and you're current thread is not running yet
+	 *  this is the exception that is going to be thrown */
 	class ThreadNotRunning:public ThreadException{
 		public:
-			/**
-			 * Default constructor
-			 */
+			/** Default constructor */
 			ThreadNotRunning();
+	};
+	/** \class MaximumNumberOfRunningThreadsReached CoreExceptions.h <xvr2/CoreExceptions.h>
+	 *  \brief Tbis exception is thrown if while attempting to start a new thread the maximum
+	 *  number of threads supported by the OS has been reached. */
+	class MaximumNumberOfRunningThreadsReached:public ThreadException{
+		public:
+			/** Default constructor */
+			MaximumNumberOfRunningThreadsReached();
 	};
 	/** The condition variable was signaled before wait interval has been reached, as a consecuence the controlled Mutex will be re-acquired */
 	class ConditionVarWaitTimedOut:public ThreadException{
 		public:
-			/**
-			 * Default constructor
-			 */
+			/** Default constructor */
 			ConditionVarWaitTimedOut();
 	};
 

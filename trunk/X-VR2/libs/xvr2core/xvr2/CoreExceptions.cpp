@@ -20,6 +20,10 @@
 
 
 namespace xvr2 {
+	static char *local_strings[] = {
+		"Tbis exception is thrown if while attempting to start a new thread the maximum number of threads supported by the OS has been reached."
+	};
+
 	Exception::Exception(){
 #ifdef USE_EMBEDDED_CLASSNAMES
 		setClassName(xvr2::_xvr2Exception);
@@ -551,14 +555,18 @@ namespace xvr2 {
 		description = (char *)xvr2::excepThreadNotRunning;
 	}
 
-
 	ConditionVarWaitTimedOut::ConditionVarWaitTimedOut(){
 #ifdef USE_EMBEDDED_CLASSNAMES
 		setClassName((char *)xvr2::_xvr2ConditionVarWaitTimedOutException);
 #endif
 		description = (char *)xvr2::excepConditionVarWaitTimedOut;
 	}
-
+	MaximumNumberOfRunningThreadsReached::MaximumNumberOfRunningThreadsReached(){
+#ifdef USE_EMBEDDED_CLASSNAMES
+		setClassName((char *)xvr2::_xvr2MaximumNumberOfRunningThreadsReached);
+#endif
+		description = (char *)local_strings[0];
+	}
 
 ///////////////////////////////////////
 /////// UserException //////////////////
