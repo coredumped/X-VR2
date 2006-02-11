@@ -71,6 +71,14 @@ namespace xvr2 {
 		return val;
 	}
 
+	void *ThreadManager::runMethod_bf(BackgroundFunction &bf){
+		//addThread(t, pthread_self()); //Add the thread to the thread list
+		bf.called = true;
+		bf();
+		//removeThread(t, pthread_self()); //Remove thread from the thread list
+		return 0;
+	}
+
 	void *ThreadManager::runMethod_arg(void *tx){
 		void *val;
 		__thArgs2_t *targs;
@@ -96,6 +104,20 @@ namespace xvr2 {
 		targs = new __thArgs2_t(t, arg);
 		if(pthread_create(&thread, NULL, ThreadManager::runMethod_arg, (void *)targs) == EAGAIN){
 			throw ThreadNotRunning();
+		}
+		return thread;
+	}
+
+	unsigned long int ThreadManager::start(BackgroundFunction &bf, bool waitfor){
+		pthread_t thread;
+		pthread_attr_t attr;
+		pthread_attr_init(&attr);
+		pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_DETACHED);
+		if(pthread_create(&thread, &attr, (void* (*)(void*))ThreadManager::runMethod_bf, (void *)&bf) == EAGAIN){
+			throw ThreadNotRunning();
+		}
+		if(waitfor){
+			while(bf.called == false) System::usleep(100);
 		}
 		return thread;
 	}
