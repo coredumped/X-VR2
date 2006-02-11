@@ -64,6 +64,18 @@ namespace xvr2{
 				unlock();
 				return u;
 			}
+			T operator=(T v){
+				lock();
+				var = v;
+				unlock();
+			}
+			bool operator==(T v){
+				bool ret;
+				lock();
+				ret = (var==v)?true:false;
+				unlock();
+				return ret;
+			}
 	};
 };
 
