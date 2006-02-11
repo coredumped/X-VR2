@@ -67,6 +67,8 @@ CC = @CC@
 CXX = @CXX@
 CXXCPP = @CXXCPP@
 DLLTOOL = @DLLTOOL@
+DOXYGEN = @DOXYGEN@
+DOXYGEN_INPUT_DIR = @DOXYGEN_INPUT_DIR@
 ECHO = @ECHO@
 EGREP = @EGREP@
 EXEEXT = @EXEEXT@
@@ -95,10 +97,10 @@ VERSION = @VERSION@
 
 SUBDIRS = parsers
 
-h_sources = Array.h ConfigFile.h Container.h c_utilities.h List.h 			RegexException.h Regex.h _xvr2utilClassNames.h
+h_sources = Array.h ConfigFile.h Container.h c_utilities.h List.h 			RegexException.h Regex.h _xvr2utilClassNames.h StringCollection.h
 
 
-cc_sources = ConfigFile.cpp Container.cpp c_utilities.cpp Regex.cpp 			RegexException.cpp _xvr2utilClassNames.cpp
+cc_sources = ConfigFile.cpp Container.cpp c_utilities.cpp Regex.cpp 			RegexException.cpp _xvr2utilClassNames.cpp StringCollection.cpp
 
 
 library_includedir = $(includedir)/$(GENERIC_LIBRARY_NAME)
@@ -122,7 +124,8 @@ LDFLAGS = @LDFLAGS@
 LIBS = @LIBS@
 libxvr2util_0_7_1_0_la_DEPENDENCIES =  parsers/*.lo
 libxvr2util_0_7_1_0_la_OBJECTS =  ConfigFile.lo Container.lo \
-c_utilities.lo Regex.lo RegexException.lo _xvr2utilClassNames.lo
+c_utilities.lo Regex.lo RegexException.lo _xvr2utilClassNames.lo \
+StringCollection.lo
 CXXFLAGS = @CXXFLAGS@
 CXXCOMPILE = $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
 LTCXXCOMPILE = $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
@@ -143,7 +146,8 @@ DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
 TAR = tar
 GZIP_ENV = --best
 DEP_FILES =  .deps/ConfigFile.P .deps/Container.P .deps/Regex.P \
-.deps/RegexException.P .deps/_xvr2utilClassNames.P .deps/c_utilities.P
+.deps/RegexException.P .deps/StringCollection.P \
+.deps/_xvr2utilClassNames.P .deps/c_utilities.P
 SOURCES = $(libxvr2util_0_7_1_0_la_SOURCES)
 OBJECTS = $(libxvr2util_0_7_1_0_la_OBJECTS)
 

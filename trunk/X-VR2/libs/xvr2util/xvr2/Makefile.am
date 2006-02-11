@@ -4,10 +4,10 @@
 SUBDIRS = parsers
 
 h_sources = Array.h ConfigFile.h Container.h c_utilities.h List.h \
-			RegexException.h Regex.h _xvr2utilClassNames.h
+			RegexException.h Regex.h _xvr2utilClassNames.h StringCollection.h
 
 cc_sources = ConfigFile.cpp Container.cpp c_utilities.cpp Regex.cpp \
-			RegexException.cpp _xvr2utilClassNames.cpp
+			RegexException.cpp _xvr2utilClassNames.cpp StringCollection.cpp
 
 library_includedir=$(includedir)/$(GENERIC_LIBRARY_NAME)
 library_include_HEADERS = $(h_sources)
