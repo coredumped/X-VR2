@@ -11,7 +11,8 @@ h_sources = CoreExceptions.h AutomatedGC.h BaseFile.h BasicStringBuffer.h \
 	StandardOutput.h StringBuffer.h String.h Syslog.h System.h \
 	TemporalBuffer.h TextInput.h TextOutput.h Thread.h Threading.h \
 	ThreadManager.h Time.h Timestamp.h Tokenizer.h TraceDumper.h Unix.h \
-	User.h _xvr2ClassNames.h xvr2config.h Conversion.h
+	User.h _xvr2ClassNames.h xvr2config.h Conversion.h Function.h \
+	BackgroundFunction.h
 
 cc_sources = CoreExceptions.cpp AutomatedGC.cpp BaseFile.cpp BasicString.cpp \
 	Byte.cpp Chronometer.cpp ConditionVar.cpp Console.cpp Date.cpp \
