@@ -16,7 +16,7 @@
 
 namespace xvr2{
 	/**
-	 * \class Thread
+	 * \class Thread Thread.h <xvr2/Thread.h>
 	 * \version $Revision$
 	 * \brief
 	 * This class encapsulates the thread library functionality using 
