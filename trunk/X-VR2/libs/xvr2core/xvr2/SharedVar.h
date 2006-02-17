@@ -68,6 +68,7 @@ namespace xvr2{
 				lock();
 				var = v;
 				unlock();
+				return v;
 			}
 			bool operator==(T v){
 				bool ret;
@@ -76,8 +77,14 @@ namespace xvr2{
 				unlock();
 				return ret;
 			}
+			bool operator!=(T v){
+				bool ret;
+				lock();
+				ret = (var==v)?false:true;
+				unlock();
+				return ret;
+			}
 	};
 };
 
 #endif
-
