@@ -29,7 +29,26 @@ namespace xvr2 {
 
 	//static Util::List<Thread *> activeThreads;
 	static std::vector<Thread *> activeThreads;
+	static std::vector<BackgroundFunction *> activeBFs;
 	static Mutex lm;
+
+	static void _addBF(BackgroundFunction *bf){
+		lm.lock();
+		activeBFs.push_back(bf);
+		lm.unlock();
+	}
+	static void _removeBF(BackgroundFunction *bf){
+		unsigned long int i;
+		BackgroundFunction *tx;
+		lm.lock();
+		for(i = 0; i < activeBFs.size(); i++){
+			tx = activeBFs[i];
+			if(tx == bf){
+				activeBFs.erase(activeBFs.begin() + i);
+			}
+		}
+		lm.unlock();
+	}
 
 	static Thread *findThread(unsigned long int id){
 		unsigned int i;
@@ -72,10 +91,11 @@ namespace xvr2 {
 	}
 
 	void *ThreadManager::runMethod_bf(BackgroundFunction &bf){
-		//addThread(t, pthread_self()); //Add the thread to the thread list
+		_addBF(&bf);
 		bf.called = true;
 		bf();
-		//removeThread(t, pthread_self()); //Remove thread from the thread list
+		_removeBF(&bf);
+		bf.terminated = true;
 		return 0;
 	}
 
@@ -134,7 +154,6 @@ namespace xvr2 {
 		for(i = 0; i < activeThreads.size(); i++){
 			tx = activeThreads[i];
 			if(tx->numericID() == id){
-				//threadIDs.remove(i);
 				activeThreads.erase(activeThreads.begin() + i);
 				//TODO: Verify that no leaks remain after this
 			}
@@ -149,7 +168,7 @@ namespace xvr2 {
 	unsigned int ThreadManager::activeCount(){
 		unsigned int n;
 		lm.lock();
-		n = activeThreads.size();
+		n = activeThreads.size() + activeBFs.size();
 		lm.unlock();
 		return n;
 	}
