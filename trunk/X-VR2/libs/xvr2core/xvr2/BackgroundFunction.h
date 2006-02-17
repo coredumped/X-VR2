@@ -18,12 +18,14 @@ namespace xvr2 {
 			 *  false to true just once in the lifetime of a BackgroundFunction.
 			 *  You should never modify its value. */
 			SharedVar<bool> called;
+			SharedVar<bool> terminated;
 			/** Default constructor, it does nothing. */
 			BackgroundFunction(){
 #ifdef USE_ENBEDDED_CLASSNAMES
 				setClassName(_xvr2BackgroundFunction);
 #endif
 				called = false;
+				terminated = false;
 			}
 			/** Destructor that destroys nothing. */
 			virtual ~BackgroundFunction(){}
