@@ -46,7 +46,7 @@ namespace xvr2{
 			~Tokenizer ();
 			/** When called returns the next token in the string,
 			 *  if there are not any more tokens, then this method will
-			 *  throw an Exception::NoMoreTokens() */
+			 *  throw a NoMoreTokens exception.*/
 			const String &next();
 			/** Call this method in order to know if there are any
 			 *  more tokens to read */
