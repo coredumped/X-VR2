@@ -7,6 +7,6 @@
 
 namespace xvr2 {
 	DetachedThread::DetachedThread(){
-		detached = true;
+		_detached = true;
 	}
 };

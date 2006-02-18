@@ -8,6 +8,6 @@
 
 namespace xvr2 {
 	JoinableThread::JoinableThread(){
-		detached = false;
+		_detached = false;
 	}
 };
