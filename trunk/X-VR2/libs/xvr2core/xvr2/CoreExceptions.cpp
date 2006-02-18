@@ -21,10 +21,11 @@
 
 namespace xvr2 {
 	static char *local_strings[] = {
-		"Tbis exception is thrown if while attempting to start a new thread the maximum number of threads supported by the OS has been reached."
+		"This exception is thrown if while attempting to start a new thread the maximum number of threads supported by the OS has been reached.",
+		"An operation was attempted over an invalid Thread"
 	};
 
-	Exception::Exception(){
+	Exception::Exception():ExceptionTracer(){
 #ifdef USE_EMBEDDED_CLASSNAMES
 		setClassName(xvr2::_xvr2Exception);
 #endif
@@ -32,7 +33,7 @@ namespace xvr2 {
 	}
 	Exception::~Exception(){
 	}
-	Exception::Exception(const char *d){
+	Exception::Exception(const char *d):ExceptionTracer(){
 #ifdef USE_EMBEDDED_CLASSNAMES
 		setClassName(xvr2::_xvr2Exception);
 #endif
@@ -41,8 +42,8 @@ namespace xvr2 {
 		else
 			description = (char *)d;
 	}
-	const char *Exception::toString() const {
-		return description;
+	std::string Exception::toString() {
+		return std::string(description);
 	}
 
 
@@ -566,6 +567,12 @@ namespace xvr2 {
 		setClassName((char *)xvr2::_xvr2MaximumNumberOfRunningThreadsReached);
 #endif
 		description = (char *)local_strings[0];
+	}
+	InvalidThread::InvalidThread(){
+#ifdef USE_EMBEDDED_CLASSNAMES
+		setClassName((char *)xvr2::_xvr2InvalidThread);
+#endif
+		description = (char *)local_strings[1];
 	}
 
 ///////////////////////////////////////

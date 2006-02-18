@@ -25,7 +25,7 @@ namespace xvr2{
 			 *  of the exception. */
 			Exception(const char *d);
 			/** Displays the description of the exception */
-			const char *toString() const;
+			std::string toString();
 	};
 
 
@@ -609,6 +609,14 @@ namespace xvr2{
 		public:
 			/** Default constructor */
 			ConditionVarWaitTimedOut();
+	};
+	/** \class InvalidThread CoreExceptions.h <xvr2/CoreExceptions.h>
+	 *  The user provided thread object is not being managed by the ThreadManager	
+	 *  so its is invalid */
+	class InvalidThread:public ThreadException{
+		public:
+			/** Default constructor */
+			InvalidThread();
 	};
 
 
