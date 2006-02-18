@@ -20,7 +20,15 @@
 #define EXCEPTION_DEPTH_TRACE 50
 #endif
 
+
 namespace xvr2{
+#ifdef __GNUC__
+	static const char *__gxx_p1 = "__gxx_personality";
+#endif
+#if defined(__linux__) || defined(__linux) || defined(_linux)
+	static const char *__gxx_p2 = "cmov";
+	static const char *__gxx_p3 = "/lib/tls/i";
+#endif
 	//static xvr2::Mutex _tm;
 	static bool __enabled;
 #ifdef USE_POSIX_THREADS
@@ -127,9 +135,23 @@ namespace xvr2{
 				continue;
 			}
 			demangled = demangle_symbol(symbols[i]);
+#if defined(__linux__) || defined(__linux) || defined(_linux)
+			if(strstr(demangled, __gxx_p1) == 0 && strstr(demangled, __gxx_p2) == 0 && strstr(demangled, __gxx_p3) == 0){
+				debugConsole << " [EE] \t" << demangled << "\n";
+			}
+#else
+#ifdef __GNUC__
+			if(strstr(demangled, __gxx_p1) == 0){
+				debugConsole << " [EE] \t" << demangled << "\n";
+			}
+#else
 			debugConsole << " [EE] \t" << demangled << "\n";
+#endif
+#endif
 			free(demangled);
 		}
+		//debugConsole << " [EE] Exception thrown was: " << getClassName() << "\n";
+		//debugConsole << " [EE]          description: " << toString() << "\n";
 		free(symbols);
 #ifdef USE_POSIX_THREADS
 		pthread_mutex_unlock(&_tm);
