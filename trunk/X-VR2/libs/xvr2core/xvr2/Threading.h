@@ -15,6 +15,21 @@ namespace xvr2{
 			/** Default Constructor, remember that this class
 			 * is just an interface */
 			Threading();
+			/**
+			 * Please use this set of constants to define or
+			 * stablish a thread execution policy
+			 */
+			enum SchedPolicy{
+				/** Default scheduling policy, 
+				 *  non-realtime */
+				NORMAL,
+				/** Round Robin based realtime 
+				 *  scheduling policy */
+				ROUND_ROBIN,
+				/** First In First Out based realtime 
+				 *  scheduling policy */
+				FIFO
+			};
 	};
 }
 
