@@ -52,7 +52,7 @@ namespace xvr2{
 			 * \return This method never returns
 			 * \warning PLEASE DONT CALL THIS FUNCTION DIRECTLY
 			 */
-			void *run();
+			void run();
 			/**
 			 * \fn void stop()
 			 * \brief This will stop forever the garbage collecting process if you need to

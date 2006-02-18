@@ -15,12 +15,11 @@ namespace xvr2{
 		keepscanning = false;
 	}
 
-	void *AutomatedGC::run(){
+	void AutomatedGC::run(){
 		while(keepscanning){
 			System::usleep(_scanperiod * 1000);
 			collect();
 		}
-		return 0;
 	}
 
 	void AutomatedGC::startChecking(){
