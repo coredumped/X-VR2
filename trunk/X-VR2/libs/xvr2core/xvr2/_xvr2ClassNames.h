@@ -13,6 +13,7 @@ namespace xvr2 {
 	extern const char *_xvr2AllocationFailed;
 	extern const char *_xvr2ArrayIndexOutOfLimits;
 	extern const char *_xvr2AutomatedGC;
+	extern const char *_xvr2BackgroundFunction;
 	extern const char *_xvr2BaseFile;
 	extern const char *_xvr2BasicStringBuffer;
 	extern const char *_xvr2BitParseException;
@@ -51,17 +52,20 @@ namespace xvr2 {
 	extern const char *_xvr2FileNotOpened;
 	extern const char *_xvr2FileOrDirectoryNotFound;
 	extern const char *_xvr2FileTooBig;
+	extern const char *_xvr2Function;
 	extern const char *_xvr2GarbageCollector;
 	extern const char *_xvr2Group;
 	extern const char *_xvr2GroupException;
 	extern const char *_xvr2GroupNotFound;
 	extern const char *_xvr2InterruptedSystemCall;
 	extern const char *_xvr2InvalidParameter;
+	extern const char *_xvr2InvalidThread;
 	extern const char *_xvr2IOException;
 	extern const char *_xvr2JoinableThread;
 	extern const char *_xvr2Log;
 	extern const char *_xvr2MaximumNumberOfOpenFilesForThisProcess;
 	extern const char *_xvr2MaximumNumberOfOpenFilesForThisSystem;
+	extern const char *_xvr2MaximumNumberOfRunningThreadsReached;
 	extern const char *_xvr2Memory;
 	extern const char *_xvr2MemoryException;
 	extern const char *_xvr2Mutex;
@@ -70,6 +74,7 @@ namespace xvr2 {
 	extern const char *_xvr2NotEnoughKernelMemory;
 	extern const char *_xvr2NotEnoughStorageSpace;
 	extern const char *_xvr2NullPointer;
+	extern const char *_xvr2Number;
 	extern const char *_xvr2NumberException;
 	extern const char *_xvr2Object;
 	extern const char *_xvr2ParseException;

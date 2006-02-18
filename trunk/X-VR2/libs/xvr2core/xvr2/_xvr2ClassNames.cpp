@@ -9,6 +9,7 @@ namespace xvr2 {
 	const char *_xvr2AllocationFailed = "xvr2::AllocationFailed";
 	const char *_xvr2ArrayIndexOutOfLimits = "xvr2::ArrayIndexOutOfLimits";
 	const char *_xvr2AutomatedGC = "xvr2::AutomatedGC";
+	const char *_xvr2BackgroundFunction = "xvr2::BackgroundFunction";
 	const char *_xvr2BaseFile = "xvr2::BaseFile";
 	const char *_xvr2BasicStringBuffer = "xvr2::BasicStringBuffer";
 	const char *_xvr2BitParseException = "xvr2::BitParseException";
@@ -47,17 +48,20 @@ namespace xvr2 {
 	const char *_xvr2FileNotOpened = "xvr2::FileNotOpened";
 	const char *_xvr2FileOrDirectoryNotFound = "xvr2::FileOrDirectoryNotFound";
 	const char *_xvr2FileTooBig = "xvr2::FileTooBig";
+	const char *_xvr2Function = "xvr2::Function";
 	const char *_xvr2GarbageCollector = "xvr2::GarbageCollector";
 	const char *_xvr2Group = "xvr2::Group";
 	const char *_xvr2GroupException = "xvr2::GroupException";
 	const char *_xvr2GroupNotFound = "xvr2::GroupNotFound";
 	const char *_xvr2InterruptedSystemCall = "xvr2::InterruptedSystemCall";
 	const char *_xvr2InvalidParameter = "xvr2::InvalidParameter";
+	const char *_xvr2InvalidThread = "xvr2::InvalidThread";
 	const char *_xvr2IOException = "xvr2::IOException";
 	const char *_xvr2JoinableThread = "xvr2::JoinableThread";
 	const char *_xvr2Log = "xvr2::Log";
 	const char *_xvr2MaximumNumberOfOpenFilesForThisProcess = "xvr2::MaximumNumberOfOpenFilesForThisProcess";
 	const char *_xvr2MaximumNumberOfOpenFilesForThisSystem = "xvr2::MaximumNumberOfOpenFilesForThisSystem";
+	const char *_xvr2MaximumNumberOfRunningThreadsReached = "xvr2::MaximumNumberOfRunningThreadsReached";
 	const char *_xvr2Memory = "xvr2::Memory";
 	const char *_xvr2MemoryException = "xvr2::MemoryException";
 	const char *_xvr2Mutex = "xvr2::Mutex";
@@ -66,6 +70,7 @@ namespace xvr2 {
 	const char *_xvr2NotEnoughKernelMemory = "xvr2::NotEnoughKernelMemory";
 	const char *_xvr2NotEnoughStorageSpace = "xvr2::NotEnoughStorageSpace";
 	const char *_xvr2NullPointer = "xvr2::NullPointer";
+	const char *_xvr2Number = "xvr2::Number";
 	const char *_xvr2NumberException = "xvr2::NumberException";
 	const char *_xvr2Object = "xvr2::Object";
 	const char *_xvr2ParseException = "xvr2::ParseException";
