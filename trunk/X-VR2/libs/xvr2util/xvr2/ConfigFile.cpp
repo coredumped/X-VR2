@@ -16,6 +16,7 @@
 #include<stdio.h>
 #endif
 #include<limits.h>
+#include<unistd.h>
 
 extern int config_parse(xvr2::Util::ConfigFile *store, const char *);
 
@@ -42,7 +43,7 @@ namespace xvr2 {
 		static Mutex ConfigFileLock;
 
 		ConfigFile::ConfigFile(const char *fname){
-#if __GNUC__ < 3
+#ifdef USE_EMBEDDED_CLASSNAMES
 			setClassName(__xvr2_Util_ConfigFile);
 #endif
 			filepath = strdup(fname);
@@ -62,6 +63,9 @@ namespace xvr2 {
 
 		int ConfigFile::parse(){
 			int ret;
+			if(::access(filepath, F_OK) != 0){
+				throw xvr2::FileNotFound();
+			}
 			ConfigFileLock.lock();
 			ret = config_parse(this, filepath);
 			ConfigFileLock.unlock();
