@@ -9,10 +9,15 @@
 
 namespace xvr2 {
 	class DebugConsole : protected Console {
+		protected:
+			bool _enabled;
 		public:
 			DebugConsole();
 			void setOutput(TextOutput *to = 0);
 			const DebugConsole &operator<<(const String &s) const;
+			void enable();
+			void disable();
+			bool enabled();
 	};
 
 	/** Standard X-VR2 debug console */

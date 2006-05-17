@@ -20,4 +20,13 @@ namespace xvr2 {
 		errWrite(s);
 		return *this;
 	}
+	bool DebugConsole::enabled(){
+		return _enabled;
+	}
+	void DebugConsole::enable(){
+		_enabled = true;
+	}
+	void DebugConsole::disable(){
+		_enabled = false;
+	}
 };
