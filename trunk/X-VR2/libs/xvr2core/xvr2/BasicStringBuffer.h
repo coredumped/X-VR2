@@ -26,6 +26,11 @@ namespace xvr2 {
 				buffer = new StringT();
 				buffer->assign(s.toCharPtr());
 			}
+			void clear(){
+				if(buffer != 0){
+					buffer->clear();
+				}
+			}
 	};
 };
 
