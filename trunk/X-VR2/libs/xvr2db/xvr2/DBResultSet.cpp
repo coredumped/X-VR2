@@ -33,19 +33,20 @@ namespace xvr2{
 #if __GNUC__ < 3
 			setClassName(__xvr2_DB_ResultSet);
 #endif
-			r_handle = __handle;
-			if(drv == 0 || __handle == 0)
-				throw NullPointer();
 			driver = drv;
 			_status = __status;
 			row = 0;
-			if(_status == true && r_handle != 0)
-				fetchNextRow();
-	
-			nrows = driver->numRows(__handle);
-			ncols = driver->numCols(__handle);
-			afrows = nrows;
-			is_a_select = true;
+			if(__status){
+				r_handle = __handle;
+				if(drv == 0 || __handle == 0)
+					throw NullPointer();
+				if(_status == true && r_handle != 0)
+					fetchNextRow();
+				nrows = driver->numRows(__handle);
+				ncols = driver->numCols(__handle);
+				afrows = nrows;
+				is_a_select = true;
+			}
 		}
 	
 		ResultSet::~ResultSet(){
