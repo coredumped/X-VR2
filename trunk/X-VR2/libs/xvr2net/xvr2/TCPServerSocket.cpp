@@ -15,7 +15,6 @@
 #include<signal.h>
 #include<netdb.h>
 #else
-#include <SDL_net.h>
 #endif
 #if __GNUC__ >= 3
 #include<iostream>
