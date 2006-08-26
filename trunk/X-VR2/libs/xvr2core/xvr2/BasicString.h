@@ -75,14 +75,16 @@ namespace xvr2 {
 			/** Erases all ocurrences of character c located at the left side of the string */
 			virtual BasicString<_charT> &trimLeft(const _charT c = ' '){
 				while(std::basic_string<_charT>::size() > 0 && std::basic_string<_charT>::at(0) == c){
-					std::basic_string<_charT>::erase(0);
+					//std::basic_string<_charT>::erase(0);
+					std::basic_string<_charT>::erase(std::basic_string<_charT>::begin(), std::basic_string<_charT>::begin() + 1);
 				}
 				return *this;
 			}
 			/** Erases all ocurrences of character c located at the right side of the string */
 			virtual BasicString<_charT> &trimRight(const _charT c = ' '){
 				while(std::basic_string<_charT>::size() > 0 && std::basic_string<_charT>::at(std::basic_string<_charT>::size() - 1) == c){
-					std::basic_string<_charT>::erase(std::basic_string<_charT>::size() - 1);
+					//std::basic_string<_charT>::erase(std::basic_string<_charT>::size() - 1);
+					std::basic_string<_charT>::erase(std::basic_string<_charT>::end() - 1, std::basic_string<_charT>::end());
 				}
 				return *this;
 			}
@@ -146,7 +148,9 @@ namespace xvr2 {
 			}
 			//virtual bool endsIWith(const _charT *s) const = 0;
 			bool endsWith(const _charT *s) const {
-				return (std::basic_string<_charT>::find_last_of(s) - std::basic_string<_charT>::size() + 1 == 0)?true:false;
+				std::basic_string<_charT> tmp = s;
+				//return (std::basic_string<_charT>::size() - (std::basic_string<_charT>::find_last_of(s) + tmp.size()) == 0)?true:false;
+				return (std::basic_string<_charT>::size() - std::basic_string<_charT>::find_last_of(s) == 0)?true:false;
 			}
 			BasicString<_charT> &deleteCharAt(int pos){
 				std::basic_string<_charT>::erase(pos);
@@ -158,6 +162,18 @@ namespace xvr2 {
 			}
 			BasicString getSubstr(int start, int end){
 				return BasicString<_charT>::substr(start, end);
+			}
+			/** Replaces all ocurrences of the string from with the contents of the
+			 *  string to. */
+			BasicString<_charT> replace(const _charT from, const _charT *to){
+				for(unsigned int i = 0; i < std::basic_string<_charT>::size(); i++){
+					if(charAt(i) == from){
+						std::basic_string<_charT>::erase(i, 1);
+						std::basic_string<_charT>::insert(i, to);
+						i++;
+					}
+				}
+				return *this;
 			}
 	};
 };
