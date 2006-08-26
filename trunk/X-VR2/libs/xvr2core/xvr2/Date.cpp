@@ -12,27 +12,6 @@
 namespace xvr2{
 
 	void Date::encode(){
-		/*drep.assign(year);
-		drep.concat("-");
-		if(month <= 9)
-			drep.concat(0);
-		drep.concat(month);
-		drep.concat("-");
-		if(dayofmonth <= 9)
-			drep.concat(0);
-		drep.concat(dayofmonth);
-		drep.concat(" ");
-		if(hour <= 9)
-			drep.concat(0);
-		drep.concat(hour);
-		drep.concat(":");
-		if(minute <= 9)
-			drep.concat(0);
-		drep.concat(minute);
-		drep.concat(":");
-		if(second <= 9)
-			drep.concat(0);
-		drep.concat(second);*/
 		if(string_representation != 0){
 			delete string_representation;
 		}
@@ -214,7 +193,7 @@ namespace xvr2{
 #endif
 		string_representation = 0;
 		//drep = 0;
-		if(strptime(date_text.toCharPtr(), format.toCharPtr(), &t) == NULL)
+		/* if(strptime(date_text.toCharPtr(), format.toCharPtr(), &t) == NULL)
 			throw DateParseException();
 		hour = t.tm_hour;
 		if(hour > 12){
@@ -232,17 +211,18 @@ namespace xvr2{
 		}
 		minute = t.tm_min;
 		second = t.tm_sec;
-		dayofweek = t.tm_wday;
+		dayofweek = (++t.tm_wday);
 		dayofyear = t.tm_yday;
 		dayofmonth = t.tm_mday;
-		month = t.tm_mon;
+		month = (++t.tm_mon);
 		if(t.tm_year < 1900){
 			year = t.tm_year + 1900;
 		}
 		else{
 			year = t.tm_year;
 		}
-		unixtime = mktime(&t);
+		unixtime = mktime(&t);*/
+		decode(format.toCharPtr(), date_text.toCharPtr());
 		encode();
 	}
 
@@ -284,6 +264,10 @@ namespace xvr2{
 	}
 
 	const UInt32 Date::unixTime(){
+		return unixtime;
+	}
+
+	const UInt32 Date::unixTime() const{
 		return unixtime;
 	}
 

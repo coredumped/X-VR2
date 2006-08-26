@@ -98,6 +98,7 @@ namespace xvr2{
 			/** This methid will give you the numeric representation of
 			 *  the date in the unix time format */
 			const UInt32 unixTime();
+			const UInt32 unixTime() const;
 			/**
 			 * This will convert the current date object to the following
 			 * format:   YYYY-MM-DD HH:MM:SS
