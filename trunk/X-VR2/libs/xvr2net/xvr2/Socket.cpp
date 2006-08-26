@@ -14,7 +14,7 @@
 #include<netinet/tcp.h>
 #include<netdb.h>
 #else
-#include <SDL_net.h>
+
 #endif
 #include<iostream>
 
@@ -36,10 +36,12 @@ namespace xvr2{
 		Socket::~Socket(){
 		}
 
-		void Socket::debugmsg(Socket *obj, const char *msg){
+		void Socket::debugmsg(Socket *obj, const char *msg, int linenumber, const char *srcfile){
 			if(obj == 0)
 				return;
 			//xvr2::String s;
+			if(linenumber >= 0)
+				debugConsole << srcfile << ":" << linenumber << ": ";
 #if __WORDSIZE == 64 && defined(__x86_64__)
 			debugConsole << obj->getClassName() << "[ptr=" << (Int64)obj << ",tid=";
 #else
@@ -54,10 +56,10 @@ namespace xvr2{
 			debugConsole << ",sockid=" << (int)tsock << "]: " << msg;
 		}
 
-		void Socket::debugmsgln(Socket *obj, const char *msg){
+		void Socket::debugmsgln(Socket *obj, const char *msg, int linenumber, const char *srcfile){
 			if(obj == 0)
 				return;
-			debugmsg(obj, msg);
+			debugmsg(obj, msg, linenumber, srcfile);
 			debugConsole << "\n";
 		}
 		
