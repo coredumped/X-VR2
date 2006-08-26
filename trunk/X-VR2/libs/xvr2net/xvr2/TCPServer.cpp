@@ -74,7 +74,7 @@ namespace xvr2{
 #endif
 		}
 
-		void *TCPServer::run(void *data){
+/*		void TCPServer::run(){
 			TCPSocket *client = 0;
 			client = (TCPSocket *)data;
 			if(client != 0){
@@ -93,7 +93,7 @@ namespace xvr2{
 			}
 			//killMe();
 			return 0;
-		}
+		}*/
 
 		void TCPServer::sessionDialog(TCPSocket *client){
 			static int h;
@@ -113,7 +113,7 @@ namespace xvr2{
 		}
 
 		void TCPServer::startSession(TCPSocket *client){
-			start((void *)client);
+			//start((void *)client);
 		}
 
 		//void TCPServer::(){

@@ -15,6 +15,8 @@ namespace xvr2{
 	namespace Net {
 		//class TCPServerSession;
 		/**
+		 * \deprecated
+		 * \class TCPServer TCPServer.h <xvr2/TCPServer.h>
 		 * TCP oriented server, top-level class
 		 *
 		 */
@@ -27,7 +29,7 @@ namespace xvr2{
 				 * of  TCPServerSession
 				 */
 				SharedVar<bool> continue_loop;
-				void *run(void *);
+				void run() = 0;
 				/**
 				 * This method handles the conversation between the
 				 * client and server sockets, override it in your 
@@ -49,7 +51,7 @@ namespace xvr2{
 				 * user-defined subclass as a parameter
 				 */
 				TCPServer(int pport);
-				~TCPServer();
+				virtual ~TCPServer();
 				/**
 				 * This method will start the connection listener
 				 * loop, inside this loop new threads are triggered
