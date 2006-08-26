@@ -50,9 +50,11 @@ namespace xvr2{
 		return (const char *)__cls_name;
 	}
 
-	void Object::debugmsg(Object *obj, const char *msg){
+	void Object::debugmsg(Object *obj, const char *msg, int linenumber, const char *srcfile){
 		if(obj == 0)
 			return;
+		if(linenumber >= 0)
+			debugConsole << srcfile << ":" << linenumber << ": ";
 #if __WORDSIZE == 64 && defined(__x86_64__)
 		debugConsole << obj->getClassName() << "[ptr=" << (Int64)obj << ",tid=";
 #else
@@ -67,10 +69,10 @@ namespace xvr2{
 		debugConsole << "]: " << msg;
 	}
 
-	void Object::debugmsgln(Object *obj, const char *msg){
+	void Object::debugmsgln(Object *obj, const char *msg, int linenumber, const char *srcfile){
 		if(obj == 0)
 			return;
-		debugmsg(obj, msg);
+		debugmsg(obj, msg, linenumber, srcfile);
 		debugConsole << "\n";
 	}
 

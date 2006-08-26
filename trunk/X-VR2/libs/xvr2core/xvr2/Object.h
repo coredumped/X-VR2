@@ -58,8 +58,8 @@ namespace xvr2{
 			virtual ~Object();
 			/**
 			 * Will print a debug message to the screen */
-			static void debugmsg(Object *obj, const char *msg);
-			static void debugmsgln(Object *obj, const char *msg);
+			static void debugmsg(Object *obj, const char *msg, int linenumber = __LINE__, const char *srcfile = __FILE__);
+			static void debugmsgln(Object *obj, const char *msg, int linenumber = __LINE__, const char *srcfile = __FILE__);
 			virtual std::string toString();
 			friend std::ostream& operator<<(std::ostream& stream, const Object &s);
 	};
