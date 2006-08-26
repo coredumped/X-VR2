@@ -29,6 +29,8 @@ class PostgreSQLDriver : public Driver {
 		const bool bulkAddData(void *conn_handle, const char *data, const char *delim);
 		const bool bulkEnd(void *conn_handle);
 		char *quoteString(const char *str);
+		String escapeString(const String &s);
+		String escapeString(const String &s, void *conn_handle);
 		const char *errorMessage(void *conn_handle);
 		const char *resultErrorMessage(void *res_handle);
 		const bool isConnected(void *conn_handle);
