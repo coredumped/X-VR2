@@ -36,9 +36,12 @@ namespace xvr2{
 	}
 	template<typename _numericT>
 	_numericT char2num(const std::string *str){
+		using std::ios_base;
 		_numericT num;
 		std::istringstream ss(str->c_str());
 		ss >> num;
+		if(ss.fail() || ss.bad())
+			throw NumberException();
 		return num;
 	}
 	////////////////////////////// DESTRUCTOR ///////////////////////////
