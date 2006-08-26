@@ -11,7 +11,7 @@ do
 	cd $library
 	if [ ! -f configure ]; then
 		echo -ne "\n\nAutogenerating ${library}..."
-		./autogen.sh > $LOGFILE 2>&1
+		./autogen.sh 2>&1 | tee $LOGFILE
 		if [ $? -ne 0 ]; then
 			echo
 			cat $LOGIFLE
@@ -20,7 +20,7 @@ do
 		echo done
 	fi
 	echo -ne "\nConfiguring package $library with parameters: \"${@}\"..."
-	./configure "$@" > $LOGFILE 2>&1
+	./configure "$@" 2>&1 | tee $LOGFILE
 	if [ $? -ne 0 ]; then
 		echo
 		cat $LOGIFLE
@@ -34,7 +34,7 @@ do
 		exit 1
 	fi
 	echo -ne "\n\nDo you wish to install this library ($library) [Y/n] "
-	read yesno
+	#read yesno
 	if [ "$yesno" != 'n' ]; then
 		cmd=`which sudo`
 		if [ -x ${cmd} ]; then
