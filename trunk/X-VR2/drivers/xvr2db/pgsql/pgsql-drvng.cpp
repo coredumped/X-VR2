@@ -2,6 +2,7 @@
 #include<pg_config.h>
 #include<libpq-fe.h>
 #include"pgsql-drvng.h"
+#include<xvr2/DebugConsole.h>
 
 using namespace xvr2;
 //using namespace xvr2::Exception;
@@ -100,7 +101,7 @@ class __pgsql_conn {
 			result = PQexec(conn, "select oid,typname from pg_type");
 			if(result == NULL){
 #ifdef USE_DEBUG
-				std::cerr << "Unable to retrieve datatype mappings" << std::endl;
+				debugConsole << "Unable to retrieve datatype mappings\n";
 #endif
 				throw DB::SQLQueryException();
 			}
@@ -109,9 +110,6 @@ class __pgsql_conn {
 				if(n <= 0)
 					throw Exception();
 				tmapping = new __type_map[32];
-#ifdef USE_DEBUG
-				std::cout << "\t\tCaliobrating " << n << " datatypes..." << std::endl;
-#endif
 				for(i = 0, j = 0; i < n; i++){
 					o = strtol(PQgetvalue(result, i, 0), (char **)NULL, 10);
 					typname = PQgetvalue(result, i, 1);
@@ -119,86 +117,50 @@ class __pgsql_conn {
 					if(strcasecmp(typname, "bool") == 0){
 						ltype = DB::Field::BIT;
 						have_type = true;
-#ifdef USE_DEBUG
-						std::cout << "\t\t\t" << typname << "=DB::Field::BIT" << std::endl;
-#endif
 					}
 					else if(strcasecmp(typname, "char") == 0){
 						ltype = DB::Field::CHAR;
 						have_type = true;
-#ifdef USE_DEBUG
-						std::cout << "\t\t\t" << typname << "=DB::Field::CHAR" << std::endl;
-#endif
 					}
 					else if(strcasecmp(typname, "int2") == 0){
 						ltype = DB::Field::TINYINT;
 						have_type = true;
-#ifdef USE_DEBUG
-						std::cout << "\t\t\t" << typname << "=DB::Field::TINYINT" << std::endl;
-#endif
 					}
 					else if(strcasecmp(typname, "int4") == 0){
 						ltype = DB::Field::INTEGER;
 						have_type = true;
-#ifdef USE_DEBUG
-						std::cout << "\t\t\t" << typname << "=DB::Field::INTEGER" << std::endl;
-#endif
 					}
 					else if(strcasecmp(typname, "int8") == 0){
 						ltype = DB::Field::BIGINT;
 						have_type = true;
-#ifdef USE_DEBUG
-						std::cout << "\t\t\t" << typname << "=DB::Field::BIGINT" << std::endl;
-#endif
 					}
 					else if(strcasecmp(typname, "float4") == 0){
 						ltype = DB::Field::FLOAT;
 						have_type = true;
-#ifdef USE_DEBUG
-						std::cout << "\t\t\t" << typname << "=DB::Field::FLOAT" << std::endl;
-#endif
 					}
 					else if(strcasecmp(typname, "float8") == 0){
 						ltype = DB::Field::DOUBLE;
 						have_type = true;
-#ifdef USE_DEBUG
-						std::cout << "\t\t\t" << typname << "=DB::Field::DOUBLE" << std::endl;
-#endif
 					}
 					else if(strcasecmp(typname, "varchar") == 0){
 						ltype = DB::Field::VARCHAR;
 						have_type = true;
-#ifdef USE_DEBUG
-						std::cout << "\t\t\t" << typname << "=DB::Field::VARCHAR" << std::endl;
-#endif
 					}
 					else if(strcasecmp(typname, "text") == 0){
 						ltype = DB::Field::TEXT;
 						have_type = true;
-#ifdef USE_DEBUG
-						std::cout << "\t\t\t" << typname << "=DB::Field::TEXT" << std::endl;
-#endif
 					}
 					else if(strcasecmp(typname, "time") == 0 || strcasecmp(typname, "timetz") == 0){
 						ltype = DB::Field::TIME;
 						have_type = true;
-#ifdef USE_DEBUG
-						std::cout << "\t\t\t" << typname << "=DB::Field::TIME" << std::endl;
-#endif
 					}
 					else if(strcasecmp(typname, "date") == 0){
 						ltype = DB::Field::DATE;
 						have_type = true;
-#ifdef USE_DEBUG
-						std::cout << "\t\t\t" << typname << "=DB::Field::DATE" << std::endl;
-#endif
 					}
 					else if(strcasecmp(typname, "timestamp") == 0 || strcasecmp(typname, "timestamptz") == 0){
 						ltype = DB::Field::TIMESTAMP;
 						have_type = true;
-#ifdef USE_DEBUG
-						std::cout << "\t\t\t" << typname << "=DB::Field::TIMESTAMP" << std::endl;
-#endif
 					}
 
 					if(have_type){
@@ -238,14 +200,11 @@ PostgreSQLDriver::PostgreSQLDriver(){
 	dinfo = new DB::DriverInfo(DRV_VERSION, DRV_REVISION, "Juan V. Guerrero", PG_VERSION_STR);
 	//Set date format to ISO YYYY-MM-DD HH:MM:SS.M
 	putenv("PGDATESTYLE=ISO");
-#ifdef USE_DEBUG
-	std::cout << "PGDATESTYLE=" << getenv("PGDATESTYLE") << std::endl;
-#endif
 }
 
 PostgreSQLDriver::~PostgreSQLDriver(){
 #ifdef USE_DEBUG
-	std::cout << "PotgreSQL driver, cleaning up... " << std::endl;
+	debugConsole << "PotgreSQL driver, cleaning up... \n";
 #endif
 	delete dinfo;
 }
@@ -309,10 +268,10 @@ ResultSet *PostgreSQLDriver::query(void *__conn_handle, const String &command){
 
 	result = PQexec (conn->conn, command.toCharPtr());
 	if(result == NULL){
-#ifdef USE_DEBUG
+/*#ifdef USE_DEBUG
 		std::cerr << "While executing query: \"" << command << "\"... " <<  PQerrorMessage (conn->conn) << std::endl;
-#endif
-		throw DB::SQLQueryException();
+#endif*/
+		throw DB::SQLQueryException(PQerrorMessage (conn->conn));
 	}
 	else{
 		switch(PQresultStatus(result)){
@@ -326,7 +285,8 @@ ResultSet *PostgreSQLDriver::query(void *__conn_handle, const String &command){
 				PQclear(result);
 				break;
 			default: //Some sort of extrange error ocurred
-				r = new DB::ResultSet(this, 0, false);
+				r = new DB::ResultSet(this, (void *)rres, false);
+				throw DB::SQLQueryException(PQresultErrorMessage (result), r);
 		}
 	}
 	return r;
@@ -488,10 +448,10 @@ const bool PostgreSQLDriver::bulkBegin(void *conn_handle, const char *table, con
 	result = PQexec (conn->conn, sqlcmd);
 	xvr2_delete_array(sqlcmd);
 	if(result == NULL){
-#ifdef USE_DEBUG
+/*#ifdef USE_DEBUG
 		std::cerr << "COPY command failure!!! " <<  PQerrorMessage (conn->conn) << std::endl;
-#endif
-		throw DB::SQLQueryException();
+#endif*/
+		throw DB::SQLQueryException(PQerrorMessage (conn->conn));
 	}
 	switch(PQresultStatus(result)){
 		case PGRES_TUPLES_OK:
@@ -514,10 +474,10 @@ const bool PostgreSQLDriver::bulkAddData(void *conn_handle, const char *data, co
 	if(ret == 1)
 		return true;
 	else if(ret == -1){
-#ifdef USE_DEBUG
+/*#ifdef USE_DEBUG
 		std::cerr << "COPY command failure: " <<  PQerrorMessage (conn->conn) << std::endl;
-#endif
-		throw DB::SQLQueryException();
+#endif*/
+		throw DB::SQLQueryException(PQerrorMessage (conn->conn));
 	}
 	return false;
 }
@@ -531,10 +491,10 @@ const bool PostgreSQLDriver::bulkEnd(void *conn_handle){
 	if(ret == 1){
 		result = PQgetResult(conn->conn);
 		if(result == NULL){
-#ifdef USE_DEBUG
+/*#ifdef USE_DEBUG
 			std::cerr << "COPY command failure: " <<  PQerrorMessage (conn->conn) << std::endl;
-#endif
-			throw DB::SQLQueryException();
+#endif*/
+			throw DB::SQLQueryException(PQerrorMessage (conn->conn));
 		}
 		else {
 			if(PQresultStatus(result) == PGRES_COMMAND_OK){
@@ -544,10 +504,10 @@ const bool PostgreSQLDriver::bulkEnd(void *conn_handle){
 			PQclear(result);
 		}
 	}
-#ifdef USE_DEBUG
+/*#ifdef USE_DEBUG
 	std::cerr << "COPY command failure: " <<  PQerrorMessage (conn->conn) << std::endl;
-#endif
-	throw DB::SQLQueryException();
+#endif*/
+	throw DB::SQLQueryException(PQerrorMessage (conn->conn));
 	return false;
 }
 
@@ -558,6 +518,25 @@ char *PostgreSQLDriver::quoteString(const char *in){
 	buf = new char(len * 2 + 1);
 	PQescapeString(buf, in, len);
 	return buf;
+}
+
+String PostgreSQLDriver::escapeString(const String &s){
+	char buf[s.size() * 2 + 1];
+	PQescapeString(buf, s.toCharPtr(), s.size());
+	return String(buf);
+}
+
+String PostgreSQLDriver::escapeString(const String &s, void *__conn_handle){
+	__pgsql_conn *conn;
+	int e_code;
+	char buf[s.size() * 2 + 1];
+	conn = (__pgsql_conn *)__conn_handle;
+	PQescapeStringConn(conn->conn, buf, s.toCharPtr(), s.size(), &e_code);
+	if(e_code != 0){
+		//Houston we have a problem
+		throw DB::DatabaseException(PQerrorMessage (conn->conn));
+	}
+	return String(buf);
 }
 
 const char *PostgreSQLDriver::errorMessage(void *__conn_handle){
