@@ -104,12 +104,28 @@ namespace xvr2 {
 				 *  insert it into the table.
 				 *  \param conn_handle The connection handle */
 				virtual const bool bulkEnd(void *conn_handle) = 0;
-				/** Quotes a string to be passed in an SQL query this is neccesary since
+				/** \deprecated Please use String escapeString(const String &s, void *conn_handle);
+				 *  Quotes a string to be passed in an SQL query this is neccesary since
 				 *  some chars can confuse the SQL command parser in the RDBMS, after 
 				 *  calling this method you must free all memory allocated from the it.
 				 *  \param str The string to be escaped
 				 *  \return The escaped string, you must free this pointer after used */
 				virtual char *quoteString(const char *str) = 0;
+				/** \deprecated Please use String escapeString(const String &s, void *conn_handle);
+				 *  Quotes a string to be passed in an SQL query this is neccesary since
+				 *  some chars can confuse the SQL command parser in the RDBMS, after 
+				 *  calling this method you must free all memory allocated from the it.
+				 *  \param str The string to be escaped
+				 *  \return The escaped string, you must free this pointer after used */
+				virtual String escapeString(const String &s) = 0;
+				/** Quotes a string to be passed in an SQL query this is neccesary since
+				 *  some chars can confuse the SQL command parser in the RDBMS, after 
+				 *  calling this method you must free all memory allocated from the it.
+				 *  \param str The string to be escaped
+				 *  \param conn_handle The RDBMS connection from where you're connecting
+				 *  \return The escaped string, you must free this pointer after used */
+				virtual String escapeString(const String &s, void *conn_handle) = 0;
+
 				/** Returns a specific error message returned by the latest operation
 				 *  executed at the connection level.
 				 *  \param conn_handle The connection handle
@@ -120,7 +136,9 @@ namespace xvr2 {
 				 *  \param res_handle The ResultSet handle
 				 *  \return The error string*/
 				virtual const char *resultErrorMessage(void *res_handle) = 0;
+				/** Verifies wheter the connection is still live or not. */
 				virtual const bool isConnected(void *conn_handle) = 0;
+				/** Says if the driver's connection can be polled for connection or not. */
 				virtual const bool hasConnPolling() = 0;
 		};
 	};
