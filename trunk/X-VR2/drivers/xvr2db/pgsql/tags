@@ -1,0 +1,69 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.5.4	//
+HAVE_DLFCN_H	config.h	5;"	d
+HAVE_INTTYPES_H	config.h	8;"	d
+HAVE_MEMORY_H	config.h	11;"	d
+HAVE_STDINT_H	config.h	14;"	d
+HAVE_STDLIB_H	config.h	17;"	d
+HAVE_STRINGS_H	config.h	20;"	d
+HAVE_STRING_H	config.h	23;"	d
+HAVE_SYS_STAT_H	config.h	26;"	d
+HAVE_SYS_TYPES_H	config.h	29;"	d
+HAVE_UNISTD_H	config.h	32;"	d
+PACKAGE_BUGREPORT	config.h	38;"	d
+PACKAGE_NAME	config.h	41;"	d
+PACKAGE_STRING	config.h	44;"	d
+PACKAGE_TARNAME	config.h	47;"	d
+PACKAGE_VERSION	config.h	50;"	d
+PostgreSQLDriver	pgsql-drvng.cpp	/^PostgreSQLDriver::PostgreSQLDriver(){$/;"	f	class:PostgreSQLDriver
+PostgreSQLDriver	pgsql-drvng.h	/^class PostgreSQLDriver : public Driver {$/;"	c
+STDC_HEADERS	config.h	53;"	d
+__XVR2_PGSQL_DRV_NG_H__	pgsql-drvng.h	3;"	d
+__pgsql_conn	pgsql-drvng.cpp	/^		__pgsql_conn(PGconn *_conn){$/;"	f	class:__pgsql_conn
+__pgsql_conn	pgsql-drvng.cpp	/^class __pgsql_conn {$/;"	c	file:
+__pgsql_res	pgsql-drvng.cpp	/^		__pgsql_res(PGresult *r){$/;"	f	class:__pgsql_res
+__pgsql_res	pgsql-drvng.cpp	/^class __pgsql_res {$/;"	c	file:
+__type_map	pgsql-drvng.cpp	/^		__type_map(){$/;"	f	class:__type_map
+__type_map	pgsql-drvng.cpp	/^		__type_map(Oid o, int l){$/;"	f	class:__type_map
+__type_map	pgsql-drvng.cpp	/^		__type_map(Oid o, int l, const char *t){$/;"	f	class:__type_map
+__type_map	pgsql-drvng.cpp	/^class __type_map {$/;"	c	file:
+bulkAddData	pgsql-drvng.cpp	/^const bool PostgreSQLDriver::bulkAddData(void *conn_handle, const char *data, const char *delim){$/;"	f	class:PostgreSQLDriver
+bulkBegin	pgsql-drvng.cpp	/^const bool PostgreSQLDriver::bulkBegin(void *conn_handle, const char *table, const char *columns, const char *delim){$/;"	f	class:PostgreSQLDriver
+bulkEnd	pgsql-drvng.cpp	/^const bool PostgreSQLDriver::bulkEnd(void *conn_handle){$/;"	f	class:PostgreSQLDriver
+commit	pgsql-drvng.cpp	/^void PostgreSQLDriver::commit(void *){$/;"	f	class:PostgreSQLDriver
+conn	pgsql-drvng.cpp	/^		PGconn *conn;$/;"	m	class:__pgsql_conn	file:
+conn	pgsql-drvng.cpp	/^		__pgsql_conn *conn;$/;"	m	class:__pgsql_res	file:
+connect	pgsql-drvng.cpp	/^void *PostgreSQLDriver::connect(const String &server, const String &__dbname, const String &user, const String &pass, int port){$/;"	f	class:PostgreSQLDriver
+create_dbdriver_instance	pgsql-drvng.cpp	/^PostgreSQLDriver *create_dbdriver_instance(){$/;"	f
+curr_row	pgsql-drvng.cpp	/^		int curr_row;$/;"	m	class:__pgsql_res	file:
+destroy_dbdriver_instance	pgsql-drvng.cpp	/^void destroy_dbdriver_instance(PostgreSQLDriver *obj){$/;"	f
+dinfo	pgsql-drvng.h	/^		DriverInfo *dinfo;$/;"	m	class:PostgreSQLDriver
+disconnect	pgsql-drvng.cpp	/^bool PostgreSQLDriver::disconnect(void *__conn_handle){$/;"	f	class:PostgreSQLDriver
+errorMessage	pgsql-drvng.cpp	/^const char *PostgreSQLDriver::errorMessage(void *__conn_handle){$/;"	f	class:PostgreSQLDriver
+fetchRow	pgsql-drvng.cpp	/^Field *PostgreSQLDriver::fetchRow(void *__res_handle){$/;"	f	class:PostgreSQLDriver
+freeResultSet	pgsql-drvng.cpp	/^const bool PostgreSQLDriver::freeResultSet(void *__res_handle){$/;"	f	class:PostgreSQLDriver
+getLocalType	pgsql-drvng.cpp	/^		const int getLocalType(Oid o){$/;"	f	class:__pgsql_conn
+getLocalTypeName	pgsql-drvng.cpp	/^		const char *getLocalTypeName(Oid o){$/;"	f	class:__pgsql_conn
+getVersionInfo	pgsql-drvng.cpp	/^const DB::DriverInfo &PostgreSQLDriver::getVersionInfo(){$/;"	f	class:PostgreSQLDriver
+hasConnPolling	pgsql-drvng.cpp	/^const bool PostgreSQLDriver::hasConnPolling(){$/;"	f	class:PostgreSQLDriver
+isConnected	pgsql-drvng.cpp	/^const bool PostgreSQLDriver::isConnected(void *__conn_handle){$/;"	f	class:PostgreSQLDriver
+localType	pgsql-drvng.cpp	/^		int localType;$/;"	m	class:__type_map	file:
+numCols	pgsql-drvng.cpp	/^const int PostgreSQLDriver::numCols(void *__res_handle){$/;"	f	class:PostgreSQLDriver
+numRows	pgsql-drvng.cpp	/^const int PostgreSQLDriver::numRows(void *__res_handle){$/;"	f	class:PostgreSQLDriver
+oid	pgsql-drvng.cpp	/^		Oid oid;$/;"	m	class:__type_map	file:
+query	pgsql-drvng.cpp	/^ResultSet *PostgreSQLDriver::query(void *__conn_handle, const String &command){$/;"	f	class:PostgreSQLDriver
+quoteString	pgsql-drvng.cpp	/^char *PostgreSQLDriver::quoteString(const char *in){$/;"	f	class:PostgreSQLDriver
+requestMappings	pgsql-drvng.cpp	/^		void requestMappings(){$/;"	f	class:__pgsql_conn
+result	pgsql-drvng.cpp	/^		PGresult *result;$/;"	m	class:__pgsql_res	file:
+resultErrorMessage	pgsql-drvng.cpp	/^const char *PostgreSQLDriver::resultErrorMessage(void *__res_handle){$/;"	f	class:PostgreSQLDriver
+row_count	pgsql-drvng.cpp	/^		int row_count;$/;"	m	class:__pgsql_res	file:
+setAutoCommit	pgsql-drvng.cpp	/^void PostgreSQLDriver::setAutoCommit(bool){$/;"	f	class:PostgreSQLDriver
+tmapping	pgsql-drvng.cpp	/^		__type_map *tmapping;$/;"	m	class:__pgsql_conn	file:
+typeName	pgsql-drvng.cpp	/^		char *typeName;$/;"	m	class:__type_map	file:
+~PostgreSQLDriver	pgsql-drvng.cpp	/^PostgreSQLDriver::~PostgreSQLDriver(){$/;"	f	class:PostgreSQLDriver
+~__pgsql_conn	pgsql-drvng.cpp	/^		~__pgsql_conn(){$/;"	f	class:__pgsql_conn
+~__type_map	pgsql-drvng.cpp	/^		~__type_map(){$/;"	f	class:__type_map
