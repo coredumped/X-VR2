@@ -154,7 +154,7 @@ namespace xvr2{
 				}
 				else {
 #ifdef USE_DEBUG
-					debugmsg(this, "not enough memory to fill the hostent structure in a gethostbyname_r call, retrying...\n");
+					debugmsg(this, "not enough memory to fill the hostent structure in a gethostbyname_r call, retrying...\n", __LINE__, __FILE__);
 #endif
 					Memory::freeBuffer((void **)&tmp_buf);
 					tmp_blen += bmem;
@@ -194,7 +194,7 @@ namespace xvr2{
 				}
 				else {
 #ifdef USE_DEBUG
-					debugmsg(this, "not enough memory to fill the hostent structure in a gethostbyname_r call, retrying...\n");
+					debugmsg(this, "not enough memory to fill the hostent structure in a gethostbyname_r call, retrying...\n", __LINE__, __FILE__);
 #endif
 					tmp_blen += bmem;
 				}
@@ -277,7 +277,7 @@ namespace xvr2{
 				return 0;
 			}
 #ifdef USE_DEBUG
-			debugmsg(this, "connected\n");
+			debugmsg(this, "connected\n", __LINE__, __FILE__);
 #endif
 #ifndef USING_LINUX
 #ifndef SOLARIS
@@ -323,7 +323,7 @@ namespace xvr2{
 			host = s->host;
 			port = s->port;
 #ifdef USE_DEBUG
-			debugmsgln(this, " cloned\n");
+			debugmsgln(this, " cloned\n", __LINE__, __FILE__);
 #endif
 		}
 		
@@ -344,7 +344,7 @@ namespace xvr2{
 			tsock = s;
 			port = pport;
 #ifdef USE_DEBUG
-			debugmsgln(this, "connected to a TCPServerSocket\n");
+			debugmsgln(this, "connected to a TCPServerSocket\n", __LINE__, __FILE__);
 #endif
 		}
 		
@@ -370,7 +370,7 @@ namespace xvr2{
 #endif*/
 				::close(tsock);
 #ifdef USE_DEBUG
-				debugmsg(this, "closed\n");
+				debugmsg(this, "closed\n", __LINE__, __FILE__);
 #endif
 				tsock = -1;
 			}
@@ -495,7 +495,7 @@ namespace xvr2{
 			fd.events = POLLIN | POLLPRI;
 			if(poll(&fd, 1, READ_TIMEOUT) == 0){
 #ifdef USE_DEBUG
-				debugmsg(this, "Connection timed out");
+				debugmsg(this, "Connection timed out", __LINE__, __FILE__);
 #endif
 				throw ConnectionTimeout();
 			}
@@ -523,7 +523,7 @@ namespace xvr2{
 				for(i = 0; i < siz; i += SOCK_CHUNK_SIZE){
 					if(poll(&fd, 1, READ_TIMEOUT) == 0){
 #ifdef USE_DEBUG
-						debugmsg(this, "Connection timed out");
+						debugmsg(this, "Connection timed out", __LINE__, __FILE__);
 #endif
 						throw ConnectionTimeout();
 					}
@@ -544,7 +544,7 @@ namespace xvr2{
 				if(size % SOCK_CHUNK_SIZE != 0){
 					if(poll(&fd, 1, READ_TIMEOUT) == 0){
 #ifdef USE_DEBUG
-						debugmsg(this, "Connection timed out");
+						debugmsg(this, "Connection timed out", __LINE__, __FILE__);
 #endif
 						throw ConnectionTimeout();
 					}
