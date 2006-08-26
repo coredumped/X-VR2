@@ -77,17 +77,17 @@ namespace xvr2{
 			enum FileOpenMode{
 				/** The file can only be read, 
 				 *  secuentially */
-				READ_ONLY,
+				READ_ONLY = 1,
 				/** The file can only be write, 
 				 *  secuentially */
-				WRITE_ONLY,
+				WRITE_ONLY = 2,
 				/** The file can be read-written,
 				 *  be carefull if your writing data
 				 *  to an already existing file*/
-				READ_WRITE,
+				READ_WRITE = 3,
 				/** The file is open for writing
 				 *  at the end */
-				APPEND
+				APPEND = 4
 			};
 			/** Default constructor initializes the filename
 			 *  to /dev/null */

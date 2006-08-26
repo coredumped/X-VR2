@@ -50,12 +50,12 @@ namespace xvr2{
 
 	void BaseFile::open(const String &fname, BaseFile::FileOpenMode mode){
 		filename.assign(fname.toCharPtr());
-		open(mode);
+		BaseFile::open(mode);
 	}
 
 	void BaseFile::open(const char *fname, BaseFile::FileOpenMode mode){
 		setFilename(fname);
-		open(mode);
+		BaseFile::open(mode);
 	}
 
 	//This method must be overriden if u want to use higher level file handling
