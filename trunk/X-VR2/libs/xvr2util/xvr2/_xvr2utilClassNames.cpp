@@ -13,6 +13,8 @@ namespace xvr2 {
 		const char *__xvr2_Util_List = "xvr2::Util::List";
 		const char *__xvr2_Util_nodeT = "xvr2::Util::nodeT";
 		const char *__xvr2_Util___ParamAndVal = "xvr2::Util::__ParamAndVal";
+		const char *__xvr2_Util_publicBasicStringCollection<xvr2 = "xvr2::Util::publicBasicStringCollection<xvr2";
+		const char *__xvr2_Util_publicObject,publicstd = "xvr2::Util::publicObject,publicstd";
 		const char *__xvr2_Util_RegexException = "xvr2::Util::RegexException";
  
 	};

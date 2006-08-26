@@ -2,8 +2,8 @@
  * $Id$
  */
  
-#ifndef __XVR2_UTIL_EMDEDDED_CLASS_NAMES_H__
-#define __XVR2_UTIL_EMDEDDED_CLASS_NAMES_H__
+#ifndef __XVR2_Util_EMDEDDED_CLASS_NAMES_H__
+#define __XVR2_Util_EMDEDDED_CLASS_NAMES_H__
  
 #include<xvr2/xvr2config.h>
  
@@ -17,6 +17,8 @@ namespace xvr2 {
 		extern const char *__xvr2_Util_List;
 		extern const char *__xvr2_Util_nodeT;
 		extern const char *__xvr2_Util___ParamAndVal;
+		extern const char *__xvr2_Util_publicBasicStringCollection<xvr2;
+		extern const char *__xvr2_Util_publicObject,publicstd;
 		extern const char *__xvr2_Util_RegexException;
  
 	};
