@@ -4,8 +4,9 @@
 #include"config.h"
 #include<xvr2/xvr2config.h>
 #include<xvr2/_xvr2dbClassNames.h>
-#include<xvr2/DatabaseException.h>
 #include<xvr2/MessageStrings.h>
+#include"DatabaseException.h"
+#include"DBResultSet.h"
 
 namespace xvr2 {
 	namespace DB {
@@ -18,6 +19,13 @@ namespace xvr2 {
 			setClassName((char *)__xvr2_DB_DatabaseException);
 #endif
 			description = (char *)xvr2::excepDatabaseException;
+		}
+
+		DatabaseException::DatabaseException(const String &error_message){
+#ifdef USE_EMBEDDED_CLASSNAMES
+			setClassName((char *)__xvr2_DB_DatabaseException);
+#endif
+			description = (char *)error_message.toCharPtr();
 		}
 
 
@@ -81,8 +89,29 @@ namespace xvr2 {
 			setClassName((char *)__xvr2_DB_SQLQueryException);
 #endif
 			description = (char *)xvr2::excepSQLQuery;
+			result = 0;
 		}
 
+		SQLQueryException::SQLQueryException(const char *msg){
+#ifdef USE_EMBEDDED_CLASSNAMES
+			setClassName((char *)__xvr2_DB_SQLQueryException);
+#endif
+			description = (char *)msg;
+			result = 0;
+		}
+
+		SQLQueryException::SQLQueryException(const char *msg, DB::ResultSet *_result){
+#ifdef USE_EMBEDDED_CLASSNAMES
+			setClassName((char *)__xvr2_DB_SQLQueryException);
+#endif
+			description = (char *)msg;
+			result = _result;
+		}
+		SQLQueryException::~SQLQueryException(){
+			if(result != 0){
+				//result->
+			}
+		}
 
 		SQLQueryRDBMSDisconnected::SQLQueryRDBMSDisconnected(){
 #ifdef USE_EMBEDDED_CLASSNAMES
@@ -122,5 +151,3 @@ namespace xvr2 {
 		}
 	};
 };
-
-

@@ -5,9 +5,11 @@
 #define __XVR2_DATABASE_EXCEPTION_H__
 #include<xvr2/xvr2config.h>
 #include<xvr2/CoreExceptions.h>
+#include<xvr2/String.h>
 
 namespace xvr2 {
 	namespace DB {
+		class ResultSet;
 		/** Generic database exception */
 		class DatabaseException:public Exception{
 			public:
@@ -15,6 +17,7 @@ namespace xvr2 {
 				 * Default constructor
 				 */
 				DatabaseException();
+				DatabaseException(const String &error_message);
 		};
 
 
@@ -89,11 +92,16 @@ namespace xvr2 {
 
 		/** Generic SQL query exception */
 		class SQLQueryException:public DatabaseException{
+			private:
+				DB::ResultSet *result;
 			public:
 				/**
 				 * Default constructor
 				 */
 				SQLQueryException();
+				~SQLQueryException();
+				SQLQueryException(const char *msg);
+				SQLQueryException(const char *msg, DB::ResultSet *_result);
 		};
 
 
