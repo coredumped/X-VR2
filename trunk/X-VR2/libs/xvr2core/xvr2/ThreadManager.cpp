@@ -31,6 +31,10 @@ namespace xvr2 {
 
 	class __ThreadData_t {
 		public:
+			__ThreadData_t(){
+				policy = 0;
+				priority = 0;
+			}
 #ifdef USE_POSIX_THREADS
 			__ThreadData_t(pthread_t t, pthread_attr_t a, Thread *p, int pol){
 				thread = t;
