@@ -45,9 +45,6 @@ namespace xvr2{
 			mt.lock();
 			try{
 				Connection::connect(s, dbname, u, p, port);
-#ifdef USE_DEBUG
-				debugmsgln(this, "connected");
-#endif
 			}
 			catch(...){
 				mt.unlock();
@@ -60,9 +57,6 @@ namespace xvr2{
 			mt.lock();
 			try{
 				Connection::connect(d, s, dbname, u, p, port);
-#ifdef USE_DEBUG
-				debugmsgln(this, "connected");
-#endif
 			}
 			catch(...){
 				mt.unlock();
@@ -75,9 +69,6 @@ namespace xvr2{
 			mt.lock();
 			try{
 				Connection::connect();
-#ifdef USE_DEBUG
-				debugmsgln(this, "connected");
-#endif
 			}
 			catch(...){
 				mt.unlock();
@@ -90,9 +81,6 @@ namespace xvr2{
 			mt.lock();
 			try{
 				Connection::disconnect();
-#ifdef USE_DEBUG
-				debugmsgln(this, "disconnected");
-#endif
 			}
 			catch(...){
 				mt.unlock();
@@ -106,9 +94,30 @@ namespace xvr2{
 			mt.lock();
 			try{
 #ifdef USE_DEBUG
-				debugmsgln(this, cmd.toCharPtr());
+#ifdef DEBUG_SQL
+				debugmsgln(this, cmd.toCharPtr(), __LINE__ + 1, __FILE__);
+#endif
 #endif
 				r = Connection::query(cmd);
+			}
+			catch(...){
+				mt.unlock();
+				throw;
+			}
+			mt.unlock();
+			return r;
+		}
+
+		ResultSet *ConnectionMT::query(const StringBuffer &cmd){
+			ResultSet *r = 0;
+			mt.lock();
+			try{
+#ifdef USE_DEBUG
+#ifdef DEBUG_SQL
+				debugmsgln(this, cmd.toCharPtr(), __LINE__ + 1, __FILE__);
+#endif
+#endif
+				r = Connection::query(cmd.toString());
 			}
 			catch(...){
 				mt.unlock();
@@ -122,9 +131,6 @@ namespace xvr2{
 			mt.lock();
 			try{
 				Connection::commit();
-#ifdef USE_DEBUG
-				debugmsgln(this, "commit");
-#endif
 			}
 			catch(...){
 				mt.unlock();
@@ -136,10 +142,12 @@ namespace xvr2{
 		void ConnectionMT::bulkUploadBegin(const String &table, const String &cols, const String &_delim){
 			mt.lock();
 			try{
-				Connection::bulkUploadBegin(table, cols, _delim);
 #ifdef USE_DEBUG
-				debugmsgln(this, "BulkUploadBegin");
+#ifdef DEBUG_SQL
+				debugmsgln(this, "BulkUploadBegin", __LINE__ + 1, __FILE__);
 #endif
+#endif
+				Connection::bulkUploadBegin(table, cols, _delim);
 			}
 			catch(...){
 				mt.unlock();
@@ -152,9 +160,6 @@ namespace xvr2{
 			mt.lock();
 			try{
 				Connection::bulkUploadData(data);
-#ifdef USE_DEBUG
-				debugmsgln(this, "BulkUploadData");
-#endif
 			}
 			catch(...){
 				mt.unlock();
@@ -166,16 +171,32 @@ namespace xvr2{
 		void ConnectionMT::bulkUploadEnd(){
 			mt.lock();
 			try{
-				Connection::bulkUploadEnd();
 #ifdef USE_DEBUG
-				debugmsgln(this, "BulkUploadEnd");
+#ifdef DEBUG_SQL
+				debugmsgln(this, "BulkUploadEnd", __LINE__ + 1, __FILE__);
 #endif
+#endif
+				Connection::bulkUploadEnd();
 			}
 			catch(...){
 				mt.unlock();
 				throw;
 			}
 			mt.unlock();
+		}
+
+		String ConnectionMT::escapeString(const String &str){
+			String ret;
+			mt.lock();
+			try{
+				ret = Connection::escapeString(str);
+			}
+			catch(...){
+				mt.unlock();
+				throw;
+			}
+			mt.unlock();
+			return ret;
 		}
 
 		char *ConnectionMT::escapeString(const char *str){
@@ -211,9 +232,6 @@ namespace xvr2{
 			mt.lock();
 			try{
 				ret = Connection::isConnected();
-#ifdef USE_DEBUG
-				debugmsgln(this, "Connection status verified by user.");
-#endif
 			}
 			catch(...){
 				mt.unlock();

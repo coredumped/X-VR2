@@ -66,6 +66,7 @@ namespace xvr2{
 				 *  instead call the <b>status</b> method of the ResultSet
 				 *  to know if the call succeeded or not*/
 				ResultSet *query(const String &cmd);
+				ResultSet *query(const StringBuffer &cmd);
 				/** This will commit any transaction based 
 				 *  command to the database, when you call 
 				 *  commit every submitted delete or update 
@@ -76,6 +77,7 @@ namespace xvr2{
 				void bulkUploadData(const String &data);
 				void bulkUploadEnd();
 
+				String escapeString(const String &s);
 				char *escapeString(const char *);
 				const char *errorMessage();
 				/** Checks to see if the connection is still ok */

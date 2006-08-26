@@ -143,6 +143,22 @@ namespace xvr2{
 			}
 			return r;
 		}
+
+		ResultSet *Connection::query(const StringBuffer &cmd){
+			ResultSet *r = 0;
+			if(!isConnected())
+				throw DBConnectFirst();
+			try{
+				r = driver->query(__conn, cmd.toString());
+			}
+			catch(...){
+				throw;
+			}
+			if(r == 0){
+				throw DatabaseException();
+			}
+			return r;
+		}
 	
 		void Connection::commit(){
 			if(!isConnected())
@@ -192,6 +208,10 @@ namespace xvr2{
 			catch(...){
 				throw;
 			}
+		}
+
+		String Connection::escapeString(const String &str){
+			return driver->escapeString(str, __conn);
 		}
 
 		char *Connection::escapeString(const char *str){
