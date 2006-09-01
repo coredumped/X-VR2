@@ -1,5 +1,5 @@
-#LEX=flex
-#YACC=bison
+LEX=flex
+YACC=bison
 
 CFLAGS+=`pkg-config xvr2core --cflags`
 
