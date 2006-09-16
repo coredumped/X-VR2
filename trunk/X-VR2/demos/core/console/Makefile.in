@@ -1,0 +1,12 @@
+CC=g++
+DEBUG=-gstabs+
+
+all: output
+
+output: output.cpp
+	$(CC) $(DEBUG) -o output output.cpp `pkg-config xvr2core --cflags --libs`
+
+clean: 
+	rm -f output
+
+rebuild: clean all

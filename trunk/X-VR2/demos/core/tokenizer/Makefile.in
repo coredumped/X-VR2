@@ -1,0 +1,12 @@
+CC=g++
+DEBUG=-gstabs+
+
+all: tok
+
+tok: tok.cpp
+	$(CC) $(DEBUG) -o tok tok.cpp `pkg-config xvr2util --cflags --libs`
+
+clean: 
+	rm -f tok
+
+rebuild: clean all

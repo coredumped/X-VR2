@@ -1,0 +1,18 @@
+CC=g++
+DEBUG=-gstabs+
+
+all: basic comparisons leak
+
+basic: basic.cpp
+	$(CC) $(DEBUG) -o basic basic.cpp `pkg-config xvr2core --cflags --libs`
+
+comparisons: comparisons.cpp
+	$(CC) $(DEBUG) -o comparisons comparisons.cpp `pkg-config xvr2core --cflags --libs`
+
+leak: leak.cpp
+	$(CC) $(DEBUG) -o leak leak.cpp `pkg-config xvr2core --cflags --libs`
+
+clean: 
+	rm -f basic comparisons leak
+
+rebuild: clean all
