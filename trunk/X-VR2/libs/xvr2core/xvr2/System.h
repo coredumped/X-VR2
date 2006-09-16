@@ -16,13 +16,13 @@ namespace xvr2{
 			 * is just an interface */
 			System();
 			/** This will return how many CPUs are installed in the system */
-			static int installedCPUs();
+			//static int installedCPUs();
 			/** This will return the CPU speed in megahertz */
-			static double cpuSpeed();
+			//static double cpuSpeed();
 			/** Will return the total amount of system memory */
-			static int totalMemory();
+			//static int totalMemory();
 			/** Will return the total amount of free system memory */
-			static int freeMemory();
+			//static int freeMemory();
 			/** Will freeze the software for <b>usec</b> microseconds */
 			static void usleep(UInt32 usec);
 	};

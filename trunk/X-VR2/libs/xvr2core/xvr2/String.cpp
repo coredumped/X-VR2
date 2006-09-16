@@ -28,6 +28,12 @@
 
 namespace xvr2{
 
+#if defined(__linux) || defined(__LINUX) || defined(__linux__) || defined(__LINUX__) || defined(__unix) || defined(__unix__)
+	const String NL("\n");
+#else
+	const String NL("\r\n");
+#endif
+
 	template<typename _numericT>
 	void num2char(_numericT num, std::string *str){
 		std::stringstream ss;

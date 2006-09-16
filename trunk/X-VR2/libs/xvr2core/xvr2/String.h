@@ -224,6 +224,8 @@ namespace xvr2{
 			 * method */
 			String getSubstr(int start, int end);
 			virtual std::string toString();
+			
 	};
+	extern const String NL;
 };
 #endif

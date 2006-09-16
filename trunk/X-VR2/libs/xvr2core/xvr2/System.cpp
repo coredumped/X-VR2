@@ -14,7 +14,7 @@
 namespace xvr2{
 
 #ifdef USING_LINUX
-	SharedVar<bool> __lnx_data_gathered(false);
+/*	SharedVar<bool> __lnx_data_gathered(false);
 	SharedVar<double> __lnx_cpuSpeed(0.0);
 	SharedVar<int> __lnx_installedCPUs(0);
 	
@@ -55,7 +55,7 @@ namespace xvr2{
 			xvr2_delete_array(buffer);
 			fclose(f);
 		}
-	}
+	}*/
 #endif
 	
 
@@ -65,7 +65,7 @@ namespace xvr2{
 #endif
 	}
 
-	int System::installedCPUs(){
+/*	int System::installedCPUs(){
 		int num = 0;
 #ifdef USING_LINUX
 		__lnx_getCPUData();
@@ -89,7 +89,7 @@ namespace xvr2{
 
 	int System::freeMemory(){
 		return (sysconf(_SC_AVPHYS_PAGES) / 1024) * sysconf(_SC_PAGE_SIZE);
-	}
+	}*/
 
 	void System::usleep(UInt32 usec){
 		::usleep(usec);

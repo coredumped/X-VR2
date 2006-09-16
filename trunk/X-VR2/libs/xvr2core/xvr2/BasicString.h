@@ -89,7 +89,7 @@ namespace xvr2 {
 				return *this;
 			}
 			/** Erases all ocurrences of character c located at the right and left side of the string */
-			virtual BasicString<_charT> &trim(const _charT c){
+			virtual BasicString<_charT> &trim(const _charT c = ' '){
 				trimLeft(c);
 				trimRight(c);
 				return *this;
@@ -150,7 +150,7 @@ namespace xvr2 {
 			bool endsWith(const _charT *s) const {
 				std::basic_string<_charT> tmp = s;
 				//return (std::basic_string<_charT>::size() - (std::basic_string<_charT>::find_last_of(s) + tmp.size()) == 0)?true:false;
-				return (std::basic_string<_charT>::size() - std::basic_string<_charT>::find_last_of(s) == 0)?true:false;
+				return (std::basic_string<_charT>::size() - (std::basic_string<_charT>::find_last_of(s) + 1) == 0)?true:false;
 			}
 			BasicString<_charT> &deleteCharAt(int pos){
 				std::basic_string<_charT>::erase(pos);
