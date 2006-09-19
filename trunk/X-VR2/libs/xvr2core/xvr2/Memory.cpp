@@ -39,6 +39,9 @@ namespace xvr2{
 		return ptr;
 	}
 
+	Buffer Memory::alloc(UInt32 size){
+		return Buffer((void *)(new UInt8(size)), size, true);
+	}
 
 	void Memory::freeBuffer(void **buf){
 #ifndef USING_LINUX

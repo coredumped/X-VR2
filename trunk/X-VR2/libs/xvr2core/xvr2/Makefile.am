@@ -1,7 +1,5 @@
 ## Source directory
 
-#SUBDIRS = parsers
-
 h_sources = CoreExceptions.h AutomatedGC.h BaseFile.h BasicStringBuffer.h \
 	BasicString.h Byte.h Calendar.h Chronograph.h Chronometer.h \
 	ConditionVar.h Console.h DataTypes.h Date.h DebugConsole.h __Destruct.h \
@@ -12,7 +10,7 @@ h_sources = CoreExceptions.h AutomatedGC.h BaseFile.h BasicStringBuffer.h \
 	TemporalBuffer.h TextInput.h TextOutput.h Thread.h Threading.h \
 	ThreadManager.h Time.h Timestamp.h Tokenizer.h TraceDumper.h Unix.h \
 	User.h _xvr2ClassNames.h xvr2config.h Conversion.h Function.h \
-	BackgroundFunction.h
+	BackgroundFunction.h Buffer.h File.h
 
 cc_sources = CoreExceptions.cpp AutomatedGC.cpp BaseFile.cpp BasicString.cpp \
 	Byte.cpp Chronometer.cpp ConditionVar.cpp Console.cpp Date.cpp \
@@ -23,7 +21,7 @@ cc_sources = CoreExceptions.cpp AutomatedGC.cpp BaseFile.cpp BasicString.cpp \
 	Syslog.cpp System.cpp TemporalBuffer.cpp TextInput.cpp TextOutput.cpp \
 	Thread.cpp Threading.cpp ThreadManager.cpp Time.cpp Timestamp.cpp \
 	Tokenizer.cpp TraceDumper.cpp Unix.cpp User.cpp _xvr2ClassNames.cpp \
-	Conversion.cpp
+	Conversion.cpp Buffer.cpp File.cpp
 
 library_includedir=$(includedir)/$(GENERIC_LIBRARY_NAME)
 library_include_HEADERS = $(h_sources)

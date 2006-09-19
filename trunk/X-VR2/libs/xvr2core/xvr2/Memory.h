@@ -6,6 +6,7 @@
 #include<xvr2/System.h>
 #include<xvr2/AutomatedGC.h>
 #include<xvr2/CoreExceptions.h>
+#include<xvr2/Buffer.h>
 
 namespace xvr2{
 	/**
@@ -36,6 +37,7 @@ namespace xvr2{
 			 * bytes in memory
 			 */
 			static void *allocBuffer(UInt32 size);
+			static Buffer alloc(UInt32 size);
 			/**
 			 * Use this method to enlarge or minimize a buffer
 			 */
