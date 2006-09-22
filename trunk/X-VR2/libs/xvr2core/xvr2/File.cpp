@@ -16,22 +16,6 @@ namespace xvr2 {
 			close();
 		}
 	}
-	/*void File::open(const FileOpenMode mode){
-		switch(mode){
-			case READ_ONLY:
-				fstream::open(std::fstream::in);
-				break;
-			case WRITE_ONLY:
-				fstream::open(std::fstream::out);
-				break;
-			case APPEND:
-				fstream::open(std::fstream::out | std::fstream::app);
-				break;
-			case READ_WRITE:
-			default:
-				fstream::open(std::fstream::in|std::fstream::out);
-		}
-	}*/
 	void File::open(const String &path, const FileOpenMode mode){
 		switch(mode){
 			case READ_ONLY:
