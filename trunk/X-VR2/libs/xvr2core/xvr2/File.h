@@ -31,7 +31,6 @@ namespace xvr2{
 			File();
 			File(const String &path, const FileOpenMode mode = READ_WRITE);
 			virtual ~File();
-			virtual void open(const FileOpenMode mode);
 			virtual void open(const String &path, const FileOpenMode mode);
 			virtual void close();
 			virtual const File &operator << (const Buffer &data);
