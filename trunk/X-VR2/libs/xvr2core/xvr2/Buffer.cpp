@@ -9,24 +9,20 @@ namespace xvr2{
 	}
 	
 	Buffer::Buffer(void *__data, UInt32 __size, bool _freeme){
-		UInt8 *buf;
 		if(_freeme){
-			buf = new UInt8(__size);
-			_data = buf;
+			_data = new UInt8[__size];
 			memcpy(_data, __data, __size);
 		}
 		else{
-			_data = __data;
+			_data = (UInt8 *)__data;
 		}
 		_size = __size;
 		freeme = _freeme;
 	}
 	
 	Buffer::Buffer(const void *__data, UInt32 __size, bool _freeme){
-		UInt8 *buf;
 		if(_freeme){
-			buf = new UInt8(__size);
-			_data = buf;
+			_data = new UInt8[__size];
 			memcpy(_data, __data, __size);
 		}
 		else{
@@ -44,8 +40,8 @@ namespace xvr2{
 
 	Buffer::~Buffer(){
 		if(freeme){
-			UInt8 *buf = (UInt8 *)_data;
-			delete buf;
+			//UInt8 *buf = (UInt8 *)_data;
+			delete[] _data;
 			_data = 0;
 			_size = 0;
 			freeme = false;
@@ -104,7 +100,7 @@ namespace xvr2{
 	const Buffer &Buffer::append(UInt8 v){
 		if(data() == 0){
 			UInt8 *buf;
-			buf = new UInt8(1);
+			buf = new UInt8[1];
 			buf[0] = v;
 			_data = buf;
 			_size = 1;
@@ -112,12 +108,12 @@ namespace xvr2{
 		}
 		else{
 			UInt8 *buf;
-			buf = new UInt8(_size + 1);
+			buf = new UInt8[_size + 1];
 			//Now copy the contents of data in buf
 			memcpy(buf, _data, _size);
 			//Append v
 			buf[_size] = v;
-			if(freeme){
+			/*if(freeme){
 				//Now free data
 				UInt8 *b = (UInt8 *)_data;
 				delete b;
@@ -125,7 +121,8 @@ namespace xvr2{
 			}
 			else{		
 				freeme = true;
-			}
+			}*/
+			empty();
 			//Now point data to buf
 			_data = buf;
 			_size++;
@@ -136,7 +133,7 @@ namespace xvr2{
 	const Buffer &Buffer::append(const void *idata, UInt32 isize){
 		if(data() == 0){
 			UInt8 *buf;
-			buf = new UInt8(isize);
+			buf = new UInt8[isize];
 			memcpy(buf, idata, isize);
 			_data = buf;
 			_size = isize;
@@ -144,7 +141,7 @@ namespace xvr2{
 		}
 		else{
 			UInt8 *buf;
-			buf = new UInt8(_size + isize);
+			buf = new UInt8[_size + isize];
 #ifdef _GNU_SOURCE
 			//Now copy the contents of data in buf
 			void *ptr = mempcpy(buf, _data, _size);
@@ -158,7 +155,7 @@ namespace xvr2{
 #endif
 			if(freeme){
 				//Now free data
-				delete (UInt8 *)_data;
+				delete[] _data;
 				_data = 0;
 			}
 			else{		
@@ -192,6 +189,45 @@ namespace xvr2{
 	}
 	
 	//Insert methods
+	const Buffer &Buffer::insert(UInt32 pos, UInt8 v){
+		insert(pos, (const void *)&v, sizeof(UInt8));
+		return *this;
+	}
+	const Buffer &Buffer::insert(UInt32 pos, const void *__data, UInt32 __size){
+		UInt8 *dest;
+		if(pos > size()){
+			throw xvr2::ArrayIndexOutOfLimits();
+		}
+		dest = new UInt8[size() + __size];
+		//Copy all data from _data up to position pos
+#ifdef _GNU_SOURCE
+		UInt8 *ptr1 = (UInt8 *)mempcpy(dest, data(), pos);
+		UInt8 *ptr2 = (UInt8 *)mempcpy(ptr1, __data, __size) - 1;
+		memcpy(ptr2, (void *)(((UInt8 *)data()) + pos), size() - pos);
+#else
+		UInt8 *ptr1 = (UInt8 *)(dest + pos);
+		UInt8 *ptr2 = (UInt8 *)(dest + (pos + __size));
+		memcpy(dest, data, pos);
+		memcpy(ptr1, __data, __size);
+		memcpy(ptr2, (void *)(((UInt8 *)data()) + pos), size() - pos);
+#endif
+		UInt32 _tmp_size = _size;
+		empty();
+		_data = dest;
+		_size = _tmp_size + __size;
+		freeme = true;
+		return *this;
+	}
+	const Buffer &Buffer::insert(UInt32 pos, const Buffer &b){
+		insert(pos, (const void *)b.data(), b.size());
+		return *this;
+	}
+	const Buffer &Buffer::insert(UInt32 pos, const String &s){
+		insert(pos, (const void *)s.toCharPtr(), s.size() + 1);
+		if(pos + s.size() + 1 >= size()){
+		} 
+		return *this;
+	}
 	
 	//Cloning methods
 	Buffer Buffer::cloneMe(){
@@ -209,10 +245,11 @@ namespace xvr2{
 	const Buffer &Buffer::copy(const void *__data, UInt32 __size){
 		empty();
 		UInt8 *buf;
-		buf = new UInt8(__size);
+		buf = new UInt8[__size];
 		memcpy(buf, __data, __size);
 		_data = buf;
 		_size = __size;
+		freeme = true;
 		return *this;
 	}
 	const Buffer &Buffer::copy(UInt8 v){
@@ -245,13 +282,13 @@ namespace xvr2{
 	}
 	const Buffer &Buffer::refTo(const Buffer &b){
 		empty();
-		_data = (void *)b.data();
+		_data = (UInt8 *)b.data();
 		_size = b.size();
 		freeme = false;
 	}
 	const Buffer &Buffer::refTo(void *_buf, UInt32 _siz){
 		empty();
-		_data = _buf;
+		_data = (UInt8 *)_buf;
 		_size = _siz;
 		freeme = false;
 	}
@@ -260,14 +297,14 @@ namespace xvr2{
 	void Buffer::empty(){
 		if(freeme){
 			freeme = false;
-			delete (UInt8 *)_data;
+			delete[] _data;
 			_size = 0;
 		}
 	}
 	void Buffer::clear(){
 		if(freeme){
 			freeme = false;
-			delete (UInt8 *)_data;
+			delete[] _data;
 			_size = 0;
 		}
 	}

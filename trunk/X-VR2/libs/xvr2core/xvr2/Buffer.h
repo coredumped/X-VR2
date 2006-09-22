@@ -3,6 +3,7 @@
 #define __XVR2_BUFFER_H__
 
 #include <xvr2/DataTypes.h>
+#include <xvr2/CoreExceptions.h>
 #include <xvr2/Object.h>
 #include <xvr2/String.h> 
 
@@ -12,7 +13,7 @@ namespace xvr2{
 		private:
 			bool freeme;
 		protected:
-			void *_data;
+			UInt8 *_data;
 			UInt32 _size;
 		public:
 			Buffer();
@@ -47,6 +48,10 @@ namespace xvr2{
 			const Buffer &operator<<(const String &s);
 			
 			//Insert data
+			const Buffer &insert(UInt32 pos, UInt8 v);
+			const Buffer &insert(UInt32 pos, const void *__data, UInt32 __size);
+			const Buffer &insert(UInt32 pos, const Buffer &b);
+			const Buffer &insert(UInt32 pos, const String &s);
 			
 			//Remove data portions
 			
