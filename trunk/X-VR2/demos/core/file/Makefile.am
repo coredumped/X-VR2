@@ -1,0 +1,9 @@
+# $Id$
+
+bin_PROGRAMS = f1
+
+f1_SOURCES = f1.cpp
+
+INCLUDES = $(CPPFLAGS)
+
+LDADD = $(DEPS_LIBS)
