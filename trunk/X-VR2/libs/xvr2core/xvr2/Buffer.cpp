@@ -286,11 +286,11 @@ namespace xvr2{
 		_size = b.size();
 		freeme = false;
 	}
-	const Buffer &Buffer::refTo(void *_buf, UInt32 _siz){
+	const Buffer &Buffer::refTo(void *_buf, UInt32 _siz, bool __f){
 		empty();
 		_data = (UInt8 *)_buf;
 		_size = _siz;
-		freeme = false;
+		freeme = __f;
 	}
 	
 	//Empty
