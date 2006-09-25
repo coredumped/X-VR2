@@ -12,10 +12,10 @@ namespace xvr2 {
 	class FileInterface : public Object {
 		private:
 		protected:
-			fSize_t _fsize;
+			//fSize_t _fsize;
 		public:
 			FileInterface(){
-				_fsize = 0;
+				//_fsize = 0;
 			}
 			virtual ~FileInterface(){}
 			virtual void open(const String &path) = 0;
@@ -28,32 +28,33 @@ namespace xvr2 {
 			virtual FileInterface<fSize_t> &seekBegin() = 0;
 			virtual FileInterface<fSize_t> &seekStep(fSize_t _step) = 0;
 			virtual FileInterface<fSize_t> &flush() = 0;
+			virtual bool eof() = 0;
 	};
 	
 	/** To be used with files equal or smaller in size than 4Gb. */
-	class FileInterface4G : public FileInterface<UInt32> {
+	class FileInterface4G : public virtual FileInterface<UInt32> {
 	};
 	
 	/** Implements readable/input files. */
-	class ReadableFile : public FileInterface4G {
+	class ReadableFile : public virtual FileInterface4G {
 		public:
 			virtual ReadableFile &operator >> (UInt32 n);
 			virtual ReadableFile &operator >> (double n);
 			virtual ReadableFile &operator >> (UInt64 n);
-			virtual UInt32 read(UInt32 n);
-			virtual UInt32 read(double n);
-			virtual UInt32 read(UInt64 n);
+			UInt32 read(UInt32 n);
+			UInt32 read(double n);
+			UInt32 read(UInt64 n);
 			virtual UInt32 read(void *data, UInt32 size) = 0;
-			virtual UInt32 read(Buffer &data, UInt32 size);
+			UInt32 read(Buffer &data, UInt32 size);
 			/** Reads all data starting from the current position to the end of the
 			 *  file and returns it in a Buffer object. */
-			virtual ReadableFile &read(Buffer &b);
+			ReadableFile &read(Buffer &b);
 			/** Loads the full contents and returns it in a Buffer */
-			virtual ReadableFile &readAll(Buffer &b);
+			ReadableFile &readAll(Buffer &b);
 	}; 
 	
 	/** Implements writeable/output files. */
-	class WriteableFile : public FileInterface4G {
+	class WriteableFile : public virtual FileInterface4G {
 		public:
 			virtual WriteableFile &operator << (const Buffer &b);
 			virtual WriteableFile &operator << (const String &s);
