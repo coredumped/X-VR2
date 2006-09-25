@@ -1,9 +1,16 @@
-# $Id$
+# $LastChangedDate$
+# $LastChangedRevision$
+# $LastChangedBy$
+#
 
-bin_PROGRAMS = f1
+bin_PROGRAMS = stdio_in stdio_cp
 
-f1_SOURCES = f1.cpp
+stdio_cp_SOURCES = stdio_cp.cpp
+
+stdio_in_SOURCES = stdio_in.cpp
 
 INCLUDES = $(CPPFLAGS)
 
 LDADD = $(DEPS_LIBS)
+
+rebuild: clean all
