@@ -96,6 +96,20 @@ namespace xvr2 {
 		return (UInt32)_tx;
 	}
 	
+	bool StdioInterface::_eof(){
+#ifdef XVR2_STDIO_PARANOID
+		if(!_opened()) throw FileNotOpened();
+#endif
+		return (feof(_fptr) == 0)?false:true;
+	}
+	
+	void StdioInterface::_flush(){
+#ifdef XVR2_STDIO_PARANOID
+		if(!_opened()) throw FileNotOpened();
+#endif
+		if(fflush(_fptr) != 0) throw SystemException(errno);
+	}
+	
 	StdioInterfaceException::StdioInterfaceException(int _code) : SystemException(_code){	}
 	
 };

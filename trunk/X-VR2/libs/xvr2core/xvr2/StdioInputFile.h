@@ -20,6 +20,10 @@ namespace xvr2 {
 			virtual ~StdioInputFile();
 			UInt32 read(void *data, UInt32 size);
 			
+			UInt32 read(Buffer &data, UInt32 size);
+			StdioInputFile &read(Buffer &b);
+			StdioInputFile &readAll(Buffer &b);
+			
 			UInt32 size();
 			UInt32 tell();
 			StdioInputFile &seek(UInt32 _pos);
@@ -27,6 +31,8 @@ namespace xvr2 {
 			StdioInputFile &seekBegin();
 			StdioInputFile &seekStep(UInt32 _step);
 			StdioInputFile &flush();
+			
+			bool eof();
 	};
 
 };

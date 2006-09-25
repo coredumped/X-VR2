@@ -16,6 +16,7 @@ namespace xvr2{
 	}
 	
 	StdioInputFile::StdioInputFile(FILE *__f){
+		_fptr = __f;
 	}
 	
 	void StdioInputFile::open(const String &path){
@@ -64,6 +65,29 @@ namespace xvr2{
 	
 	//Input reading can't be flushed
 	StdioInputFile &StdioInputFile::flush(){
+		return *this;
+	}
+	
+	bool StdioInputFile::eof(){
+		return _eof();
+	}
+	
+	UInt32 StdioInputFile::read(Buffer &data, UInt32 ___size){
+		UInt32 _siz;
+		UInt8 *buf = new UInt8[___size];
+		_siz = read((void *)buf, ___size);
+		data.refTo(buf, _siz, true);
+		return _siz;
+	}
+
+	StdioInputFile &StdioInputFile::read(Buffer &b){
+		read(b, size() - tell());
+		return *this;
+	}
+
+	StdioInputFile &StdioInputFile::readAll(Buffer &b){
+		seekBegin();
+		read(b, size());
 		return *this;
 	}
 }
