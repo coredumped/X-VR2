@@ -13,7 +13,7 @@ do
 	./autogen.sh > $LOGFILE 2>&1
 	if [ $? -ne 0 ]; then
 		echo
-		cat $LOGIFLE
+		cat $LOGFILE
 		exit 1
 	fi
 	echo done
