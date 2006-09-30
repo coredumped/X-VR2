@@ -10,3 +10,5 @@ pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = xvr2core.pc
 
 EXTRA_DIST=autogen.sh
+
+rebuild: clean all
