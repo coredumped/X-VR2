@@ -9,7 +9,7 @@
 
 namespace xvr2 {
 
-	class StdioInputFile : public ReadableFile, public StdioInterface {
+	class StdioInputFile : public ReadableFile, private StdioInterface {
 		public:
 			StdioInputFile();
 			StdioInputFile(const String &fname);

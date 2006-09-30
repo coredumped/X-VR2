@@ -8,7 +8,7 @@
 
 namespace xvr2 {
 	/** TODO: Document this class */
-	class StdioOutputFile : public WriteableFile, public StdioInterface {
+	class StdioOutputFile : public WriteableFile, private StdioInterface {
 		public:
 			StdioOutputFile();
 			StdioOutputFile(const String &fname, bool for_append = false);
