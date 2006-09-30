@@ -87,13 +87,32 @@ PKG_CHECK_MODULES(DEPS, [xvr2core >= $xvr2core_required_version openssl >= $open
 AC_SUBST(DEPS_CFLAGS)
 AC_SUBST(DEPS_LIBS)
 
+dnl -----------------------------------------------------------
+dnl Doxygen stuff
+dnl 1. Detect doxygen path
+dnl 2. Verify of the user wants to build the docs automatically
+dnl -----------------------------------------------------------
+AC_PATH_PROG([DOXYGEN], [doxygen], docs, []
+             [$PATH:/usr/local/bin:/opt:/opt/doxygen:/bin:/opt/bin:/opt/sfw/bin:/usr/ccs/bin])
+AC_SUBST(DOXYGEN)
+AC_ARG_ENABLE(docs, AC_HELP_STRING([--enable-docs          Build library documentation]), [
+		DOXYGEN_INPUT_DIR="docs"
+		doxygen_docs=yes
+],[
+		DOXYGEN_INPUT_DIR=""
+		doxygen_docs=no
+])
+AC_SUBST(DOXYGEN_INPUT_DIR)
+
 dnl -----------------------------------------------
 dnl Generates Makefile's, configuration files and scripts
 dnl -----------------------------------------------
 
 AC_OUTPUT(Makefile \
-          xvr2net.pc \
-          xvr2/Makefile 
+			xvr2net.pc \
+			xvr2/Makefile \
+			docs/Makefile \
+			docs/Doxyfile
 )
 
 echo
@@ -104,3 +123,4 @@ echo "#  Platform:              $host"
 echo "#  Debug mode:            $debug_mode_activated"
 echo "#  X-VR2 Core:            $xvr2core_required_version"
 echo "#  OpenSSL:               `pkg-config openssl --modversion`"
+echo "#  Generate docs:         $doxygen_docs"
