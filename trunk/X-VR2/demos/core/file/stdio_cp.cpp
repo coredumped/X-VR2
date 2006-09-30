@@ -11,7 +11,7 @@
 #endif
 
 #ifndef CHUNK_SIZE
-#define CHUNK_SIZE (UInt32)MAX_FILE_SIZE
+#define CHUNK_SIZE 512
 #endif
 
 using xvr2::StdioInputFile;
