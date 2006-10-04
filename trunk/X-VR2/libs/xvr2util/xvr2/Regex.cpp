@@ -82,6 +82,11 @@ namespace xvr2 {
 				cflags &= REG_EXTENDED;
 			if(compiled){
 				//Recompile again
+				regex_t *r;
+				r = (regex_t *)handle;
+				regfree(r);
+				handle = 0;
+				delete r;
 				compile();
 			}
 		}
@@ -93,6 +98,11 @@ namespace xvr2 {
 				cflags &= REG_ICASE;
 			if(compiled){
 				//Recompile again
+				regex_t *r;
+				r = (regex_t *)handle;
+				regfree(r);
+				handle = 0;
+				delete r;
 				compile();
 			}
 		}
