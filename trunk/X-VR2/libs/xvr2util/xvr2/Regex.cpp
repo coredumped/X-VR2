@@ -80,6 +80,10 @@ namespace xvr2 {
 				cflags |= REG_EXTENDED;
 			else
 				cflags &= REG_EXTENDED;
+			if(compiled){
+				//Recompile again
+				compile();
+			}
 		}
 
 		void Regex::ignoreCase(bool u){
@@ -87,6 +91,10 @@ namespace xvr2 {
 				cflags |= REG_ICASE;
 			else
 				cflags &= REG_ICASE;
+			if(compiled){
+				//Recompile again
+				compile();
+			}
 		}
 
 		Regex::~Regex(){
