@@ -9,7 +9,7 @@
 
 namespace xvr2{
 
-	static const char __ENDOFLINE[] = { '\n' };
+	//static const char __ENDOFLINE[] = { '\n' };
 
 	TextOutput::TextOutput(){
 #if USE_EMBEDDED_CLASSNAMES
@@ -29,12 +29,13 @@ namespace xvr2{
 
 	void TextOutput::writeLine(const void *text, UInt32 size){
 		outputMethod(text, size);
-		outputMethod(__ENDOFLINE, 1);
+		//outputMethod(__ENDOFLINE, 1);
+		outputMethod(NL.toCharPtr(), NL.size());
 	}
 
 	void TextOutput::writeLine(const String &text){
 		outputMethod(text.toCharPtr(), text.size());
-		outputMethod(__ENDOFLINE, 1);
+		outputMethod(NL.toCharPtr(), NL.size());
 	}
 
 	void TextOutput::outputMethod(const void *buf, UInt32 size){
