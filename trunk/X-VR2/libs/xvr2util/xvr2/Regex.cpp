@@ -151,7 +151,7 @@ namespace xvr2 {
 			return false;
 		}
 
-		bool Regex::match(const char *pat, const char *str){
+		/*bool Regex::match(const char *pat, const char *str){
 			bool ret = false;
 			try{
 				Regex r(pat);
@@ -161,12 +161,15 @@ namespace xvr2 {
 				throw;
 			}
 			return ret;
-		}
+		}*/
 
-		bool Regex::match(const String &pat, const String &str){
+		bool Regex::match(const String &pat, const String &str, bool case_sensitive){
 			bool ret = false;
 			try{
 				Regex r(pat);
+				if(!case_sensitive){
+					 r.ignoreCase();
+				}
 				ret = r.matches(str);
 			}
 			catch(...){

@@ -50,7 +50,7 @@ namespace xvr2{
 				 *  \throws RegexException if regex compilation or
 				 *  matching fails at library level.
 				 */
-				void compile();
+				virtual void compile();
 			public:
 				/** Default constructor, This one wont perform pattern
 				 *  autocompilation and is required that the pattern 
@@ -120,22 +120,7 @@ namespace xvr2{
 				 *  has not been initialized yet
 				 *  \throws exception::regex if regex compilation or
 				 *  matching fails at library level. */
-				static bool match(const char *pattern, const char *str);
-				/** You may use this method as a shortcut when you need
-				 *  to test pattern matching against a single pattern
-				 *  once and dont want to create a Regex object.
-				 *  The method internally creates a Regex object
-				 *  compiles the given pattern and verifies if the
-				 *  given string matches or not.
-				 *  \param pattern Is the regular expression to be used
-				 *  \param str The string to test for matches against
-				 *  pattern.
-				 *  \return true if it str matches, false if not
-				 *  \throws exception::nullpointer if the regex pattern
-				 *  has not been initialized yet
-				 *  \throws exception::regex if regex compilation or
-				 *  matching fails at library level. */
-				static bool match(const String &pattern, const String &str);
+				static bool match(const String &pattern, const String &str, bool case_sensitive = true);
 				/** By using the compiled regex it attempts to check
 				 *  if the provided string matches the previously 
 				 *  given pattern.
