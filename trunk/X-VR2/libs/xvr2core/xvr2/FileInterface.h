@@ -3,6 +3,8 @@
 #define __XVR2_FILEINTERFACE_H__
 
 #include<xvr2/Object.h>
+#include<xvr2/Buffer.h>
+#include<xvr2/String.h>
 
 namespace xvr2 {
 	
