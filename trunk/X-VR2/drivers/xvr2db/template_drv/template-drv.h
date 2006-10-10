@@ -1,30 +1,46 @@
-/*
- * $Id$
- */
-#ifndef __TEMPLATE_DRIVER_H__
-#define __TEMPLATE_DRIVER_H__
-#include<xvr2.h>
+/* $Id$ */
+#ifndef __XVR2_DB_TEMPLATE_DRV_NG_H__
+#define __XVR2_DB_TEMPLATE_DRV_NG_H__
+#include<xvr2/DBField.h>
+#include<xvr2/DBResultSet.h>
+#include<xvr2/DBDriver.h>
 
-extern "C" { 
-/** This function initializes the driver itself taking as an argument the parent 
- *  SQLDriver class which is trying to generate it.
- *  It must first verify that this pointer is not null, then call any client RDBMS
- *  initialization methods and finally filling the <b>info</b> DBDriverInfo object
- *  with data appropiate for the current driver implementation. */
-bool	__drv_init(xvr2::SQLDriver *__me);
-bool	__drv_cleanup();
-void *__drv_connect(const char *srvr, const char *usr, const char *pass, const int port);
-Uint32 __drv_disconnect(void *handle);
-bool	__drv_getVersionInfo(xvr2::DBDriverInfo **i);
-bool	__drv_commit(void *handle);
-xvr2::ResultSet *__drv_query(void *handle, const char *cmd);
-bool	__drv_usedb(void *handle, const char *dbname);
-xvr2::SQLField *__drv_fetch_next_row(void *handle);
-int	__drv_numcols(void *handle);
-int	__drv_numrows(void *handle);
-bool	__drv_free_resultset(void *handle);
+using namespace xvr2::DB;
+using xvr2::String;
 
+class DB_TemplateDriver : public Driver {
+	private:
+		DriverInfo *dinfo;
+	protected:
+	public:
+		DB_TemplateDriver();
+		~DB_TemplateDriver();
+		const DriverInfo &getVersionInfo();
+		void *connect(const String &server, const String &__dbname, const String &user, const String &pass, int port = 0);
+		ResultSet *query(void *__conn_handle, const String &command);
+		bool disconnect(void *__conn_handle);
+		void setAutoCommit(bool val = true);
+		void commit(void *__conn_handle);
+		const int numRows(void *__res_handle);
+		const int numCols(void *__res_handle);
+		Field *fetchRow(void *__res_handle);
+		const bool freeResultSet(void *__res_handle);
+		const bool bulkBegin(void *conn_handle, const char *tablename, const char *cols, const char *delim);
+		const bool bulkAddData(void *conn_handle, const char *data, const char *delim);
+		const bool bulkEnd(void *conn_handle);
+		char *quoteString(const char *str);
+		String escapeString(const String &s);
+		String escapeString(const String &s, void *conn_handle);
+		const char *errorMessage(void *conn_handle);
+		const char *resultErrorMessage(void *res_handle);
+		const bool isConnected(void *conn_handle);
+		const bool hasConnPolling();
 };
 
+extern "C" {
+	DB_TemplateDriver *create_dbdriver_instance();
+	void destroy_dbdriver_instance(DB_TemplateDriver *obj);
+};
 
 #endif
+
