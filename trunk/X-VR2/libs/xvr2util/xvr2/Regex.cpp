@@ -64,7 +64,7 @@ namespace xvr2 {
 				handle = (void *)r;
 			}
 			else{
-				r = (regex_t *)r;
+				r = (regex_t *)handle;
 			}
 			if(_pattern == 0)
 				throw NullPointer();
@@ -80,7 +80,7 @@ namespace xvr2 {
 				cflags |= REG_EXTENDED;
 			else
 				cflags &= REG_EXTENDED;
-			if(compiled){
+			if(compiled && handle != 0){
 				//Recompile again
 				regex_t *r;
 				r = (regex_t *)handle;

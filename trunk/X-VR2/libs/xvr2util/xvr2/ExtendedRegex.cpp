@@ -1,19 +1,24 @@
+/* $Id$ */
 #include "ExtendedRegex.h"
+#include<regex.h>
 
 namespace xvr2{
 
 	namespace Util{
 
 		ExtendedRegex::ExtendedRegex():Regex(){
-			useExtended();
+			//useExtended();
+			cflags |= REG_EXTENDED;
 		}
 		
 		ExtendedRegex::ExtendedRegex(const String &pattern):Regex(pattern){
-			useExtended();
+			//useExtended();
+			cflags |= REG_EXTENDED;
 		}
 
 		void ExtendedRegex::compile(){
-			useExtended();
+			//useExtended();
+			cflags |= REG_EXTENDED;
 			Regex::compile();
 		}
 		bool ExtendedRegex::match(const String &pattern, const String &str, bool case_sensitive){

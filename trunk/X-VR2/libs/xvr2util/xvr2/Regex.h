@@ -36,10 +36,10 @@ namespace xvr2{
 				/** Tells wheter the pattern has already been compiled
 				 *  by the regex engine */
 				bool compiled;
-				/** Holds the regex compilation flags */
-				int cflags;
 				String *_pattern;
 			protected:
+				/** Holds the regex compilation flags */
+				int cflags;
 				/** Compiles the provided pattern. This method will
 				 *  make use of the regcomp function call in order
 				 *  to have a regex usable structure.
