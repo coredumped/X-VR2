@@ -165,7 +165,10 @@ namespace xvr2 {
 	void *runMethod_bf(BackgroundFunction &bf){
 		_addBF(&bf);
 		bf.called = true;
+		bf.onStart();
 		bf();
+		bf.onTerminate();
+		bf.callFinalizers();
 		_removeBF(&bf);
 		bf.terminated = true;
 		return 0;
@@ -246,6 +249,7 @@ namespace xvr2 {
 		pthread_attr_t attr;
 		pthread_attr_init(&attr);
 		pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_DETACHED);
+		bf.id = (UInt64)thread;
 		if(pthread_create(&thread, &attr, (void* (*)(void*))runMethod_bf, (void *)&bf) == EAGAIN){
 			throw ThreadNotRunning();
 		}
@@ -283,6 +287,18 @@ namespace xvr2 {
 #ifdef USE_POSIX_THREADS
 		return (UInt64)pthread_self();
 #endif
+	}
+	BackgroundFunction *ThreadManager::getCurrentBackgroundFunction(){
+		BackgroundFunction *ret = 0;
+		lm.lock();
+		for(UInt32 i = 0; i < activeBFs.size(); i++){
+			if(getCurrentThreadID() == activeBFs[i]->id){
+				ret = activeBFs[i];
+				break;
+			}
+		}
+		lm.unlock();
+		return ret;
 	}
 	void ThreadManager::setPriority(Thread *t, int prio){
 
@@ -387,5 +403,19 @@ namespace xvr2 {
 	}
 	Threading::SchedPolicy ThreadManager::getSchedulingPolicy(Thread &t){
 		return ThreadManager::getSchedulingPolicy(&t);
+	}
+
+//////////////////////////// THREAD IDENTIFICATION STUFF /////////////////////
+	bool ThreadManager::currentIsThread(){
+		if(getCurrentThread() == 0) return false;
+		return true;
+	}
+	bool ThreadManager::currentIsBackgroundFunction(){
+		if(getCurrentBackgroundFunction() == 0) return false;
+		return true;
+	}
+	bool ThreadManager::currentIsMain(){
+		if(!currentIsThread() && !currentIsBackgroundFunction()) return true;
+		return false;
 	}
 };

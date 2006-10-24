@@ -11,7 +11,7 @@ h_sources = CoreExceptions.h AutomatedGC.h BaseFile.h BasicStringBuffer.h \
 	ThreadManager.h Time.h Timestamp.h Tokenizer.h TraceDumper.h Unix.h \
 	User.h _xvr2ClassNames.h xvr2config.h Conversion.h Function.h \
 	BackgroundFunction.h Buffer.h FileInterface.h SystemException.h \
-	StdioInterface.h StdioInputFile.h StdioOutputFile.h 
+	StdioInterface.h StdioInputFile.h StdioOutputFile.h FinalizerCallback.h
 
 cc_sources = CoreExceptions.cpp AutomatedGC.cpp BaseFile.cpp BasicString.cpp \
 	Byte.cpp Chronometer.cpp ConditionVar.cpp Console.cpp Date.cpp \
@@ -23,7 +23,8 @@ cc_sources = CoreExceptions.cpp AutomatedGC.cpp BaseFile.cpp BasicString.cpp \
 	Thread.cpp Threading.cpp ThreadManager.cpp Time.cpp Timestamp.cpp \
 	Tokenizer.cpp TraceDumper.cpp Unix.cpp User.cpp _xvr2ClassNames.cpp \
 	Conversion.cpp Buffer.cpp FileInterface.cpp SystemException.cpp \
-	StdioInterface.cpp StdioInputFile.cpp StdioOutputFile.cpp
+	StdioInterface.cpp StdioInputFile.cpp StdioOutputFile.cpp \
+	BackgroundFunction.cpp
 
 library_includedir=$(includedir)/$(GENERIC_LIBRARY_NAME)
 library_include_HEADERS = $(h_sources)

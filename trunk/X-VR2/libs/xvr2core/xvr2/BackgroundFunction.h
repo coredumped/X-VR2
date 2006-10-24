@@ -4,7 +4,9 @@
 #ifndef __XVR2_BACKGROUND_FUNCTION_H__
 #define __XVR2_BACKGROUND_FUNCTION_H__
 #include<xvr2/Function.h>
+#include<xvr2/FinalizerCallback.h>
 #include<xvr2/SharedVar.h>
+#include<deque>
 
 namespace xvr2 {
 	/** \class BackgroundFunction BackgroundFunction.h <xvr2/BackgroundFunction.h>
@@ -13,7 +15,9 @@ namespace xvr2 {
 	 *  thread subprocess. */
 	class BackgroundFunction:public Function {
 		protected:
+			std::deque<FinalizerCallback> finalizers;
 		public:
+			UInt64 id;
 			/** Tells wheter the function has been called already, it moves from
 			 *  false to true just once in the lifetime of a BackgroundFunction.
 			 *  You should never modify its value. */
@@ -26,6 +30,7 @@ namespace xvr2 {
 #endif
 				called = false;
 				terminated = false;
+				id = 0;
 			}
 			/** Destructor that destroys nothing. */
 			virtual ~BackgroundFunction(){}
@@ -33,6 +38,18 @@ namespace xvr2 {
 			 *  run in the background, please override it in your implementation
 			 *  classes. */
 			virtual void operator()(void) = 0;
+			/** Routine to be called when the BackgroundFunction is about to be called
+			 *  (before it starts) */
+			virtual void onStart(){}
+			/** Routine to be called after the BackgroundFunction has finished */
+			virtual void onTerminate(){}
+			/** Allows to register a callback function which will be called after the
+			 *  BackgroundFunction terminates, in fact, it runs after the onTerminate()
+			 *  method. */
+			void registerFinalizer(FinalizerCallback &fc);
+			/** Executes all finalzers in reverse registration order deleting each one
+			 *  after execution. */
+			void callFinalizers();
 	};
 };
 

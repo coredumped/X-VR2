@@ -37,6 +37,7 @@ namespace xvr2 {
 			static bool isRunning(Thread *t);
 			/** Returns the currently running Thread Object or 0 if the method is called from a non-Thread.*/
 			static const Thread *getCurrentThread();
+			static BackgroundFunction *getCurrentBackgroundFunction();
 			/** Returns the numeric id of the currently running Thread */
 			static const UInt64 getCurrentThreadID();
 			/** Returns how many threads are actively running. */
@@ -55,6 +56,18 @@ namespace xvr2 {
 			static void setSchedulingParams(Thread &t, Threading::SchedPolicy pol, int prio);
 			static void setPriority(Thread *t, int prio);
 			static void setPriority(Thread &t, int prio);
+
+			/** Tells if the current thread has been subclassed from the Thread
+			 *  class */
+			static bool currentIsThread();
+			/** Tells if the current thread has been subclassed from the
+			 *  BackgroundFunction class */
+			static bool currentIsBackgroundFunction();
+			/** Tells if the current thread is the main thread, that is the main()
+			 *  function. 
+			 *  WARNING: this method won't diferentiate bewteen natively created
+			 *  threads and the main() function. */
+			static bool currentIsMain();
 	};
 
 };
