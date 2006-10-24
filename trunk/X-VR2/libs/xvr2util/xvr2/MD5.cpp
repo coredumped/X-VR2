@@ -244,6 +244,14 @@ namespace xvr2 {
 			hash = m.digest();
 			return hash;
 		}
+		const MD5 &MD5::operator<<(const Buffer &b){
+			update((unsigned char const *)b.data(), b.size());
+			return *this;
+		}
+		const MD5 &MD5::operator<<(const String &s){
+			update((unsigned char const *)s.toCharPtr(), s.size());
+			return *this;
+		}
 
 #define F1(x, y, z) (z ^ (x & (y ^ z)))
 #define F2(x, y, z) F1(z, x, y)

@@ -18,6 +18,7 @@
 #ifndef __XVR2_UTIL_MD5_H__
 #define __XVR2_UTIL_MD5_H__
 #include<xvr2/String.h>
+#include<xvr2/Buffer.h>
 #include<xvr2/CoreExceptions.h>
 #include<xvr2/ChecksumExceptions.h>
 
@@ -53,6 +54,8 @@ namespace xvr2 {
 				MD5(const String &str);
 				MD5Hash digest();
 				const MD5 &digest(MD5Hash &hash);
+				const MD5 &operator<<(const Buffer &b);
+				const MD5 &operator<<(const String &s);
 				static MD5Hash digest(const String &str);
 				static MD5Hash digest(const String &str, MD5Hash &hash);
 		};
