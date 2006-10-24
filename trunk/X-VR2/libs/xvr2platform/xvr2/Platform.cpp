@@ -22,15 +22,9 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
-
-#include<xvr2/Tokenizer.h>
-#include<xvr2/StringBuffer.h>
-#include<xvr2/Memory.h>
-#include<fstream>
-#include<vector>
+#include"Platform.h"
 #include<cerrno>
 #include<unistd.h>
-#include"Platform.h"
 #ifdef XVR2_HOST_PLATFORM_LINUX
 #include<sys/types.h>
 #include<sys/stat.h>
@@ -50,14 +44,21 @@
 #define GENTOO_RELEASE_F "/etc/gentoo-release"
 #endif
 
+#include<xvr2/Tokenizer.h>
+#include<xvr2/StringBuffer.h>
+#include<xvr2/Memory.h>
+#include<fstream>
+#include<vector>
 
-#ifndef PIC
+
+
+#if !defined(PIC) and defined(USE_LINUX_SYSCTL)
 //For some reason it is not possible to use the function
 //when the code is compiled with PIC
 #ifdef __cplusplus
 extern "C" {
 #endif
-extern _syscall1(int, _sysctl, struct __sysctl_args *, args);
+_syscall1(int, _sysctl, struct __sysctl_args *, args);
 #ifdef __cplusplus
 }
 #endif
@@ -105,7 +106,7 @@ xvr2::String __read_file_full(const xvr2::String &f){
 	#define SYSCTL_PARM_SIZE(x) sizeof(x)/sizeof(x[0])
 
 	String __computeOSName(){
-#ifndef PIC
+#if !defined(PIC) and defined(USE_LINUX_SYSCTL)
 		char osname[128];
 		xvr2::Memory::clearBuffer(osname, 128);
 		int name[] = { CTL_KERN, KERN_OSTYPE };
@@ -120,7 +121,7 @@ xvr2::String __read_file_full(const xvr2::String &f){
 	}
 	String __computeOSVersionString(){
 		String _version_str;
-#ifndef PIC
+#if !defined(PIC) and defined(USE_LINUX_SYSCTL)
 		char osname[128];
 		xvr2::Memory::clearBuffer(osname, 128);
 		int name[] = { CTL_KERN, KERN_OSRELEASE };
