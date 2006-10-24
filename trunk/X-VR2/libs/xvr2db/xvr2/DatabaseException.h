@@ -94,6 +94,7 @@ namespace xvr2 {
 		class SQLQueryException:public DatabaseException{
 			private:
 				DB::ResultSet *result;
+				String _query;
 			public:
 				/**
 				 * Default constructor
@@ -101,7 +102,10 @@ namespace xvr2 {
 				SQLQueryException();
 				~SQLQueryException();
 				SQLQueryException(const char *msg);
+				SQLQueryException(const char *msg, const String &__query);
 				SQLQueryException(const char *msg, DB::ResultSet *_result);
+				SQLQueryException(const char *msg, DB::ResultSet *_result, const String &__query);
+				const String &query();
 		};
 
 

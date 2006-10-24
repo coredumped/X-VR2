@@ -100,6 +100,26 @@ namespace xvr2 {
 			result = 0;
 		}
 
+		SQLQueryException::SQLQueryException(const char *msg, DB::ResultSet *_result, const String &__query){
+#ifdef USE_EMBEDDED_CLASSNAMES
+			setClassName((char *)__xvr2_DB_SQLQueryException);
+#endif
+			description = (char *)msg;
+			result = _result;
+			_query = __query;
+		}
+
+		SQLQueryException::SQLQueryException(const char *msg, const String &__query){
+#ifdef USE_EMBEDDED_CLASSNAMES
+			setClassName((char *)__xvr2_DB_SQLQueryException);
+#endif
+			description = (char *)msg;
+			result = 0;
+			_query = __query;
+		}
+		const String &SQLQueryException::query(){
+			return _query;
+		}
 		SQLQueryException::SQLQueryException(const char *msg, DB::ResultSet *_result){
 #ifdef USE_EMBEDDED_CLASSNAMES
 			setClassName((char *)__xvr2_DB_SQLQueryException);
