@@ -28,7 +28,7 @@ namespace xvr2 {
 			cflags = 0;
 			_pattern = 0;
 			handle = 0;
-			pattern(pat);
+			//pattern(pat);
 		}
 
 		Regex::Regex(const String &pat){
@@ -39,7 +39,7 @@ namespace xvr2 {
 			cflags = 0;
 			_pattern = 0;
 			handle = 0;
-			pattern(pat.toCharPtr());
+			//pattern(pat.toCharPtr());
 		}
 
 		const char *Regex::pattern(const char *p){

@@ -7,17 +7,14 @@ namespace xvr2{
 	namespace Util{
 
 		ExtendedRegex::ExtendedRegex():Regex(){
-			//useExtended();
 			cflags |= REG_EXTENDED;
 		}
 		
 		ExtendedRegex::ExtendedRegex(const String &pattern):Regex(pattern){
-			//useExtended();
 			cflags |= REG_EXTENDED;
 		}
 
 		void ExtendedRegex::compile(){
-			//useExtended();
 			cflags |= REG_EXTENDED;
 			Regex::compile();
 		}
@@ -35,10 +32,6 @@ namespace xvr2{
 			}
 			return ret;
 		}
-		/*ExtendedRegex::~ExtendedRegex()
-		{
-		}*/
-
 	};
 
 };
