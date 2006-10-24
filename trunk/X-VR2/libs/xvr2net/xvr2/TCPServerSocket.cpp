@@ -105,7 +105,7 @@ namespace xvr2{
 		 	ret = setsockopt(tsock, SOL_SOCKET, SO_LINGER, 
 					(struct linger*)&opt, sizeof(opt)); 
 #endif*/
-			setSockOption(SO_LINGER, (void *)&opt, sizeof(opt));
+			ret = setSockOption(SO_LINGER, (void *)&opt, sizeof(opt));
 		 	if(ret == -1){
 				_created = false;
 				throw NetworkException();
