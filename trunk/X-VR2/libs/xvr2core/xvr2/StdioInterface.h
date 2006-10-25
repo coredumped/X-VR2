@@ -3,12 +3,12 @@
 #include<xvr2/Object.h>
 #include<xvr2/String.h>
 #include<xvr2/SystemException.h>
-#include<xvr2/FileInterface.h>
+#include<xvr2/StreamInterface.h>
 #include<cstdio>
 
 namespace xvr2 {
 	/** TODO: Document this class */
-	class StdioInterface : public FileInterface4G {
+	class StdioInterface : public StreamInterface4G {
 		private:
 		protected:
 			FILE *_fptr;

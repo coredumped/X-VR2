@@ -2,14 +2,14 @@
 #ifndef __XVR2_STDIOINPUTFILE_H__
 #define __XVR2_STDIOINPUTFILE_H__
 
-#include<xvr2/FileInterface.h>
+#include<xvr2/StreamInterface.h>
 #include<xvr2/StdioInterface.h>
 #include<xvr2/String.h>
 #include<cstdio>
 
 namespace xvr2 {
 
-	class StdioInputFile : public ReadableFile, private StdioInterface {
+	class StdioInputFile : public ReadableStream, private StdioInterface {
 		public:
 			StdioInputFile();
 			StdioInputFile(const String &fname);

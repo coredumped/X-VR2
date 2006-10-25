@@ -1,12 +1,11 @@
 /* $Id$ */
-#include"FileInterface.h"
+#include"StreamInterface.h"
 #include"StdioInterface.h"
 #include"StdioOutputFile.h"
 
 namespace xvr2 {
-	//StdioOutputFile::
 	
-	StdioOutputFile::StdioOutputFile():WriteableFile(),StdioInterface(){
+	StdioOutputFile::StdioOutputFile():WriteableStream(),StdioInterface(){
 	}
 			
 	StdioOutputFile::StdioOutputFile(const String &fname, bool for_append){

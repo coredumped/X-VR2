@@ -1,14 +1,14 @@
 #ifndef __XVR2_STDIO_OUTPUT_FILE_H__
 #define __XVR2_STDIO_OUTPUT_FILE_H__
 #include<xvr2/Buffer.h>
-#include<xvr2/FileInterface.h>
+#include<xvr2/StreamInterface.h>
 #include<xvr2/StdioInterface.h>
 #include<xvr2/String.h>
 #include<cstdio>
 
 namespace xvr2 {
 	/** TODO: Document this class */
-	class StdioOutputFile : public WriteableFile, private StdioInterface {
+	class StdioOutputFile : public WriteableStream, private StdioInterface {
 		public:
 			StdioOutputFile();
 			StdioOutputFile(const String &fname, bool for_append = false);
