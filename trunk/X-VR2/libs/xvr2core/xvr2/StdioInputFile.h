@@ -24,13 +24,13 @@ namespace xvr2 {
 			StdioInputFile &read(Buffer &b);
 			StdioInputFile &readAll(Buffer &b);
 			
-			UInt32 size();
-			UInt32 tell();
-			StdioInputFile &seek(UInt32 _pos);
-			StdioInputFile &seekEnd();
-			StdioInputFile &seekBegin();
-			StdioInputFile &seekStep(UInt32 _step);
-			StdioInputFile &flush();
+			FileSizeT size();
+			FileOffsetT tell();
+			void seek(FileOffsetT _pos);
+			void seekEnd();
+			void seekBegin();
+			void seekStep(FileOffsetT _step);
+			void flush();
 			
 			bool eof();
 	};

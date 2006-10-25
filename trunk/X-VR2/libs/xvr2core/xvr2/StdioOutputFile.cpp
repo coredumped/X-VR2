@@ -1,4 +1,19 @@
 /* $Id$ */
+/*
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ */
 #include"StreamInterface.h"
 #include"StdioInterface.h"
 #include"StdioOutputFile.h"
@@ -66,37 +81,32 @@ namespace xvr2 {
 		return *this;
 	}
 	
-	UInt32 StdioOutputFile::size(){
+	FileSizeT StdioOutputFile::size(){
 		return computeSize();	
 	}
 	
-	UInt32 StdioOutputFile::tell(){
+	FileOffsetT StdioOutputFile::tell(){
 		return _tell();
 	}
 	
-	StdioOutputFile &StdioOutputFile::seek(UInt32 _pos){
+	void StdioOutputFile::seek(UInt32 _pos){
 		_seek(_pos);
-		return *this;
 	}
 	
-	StdioOutputFile &StdioOutputFile::seekEnd(){
+	void StdioOutputFile::seekEnd(){
 		_seekEnd();
-		return *this;
 	}
 	
-	StdioOutputFile &StdioOutputFile::seekBegin(){
+	void StdioOutputFile::seekBegin(){
 		_seekBegin();
-		return *this;
 	}
 	
-	StdioOutputFile &StdioOutputFile::seekStep(UInt32 _step){
+	void StdioOutputFile::seekStep(UInt32 _step){
 		_seekStep(_step);
-		return *this;
 	}
 	
-	StdioOutputFile &StdioOutputFile::flush(){
+	void StdioOutputFile::flush(){
 		_flush();
-		return *this;
 	}
 	
 	bool StdioOutputFile::eof(){

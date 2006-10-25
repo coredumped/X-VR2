@@ -24,11 +24,10 @@
 namespace xvr2 {
 	
 	/** File interface class. */
-	template<class fSize_t>
 	class StreamInterface : public Object {
 		private:
 		protected:
-			//fSize_t _fsize;
+			//FileSizeT _fsize;
 		public:
 			StreamInterface(){
 				//_fsize = 0;
@@ -37,22 +36,18 @@ namespace xvr2 {
 			virtual void open(const String &path) = 0;
 			virtual void close() = 0;
 			virtual bool opened() = 0;
-			virtual fSize_t size() = 0;
-			virtual fSize_t tell() = 0;
-			virtual StreamInterface<fSize_t> &seek(fSize_t _pos) = 0;
-			virtual StreamInterface<fSize_t> &seekEnd() = 0;
-			virtual StreamInterface<fSize_t> &seekBegin() = 0;
-			virtual StreamInterface<fSize_t> &seekStep(fSize_t _step) = 0;
-			virtual StreamInterface<fSize_t> &flush() = 0;
+			virtual FileSizeT size() = 0;
+			virtual FileOffsetT tell() = 0;
+			virtual void seek(FileOffsetT _pos) = 0;
+			virtual void seekEnd() = 0;
+			virtual void seekBegin() = 0;
+			virtual void seekStep(FileOffsetT _step) = 0;
+			virtual void flush() = 0;
 			virtual bool eof() = 0;
 	};
 	
-	/** To be used with files equal or smaller in size than 4Gb. */
-	class StreamInterface4G : public virtual StreamInterface<UInt32> {
-	};
-	
 	/** Implements readable/input files. */
-	class ReadableStream : public virtual StreamInterface4G {
+	class ReadableStream : public virtual StreamInterface {
 		public:
 			virtual ReadableStream &operator >> (UInt32 n);
 			virtual ReadableStream &operator >> (double n);
@@ -70,7 +65,7 @@ namespace xvr2 {
 	}; 
 	
 	/** Implements writeable/output files. */
-	class WriteableStream : public virtual StreamInterface4G {
+	class WriteableStream : public virtual StreamInterface {
 		public:
 			virtual WriteableStream &operator << (const Buffer &b);
 			virtual WriteableStream &operator << (const String &s);

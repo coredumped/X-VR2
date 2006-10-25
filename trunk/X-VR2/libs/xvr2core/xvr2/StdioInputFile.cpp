@@ -35,37 +35,32 @@ namespace xvr2{
 		return _read(data, _size);
 	}
 	
-	UInt32 StdioInputFile::size(){
+	FileSizeT StdioInputFile::size(){
 		return computeSize();	
 	}
 	
-	UInt32 StdioInputFile::tell(){
+	FileOffsetT StdioInputFile::tell(){
 		return _tell();
 	}
 	
-	StdioInputFile &StdioInputFile::seek(UInt32 _pos){
+	void StdioInputFile::seek(FileOffsetT _pos){
 		_seek(_pos);
-		return *this;
 	}
 	
-	StdioInputFile &StdioInputFile::seekEnd(){
+	void StdioInputFile::seekEnd(){
 		_seekEnd();
-		return *this;
 	}
 	
-	StdioInputFile &StdioInputFile::seekBegin(){
+	void StdioInputFile::seekBegin(){
 		_seekBegin();
-		return *this;
 	}
 	
-	StdioInputFile &StdioInputFile::seekStep(UInt32 _step){
+	void StdioInputFile::seekStep(FileOffsetT _step){
 		_seekStep(_step);
-		return *this;
 	}
 	
 	//Input reading can't be flushed
-	StdioInputFile &StdioInputFile::flush(){
-		return *this;
+	void StdioInputFile::flush(){
 	}
 	
 	bool StdioInputFile::eof(){
