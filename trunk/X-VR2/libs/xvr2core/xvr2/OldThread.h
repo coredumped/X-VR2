@@ -17,7 +17,7 @@
 namespace xvr2{
 	/**
 	 * \class Thread Thread.h <xvr2/Thread.h>
-	 * \version $Revision$
+	 * \version $Revision: 326 $
 	 * \brief
 	 * This class encapsulates the thread library functionality using 
 	 * POSIX-THREADS.\n
