@@ -65,7 +65,7 @@ namespace xvr2 {
 		return ret;
 	}
 	
-	size_t StdioInterface::computeSize(){
+	FileSizeT StdioInterface::size(){
 		if(_fsize == 0){
 #ifdef XVR2_STDIO_PARANOID
 			if(!_opened()) throw FileNotOpened();
@@ -79,46 +79,46 @@ namespace xvr2 {
 		return _fsize;
 	}
 	
-	void StdioInterface::_seek(UInt32 _pos, UInt32 _from){
+	void StdioInterface::_seek(FileOffsetT _pos, UInt32 _from){
 #ifdef XVR2_STDIO_PARANOID	
 		if(!_opened()) throw FileNotOpened();
 #endif
 		if(fseek(_fptr, _pos, _from) != 0) throw SystemException(errno);
 	}
 	
-	void StdioInterface::_seek(UInt32 _pos){
+	void StdioInterface::seek(FileOffsetT _pos){
 		_seek(_pos, SEEK_SET);
 	}
 	
-	void StdioInterface::_seekBegin(){
+	void StdioInterface::seekBegin(){
 		_seek(0, SEEK_SET);
 	}
 	
-	void StdioInterface::_seekEnd(){
+	void StdioInterface::seekEnd(){
 		_seek(0, SEEK_END);
 	}
 	
-	void StdioInterface::_seekStep(UInt32 step){
+	void StdioInterface::seekStep(FileOffsetT step){
 		_seek(step, SEEK_CUR);
 	}
 	
-	UInt32 StdioInterface::_tell(){
-		long _tx;
+	FileOffsetT StdioInterface::tell(){
+		FileOffsetT _tx;
 #ifdef XVR2_STDIO_PARANOID
 		if(!_opened()) throw FileNotOpened();
 #endif
 		if((_tx = ftell(_fptr)) == -1) throw SystemException(errno);
-		return (UInt32)_tx;
+		return _tx;
 	}
 	
-	bool StdioInterface::_eof(){
+	bool StdioInterface::eof(){
 #ifdef XVR2_STDIO_PARANOID
 		if(!_opened()) throw FileNotOpened();
 #endif
 		return (feof(_fptr) == 0)?false:true;
 	}
 	
-	void StdioInterface::_flush(){
+	void StdioInterface::flush(){
 #ifdef XVR2_STDIO_PARANOID
 		if(!_opened()) throw FileNotOpened();
 #endif

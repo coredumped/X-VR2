@@ -81,35 +81,26 @@ namespace xvr2 {
 		return *this;
 	}
 	
-	FileSizeT StdioOutputFile::size(){
-		return computeSize();	
-	}
-	
-	FileOffsetT StdioOutputFile::tell(){
-		return _tell();
-	}
-	
-	void StdioOutputFile::seek(UInt32 _pos){
-		_seek(_pos);
+	void StdioOutputFile::seek(FileOffsetT _pos){
+		//Throw an exception here
 	}
 	
 	void StdioOutputFile::seekEnd(){
-		_seekEnd();
+		//Throw an exception here
 	}
 	
 	void StdioOutputFile::seekBegin(){
-		_seekBegin();
+		//Throw an exception here
 	}
 	
-	void StdioOutputFile::seekStep(UInt32 _step){
-		_seekStep(_step);
-	}
-	
-	void StdioOutputFile::flush(){
-		_flush();
+	void StdioOutputFile::seekStep(FileOffsetT _step){
+		//Throw an exception here
 	}
 	
 	bool StdioOutputFile::eof(){
-		return _eof();
+		//While writing the fd pointer is allways at EOF point
+		//throw an exception here or at least return true always
+		return true;
 	}
 };
+

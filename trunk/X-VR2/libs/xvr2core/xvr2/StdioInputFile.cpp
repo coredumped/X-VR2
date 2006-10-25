@@ -35,37 +35,14 @@ namespace xvr2{
 		return _read(data, _size);
 	}
 	
-	FileSizeT StdioInputFile::size(){
-		return computeSize();	
-	}
-	
-	FileOffsetT StdioInputFile::tell(){
-		return _tell();
-	}
-	
-	void StdioInputFile::seek(FileOffsetT _pos){
-		_seek(_pos);
-	}
-	
-	void StdioInputFile::seekEnd(){
-		_seekEnd();
-	}
-	
-	void StdioInputFile::seekBegin(){
-		_seekBegin();
-	}
-	
-	void StdioInputFile::seekStep(FileOffsetT _step){
-		_seekStep(_step);
-	}
-	
 	//Input reading can't be flushed
 	void StdioInputFile::flush(){
+		//Throw an exception here
 	}
 	
-	bool StdioInputFile::eof(){
+	/*bool StdioInputFile::eof(){
 		return _eof();
-	}
+	}*/
 	
 	UInt32 StdioInputFile::read(Buffer &data, UInt32 ___size){
 		UInt32 _siz;
@@ -86,3 +63,4 @@ namespace xvr2{
 		return *this;
 	}
 }
+

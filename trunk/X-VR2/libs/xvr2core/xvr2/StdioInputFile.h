@@ -9,7 +9,7 @@
 
 namespace xvr2 {
 
-	class StdioInputFile : public ReadableStream, private StdioInterface {
+	class StdioInputFile : public ReadableStream, public StdioInterface {
 		public:
 			StdioInputFile();
 			StdioInputFile(const String &fname);
@@ -24,17 +24,10 @@ namespace xvr2 {
 			StdioInputFile &read(Buffer &b);
 			StdioInputFile &readAll(Buffer &b);
 			
-			FileSizeT size();
-			FileOffsetT tell();
-			void seek(FileOffsetT _pos);
-			void seekEnd();
-			void seekBegin();
-			void seekStep(FileOffsetT _step);
 			void flush();
-			
-			bool eof();
 	};
 
 };
 
 #endif
+

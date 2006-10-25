@@ -25,7 +25,7 @@
 
 namespace xvr2 {
 	/** TODO: Document this class */
-	class StdioOutputFile : public WriteableStream, private StdioInterface {
+	class StdioOutputFile : public WriteableStream, public StdioInterface {
 		public:
 			StdioOutputFile();
 			StdioOutputFile(const String &fname, bool for_append = false);
@@ -42,13 +42,10 @@ namespace xvr2 {
 			virtual StdioOutputFile &write(const Buffer &data);
 			virtual StdioOutputFile &write(const String &s);
 			
-			FileSizeT size();
-			FileOffsetT tell();
-			void seek(UInt32 _pos);
+			void seek(FileOffsetT _pos);
 			void seekEnd();
 			void seekBegin();
-			void seekStep(UInt32 _step);
-			void flush();
+			void seekStep(FileOffsetT _step);
 			
 			bool eof();
 	};
