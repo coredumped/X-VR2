@@ -19,21 +19,21 @@
 #ifndef __XVR2_Log_H__
 #define __XVR2_Log_H__
 
-#include<xvr2/Mutex.h>
 #include<xvr2/CoreExceptions.h>
 #include<xvr2/StdioOutputFile.h>
+#include<xvr2/StringBuffer.h>
 
 namespace xvr2{
 	/** This class manages basic log file handling */
-	class Log:public StdioOutputFile {
+	class Log:private StdioOutputFile {
 		private:
-			Mutex mutex;
+			StringBuffer ldata;
 		protected:
 			bool show_times;
 		public:
 			Log(const String &fname, bool _show_times = true);
-			Log &write(void *data, UInt32 size);
-			
+			Log &operator << (const String &s);
+			void flush();
 	};
 };
 

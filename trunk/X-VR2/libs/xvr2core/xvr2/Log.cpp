@@ -21,6 +21,7 @@
 #include"config.h"
 #include"Log.h"
 #include<xvr2/Timestamp.h>
+#include<xvr2/ThreadManager.h>
 
 namespace xvr2{
 
@@ -42,24 +43,31 @@ namespace xvr2{
 		show_times = _show_times;
 	}
 
-	static const char *__lsep = ": ";
+	static const char *__lsep1 = " [Thread=";
+	static const char *__lsep2 = "]: ";
 
-	Log &Log::write(void *data, UInt32 size){
-		if(NL.equals((char *)data)){
-			StdioOutputFile::write((void *)NL.toCharPtr(), NL.size());
-			flush();
-			return *this;
+	Log &Log::operator << (const String &s){
+		ldata << s;
+		if(s.equals(NL)){
+			String line = ldata.toString();
+			ldata.clear();
+			if(show_times){
+				Timestamp t;
+				ldata << t.toString();
+			}
+			ldata << __lsep1 << ThreadManager::getCurrentThreadID() << __lsep2 << line;
+			Log::flush();
+			ldata.clear();
 		}
-		if(show_times){
-			Timestamp t;
-			std::string s = t.toString();
-			StdioOutputFile::write((void *)s.c_str(), s.size());
-			StdioOutputFile::write((void *)__lsep, 2);
-		}
-		StdioOutputFile::write((void *)data, size);
 		return *this;
 	}
 
+	void Log::flush(){
+		if(ldata.toString().size() > 0){
+			write((void *)ldata.toString().toCharPtr(), ldata.toString().size());
+		}
+		StdioOutputFile::flush();
+	}
 
 	//End implementation of class: Log
 };
