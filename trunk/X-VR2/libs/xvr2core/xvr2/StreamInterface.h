@@ -20,6 +20,7 @@
 #include<xvr2/Object.h>
 #include<xvr2/Buffer.h>
 #include<xvr2/String.h>
+#include<xvr2/StreamException.h>
 
 namespace xvr2 {
 	
@@ -46,7 +47,17 @@ namespace xvr2 {
 			virtual bool eof() = 0;
 	};
 	
-	/** Implements readable/input files. */
+	/** Implements readable/input streams.
+	 *  Considerations
+	 *  1. Readable streams ARE NOT flushable, that is since they are
+	 *     considered input devices there is no input to push down the
+	 *     pipe.
+	 *  2. When subclassing sometimes is enough to just implement the
+	 *     UInt32 ReadableStream::read(void *data, UInt32 size) method.
+	 *  3. Also you must provide an open method which takes a String as
+	 *     a parameter which specifies the stream "address", that address
+	 *     can be a filesystem path or any other address which your
+	 *     implmentation is meant to handle. */
 	class ReadableStream : public virtual StreamInterface {
 		public:
 			virtual ReadableStream &operator >> (UInt32 n);
@@ -62,6 +73,7 @@ namespace xvr2 {
 			ReadableStream &read(Buffer &b);
 			/** Loads the full contents and returns it in a Buffer */
 			ReadableStream &readAll(Buffer &b);
+			virtual void flush();
 	}; 
 	
 	/** Implements writeable/output files. */
@@ -72,7 +84,15 @@ namespace xvr2 {
 			virtual WriteableStream &write(void *data, UInt32 size) = 0;
 			virtual WriteableStream &write(const Buffer &data);
 			virtual WriteableStream &write(const String &s);
+			virtual void seek(FileOffsetT _pos);
+			virtual void seekEnd();
+			virtual void seekBegin();
+			virtual void seekStep(FileOffsetT _step);
 	};
+
+	//class RandomAccessStream : public virtual StreamInterface {
+	//};
 };
 
 #endif
+

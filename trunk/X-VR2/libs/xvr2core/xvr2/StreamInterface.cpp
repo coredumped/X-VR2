@@ -66,6 +66,10 @@ namespace xvr2 {
 		read(b, size());
 		return *this;
 	}
+
+	void ReadableStream::flush(){
+		throw StreamIsNotFlushable();
+	}
 	// END READABLE FILE
 
 
@@ -90,6 +94,23 @@ namespace xvr2 {
 		write((void *)s.toCharPtr(), s.size());
 		return *this;
 	}
+
+	void WriteableStream::seek(FileOffsetT _pos){
+		throw StreamIsNotSeekable();
+	}
+
+	void WriteableStream::seekEnd(){
+		throw StreamIsNotSeekable();
+	}
+
+	void WriteableStream::seekBegin(){
+		throw StreamIsNotSeekable();
+	}
+
+	void WriteableStream::seekStep(FileOffsetT _step){
+		throw StreamIsNotSeekable();
+	}
+
 	// END WRITEABLE FILE
 
 };
