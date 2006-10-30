@@ -12,7 +12,7 @@ h_sources = CoreExceptions.h AutomatedGC.h BaseFile.h BasicStringBuffer.h \
 	User.h _xvr2ClassNames.h xvr2config.h Conversion.h Function.h \
 	BackgroundFunction.h Buffer.h StreamInterface.h SystemException.h \
 	StdioInterface.h StdioInputFile.h StdioOutputFile.h FinalizerCallback.h \
-	RawInputStream.h
+	RawInputStream.h RawOutputStream.h RawStreamInterface.h StreamException.h
 
 cc_sources = CoreExceptions.cpp AutomatedGC.cpp BaseFile.cpp BasicString.cpp \
 	Byte.cpp Chronometer.cpp ConditionVar.cpp Console.cpp Date.cpp \
@@ -25,7 +25,8 @@ cc_sources = CoreExceptions.cpp AutomatedGC.cpp BaseFile.cpp BasicString.cpp \
 	Tokenizer.cpp TraceDumper.cpp Unix.cpp User.cpp _xvr2ClassNames.cpp \
 	Conversion.cpp Buffer.cpp StreamInterface.cpp SystemException.cpp \
 	StdioInterface.cpp StdioInputFile.cpp StdioOutputFile.cpp \
-	BackgroundFunction.cpp RawInputStream.cpp
+	BackgroundFunction.cpp RawInputStream.cpp RawOutputStream.cpp \
+	RawStreamInterface.cpp StreamException.cpp
 
 library_includedir=$(includedir)/$(GENERIC_LIBRARY_NAME)
 library_include_HEADERS = $(h_sources)
