@@ -17,18 +17,18 @@
 #ifndef __XVR2_RAW_INPUT_STREAM_H__
 #define __XVR2_RAW_INPUT_STREAM_H__
 #include<xvr2/StreamInterface.h>
+#include<xvr2/RawStreamInterface.h>
 #include<xvr2/SystemException.h>
 
 namespace xvr2 {
 
 	/** TODO: Document this class */
-	class RawInputStream : public ReadableStream{
-		protected:
-			int _fd;
-			bool _a_close;
+	class RawInputStream : public ReadableStream, public RawStreamInterface {
+		private:
+			bool reached_eof;
 		public:
 			RawInputStream();
-			~RawInputStream();
+			virtual ~RawInputStream();
 			RawInputStream(int __fd);
 			RawInputStream(const String &fname);
 			void open(int __fd);
@@ -37,6 +37,12 @@ namespace xvr2 {
 
 			virtual UInt32 read(void *data, UInt32 size);
 			int fd();
+			bool eof();
+			virtual void seek(FileOffsetT _pos);
+			virtual void seekEnd();
+			virtual void seekBegin();
+			virtual void seekStep(FileOffsetT _step);
+			virtual bool ready();
 	};
 };
 
