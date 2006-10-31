@@ -28,11 +28,8 @@ namespace xvr2 {
 	class StreamInterface : public Object {
 		private:
 		protected:
-			//FileSizeT _fsize;
 		public:
-			StreamInterface(){
-				//_fsize = 0;
-			}
+			StreamInterface(){ }
 			virtual ~StreamInterface(){}
 			virtual void open(const String &path) = 0;
 			virtual void close() = 0;
