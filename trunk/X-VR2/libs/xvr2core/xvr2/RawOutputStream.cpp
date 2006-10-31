@@ -84,11 +84,11 @@ namespace xvr2 {
 		return true;
 	}
 
-	bool RawOutputStream::ready(){
+	bool RawOutputStream::ready(int timeout){
 		int r;
 		bool ret = false;
 		struct pollfd d = { _fd, POLLOUT, 0 };
-		r = poll(&d, 1, 0);
+		r = poll(&d, 1, timeout);
 		if(r == -1){
 			throw StreamException(errno);
 		}

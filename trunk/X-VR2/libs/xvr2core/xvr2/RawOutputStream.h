@@ -37,7 +37,7 @@ namespace xvr2 {
 			virtual void flush();
 			FileSizeT size();
 			bool eof();
-			virtual bool ready();
+			virtual bool ready(int timeout = 100);
 	};
 };
 #endif
