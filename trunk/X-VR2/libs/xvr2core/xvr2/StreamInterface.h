@@ -67,12 +67,12 @@ namespace xvr2 {
 			UInt32 read(double n);
 			UInt32 read(UInt64 n);
 			virtual UInt32 read(void *data, UInt32 size) = 0;
-			UInt32 read(Buffer &data, UInt32 size);
+			virtual UInt32 read(Buffer &data, UInt32 size);
 			/** Reads all data starting from the current position to the end of the
 			 *  file and returns it in a Buffer object. */
-			ReadableStream &read(Buffer &b);
+			virtual ReadableStream &read(Buffer &b);
 			/** Loads the full contents and returns it in a Buffer */
-			ReadableStream &readAll(Buffer &b);
+			virtual ReadableStream &readAll(Buffer &b);
 			virtual void flush();
 	}; 
 	
