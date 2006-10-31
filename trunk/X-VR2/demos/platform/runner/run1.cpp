@@ -12,7 +12,7 @@ int main(int argc, char *argv[]){
 	for(int i = 1; i < argc; i++){
 		cmd << argv[i] << " ";
 	}
-	Platform::ProcessRunner::start(cmd.toString(), buf);
+	Platform::ProcessRunner::execute(cmd.toString(), buf);
 
 	std::cout << (const char *)buf.data();
 	std::cout.flush();
