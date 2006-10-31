@@ -37,9 +37,10 @@ namespace xvr2 {
 	}
 
 	RawInputStream::RawInputStream(int __fd){
-		_fd = __fd;
+		/*_fd = __fd;
 		reached_eof = false;
-		_is_opened = true;
+		_is_opened = true;*/
+		open(__fd);
 	}
 
 	RawInputStream::RawInputStream(const String &fname){
@@ -117,7 +118,7 @@ namespace xvr2 {
 		reached_eof = false;
 	}
 
-	bool RawInputStream::ready(){
+	bool RawInputStream::ready(int timeout){
 		int r;
 		bool ret = false;
 		struct pollfd d = { _fd, POLLIN | POLLPRI, 0 };

@@ -42,7 +42,7 @@ namespace xvr2 {
 			virtual void seekEnd();
 			virtual void seekBegin();
 			virtual void seekStep(FileOffsetT _step);
-			virtual bool ready();
+			virtual bool ready(int timeout = 100);
 	};
 };
 
