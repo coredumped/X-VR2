@@ -1,5 +1,5 @@
 # $Id$
-# Top Makefile for xvr2core demos
+# Top Makefile for xvr2platform demos
 
 SUBDIRS = info runner
 

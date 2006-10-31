@@ -1,4 +1,4 @@
-dnl $Id: configure.ac 317 2006-02-11 18:16:24Z mindstorm2600 $
+dnl $Id$
 
 dnl --------------------------------
 dnl Initialization macros.
@@ -60,7 +60,7 @@ PKG_CHECK_MODULES(XVR2CORE, [xvr2core >= $xvr2core_required_version],[
 dnl -----------------------------------------------
 dnl Verify that xvr2platform library is already installed
 dnl -----------------------------------------------
-PKG_CHECK_MODULES(XVR2CORE, [xvr2platform >= $xvr2platform_required_version],[
+PKG_CHECK_MODULES(XVR2PLATFORM, [xvr2platform >= $xvr2platform_required_version],[
 	AC_MSG_RESULT([*** xvr2platform found ***])
 	CPPFLAGS="$CPPFLAGS $XVR2PLATFORM_CFLAGS"
 	LIBS="$LIBS $XVR2PLATFORM_LIBS"
