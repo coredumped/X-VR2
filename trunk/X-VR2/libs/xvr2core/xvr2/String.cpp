@@ -559,4 +559,9 @@ namespace xvr2{
 	String String::getSubstr(int start, int end){
 		return BasicString<char>::substr(start, end);
 	}
+
+	void String::eat(char *data, int len){
+		BasicString<char>::append(data, len);
+	}
 };
+

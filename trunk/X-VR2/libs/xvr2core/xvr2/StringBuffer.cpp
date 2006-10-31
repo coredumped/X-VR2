@@ -30,4 +30,7 @@ namespace xvr2 {
 	const String &StringBuffer::toString() const {
 		return *buffer;
 	}
+	void StringBuffer::eat(char *data, int len){
+		buffer->eat(data, len);
+	}
 };

@@ -17,6 +17,8 @@ namespace xvr2 {
 			const char *toCharPtr() const;
 			const StringBuffer &operator<<(const String &s) const;
 			const String &toString() const;
+			/** Will append to the String len characters from the data buffer */
+			void eat(char *data, int len);
 	};
 };
 
