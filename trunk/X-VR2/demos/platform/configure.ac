@@ -4,7 +4,7 @@ dnl --------------------------------
 dnl Initialization macros.
 dnl --------------------------------
 
-AC_INIT(String/basic.cpp)
+AC_INIT(info/info.cpp)
 AM_CONFIG_HEADER(config.h)
 
 GENERIC_VERSION=0.7.1.0
