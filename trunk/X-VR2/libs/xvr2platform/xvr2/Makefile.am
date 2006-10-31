@@ -1,8 +1,8 @@
 ## Source directory
 
-h_sources = PlatformException.h Platform.h CPU.h
+h_sources = PlatformException.h Platform.h CPU.h ProcessRunner.h
 
-cc_sources = PlatformException.cpp Platform.cpp CPU.cpp
+cc_sources = PlatformException.cpp Platform.cpp CPU.cpp ProcessRunner.cpp
 
 library_includedir=$(includedir)/$(GENERIC_LIBRARY_NAME)
 library_include_HEADERS = $(h_sources)
