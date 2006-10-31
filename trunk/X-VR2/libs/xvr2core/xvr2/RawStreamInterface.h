@@ -29,7 +29,7 @@ namespace xvr2 {
 			virtual FileSizeT size();
 			virtual FileOffsetT tell();
 			virtual bool opened();
-			virtual bool ready() = 0;
+			virtual bool ready(int t = 100) = 0;
 	};
 };
 
