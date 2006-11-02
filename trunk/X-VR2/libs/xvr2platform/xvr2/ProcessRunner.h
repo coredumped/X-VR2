@@ -15,6 +15,9 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
+#ifndef __XVR2_PLATFORM_PROCESS_RUNNER_H__
+#define __XVR2_PLATFORM_PROCESS_RUNNER_H__
+
 #include<xvr2/SystemException.h>
 #include<xvr2/PlatformException.h>
 #include<xvr2/RawInputStream.h>
@@ -66,3 +69,4 @@ namespace xvr2 {
 	};
 };
 
+#endif
