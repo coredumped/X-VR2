@@ -47,18 +47,43 @@ namespace xvr2 {
 
 	void BufferedTextInputStream::operator>>(String &s){
 		char *_buf;
+		char *bufptr = 0;
 		s.clear();
 		if(buffer.size() > 0){
-			do{
-				if(buffer.equals(_lterm)){
-					s.eat((char *)buffer.toCharPtr(), _lterm.size());
-					buffer.clear();
-					return;
-				}
+			if(buffer.equals(_lterm)){
+				s.eat((char *)buffer.toCharPtr(), _lterm.size());
+				buffer.clear();
+			}
+			else if(buffer.startsWith(_lterm)){
 				s.eat((char *)buffer.toCharPtr(), _lterm.size());
 				buffer.biteLeft(_lterm.size());
-			} while(!buffer.startsWith(_lterm));
-			s.eat((char *)buffer.toCharPtr(), _lterm.size());
+			}
+			else{
+				bufptr = (char *)buffer.toCharPtr();
+				int eaten = 0;
+				while(buffer.size() > 0 && !buffer.startsWith(_lterm)){
+					s.eat(buffer.toCharPtr(), 1);
+					if(buffer.size() == 1){
+						buffer.clear();
+						return;
+					}
+					else{
+						buffer.biteLeft(1);
+					}
+				}
+				s.eat(buffer.toCharPtr(), _lterm.size());
+				if(buffer.size() == _lterm.size()){
+					buffer.clear();
+				}
+				else{
+					buffer.biteLeft(_lterm.size());
+				}
+				/*do{
+					s.eat((char *)buffer.toCharPtr(), 1);
+					buffer.biteLeft(1);
+				} while(!buffer.startsWith(_lterm) && buffer.size() > _lterm.size());
+				s.eat((char *)buffer.toCharPtr(), _lterm.size());*/
+			}
 		}
 		else{
 			bool keep_reading = true;
@@ -73,18 +98,18 @@ namespace xvr2 {
 					//Now the tricky part, lets read the _buf every _lterm.size()
 					//steps until one of those steps is equals to _lterm, keep feeding
 					//that to data
-					char *bufptr = _buf;
-					for(UInt32 i = 0; i < siz; i += _lterm.size()){
-						s.eat(bufptr, _lterm.size());
+					bufptr = _buf;
+					for(UInt32 i = 0; i < siz; i++){
+						s.eat(bufptr, 1);
 						if(strncmp(_lterm.toCharPtr(), bufptr, _lterm.size()) == 0){
 							keep_reading = false;
 							//Read all the remainings from bufptr to the end of the _buf
 							//then assign it to line
 							buffer.clear();
-							buffer.eat(bufptr + _lterm.size(), siz - (i + _lterm.size()));
+							buffer.eat(bufptr + _lterm.size(), siz - (i + 1));
 							break;
 						}
-						bufptr += _lterm.size();
+						bufptr += 1;
 					}
 				}
 			}while(keep_reading);
