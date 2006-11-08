@@ -226,7 +226,7 @@ namespace xvr2{
 			virtual std::string toString();
 			
 			/** Will append to the String len characters from the data buffer */
-			void eat(char *data, int len);
+			void eat(const char *data, int len);
 	};
 	extern const String NL;
 };
