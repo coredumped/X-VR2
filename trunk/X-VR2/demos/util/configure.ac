@@ -56,6 +56,20 @@ PKG_CHECK_MODULES(XVR2CORE, [xvr2core >= $xvr2core_required_version],[
 	exit 1
 ])
 
+xvr2util_required_version=0.7.1.0
+
+dnl -----------------------------------------------
+dnl Verify that xvr2util library is already installed
+dnl -----------------------------------------------
+PKG_CHECK_MODULES(XVR2UTIL, [xvr2util >= $xvr2util_required_version],[
+	AC_MSG_RESULT([*** xvr2util found ***])
+	CPPFLAGS="$CPPFLAGS $XVR2UTIL_CFLAGS"
+	LIBS="$LIBS $XVR2UTIL_LIBS"
+],[
+	AC_MSG_RESULT([ !!! A suitable version of xvr2util has not been found, unable to build demos, sorry !!! ])
+	exit 1
+])
+
 DEPS_LIBS=$LIBS
 AC_SUBST(DEPS_LIBS)
 
@@ -64,20 +78,18 @@ dnl Generates Makefile's, configuration files and scripts
 dnl -----------------------------------------------
 
 AC_OUTPUT(Makefile \
-	buffer/Makefile \
-	console/Makefile \
-	String/Makefile \
-	String/conversion/Makefile \
-	Thread/Makefile \
-	tokenizer/Makefile \
-	file/Makefile \
-	log/Makefile
+	md5/Makefile \
+	ConfigFile/Makefile \
+	DataContainers/Makefile \
+	c_utilities/Makefile \
+	regex/Makefile
 )
 
 echo
 echo "######################################"
-echo "# X-VR2 Core demos $GENERIC_VERSION"
+echo "# X-VR2 Util demos $GENERIC_VERSION"
 echo "#"
 echo "#  Platform:              $host"
 echo "#  Debug mode:            $debug_mode_activated"
 echo "#  X-VR2 Core:            $xvr2core_required_version"
+echo "#  X-VR2 Util:            $xvr2util_required_version"
