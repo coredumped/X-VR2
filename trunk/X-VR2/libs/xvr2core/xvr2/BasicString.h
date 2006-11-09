@@ -57,13 +57,23 @@ namespace xvr2 {
 				return std::basic_string<_charT>::find_last_of(s.c_str());
 			}
 			/** Erases howmany characters from the left of the string */
-			BasicString<_charT> &biteLeft(int howmany = 1){
-				std::basic_string<_charT>::erase(std::basic_string<_charT>::begin(), std::basic_string<_charT>::begin() + howmany);
+			BasicString<_charT> &biteLeft(UInt32 howmany = 1){
+				if(std::basic_string<_charT>::size() == howmany){
+					std::basic_string<_charT>::clear();
+				}
+				else{
+					std::basic_string<_charT>::erase(std::basic_string<_charT>::begin(), std::basic_string<_charT>::begin() + howmany);
+				}
 				return *this;
 			}
 			/** Erases howmany characters from the right side of the string */
-			BasicString<_charT> &biteRight(int howmany = 1){
-				std::basic_string<_charT>::erase(std::basic_string<_charT>::end() - howmany, std::basic_string<_charT>::end());
+			BasicString<_charT> &biteRight(UInt32 howmany = 1){
+				if(std::basic_string<_charT>::size() == howmany){
+					std::basic_string<_charT>::clear();
+				}
+				else{
+					std::basic_string<_charT>::erase(std::basic_string<_charT>::end() - howmany, std::basic_string<_charT>::end());
+				}
 				return *this;
 			}
 			BasicString<_charT> &deleteFirst(){

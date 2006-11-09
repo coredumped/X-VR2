@@ -53,6 +53,7 @@ namespace xvr2 {
 				Int32 pid();
 				void kill(int signal);
 				int wait();
+				bool isRunning();
 				
 				static int execute(const String &command);
 				static int execute(const String &command, Buffer &_output);

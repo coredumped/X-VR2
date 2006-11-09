@@ -103,7 +103,7 @@ namespace xvr2{
 			tmpStrDOUBLE = 0;
 			tmpStrBIT = 0;
 			tmpStrBYTE = 0;
-			tmpString = 0;
+			tmpString.clear();
 			tmpDate = 0;
 			tmpTime = 0;
 			tmpTimestamp = 0;
@@ -263,7 +263,12 @@ namespace xvr2{
 				case TEXT:
 				case VARCHAR:
 					dataPtr = (void *)data;
-					tmpString.assign((char *)data);
+					if(dataPtr == 0){
+						tmpString.clear();
+					}
+					else{
+						tmpString.assign((char *)data);
+					}
 					break;
 				default:
 					dataPtr = (void *)data;

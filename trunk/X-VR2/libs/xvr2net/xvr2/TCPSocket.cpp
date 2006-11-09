@@ -348,12 +348,12 @@ namespace xvr2{
 #endif
 		}
 		
-		TCPSocket::TCPSocket(const char *thehost, const int theport){
+		TCPSocket::TCPSocket(const String &thehost, const int theport){
 #ifdef USE_EMBEDDED_CLASSNAMES
 			setClassName(__xvr2_Net_TCPSocket);
 #endif
 			try{
-				CreateSocket(thehost, theport);
+				CreateSocket(thehost.toCharPtr(), theport);
 			}
 			catch(...){
 				throw ;

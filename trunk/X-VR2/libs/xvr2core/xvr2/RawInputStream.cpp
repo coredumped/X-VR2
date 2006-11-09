@@ -30,6 +30,7 @@ namespace xvr2 {
 		_fd = 0;
 		reached_eof = false;
 		_is_opened = true;
+		handles_timeouts = true;
 	}
 
 	RawInputStream::~RawInputStream(){
@@ -40,10 +41,12 @@ namespace xvr2 {
 		/*_fd = __fd;
 		reached_eof = false;
 		_is_opened = true;*/
+		handles_timeouts = true;
 		open(__fd);
 	}
 
 	RawInputStream::RawInputStream(const String &fname){
+		handles_timeouts = true;
 		open(fname);
 	}
 
@@ -73,6 +76,11 @@ namespace xvr2 {
 
 
 	UInt32 RawInputStream::read(void *data, UInt32 size){
+		if(handles_timeouts && timeout_msecs > 0){
+			if(!ready(timeout_msecs)){
+				throw RawInputStreamTimeoutException(fd(), timeout_msecs);
+			}
+		}
 		Int32 ret = ::read(_fd, data, size);
 		if(ret == -1){
 			throw SystemException(errno);
@@ -121,8 +129,10 @@ namespace xvr2 {
 	bool RawInputStream::ready(int timeout){
 		int r;
 		bool ret = false;
-		struct pollfd d = { _fd, POLLIN | POLLPRI, 0 };
-		r = poll(&d, 1, 0);
+		struct pollfd d;
+		d.fd = fd();
+		d.events = POLLIN | POLLPRI;
+		r = poll(&d, 1, timeout);
 		if(r == -1){
 			throw StreamException(errno);
 		}

@@ -26,7 +26,7 @@ namespace xvr2 {
 #endif
 			compiled = false;
 			cflags = 0;
-			_pattern = 0;
+			_pattern = new String(pat);
 			handle = 0;
 			//pattern(pat);
 		}
@@ -37,7 +37,7 @@ namespace xvr2 {
 #endif
 			compiled = false;
 			cflags = 0;
-			_pattern = 0;
+			_pattern = new String(pat);
 			handle = 0;
 			//pattern(pat.toCharPtr());
 		}

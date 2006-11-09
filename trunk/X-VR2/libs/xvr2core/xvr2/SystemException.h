@@ -13,7 +13,7 @@ namespace xvr2 {
 		public:
 			SystemException(int _code = 0);
 			int code();
-			const String &message(); 
+			virtual String message(); 
 	};
 };
 

@@ -1,5 +1,6 @@
 /* $Id$ */
 #include"SystemException.h"
+#include"Memory.h"
 #include<cerrno>
 #include<cstring>
 
@@ -9,22 +10,28 @@
 
 namespace xvr2 {
 	SystemException::SystemException(int _code){
-		char buf[XVR2_ERRNO_DESCRIPTION_MAXLEN];
 		if(_code == 0){
 			_err_code = errno;
 		}
 		else{
 			_err_code = _code;
 		}
-		strerror_r(_err_code, buf, XVR2_ERRNO_DESCRIPTION_MAXLEN);
-		_err_str = buf;
 	}
 	
 	int SystemException::code(){
 		return _err_code;
 	}
 	
-	const String &SystemException::message(){
-		return _err_str;
+	String SystemException::message(){
+		if(code() == 0){
+			return String(_err_str);
+		}
+		char buf[XVR2_ERRNO_DESCRIPTION_MAXLEN];
+#if _XOPEN_SOURCE == 600
+		strerror_r(code(), buf, XVR2_ERRNO_DESCRIPTION_MAXLEN);
+		return String(buf);
+#else
+		return String(strerror_r(code(), buf, XVR2_ERRNO_DESCRIPTION_MAXLEN));
+#endif
 	}
 };

@@ -56,7 +56,14 @@ namespace xvr2 {
 	 *     can be a filesystem path or any other address which your
 	 *     implmentation is meant to handle. */
 	class ReadableStream : public virtual StreamInterface {
+		protected:
+			bool handles_timeouts;
+			int timeout_msecs;
 		public:
+			ReadableStream(){
+				handles_timeouts = false;
+				timeout_msecs = 0;
+			}
 			virtual ReadableStream &operator >> (UInt32 n);
 			virtual ReadableStream &operator >> (double n);
 			virtual ReadableStream &operator >> (UInt64 n);
@@ -71,6 +78,9 @@ namespace xvr2 {
 			/** Loads the full contents and returns it in a Buffer */
 			virtual ReadableStream &readAll(Buffer &b);
 			virtual void flush();
+			virtual void setTimeout(int millisecs){
+				timeout_msecs = millisecs;
+			}
 	}; 
 	
 	/** Implements writeable/output files. */

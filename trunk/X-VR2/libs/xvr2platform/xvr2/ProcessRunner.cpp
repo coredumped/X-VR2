@@ -101,7 +101,7 @@ namespace xvr2 {
 
 		void ProcessRunner::kill(int signal){
 			_opaque *o = (_opaque *)stack;
-			if(::kill(o->pid, signal) == -1){
+			if(::killpg(o->pid, signal) == -1){
 				throw SystemException(errno);
 			}
 		}
@@ -163,6 +163,7 @@ namespace xvr2 {
 			if(o->pid == 0){
 				//Child process
 				//Connecting pipelines
+				setpgrp();
 				dup2(in_fds[0],  __FD_STDIN);
 				dup2(out_fds[1], __FD_STDOUT);
 				dup2(err_fds[1], __FD_STDERR);
@@ -219,6 +220,27 @@ namespace xvr2 {
 			return o->retcode;
 		}
 
+		bool ProcessRunner::isRunning(){
+			_opaque *o = (_opaque *)stack;
+			int retcode;
+			pid_t p;
+			p = waitpid(o->pid, &retcode, WNOHANG);
+			if(p == 0){
+				return true;
+			}
+			else if(p == -1){
+				throw ProcessException(errno, "Unable to determine if the process is running or not.");
+			}
+			else if(p == o->pid){
+				__closable_fds.push_back(in.fd());
+				__closable_fds.push_back(out.fd());
+				__closable_fds.push_back(err.fd());
+				if(WIFEXITED(retcode)){
+					o->retcode = WEXITSTATUS(retcode);
+				}
+			}
+			return false;
+		}
 
 
 

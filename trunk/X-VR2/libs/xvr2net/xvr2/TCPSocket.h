@@ -46,7 +46,7 @@ namespace xvr2{
 				 * very moment that this class is instantiated the
 				 * socket would try to connect with the remote 
 				 * host inmediately */
-				TCPSocket(const char *thehost, int theport);
+				//TCPSocket(const char *thehost, int theport);
 				TCPSocket(const String &thehost, int theport);
 				/**
 				 * This constructor tekas as an argument the host 

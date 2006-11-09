@@ -28,7 +28,9 @@ namespace xvr2 {
 			String buffer;
 			String _lterm;
 		public:
+			BufferedTextInputStream();
 			BufferedTextInputStream(RawInputStream &input, const String &__lterm = NL);
+			void open(RawInputStream &input, const String &__lterm = NL);
 			~BufferedTextInputStream();
 			//virtual UInt32 read(void *data, UInt32 size);
 			void operator>>(String &s);

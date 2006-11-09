@@ -19,6 +19,7 @@
 #include<xvr2/StreamInterface.h>
 #include<xvr2/RawStreamInterface.h>
 #include<xvr2/SystemException.h>
+#include<cerrno>
 
 namespace xvr2 {
 
@@ -43,6 +44,20 @@ namespace xvr2 {
 			virtual void seekBegin();
 			virtual void seekStep(FileOffsetT _step);
 			virtual bool ready(int timeout = 100);
+	};
+
+	class RawInputStreamTimeoutException : public StreamException {
+		protected:
+			int _fd;
+			int _msecs;
+		public:
+			RawInputStreamTimeoutException(int __fd):StreamException(errno){ _fd = __fd; }
+			RawInputStreamTimeoutException(int __fd, int __msecs):StreamException(errno){
+				_fd = __fd;
+				_msecs = __msecs;
+			}
+			int fd(){ return _fd; }
+			int millis(){ return _msecs; }
 	};
 };
 
