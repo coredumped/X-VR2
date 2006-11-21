@@ -354,74 +354,84 @@ Field *PostgreSQLDriver::fetchRow(void *__res_handle){
 		s[n].setFieldName(f);
 		thetype = PQftype(r->result, n);
 		data = PQgetvalue(r->result, r->curr_row, n);
-		if(PQfformat(r->result, n) == 0){
-			//DATA IS TEXT
-			switch(r->conn->getLocalType(thetype)){
-				case DB::Field::BIT:
-					if(data[0] == 't'){
-						bdat = true;
-						s[n].init(xvr2::DB::Field::BIT, (void *)&bdat, sizeof(bool));
-					}
-					else{
-						bdat = false;
-						s[n].init(xvr2::DB::Field::BIT, (void *)&bdat, sizeof(bool));
-					}
-					break;
-				case DB::Field::TINYINT:
-					tint = atoi(data);
-					s[n].init(xvr2::DB::Field::TINYINT, (void *)&tint, sizeof(Int16));
-					break;
-				case DB::Field::INTEGER:
-					iint = atol(data);
-					s[n].init(xvr2::DB::Field::INTEGER, (void *)&iint, sizeof(Int32));
-					break;
-				case DB::Field::BIGINT:
-					bint = atoll(data);
-					s[n].init(xvr2::DB::Field::BIGINT, (void *)&bint, sizeof(Int64));
-					break;
-				case DB::Field::FLOAT:
-					float4 = atof(data);
-					s[n].init(xvr2::DB::Field::FLOAT, (void *)&float4, sizeof(float));
-					break;
-				case DB::Field::DOUBLE:
-					float8 = atof(data);
-					s[n].init(xvr2::DB::Field::DOUBLE, (void *)&float8, sizeof(double));
-					break;
-				case DB::Field::DATE:
-					if(!PQgetisnull(r->result, r->curr_row, n))
-						tdate = new Date("%Y-%m-%d", data);
-					else
-						tdate = 0;
-					s[n].init(xvr2::DB::Field::DATE, (void *)tdate, sizeof(xvr2::Date));
-					xvr2_delete(tdate);
-					break;
-				case DB::Field::TIME:
-					if(!PQgetisnull(r->result, r->curr_row, n))
-						ttime = new Time(data);
-					else
-						ttime = 0;
-					s[n].init(xvr2::DB::Field::TIME, (void *)ttime, sizeof(xvr2::Time));
-					xvr2_delete(ttime);
-					break;
-				case DB::Field::TIMESTAMP:
-					if(!PQgetisnull(r->result, r->curr_row, n))
-						tstamp = new Timestamp("%Y-%m-%d %T", data);
-					else
-						tstamp = 0;
-					s[n].init(xvr2::DB::Field::TIMESTAMP, (void *)tstamp, sizeof(xvr2::Timestamp));
-					xvr2_delete(tstamp);
-					break;
-				case DB::Field::VARCHAR:
-				default:
-					if(PQgetisnull(r->result, r->curr_row, n))
-						s[n].init(xvr2::DB::Field::VARCHAR, (void *)0, PQgetlength(r->result, r->curr_row, n) + 1);
-					else
-						s[n].init(xvr2::DB::Field::VARCHAR, (void *)data, PQgetlength(r->result, r->curr_row, n) + 1);
-			}
+		if(PQgetisnull(r->result, r->curr_row, n)){
+			s[n].init(r->conn->getLocalType(thetype), (void *)0, PQgetlength(r->result, r->curr_row, n) + 1);
 		}
 		else{
-			//DATA IS BINARY
-			s[n].init(xvr2::DB::Field::BLOB, (void *)data, PQgetlength(r->result, r->curr_row, n));
+			if(PQfformat(r->result, n) == 0){
+				//DATA IS TEXT
+				switch(r->conn->getLocalType(thetype)){
+					case DB::Field::BIT:
+						if(data[0] == 't'){
+							bdat = true;
+							s[n].init(xvr2::DB::Field::BIT, (void *)&bdat, sizeof(bool));
+						}
+						else{
+							bdat = false;
+							s[n].init(xvr2::DB::Field::BIT, (void *)&bdat, sizeof(bool));
+						}
+						break;
+					case DB::Field::TINYINT:
+						tint = atoi(data);
+						s[n].init(xvr2::DB::Field::TINYINT, (void *)&tint, sizeof(Int16));
+						break;
+					case DB::Field::INTEGER:
+						if(!PQgetisnull(r->result, r->curr_row, n)){
+							iint = atol(data);
+							s[n].init(xvr2::DB::Field::INTEGER, (void *)&iint, sizeof(Int32));
+						}
+						else{
+							s[n].init(xvr2::DB::Field::INTEGER, 0, sizeof(Int32));
+						}
+						break;
+					case DB::Field::BIGINT:
+						bint = atoll(data);
+						s[n].init(xvr2::DB::Field::BIGINT, (void *)&bint, sizeof(Int64));
+						break;
+					case DB::Field::FLOAT:
+						float4 = atof(data);
+						s[n].init(xvr2::DB::Field::FLOAT, (void *)&float4, sizeof(float));
+						break;
+					case DB::Field::DOUBLE:
+						float8 = atof(data);
+						s[n].init(xvr2::DB::Field::DOUBLE, (void *)&float8, sizeof(double));
+						break;
+					case DB::Field::DATE:
+						if(!PQgetisnull(r->result, r->curr_row, n))
+							tdate = new Date("%Y-%m-%d", data);
+						else
+							tdate = 0;
+						s[n].init(xvr2::DB::Field::DATE, (void *)tdate, sizeof(xvr2::Date));
+						xvr2_delete(tdate);
+						break;
+					case DB::Field::TIME:
+						if(!PQgetisnull(r->result, r->curr_row, n))
+							ttime = new Time(data);
+						else
+							ttime = 0;
+						s[n].init(xvr2::DB::Field::TIME, (void *)ttime, sizeof(xvr2::Time));
+						xvr2_delete(ttime);
+						break;
+					case DB::Field::TIMESTAMP:
+						if(!PQgetisnull(r->result, r->curr_row, n))
+							tstamp = new Timestamp("%Y-%m-%d %T", data);
+						else
+							tstamp = 0;
+						s[n].init(xvr2::DB::Field::TIMESTAMP, (void *)tstamp, sizeof(xvr2::Timestamp));
+						xvr2_delete(tstamp);
+						break;
+					case DB::Field::VARCHAR:
+					default:
+						if(PQgetisnull(r->result, r->curr_row, n))
+							s[n].init(xvr2::DB::Field::VARCHAR, (void *)0, PQgetlength(r->result, r->curr_row, n) + 1);
+						else
+							s[n].init(xvr2::DB::Field::VARCHAR, (void *)data, PQgetlength(r->result, r->curr_row, n) + 1);
+				}
+			}
+			else{
+				//DATA IS BINARY
+				s[n].init(xvr2::DB::Field::BLOB, (void *)data, PQgetlength(r->result, r->curr_row, n));
+			}
 		}
 	}
 	r->curr_row++;
@@ -448,9 +458,6 @@ const bool PostgreSQLDriver::bulkBegin(void *conn_handle, const char *table, con
 	result = PQexec (conn->conn, sqlcmd);
 	xvr2_delete_array(sqlcmd);
 	if(result == NULL){
-/*#ifdef USE_DEBUG
-		std::cerr << "COPY command failure!!! " <<  PQerrorMessage (conn->conn) << std::endl;
-#endif*/
 		throw DB::SQLQueryException(PQerrorMessage (conn->conn));
 	}
 	switch(PQresultStatus(result)){
@@ -474,9 +481,6 @@ const bool PostgreSQLDriver::bulkAddData(void *conn_handle, const char *data, co
 	if(ret == 1)
 		return true;
 	else if(ret == -1){
-/*#ifdef USE_DEBUG
-		std::cerr << "COPY command failure: " <<  PQerrorMessage (conn->conn) << std::endl;
-#endif*/
 		throw DB::SQLQueryException(PQerrorMessage (conn->conn));
 	}
 	return false;
@@ -491,9 +495,6 @@ const bool PostgreSQLDriver::bulkEnd(void *conn_handle){
 	if(ret == 1){
 		result = PQgetResult(conn->conn);
 		if(result == NULL){
-/*#ifdef USE_DEBUG
-			std::cerr << "COPY command failure: " <<  PQerrorMessage (conn->conn) << std::endl;
-#endif*/
 			throw DB::SQLQueryException(PQerrorMessage (conn->conn));
 		}
 		else {
@@ -504,9 +505,6 @@ const bool PostgreSQLDriver::bulkEnd(void *conn_handle){
 			PQclear(result);
 		}
 	}
-/*#ifdef USE_DEBUG
-	std::cerr << "COPY command failure: " <<  PQerrorMessage (conn->conn) << std::endl;
-#endif*/
 	throw DB::SQLQueryException(PQerrorMessage (conn->conn));
 	return false;
 }
@@ -561,3 +559,4 @@ const bool PostgreSQLDriver::isConnected(void *__conn_handle){
 const bool PostgreSQLDriver::hasConnPolling(){
 	return true;
 }
+
