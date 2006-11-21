@@ -25,24 +25,27 @@
 
 namespace xvr2{
 	/** This class manages basic log file handling */
-	class Log:private StdioOutputFile {
+	class Log:public StdioOutputFile {
 		private:
 			/** Log line internal data */
 			StringBuffer ldata;
 		protected:
 			/** Wheter to show a timestamp or not in every log line. */
 			bool show_times;
+			Log(bool _show_times = true);
 		public:
 			/** Builds a log object which will dump log lines
 			 *  in the file specified by fname and printing
 			 *  timestamps on each line if _show_times is true */
 			Log(const String &fname, bool _show_times = true);
+			virtual ~Log();
 			/** Send string s to the log buffer */
 			Log &operator << (const String &s);
 			/** Flushes the log line to the log file, this method
 			 *  will be automatically called whenever the xvr2::NL
 			 *  is appended to the log stream */
 			void flush();
+			virtual void close();
 	};
 };
 

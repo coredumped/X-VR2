@@ -132,8 +132,9 @@ namespace xvr2 {
 		struct pollfd d;
 		d.fd = fd();
 		d.events = POLLIN | POLLPRI;
+		errno = 0;
 		r = poll(&d, 1, timeout);
-		if(r == -1){
+		if(r == -1 && !(errno == EAGAIN || errno == EINTR)){
 			throw StreamException(errno);
 		}
 		else if(r > 0){

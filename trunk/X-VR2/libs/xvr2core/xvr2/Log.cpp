@@ -35,12 +35,22 @@ namespace xvr2{
 
 
 	//Start implementation of class: Log
+	Log::Log(bool _show_times){
+		show_times = _show_times;
+	}
 
-	Log::Log(const String &fname, bool _show_times):StdioOutputFile(fname){
+	Log::Log(const String &fname, bool _show_times):StdioOutputFile(fname, true){
 #if __GNUC__ < 3
 		setClassName(xvr2::_xvr2Log);
 #endif
 		show_times = _show_times;
+	}
+
+	Log::~Log(){
+	}
+
+	void Log::close(){
+		StdioOutputFile::close();
 	}
 
 	static const char *__lsep1 = " [Thread=";

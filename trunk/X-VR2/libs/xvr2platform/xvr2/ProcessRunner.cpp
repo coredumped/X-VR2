@@ -17,6 +17,7 @@
 #include<xvr2/CoreExceptions.h>
 #include<xvr2/PlatformException.h>
 #include<xvr2/DebugConsole.h>
+#include<xvr2/Mutex.h>
 #include"ProcessRunner.h"
 #include<cerrno>
 #include<cstdio>
@@ -31,6 +32,7 @@
 namespace xvr2 {
 	namespace Platform {
 
+		Mutex fmx;
 		static std::deque<int> __closable_fds;
 
 		int ProcessRunner::execute(const String &command){
@@ -101,8 +103,18 @@ namespace xvr2 {
 
 		void ProcessRunner::kill(int signal){
 			_opaque *o = (_opaque *)stack;
+			//Close fds not in use
+/*#ifdef USE_DEBUG
+			debugConsole << "kill() Closing in fd(" << in.fd() << ") from killed process: " << ::close(in.fd()) << NL;
+			debugConsole << "kill() Closing out fd(" << out.fd() << ") from killed process: " << ::close(out.fd()) << NL;
+			debugConsole << "kill() Closing err fd(" << err.fd() << ") from killed process: " << ::close(err.fd()) << NL;
+#else
+			::close(in.fd());
+			::close(out.fd());
+			::close(err.fd());
+#endif*/
 			if(::killpg(o->pid, signal) == -1){
-				throw SystemException(errno);
+				throw ProcessException(errno, "Demonios!!!");
 			}
 		}
 
@@ -139,6 +151,7 @@ namespace xvr2 {
 			int out_fds[2];
 			int err_fds[2];
 #ifdef USE_DEBUG
+			debugConsole << "Running: " << cmdline << NL;
 			debugConsole << "Creating stdin pipe..." << NL;
 #endif
 			if(pipe(in_fds) < 0){
@@ -171,11 +184,6 @@ namespace xvr2 {
 				if(in_fds[1]  != __FD_STDIN)  ::close(in_fds[1]);
 				if(out_fds[0] != __FD_STDOUT) ::close(out_fds[0]);
 				if(err_fds[0] != __FD_STDERR) ::close(err_fds[0]);
-				//Close fds not in use
-				while(__closable_fds.size() > 0){
-					::close(__closable_fds.at(0));
-					__closable_fds.pop_front();
-				}
 				//Start the process per se.
 				execl("/bin/sh", "sh", "-c", o->cmd.toCharPtr(), (char *)0);
 				_exit(127);
@@ -195,28 +203,52 @@ namespace xvr2 {
 				//Open X-VR2 Streams
 #ifdef USE_DEBUG
 				debugConsole << "Attaching stdin, stdout and stderr to in, out, err respectively" << NL;
+				debugConsole << "in:  " << in_fds[1] << NL;
+				debugConsole << "out: " << out_fds[0] << NL;
+				debugConsole << "err: " << err_fds[0] << NL;
 #endif
 				in.open(in_fds[1]);
 				out.open(out_fds[0]);
 				err.open(err_fds[0]);
+#ifdef USE_DEBUG
+				debugConsole << "Closing unused pipelines in parent process" << NL;
+				debugConsole << "in[0](" << in_fds[0] << ")  " << ::close(in_fds[0]) << NL;
+				debugConsole << "out[1](" << out_fds[1] << ") " << ::close(out_fds[1]) << NL;
+				debugConsole << "err[1](" << err_fds[1] << ") " << ::close(err_fds[1]) << NL;
+#else
+				::close(in_fds[0]);
+				::close(out_fds[1]);
+				::close(err_fds[1]);
+#endif
 			}
 		}
 
 		int ProcessRunner::wait(){
 			_opaque *o = (_opaque *)stack;
 			int retcode;
-			__closable_fds.push_back(in.fd());
-			__closable_fds.push_back(out.fd());
-			__closable_fds.push_back(err.fd());
 #ifdef USE_DEBUG
 			debugConsole << "Waiting for process: " << o->pid << " to finish..." << NL;
 #endif
 			if(waitpid(o->pid, &retcode, 0) == -1){
 				throw ProcessException(errno, "Weird problem on ProcessRunner::wait()");
 			}
+			/*fmx.lock();
+			__closable_fds.push_back(in.fd());
+			__closable_fds.push_back(out.fd());
+			__closable_fds.push_back(err.fd());
+			fmx.unlock();*/
 			if(WIFEXITED(retcode)){
 				o->retcode = WEXITSTATUS(retcode);
 			}
+#ifdef USE_DEBUG
+			debugConsole << "wait() Closing fd(" << in.fd() << ") from terminated process: " << ::close(in.fd()) << NL;
+			debugConsole << "wait() Closing fd(" << out.fd() << ") from terminated process: " << ::close(out.fd()) << NL;
+			debugConsole << "wait() Closing fd(" << err.fd() << ") from terminated process: " << ::close(err.fd()) << NL;
+#else
+			::close(in.fd());
+			::close(out.fd());
+			::close(err.fd());
+#endif
 			return o->retcode;
 		}
 
@@ -232,9 +264,20 @@ namespace xvr2 {
 				throw ProcessException(errno, "Unable to determine if the process is running or not.");
 			}
 			else if(p == o->pid){
+				/*fmx.lock();
 				__closable_fds.push_back(in.fd());
 				__closable_fds.push_back(out.fd());
 				__closable_fds.push_back(err.fd());
+				fmx.unlock();*/
+#ifdef USE_DEBUG
+				debugConsole << "isRunning() Closing fd(" << in.fd() << ") from terminated process: " << ::close(in.fd()) << NL;
+				debugConsole << "isRunning() Closing fd(" << out.fd() << ") from terminated process: " << ::close(out.fd()) << NL;
+				debugConsole << "isRunning() Closing fd(" << err.fd() << ") from terminated process: " << ::close(err.fd()) << NL;
+#else
+				::close(in.fd());
+				::close(out.fd());
+				::close(err.fd());
+#endif
 				if(WIFEXITED(retcode)){
 					o->retcode = WEXITSTATUS(retcode);
 				}
@@ -246,13 +289,19 @@ namespace xvr2 {
 
 /////////////////////// SPECIFIC PROCESS EXCEPTIONS //////////////////////////////////
 
-		ProcessException::ProcessException(int c):SystemException(c){}
+		static const char *_pe_des = "While running a process and exception got caught.";
+
+		ProcessException::ProcessException(int c):SystemException(c){
+			description = (char *)_pe_des;
+		}
 
 		ProcessException::ProcessException(int c, const String &msg):SystemException(c){
+			description = (char *)_pe_des;
 			_comment = msg;
 		}
 
 		const String &ProcessException::comment(){
+			description = (char *)_pe_des;
 			return _comment;
 		}
 

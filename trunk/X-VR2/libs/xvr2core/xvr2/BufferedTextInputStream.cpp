@@ -50,6 +50,10 @@ namespace xvr2 {
 		__default_bufsize = _size;
 	}
 
+	void BufferedTextInputStream::setBufferSize(UInt32 _size){
+		_bufsize = _size;
+	}
+
 	/*virtual UInt32 BufferedTextInputStream::read(void *data, UInt32 size){
 		//Clear buffer first
 		Memory::clearBuffer(buffer, _bufsize + 1);
@@ -57,11 +61,16 @@ namespace xvr2 {
 		RawInputStream::read(buffer, _bufsize);
 	}*/
 
+	UInt32 BufferedTextInputStream::remaining(){
+		return buffer.size();
+	}
+
 	void BufferedTextInputStream::operator>>(String &s){
 		char *_buf;
 		char *bufptr = 0;
 		s.clear();
-		if(ready(0)){
+		if(buffer.size() == 1 && buffer[0] == 0) buffer.clear();
+		while(ready()){
 			while(_bufsize % _lterm.size() != 0){
 				_bufsize++;
 			}
@@ -74,7 +83,7 @@ namespace xvr2 {
 			buffer.eat(_buf, siz);
 			delete[] _buf;
 		}
-		if(buffer.size() > 0){
+		//if(buffer.size() > 0){
 			if(buffer.equals(_lterm)){
 				s.eat((char *)buffer.toCharPtr(), _lterm.size());
 				buffer.clear();
@@ -83,14 +92,13 @@ namespace xvr2 {
 				s.eat((char *)buffer.toCharPtr(), _lterm.size());
 				buffer.biteLeft(_lterm.size());
 			}
-			else{
+			else if(buffer.size() > 0){
 #ifdef USE_DEBUG
 				debugConsole << "BufferedTextInputStream: buffer has: \"" << buffer << "\"" << xvr2::NL;
 #endif
 				bufptr = (char *)buffer.toCharPtr();
-				int eaten = 0;
 				while(buffer.size() > 0 && !buffer.startsWith(_lterm)){
-					s.eat(buffer.toCharPtr(), 1);
+					if(buffer[0] != 0) s.eat(buffer.toCharPtr(), 1);
 					if(buffer.size() == 1){
 						buffer.clear();
 						return;
@@ -110,7 +118,7 @@ namespace xvr2 {
 				debugConsole << "BufferedTextInputStream: s now has: \"" << s << "\"" << xvr2::NL;
 #endif
 			}
-		}
+		/*}
 		else{
 			bool keep_reading = true;
 			buffer.clear();
@@ -138,7 +146,7 @@ namespace xvr2 {
 				}
 			}
 			delete[] _buf;
-		}
+		}*/
 	}
 
 };

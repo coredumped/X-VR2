@@ -55,6 +55,7 @@ namespace xvr2{
 			port = s.port;
 			tsock = s.tsock;
 			host = strdup(s.host);
+			_created = true;
 			return *this;
 		}
 
@@ -89,6 +90,7 @@ namespace xvr2{
 			opt.l_linger = 0; 
 			setSockOption(SO_LINGER, &opt, sizeof(opt));
 			if(::connect(tsock, (struct sockaddr *)&name, sizeof(name)) != 0){
+				::close(tsock);
 				tsock = -1;
 				switch(errno){
 					case ETIMEDOUT:
@@ -249,6 +251,7 @@ namespace xvr2{
 
 			setSockOption(SO_LINGER, &opt, sizeof(opt));
 			if(::connect(tsock, (struct sockaddr *)&name, sizeof(name)) != 0){
+				::close(tsock);
 				tsock = -1;
 #ifndef USING_LINUX
 #ifndef SOLARIS
@@ -297,6 +300,7 @@ namespace xvr2{
 #ifdef USE_EMBEDDED_CLASSNAMES
 			setClassName(__xvr2_Net_TCPSocket);
 #endif
+			_created = false;
 			try{
 				CreateSocket(ip, theport);
 			}
@@ -308,6 +312,7 @@ namespace xvr2{
 #ifdef USE_EMBEDDED_CLASSNAMES
 			setClassName(__xvr2_Net_TCPSocket);
 #endif
+			_created = false;
 			try{
 				CreateSocket(&ip, theport);
 			}
@@ -319,6 +324,7 @@ namespace xvr2{
 #ifdef USE_EMBEDDED_CLASSNAMES
 			setClassName(__xvr2_Net_TCPSocket);
 #endif
+			_created = true;
 			tsock = s->tsock;
 			host = s->host;
 			port = s->port;
@@ -331,6 +337,7 @@ namespace xvr2{
 #ifdef USE_EMBEDDED_CLASSNAMES
 			setClassName(__xvr2_Net_TCPSocket);
 #endif
+			_created = true;
 			tsock = s.tsock;
 			host = (char *)__w6_localhost;
 			port = s.port;
@@ -340,6 +347,7 @@ namespace xvr2{
 #ifdef USE_EMBEDDED_CLASSNAMES
 			setClassName(__xvr2_Net_TCPSocket);
 #endif
+			_created = true;
 			host = (char *)__w6_localhost;
 			tsock = s;
 			port = pport;
@@ -352,6 +360,7 @@ namespace xvr2{
 #ifdef USE_EMBEDDED_CLASSNAMES
 			setClassName(__xvr2_Net_TCPSocket);
 #endif
+			_created = false;
 			try{
 				CreateSocket(thehost.toCharPtr(), theport);
 			}
@@ -360,6 +369,10 @@ namespace xvr2{
 			}
 		}
 		
+		TCPSocket::TCPSocket(){
+			_created = false;
+		}
+
 		TCPSocket::~TCPSocket(){;}
 		
 		void TCPSocket::close(void){

@@ -142,6 +142,7 @@ namespace xvr2{
 	/////////////////////////////// ::assign() /////////////////////////
 	String &String::assign(const char *s){
 		BasicString<char>::assign(s);
+		return *this;
 	}
 	
 	String &String::assign(const Int32 n){
@@ -529,8 +530,6 @@ namespace xvr2{
 		return (index(s.toCharPtr()) == 0)?true:false;
 	}
 	bool String::startsIWith(const char *s) const{
-		int i;
-		int ssize;
 		if(s == 0)
 			return true;
 		else
@@ -538,10 +537,10 @@ namespace xvr2{
 				return false;
 		if(size() == 0)
 			return false;
-		ssize = strlen(s);
+		UInt32 ssize = strlen(s);
 		if(ssize > size())
 			return false;
-		for(i = 0; i < ssize; i++){
+		for(UInt32 i = 0; i < ssize; i++){
 			if(tolower(charAt(i)) != tolower(s[i]))
 				return false;
 		}

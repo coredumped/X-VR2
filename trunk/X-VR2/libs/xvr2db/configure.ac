@@ -57,6 +57,8 @@ AC_PROG_INSTALL
 
 AC_LANG_CPLUSPLUS
 
+CXXFLAGS="$CXXFLAGS -Wall "
+
 dnl -----------------------------------------------
 dnl Verify manual features
 dnl -----------------------------------------------

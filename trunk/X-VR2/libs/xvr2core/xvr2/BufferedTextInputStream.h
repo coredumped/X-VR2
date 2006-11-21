@@ -35,6 +35,9 @@ namespace xvr2 {
 			//virtual UInt32 read(void *data, UInt32 size);
 			void operator>>(String &s);
 			static void setDefaultBufferSize(UInt32 _size);
+			void setBufferSize(UInt32 _size);
+			/** Returns the amount of remaining bytes to be read */
+			UInt32 remaining();
 	};
 };
 

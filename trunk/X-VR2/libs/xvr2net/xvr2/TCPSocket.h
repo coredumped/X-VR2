@@ -22,6 +22,7 @@ namespace xvr2{
 		 */
 		class TCPSocket:public Socket{
 			protected:
+				bool _created;
 		 		/** Stores the hostname where the socket is going 
 				 *  to be connected */
 		 		char *host;
@@ -38,7 +39,7 @@ namespace xvr2{
 			public:
 				/** This is a default constructor that does 
 				 *  nothing */
-				TCPSocket(){;}
+				TCPSocket();
 				/**
 				 * This constructor takes as an argument the host 
 				 * location as an IP number or as a name, also the

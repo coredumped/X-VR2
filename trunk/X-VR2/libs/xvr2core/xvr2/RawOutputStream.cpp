@@ -25,6 +25,7 @@ namespace xvr2 {
 	RawOutputStream::RawOutputStream(){
 		//As a default initialize it to be the stdout
 		_fd = 1;
+		_a_close = false;
 	}
 
 	RawOutputStream::~RawOutputStream(){
@@ -51,8 +52,10 @@ namespace xvr2 {
 	}
 
 	void RawOutputStream::close(){
-		if(_fd != 0 && _a_close == true){
-			::close(_fd);
+		if(_fd != 1 && _a_close == true){
+			if(::close(_fd) == -1){
+				throw SystemException(errno);
+			}
 		}
 	}
 

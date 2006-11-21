@@ -285,12 +285,14 @@ namespace xvr2{
 		_data = (UInt8 *)b.data();
 		_size = b.size();
 		freeme = false;
+		return *this;
 	}
 	const Buffer &Buffer::refTo(void *_buf, UInt32 _siz, bool __f){
 		empty();
 		_data = (UInt8 *)_buf;
 		_size = _siz;
 		freeme = __f;
+		return *this;
 	}
 	
 	//Empty
@@ -309,3 +311,4 @@ namespace xvr2{
 		}
 	}
 };
+
