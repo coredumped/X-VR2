@@ -456,7 +456,7 @@ const bool PostgreSQLDriver::bulkBegin(void *conn_handle, const char *table, con
 	conn = (__pgsql_conn *)conn_handle;
 	//sqlcmd = new char[500 + strlen(table) + strlen(columns) + strlen(delim)];
 	//sprintf(sqlcmd, "COPY %s (%s) FROM STDIN WITH DELIMITER '%s'", table, columns, delim);
-	sqlcmd << "COPY " << table << " (" << columns << ") FROM STDIN WITH DELIMETER '" << delim << "'";
+	sqlcmd << "COPY " << table << " (" << columns << ") FROM STDIN WITH DELIMITER '" << delim << "'";
 	result = PQexec (conn->conn, sqlcmd.toString().toCharPtr());
 	//xvr2_delete_array(sqlcmd);
 	if(result == NULL){
