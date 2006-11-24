@@ -3,6 +3,7 @@
 #include<libpq-fe.h>
 #include"pgsql-drvng.h"
 #include<xvr2/DebugConsole.h>
+#include<xvr2/StringBuffer.h>
 
 using namespace xvr2;
 //using namespace xvr2::Exception;
@@ -271,7 +272,7 @@ ResultSet *PostgreSQLDriver::query(void *__conn_handle, const String &command){
 /*#ifdef USE_DEBUG
 		std::cerr << "While executing query: \"" << command << "\"... " <<  PQerrorMessage (conn->conn) << std::endl;
 #endif*/
-		throw DB::SQLQueryException(PQerrorMessage (conn->conn));
+		throw DB::SQLQueryException(PQerrorMessage (conn->conn), command);
 	}
 	else{
 		switch(PQresultStatus(result)){
@@ -286,7 +287,7 @@ ResultSet *PostgreSQLDriver::query(void *__conn_handle, const String &command){
 				break;
 			default: //Some sort of extrange error ocurred
 				r = new DB::ResultSet(this, (void *)rres, false);
-				throw DB::SQLQueryException(PQresultErrorMessage (result), r);
+				throw DB::SQLQueryException(PQresultErrorMessage (result), r, command);
 		}
 	}
 	return r;
@@ -449,16 +450,17 @@ const bool PostgreSQLDriver::freeResultSet(void *__res_handle){
 
 const bool PostgreSQLDriver::bulkBegin(void *conn_handle, const char *table, const char *columns, const char *delim){
 	bool ret;
-	char *sqlcmd;
+	StringBuffer sqlcmd;
 	PGresult *result;
 	__pgsql_conn *conn;
 	conn = (__pgsql_conn *)conn_handle;
-	sqlcmd = new char[500 + strlen(table) + strlen(columns) + strlen(delim)];
-	sprintf(sqlcmd, "COPY %s (%s) FROM STDIN WITH DELIMITER '%s'", table, columns, delim);
-	result = PQexec (conn->conn, sqlcmd);
-	xvr2_delete_array(sqlcmd);
+	//sqlcmd = new char[500 + strlen(table) + strlen(columns) + strlen(delim)];
+	//sprintf(sqlcmd, "COPY %s (%s) FROM STDIN WITH DELIMITER '%s'", table, columns, delim);
+	sqlcmd << "COPY " << table << " (" << columns << ") FROM STDIN WITH DELIMETER '" << delim << "'";
+	result = PQexec (conn->conn, sqlcmd.toString());
+	//xvr2_delete_array(sqlcmd);
 	if(result == NULL){
-		throw DB::SQLQueryException(PQerrorMessage (conn->conn));
+		throw DB::SQLQueryException(PQerrorMessage (conn->conn), sqlcmd.toString());
 	}
 	switch(PQresultStatus(result)){
 		case PGRES_TUPLES_OK:
