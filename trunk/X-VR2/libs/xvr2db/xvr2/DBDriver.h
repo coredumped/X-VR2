@@ -14,13 +14,16 @@ namespace xvr2 {
 		class ResultSet;
 		class Field;
 
-		/*
-		 * Interface class for database drivers
-		 */
+		/* Interface class for database drivers */
 		class Driver:public Object {
 			private:
 			protected:
 			public:
+				bool conn_requires_lock;
+				bool query_requires_lock;
+				bool bulk_requires_specific_lock;
+				bool resultset_requires_lock;
+				Driver();
 				/** Use this function to retrieve verion 
 				 *  and/or vendor informaton for the 
 				 *  driver */

@@ -9,6 +9,7 @@
 #include<xvr2/Socket.h>
 #include<xvr2/IPv4Address.h>
 #include<xvr2/NetworkExceptions.h>
+#include<xvr2/InvalidParameterException.h>
 
 namespace xvr2{
 	namespace Net {

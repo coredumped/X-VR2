@@ -7,7 +7,7 @@
  
 #include<xvr2/xvr2config.h>
  
-#ifdef USE_EMBEDDED_CLASSNAMES
+#if __GNUC__ < 3
 namespace xvr2 {
  
 	extern const char *_xvr2AllocationFailed;

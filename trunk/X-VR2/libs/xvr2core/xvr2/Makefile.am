@@ -1,6 +1,6 @@
 ## $Id$
 
-h_sources = CoreExceptions.h AutomatedGC.h BaseFile.h BasicStringBuffer.h \
+h_sources = CoreExceptions.h AutomatedGC.h BasicStringBuffer.h \
 	BasicString.h Byte.h Calendar.h Chronograph.h Chronometer.h \
 	ConditionVar.h Console.h DataTypes.h Date.h DebugConsole.h __Destruct.h \
 	DetachedThread.h DSObject.h DSO.h GarbageCollector.h Group.h \
@@ -13,9 +13,10 @@ h_sources = CoreExceptions.h AutomatedGC.h BaseFile.h BasicStringBuffer.h \
 	BackgroundFunction.h Buffer.h StreamInterface.h SystemException.h \
 	StdioInterface.h StdioInputFile.h StdioOutputFile.h FinalizerCallback.h \
 	RawInputStream.h RawOutputStream.h RawStreamInterface.h StreamException.h \
-	BufferedTextInputStream.h
+	BufferedTextInputStream.h InvalidParameterException.h \
+	ThreadFinalizator.h
 
-cc_sources = CoreExceptions.cpp AutomatedGC.cpp BaseFile.cpp BasicString.cpp \
+cc_sources = CoreExceptions.cpp AutomatedGC.cpp BasicString.cpp \
 	Byte.cpp Chronometer.cpp ConditionVar.cpp Console.cpp Date.cpp \
 	DebugConsole.cpp DetachedThread.cpp DSObject.cpp DSO.cpp \
 	GarbageCollector.cpp Group.cpp JoinableThread.cpp Log.cpp Memory.cpp \
@@ -27,8 +28,9 @@ cc_sources = CoreExceptions.cpp AutomatedGC.cpp BaseFile.cpp BasicString.cpp \
 	Conversion.cpp Buffer.cpp StreamInterface.cpp SystemException.cpp \
 	StdioInterface.cpp StdioInputFile.cpp StdioOutputFile.cpp \
 	BackgroundFunction.cpp RawInputStream.cpp RawOutputStream.cpp \
-	RawStreamInterface.cpp StreamException.cpp \
-	BufferedTextInputStream.cpp
+	RawStreamInterface.cpp StreamException.cpp FinalizerCallback.cpp\
+	BufferedTextInputStream.cpp InvalidParameterException.cpp \
+	ThreadFinalizator.cpp
 
 library_includedir=$(includedir)/$(GENERIC_LIBRARY_NAME)
 library_include_HEADERS = $(h_sources)
@@ -38,3 +40,5 @@ INCLUDES = -I$(top_srcdir)
 lib_LTLIBRARIES=libxvr2core-0.7.1.0.la
 libxvr2core_0_7_1_0_la_SOURCES= $(h_sources) $(cc_sources)
 libxvr2core_0_7_1_0_la_LDFLAGS= -version-info $(GENERIC_LIBRARY_VERSION) -release $(GENERIC_RELEASE)
+
+rebuild: clean all

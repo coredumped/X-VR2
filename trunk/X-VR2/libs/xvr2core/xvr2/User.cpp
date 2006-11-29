@@ -10,14 +10,14 @@
 namespace xvr2{
 
 	char *User::_getUsername(int uid){
-		struct passwd *p1;
+		struct passwd p1;
 		struct passwd *p2;
 		char *buffer;
 		char *uname;
 		buffer = new char[1024];
-		getpwuid_r(uid, p1, buffer, 1024, &p2);
-		uname = new char(strlen(p1->pw_name) + 1);
-		strcpy(uname, p1->pw_name);
+		getpwuid_r(uid, &p1, buffer, 1024, &p2);
+		uname = new char(strlen(p1.pw_name) + 1);
+		strcpy(uname, p1.pw_name);
 		xvr2_delete_array(buffer);
 		return uname;
 	}
@@ -67,12 +67,12 @@ namespace xvr2{
 	}
 
 	int User::getUserID(const String &uname){
-		struct passwd *u1;
+		struct passwd u1;
 		struct passwd *u2;
 		char *buffer;
 		int x_uid;
 		buffer = new char[1024];
-		getpwnam_r(uname.toCharPtr(), u1, buffer, 1024, &u2);
+		getpwnam_r(uname.toCharPtr(), &u1, buffer, 1024, &u2);
 		if(u2 == 0)
 			throw UserException();
 		x_uid = u2->pw_uid;

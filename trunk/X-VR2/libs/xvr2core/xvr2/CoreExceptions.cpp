@@ -46,28 +46,6 @@ namespace xvr2 {
 		return std::string(description);
 	}
 
-
-
-	InvalidParameter::InvalidParameter(){
-#ifdef USE_EMBEDDED_CLASSNAMES
-		setClassName((char *)xvr2::_xvr2InvalidParameterException);
-#endif
-		description = (char *)xvr2::excepInvalidParameter;	
-	}
-
-	InvalidParameter::InvalidParameter(const char *param_name){
-#ifdef USE_EMBEDDED_CLASSNAMES
-		setClassName((char *)xvr2::_xvr2InvalidParameterException);
-#endif
-		description = (char *)xvr2::Memory::allocBuffer(strlen((char *)xvr2::excepInvalidParameter) + 30 + strlen(param_name));
-		sprintf(description, "%s, Parameter: %s", (char *)xvr2::excepInvalidParameter, param_name);
-	}
-
-	InvalidParameter::~InvalidParameter(){
-		if((char *)description == (char *)xvr2::excepInvalidParameter){
-			xvr2::Memory::freeBuffer((void **)&description);
-		}
-	}
 	IOException::IOException(){
 #ifdef USE_EMBEDDED_CLASSNAMES
 		setClassName((char *)xvr2::_xvr2IOException);

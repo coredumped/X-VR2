@@ -104,12 +104,6 @@ namespace Net {
 	const Date &X509::endDate() const {
 		return *_endDate;
 	}
-	/*Date &X509::startDate() const {
-		return *_startDate;
-	}
-	Date &X509::endDate() const {
-		return *_endDate;
-	}*/
 	const String &X509::version() const {
 		return _version;
 	}

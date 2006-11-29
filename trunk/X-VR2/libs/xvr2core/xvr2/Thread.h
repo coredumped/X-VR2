@@ -15,9 +15,10 @@
 #include<xvr2/Mutex.h>
 #include<xvr2/SharedVar.h>
 #include<xvr2/CoreExceptions.h>
+#include<xvr2/ThreadFinalizator.h>
 
 namespace xvr2{
-	class Thread:public Threading{
+	class Thread:public Threading, public ThreadFinalizator{
 		private:
 		protected:
 			/** Default constructor */

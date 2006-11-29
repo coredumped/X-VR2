@@ -4,7 +4,7 @@ h_sources = DatabaseException.h DBConnection.h DBConnectionMT.h DBDriver.h \
 	    DBDriverInfo.h DBDriverManager.h DBField.h DBResultSet.h \
 	     _xvr2dbClassNames.h
 
-cc_sources = DatabaseException.cpp DBConnection.cpp DBConnectionMT.cpp \
+cc_sources = DatabaseException.cpp DBConnection.cpp DBConnectionMT.cpp DBDriver.cpp \
 	     DBDriverInfo.cpp DBDriverManager.cpp DBField.cpp \
 	     DBResultSet.cpp _xvr2dbClassNames.cpp
 

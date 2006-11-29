@@ -6,17 +6,14 @@
 
 #include<xvr2/NetworkExceptions.h>
 #include<xvr2/TCPSocket.h>
+#include<xvr2/InvalidParameterException.h>
 
 namespace xvr2{
 	namespace Net {
-		/**
-		 * This class handles the socket server interface
-		 */
+		/** This class handles the socket server interface */
 		class TCPServerSocket:public Socket{
 			protected:
-			/**
-			 * Tells if the server socket has been created or not
-			 */
+			/** * Tells if the server socket has been created or not */
 			bool _created;
 			/**
 			 * This will tell if a call to accept() will block or not

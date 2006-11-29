@@ -155,6 +155,7 @@ namespace xvr2 {
 		__addThread(info); //Add the thread to the thread list
 		info->ptr->_started = true;
 		info->ptr->run();
+		info->ptr->callFinalizers();
 		info->ptr->_terminated = true;
 		__removeThread(info); //Remove thread from the thread list
 		delete info;
@@ -203,7 +204,7 @@ namespace xvr2 {
 		ThreadManager::start(&t);
 	}
 
-	static const char *_iparm = "The specified policy is not one of Threading::NORMAL, Threading::FIFO, or Threading::ROUND_ROBIN";
+	static const char *_iparm = "Policy";
 
 	void ThreadManager::start(Thread *t, Threading::SchedPolicy pol){
 		pthread_t thread;
@@ -276,7 +277,7 @@ namespace xvr2 {
 		lm.unlock();
 		return n;
 	}
-	const Thread *ThreadManager::getCurrentThread(){
+	Thread *ThreadManager::getCurrentThread(){
 		__ThreadData_t *info;
 #ifdef USE_POSIX_THREADS
 		info = findThread_id((UInt64)pthread_self());
@@ -365,7 +366,7 @@ namespace xvr2 {
 		int ret;
 		ret = pthread_setschedparam(info->thread, __to_posix(pol), (struct sched_param *)&info->priority);
 		if(ret == EINVAL){
-			throw InvalidParameter();
+			throw InvalidParameter(_iparm);
 		}
 		else if(ret == EPERM){
 			throw SecurityException();

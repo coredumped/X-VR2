@@ -65,20 +65,6 @@ namespace xvr2{
 			/** Default constructor */
 			GroupException();
 	};
-	/** \class InvalidParameter CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  \brief This exception is thrown whenever you call a system call with
-	 *  an invalid parameter. */
-	class InvalidParameter:public Exception{
-		public:
-			/** Default constructor */
-			InvalidParameter();
-			/** Destructor */
-			~InvalidParameter();
-			/** Use this constructor to specify the name of the faulty
-			 *  parameter
-			 */
-			InvalidParameter(const char *param_name);
-	};
 	/** \class IOException CoreExceptions.h <xvr2/CoreExceptions.h>
 	 *  \brief This is a generic exception for I/O events.
 	 *  This exception is thrown whenever a unexpected exception occurrs
@@ -675,5 +661,5 @@ namespace xvr2{
 	};
 };
 
-
 #endif
+

@@ -42,56 +42,56 @@ namespace xvr2{
 		}
 	
 		void ConnectionMT::connect(const String &s, const String &dbname, const String &u, const String &p, int port){
-			mt.lock();
+			if(driver->conn_requires_lock) mt.lock();
 			try{
 				Connection::connect(s, dbname, u, p, port);
 			}
 			catch(...){
-				mt.unlock();
+				if(driver->conn_requires_lock) mt.unlock();
 				throw;
 			}
-			mt.unlock();
+			if(driver->conn_requires_lock) mt.unlock();
 		}
 	
 		void ConnectionMT::connect(Driver *d, const String &s, const String &dbname, const String &u, const String &p, int port){
-			mt.lock();
+			if(driver->conn_requires_lock) mt.lock();
 			try{
 				Connection::connect(d, s, dbname, u, p, port);
 			}
 			catch(...){
-				mt.unlock();
+				if(driver->conn_requires_lock) mt.unlock();
 				throw;
 			}
-			mt.unlock();
+			if(driver->conn_requires_lock) mt.unlock();
 		}
 	
 		void ConnectionMT::connect(){
-			mt.lock();
+			if(driver->conn_requires_lock) mt.lock();
 			try{
 				Connection::connect();
 			}
 			catch(...){
-				mt.unlock();
+				if(driver->conn_requires_lock) mt.unlock();
 				throw;
 			}
-			mt.unlock();
+			if(driver->conn_requires_lock) mt.unlock();
 		}
 	
 		void ConnectionMT::disconnect(){
-			mt.lock();
+			if(driver->conn_requires_lock) mt.lock();
 			try{
 				Connection::disconnect();
 			}
 			catch(...){
-				mt.unlock();
+				if(driver->conn_requires_lock) mt.unlock();
 				throw;
 			}
-			mt.unlock();
+			if(driver->conn_requires_lock) mt.unlock();
 		}
 	
 		ResultSet *ConnectionMT::query(const String &cmd){
 			ResultSet *r = 0;
-			mt.lock();
+			if(driver->query_requires_lock) mt.lock();
 			try{
 #ifdef USE_DEBUG
 #ifdef DEBUG_SQL
@@ -101,16 +101,16 @@ namespace xvr2{
 				r = Connection::query(cmd);
 			}
 			catch(...){
-				mt.unlock();
+				if(driver->query_requires_lock) mt.unlock();
 				throw;
 			}
-			mt.unlock();
+			if(driver->query_requires_lock) mt.unlock();
 			return r;
 		}
 
 		ResultSet *ConnectionMT::query(const StringBuffer &cmd){
 			ResultSet *r = 0;
-			mt.lock();
+			if(driver->query_requires_lock) mt.lock();
 			try{
 #ifdef USE_DEBUG
 #ifdef DEBUG_SQL
@@ -120,27 +120,27 @@ namespace xvr2{
 				r = Connection::query(cmd.toString());
 			}
 			catch(...){
-				mt.unlock();
+				if(driver->query_requires_lock) mt.unlock();
 				throw;
 			}
-			mt.unlock();
+			if(driver->query_requires_lock) mt.unlock();
 			return r;
 		}
 	
 		void ConnectionMT::commit(){
-			mt.lock();
+			if(driver->query_requires_lock) mt.lock();
 			try{
 				Connection::commit();
 			}
 			catch(...){
-				mt.unlock();
+				if(driver->query_requires_lock) mt.unlock();
 				throw;
 			}
-			mt.unlock();
+			if(driver->query_requires_lock) mt.unlock();
 		}
 	
 		void ConnectionMT::bulkUploadBegin(const String &table, const String &cols, const String &_delim){
-			mt.lock();
+			if(driver->conn_requires_lock || driver->query_requires_lock) mt.lock();
 			try{
 #ifdef USE_DEBUG
 #ifdef DEBUG_SQL
@@ -150,26 +150,26 @@ namespace xvr2{
 				Connection::bulkUploadBegin(table, cols, _delim);
 			}
 			catch(...){
-				mt.unlock();
+				if(driver->conn_requires_lock || driver->query_requires_lock) mt.unlock();
 				throw;
 			}
-			mt.unlock();
+			if(driver->conn_requires_lock || driver->query_requires_lock) mt.unlock();
 		}
 
 		void ConnectionMT::bulkUploadData(const String &data){
-			mt.lock();
+			if(driver->conn_requires_lock || driver->query_requires_lock) mt.lock();
 			try{
 				Connection::bulkUploadData(data);
 			}
 			catch(...){
-				mt.unlock();
+				if(driver->conn_requires_lock || driver->query_requires_lock) mt.unlock();
 				throw;
 			}
-			mt.unlock();
+			if(driver->conn_requires_lock || driver->query_requires_lock) mt.unlock();
 		}
 
 		void ConnectionMT::bulkUploadEnd(){
-			mt.lock();
+			if(driver->conn_requires_lock || driver->query_requires_lock) mt.lock();
 			try{
 #ifdef USE_DEBUG
 #ifdef DEBUG_SQL
@@ -179,10 +179,10 @@ namespace xvr2{
 				Connection::bulkUploadEnd();
 			}
 			catch(...){
-				mt.unlock();
+				if(driver->conn_requires_lock || driver->query_requires_lock) mt.unlock();
 				throw;
 			}
-			mt.unlock();
+			if(driver->conn_requires_lock || driver->query_requires_lock) mt.unlock();
 		}
 
 		String ConnectionMT::escapeString(const String &str){
@@ -201,15 +201,15 @@ namespace xvr2{
 
 		char *ConnectionMT::escapeString(const char *str){
 			char *ret = 0;
-			mt.lock();
+			//mt.lock();
 			try{
 				ret = Connection::escapeString(str);
 			}
 			catch(...){
-				mt.unlock();
+				//mt.unlock();
 				throw;
 			}
-			mt.unlock();
+			//mt.unlock();
 			return ret;
 		}
 
@@ -229,18 +229,19 @@ namespace xvr2{
 
 		const bool ConnectionMT::isConnected(){
 			bool ret;
-			mt.lock();
+			if(driver->conn_requires_lock) mt.lock();
 			try{
 				ret = Connection::isConnected();
 			}
 			catch(...){
-				mt.unlock();
+				if(driver->conn_requires_lock) mt.unlock();
 				throw;
 			}
-			mt.unlock();
+			if(driver->conn_requires_lock) mt.unlock();
 			return ret;
 		}
 
 	//End implementation of class: ConnectionMT
 	};
 };
+

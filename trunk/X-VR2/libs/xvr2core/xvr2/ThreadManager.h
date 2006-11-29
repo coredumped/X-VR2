@@ -7,6 +7,7 @@
 #include<xvr2/Thread.h>
 #include<xvr2/JoinableThread.h>
 #include<xvr2/CoreExceptions.h>
+#include<xvr2/InvalidParameterException.h>
 #include<xvr2/BackgroundFunction.h>
 
 namespace xvr2 {
@@ -36,7 +37,7 @@ namespace xvr2 {
 			 *  \param t The thread to be verified. */
 			static bool isRunning(Thread *t);
 			/** Returns the currently running Thread Object or 0 if the method is called from a non-Thread.*/
-			static const Thread *getCurrentThread();
+			static Thread *getCurrentThread();
 			static BackgroundFunction *getCurrentBackgroundFunction();
 			/** Returns the numeric id of the currently running Thread */
 			static const UInt64 getCurrentThreadID();

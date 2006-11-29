@@ -14,19 +14,14 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
-#ifndef __XVR2_FINALIZER_CALLBACK_H__
-#define __XVR2_FINALIZER_CALLBACK_H__
-#include<xvr2/Function.h>
-#include<xvr2/String.h>
+#include"FinalizerCallback.h"
 
-namespace xvr2{
-
-	class FinalizerCallback : public Function {
-		public:
-			FinalizerCallback();
-			virtual ~FinalizerCallback();
-			virtual void operator()();
-	};
+namespace xvr2 {
+	FinalizerCallback::FinalizerCallback(){
+	}
+	FinalizerCallback::~FinalizerCallback(){
+	}
+	void FinalizerCallback::operator()(){
+	}
 };
 
-#endif

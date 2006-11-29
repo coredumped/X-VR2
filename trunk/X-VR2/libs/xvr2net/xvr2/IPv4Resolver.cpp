@@ -31,32 +31,28 @@ namespace Net {
 		bmem = 2 * ip_or_host.size() + sizeof(hostent) ;
 		tmp_blen = bmem;
 		while(true){
-			tmp_buf = (char *)Memory::allocBuffer(tmp_blen);
+			tmp_buf = new char[tmp_blen];
 			result = gethostbyname_r(ip_or_host.toCharPtr(), &ret, tmp_buf, tmp_blen, &hp, &h_errnop);
-			/*if(gethostbyname_r(ip_or_host.toCharPtr(), &ret, tmp_buf, tmp_blen, &hp, &h_errnop) != ERANGE){
-				break;
-			}
-			else {*/
 			if(result == ERANGE){
 				tmp_blen += bmem;
-				Memory::freeBuffer((void **)&tmp_buf);
+				delete[] tmp_buf;
 				continue;
 			}
 			switch(h_errnop){
 				case HOST_NOT_FOUND:
-					Memory::freeBuffer((void **)&tmp_buf);
+					delete[] tmp_buf;
 					throw HostNotFound();
 					break;
 				case TRY_AGAIN:
-					Memory::freeBuffer((void **)&tmp_buf);
+					delete[] tmp_buf;
 					throw NSTryAgain();
 					break;
 				case NO_RECOVERY:
-					Memory::freeBuffer((void **)&tmp_buf);
+					delete[] tmp_buf;
 					throw NSFatal();
 					break;
 				case NO_ADDRESS:
-					Memory::freeBuffer((void **)&tmp_buf);
+					delete[] tmp_buf;
 					throw NoIPForYou();
 					break;
 			}
@@ -70,7 +66,7 @@ namespace Net {
 		else{
 			ipv4 = 0;
 		}
-		Memory::freeBuffer((void **)&tmp_buf);
+		delete[] tmp_buf;
 		return ipv4;
 	}
 

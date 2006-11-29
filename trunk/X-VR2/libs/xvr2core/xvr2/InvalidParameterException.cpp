@@ -9,33 +9,26 @@
 #include<string>
 #if __GNUC__ < 3
 #include<stdio.h>
+#include"_xvr2ClassNames.h"
 #endif
 
 
 namespace xvr2 {
-	namespace Exception{
 
-		InvalidParameter::InvalidParameter(){
+	InvalidParameter::InvalidParameter(){
 #if __GNUC__ < 3
-			setClassName((char *)xvr2::_xvr2InvalidParameterException);
+		setClassName((char *)xvr2::_xvr2InvalidParameter);
 #endif
-			description = (char *)xvr2::excepInvalidParameter;	
-		}
+		description = (char *)xvr2::excepInvalidParameter;	
+	}
 
-		InvalidParameter::InvalidParameter(const char *param_name){
+	InvalidParameter::InvalidParameter(const String &_param_name){
 #if __GNUC__ < 3
-			setClassName((char *)xvr2::_xvr2InvalidParameterException);
+		setClassName((char *)xvr2::_xvr2InvalidParameter);
 #endif
-			description = (char *)xvr2::Memory::allocBuffer(strlen((char *)xvr2::excepInvalidParameter) + 30 + strlen(param_name));
-			sprintf(description, "%s, Parameter: %s", (char *)xvr2::excepInvalidParameter, param_name);
-		}
+		description = (char *)xvr2::excepInvalidParameter;
+		param_name = _param_name;
+	}
 
-		InvalidParameter::~InvalidParameter(){
-			if((char *)description == (char *)xvr2::excepInvalidParameter){
-				xvr2::Memory::freeBuffer((void **)&description);
-			}
-		}
-
-	};
 };
 

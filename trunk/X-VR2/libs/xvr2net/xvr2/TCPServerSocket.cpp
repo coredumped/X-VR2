@@ -53,7 +53,7 @@ namespace xvr2{
 			if(_created)
 				return 1;
 			if(p == 0){
-				throw InvalidParameter("\"port <= 0 !!!!\"");
+				throw InvalidParameter("port number");
 				return 0;
 			}
 			int ret;
@@ -97,14 +97,6 @@ namespace xvr2{
 #endif
 				_nonblock = nonblock;
 			}
-/*#ifdef SOLARIS
-		 	ptr = (char *)&opt;
-		 	ret = setsockopt(tsock, SOL_SOCKET, SO_LINGER, ptr, 
-					sizeof(opt)); 
-#else
-		 	ret = setsockopt(tsock, SOL_SOCKET, SO_LINGER, 
-					(struct linger*)&opt, sizeof(opt)); 
-#endif*/
 			ret = setSockOption(SO_LINGER, (void *)&opt, sizeof(opt));
 		 	if(ret == -1){
 				_created = false;

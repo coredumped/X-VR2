@@ -148,7 +148,7 @@ namespace xvr2{
 			bmem = 6 * strlen(thehost) + sizeof(hostent);
 			tmp_blen = bmem;
 			while(true){
-				tmp_buf = (char *)Memory::allocBuffer(tmp_blen);
+				tmp_buf = new char[tmp_blen];
 				
 				if(gethostbyname_r(thehost, &ret, tmp_buf, tmp_blen, &hp, &h_errnop) != ERANGE){
 
@@ -158,25 +158,25 @@ namespace xvr2{
 #ifdef USE_DEBUG
 					debugmsg(this, "not enough memory to fill the hostent structure in a gethostbyname_r call, retrying...\n", __LINE__, __FILE__);
 #endif
-					Memory::freeBuffer((void **)&tmp_buf);
+					delete[] tmp_buf;
 					tmp_blen += bmem;
 				}
 				switch(h_errnop){
 					case HOST_NOT_FOUND:
-						Memory::freeBuffer((void **)&tmp_buf);
+						delete[] tmp_buf;
 						throw HostNotFound();
 						break;
 					case TRY_AGAIN:
-						Memory::freeBuffer((void **)&tmp_buf);
+						delete[] tmp_buf;
 						throw NSTryAgain();
 						break;
 					case NO_RECOVERY:
-						Memory::freeBuffer((void **)&tmp_buf);
+						delete[] tmp_buf;
 						throw NSFatal();
 						break;
 					case NO_DATA:
 					case NO_ADDRESS:
-						Memory::freeBuffer((void **)&tmp_buf);
+						delete[] tmp_buf;
 						throw NoIPForYou();
 						break;
 				}
@@ -188,7 +188,7 @@ namespace xvr2{
 			bmem = 16 * strlen(thehost) + sizeof(hostent);
 			tmp_blen = bmem;
 			while(true){
-				tmp_buf = (char *)Memory::allocBuffer(tmp_blen);
+				tmp_buf = new char[tmp_blen];
 				
 				if(gethostbyname_r(thehost, &ret, tmp_buf, tmp_blen, &hp, &h_errnop) != ERANGE){
 
@@ -202,19 +202,19 @@ namespace xvr2{
 				}
 				switch(h_errnop){
 					case HOST_NOT_FOUND:
-						Memory::freeBuffer((void **)&tmp_buf);
+						delete[] tmp_buf;
 						throw HostNotFound();
 						break;
 					case TRY_AGAIN:
-						Memory::freeBuffer((void **)&tmp_buf);
+						delete[] tmp_buf;
 						throw NSTryAgain();
 						break;
 					case NO_RECOVERY:
-						Memory::freeBuffer((void **)&tmp_buf);
+						delete[] tmp_buf;
 						throw NSFatal();
 						break;
 					case NO_ADDRESS:
-						Memory::freeBuffer((void **)&tmp_buf);
+						delete[] tmp_buf;
 						throw NoIPForYou();
 						break;
 				}
@@ -229,12 +229,7 @@ namespace xvr2{
 				__ghbn.unlock();
 #endif
 #endif
-#ifdef USING_LINUX
-					Memory::freeBuffer((void **)&tmp_buf);
-#endif
-#ifdef SOLARIS
-					Memory::freeBuffer((void **)&tmp_buf);
-#endif
+				delete[] tmp_buf;
 				return 0;
 			}
 			name.sin_family = AF_INET;
@@ -258,12 +253,7 @@ namespace xvr2{
 				__ghbn.unlock();
 #endif
 #endif
-#ifdef USING_LINUX
-				Memory::freeBuffer((void **)&tmp_buf);
-#endif
-#ifdef SOLARIS
-				Memory::freeBuffer((void **)&tmp_buf);
-#endif
+				delete[] tmp_buf;
 				switch(errno){
 					case ETIMEDOUT:
 						throw ConnectionTimeout();
@@ -287,12 +277,7 @@ namespace xvr2{
 			__ghbn.unlock();
 #endif
 #endif
-#ifdef USING_LINUX
-			Memory::freeBuffer((void **)&tmp_buf);
-#endif
-#ifdef SOLARIS
-			Memory::freeBuffer((void **)&tmp_buf);
-#endif
+			delete[] tmp_buf;
 			return 1;
 		}
 
