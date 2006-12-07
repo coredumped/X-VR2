@@ -163,15 +163,26 @@ namespace xvr2 {
 	}
 #endif
 
+	void bf_cancellation_remover(void *arg){
+		BackgroundFunction *bf = (BackgroundFunction *)arg;
+		_removeBF(bf);
+	}
+
 	void *runMethod_bf(BackgroundFunction &bf){
 		_addBF(&bf);
 		bf.called = true;
 		bf.onStart();
+#ifdef USE_POSIX_THREADS
+		pthread_cleanup_push(bf_cancellation_remover, (void *)&bf);
+#endif
 		bf();
 		bf.onTerminate();
 		bf.callFinalizers();
 		_removeBF(&bf);
 		bf.terminated = true;
+#ifdef USE_POSIX_THREADS
+		pthread_cleanup_pop(0);
+#endif
 		return 0;
 	}
 
