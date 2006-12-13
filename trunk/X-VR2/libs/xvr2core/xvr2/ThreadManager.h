@@ -69,6 +69,11 @@ namespace xvr2 {
 			 *  WARNING: this method won't diferentiate bewteen natively created
 			 *  threads and the main() function. */
 			static bool currentIsMain();
+
+			/** Performs a test to see if the current thread has been asked to
+			 *  be cancelled, if it already has, then the thread execution will
+			 *  stop at this point */
+			static void testCancellation();
 	};
 
 };

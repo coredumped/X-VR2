@@ -430,4 +430,9 @@ namespace xvr2 {
 		if(!currentIsThread() && !currentIsBackgroundFunction()) return true;
 		return false;
 	}
+	void ThreadManager::testCancellation(){
+#ifdef USE_POSIX_THREADS
+		pthread_testcancel();
+#endif
+	}
 };
