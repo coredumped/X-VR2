@@ -10,10 +10,16 @@ namespace xvr2 {
 		private:
 		protected:
 			std::deque<FinalizerCallback *> finalizers;
+			std::deque<FinalizerCallback *> cancelCBs;
 			ThreadFinalizator();
 		public:
 			void registerFinalizer(FinalizerCallback *f_cb);
+			/** Registers a new cancellation callback to be called in the
+			 *  event of thread cancellation only. */
+			void registerCancellationCB(FinalizerCallback *f_cb);
 			void callFinalizers();
+			void callCancellationCallbacks();
+			void removeCancellationCBs();
 
 	};
 

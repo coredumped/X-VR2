@@ -72,7 +72,11 @@ namespace xvr2 {
 
 			/** Performs a test to see if the current thread has been asked to
 			 *  be cancelled, if it already has, then the thread execution will
-			 *  stop at this point */
+			 *  stop at this point.
+			 *  When this event occurs no finalization callbacks will by run,
+			 *  not even the onTerminate() handler, only the cancellation
+			 *  callbacks will be run, so you must use these in order to 
+			 *  perform any required housekeeping for your threads. */
 			static void testCancellation();
 	};
 

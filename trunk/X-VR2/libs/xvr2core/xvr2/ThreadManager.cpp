@@ -165,6 +165,10 @@ namespace xvr2 {
 
 	void bf_cancellation_remover(void *arg){
 		BackgroundFunction *bf = (BackgroundFunction *)arg;
+		//Since we're being cancelled then just run all cancellation
+		//cleanup handlers
+		bf->callCancellationCallbacks();
+		bf->terminated = true;
 		_removeBF(bf);
 	}
 
@@ -176,6 +180,7 @@ namespace xvr2 {
 		pthread_cleanup_push(bf_cancellation_remover, (void *)&bf);
 #endif
 		bf();
+		ThreadManager::testCancellation();
 		bf.onTerminate();
 		bf.callFinalizers();
 		_removeBF(&bf);
