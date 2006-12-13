@@ -188,6 +188,7 @@ namespace xvr2 {
 #ifdef USE_POSIX_THREADS
 		pthread_cleanup_pop(0);
 #endif
+		bf.removeCancellationCBs();
 		return 0;
 	}
 
