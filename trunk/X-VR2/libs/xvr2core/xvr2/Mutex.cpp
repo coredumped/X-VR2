@@ -15,6 +15,7 @@
 #include"Mutex.h"
 #include<iostream>
 #include<errno.h>
+#include<DebugConsole.h>
 
 #ifdef DEBUG_MUTEXES
 using std::cout;
@@ -84,12 +85,14 @@ void Mutex::lock(){
 				if(err_code == EDEADLK){
 #ifdef DEBUG_MUTEXES
 					//cerr << "Mutex: " << (unsigned int)&mutex << " in " << (unsigned int)SDL_ThreadID() <<  " will create a DEADLOCK " << endl;
-					debugmsgln(this, "DEADLOCK detected");
+					debugConsole << this->toString << " DEADLOCK detected" << xvr2::NL;
 #endif
 					throw DeadLock();
 				}
 				else if(err_code == EINVAL){
-					debugmsgln(this, " MUTEX HAS NOT BEEN INITIALIZED CORRECTLY!!!!");
+#ifdef USING_DEBUG
+					debugConsole << this->toString() << " MUTEX HAS NOT BEEN INITIALIZED CORRECTLY!!!!" << xvr2::NL;
+#endif
 					throw UnableToLockMutex();
 				}
 #else
@@ -103,7 +106,7 @@ void Mutex::lock(){
 #endif
 #ifdef DEBUG_MUTEXES
 	//cout << "Mutex::lock " << (unsigned int)&mutex << " in " << (unsigned int)pthread_self() << endl;
-	debugmsgln(this, "Locked");
+	debugConsole << this->toString() << " Locked" << xvr2::NL;
 #endif
 }
 
@@ -132,18 +135,18 @@ void Mutex::unlock(){
 	#endif
 #endif
 #ifdef DEBUG_MUTEXES
-	debugmsgln(this, "Unlocked");
+	debugConsole << this->toString() << " Unlocked" << xvr2::NL;
 #endif
 }
 
 void Mutex::destroy(){
 #ifdef USE_SDL
- SDL_DestroyMutex(mutex);
+	SDL_DestroyMutex(mutex);
 #else
 #ifndef USE_GNUPTH
- pthread_mutex_destroy(&mutex);
+	pthread_mutex_destroy(&mutex);
 #ifdef USING_LINUX
- pthread_mutexattr_destroy(&m_attr);
+	pthread_mutexattr_destroy(&m_attr);
 #endif
 #endif
 #endif
