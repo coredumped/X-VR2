@@ -11,10 +11,23 @@ namespace xvr2 {
 			finalizers.pop_front();
 		}
 	}*/
+
+	BackgroundFunction::BackgroundFunction(){
+#ifdef USE_ENBEDDED_CLASSNAMES
+		setClassName(_xvr2BackgroundFunction);
+#endif
+		called = false;
+		terminated = false;
+		id = 0;
+	}
+
 	BackgroundFunction::~BackgroundFunction(){
 	}
+
 	void BackgroundFunction::onStart(){
 	}
+
 	void BackgroundFunction::onTerminate(){
 	}
 };
+

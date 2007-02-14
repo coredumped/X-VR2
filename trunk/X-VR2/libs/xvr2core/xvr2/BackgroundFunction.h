@@ -23,14 +23,7 @@ namespace xvr2 {
 			SharedVar<bool> called;
 			SharedVar<bool> terminated;
 			/** Default constructor, it does nothing. */
-			BackgroundFunction(){
-#ifdef USE_ENBEDDED_CLASSNAMES
-				setClassName(_xvr2BackgroundFunction);
-#endif
-				called = false;
-				terminated = false;
-				id = 0;
-			}
+			BackgroundFunction();
 			/** Destructor that destroys nothing. */
 			virtual ~BackgroundFunction();
 			/** Default functor function, in fact this method is the one to be
