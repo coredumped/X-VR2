@@ -156,7 +156,7 @@ namespace xvr2{
 				}
 				else {
 #ifdef USE_DEBUG
-					debugmsg(this, "not enough memory to fill the hostent structure in a gethostbyname_r call, retrying...\n", __LINE__, __FILE__);
+					debugConsole << "[" << __FILE__ << ":" << __LINE__ << "]: " << this->toString() << ": Not enough memory to fill the hostent structure in a gethostbyname_r call, retrying..." << xvr2::NL;
 #endif
 					delete[] tmp_buf;
 					tmp_blen += bmem;
@@ -288,6 +288,10 @@ namespace xvr2{
 			_created = false;
 			try{
 				CreateSocket(ip, theport);
+				string_representation = "xvr2::Net::TCPSocket [";
+				string_representation.concat("[host=");
+				//string_representation.concat(ip->toString());
+
 			}
 			catch(...){
 				throw ;
@@ -563,6 +567,10 @@ namespace xvr2{
 				delete tmpbuf;
 			}
 			return readed;
+		}
+
+		std::string TCPSocket::toString(){
+			return string_representation;
 		}
 	};
 };

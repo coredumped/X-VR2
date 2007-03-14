@@ -51,13 +51,10 @@ namespace xvr2 {
 			int _fd;
 			int _msecs;
 		public:
-			RawInputStreamTimeoutException(int __fd):StreamException(errno){ _fd = __fd; }
-			RawInputStreamTimeoutException(int __fd, int __msecs):StreamException(errno){
-				_fd = __fd;
-				_msecs = __msecs;
-			}
-			int fd(){ return _fd; }
-			int millis(){ return _msecs; }
+			RawInputStreamTimeoutException(int __fd);
+			RawInputStreamTimeoutException(int __fd, int __msecs);
+			int fd();
+			int millis();
 	};
 };
 

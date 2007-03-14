@@ -37,8 +37,9 @@ namespace xvr2{
 				 */
 				int setSockOption(int opname, void *optval, unsigned int siz);
 				int setTCPOption(int opname, void *optval, unsigned int siz);
-				void debugmsg(Socket *, const char *msg, int linenumber = __LINE__, const char *srcfile = __FILE__);
-				void debugmsgln(Socket *, const char *msg, int linenumber = __LINE__, const char *srcfile = __FILE__);
+
+				/** For debugging purposes only */
+				String string_representation;
 			public:
 				Socket();
 				/*Socket(const IPv4Address &addr, int _port);
@@ -46,9 +47,7 @@ namespace xvr2{
 				~Socket();
 				/** Returns the socket's file descriptor 
 				 *  value */
-				const int getSocketID(){
-					return tsock;
-				}
+				const int getSocketID();
 				/** Defines the timeout before closing 
 				 *  connection to the other end
 				 *  of communication*/

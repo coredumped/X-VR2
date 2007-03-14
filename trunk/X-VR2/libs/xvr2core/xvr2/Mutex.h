@@ -18,17 +18,13 @@
 #include<xvr2/CoreExceptions.h>
 namespace xvr2{
 
-	/**
-	 * This classes handle MUTEX (MUTual EXclusion) sinchronization devices<br>
+	/** This classes handle MUTEX (MUTual EXclusion) sinchronization devices<br>
 	 * This classes are designed to work with SDL's Thread encapsulation, 
-	 * GNU Pth or POSIX Threads
-	 */
+	 * GNU Pth or POSIX Threads */
 	class Mutex:public Threading{
 	 private:
-	  /**
-	   * Destroys the current mutex, freeing all the resources allocated
-	   * by it
-	   */
+	  /** Destroys the current mutex, freeing all the resources allocated
+	   * by it */
 	  void destroy();
 	 public:
 	  /** The mutex object itself as defined by POSIX Threads GNU Pth or SDL */
@@ -42,37 +38,29 @@ namespace xvr2{
 	    pthread_mutexattr_t m_attr;
 #endif
 	#endif
-	  /**
-	   * Constructor initialize using default atttributes, this depends on how
+	  /** Constructor initialize using default atttributes, this depends on how
 	   * you compiled the library if you chose GNU Pth then the first argument
-	   * is meaningfull
-	   */
+	   * is meaningfull */
 	  Mutex(int autoinit = 1);
-	  /**
-	   * This destructor calls dastroy to ensure that all the resources used
-	   * by the Mutex all released automagically
-	   */
-	  virtual ~Mutex(){
-		  destroy();
-	  }
-	
-	  /** 
-	   * Initializer, use in case of not using the default constructor
-	   * (this interface is provided for future compatibility)
-	   * */
+	  /** This destructor calls dastroy to ensure that all the resources used
+	   * by the Mutex all released automagically */
+	  virtual ~Mutex();	
+	  /** Initializer, use in case of not using the default constructor
+	   * (this interface is provided for future compatibility) */
 	  void init();
-	
-	  /**
-	   * Use this to explicitely lock the mutex
-	   */
+	  /** Use this to explicitely lock the mutex */
 	  void lock();
-	
-	  /**
-	   * Use this to explicitely unlock the mutex
-	   */
+	  /** Use this attemp a lock on the thread, if the mutex has already been
+	   *  locked, then it will throw a corresponding exception. */
+	  void trylock();
+	  /** Use this to explicitely unlock the mutex */
 	  void unlock();
 	};
 
+	class MutexAlreadyLocked : public MutexException {
+		public:
+			MutexAlreadyLocked();
+	};
 };
 
 #endif

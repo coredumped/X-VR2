@@ -224,7 +224,8 @@ namespace xvr2{
 				const Time	*toTime();
 				/** This method will convert and return the data as a 
 				 * Timestamp  pointer */
-				const Timestamp	*toTimestamp();
+				Timestamp	toTimestamp();
+				Timestamp	toTimestamp() const;
 				/** This method will return 0 or 1, a boolean value according
 				 *  to the stored data pointer */
 				bool		toBit();

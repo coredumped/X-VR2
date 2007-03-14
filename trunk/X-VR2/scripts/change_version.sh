@@ -1,3 +1,7 @@
 #!/bin/bash
+#$Id$
 #
-# TODO: Create a script capable of changing version informacion in all autoconf/pkconfig and automake scripts
+
+NEW_VERSION=$1
+
+echo "Setting version: " $NEW_VERSION

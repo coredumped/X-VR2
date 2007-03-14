@@ -7,6 +7,7 @@
 #include<xvr2/xvr2config.h>
 #include"_xvr2netClassNames.h"
 #include<xvr2/TCPServer.h>
+#include<xvr2/DebugConsole.h>
 
 namespace xvr2{
 	namespace Net {
@@ -26,12 +27,17 @@ namespace xvr2{
 #ifdef USE_EMBEDDED_CLASSNAMES
 			setClassName(__xvr2_Net_TCPServer);
 #endif
+			string_representation.clear();
+
+			string_representation = "xvr2::Net::TCPServer[port=";
+			string_representation.concat(pport);
+			string_representation.concat("]");
 		}
 	
 	
 		TCPServer::~TCPServer(){
 #ifdef USE_DEBUG
-			Socket::debugmsg(this, "destroyed\n");
+			debugConsole << "[" << __FILE__ << ":" << __LINE__ << "]: " << this->toString() << ": destroyed" << xvr2::NL;
 #endif
 		}
 	
@@ -42,21 +48,21 @@ namespace xvr2{
 #endif
 			continue_loop.setValue(true);
 #ifdef USE_DEBUG
-			Socket::debugmsg(this, ": starting loop...\n");
+			debugConsole << "[" << __FILE__ << ":" << __LINE__ << "]: " << this->toString() << ": starting loop" << xvr2::NL;
 #endif
 			while(continue_loop.getValue()){
 				client = asyncAccept();
 				if(continue_loop.getValue()){
 					if(client != 0){
 #ifdef USE_DEBUG
-						Socket::debugmsg(this, ": starting session...\n");
+						debugConsole << "[" << __FILE__ << ":" << __LINE__ << "]: " << this->toString() << ": starting session..." << xvr2::NL;
 #endif
 						startSession(client);
 					}
 #ifdef USE_DEBUG
 					else{
 						if((j % 10000) == 0){
-							Socket::debugmsg(this, "waiting for connections...\n");
+							debugConsole << "[" << __FILE__ << ":" << __LINE__ << "]: " << this->toString() << ": waiting for connections" << xvr2::NL;
 						}
 						j++;
 					}
@@ -70,7 +76,7 @@ namespace xvr2{
 		void TCPServer::terminate(){
 			continue_loop.setValue(false);
 #ifdef USE_DEBUG
-			Socket::debugmsg(this, "Stopping listener loop\n");
+			debugConsole << "[" << __FILE__ << ":" << __LINE__ << "]: " << this->toString() << ": Stoping listener loop" << xvr2::NL;
 #endif
 		}
 
@@ -116,8 +122,9 @@ namespace xvr2{
 			//start((void *)client);
 		}
 
-		//void TCPServer::(){
-		//}
+		std::string TCPServer::toString(){
+			return std::string(string_representation.toCharPtr());
+		}
 
 		//void TCPServer::(){
 		//}

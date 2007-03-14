@@ -90,8 +90,10 @@ namespace xvr2{
 			 *  \param date_text The date as a string matching the given 
 			 *  format */
 			Date(const String &format, const String &date_text);
+			Date(const Date &d);
 			Date(const Date *d);
 			virtual ~Date();
+			Date &operator=(const Date &_d);
 			/** This method will update the value of unixtime and all the other <i>broken-time</i> values */
 			virtual time_t getCurrentTime();
 			
@@ -105,6 +107,7 @@ namespace xvr2{
 			 */
 			virtual std::string toString();
 			virtual void add(DateARITHParts component, int value);
+			static Date Now();
 	};
 
 };

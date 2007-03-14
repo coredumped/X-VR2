@@ -32,7 +32,9 @@ namespace xvr2{
 			 *  \param time_text Time in string format */
 			Time(const String &time_text);
 			Time(const Time *t);
-			virtual ~Time(){;}
+			Time(const Time &t);
+			virtual ~Time();
+			Time &operator=(const Time &t);
 			/** Returns the current hour */
 			virtual int Hour();
 			/** Returns the current minute */

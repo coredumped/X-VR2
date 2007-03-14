@@ -81,7 +81,7 @@ namespace xvr2{
 				throw NoDataFetch();
 			}
 			if(index < 0 || index > numCols()){
-				throw ArrayIndexOutOfLimits();
+				throw ArrayIndexOutOfLimits(index, numCols());
 			}
 			return row[index].getFieldName();
 		}
@@ -98,11 +98,11 @@ namespace xvr2{
 				throw NoDataFetch();
 			}
 			if(index < 0 || index > numCols()){
-				throw ArrayIndexOutOfLimits();
+				throw ArrayIndexOutOfLimits(index, numCols());
 			}
 			return row[index];
 		}
-	
+
 		const Field &ResultSet::get(const char *colname){
 			bool found = false;
 			int index;
@@ -116,7 +116,7 @@ namespace xvr2{
 				}
 			}
 			if(found == false){
-				throw ArrayIndexOutOfLimits();
+				throw ArrayIndexOutOfLimits(index, ncols);
 			}
 			return row[index];
 		}
@@ -134,7 +134,7 @@ namespace xvr2{
 				}
 			}
 			if(found == false){
-				throw ArrayIndexOutOfLimits();
+				throw ArrayIndexOutOfLimits(index, ncols);
 			}
 			return row[index];
 		}

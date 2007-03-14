@@ -19,6 +19,12 @@
 #include"StreamInterface.h"
 
 namespace xvr2 {
+	StreamInterface::StreamInterface(){
+	}
+	StreamInterface::~StreamInterface(){
+	}
+
+
 	// BEGIN READABLE FILE
 	ReadableStream &ReadableStream::operator >> (UInt32 n){
 		read((void *)&n, sizeof(UInt32));

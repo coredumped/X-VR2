@@ -3,8 +3,7 @@
 
 //dlname='pgsql_driver-0.7.1.0-0.7.1.so.0'
 
-static const char *MYSQL_DRIVER_LOCATION = __XVR2_PREFIX_DIR"/lib/mysql_driver-"__XVR2_VERSION_STRING"-0.7.1.so.0";
-//static const char *PGSQL_DRIVER_LOCATION = __XVR2_PREFIX_DIR"/lib/pgsql_driver-"__XVR2_VERSION_STRING"-0.7.1.so.0";
+static const char *MYSQL_DRIVER_LOCATION = __XVR2_PREFIX_DIR"/lib/mysql_driver-"__XVR2_VERSION_STRING".so";
 static const char *PGSQL_DRIVER_LOCATION = __XVR2_PREFIX_DIR"/lib/pgsql_driver-"__XVR2_VERSION_STRING".so";
 
 
@@ -118,25 +117,26 @@ bool parse_args(int argc, char *argv[]){
 		std::cin >> foo;
 		db_user = foo.c_str();
 	}
-	if(db_pass.size() == 0){
+	/*if(db_pass.size() == 0){
 		std::cout << "Password: \033[8m";
 		std::cin >> foo;
 		std::cout << "\033[0m";
 		std::cout.flush();
 		db_pass = foo.c_str();
-	}
+	}*/
 	if(select_statement.size() == 0){
 		char *ss;
 		std::cout << "Enter select statement below:" << std::endl;
 		/*select_statement = new char(4096);
 		select_statement[0] = 0;*/
-		ss = new char(4096);
+		ss = new char[4096];
 		ss[0] = 0;
 		std::cin.ignore();
 		std::cin.getline(ss, 4096);
 		select_statement = ss;
-		delete ss;
+		delete[] ss;
 	}
+	return true;
 }
 
 int rundemo(int demo_type){
@@ -145,7 +145,6 @@ int rundemo(int demo_type){
 	DB::Connection *conn = 0;
 	DB::DriverInfo q;
 	DB::ResultSet *r = 0;
-	void *dbhandle;
 	int ci, cj;
 	bool capshown;
 	ExceptionTracer::enable();

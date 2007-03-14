@@ -57,6 +57,7 @@ namespace xvr2{
 				 * loop, inside this loop new threads are triggered
 				 * to handle remote connections */
 				virtual void startListener();
+				virtual std::string toString();
 		};
 	};
 };

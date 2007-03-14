@@ -515,6 +515,9 @@ namespace xvr2{
 		String s(n);
 		return (compare(s.c_str()) == 0)?true:false;
 	}
+	int String::compare(const String &s) const{
+		return BasicString<char>::compare(s.c_str());
+	}
 	
 	/////////////////////////////// ::endsWith() /////////////////////////
 	bool String::endsWith(const String &s) const{

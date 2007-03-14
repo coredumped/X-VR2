@@ -40,6 +40,9 @@ namespace xvr2{
 #endif
 	}
 
+	Time::~Time(){
+	}
+
 	Time::Time(UInt32 tstamp){
 #if __GNUC__ < 3
 		setClassName(xvr2::_xvr2Time);
@@ -81,6 +84,17 @@ namespace xvr2{
 #if __GNUC__ < 3
 		setClassName(xvr2::_xvr2Time);
 #endif
+	}
+
+	Time::Time(const Time &t):Date(t){
+#if __GNUC__ < 3
+		setClassName(xvr2::_xvr2Time);
+#endif
+	}
+
+	Time &Time::operator=(const Time &t){
+		setTStamp(t.unixtime);
+		return *this;
 	}
 
 	int Time::Hour(){

@@ -14,6 +14,7 @@
 #include<xvr2/_xvr2dbClassNames.h>
 #include<xvr2/DBField.h>
 #include<xvr2/Memory.h>
+#include<xvr2/DatabaseException.h>
 #include<errno.h>
 #if __GNUC__ < 3
 #define __USE_SVID
@@ -649,7 +650,7 @@ namespace xvr2{
 		}
 	
 		char *Field::toChar() const{
-			char *ret;
+			char *ret = 0;
 			//void *ttmp;
 			if(isNull())
 				return 0;
@@ -975,7 +976,7 @@ namespace xvr2{
 		}
 	
 	
-		const Timestamp *Field::toTimestamp(){
+		/*const Timestamp *Field::toTimestamp(){
 			Timestamp *ret = 0;
 			if(isNull())
 				return 0;
@@ -1044,6 +1045,146 @@ namespace xvr2{
 					break;
 			}
 			return ret;
+		}*/
+
+		Timestamp Field::toTimestamp() const {
+			//Timestamp *ret = 0;
+			if(isNull()){
+				//return 0;
+				throw FieldIsNull(colname);
+			}
+			switch(dataType){
+				case  TINYINT:
+					throw DateParseException();
+					break;
+				case  INTEGER:
+				case  BIGINT:
+					UInt32 n1;
+					n1 = *((UInt32 *)dataPtr);
+					return Timestamp(n1);
+					break;
+				case  FLOAT:
+					throw DateParseException();
+					break;
+				case  DOUBLE:
+					throw DateParseException();
+					break;
+				case  CHAR:
+				case  VARCHAR:
+					UInt32 nx1;
+					nx1 = strtoul((const char *)dataPtr, (char **)0, 10);
+					if(errno == ERANGE)
+						throw NumberException();
+					return Timestamp(nx1);
+					break;
+				case  STRING:
+				case  TEXT:
+					UInt32 nx2;
+					nx2 = ((String *)dataPtr)->toUInt();
+					return Timestamp(nx2);
+					break;
+				case  BLOB:
+					throw DateParseException();
+					break;
+				case  DATE:
+					return Timestamp(((Date *)dataPtr)->unixTime());
+					break;
+				case  TIME:
+					return Timestamp(((Time *)dataPtr)->timestamp());
+					break;
+				case  TIMESTAMP:
+					//Timestamp *ret = (Timestamp *)dataPtr;
+					return Timestamp(((Timestamp *)dataPtr)->unixTime());
+					break;
+				case  BIT:
+					throw DateParseException();
+					break;
+				case  BYTE:
+					throw DateParseException();
+					break;
+			}
+			//return ret;
+			return Timestamp();
+		}
+
+		Timestamp Field::toTimestamp(){
+			//Timestamp *ret = 0;
+			if(isNull()){
+				//return 0;
+				throw FieldIsNull(colname);
+			}
+			switch(dataType){
+				case  TINYINT:
+					throw DateParseException();
+					break;
+				case  INTEGER:
+				case  BIGINT:
+					UInt32 n1;
+					n1 = *((UInt32 *)dataPtr);
+					if(tmpTimestamp != 0)
+						xvr2_delete(tmpTimestamp);
+					tmpTimestamp = new Timestamp(n1);
+					//ret = tmpTimestamp;
+					return Timestamp(n1);
+					break;
+				case  FLOAT:
+					throw DateParseException();
+					break;
+				case  DOUBLE:
+					throw DateParseException();
+					break;
+				case  CHAR:
+				case  VARCHAR:
+					UInt32 nx1;
+					nx1 = strtoul((const char *)dataPtr, (char **)0, 10);
+					if(errno == ERANGE)
+						throw NumberException();
+					if(tmpTimestamp != 0)
+						xvr2_delete(tmpTimestamp);
+					tmpTimestamp = new Timestamp(nx1);
+					//ret = tmpTimestamp;
+					return Timestamp(nx1);
+					break;
+				case  STRING:
+				case  TEXT:
+					UInt32 nx2;
+					nx2 = ((String *)dataPtr)->toUInt();
+					if(tmpTimestamp != 0)
+						xvr2_delete(tmpTimestamp);
+					tmpTimestamp = new Timestamp(nx2);
+					//ret = tmpTimestamp;
+					return Timestamp(nx2);
+					break;
+				case  BLOB:
+					throw DateParseException();
+					break;
+				case  DATE:
+					if(tmpTimestamp != 0)
+						xvr2_delete(tmpTimestamp);
+					tmpTimestamp = new Timestamp(((Date *)dataPtr)->unixTime());
+					//ret = tmpTimestamp;
+					return Timestamp(((Date *)dataPtr)->unixTime());
+					break;
+				case  TIME:
+					if(tmpTimestamp != 0)
+						xvr2_delete(tmpTimestamp);
+					tmpTimestamp = new Timestamp(((Time *)dataPtr)->timestamp());
+					//ret = tmpTimestamp;
+					return Timestamp(((Time *)dataPtr)->timestamp());
+					break;
+				case  TIMESTAMP:
+					//Timestamp *ret = (Timestamp *)dataPtr;
+					return Timestamp(((Timestamp *)dataPtr)->unixTime());
+					break;
+				case  BIT:
+					throw DateParseException();
+					break;
+				case  BYTE:
+					throw DateParseException();
+					break;
+			}
+			//return ret;
+			return Timestamp();
 		}
 	
 		bool Field::toBool(){

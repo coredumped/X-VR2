@@ -89,6 +89,20 @@ namespace xvr2 {
 				ServerDisconnected();
 		};
 
+		class FieldIsNull:public  DatabaseException {
+			private:
+				String field_name;
+			public:
+			/** This exception is thrown whenever a field which is
+			 *  NULL dows not have a direct conversion to a specified
+			 *  data type, eg NULL -> TIME. However this is not true for
+			 *  string covnersions since it is permissible to have a
+			 *  NULL mapped to a "". */
+				FieldIsNull();
+				FieldIsNull(const String &fn);
+				const String &fieldName();
+		};
+
 
 		/** Generic SQL query exception */
 		class SQLQueryException:public DatabaseException{

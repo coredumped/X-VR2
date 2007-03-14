@@ -45,9 +45,15 @@ namespace xvr2{
 	 *  \brief Throw this exception when an operation over an array exceeds is 
 	 *  inbound and outbound limits. */
 	class ArrayIndexOutOfLimits:public Exception{
+		private:
+			int _i;
+			int _m;
 		public:
 			/** Default constructor */
 			ArrayIndexOutOfLimits();
+			ArrayIndexOutOfLimits(int _index, int _maxval);
+			int index();
+			int maxval();
 	};
 	
 	/** \class ElementNotFound CoreExceptions.h <xvr2/CoreExceptions.h>
@@ -159,7 +165,7 @@ namespace xvr2{
 	 *************************************************************************/
 	/** \class DSOException CoreExceptions.h <xvr2/CoreExceptions.h>
 	 *  \brief Use this exception whenever you want to throw a generic exception
-     *  over a dso (dynamic shared object) event. */
+	 *  over a dso (dynamic shared object) event. */
 	class DSOException:public IOException{
 		public:
 			/** Default Constructor */
@@ -168,7 +174,7 @@ namespace xvr2{
 
 	/** \class FileException CoreExceptions.h <xvr2/CoreExceptions.h>
 	 *  \brief You will only be seeing this exception if a generic 
-     *  (undetermined) exception has occurred on a file-based class. */
+	 *  (undetermined) exception has occurred on a file-based class. */
 	class FileException:public IOException{
 		public:
 			/** Default constructor */

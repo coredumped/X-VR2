@@ -36,33 +36,10 @@ namespace xvr2{
 		Socket::~Socket(){
 		}
 
-		void Socket::debugmsg(Socket *obj, const char *msg, int linenumber, const char *srcfile){
-			if(obj == 0)
-				return;
-			//xvr2::String s;
-			if(linenumber >= 0)
-				debugConsole << srcfile << ":" << linenumber << ": ";
-#if __WORDSIZE == 64 && defined(__x86_64__)
-			debugConsole << obj->getClassName() << "[ptr=" << (Int64)obj << ",tid=";
-#else
-			debugConsole << obj->getClassName() << "[ptr=" << (unsigned int)obj << ",tid=";
-#endif
-			if(ThreadManager::getCurrentThreadID() == 0){
-				debugConsole << "MAIN";
-			}
-			else{
-				debugConsole << (unsigned int)ThreadManager::getCurrentThreadID();
-			}
-			debugConsole << ",sockid=" << (int)tsock << "]: " << msg;
+		const int Socket::getSocketID(){
+			return tsock;
 		}
 
-		void Socket::debugmsgln(Socket *obj, const char *msg, int linenumber, const char *srcfile){
-			if(obj == 0)
-				return;
-			debugmsg(obj, msg, linenumber, srcfile);
-			debugConsole << "\n";
-		}
-		
 		int Socket::setSockOption(int opname, void *optval, 
 						unsigned int siz){
 #ifdef UNIX_SOCKETS

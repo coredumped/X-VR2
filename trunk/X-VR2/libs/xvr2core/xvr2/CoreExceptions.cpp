@@ -67,6 +67,24 @@ namespace xvr2 {
 		setClassName((char *)xvr2::_xvr2ArrayIndexOutOfLimitsException);
 #endif
 		description = (char *)xvr2::excepAOB;	
+		_i = -1;
+		_m = -1;
+	}
+	ArrayIndexOutOfLimits::ArrayIndexOutOfLimits(int _index, int _maxval){
+#ifdef USE_EMBEDDED_CLASSNAMES
+		setClassName((char *)xvr2::_xvr2ArrayIndexOutOfLimitsException);
+#endif
+		description = (char *)xvr2::excepAOB;	
+		_i = _index;
+		_m = _maxval;
+	}
+
+	int ArrayIndexOutOfLimits::index(){
+		return _i;
+	}
+
+	int ArrayIndexOutOfLimits::maxval(){
+		return _m;
 	}
 	NoMoreTokens::NoMoreTokens(){
 #ifdef USE_EMBEDDED_CLASSNAMES

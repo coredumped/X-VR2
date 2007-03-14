@@ -144,5 +144,21 @@ namespace xvr2 {
 		}
 		return ret;
 	}
+
+
+	/////////////////////// RawInputStreamTimeoutException class ////////////////
+	RawInputStreamTimeoutException::RawInputStreamTimeoutException(int __fd):StreamException(errno){
+		_fd = __fd;
+	}
+	RawInputStreamTimeoutException::RawInputStreamTimeoutException(int __fd, int __msecs):StreamException(errno){
+		_fd = __fd;
+		_msecs = __msecs;
+	}
+	int RawInputStreamTimeoutException::fd(){
+		return _fd; 
+	}
+	int RawInputStreamTimeoutException::millis(){
+		return _msecs;
+	}
 };
 

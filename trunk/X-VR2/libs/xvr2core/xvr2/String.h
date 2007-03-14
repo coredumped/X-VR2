@@ -189,9 +189,7 @@ namespace xvr2{
 
 			bool equals(const String &s) const;
 			bool equals(const String &s);
-			virtual int compare(const String &s) const{
-				return BasicString<char>::compare(s.c_str());
-			}
+			int compare(const String &s) const;
 			/** Transforms and checks if the parameter <b>n</b> is equal 
 			 * to <b>buffer</b> */
 			const bool equals(const Int32 n);

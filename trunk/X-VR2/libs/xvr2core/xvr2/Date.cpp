@@ -138,6 +138,21 @@ namespace xvr2{
 		setTStamp(__unixtime);
 	}
 
+	Date::Date(const Date &_d){
+#if __GNUC__ < 3
+		setClassName(xvr2::_xvr2Date);
+#endif
+		string_representation = 0;
+		//drep = 0;
+		setTStamp(_d.unixtime);
+	}
+
+	Date &Date::operator=(const Date &_d){
+		string_representation = 0;
+		setTStamp(_d.unixtime);
+		return *this;
+	}
+
 	void Date::decode(const char *format, const char *date_text){
 		struct tm *t = 0;
 		t = new tm();
@@ -187,41 +202,10 @@ namespace xvr2{
 	}
 
 	Date::Date(const String &format, const String &date_text){
-		struct tm t;
 #if __GNUC__ < 3
 		setClassName(xvr2::_xvr2Date);
 #endif
 		string_representation = 0;
-		//drep = 0;
-		/* if(strptime(date_text.toCharPtr(), format.toCharPtr(), &t) == NULL)
-			throw DateParseException();
-		hour = t.tm_hour;
-		if(hour > 12){
-			hr12hour = hour - 12;
-			hr12ampm = Date::PM;
-		}
-		else{
-			if(hour == 0){
-				hr12hour = 12;
-			}
-			else{
-				hr12hour = hour;
-			}
-			hr12ampm = Date::AM;
-		}
-		minute = t.tm_min;
-		second = t.tm_sec;
-		dayofweek = (++t.tm_wday);
-		dayofyear = t.tm_yday;
-		dayofmonth = t.tm_mday;
-		month = (++t.tm_mon);
-		if(t.tm_year < 1900){
-			year = t.tm_year + 1900;
-		}
-		else{
-			year = t.tm_year;
-		}
-		unixtime = mktime(&t);*/
 		decode(format.toCharPtr(), date_text.toCharPtr());
 		encode();
 	}
@@ -294,4 +278,9 @@ namespace xvr2{
 		}
 		setTStamp(unixtime + fsec);
 	}
+
+	Date Date::Now(){
+		return Date();
+	}
 };
+

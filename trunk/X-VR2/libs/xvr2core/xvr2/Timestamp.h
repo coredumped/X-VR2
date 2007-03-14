@@ -17,9 +17,11 @@ namespace xvr2{
 		public:
 			Timestamp();
 			Timestamp(const Timestamp *t);
+			Timestamp(const Timestamp &t);
 			Timestamp(const char *f, const char *t);
 			Timestamp(UInt32 tstamp);
-			~Timestamp(){;}
+			Timestamp &operator=(const Timestamp &t);
+			~Timestamp();
 			/** Returns the current hour */
 			int Hour();
 			/** Returns the current minute */

@@ -11,7 +11,7 @@
 namespace xvr2 {
 	/** \class BackgroundFunction BackgroundFunction.h <xvr2/BackgroundFunction.h>
 	 *  \brief
-	 *  Interface class for functions which are run in the packground as a separate
+	 *  Interface class for functions which are run in the background as a separate
 	 *  thread subprocess. */
 	class BackgroundFunction:public Function, public ThreadFinalizator {
 		protected:

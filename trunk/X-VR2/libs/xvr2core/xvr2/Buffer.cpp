@@ -196,7 +196,7 @@ namespace xvr2{
 	const Buffer &Buffer::insert(UInt32 pos, const void *__data, UInt32 __size){
 		UInt8 *dest;
 		if(pos > size()){
-			throw xvr2::ArrayIndexOutOfLimits();
+			throw xvr2::ArrayIndexOutOfLimits(pos, size());
 		}
 		dest = new UInt8[size() + __size];
 		//Copy all data from _data up to position pos

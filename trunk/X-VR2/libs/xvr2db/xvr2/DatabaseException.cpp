@@ -83,6 +83,26 @@ namespace xvr2 {
 			description = (char *)xvr2::excepServerDisconnected;
 		}
 
+#ifdef USE_EMBEDDED_CLASSNAMES
+		static const char *__xvr2_DB_DBFieldIsNull = "xvr2::DB::FieldIsNull";
+#endif
+
+		FieldIsNull::FieldIsNull(){
+#ifdef USE_EMBEDDED_CLASSNAMES
+			setClassName((char *)__xvr2_DB_DBFieldIsNull);
+#endif
+		}
+
+		FieldIsNull::FieldIsNull(const String &fn){
+#ifdef USE_EMBEDDED_CLASSNAMES
+			setClassName((char *)__xvr2_DB_DBFieldIsNull);
+#endif
+			field_name = fn;
+		}
+
+		const String &FieldIsNull::fieldName(){
+			return field_name;
+		}
 
 		SQLQueryException::SQLQueryException(){
 #ifdef USE_EMBEDDED_CLASSNAMES

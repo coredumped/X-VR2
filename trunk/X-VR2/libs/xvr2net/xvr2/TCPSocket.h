@@ -128,6 +128,7 @@ namespace xvr2{
 				 * buffer of data
 				 */
 				virtual int read(void *buffer, unsigned long size);
+				virtual std::string toString();
 		};
 	}; //End of Network namespace directive
 }; //End of xvr2 namespace directive

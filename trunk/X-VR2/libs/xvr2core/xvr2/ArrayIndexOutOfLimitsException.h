@@ -11,11 +11,17 @@ namespace xvr2{
 	 * and outbound limits
 	 */
 	class ArrayIndexOutOfLimits:public Exception{
+		private:
+			int _i;
+			int _m;
 		public:
 			/**
 			 * Default constructor
 			 */
 			ArrayIndexOutOfLimits();
+			ArrayIndexOutOfLimits(int _index, int _maxval);
+			int index();
+			int maxval();
 	};
 };
 #endif

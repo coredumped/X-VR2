@@ -29,8 +29,8 @@ namespace xvr2 {
 		private:
 		protected:
 		public:
-			StreamInterface(){ }
-			virtual ~StreamInterface(){}
+			StreamInterface();
+			virtual ~StreamInterface();
 			virtual void open(const String &path) = 0;
 			virtual void close() = 0;
 			virtual bool opened() = 0;
