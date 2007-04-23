@@ -11,6 +11,7 @@
 #include<xvr2/Byte.h>
 #include<xvr2/String.h>
 #include<xvr2/CoreExceptions.h>
+#include<xvr2/DBDriver.h>
 
 namespace xvr2{
 	namespace DB {
@@ -57,6 +58,7 @@ namespace xvr2{
 				double		*tmpDouble;
 				String		colname;
 			public:
+				Driver *drv;
 				/** This enumeration holds all SQL compatible datatypes,
 				 *  this compatible datatypes must also coincide with
 				 *  C/C++ and/or xvr2lib's previously defined datatypes */
@@ -228,10 +230,10 @@ namespace xvr2{
 				Timestamp	toTimestamp() const;
 				/** This method will return 0 or 1, a boolean value according
 				 *  to the stored data pointer */
-				bool		toBit();
+				bool		toBit() const;
 				/** This method will return 0 or 1, a boolean value according
 				 *  to the stored data pointer */
-				bool		toBool();
+				bool		toBool() const;
 				/** With this method ou will get the first byte of the stored
 				 *  data pointer */
 				const Byte	*toByte();

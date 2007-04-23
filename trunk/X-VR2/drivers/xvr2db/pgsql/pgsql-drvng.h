@@ -18,6 +18,7 @@ class PostgreSQLDriver : public Driver {
 		const DriverInfo &getVersionInfo();
 		void *connect(const String &server, const String &__dbname, const String &user, const String &pass, int port = 0);
 		ResultSet *query(void *__conn_handle, const String &command);
+		int execCommand(void *__conn_handle, const String &command);
 		bool disconnect(void *__conn_handle);
 		void setAutoCommit(bool val = true);
 		void commit(void *__conn_handle);

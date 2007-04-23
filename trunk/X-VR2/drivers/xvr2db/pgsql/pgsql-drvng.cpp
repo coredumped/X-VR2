@@ -255,6 +255,14 @@ void *PostgreSQLDriver::connect(const String &server, const String &__dbname, co
 }
 ////////////////////// CONNECT ENDS HERE /////////////////////
 
+int PostgreSQLDriver::execCommand(void *__conn_handle, const String &command){
+	int ret = 0;
+	ResultSet *r = this->query(__conn_handle, command);
+	ret = r->affectedRows();
+	delete r;
+	return ret;
+}
+
 ResultSet *PostgreSQLDriver::query(void *__conn_handle, const String &command){
 	//Function will call and execute a query, also it will pass an instance 
 	//of a library self-pointer
@@ -353,6 +361,7 @@ Field *PostgreSQLDriver::fetchRow(void *__res_handle){
 	for(n = 0; n < num; n++){
 		f = PQfname(r->result, n);
 		s[n].setFieldName(f);
+		s[n].drv = this;
 		thetype = PQftype(r->result, n);
 		data = PQgetvalue(r->result, r->curr_row, n);
 		if(PQgetisnull(r->result, r->curr_row, n)){

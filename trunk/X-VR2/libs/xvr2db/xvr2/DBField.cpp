@@ -1187,12 +1187,12 @@ namespace xvr2{
 			return Timestamp();
 		}
 	
-		bool Field::toBool(){
+		bool Field::toBool() const{
 			return toBit();
 		}
 	
-		bool Field::toBit(){
-			bool ret;
+		bool Field::toBit() const{
+			bool ret = 0;
 			if(isNull())
 				return 0;
 			switch(dataType){
@@ -1245,7 +1245,7 @@ namespace xvr2{
 	
 	
 		const Byte *Field::toByte(){
-			Byte *ret;
+			Byte *ret = 0;
 			if(isNull())
 				return 0;
 			switch(dataType){

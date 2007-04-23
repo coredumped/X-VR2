@@ -53,6 +53,16 @@ namespace xvr2 {
 				 *  database */
 				virtual ResultSet *query(void *__handle, 
 							 const String &command) = 0;
+				/** Use this method to send a command to 
+				 *  the backend server. <b>__handle</b> is
+				 *  the connection handler and <b>command</b>
+				 *  is the command to be send to the backend
+				 *  database. The command is question must NOT
+				 *  return any rows, this method is intended to
+				 *  be used only for execution, commands like
+				 *  DELETE, UPDATE, INSERT, etc. */
+				virtual int execCommand(void *__handle, 
+							 const String &command) = 0;
 				/** This method will disconnect you from 
 				 *  the backend server if you are 
 				 *  connected */
