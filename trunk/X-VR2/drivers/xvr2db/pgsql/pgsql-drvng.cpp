@@ -257,9 +257,36 @@ void *PostgreSQLDriver::connect(const String &server, const String &__dbname, co
 
 int PostgreSQLDriver::execCommand(void *__conn_handle, const String &command){
 	int ret = 0;
-	ResultSet *r = this->query(__conn_handle, command);
+	DB::ResultSet *r = 0;
+	__pgsql_res *rres;
+	/*ResultSet *r = this->query(__conn_handle, command);
 	ret = r->affectedRows();
-	delete r;
+	delete r;*/
+	PGresult *result;
+	__pgsql_conn *conn;
+	conn = (__pgsql_conn *)__conn_handle;
+	result = PQexec (conn->conn, command.toCharPtr());
+	if(result == NULL){
+		throw DB::SQLQueryException(PQerrorMessage (conn->conn), command);
+	}
+	else{
+		String rows;
+		switch(PQresultStatus(result)){
+			case PGRES_TUPLES_OK:
+				ret = PQntuples(result);
+				PQclear(result);
+			case PGRES_COMMAND_OK: //This is an update or delete type command
+				rows = PQcmdTuples(result);
+				if(rows.size() > 0){
+					ret = rows.toInt();
+				}
+				PQclear(result);
+				break;
+			default: //Some sort of extrange error ocurred
+				r = new DB::ResultSet(this, (void *)rres, false);
+				throw DB::SQLQueryException(PQresultErrorMessage (result), r, command);
+		}
+	}
 	return ret;
 }
 
