@@ -159,6 +159,24 @@ namespace xvr2{
 			}
 			return r;
 		}
+
+		int Connection::execCommand(const String &cmd){
+			int ret;
+			if(!isConnected()){
+				throw DBConnectFirst();
+			}
+			ret = driver->execCommand(__conn, cmd);
+			return ret;
+		}
+
+		int Connection::execCommand(const StringBuffer &cmd){
+			int ret;
+			if(!isConnected()){
+				throw DBConnectFirst();
+			}
+			ret = driver->execCommand(__conn, cmd.toString());
+			return ret;
+		}
 	
 		void Connection::commit(){
 			if(!isConnected())

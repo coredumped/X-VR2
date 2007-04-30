@@ -241,6 +241,34 @@ namespace xvr2{
 			return ret;
 		}
 
+		int ConnectionMT::execCommand(const String &cmd){
+			int ret = 0;
+			mt.lock();
+			try{
+				ret = execCommand(cmd);
+			}
+			catch(...){
+				mt.unlock();
+				throw;
+			}
+			mt.unlock();
+			return ret;
+		}
+
+		int ConnectionMT::execCommand(const StringBuffer &cmd){
+			int ret = 0;
+			mt.lock();
+			try{
+				ret = execCommand(cmd);
+			}
+			catch(...){
+				mt.unlock();
+				throw;
+			}
+			mt.unlock();
+			return ret;
+		}
+
 	//End implementation of class: ConnectionMT
 	};
 };

@@ -75,6 +75,14 @@ namespace xvr2{
 				 *  to know if the call succeeded or not*/
 				ResultSet *query(const String &cmd);
 				ResultSet *query(const StringBuffer &cmd);
+				/** Use this method to execute command which do not return
+				 *  row information such as INSERT, UPDATE, DELETE, etc. The
+				 *  method will return the number of affected rows. */
+				int execCommand(const String &cmd);
+				/** Use this method to execute command which do not return
+				 *  row information such as INSERT, UPDATE, DELETE, etc. The
+				 *  method will return the number of affected rows. */
+				int execCommand(const StringBuffer &cmd);
 				/** This will commit any transaction based 
 				 *  command to the database, when you call 
 				 *  commit every submitted delete or update 
