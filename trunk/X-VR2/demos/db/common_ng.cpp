@@ -1,3 +1,4 @@
+#include<xvr2/StringBuffer.h>
 #include "common_ng.h"
 #include<iostream>
 
@@ -278,6 +279,16 @@ int rundemo(int demo_type){
 	}
 	std::cout << "succeeded" << std::endl;
 
+/******* PERFOMING SOME COMMANDS ********/
+	conn->execCommand("create table testx (id serial, name text)");
+	for(int ni = 0; ni < 1000; ni++){
+		StringBuffer cmd;
+		cmd << "INSERT INTO testx (name) values ('" << ni << "')";
+		conn->execCommand(cmd);
+	}
+	int num = conn->execCommand("DELETE FROM testx");
+	std::cout << num << " rows deleted from testx" << std::endl;
+	conn->execCommand("drop table testx");
 	std::cout << "6. Disconnecting from database... ";
 	std::cout.flush();
 	try{
