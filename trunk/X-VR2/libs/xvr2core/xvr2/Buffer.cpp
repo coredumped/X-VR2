@@ -310,5 +310,9 @@ namespace xvr2{
 			_size = 0;
 		}
 	}
+
+	std::string Buffer::toString(){
+		return std::string((const char *)_data, _size - 1);
+	}
 };
 

@@ -88,6 +88,7 @@ namespace xvr2{
 			const void *getBuf(int pos);
 			/** Returns a pointer to position pos within the data store. */
 			const void *getBuf(int pos) const;
+			virtual std::string toString();
 			
 			//Append data
 			/** Appends (inserts at the end) the value of v to the data store. */
@@ -107,6 +108,8 @@ namespace xvr2{
 			const Buffer &operator<<(const String &s);
 			
 			//Insert data
+			/** Inserts a byte (v) of data at position pos, given that pos
+			 *  is a position from the begining of the buffer. */
 			const Buffer &insert(UInt32 pos, UInt8 v);
 			const Buffer &insert(UInt32 pos, const void *__data, UInt32 __size);
 			const Buffer &insert(UInt32 pos, const Buffer &b);
@@ -115,11 +118,17 @@ namespace xvr2{
 			//Remove data portions
 			
 			//Cloning
+			/** Clones the current Buffer object into a new one 
+			 *  which will be an exact copy of the former. */
 			Buffer cloneMe();
+			/** Clones b by creating an exact copy of it into
+			 *  a new Buffer instance. */
 			static Buffer clone(const Buffer &b);
 			
 			//Copy/Assign
-			/** Copies the contents of b */
+			/** Copies the contents of b. This basically means
+			 *  the contents of this object will be replaced by
+			 *  the contents of b. */
 			const Buffer &copy(const Buffer &b);
 			const Buffer &copy(const void *__data, UInt32 __size);
 			const Buffer &copy(UInt8 v);
@@ -134,6 +143,11 @@ namespace xvr2{
 			Buffer ref();
 			/** Converts this buffer in a reference of Buffer b. */
 			const Buffer &refTo(const Buffer &b);
+			/** Transform this Buffer object in a pointer to __buf,
+			 *  given that it is holding _siz bytes.
+			 *  If the __f parameter is true then by the time this
+			 *  object is destroid the inner reference to _buf will
+			 * also be freed */
 			const Buffer &refTo(void *_buf, UInt32 _siz, bool __f = false);
 			
 			//Empty
