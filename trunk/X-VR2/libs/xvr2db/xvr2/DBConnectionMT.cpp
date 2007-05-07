@@ -243,29 +243,29 @@ namespace xvr2{
 
 		int ConnectionMT::execCommand(const String &cmd){
 			int ret = 0;
-			mt.lock();
+			if(driver->query_requires_lock) mt.lock();
 			try{
 				ret = execCommand(cmd);
 			}
 			catch(...){
-				mt.unlock();
+				if(driver->conn_requires_lock) mt.unlock();
 				throw;
 			}
-			mt.unlock();
+			if(driver->query_requires_lock) mt.unlock();
 			return ret;
 		}
 
 		int ConnectionMT::execCommand(const StringBuffer &cmd){
 			int ret = 0;
-			mt.lock();
+			if(driver->query_requires_lock) mt.lock();
 			try{
 				ret = execCommand(cmd);
 			}
 			catch(...){
-				mt.unlock();
+				if(driver->conn_requires_lock) mt.unlock();
 				throw;
 			}
-			mt.unlock();
+			if(driver->query_requires_lock) mt.unlock();
 			return ret;
 		}
 
