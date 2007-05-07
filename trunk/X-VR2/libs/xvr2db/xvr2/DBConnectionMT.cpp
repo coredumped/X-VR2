@@ -245,7 +245,7 @@ namespace xvr2{
 			int ret = 0;
 			if(driver->query_requires_lock) mt.lock();
 			try{
-				ret = execCommand(cmd);
+				ret = Connection::execCommand(cmd);
 			}
 			catch(...){
 				if(driver->conn_requires_lock) mt.unlock();
@@ -259,7 +259,7 @@ namespace xvr2{
 			int ret = 0;
 			if(driver->query_requires_lock) mt.lock();
 			try{
-				ret = execCommand(cmd);
+				ret = Connection::execCommand(cmd);
 			}
 			catch(...){
 				if(driver->conn_requires_lock) mt.unlock();
