@@ -51,7 +51,7 @@ namespace xvr2{
 		 *  string */
 		static const char *__w6_localhost = "localhost";
 		
-		TCPSocket &TCPSocket::operator=(TCPSocket s){
+		TCPSocket &TCPSocket::operator=(const TCPSocket &s){
 			port = s.port;
 			tsock = s.tsock;
 			host = strdup(s.host);
@@ -105,6 +105,8 @@ namespace xvr2{
 					default:
 						throw NetworkException();
 				}
+				in.open(tsock);
+				out.open(tsock);
 				return 0;
 			}
 			return 1;
@@ -267,6 +269,8 @@ namespace xvr2{
 					default:
 						throw NetworkException();
 				}
+				in.open(tsock);
+				out.open(tsock);
 				return 0;
 			}
 #ifdef USE_DEBUG
@@ -571,6 +575,14 @@ namespace xvr2{
 
 		std::string TCPSocket::toString(){
 			return string_representation;
+		}
+
+		RawInputStream &TCPSocket::outputStream(){
+			return out;
+		}
+
+		RawOutputStream &TCPSocket::inputStream(){
+			return in;
 		}
 	};
 };

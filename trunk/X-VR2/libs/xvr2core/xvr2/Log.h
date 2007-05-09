@@ -32,8 +32,9 @@ namespace xvr2{
 		protected:
 			/** Wheter to show a timestamp or not in every log line. */
 			bool show_times;
-			Log(bool _show_times = true);
 		public:
+			Log(bool _show_times = true);
+			void open(const String &_fname);
 			/** Builds a log object which will dump log lines
 			 *  in the file specified by fname and printing
 			 *  timestamps on each line if _show_times is true */

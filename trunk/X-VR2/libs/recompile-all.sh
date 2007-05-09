@@ -3,6 +3,7 @@
 #
 # Use this script to re-compile all libraries from
 # the ground up
+export CXXFLAGS=-gstabs+
 
 LOGFILE=/tmp/_xvr2_autogen_all.tmp.log
 

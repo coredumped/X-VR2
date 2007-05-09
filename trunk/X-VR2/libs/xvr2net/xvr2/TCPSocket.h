@@ -10,6 +10,8 @@
 #include<xvr2/IPv4Address.h>
 #include<xvr2/NetworkExceptions.h>
 #include<xvr2/InvalidParameterException.h>
+#include<xvr2/RawInputStream.h>
+#include<xvr2/RawOutputStream.h>
 
 namespace xvr2{
 	namespace Net {
@@ -37,6 +39,8 @@ namespace xvr2{
 				 */
 				int CreateSocket(const IPv4Address *addr, int theport);
 				int CreateSocket(const char *thehost, int theport);
+				RawInputStream out;
+				RawOutputStream in;
 			public:
 				/** This is a default constructor that does 
 				 *  nothing */
@@ -69,7 +73,7 @@ namespace xvr2{
 				/**
 				 * Use this operator to create copies of an already
 				 * existent TCPSocket */
-				TCPSocket &operator=(TCPSocket s);
+				TCPSocket &operator=(const TCPSocket &s);
 				/**
 				 * This destructor does nothing
 				 */
@@ -129,6 +133,10 @@ namespace xvr2{
 				 */
 				virtual int read(void *buffer, unsigned long size);
 				virtual std::string toString();
+
+				RawInputStream &outputStream();
+				RawOutputStream &inputStream();
+
 		};
 	}; //End of Network namespace directive
 }; //End of xvr2 namespace directive
