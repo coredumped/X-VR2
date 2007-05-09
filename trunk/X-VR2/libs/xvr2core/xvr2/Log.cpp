@@ -49,6 +49,10 @@ namespace xvr2{
 	Log::~Log(){
 	}
 
+	void Log::open(const String &_fname){
+		StdioOutputFile::open(_fname, true);
+	}
+
 	void Log::close(){
 		StdioOutputFile::close();
 	}
