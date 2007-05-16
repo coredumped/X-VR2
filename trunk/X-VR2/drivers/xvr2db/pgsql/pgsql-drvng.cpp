@@ -267,7 +267,12 @@ int PostgreSQLDriver::execCommand(void *__conn_handle, const String &command){
 	conn = (__pgsql_conn *)__conn_handle;
 	result = PQexec (conn->conn, command.toCharPtr());
 	if(result == NULL){
-		throw DB::SQLQueryException(PQerrorMessage (conn->conn), command);
+		if(PQstatus(conn->conn) != CONNECTION_OK){
+			throw DB::DBConnectionFailed();
+		}
+		else{
+			throw DB::SQLQueryException(PQerrorMessage (conn->conn), command);
+		}
 	}
 	else{
 		String rows;
@@ -307,7 +312,12 @@ ResultSet *PostgreSQLDriver::query(void *__conn_handle, const String &command){
 /*#ifdef USE_DEBUG
 		std::cerr << "While executing query: \"" << command << "\"... " <<  PQerrorMessage (conn->conn) << std::endl;
 #endif*/
-		throw DB::SQLQueryException(PQerrorMessage (conn->conn), command);
+		if(PQstatus(conn->conn) != CONNECTION_OK){
+			throw DB::DBConnectionFailed();
+		}
+		else{
+			throw DB::SQLQueryException(PQerrorMessage (conn->conn), command);
+		}
 	}
 	else{
 		switch(PQresultStatus(result)){
