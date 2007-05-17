@@ -6,6 +6,6 @@ includedir=@includedir@
 Name: xvr2core
 Description: X-VR2 Core Library
 Version: @VERSION@
-Libs: -L${libdir} -l@GENERIC_LIBRARY_NAME@core-@VERSION@
+Libs: -L${libdir} -l@GENERIC_LIBRARY_NAME@core
 Cflags: -Wall -I${includedir}/@GENERIC_LIBRARY_NAME@ -I${libdir}/@GENERIC_LIBRARY_NAME@/include
 

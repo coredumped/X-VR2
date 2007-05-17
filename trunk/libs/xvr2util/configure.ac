@@ -15,16 +15,13 @@ GENERIC_LIBRARY_NAME=xvr2
 
 #release versioning
 GENERIC_MAJOR_VERSION=0
-GENERIC_MINOR_VERSION=7
-GENERIC_MICRO_VERSION=1
+GENERIC_MINOR_VERSION=8
+GENERIC_MICRO_VERSION=0
 GENERIC_PATCH_LEVEL=0
-
-#API version (often = GENERIC_MAJOR_VERSION.GENERIC_MINOR_VERSION)
-#GENERIC_API_VERSION=0.7.1
-#AC_SUBST(GENERIC_API_VERSION)
 
 #shared library versioning
 GENERIC_LIBRARY_VERSION=$GENERIC_MINOR_VERSION:$GENERIC_MICRO_VERSION:$GENERIC_PATCH_LEVEL
+GENERIC_LIBRARY_VERSION_DOTTED=$GENERIC_MINOR_VERSION.$GENERIC_MICRO_VERSION.$GENERIC_PATCH_LEVEL
 
 
 dnl --------------------------------
@@ -32,11 +29,12 @@ dnl Package name and version number
 dnl --------------------------------
 
 AC_SUBST(GENERIC_LIBRARY_VERSION)
+AC_SUBST(GENERIC_LIBRARY_VERSION_DOTTED)
 
 PACKAGE=$GENERIC_LIBRARY_NAME
 AC_SUBST(GENERIC_LIBRARY_NAME)
 
-GENERIC_VERSION=$GENERIC_MAJOR_VERSION.$GENERIC_MINOR_VERSION.$GENERIC_MICRO_VERSION.$GENERIC_PATCH_LEVEL
+GENERIC_VERSION=$GENERIC_MAJOR_VERSION.$GENERIC_MINOR_VERSION.$GENERIC_MICRO_VERSION
 GENERIC_RELEASE=$GENERIC_MAJOR_VERSION.$GENERIC_MINOR_VERSION.$GENERIC_MICRO_VERSION
 AC_SUBST(GENERIC_RELEASE)
 AC_SUBST(GENERIC_VERSION)
@@ -75,7 +73,7 @@ AC_ARG_ENABLE(debug, AC_HELP_STRING([--enable-debug          Build library in de
 	]
 )
 
-xvr2core_required_version=0.7.1.0
+xvr2core_required_version=$GENERIC_RELEASE
 
 dnl -----------------------------------------------
 dnl Verify that xvr2core library is already installed
@@ -85,7 +83,7 @@ PKG_CHECK_MODULES(XVR2CORE, [xvr2core >= $xvr2core_required_version],[
 	CPPFLAGS="$CPPFLAGS $XVR2CORE_CFLAGS"
 	LIBS="$LIBS $XVR2CORE_LIBS"
 ],[
-	AC_MSG_RESULT([ !!! A suitable version of xvr2core has not been found, unable build xvr2util, sorry !!! ])
+	AC_MSG_RESULT([ !!! A suitable version of xvr2core => $GENERIC_RELEASE has not been found, unable build xvr2util, sorry !!! ])
 	exit 1
 ])
 
@@ -117,6 +115,9 @@ AC_OUTPUT(Makefile \
 	  docs/Makefile \
 	  docs/Doxyfile
 )
+
+mkdir xvr2/Util
+ln -svf $PWD/xvr2/*.h xvr2/Util/
 
 echo
 echo "######################################"

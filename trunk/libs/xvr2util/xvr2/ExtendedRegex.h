@@ -2,7 +2,7 @@
 #ifndef __XVR2_EXTENDED_REGEX_H__
 #define __XVR2_EXTENDED_REGEX_H__
 
-#include<xvr2/Regex.h>
+#include<xvr2/Util/Regex.h>
 
 namespace xvr2{
 

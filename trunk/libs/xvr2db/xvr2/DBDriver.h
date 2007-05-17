@@ -6,7 +6,7 @@
  
 
 #include<xvr2/xvr2config.h>
-#include<xvr2/DBDriverInfo.h>
+#include<xvr2/DB/DriverInfo.h>
 
 
 namespace xvr2 {

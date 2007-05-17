@@ -4,9 +4,9 @@
 #ifndef __XVR2_RESULTSET_H__
 #define __XVR2_RESULTSET_H__
 #include<xvr2/xvr2config.h>
-#include<xvr2/DBDriver.h>
-#include<xvr2/DBField.h>
-#include<xvr2/DatabaseException.h>
+#include<xvr2/DB/Driver.h>
+#include<xvr2/DB/Field.h>
+#include<xvr2/DB/DatabaseException.h>
 
 namespace xvr2{
 

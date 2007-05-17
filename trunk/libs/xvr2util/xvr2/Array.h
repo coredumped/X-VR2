@@ -5,10 +5,10 @@
 #define __XVR2_ARRAY_H__
 #include<xvr2/xvr2config.h>
 #ifdef USE_EMBEDDED_CLASSNAMES
-#include<xvr2/_xvr2utilClassNames.h>
+#include<xvr2/Util/_xvr2utilClassNames.h>
 #endif
-#include<xvr2/Container.h>
-#include<xvr2/c_utilities.h>
+#include<xvr2/Util/Container.h>
+#include<xvr2/Util/c_utilities.h>
 
 namespace xvr2{
 	namespace Util {

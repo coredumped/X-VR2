@@ -6,7 +6,7 @@
 #include<xvr2/xvr2config.h>
 #include<xvr2/String.h>
 #include<xvr2/CoreExceptions.h>
-#include<xvr2/RegexException.h>
+#include<xvr2/Util/RegexException.h>
 
 namespace xvr2{
 	namespace Util {

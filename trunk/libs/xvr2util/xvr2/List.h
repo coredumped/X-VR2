@@ -9,9 +9,9 @@
 #define __XVR2_LIST_H__
 #include<xvr2/xvr2config.h>
 #ifdef USE_EMBEDDED_CLASSNAMES
-#include<xvr2/_xvr2utilClassNames.h>
+#include<xvr2/Util/_xvr2utilClassNames.h>
 #endif
-#include<xvr2/Container.h>
+#include<xvr2/Util/Container.h>
 #include<xvr2/CoreExceptions.h>
 
 namespace xvr2{

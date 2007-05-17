@@ -7,7 +7,7 @@
 #include<xvr2/CoreExceptions.h>
 #include<xvr2/String.h>
 #ifdef USE_EMBEDDED_CLASSNAMES
-#include<xvr2/_xvr2utilClassNames.h>
+#include<xvr2/Util/_xvr2utilClassNames.h>
 #endif
 #include<vector>
 

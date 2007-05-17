@@ -11,7 +11,7 @@
 #include<xvr2/Byte.h>
 #include<xvr2/String.h>
 #include<xvr2/CoreExceptions.h>
-#include<xvr2/DBDriver.h>
+#include<xvr2/DB/Driver.h>
 
 namespace xvr2{
 	namespace DB {

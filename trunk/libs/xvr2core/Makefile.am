@@ -1,4 +1,4 @@
-## top directory
+# $Id$
 
 #Build in these directories:
 SUBDIRS= $(GENERIC_LIBRARY_NAME) $(DOXYGEN_INPUT_DIR)

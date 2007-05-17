@@ -5,10 +5,10 @@
 #define __XVR2_DB_OLD_DRIVER_H__
 #include<xvr2/xvr2config.h>
 #include<xvr2/Plugin.h>
-#include<xvr2/DBDriver.h>
-#include<xvr2/DBDriverInfo.h>
-#include<xvr2/DBField.h>
-#include<xvr2/DBResultSet.h>
+#include<xvr2/DB/Driver.h>
+#include<xvr2/DB/DriverInfo.h>
+#include<xvr2/DB/Field.h>
+#include<xvr2/DB/ResultSet.h>
 
 namespace xvr2{
 

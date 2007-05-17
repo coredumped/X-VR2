@@ -6,7 +6,7 @@ includedir=@includedir@
 Name: xvr2gl
 Description: X-VR2 GL (Graphics Library)
 Version: @VERSION@
-Requires: xvr2core = 0.7.1.0, xvr2math >= 0.7.1.0
-Libs: -L${libdir} -l@GENERIC_LIBRARY_NAME@gl-@VERSION@
+Requires: xvr2core = @VERSION@, xvr2math >= @VERSION@
+Libs: -L${libdir} -l@GENERIC_LIBRARY_NAME@gl
 Cflags: -I${includedir}/@GENERIC_LIBRARY_NAME@ -I${libdir}/@GENERIC_LIBRARY_NAME@/include
 

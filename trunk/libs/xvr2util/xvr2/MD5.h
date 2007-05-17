@@ -20,7 +20,7 @@
 #include<xvr2/String.h>
 #include<xvr2/Buffer.h>
 #include<xvr2/CoreExceptions.h>
-#include<xvr2/ChecksumExceptions.h>
+#include<xvr2/Util/ChecksumExceptions.h>
 
 namespace xvr2 {
 	namespace Util {

@@ -6,7 +6,7 @@ includedir=@includedir@
 Name: xvr2db
 Description: X-VR2 DB Library
 Version: @VERSION@
-Requires: xvr2core = 0.7.1.0
-Libs: -L${libdir} -l@GENERIC_LIBRARY_NAME@db-@VERSION@
+Requires: xvr2core = @VERSION@
+Libs: -L${libdir} -l@GENERIC_LIBRARY_NAME@db
 Cflags: -I${includedir}/@GENERIC_LIBRARY_NAME@ -I${libdir}/@GENERIC_LIBRARY_NAME@/include
 

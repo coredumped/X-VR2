@@ -5,8 +5,8 @@
 #define __XVR2_DB_ConnectionMT_H__
 
 #include<xvr2/xvr2config.h>
-#include<xvr2/DBDriver.h>
-#include<xvr2/DBConnection.h>
+#include<xvr2/DB/Driver.h>
+#include<xvr2/DB/Connection.h>
 #include<xvr2/Mutex.h>
 
 namespace xvr2{
