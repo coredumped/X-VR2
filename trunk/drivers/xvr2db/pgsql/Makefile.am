@@ -10,6 +10,6 @@ cc_sources = pgsql-drvng.cpp
 
 INCLUDES = -I$(top_srcdir)
 
-lib_LTLIBRARIES=pgsql_driver-0.7.1.0.la
-pgsql_driver_0_7_1_0_la_SOURCES= $(h_sources) $(cc_sources)
-pgsql_driver_0_7_1_0_la_LDFLAGS= -module -version-info $(GENERIC_LIBRARY_VERSION) -release $(GENERIC_RELEASE)
+lib_LTLIBRARIES=pgsql_driver.la
+pgsql_driver_la_SOURCES= $(h_sources) $(cc_sources)
+pgsql_driver_la_LDFLAGS= -module -version-info $(GENERIC_LIBRARY_VERSION) -release $(GENERIC_RELEASE)

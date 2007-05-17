@@ -2,10 +2,8 @@
 #include "common_ng.h"
 #include<iostream>
 
-//dlname='pgsql_driver-0.7.1.0-0.7.1.so.0'
-
-static const char *MYSQL_DRIVER_LOCATION = __XVR2_PREFIX_DIR"/lib/mysql_driver-"__XVR2_VERSION_STRING".so";
-static const char *PGSQL_DRIVER_LOCATION = __XVR2_PREFIX_DIR"/lib/pgsql_driver-"__XVR2_VERSION_STRING".so";
+static const char *MYSQL_DRIVER_LOCATION = __XVR2_PREFIX_DIR"/lib/mysql_driver-"__XVR2_VERSION_STRING".so."__XVR2_MINOR_VERSION_STRING;
+static const char *PGSQL_DRIVER_LOCATION = __XVR2_PREFIX_DIR"/lib/pgsql_driver-"__XVR2_VERSION_STRING".so."__XVR2_MINOR_VERSION_STRING;
 
 
 using namespace xvr2;

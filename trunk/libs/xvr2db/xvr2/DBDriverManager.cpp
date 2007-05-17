@@ -3,8 +3,8 @@
  */
 #include"config.h"
 #include<xvr2/xvr2config.h>
-#include<xvr2/_xvr2dbClassNames.h>
-#include<xvr2/DBDriverManager.h>
+#include"_xvr2dbClassNames.h"
+#include"DriverManager.h"
 
 namespace xvr2 {
 	namespace DB {

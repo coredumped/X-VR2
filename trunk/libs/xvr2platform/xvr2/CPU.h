@@ -26,7 +26,7 @@
 #define __XVR2_CPU_H__
 
 #include<xvr2/String.h>
-#include<xvr2/PlatformException.h>
+#include<xvr2/Platform/PlatformException.h>
 #include<fstream>
 
 namespace xvr2 {

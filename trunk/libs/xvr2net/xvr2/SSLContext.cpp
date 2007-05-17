@@ -4,9 +4,9 @@
 #include<cstdlib>
 #include"config.h"
 #include<xvr2/xvr2config.h>
-#include"_xvr2netClassNames.h"
-#include<xvr2/SSLContext.h>
 #include<xvr2/Mutex.h>
+#include"_xvr2netClassNames.h"
+#include"SSLContext.h"
 #include<openssl/ssl.h>
 #include<openssl/x509.h>
 #include<openssl/err.h>

@@ -7,12 +7,12 @@
 #include<netdb.h>
 #include"config.h"
 #include<xvr2/xvr2config.h>
+#include<xvr2/Object.h>
+#include<xvr2/System.h>
+#include<xvr2/Memory.h>
 #include"_xvr2netClassNames.h"
-#include"xvr2/Object.h"
-#include"xvr2/System.h"
-#include"xvr2/Memory.h"
-#include<xvr2/IPv4Address.h>
-#include"xvr2/IPv4Resolver.h"
+#include"IPv4Address.h"
+#include"IPv4Resolver.h"
 #include<errno.h>
 
 namespace xvr2 {

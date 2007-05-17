@@ -3,9 +3,9 @@
  */
 #include"config.h"
 #include<xvr2/xvr2config.h>
+#include<xvr2/Memory.h>
 #include"_xvr2netClassNames.h"
-#include"xvr2/IPv4Address.h"
-#include"xvr2/Memory.h"
+#include"IPv4Address.h"
 #include<arpa/inet.h>
 #include<errno.h>
 

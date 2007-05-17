@@ -4,7 +4,7 @@
 #include"config.h"
 #include<xvr2/xvr2config.h>
 #include"_xvr2mathClassNames.h"
-#include"xvr2/Vector3.h"
+#include"Vector3.h"
 #include<math.h>
 #include<sstream>
 

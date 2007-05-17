@@ -10,9 +10,9 @@
 #include<string.h>
 #include"config.h"
 #include<xvr2/xvr2config.h>
+#include<xvr2/Util/c_utilities.h>
 #include"_xvr2mathClassNames.h"
-#include<xvr2/c_utilities.h>
-#include<xvr2/Polygon.h>
+#include"Polygon.h"
 
 
 namespace xvr2 {

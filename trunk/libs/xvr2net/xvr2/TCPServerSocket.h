@@ -4,8 +4,8 @@
 #ifndef __XVR2_SERVER_SOCKET_H__
 #define __XVR2_SERVER_SOCKET_H__
 
-#include<xvr2/NetworkExceptions.h>
-#include<xvr2/TCPSocket.h>
+#include<xvr2/Net/NetworkExceptions.h>
+#include<xvr2/Net/TCPSocket.h>
 #include<xvr2/InvalidParameterException.h>
 
 namespace xvr2{

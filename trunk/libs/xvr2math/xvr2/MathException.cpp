@@ -3,9 +3,9 @@
  */
 #include"config.h"
 #include<xvr2/xvr2config.h>
-#include"_xvr2mathClassNames.h"
-#include<xvr2/MathException.h>
 #include<xvr2/MessageStrings.h>
+#include"_xvr2mathClassNames.h"
+#include"MathException.h"
 
 namespace xvr2 {
 	namespace Math {

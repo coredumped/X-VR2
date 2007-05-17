@@ -4,7 +4,7 @@
 #include"config.h"
 #include<xvr2/xvr2config.h>
 #include"_xvr2dbClassNames.h"
-#include<xvr2/DBResultSet.h>
+#include"ResultSet.h"
 
 namespace xvr2{
 

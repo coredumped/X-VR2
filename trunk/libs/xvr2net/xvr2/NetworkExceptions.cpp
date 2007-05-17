@@ -4,8 +4,8 @@
 #include"config.h"
 #include<xvr2/xvr2config.h>
 #include"_xvr2netClassNames.h"
-#include<xvr2/NetworkExceptions.h>
 #include<xvr2/MessageStrings.h>
+#include"NetworkExceptions.h"
 #include<openssl/err.h>
 
 namespace xvr2 {

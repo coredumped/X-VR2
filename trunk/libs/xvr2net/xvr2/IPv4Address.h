@@ -7,8 +7,8 @@
 #include<iostream>
 #include<xvr2/Object.h>
 #include<xvr2/String.h>
-#include<xvr2/NetworkExceptions.h>
-#include<xvr2/IPv4Resolver.h>
+#include<xvr2/Net/NetworkExceptions.h>
+#include<xvr2/Net/IPv4Resolver.h>
 #ifdef UNIX_SOCKETS
 #include<sys/types.h>
 #include<netinet/in.h>

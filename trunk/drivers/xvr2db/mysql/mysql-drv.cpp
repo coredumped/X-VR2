@@ -178,6 +178,45 @@ void *MySQLDriver::connect(const String &server, const String &__dbname, const S
 ////////////////////// CONNECT ENDS HERE /////////////////////
 
 
+int MySQLDriver::execCommand(void *__conn_handle, const xvr2::String &command){
+	int r = 0;
+	MYSQL_RES *result;
+	__rdbms_result_set *rres;
+	__rdbms_conn *conn;
+	conn = (__rdbms_conn *)__conn_handle;
+	//Verify that MySQL's TSD is in place before attemtping to run the query
+	if(conn->creator_tid != ThreadManager::getCurrentThreadID()){
+		if(mysql_thread_init() == 0){
+			//Install finalization handler here
+			if(!ThreadManager::currentIsMain()){
+				if(ThreadManager::currentIsThread()){
+					ThreadManager::getCurrentThread()->registerFinalizer(new MySQLThreadCleanupFinalizer());
+				}
+				else if(ThreadManager::currentIsBackgroundFunction()){
+					ThreadManager::getCurrentBackgroundFunction()->registerFinalizer(new MySQLThreadCleanupFinalizer());
+				}
+			}
+		}
+	}
+
+	int queryid = mysql_query(conn->conn, command.toCharPtr());
+	if(queryid != 0){
+		switch(queryid){
+			case CR_SERVER_GONE_ERROR:
+				throw DB::DBConnectionFailed();
+				break;
+			case CR_SERVER_LOST:
+				throw DB::DBConnectionFailed();
+				break;
+			case CR_COMMANDS_OUT_OF_SYNC:
+			case CR_UNKNOWN_ERROR:
+				throw DB::SQLQueryException(mysql_error(conn->conn), command);
+				break;
+		}
+	}
+	r = mysql_field_count(conn->conn);
+	return r;
+}
 
 ResultSet *MySQLDriver::query(void *__conn_handle, const String &command){
 	DB::ResultSet *r = 0;

@@ -5,8 +5,8 @@
 #define __XVR2_GL_DISPLAY_H__
 #include<xvr2/Object.h>
 #include<xvr2/String.h>
-#include<xglDisplayDriver.h>
-#include<xglExceptions.h>
+#include<xvr2/GL/xglDisplayDriver.h>
+#include<xvr2/GL/xglExceptions.h>
 
 namespace xvr2 {
 namespace GL {

@@ -4,7 +4,7 @@ dnl --------------------------------
 dnl Initialization macros.
 dnl --------------------------------
 
-AC_INIT(xvr2/DBDriver.h)
+AC_INIT(xvr2/Driver.h)
 AM_CONFIG_HEADER(config.h)
 
 dnl -----------------------------------------------

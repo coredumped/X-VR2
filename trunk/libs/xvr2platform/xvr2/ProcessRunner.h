@@ -19,7 +19,7 @@
 #define __XVR2_PLATFORM_PROCESS_RUNNER_H__
 
 #include<xvr2/SystemException.h>
-#include<xvr2/PlatformException.h>
+#include<xvr2/Platform/PlatformException.h>
 #include<xvr2/RawInputStream.h>
 #include<xvr2/RawOutputStream.h>
 #include<xvr2/String.h>

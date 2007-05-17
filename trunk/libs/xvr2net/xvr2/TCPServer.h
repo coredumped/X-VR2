@@ -4,12 +4,12 @@
 #ifndef __XVR2_TCPServer_H__
 #define __XVR2_TCPServer_H__
 
-#include<xvr2/TCPSocket.h>
-#include<xvr2/TCPServerSocket.h>
+#include<xvr2/Net/TCPSocket.h>
+#include<xvr2/Net/TCPServerSocket.h>
 //#include<xvr2/TCPServerSession.h>
 #include<xvr2/SharedVar.h>
 #include<xvr2/Thread.h>
-#include<xvr2/NetworkExceptions.h>
+#include<xvr2/Net/NetworkExceptions.h>
 
 namespace xvr2{
 	namespace Net {

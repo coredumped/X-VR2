@@ -5,8 +5,8 @@
 #define __SOCKET_BASE_H__
 #include<xvr2/Object.h>
 #include<xvr2/DataTypes.h>
-#include<xvr2/IPv4Address.h>
-#include<xvr2/NetworkExceptions.h>
+#include<xvr2/Net/IPv4Address.h>
+#include<xvr2/Net/NetworkExceptions.h>
 
 namespace xvr2{
 	namespace Net{

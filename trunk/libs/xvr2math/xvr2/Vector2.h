@@ -4,8 +4,8 @@
 #ifndef __XVR2_GFX_VECTOR2_H__
 #define __XVR2_GFX_VECTOR2_H__
 #include<xvr2/xvr2config.h>
-#include<xvr2/xvr2mathdefs.h>
 #include<xvr2/String.h>
+#include<xvr2/Math/xvr2mathdefs.h>
 
 namespace xvr2 {
 namespace Math {

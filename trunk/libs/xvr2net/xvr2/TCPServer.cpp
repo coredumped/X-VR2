@@ -5,9 +5,9 @@
  */
 #include"config.h"
 #include<xvr2/xvr2config.h>
-#include"_xvr2netClassNames.h"
-#include<xvr2/TCPServer.h>
 #include<xvr2/DebugConsole.h>
+#include"_xvr2netClassNames.h"
+#include"TCPServer.h"
 
 namespace xvr2{
 	namespace Net {

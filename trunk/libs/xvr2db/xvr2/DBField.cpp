@@ -11,10 +11,10 @@
 #include<ctype.h>
 #include<unistd.h>
 #include<xvr2/xvr2config.h>
-#include<xvr2/_xvr2dbClassNames.h>
-#include<xvr2/DBField.h>
 #include<xvr2/Memory.h>
-#include<xvr2/DatabaseException.h>
+#include"_xvr2dbClassNames.h"
+#include"Field.h"
+#include"DatabaseException.h"
 #include<errno.h>
 #if __GNUC__ < 3
 #define __USE_SVID

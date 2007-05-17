@@ -4,7 +4,7 @@
 #include"config.h"
 #include<xvr2/xvr2config.h>
 #include"_xvr2glClassNames.h"
-#include"xvr2/xglDisplayDriver.h"
+#include"xglDisplayDriver.h"
 namespace xvr2 {
 namespace GL {
 	DisplayDriver::DisplayDriver(){

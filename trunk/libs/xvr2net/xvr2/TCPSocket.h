@@ -6,9 +6,9 @@
 #include<sys/socket.h>
 
 #include<xvr2/String.h>
-#include<xvr2/Socket.h>
-#include<xvr2/IPv4Address.h>
-#include<xvr2/NetworkExceptions.h>
+#include<xvr2/Net/Socket.h>
+#include<xvr2/Net/IPv4Address.h>
+#include<xvr2/Net/NetworkExceptions.h>
 #include<xvr2/InvalidParameterException.h>
 #include<xvr2/RawInputStream.h>
 #include<xvr2/RawOutputStream.h>

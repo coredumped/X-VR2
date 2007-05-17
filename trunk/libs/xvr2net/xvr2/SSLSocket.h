@@ -3,9 +3,9 @@
  */
 #ifndef __XVR_SSL_SOCKET_H__
 #define __XVR_SSL_SOCKET_H__
-#include<xvr2/TCPSocket.h>
-#include<xvr2/SSLContext.h>
-#include<xvr2/NetworkExceptions.h>
+#include<xvr2/Net/TCPSocket.h>
+#include<xvr2/Net/SSLContext.h>
+#include<xvr2/Net/NetworkExceptions.h>
 
 namespace xvr2 {
 	namespace Net {

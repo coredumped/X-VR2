@@ -5,9 +5,9 @@
  */
 #include"config.h"
 #include<xvr2/xvr2config.h>
-#include<xvr2/_xvr2dbClassNames.h>
-#include<xvr2/DBConnection.h>
-#include<xvr2/DatabaseException.h>
+#include"_xvr2dbClassNames.h"
+#include"Connection.h"
+#include"DatabaseException.h"
 
 namespace xvr2{
 

@@ -4,7 +4,7 @@
 #ifndef __XVR2_GL_3D_OBJECT_H__
 #define __XVR2_GL_3D_OBJECT_H__
 #include<xvr2/Object.h>
-#include<xvr2/Vector3.h>
+#include<xvr2/Math/Vector3.h>
 
 namespace xvr2 {
 	namespace GL {

@@ -4,7 +4,7 @@
 #include"config.h"
 #include<xvr2/xvr2config.h>
 #include"_xvr2glClassNames.h"
-#include"xvr2/Object3D.h"
+#include"Object3D.h"
 
 namespace xvr2 {
 	namespace GL {

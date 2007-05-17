@@ -6,7 +6,7 @@
 #include<xvr2/Object.h>
 #include<xvr2/DSO.h>
 #include<xvr2/CoreExceptions.h>
-#include<xvr2/xglExceptions.h>
+#include<xvr2/GL/xglExceptions.h>
 
 namespace xvr2 {
 namespace GL {

@@ -17,9 +17,9 @@
 
 #ifndef __XVR2_DB_MYSQL_DRV_H__
 #define __XVR2_DB_MYSQL_DRV_H__
-#include<xvr2/DBField.h>
-#include<xvr2/DBResultSet.h>
-#include<xvr2/DBDriver.h>
+#include<xvr2/DB/Field.h>
+#include<xvr2/DB/ResultSet.h>
+#include<xvr2/DB/Driver.h>
 
 using namespace xvr2::DB;
 using xvr2::String;
@@ -51,6 +51,7 @@ class MySQLDriver : public Driver {
 		const char *resultErrorMessage(void *res_handle);
 		const bool isConnected(void *conn_handle);
 		const bool hasConnPolling();
+		int execCommand(void *conn_handle, const xvr2::String &cmd);
 };
 
 extern "C" {

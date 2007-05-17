@@ -4,7 +4,7 @@
 #include"config.h"
 #include<xvr2/xvr2config.h>
 #include"_xvr2glClassNames.h"
-#include<xvr2/xglDisplay.h>
+#include"xglDisplay.h"
 
 
 namespace xvr2 {

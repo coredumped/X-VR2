@@ -22,7 +22,7 @@
 #include<string.h>
 #include<errno.h>
 #endif
-#include<xvr2/TCPSocket.h>
+#include"TCPSocket.h"
 #include<xvr2/Memory.h>
 #ifdef UNIX_SOCKETS
 #include<sys/types.h>

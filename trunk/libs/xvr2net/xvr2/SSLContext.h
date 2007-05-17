@@ -3,12 +3,12 @@
  */
 #ifndef __XVR2_NET_SSL_CONTEXT_H__
 #define __XVR2_NET_SSL_CONTEXT_H__
-#include<xvr2/netdefs.h>
+#include<xvr2/Net/netdefs.h>
 #include<xvr2/Object.h>
-#include<xvr2/TCPSocket.h>
+#include<xvr2/Net/TCPSocket.h>
 #include<xvr2/StringBuffer.h>
-#include<xvr2/X509.h>
-#include<xvr2/NetworkExceptions.h>
+#include<xvr2/Net/X509.h>
+#include<xvr2/Net/NetworkExceptions.h>
 
 namespace xvr2 {
 namespace Net {

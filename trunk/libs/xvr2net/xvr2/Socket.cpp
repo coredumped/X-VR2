@@ -6,8 +6,8 @@
 #include"config.h"
 #include<xvr2/xvr2config.h>
 #include"_xvr2netClassNames.h"
-#include"xvr2/Socket.h"
-#include"xvr2/Thread.h"
+#include"Socket.h"
+#include<xvr2/Thread.h>
 #ifdef UNIX_SOCKETS
 #include<sys/socket.h>
 #include<sys/types.h>
@@ -18,10 +18,10 @@
 #endif
 #include<iostream>
 
-#include"xvr2/DebugConsole.h"
-#include"xvr2/String.h"
-#include"xvr2/ThreadManager.h"
-#include"xvr2/IPv4Address.h"
+#include<xvr2/DebugConsole.h>
+#include<xvr2/String.h>
+#include<xvr2/ThreadManager.h>
+#include"IPv4Address.h"
 #include<limits.h>
 
 namespace xvr2{

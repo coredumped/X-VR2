@@ -26,7 +26,7 @@
 #include<fcntl.h>
 #include"config.h"
 #include"_xvr2netClassNames.h"
-#include<xvr2/TCPServerSocket.h>
+#include"TCPServerSocket.h"
 
 namespace xvr2{
 	namespace Net{

@@ -27,7 +27,7 @@
 #define __XVR2_PLATFORM_H__
 
 #include<xvr2/String.h>
-#include<xvr2/PlatformException.h>
+#include<xvr2/Platform/PlatformException.h>
 #include<xvr2/CPU.h>
 #include<vector>
 

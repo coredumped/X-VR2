@@ -3,9 +3,9 @@
  */
 #include"config.h"
 #include<xvr2/xvr2config.h>
-#include"_xvr2mathClassNames.h"
-#include<xvr2/PolygonAlignmentException.h>
 #include<xvr2/MessageStrings.h>
+#include"_xvr2mathClassNames.h"
+#include"PolygonAlignmentException.h"
 
 namespace xvr2 {
         namespace Math {
