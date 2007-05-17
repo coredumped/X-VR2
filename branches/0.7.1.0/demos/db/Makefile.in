@@ -1,0 +1,15 @@
+all: pgsql-query-test mysql-query-test
+
+mysql-query-test: mysql-query-test_ng.cpp common_ng.o
+	g++ -gstabs+ -o mysql-query-test mysql-query-test_ng.cpp `pkg-config xvr2core xvr2db --cflags --libs` common_ng.o
+
+pgsql-query-test: pgsql-query-test_ng.cpp common_ng.o
+	g++ -gstabs+ -o pgsql-query-test pgsql-query-test_ng.cpp `pkg-config xvr2core xvr2db --cflags --libs` common_ng.o
+
+common_ng.o: common_ng.cpp common_ng.h
+	g++ -c -gstabs+ -o common_ng.o common_ng.cpp `pkg-config xvr2core xvr2db --cflags`
+
+clean:
+	rm -f pgsql-query-test mysql-query-test *.o
+
+rebuild: clean all
