@@ -17,7 +17,7 @@ namespace Net {
 	class IPv4Address;
 	class IPv4Resolver:public xvr2::System {
 		public:
-			static IPv4Address *resolve(const String &ip_or_host);
+			static IPv4Address resolve(const String &ip_or_host);
 			//static String *reverse_lookup(const String &ip_address);
 	};
 };

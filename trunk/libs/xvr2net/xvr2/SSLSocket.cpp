@@ -82,10 +82,12 @@ namespace Net {
 			throw ;
 		}
 	}
-	SSLSocket::SSLSocket(const SSLContext &_ctx, const char *thehost, int theport):TCPSocket(thehost, theport){
+	//SSLSocket::SSLSocket(const SSLContext &_ctx, const char *thehost, int theport):TCPSocket(thehost, theport){
+	SSLSocket::SSLSocket(const SSLContext &_ctx, const char *thehost, int theport){
 #ifdef USE_EMBEDDED_CLASSNAMES
 		setClassName(__xvr2_Net_SSLSocket);
 #endif
+		port = theport;
 		idata = 0;
 		ctx = _ctx;
 		try{
@@ -95,10 +97,11 @@ namespace Net {
 			throw ;
 		}
 	}
-	SSLSocket::SSLSocket(const SSLContext &_ctx, const String &thehost, int theport):TCPSocket(thehost.toCharPtr(), theport){
+	SSLSocket::SSLSocket(const SSLContext &_ctx, const String &thehost, int theport){
 #ifdef USE_EMBEDDED_CLASSNAMES
 		setClassName(__xvr2_Net_SSLSocket);
 #endif
+		port = theport;
 		idata = 0;
 		ctx = _ctx;
 		try{

@@ -4,7 +4,7 @@ dnl --------------------------------
 dnl Initialization macros.
 dnl --------------------------------
 
-AC_INIT(xvr2/TCPSocket.h)
+AC_INIT(xvr2/IPv4Address.h)
 AM_CONFIG_HEADER(config.h)
 
 dnl -----------------------------------------------
@@ -75,14 +75,16 @@ AC_ARG_ENABLE(debug, AC_HELP_STRING([--enable-debug          Build library in de
 )
 
 xvr2core_required_version=$GENERIC_RELEASE
+xvr2util_required_version=$GENERIC_RELEASE
 openssl_required_version=0.9.7
 
 dnl -----------------------------------------------
 dnl Verify that xvr2core library is already installed
 dnl -----------------------------------------------
-PKG_CHECK_MODULES(DEPS, [xvr2core >= $xvr2core_required_version openssl >= $openssl_required_version],[
-	AC_MSG_RESULT([*** xvr2core, OpenSSL found])
+PKG_CHECK_MODULES(DEPS, [xvr2core >= $xvr2core_required_version openssl >= $openssl_required_version xvr2util >= $xvr2util_required_version],[
+	AC_MSG_RESULT([*** xvr2core, xvr2util and OpenSSL found])
 ],[
+	AC_MSG_RESULT([Dependency failure, unable to build.])
 	exit 1
 ])
 AC_SUBST(DEPS_CFLAGS)
@@ -126,5 +128,7 @@ echo "#"
 echo "#  Platform:              $host"
 echo "#  Debug mode:            $debug_mode_activated"
 echo "#  X-VR2 Core:            $xvr2core_required_version"
+echo "#  X-VR2 Util:            $xvr2util_required_version"
 echo "#  OpenSSL:               `pkg-config openssl --modversion`"
 echo "#  Generate docs:         $doxygen_docs"
+

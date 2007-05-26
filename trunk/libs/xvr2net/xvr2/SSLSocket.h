@@ -9,8 +9,10 @@
 
 namespace xvr2 {
 	namespace Net {
-		class SSLSocket : public TCPSocket{
+		class SSLSocket : public xvr2::Object {
 			private:
+				int tsock;
+				int port;
 			protected:
 				SSLContext ctx;
 				void *idata;

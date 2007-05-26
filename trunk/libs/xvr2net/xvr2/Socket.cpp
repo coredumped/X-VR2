@@ -1,80 +1,85 @@
 /*
  * $Id$
- * This is the socket's parent class
  */
-
-#include"config.h"
-#include<xvr2/xvr2config.h>
-#include"_xvr2netClassNames.h"
 #include"Socket.h"
-#include<xvr2/Thread.h>
-#ifdef UNIX_SOCKETS
-#include<sys/socket.h>
 #include<sys/types.h>
-#include<netinet/tcp.h>
-#include<netdb.h>
-#else
+#include<sys/socket.h>
+#include<cerrno>
 
-#endif
-#include<iostream>
-
-#include<xvr2/DebugConsole.h>
-#include<xvr2/String.h>
-#include<xvr2/ThreadManager.h>
-#include"IPv4Address.h"
-#include<limits.h>
-
-namespace xvr2{
-	namespace Net{
-
+namespace xvr2 {
+	namespace Net {
 		Socket::Socket(){
-#ifdef USE_EMBEDDED_CLASSNAMES
-			setClassName(__xvr2_Net_Socket);
-#endif
+			_socket = 0;
+		}
+
+		Socket::Socket(const Socket &s){
+			_socket = s._socket;
 		}
 
 		Socket::~Socket(){
 		}
 
-		const int Socket::getSocketID(){
-			return tsock;
+		void Socket::getsockopt(int level, int optname, void *optval, socklen_t *optlen){
+			if(::getsockopt(_socket, level, optname, optval, optlen) != 0){
+				//Socket option retrieval failure
+				switch(errno){
+					case EINVAL:
+						throw SocketOptionParamFailure(errno, optname);
+						break;
+					case ENOPROTOOPT:
+						throw SocketOptionIsInvalid(errno, optname);
+						break;
+					default:
+						throw SocketOptionException(errno);
+				}
+			}
+
 		}
 
-		int Socket::setSockOption(int opname, void *optval, 
-						unsigned int siz){
-#ifdef UNIX_SOCKETS
-#ifdef SOLARIS
-				char *optval1;
-				optval1 = (char *)optval;
-				return setsockopt(tsock, SOL_SOCKET, 
-						opname, optval1, 
-						siz);
-#else
-				return setsockopt(tsock, SOL_SOCKET, 
-						opname, optval, 
-						siz);
-#endif
-#else
-			return 0;
-#endif
-		}
-		
-		int Socket::setTCPOption(int opname, void *optval, 
-						unsigned int siz){
-#ifdef UNIX_SOCKETS
-			return setsockopt(tsock, SOL_TCP, opname, optval, 
-					sizeof(optval));
-#else
-			return 0;
-#endif
-		}
-		
-		int Socket::setSoTimeout(int t){
-#ifdef UNIX_SOCKETS
-			return setSockOption(SO_KEEPALIVE, &t, sizeof(int));
-#endif
-			return 0;
+		void Socket::setsockopt(int level, int optname, const void *optval, socklen_t optlen){
+			if(::setsockopt(_socket, level, optname, optval, optlen) != 0){
+				//Socket option set failure
+				switch(errno){
+					case EINVAL:
+						throw SocketOptionParamFailure(errno, optname);
+						break;
+					case ENOPROTOOPT:
+						throw SocketOptionIsInvalid(errno, optname);
+						break;
+					default:
+						throw SocketOptionException(errno);
+				}
+			}
 		}
 
+		bool Socket::debug(){
+			bool ret;
+			int val;
+			socklen_t olen;
+			getsockopt(SOL_SOCKET, SO_DEBUG, (void *)&val, &olen);
+			if(val == 0){
+				ret = false;
+			}
+			else{
+				ret = true;
+			}
+			return ret;
+		}
+
+		bool Socket::setDebug(bool enabled){
+			bool ret;
+			int val;
+			socklen_t olen;
+			ret = debug();
+			if(enabled == false){
+				val = 0;
+			}
+			else{
+				val = 1;
+			}
+			setsockopt(SOL_SOCKET, SO_DEBUG, (const void *)&val, (socklen_t)sizeof(int));
+			return ret;
+		}
 	};
 };
+

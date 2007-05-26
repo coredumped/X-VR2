@@ -7,8 +7,8 @@
 #include"UDP.h"
 #include"IPv4Address.h"
 #include"Socket.h"
-#include"UDPSocket.h"
-#include"UDPServerSocket.h"
+#include"OldUDPSocket.h"
+#include"OldUDPServerSocket.h"
 #include<sys/types.h>
 #include<sys/socket.h>
 #include<sys/poll.h>
@@ -20,12 +20,12 @@
 
 namespace xvr2{
 namespace Net{
-	void UDP::send(const UDPSocket &s, const void *buf, int size, int flags, int timeout){
+	void UDP::send(const OldUDPSocket &s, const void *buf, int size, int flags, int timeout){
 		flags |= MSG_NOSIGNAL;
 		::sendto(s.tsock, buf, size, flags, (struct ::sockaddr *)&s.ipv4addr, sizeof(s.ipv4addr));
 	}
 	void UDP::send(const IPv4Address &a, int port, const void *buf, int size, int flags, int timeout){
-		UDPSocket s(a, port);
+		OldUDPSocket s(a, port);
 		try{
 			send(s, buf, size, flags, timeout);
 		}
@@ -35,7 +35,7 @@ namespace Net{
 	}
 	int UDP::receive(const IPv4Address &a, int port, void *buf, int size, int flags, int timeout){
 		int ret;
-		UDPServerSocket s(a, port);
+		OldUDPServerSocket s(a, port);
 		try{
 			ret = receive(s, buf, size, flags, timeout);
 		}
@@ -44,7 +44,7 @@ namespace Net{
 		}
 		return ret;
 	}
-	int UDP::receive(const UDPServerSocket &s, void *buf, int size, int flags, int timeout){
+	int UDP::receive(const OldUDPServerSocket &s, void *buf, int size, int flags, int timeout){
 		::socklen_t ret;
 		struct pollfd fd;
 		int bytes;
@@ -71,7 +71,7 @@ namespace Net{
 	int UDP::receive(int port, void *buf, int size, int flags, int timeout){
 		::socklen_t ret;
 		struct pollfd fd;
-		UDPServerSocket s(port);
+		OldUDPServerSocket s(port);
 		struct ::sockaddr_in ipv4addr;
 		int bytes;
 		fd.fd = s.tsock;
