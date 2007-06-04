@@ -23,9 +23,6 @@
 namespace xvr2{
 
 	Thread::Thread(){
-#if USE_EMBEDDED_CLASSNAMES
-		setClassName(xvr2::_xvr2Thread);
-#endif
 		_started = false;
 		_terminated = false;
 		_detached = false;

@@ -12,9 +12,6 @@ namespace xvr2{
 	//static const char __ENDOFLINE[] = { '\n' };
 
 	TextOutput::TextOutput(){
-#if USE_EMBEDDED_CLASSNAMES
-		setClassName(xvr2::_xvr2TextOutput);
-#endif
 	}
 
 	TextOutput::~TextOutput(){;}

@@ -4,14 +4,15 @@ h_sources = IPv4Address.h IPv4Resolver.h netdefs.h NetworkExceptions.h \
 	    Socket.h SSLContext.h SSLSocket.h TCPServerSocket.h \
 	    TCPSocket.h UDP.h UDPServerSocket.h UDPSocket.h X509.h X509Issuer.h \
 	    X509Name.h X509Subject.h OldSocket.h OldTCPSocket.h OldTCPServerSocket.h \
-	    OldUDPSocket.h OldUDPServerSocket.h SocketExceptions.h
+	    OldUDPSocket.h OldUDPServerSocket.h SocketExceptions.h IPAddress.h \
+	    ClientSocket.h SocketProtocol.h
 
 cc_sources = IPv4Address.cpp IPv4Resolver.cpp NetworkExceptions.cpp Socket.cpp \
 	     SSLContext.cpp SSLSocket.cpp TCPServerSocket.cpp \
 	     TCPSocket.cpp UDP.cpp UDPServerSocket.cpp UDPSocket.cpp X509.cpp \
 	     X509Issuer.cpp X509Name.cpp X509Subject.cpp OldSocket.cpp OldTCPSocket.cpp \
 	     OldTCPServerSocket.cpp OldUDPSocket.cpp OldUDPServerSocket.cpp \
-	     SocketExceptions.cpp
+	     SocketExceptions.cpp IPAddress.cpp ClientSocket.cpp SocketProtocol.cpp
 
 
 library_includedir=$(includedir)/$(GENERIC_LIBRARY_NAME)/Net

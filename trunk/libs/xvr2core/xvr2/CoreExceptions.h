@@ -1,6 +1,21 @@
 /*
  * $Id$
  */
+/*
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ */
 #ifndef __XVR2_CORE_EXCEPTIONS_H__
 #define __XVR2_CORE_EXCEPTIONS_H__
 #include<xvr2/Object.h>
@@ -70,15 +85,6 @@ namespace xvr2{
 		public:
 			/** Default constructor */
 			GroupException();
-	};
-	/** \class IOException CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  \brief This is a generic exception for I/O events.
-	 *  This exception is thrown whenever a unexpected exception occurrs
-	 *  dealing with the IO related classes. */
-	class IOException:public Exception{
-		public:
-			/** Default constructor */
-			IOException();
 	};
 	/** \class MemoryException CoreExceptions.h <xvr2/CoreExceptions.h>
 	 *  \brief Generic memory exception.
@@ -160,297 +166,8 @@ namespace xvr2{
 	};
 
 
-	/*************************************************************************
-	 * EXCEPTIONS DERIVED FROM xvr2::IOException 
-	 *************************************************************************/
-	/** \class DSOException CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  \brief Use this exception whenever you want to throw a generic exception
-	 *  over a dso (dynamic shared object) event. */
-	class DSOException:public IOException{
-		public:
-			/** Default Constructor */
-			DSOException(const char *msg = 0);
-	};
 
-	/** \class FileException CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  \brief You will only be seeing this exception if a generic 
-	 *  (undetermined) exception has occurred on a file-based class. */
-	class FileException:public IOException{
-		public:
-			/** Default constructor */
-			FileException();
-	};
-	/** \class NotEnoughKernelMemory CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  \brief This exception will be thrown only if there is not enough memory 
-	 *  for kernel use. */
-	class NotEnoughKernelMemory:public IOException{
-		public:
-			/** Default constructor */
-			NotEnoughKernelMemory();
-	};
 
-	/** \class BrokenPipe CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  \brief This exception is thrown whenever the other end of communication 
-     *  has died or in the case of a socket when the remote host has closed 
-	 *  connection without warning. */
-	class BrokenPipe:public IOException{
-		public:
-			/** Default constructor */
-			BrokenPipe();
-	};
-
-	/** \class ProcOutOfFileDescriptors CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  \brief This exception is thrown when the process is going out of 
-     *  files. */
-	class ProcOutOfFileDescriptors:public IOException{
-		public:
-			/** Default constructor */
-			ProcOutOfFileDescriptors();
-	};
-
-	/** \class SysOutOfFileDescriptors CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  \brief This exception is thrown when the system is going out of 
-     *  files. */
-	class SysOutOfFileDescriptors:public IOException{
-		public:
-			/** Default constructor */
-			SysOutOfFileDescriptors();
-	};
-
-	/** \class DeviceOrFIFONotFound CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  \brief This exception will be thrown only if while trying to open a FIFO
-	 *  filename the process owning the PIPE is not running or while trying
-	 *  to access a special device filename and the associated hardware is
-	 *  non-existent. */
-	class DeviceOrFIFONotFound:public IOException{
-		public:
-			/** Default constructor */
-			DeviceOrFIFONotFound();
-	};
-	/** \class DeviceNotFound CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  \brief This exception will be thrown only if while trying to open a 
-     * special device file the associated hardware is not properly connected to 
-     * the system. */
-	class DeviceNotFound:public IOException{
-		public:
-			/** Default constructor */
-			DeviceNotFound();
-	};
-
-	/** \class InterruptedSystemCall CoreExceptions.h <xvr2/CoreExceptions.h>
-     *  \brief This exception is thrown whenever a system call is interrupted 
-     *  by another */
-	class InterruptedSystemCall:public IOException{
-		public:
-			/**
-			 * Default constructor
-			 */
-			InterruptedSystemCall();
-	};
-
-	/** \class SocketUnableToWrite CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  \brief This exception is thrown if it is not possible to write data to 
-     *  the other end of communications. */
-	class SocketUnableToWrite:public IOException{
-		public:
-			/** Default constructor */
-			SocketUnableToWrite();
-	};
-
-	/** \class SocketUnableToRead CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  \brief This exception is thrown if it is not possible to read data from 
-     *  the other end of communications. */
-	class SocketUnableToRead:public IOException{
-		public:
-			/** Default constructor */
-			SocketUnableToRead();
-	};
-
-	/*************************************************************************
-	 * EXCEPTIONS DERIVED FROM xvr2::DSOException
-	 *************************************************************************/
-	/** \class CantLoadDSO CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  \brief This exception is thown whenever you're trying to load a 
-     *  DSOException and some error ocurred. */
-	class CantLoadDSO:public DSOException{
-		public:
-			/** Default constructor */
-			CantLoadDSO();
-	};
-
-	/** \class CantUnloadDSO CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  \brief If a DSOException cannot be unloaded, this exception is 
-     *  thrown. */
-	class CantUnloadDSO:public DSOException{
-		public:
-			/** Default constructor */
-			CantUnloadDSO();
-	};
-
-	/** \class DSOSymbolException CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  \brief This is a common error appearing whenever you cant load
-	 *  a symbol from a DSOException. */
-	class DSOSymbolException:public DSOException{
-		public:
-			/** Default constructor */
-			DSOSymbolException();
-	};
-
-	/*************************************************************************
-	 * EXCEPTIONS DERIVED FROM xvr2::FileException
-	 *************************************************************************/
-	/** \class FileExists CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  \brief Exception thrown when the file to be used alreadyeady exists.
-     *  This exception will be thrown only if you enable the checking 
-     *  while creating a new file in write or append mode. */
-	class FileExists:public FileException{
-		public:
-			/** Default constructor */
-			FileExists();
-	};
-	/** \class FeatureNotAvailableOnPipesOrSocket CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  This exception is thrown when u are attempting to execute an
-	 *  operation that is only valid to common files and for PIPEs
-	 *  or Sockets */
-	class FeatureNotAvailableOnPipesOrSocket:public FileException{
-		public:
-			/** Default constructor */
-			FeatureNotAvailableOnPipesOrSocket();
-	};
-
-	/** \class ThisIsADirectory CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  This exception will be thrown only if you are attempting to open
-	 *  a file but the given filename corresponds to a directory. */
-	class ThisIsADirectory:public FileException{
-		public:
-			/** Default constructor */
-			ThisIsADirectory();
-	};
-	/** \class PermissionDenied CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  This exception will be thrown only if the current process does not
-	 *  own the rights to do a specific operation on this file. */
-	class PermissionDenied:public FileException{
-		public:
-			/** Default constructor */
-			PermissionDenied();
-	};
-	/** \class FilenameTooLong CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  This exception will be thrown only if you are attempting to open a 
-	 *  very large filename. */
-	class FilenameTooLong:public FileException{
-		public:
-			/** Default constructor */
-			FilenameTooLong();
-	};
-	/** \class FileOrDirectoryNotFound CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  This exception will be thrown only if you are opening a file for
-	 *  reading and the currently opened file does not exist. */
-	class FileOrDirectoryNotFound:public FileException{
-		public:
-			/** Default constructor */
-			FileOrDirectoryNotFound();
-	};
-	/** \class ThisIsNotADirectory CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  This exception will be thrown only if you are attempting to open a 
-	 *  directory and the given filename is not a directory. */
-	class ThisIsNotADirectory:public FileException{
-		public:
-			/** Default constructor */
-			ThisIsNotADirectory();
-	};
-	/** \class FileNotOpened CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  This exception will be thrown only if you attempt to execute an
-	 *  operation on a non-opened file. */
-	class FileNotOpened:public FileException{
-		public:
-			/** Default constructor */
-			FileNotOpened();
-	};
-	/** \class UnableToWriteOnReadOnlyFile CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  This exception will be thrown only if you are trying to write on a
-	 *  read only opened file. */
-	class UnableToWriteOnReadOnlyFile:public FileException{
-		public:
-			/** Default constructor */
-			UnableToWriteOnReadOnlyFile();
-	};
-	/** \class UnableToWriteOnRunningExecutableFile CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  This exception will be thrown only if you are trying to write on an
-	 *  executable file of process which is already running. */
-	class UnableToWriteOnRunningExecutableFile:public FileException{
-		public:
-			/** Default constructor */
-			UnableToWriteOnRunningExecutableFile();
-	};
-	/** \class FilenameExceedsAddressSpace CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  This exception will be thrown only if you are trying to reach file 
-	 *  which is outside of the address provided by its parent directory. */
-	class FilenameExceedsAddressSpace:public FileException{
-		public:
-			/** Default constructor */
-			FilenameExceedsAddressSpace();
-	};
-	/** \class TooManySymlinks CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  This exception will be thrown only if the file you are trying to read
-	 *  is the last symlink in a very large chain. */
-	class TooManySymlinks:public FileException{
-		public:
-			/** Default constructor */
-			TooManySymlinks();
-	};
-	/** \class NotEnoughStorageSpace CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  This exception will be thrown only if there is not enough room to 
-	 *  to open this file. */
-	class NotEnoughStorageSpace:public FileException{
-		public:
-			/** Default constructor */
-			NotEnoughStorageSpace();
-	};
-	/** \class MaximumNumberOfOpenFilesForThisProcess CoreExceptions.h <xvr2/CoreExceptions.h>
-	 * This exception will be thrown only if the maximum number of opened
-	 * files. */
-	class MaximumNumberOfOpenFilesForThisProcess:public FileException{
-		public:
-			/** Default constructor */
-			MaximumNumberOfOpenFilesForThisProcess();
-	};
-	/** \classMaximumNumberOfOpenFilesForThisSystem CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  This exception will be thrown only if this system has reached the
-	 *  maximum number of opened files that the kernel can handle */
-	class MaximumNumberOfOpenFilesForThisSystem:public FileException{
-		public:
-			/**
-			 * Default constructor
-			 */
-			MaximumNumberOfOpenFilesForThisSystem();
-	};
-
-	/** \class FileTooBig CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  This exception is thrown whenever you attempt to write pass the maximum offset 
-	 *  allowed or while writing a file will make it grow pass the implementation 
-	 *  defined size for the current OS. */
-	class FileTooBig:public FileException{
-	        public:
-	                /** Default constructor */
-	                FileTooBig();
-	};
-
-	/** \class WriteWillBlock CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  The file was opened with NON-BLOCKING feature but if u write the process will 
-	 *  block every I/O. */
-	class WriteWillBlock:public FileException{
-		public:
-			/** Default constructor */
-			WriteWillBlock();
-	};
-
-	/** \class FileNotFound CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  Unable to find the requested file. */
-	class FileNotFound:public FileException{
-		public:
-			/** Default constructor */
-			FileNotFound();
-	};
 
 
 	/*************************************************************************

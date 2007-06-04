@@ -2,9 +2,10 @@
  * $Id$
  */
 #include"config.h"
-#include "Unix.h"
-#include "Mutex.h"
-#include "DebugConsole.h"
+#include"Unix.h"
+#include"Mutex.h"
+#include"DebugConsole.h"
+#include"FileException.h"
 #include<sys/types.h>
 #include<pwd.h>
 #include<grp.h>

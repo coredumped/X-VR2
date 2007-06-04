@@ -6,6 +6,7 @@
 #include<xvr2/System.h>
 #include<xvr2/String.h>
 #include<xvr2/CoreExceptions.h>
+#include<xvr2/SystemException.h>
 
 #ifndef _WIN32
 

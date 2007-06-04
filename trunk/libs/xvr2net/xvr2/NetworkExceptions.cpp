@@ -6,6 +6,7 @@
 #include"_xvr2netClassNames.h"
 #include<xvr2/MessageStrings.h>
 #include"NetworkExceptions.h"
+#include"SocketProtocol.h"
 #include<openssl/err.h>
 
 namespace xvr2 {
@@ -33,21 +34,43 @@ namespace xvr2 {
 		static const char *_desc_X509UnableToDecryptCertificate = "X509UnableToDecryptCertificate exception throw n";
 		/***** LAST EXCEPTION DESCRIPTION *****/
 
-		NetworkException::NetworkException(){
+		NetworkException::NetworkException():SystemException(){
 #ifdef USE_EMBEDDED_CLASSNAMES
 			setClassName(__xvr2_Net_NetworkException);
 #endif
-#ifndef strerror
 			description = (char *)xvr2::excepGenNet;
-#else
-			description = strerror(errno);
-#endif
+		}
+		NetworkException::NetworkException(OSErrorCodeT error_code):SystemException(error_code){
+			description = (char *)xvr2::excepGenNet;
+		}
+
+		UnsupportedProtocol::UnsupportedProtocol():NetworkException(EPROTONOSUPPORT){
+			_proto_id = 0;
+		}
+
+		UnsupportedProtocol::UnsupportedProtocol(OSErrorCodeT error_code):NetworkException(error_code){
+			_proto_id = 0;
+		}
+
+		UnsupportedProtocol::UnsupportedProtocol(OSErrorCodeT error_code, int _protocol_id):NetworkException(error_code){
+			_proto_id = _protocol_id;
+		}
+
+		int UnsupportedProtocol::protocolID(){
+			return _proto_id;
+		}
+		String UnsupportedProtocol::protocolName(){
+			SocketProtocol sp = SocketProtocol::protocol(_proto_id);
+			return String(sp.name());
 		}
 
 		ConnectionTimeout::ConnectionTimeout(){
 #ifdef USE_EMBEDDED_CLASSNAMES
 			setClassName(__xvr2_Net_ConnectionTimeoutException);
 #endif
+			description = (char *)xvr2::excepNetTimeout;
+		}
+		ConnectionTimeout::ConnectionTimeout(OSErrorCodeT error_code):NetworkException(error_code){
 			description = (char *)xvr2::excepNetTimeout;
 		}
 
@@ -57,11 +80,17 @@ namespace xvr2 {
 #endif
 			description = (char *)xvr2::excepNetRefused;
 		}
+		ConnectionRefused::ConnectionRefused(OSErrorCodeT error_code):NetworkException(error_code){
+			description = (char *)xvr2::excepNetRefused;
+		}
 
 		NetworkUnreachable::NetworkUnreachable(){
 #ifdef USE_EMBEDDED_CLASSNAMES
 			setClassName(__xvr2_Net_NetworkUnreachableException);
 #endif
+			description = (char *)xvr2::excepNetUnreach;
+		}
+		NetworkUnreachable::NetworkUnreachable(OSErrorCodeT error_code):NetworkException(error_code){
 			description = (char *)xvr2::excepNetUnreach;
 		}
 
@@ -71,11 +100,17 @@ namespace xvr2 {
 #endif
 			description = (char *)xvr2::excepSockUsed;
 		}
+		SocketAlreadyBounded::SocketAlreadyBounded(OSErrorCodeT error_code):NetworkException(error_code){
+			description = (char *)xvr2::excepSockUsed;
+		}
 
 		SocketAlreadyUsed::SocketAlreadyUsed(){
 #ifdef USE_EMBEDDED_CLASSNAMES
 			setClassName(__xvr2_Net_SocketAlreadyUsedException);
 #endif
+			description = (char *)xvr2::excepSockListening;
+		}
+		SocketAlreadyUsed::SocketAlreadyUsed(OSErrorCodeT error_code):NetworkException(error_code){
 			description = (char *)xvr2::excepSockListening;
 		}
 
@@ -262,6 +297,8 @@ namespace xvr2 {
 #endif
 			description = (char *)_desc_X509UnableToDecryptCertificate;
 		}
+
+
 	};
 };
 

@@ -160,9 +160,6 @@ namespace xvr2{
 
 
 	ExceptionTracer::ExceptionTracer(){
-#ifdef USE_EMBEDDED_CLASSNAMES
-		setClassName(xvr2::_xvr2ExceptionTracer);
-#endif
 #ifdef USE_POSIX_THREADS
 		if(!__inited){
 			pthread_mutexattr_init(&_tm_attr);

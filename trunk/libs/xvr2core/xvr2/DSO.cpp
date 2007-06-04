@@ -13,9 +13,6 @@ namespace xvr2{
 	DSO::DSO(){
 		loaded = false;
 		handle = 0;
-#ifdef USE_EMBEDDED_CLASNAMES
-		setClassName(xvr2::_xvr2DSO);
-#endif
 		dso = (char *)msgNothingLoaded;
 	}
 
@@ -31,9 +28,6 @@ namespace xvr2{
 	DSO::DSO(const String &plName){
 		loaded = false;
 		handle = 0;
-#if USE_EMBEDDED_CLASNAMES
-		setClassName(xvr2::_xvr2DSO);
-#endif
 		dso = plName.toCharPtr();
 	}
 

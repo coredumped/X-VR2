@@ -61,81 +61,45 @@ namespace xvr2{
 	
 	/////////////////////////////// CONSTRUCTOR /////////////////////////
 	String::String(){
-#ifdef USE_EMBEDDED_CLASSNAMES
-		Object::setClassName(xvr2::_xvr2String);
-#endif
 	}
 	
 	String::String(const String &s){
-#ifdef USE_EMBEDDED_CLASSNAMES
-		Object::setClassName(xvr2::_xvr2String);
-#endif
 		BasicString<char>::assign(s.c_str());
 	}
 	
 	String::String(const char *s){
-#ifdef USE_EMBEDDED_CLASSNAMES
-		Object::setClassName(xvr2::_xvr2String);
-#endif
 		BasicString<char>::assign(s);
 	}
 	
 	String::String(const Int32 n){
-#ifdef USE_EMBEDDED_CLASSNAMES
-		Object::setClassName(xvr2::_xvr2String);
-#endif
 		assign(n);
 	}
 	String::String(const UInt32 n){
-#ifdef USE_EMBEDDED_CLASSNAMES
-		Object::setClassName(xvr2::_xvr2String);
-#endif
 		assign(n);
 	}
 
 	String::String(const Int64 n){
-#ifdef USE_EMBEDDED_CLASSNAMES
-		Object::setClassName(xvr2::_xvr2String);
-#endif
 		assign(n);
 	}
 	String::String(const UInt64 n){
-#ifdef USE_EMBEDDED_CLASSNAMES
-		Object::setClassName(xvr2::_xvr2String);
-#endif
 		assign(n);
 	}
 	
 	String::String(const float n){
-#ifdef USE_EMBEDDED_CLASSNAMES
-		Object::setClassName(xvr2::_xvr2String);
-#endif
 		assign(n);
 	}
 	
 	String::String(const double n){
-#ifdef USE_EMBEDDED_CLASSNAMES
-		Object::setClassName(xvr2::_xvr2String);
-#endif
 		assign(n);
 	}
 	
-	String::String(const long double n){
-#ifdef USE_EMBEDDED_CLASSNAMES
-		Object::setClassName(xvr2::_xvr2String);
-#endif
-		assign(n);
+	String::String(const long double n){		assign(n);
 	}
 	String::String(const std::string &s){
-#ifdef USE_EMBEDDED_CLASSNAMES
-		Object::setClassName(xvr2::_xvr2String);
-#endif
 		std::string::assign(s);
 	}
 	String::String(const std::string *s){
-#ifdef USE_EMBEDDED_CLASSNAMES
-		Object::setClassName(xvr2::_xvr2String);
-#endif
+
 		std::string::assign(s->c_str());
 	}
 	
@@ -566,4 +530,3 @@ namespace xvr2{
 		BasicString<char>::append(data, len);
 	}
 };
-

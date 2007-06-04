@@ -41,9 +41,11 @@ typedef long long		Int64;
 #include<sys/types.h>
 typedef off_t			FileSizeT;
 typedef off_t			FileOffsetT;
+typedef int			OSErrorCodeT;
 #else
 typedef long int		FileSizeT;
 typedef long int		FileOffsetT;
+typedef int			OSErrorCodeT;
 #endif
 
 #endif

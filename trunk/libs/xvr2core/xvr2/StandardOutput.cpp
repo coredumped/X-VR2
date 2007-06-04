@@ -7,9 +7,6 @@
 
 namespace xvr2{
 	StandardOutput::StandardOutput(){
-#if USE_EMBEDDED_CLASSNAMES
-		setClassName(xvr2::_xvr2StandardOutput);
-#endif
 	}
 
 	void StandardOutput::outputMethod(const void *buf, UInt32 size){

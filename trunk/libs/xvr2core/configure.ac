@@ -57,11 +57,31 @@ dnl -----------------------------------------------
 
 AC_PROG_CC
 AC_PROG_CXX
+dnl -----------------------------------------------
+dnl If it is GCC verify its version is >= 3.0.0
+dnl -----------------------------------------------
+if test "$GXX" = "yes" ; then
+	AC_MSG_RESULT([GCC Detected, checking version... ])
+	AC_TRY_RUN([ 
+
+			int main()
+			{
+				if(__GNUC__ < 3) return 1;
+				return 0;
+			}
+	], [ echo "GCC version is >= 3" ], 
+	[
+		echo "X-VR2 must be compiled with GCC versions 3.0.0 and above, please upgrade your compiler"
+		exit 1
+	]
+	)
+fi
 AC_LIBTOOL_DLOPEN
 AC_PROG_LIBTOOL
 AC_PROG_INSTALL
 
 AC_LANG_CPLUSPLUS
+
 
 CXXFLAGS="$CXXFLAGS -Wall "
 
@@ -84,7 +104,7 @@ AC_ARG_ENABLE(debug, AC_HELP_STRING([--enable-debug          Build library in de
 dnl -----------------------------------------------
 dnl Miscellaneous function checking
 dnl -----------------------------------------------
-AC_CHECK_FUNCS(strtol strcpy memcpy pow strtoul strtoll strtoull strtof strtod strtold, [
+AC_CHECK_FUNCS(strtol strcpy memcpy pow strtoul strtoll strtoull strtof strtod strtold strerror_r, [
 	threads_library="POSIX Threads (pthreads)"
 	ENABLE_XVR2_POSIX_THREADS_SUPPORT=1
 	AC_SUBST(ENABLE_XVR2_POSIX_THREADS_SUPPORT)

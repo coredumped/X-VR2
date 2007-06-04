@@ -105,10 +105,10 @@ namespace xvr2{
 					default:
 						throw NetworkException();
 				}
-				in.open(tsock);
-				out.open(tsock);
 				return 0;
 			}
+			in.open(tsock);
+			out.open(tsock);
 			return 1;
 		}
 

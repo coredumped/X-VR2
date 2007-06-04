@@ -9,12 +9,12 @@ h_sources = CoreExceptions.h AutomatedGC.h BasicStringBuffer.h \
 	StandardOutput.h StringBuffer.h String.h Syslog.h System.h \
 	TemporalBuffer.h TextInput.h TextOutput.h Thread.h Threading.h \
 	ThreadManager.h Time.h Timestamp.h Tokenizer.h TraceDumper.h Unix.h \
-	User.h _xvr2ClassNames.h xvr2config.h Conversion.h Function.h \
+	User.h xvr2config.h Conversion.h Function.h \
 	BackgroundFunction.h Buffer.h StreamInterface.h SystemException.h \
 	StdioInterface.h StdioInputFile.h StdioOutputFile.h FinalizerCallback.h \
 	RawInputStream.h RawOutputStream.h RawStreamInterface.h StreamException.h \
 	BufferedTextInputStream.h InvalidParameterException.h \
-	ThreadFinalizator.h
+	ThreadFinalizator.h FileException.h
 
 cc_sources = CoreExceptions.cpp AutomatedGC.cpp BasicString.cpp \
 	Byte.cpp Chronometer.cpp ConditionVar.cpp Console.cpp Date.cpp \
@@ -24,13 +24,13 @@ cc_sources = CoreExceptions.cpp AutomatedGC.cpp BasicString.cpp \
 	StandardInput.cpp StandardOutput.cpp StringBuffer.cpp String.cpp \
 	Syslog.cpp System.cpp TemporalBuffer.cpp TextInput.cpp TextOutput.cpp \
 	Thread.cpp Threading.cpp ThreadManager.cpp Time.cpp Timestamp.cpp \
-	Tokenizer.cpp TraceDumper.cpp Unix.cpp User.cpp _xvr2ClassNames.cpp \
+	Tokenizer.cpp TraceDumper.cpp Unix.cpp User.cpp \
 	Conversion.cpp Buffer.cpp StreamInterface.cpp SystemException.cpp \
 	StdioInterface.cpp StdioInputFile.cpp StdioOutputFile.cpp \
 	BackgroundFunction.cpp RawInputStream.cpp RawOutputStream.cpp \
 	RawStreamInterface.cpp StreamException.cpp FinalizerCallback.cpp\
 	BufferedTextInputStream.cpp InvalidParameterException.cpp \
-	ThreadFinalizator.cpp
+	ThreadFinalizator.cpp FileException.cpp
 
 library_includedir=$(includedir)/$(GENERIC_LIBRARY_NAME)
 library_include_HEADERS = $(h_sources)

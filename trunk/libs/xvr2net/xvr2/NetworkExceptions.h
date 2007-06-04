@@ -1,61 +1,114 @@
+/* $Id$ */
 /*
- * $Id$
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 #ifndef __XVR2_NETWORK_EXCEPTION_H__
 #define __XVR2_NETWORK_EXCEPTION_H__
 #include<xvr2/CoreExceptions.h>
+#include<xvr2/SystemException.h>
+
 namespace xvr2 {
 	namespace Net {
-		/** This is a generic exception it is supposed to be throw n for undefined or
+		/** This is a generic exception it is supposed to be thrown for undefined or
 		 * generic network events */
-		class NetworkException:public Exception{
+		class NetworkException:public SystemException{
 			public:
-				/**
-				 * Default constructor
-				 */
+				/** Default constructor. 
+				 *  \warning Not a good idea to instatiate your exception from this
+				 *  constructor, since the internal platform networking layer is very
+				 *  OS-specific the best approach is to report the OS error condition
+				 *  as well. */
 				NetworkException();
+				/** Constructor properly initializes al error condition reporting
+				 *  variables needed by this exception object. */
+				NetworkException(OSErrorCodeT error_code);
+		};
+
+		class UnsupportedProtocol:public NetworkException {
+			private:
+				int _proto_id;
+			public:
+				UnsupportedProtocol();
+				UnsupportedProtocol(OSErrorCodeT error_code);
+				UnsupportedProtocol(OSErrorCodeT error_code, int _protocol_id);
+				int protocolID();
+				String protocolName();
+
 		};
 
 		/** Throw this exception when the connection passes the timeout */
 		class ConnectionTimeout:public NetworkException{
 			public:
-				/**
-				 * Default constructor
-				 */
+				/** Default constructor. 
+				 *  \warning Not a good idea to instatiate your exception from this
+				 *  constructor, since the internal platform networking layer is very
+				 *  OS-specific the best approach is to report the OS error condition
+				 *  as well. */
 				ConnectionTimeout();
+				ConnectionTimeout(OSErrorCodeT error_code);
 		};
 
 		/** Throw this exception when the connection gets refused by the other
 		 * host */
 		class ConnectionRefused:public NetworkException{
 			public:
-				/**
-				 * Default constructor
-				 */
+				/** Default constructor. 
+				 *  \warning Not a good idea to instatiate your exception from this
+				 *  constructor, since the internal platform networking layer is very
+				 *  OS-specific the best approach is to report the OS error condition
+				 *  as well. */
 				ConnectionRefused();
+				ConnectionRefused(OSErrorCodeT error_code);
 		};
 
 		/** This exception is throw n when the remote host cannot be reached by
 		 * this host */
 		class NetworkUnreachable:public NetworkException{
 			public:
-				/**
-				 * Default constructor
-				 */
+				/** Default constructor. 
+				 *  \warning Not a good idea to instatiate your exception from this
+				 *  constructor, since the internal platform networking layer is very
+				 *  OS-specific the best approach is to report the OS error condition
+				 *  as well. */
 				NetworkUnreachable();
+				NetworkUnreachable(OSErrorCodeT error_code);
 		};
 
 		/**Throw this exception whenever yo hav a socket that is already bounded
 		 * to an address */
 		class SocketAlreadyBounded:public NetworkException{
 			public:
+				/** Default constructor. 
+				 *  \warning Not a good idea to instatiate your exception from this
+				 *  constructor, since the internal platform networking layer is very
+				 *  OS-specific the best approach is to report the OS error condition
+				 *  as well. */
 				SocketAlreadyBounded();
+				SocketAlreadyBounded(OSErrorCodeT error_code);
 		};
 
 		/** This exception is throw n when a previous socket is listening to this port */
 		class SocketAlreadyUsed:public NetworkException{
 			public:
+				/** Default constructor. 
+				 *  \warning Not a good idea to instatiate your exception from this
+				 *  constructor, since the internal platform networking layer is very
+				 *  OS-specific the best approach is to report the OS error condition
+				 *  as well. */
 				SocketAlreadyUsed();
+				SocketAlreadyUsed(OSErrorCodeT error_code);
 		};
 
 		class CertificateLoadLocations:public NetworkException{

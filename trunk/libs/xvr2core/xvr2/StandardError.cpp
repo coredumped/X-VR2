@@ -7,9 +7,6 @@
 
 namespace xvr2{
 	StandardError::StandardError(){
-#ifdef USE_EMBEDDED_CLASSNAMES
-		setClassName(xvr2::_xvr2StandardError);
-#endif
 	}
 
 	void StandardError::outputMethod(const void *buf, UInt32 size){

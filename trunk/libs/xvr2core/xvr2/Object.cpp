@@ -22,9 +22,6 @@ namespace xvr2{
 	
 
 	Object::Object(){
-#ifdef USE_EMBEDDED_CLASSNAMES
-		setClassName(xvr2::_xvr2Object);
-#endif
 #ifdef USE_DEBUG
 #if __GNUC__ == 3 && __GNUC_MINOR__ < 4
 		if(!vterm){
@@ -35,18 +32,10 @@ namespace xvr2{
 #endif
 	}
 
-#ifdef USE_EMBEDDED_CLASSNAMES
-	void Object::setClassName(const char *n){
-		__cls_name = (char *)n;
-	}
-#endif
-
 	const char *Object::getClassName(){
-#if __GNUC__ >= 3
 		char *__cls_name;
 		int status;
 		__cls_name = abi::__cxa_demangle(typeid(*this).name(), 0, 0, &status);
-#endif
 		return (const char *)__cls_name;
 	}
 

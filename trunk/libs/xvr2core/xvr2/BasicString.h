@@ -7,7 +7,6 @@
 #ifndef __XVR2_BASIC_STRING_H__
 #define __XVR2_BASIC_STRING_H__
 #include<xvr2/Object.h>
-#include<xvr2/_xvr2ClassNames.h>
 #include<xvr2/CoreExceptions.h>
 #if __GNUC__ < 3
 #include<string.h>
@@ -20,14 +19,8 @@ namespace xvr2 {
 	class BasicString : public Object, public std::basic_string<_charT> {
 		protected:
 			BasicString(){
-#ifdef USE_EMBEDDED_CLASSNAMES
-				setClassName(BasicString);
-#endif
 			}
 			BasicString(const _charT *s){
-#ifdef USE_EMBEDDED_CLASSNAMES
-				setClassName(BasicString);
-#endif
 				std::basic_string<_charT>::assign(s);
 			}
 		public:
