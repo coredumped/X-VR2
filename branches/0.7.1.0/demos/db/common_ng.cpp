@@ -56,7 +56,7 @@ bool parse_args(int argc, char *argv[]){
 		t = new Tokenizer(argv[i], "=");
 		if(s.startsWith("--help")){
 			std::cout << "Syntax: " << std::endl;
-			std::cout << argv[0] << " [host=LOC] [database=DBNAME] [user=DBUSER] [pass=PASSWORD] [select=STMT]" << std::endl;
+			std::cout << argv[0] << " [host=LOC] [database=DBNAME] [user=DBUSER] [password=PASSWORD] [select=STMT]" << std::endl;
 			std::cout << "where..." << std::endl;
 			std::cout << "LOC is the ip address or hostname corresponding to your test database server" << std::endl;
 			std::cout << "DBNAME is the database name to be used" << std::endl;
