@@ -70,8 +70,7 @@ AC_OUTPUT(Makefile \
 	String/conversion/Makefile \
 	Thread/Makefile \
 	tokenizer/Makefile \
-	file/Makefile \
-	log/Makefile
+	file/Makefile
 )
 
 echo

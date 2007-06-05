@@ -27,7 +27,6 @@ class ping : public xvr2::BackgroundFunction {
 			String cmd = "/bin/ping " + addr + " -c 1 -w 5 > /dev/null 2>&1";
 			int ret = system(cmd.toCharPtr());
 			if(ret == -1){
-				debugmsgln(this, "Ping fork failed!!!!", __LINE__ - 2, __FILE__);
 				throw xvr2::Exception();
 			}
 			else if(ret == 0){
