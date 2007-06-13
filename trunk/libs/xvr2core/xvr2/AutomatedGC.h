@@ -39,6 +39,8 @@ namespace xvr2{
 			 * value must be in milliseconds)
 			 */
 			AutomatedGC(UInt32 speriod);
+			/** Mandatory destructor */
+			~AutomatedGC();
 			/**
 			 * \fn void startChecking()
 			 * \brief Call this function to enable the garbage scanning 

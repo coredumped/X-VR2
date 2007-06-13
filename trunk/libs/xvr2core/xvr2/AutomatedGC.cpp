@@ -7,6 +7,9 @@
 
 namespace xvr2{
 
+	AutomatedGC::~AutomatedGC(){
+	}
+
 	AutomatedGC::AutomatedGC(UInt32 speriod){
 		_scanperiod = speriod;
 		keepscanning = false;
