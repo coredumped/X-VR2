@@ -25,9 +25,6 @@ namespace xvr2{
 	}
 
 	ConditionVar::ConditionVar(){
-#if __GNUC__ < 3
-		setClassName(xvr2::_xvr2ConditionVar);
-#endif
 		init();
 	}
 

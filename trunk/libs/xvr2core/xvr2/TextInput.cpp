@@ -15,9 +15,6 @@
 namespace xvr2{
 
 	TextInput::TextInput(){
-#if __GNUC__ < 3
-		setClassName(xvr2::_xvr2TextInput);
-#endif
 	}
 
 	TextInput::~TextInput(){;}

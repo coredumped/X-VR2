@@ -13,9 +13,6 @@ namespace xvr2{
 	Plugin::Plugin(){
 		loaded = false;
 		handle = 0;
-#if __GNUC__ < 3
-		setClassName(xvr2::_xvr2Plugin);
-#endif
 		dso = (char *)msgNothingLoaded;
 	}
 
@@ -31,9 +28,6 @@ namespace xvr2{
 	Plugin::Plugin(const String &plName){
 		loaded = false;
 		handle = 0;
-#if __GNUC__ < 3
-		setClassName(xvr2::_xvr2Plugin);
-#endif
 		dso = plName.toCharPtr();
 	}
 

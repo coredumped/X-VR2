@@ -29,9 +29,6 @@ namespace xvr2{
 
 
 	Thread::Thread(){
-#if __GNUC__ < 3
-		setClassName(xvr2::_xvr2Thread);
-#endif
 		detached = true;
 		policy = Thread::NORMAL;
 		priority = 0;

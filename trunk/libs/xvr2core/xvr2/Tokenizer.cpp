@@ -11,9 +11,6 @@
 namespace xvr2{
 
 	Tokenizer::Tokenizer(char *phrase, char *d){
-#if __GNUC__ < 3
-		setClassName(xvr2::_xvr2Tokenizer);
-#endif
 		temp = 0;
 		token = 0;
 		_fin = false;
@@ -23,9 +20,6 @@ namespace xvr2{
 	}
 
 	Tokenizer::Tokenizer(const String &phrase, const String &d){
-#if __GNUC__ < 3
-		setClassName(xvr2::_xvr2Tokenizer);
-#endif
 		temp = 0;
 		token = 0;
 		_fin = false;

@@ -21,9 +21,6 @@ namespace xvr2{
 	//Start implementation of class: Syslog
 
 	Syslog::Syslog(){
-#if __GNUC__ < 3
-		setClassName(xvr2::_xvr2Syslog);
-#endif
 	}
 
 	Syslog::~Syslog(){

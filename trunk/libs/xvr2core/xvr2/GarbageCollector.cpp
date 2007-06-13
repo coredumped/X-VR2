@@ -13,9 +13,6 @@
 namespace xvr2{
 
 	GarbageCollector::GarbageCollector(){
-#if __GNUC__ < 3
-		setClassName(xvr2::_xvr2GarbageCollector);
-#endif
 		//garbage = new Util::List<TemporalBuffer *>();
 		garbage = new std::vector<TemporalBuffer *>();
 	}

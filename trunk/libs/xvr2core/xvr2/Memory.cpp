@@ -13,9 +13,6 @@
 namespace xvr2{
 
 	Memory::Memory(){
-#if __GNUC__ < 3
-		setClassName(xvr2::_xvr2Memory);
-#endif
 		usingGC = false;
 		garbage = 0;
 	}

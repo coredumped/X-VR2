@@ -14,9 +14,6 @@ namespace xvr2{
 	//static Mutex __conm;
 
 	Console::Console(){
-#if __GNUC__ < 3
-		setClassName(xvr2::_xvr2Console);
-#endif
 		out = 0;
 		err = 0;
 		out = new StandardOutput();

@@ -30,7 +30,7 @@ cc_sources = CoreExceptions.cpp AutomatedGC.cpp BasicString.cpp \
 	BackgroundFunction.cpp RawInputStream.cpp RawOutputStream.cpp \
 	RawStreamInterface.cpp StreamException.cpp FinalizerCallback.cpp\
 	BufferedTextInputStream.cpp InvalidParameterException.cpp \
-	ThreadFinalizator.cpp FileException.cpp
+	ThreadFinalizator.cpp FileException.cpp Function.cpp
 
 library_includedir=$(includedir)/$(GENERIC_LIBRARY_NAME)
 library_include_HEADERS = $(h_sources)

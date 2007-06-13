@@ -47,9 +47,6 @@ namespace xvr2{
 	}
 
 	Semaphore::Semaphore(int x){
-#if __GNUC__ < 3
-		setClassName(xvr2::_xvr2Semaphore);
-#endif
 		try{
 			init(x);
 		}

@@ -20,18 +20,12 @@
 #include"MessageStrings.h"
 namespace xvr2{
 	Exception::Exception(){
-#if __GNUC__ < 3
-		setClassName(xvr2::_xvr2Exception);
-#endif
 		description = (char *)xvr2::strGenericException;
 	}
 	Exception::~Exception(){
 	}
 
 	Exception::Exception(const char *d){
-#if __GNUC__ < 3
-		setClassName(xvr2::_xvr2Exception);
-#endif
 		if(d == 0)
 			description = (char *)xvr2::strGenericException;
 		else

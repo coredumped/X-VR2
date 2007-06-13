@@ -76,9 +76,6 @@ namespace xvr2{
 	}
 	Group::Group(){
 		char *tmpptr;
-#if __GNUC__ < 3
-		setClassName(xvr2::_xvr2Group);
-#endif
 		_groupid = Group::getCurrentGroupID();
 		tmpptr = getGroupName(_groupid);
 		//_groupname = tmpptr;
@@ -88,9 +85,6 @@ namespace xvr2{
 
 	Group::Group(int gid){
 		char *tmpptr;
-#if __GNUC__ < 3
-		setClassName(xvr2::_xvr2Group);
-#endif
 		_groupid = gid;
 		tmpptr = getGroupName(gid);
 		//_groupname = tmpptr;
@@ -99,9 +93,6 @@ namespace xvr2{
 	}
 
 	Group::Group(const String &gname){
-#if __GNUC__ < 3
-		setClassName(xvr2::_xvr2Group);
-#endif
 		//_groupname = gname;
 		string_representation = new std::string(gname.toCharPtr());
 		_groupid = Unix::getgid(gname);

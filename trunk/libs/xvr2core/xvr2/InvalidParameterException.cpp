@@ -16,16 +16,10 @@
 namespace xvr2 {
 
 	InvalidParameter::InvalidParameter(){
-#if __GNUC__ < 3
-		setClassName((char *)xvr2::_xvr2InvalidParameter);
-#endif
 		description = (char *)xvr2::excepInvalidParameter;	
 	}
 
 	InvalidParameter::InvalidParameter(const String &_param_name){
-#if __GNUC__ < 3
-		setClassName((char *)xvr2::_xvr2InvalidParameter);
-#endif
 		description = (char *)xvr2::excepInvalidParameter;
 		param_name = _param_name;
 	}

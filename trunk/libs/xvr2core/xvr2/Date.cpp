@@ -62,18 +62,12 @@ namespace xvr2{
 	}
 
 	Date::Date(){
-#if __GNUC__ < 3
-		setClassName(xvr2::_xvr2Date);
-#endif
 		//drep = 0;
 		string_representation = 0;
 		getCurrentTime();
 	}
 
 	Date::Date(const Date *d){
-#if __GNUC__ < 3
-		setClassName(xvr2::_xvr2Date);
-#endif
 		string_representation = 0;
 		//drep = 0;
 		minute = d->minute;
@@ -91,9 +85,6 @@ namespace xvr2{
 
 	Date::Date(int __y, int __m, int __dw, int __dm, int __h, int __mi, int __s){
 		struct tm t;
-#if __GNUC__ < 3
-		setClassName(xvr2::_xvr2Date);
-#endif
 		string_representation = 0;
 		//drep = 0;
 		hour       = __h;
@@ -130,18 +121,12 @@ namespace xvr2{
 	}
 
 	Date::Date(UInt32 __unixtime){
-#if __GNUC__ < 3
-		setClassName(xvr2::_xvr2Date);
-#endif
 		string_representation = 0;
 		//drep = 0;
 		setTStamp(__unixtime);
 	}
 
 	Date::Date(const Date &_d){
-#if __GNUC__ < 3
-		setClassName(xvr2::_xvr2Date);
-#endif
 		string_representation = 0;
 		//drep = 0;
 		setTStamp(_d.unixtime);
@@ -192,27 +177,18 @@ namespace xvr2{
 	}
 
 	Date::Date(const char *format, const char *date_text){
-		//drep = 0;
-#if __GNUC__ < 3
-		setClassName(xvr2::_xvr2Date);
-#endif
 		string_representation = 0;
 		decode(format, date_text);
 		encode();
 	}
 
 	Date::Date(const String &format, const String &date_text){
-#if __GNUC__ < 3
-		setClassName(xvr2::_xvr2Date);
-#endif
 		string_representation = 0;
 		decode(format.toCharPtr(), date_text.toCharPtr());
 		encode();
 	}
 
 	Date::~Date(){
-		/*if(drep != 0)
-			xvr2_delete(drep);*/
 		if(string_representation != 0){
 			delete string_representation;
 			string_representation = 0;

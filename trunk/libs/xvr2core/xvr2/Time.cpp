@@ -35,31 +35,19 @@ namespace xvr2{
 		string_representation = new std::string(stream.str());
 	}
 	Time::Time(){
-#if __GNUC__ < 3
-		setClassName(xvr2::_xvr2Time);
-#endif
 	}
 
 	Time::~Time(){
 	}
 
 	Time::Time(UInt32 tstamp){
-#if __GNUC__ < 3
-		setClassName(xvr2::_xvr2Time);
-#endif
 		setTStamp(tstamp);
 	}
 
 	Time::Time(const char *time_text):Date("%T", time_text){
-#if __GNUC__ < 3
-		setClassName(xvr2::_xvr2Time);
-#endif
 	}
 
 	Time::Time(const String &time_text):Date("%T", time_text){
-#if __GNUC__ < 3
-		setClassName(xvr2::_xvr2Time);
-#endif
 	}
 
 	const UInt32 Time::timestamp(){
@@ -67,9 +55,6 @@ namespace xvr2{
 	}
 
 	Time::Time(int __hour, int __min, int __sec){
-#if __GNUC__ < 3
-		setClassName(xvr2::_xvr2Time);
-#endif
 		hour      = __hour;
 		minute    = __min;
 		second    = __sec;
@@ -81,15 +66,9 @@ namespace xvr2{
 	}
 
 	Time::Time(const Time *t):Date(t){
-#if __GNUC__ < 3
-		setClassName(xvr2::_xvr2Time);
-#endif
 	}
 
 	Time::Time(const Time &t):Date(t){
-#if __GNUC__ < 3
-		setClassName(xvr2::_xvr2Time);
-#endif
 	}
 
 	Time &Time::operator=(const Time &t){

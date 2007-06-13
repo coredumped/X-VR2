@@ -10,18 +10,12 @@
 namespace xvr2{
 
 	TemporalBuffer::TemporalBuffer(){
-#if __GNUC__ < 3
-		setClassName(xvr2::_xvr2TemporalBuffer);
-#endif
 		buffer = 0x0000;
 		_timeout = 0;
 		_timeout = 0;
 	}
 
 	TemporalBuffer::TemporalBuffer(UInt32 size, UInt32 t){
-#if __GNUC__ < 3
-		setClassName(xvr2::_xvr2TemporalBuffer);
-#endif
 		alloc(size);
 		_timeout = t;
 	}

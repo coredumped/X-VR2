@@ -27,9 +27,6 @@ namespace xvr2{
 	}
 	User::User(){
 		char *tmpptr;
-#if __GNUC__ < 3
-		setClassName(xvr2::_xvr2User);
-#endif
 		_userid = User::getCurrentUserID();
 		tmpptr = _getUsername(_userid);
 		//_username = tmpptr;
@@ -39,9 +36,6 @@ namespace xvr2{
 
 	User::User(int uid){
 		char *tmpptr;
-#if __GNUC__ < 3
-		setClassName(xvr2::_xvr2User);
-#endif
 		_userid = uid;
 		tmpptr = _getUsername(_userid);
 		//_username = tmpptr;
@@ -50,9 +44,6 @@ namespace xvr2{
 	}
 
 	User::User(const String &uname){
-#if __GNUC__ < 3
-		setClassName(xvr2::_xvr2User);
-#endif
 		_userid = Unix::getuid(uname);
 		//_username = uname.toCharPtr();
 		string_representation = new std::string(uname.toCharPtr());

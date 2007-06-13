@@ -8,9 +8,6 @@
 namespace xvr2{
 
 	StandardInput::StandardInput(){
-#if __GNUC__ < 3
-		setClassName(xvr2::_xvr2StandardInput);
-#endif
 	}
 
 	void StandardInput::inputMethod(void *buf, UInt32 size){

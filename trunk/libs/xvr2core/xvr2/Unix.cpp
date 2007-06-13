@@ -46,9 +46,6 @@ namespace xvr2{
 	}
 
 	Unix::Unix(){
-#if __GNUC__ < 3
-		setClassName(xvr2::_xvr2Unix);
-#endif
 		sysname = 0;
 		nodename = 0;
 		release = 0;
