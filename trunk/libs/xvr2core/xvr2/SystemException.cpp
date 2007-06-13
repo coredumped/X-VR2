@@ -83,6 +83,10 @@ namespace xvr2 {
 #endif
 	}
 
+	IOException::IOException(OSErrorCodeT error_code):SystemException(error_code){
+		description = (char *)xvr2::excepGenIO;
+	}
+
 
 ///////////////////////////////////////
 /////// DSOException //////////////////
@@ -123,6 +127,12 @@ namespace xvr2 {
 
 ///////////////////////////////////////
 /////// FileException //////////////////
+	FileException::FileException(){
+		description = (char *)xvr2::excepFile;
+	}
+	FileException::FileException(OSErrorCodeT error_code):IOException(error_code){
+		description = (char *)xvr2::excepFile;
+	}
 
 	BrokenPipe::BrokenPipe(){
 		description = (char *)xvr2::excepBrokenPipe;

@@ -76,6 +76,7 @@ namespace xvr2 {
 		public:
 			/** Default constructor */
 			IOException();
+			IOException(OSErrorCodeT error_code);
 	};
 	/** \class DSOException CoreExceptions.h <xvr2/CoreExceptions.h>
 	 *  \brief Use this exception whenever you want to throw a generic exception

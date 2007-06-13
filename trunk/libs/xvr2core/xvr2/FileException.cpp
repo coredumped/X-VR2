@@ -21,9 +21,6 @@
 #include<cerrno>
 
 namespace xvr2 {
-	FileException::FileException(){
-		description = (char *)xvr2::excepFile;
-	}
 
 	FeatureNotAvailableOnPipesOrSocket::FeatureNotAvailableOnPipesOrSocket(){
 		description = (char *)xvr2::excepFeatureNotAvailableOnPipesOrSocket;
