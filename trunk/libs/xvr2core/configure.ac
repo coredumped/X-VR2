@@ -177,13 +177,7 @@ AC_OUTPUT(Makefile \
           xvr2/Makefile \
           xvr2/xvr2config.h \
 	  docs/Makefile \
-	  docs/Doxyfile \
-	  demos/Makefile \
-	  demos/buffer/Makefile \
-	  demos/console/Makefile \
-	  demos/file/Makefile \
-	  demos/String/Makefile \
-	  demos/Thread/Makefile
+	  docs/Doxyfile
 )
 
 echo
