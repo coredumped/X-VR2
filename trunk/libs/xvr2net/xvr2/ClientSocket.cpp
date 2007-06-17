@@ -25,11 +25,11 @@ namespace xvr2 {
 		ClientSocket::~ClientSocket(){
 		}
 
-		RawOutputStream &ClientSocket::inputStream(){
+		RawSocketOutputStream &ClientSocket::inputStream(){
 			return in;
 		}
 
-		RawInputStream &ClientSocket::outputStream(){
+		RawSocketInputStream &ClientSocket::outputStream(){
 			return out;
 		}
 	};

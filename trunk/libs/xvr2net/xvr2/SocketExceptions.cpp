@@ -2,6 +2,7 @@
  * $Id$
  */
 #include"SocketExceptions.h"
+#include<cerrno>
 #include<sys/socket.h>
 #define _XOPEN_SOURCE 600
 #include <string.h>
@@ -17,6 +18,7 @@ namespace xvr2 {
 		static const char *_sckt_option_desc = "Unable to set/get socket option value.";
 		static const char *_sckt_option_p_desc = "Unable to set socket level option value, parameter specification failed.";
 		static const char *_sckt_option_i_desc = "Unable to get/set socket level option value, specific option is not available at the given level.";
+		static const char *_sckt_invalid = "The given file descriptor is not a valid socket.";
 		SocketException::SocketException(){
 			description = (char *)_sckt_gen_desc;
 		}
@@ -129,6 +131,19 @@ namespace xvr2 {
 			description = (char *)_sckt_option_i_desc;
 		}
 
+		InvalidSocket::InvalidSocket():SocketException(ENOTSOCK){
+			_socket = -1;
+			description = (char *)_sckt_invalid;
+		}
+
+		InvalidSocket::InvalidSocket(int _fd):SocketException(ENOTSOCK){
+			_socket = _fd;
+			description = (char *)_sckt_invalid;
+		}
+
+		int InvalidSocket::socketID(){
+			return _socket;
+		}
 	}
 };
 

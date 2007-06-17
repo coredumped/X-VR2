@@ -27,7 +27,7 @@ namespace xvr2 {
 			struct ::sockaddr_in name;
 			bzero(&name, sizeof(struct ::sockaddr_in));
 			int result;
-			bmem = 2 * ip_or_host.size() + sizeof(hostent) ;
+			bmem = 4 * ip_or_host.size() + 2 * sizeof(hostent) ;
 			tmp_blen = bmem;
 			while(true){
 				tmp_buf = new char[tmp_blen];

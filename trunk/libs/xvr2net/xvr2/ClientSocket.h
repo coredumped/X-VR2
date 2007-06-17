@@ -16,8 +16,8 @@
  */
 #ifndef __XVR2_NET_CLIENT_SOCKET_H__
 #define __XVR2_NET_CLIENT_SOCKET_H__
-#include<xvr2/RawInputStream.h>
-#include<xvr2/RawOutputStream.h>
+#include<xvr2/Net/RawSocketInputStream.h>
+#include<xvr2/Net/RawSocketOutputStream.h>
 #include<xvr2/Net/Socket.h>
 #include<xvr2/Net/IPv4Address.h>
 
@@ -30,9 +30,9 @@ namespace xvr2 {
 			private:
 			protected:
 				/** Output stream object. */
-				RawInputStream out;
+				RawSocketInputStream out;
 				/** Input stream object. */
-				RawOutputStream in;
+				RawSocketOutputStream in;
 			public:
 				/** Default constructor. */
 				ClientSocket();
@@ -44,11 +44,11 @@ namespace xvr2 {
 				/** Returns the associated input address for writing operations.
 				 *  \return a stream from where you can send data through this
 				 *  socket. */
-				RawOutputStream &inputStream();
+				RawSocketOutputStream &inputStream();
 				/** Returns the associated output address for reading operations.
 				 *  \return a stream from where you can receive data through this
 				 *  socket. */
-				RawInputStream &outputStream();
+				RawSocketInputStream &outputStream();
 		};
 	};
 };

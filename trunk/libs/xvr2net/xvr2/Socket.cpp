@@ -19,6 +19,10 @@
 #include<sys/socket.h>
 #include<cerrno>
 
+#ifndef XVR2_RECV_BUFSIZE
+#define XVR2_RECV_BUFSIZE 128
+#endif
+
 namespace xvr2 {
 	namespace Net {
 		Socket::Socket(){
