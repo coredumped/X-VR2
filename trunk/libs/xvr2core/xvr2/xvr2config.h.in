@@ -47,7 +47,11 @@ namespace xvr2 {
 	#endif
 #else
 /* Add code for other architectures here */
-
+	#if defined(__sun) || defined(__sun__) || defined(sun)
+		#ifndef USING_SOLARIS
+			#define USING_SOLARIS
+		#endif
+	#endif
 #endif
 
 /* Endianness settings */

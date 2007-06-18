@@ -6,6 +6,7 @@
 #include"config.h"
 #include"Byte.h"
 #ifdef USING_LINUX
+#include<endian.h>
 #else
 
 #ifdef __LITTLE_ENDIAN
@@ -26,7 +27,6 @@
 #endif
 
 #endif
-#include<endian.h>
 #include<sstream>
 
 namespace xvr2{
