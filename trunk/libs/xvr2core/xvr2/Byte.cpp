@@ -5,6 +5,27 @@
  */
 #include"config.h"
 #include"Byte.h"
+#ifdef USING_LINUX
+#else
+
+#ifdef __LITTLE_ENDIAN
+#undef __LITTLE_ENDIAN
+#endif
+#define __LITTLE_ENDIAN 1
+
+#ifdef __BIG_ENDIAN
+#undef __BIG_ENDIAN
+#endif
+#define __BIG_ENDIAN 2
+
+#ifdef XVR2_BIG_ENDIAN
+#define __BYTE_ORDER __BIG_ENDIAN
+#endif
+#ifdef XVR2_LITTLE_ENDIAN
+#define __BYTE_ORDER __LITTLE_ENDIAN
+#endif
+
+#endif
 #include<endian.h>
 #include<sstream>
 

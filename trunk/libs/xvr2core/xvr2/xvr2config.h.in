@@ -50,6 +50,14 @@ namespace xvr2 {
 
 #endif
 
+/* Endianness settings */
+#if @SYSTEM_IS_BIGENDIAN@ == 1
+	#define XVR2_BIG_ENDIAN
+#endif
+#if @SYSTEM_IS_LITTLEENDIAN@ == 1
+	#define XVR2_LITTLE_ENDIAN
+#endif
+
 
 #ifndef __XVR2_PREFIX_DIR
 #define __XVR2_PREFIX_DIR "@prefix@"

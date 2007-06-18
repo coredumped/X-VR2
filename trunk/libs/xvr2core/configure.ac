@@ -81,6 +81,21 @@ AC_PROG_LIBTOOL
 AC_PROG_INSTALL
 
 AC_LANG_CPLUSPLUS
+AC_C_BIGENDIAN([
+			SYSTEM_IS_BIGENDIAN=1
+			SYSTEM_IS_LITTLEENDIAN=0
+			AC_SUBST(SYSTEM_IS_BIGENDIAN)
+			echo "System architecture is big-endian"
+		],[
+			SYSTEM_IS_LITTLEENDIAN=1
+			SYSTEM_IS_BIGENDIAN=0
+			AC_SUBST(SYSTEM_IS_LITTLEENDIAN)
+			echo "System architecture is little-endian"
+		],[
+			echo "Unknown architecture byte ordering"
+			exit 1
+		]
+	      )
 
 
 CXXFLAGS="$CXXFLAGS -Wall "
