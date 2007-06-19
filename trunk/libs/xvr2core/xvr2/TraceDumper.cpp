@@ -10,10 +10,18 @@
 #include"ThreadManager.h"
 #include"Tokenizer.h"
 #include"Mutex.h"
-#include <execinfo.h>
-#include <signal.h>
-#include <exception>
-#include <iostream>
+#ifdef USING_LINUX
+#include<execinfo.h>
+#else
+
+#ifdef USING_SOLARIS
+#include<ucontext.h>
+#endif
+
+#endif
+#include<signal.h>
+#include<exception>
+#include<iostream>
 #include<cxxabi.h>
 
 #ifndef EXCEPTION_DEPTH_TRACE
@@ -108,6 +116,8 @@ namespace xvr2{
 #endif
 	}
 
+#ifdef USING_LINUX
+	/////////////////////// LINUX CODE STARTS HERE ////////////////////////////
 	void ExceptionTracer::dumpTrace(){
 		Timestamp t;
 		char *demangled;
@@ -157,7 +167,18 @@ namespace xvr2{
 		pthread_mutex_unlock(&_tm);
 #endif
 	}
+	//////////////////////// LINUX CODE ENDS HERE /////////////////////////////
+#else
+#ifdef USING_SOLARIS
+	////////////////////// SOLARIS CODE STARTS HERE ////////////////////////////
+	void ExceptionTracer::dumpTrace(){
+		//TODO: Implement walkcontext
+		printstack(2);
+	}
+	/////////////////////// SOLARIS CODE ENDS HERE /////////////////////////////
+#endif
 
+#endif
 
 	ExceptionTracer::ExceptionTracer(){
 #ifdef USE_POSIX_THREADS
