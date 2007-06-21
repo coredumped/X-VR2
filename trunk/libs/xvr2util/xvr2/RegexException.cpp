@@ -68,18 +68,22 @@ namespace xvr2 {
 				case REG_ESUBREG:
 					description = (char *)__rexp_REG_ESUBREG;
 					break;
+#ifdef USING_LINUX 
 				case REG_EEND:
 					description = (char *)__rexp_REG_EEND;
 					break;
+#endif
 				case REG_EESCAPE:
 					description = (char *)__rexp_REG_EESCAPE;
 					break;
 				case REG_BADPAT:
 					description = (char *)__rexp_REG_BADPAT;
 					break;
+#ifdef USING_LINUX 
 				case REG_ESIZE:
 					description = (char *)__rexp_REG_ESIZE;
 					break;
+#endif
 				case REG_ESPACE:
 					description = (char *)__rexp_REG_ESPACE;
 					break;
