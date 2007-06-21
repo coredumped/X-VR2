@@ -111,12 +111,12 @@ dnl -----------------------------------------------
 AC_OUTPUT(Makefile \
           xvr2util.pc \
           xvr2/Makefile \
-          xvr2/parsers/Makefile \
 	  docs/Makefile \
 	  docs/Doxyfile
 )
 
 mkdir xvr2/Util
+
 ln -svf $PWD/xvr2/*.h xvr2/Util/
 
 echo
