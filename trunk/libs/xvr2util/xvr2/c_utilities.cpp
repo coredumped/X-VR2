@@ -14,9 +14,9 @@ void *__xvr2_util_mempcpy(void *to, const void *from, size_t bytes){
 	ret_ptr = mempcpy(to, from, bytes);
 #else
 #ifdef HAVE_MEMCPY
-	ret_ptr = memcpy(to, from, bytes) + bytes;
+	ret_ptr = (void *)((char *)memcpy(to, from, bytes) + bytes);
 #else
-	ret_ptr = (void *)(char *)__xvr2_util_memcpy(to, from, bytes) + bytes);
+	ret_ptr = (void *)((char *)__xvr2_util_memcpy(to, from, bytes) + bytes);
 #endif
 #endif
 	return ret_ptr;
