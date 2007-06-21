@@ -40,7 +40,7 @@ do
 	if [ $? -ne 0 ]; then
 		exit 1
 	fi
-	$u=`whoami`
+	u=`whoami`
 	if [ "$u" = root ]; then
 		make install
 	else

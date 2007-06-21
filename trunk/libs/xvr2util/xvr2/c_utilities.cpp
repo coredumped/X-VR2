@@ -6,7 +6,7 @@
 #endif
 #include"config.h"
 #include<string.h>
-#include<xvr2/c_utilities.h>
+#include"c_utilities.h"
 
 void *__xvr2_util_mempcpy(const void *to, const void *from, size_t bytes){
 	void *ret_ptr;
@@ -16,7 +16,7 @@ void *__xvr2_util_mempcpy(const void *to, const void *from, size_t bytes){
 #ifdef HAVE_MEMCPY
 	ret_ptr = memcpy((void *)to, (void *)from, bytes) + bytes;
 #else
-	ret_ptr = __xvr2_util_memcpy(to, from, bytes) + bytes;
+	ret_ptr = (void *)(char *)__xvr2_util_memcpy(to, from, bytes) + bytes);
 #endif
 #endif
 	return ret_ptr;

@@ -75,6 +75,8 @@ AC_ARG_ENABLE(debug, AC_HELP_STRING([--enable-debug          Build library in de
 
 xvr2core_required_version=$GENERIC_RELEASE
 
+AC_CHECK_FUNCS(memcpy mempcpy)
+
 dnl -----------------------------------------------
 dnl Verify that xvr2core library is already installed
 dnl -----------------------------------------------
