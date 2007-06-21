@@ -6,8 +6,8 @@
 #include<sys/types.h>
 
 extern "C" {
-	extern void *__xvr2_util_mempcpy(const void *to, const void *from, size_t bytes);
-	extern void *__xvr2_util_memcpy(const void *to, const void *from, size_t bytes);
+	extern void *__xvr2_util_mempcpy(void *to, const void *from, size_t bytes);
+	extern void *__xvr2_util_memcpy(void *to, const void *from, size_t bytes);
 }
 
 namespace xvr2 {
