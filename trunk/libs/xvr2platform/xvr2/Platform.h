@@ -28,11 +28,17 @@
 
 #include<xvr2/String.h>
 #include<xvr2/Platform/PlatformException.h>
-#include<xvr2/CPU.h>
+#include<xvr2/Platform/CPU.h>
 #include<vector>
 
 #if defined(__linux) || defined(__linux__) || defined(linux__) || defined(__LINUX__) || defined(__LINUX) || defined(LINUX__)
 #define XVR2_HOST_PLATFORM_LINUX
+#else
+
+#if defined(__sun) || defined(__sun__) || defined(sun__)
+#define XVR2_HOST_PLATFORM_SOLARIS
+#endif
+
 #endif
 
 

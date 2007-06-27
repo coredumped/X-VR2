@@ -22,6 +22,12 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
+#include<xvr2/Tokenizer.h>
+#include<xvr2/StringBuffer.h>
+#include<xvr2/Memory.h>
+#ifdef USE_DEBUG
+#include<xvr2/DebugConsole.h>
+#endif
 #include"Platform.h"
 #include<cerrno>
 #include<unistd.h>
@@ -43,10 +49,6 @@
 #ifndef GENTOO_RELEASE_F
 #define GENTOO_RELEASE_F "/etc/gentoo-release"
 #endif
-
-#include<xvr2/Tokenizer.h>
-#include<xvr2/StringBuffer.h>
-#include<xvr2/Memory.h>
 #include<fstream>
 #include<vector>
 
@@ -224,7 +226,72 @@ namespace xvr2 {
 				}
 			}
 #else
+#ifdef XVR2_HOST_PLATFORM_SOLARIS
+			//Solaris specific cpu information
+			char buf[1024];
+			FILE *pptr = popen("/usr/sbin/prtconf -v", "r");
+			while(fgets(buf, 1024, pptr)){
+				String buffer = buf;
+				buffer.trimLeft(' ');
+				if(buffer.startsWith("cpus")){
+#ifdef USE_DEBUG
+					debugConsole << "Entered CPU section" << NL;
+#endif
+					//cpu_f.seekg(pos);
+					CPU c_tmp;
+					while(!feof(pptr)){
+						long pos = ftell(pptr);
+						fgets(buf, 1024, pptr);
+						buffer = buf;
+#ifdef USE_DEBUG
+							debugConsole << buffer << NL;
+#endif
+						buffer.trimLeft(' ');
+						if(!buffer.startsWith("cpu, instance #")){
+							fseek(pptr, pos, SEEK_SET);
+							break;
+						}
+						else{
+							while(fgets(buf, 1024, pptr)){
+								buffer = buf;
+								buffer.trimLeft(' ');
+								buffer.biteLeft(6);
+#ifdef USE_DEBUG
+								debugConsole << buffer << NL;
+#endif
+								if(buffer.startsWith("brand-string'")){
+#ifdef USE_DEBUG
+									debugConsole << "* * * * GOT BRAND STRING !!!" << NL;
+#endif
+							fgets(buf, 1024, pptr);
+								buffer = buf;
+								buffer.trimLeft(' ');
+					
+									Tokenizer t0(buffer, " ");
+									c_tmp.vendor = t0.next();
+									c_tmp.model = t0.next();
+									t0.next();
+									t0.next();
+									//t0.next();
+									//Get CPU speed
+									String sp = t0.next();
+									sp.biteRight(3);
+									c_tmp.clockSpeed = sp.toDouble() * 1000.0 * 1000.0;
+									if(c_tmp.vendor.equals("GenuineIntel")){
+										c_tmp.vendor = "Intel(R)";
+									}
+									break;
+								}
+							}
+						}
+					}
+					_cpulist.push_back(c_tmp);
+				}
+			}
+			pclose(pptr);
+#else
 #error Platform not supported
+#endif
 #endif
 			//Obtain memory information
 			__phys_mem_size = sysconf(_SC_PHYS_PAGES) * sysconf(_SC_PAGE_SIZE);

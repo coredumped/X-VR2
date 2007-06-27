@@ -227,7 +227,7 @@ namespace xvr2 {
 			_opaque *o = (_opaque *)stack;
 			int retcode;
 #ifdef USE_DEBUG
-			debugConsole << "Waiting for process: " << o->pid << " to finish..." << NL;
+			debugConsole << "Waiting for process: " << (UInt32)o->pid << " to finish..." << NL;
 #endif
 			if(waitpid(o->pid, &retcode, 0) == -1){
 				throw ProcessException(errno, "Weird problem on ProcessRunner::wait()");

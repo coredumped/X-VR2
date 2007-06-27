@@ -112,7 +112,48 @@ namespace Platform {
 		return CPU(dummy);
 	}
 #else
+#ifdef XVR2_HOST_PLATFORM_SOLARIS
+	const CPU CPU::create(std::ifstream &in){
+		String buffer;
+		CPU dummy;
+		char buf[1024];
+		int pos;
+		while(!in.eof()){
+			pos = in.tellg();
+			in.getline(buf, 1024);
+			String buffer = buf;
+			buffer.trimLeft(' ');
+			if(buffer.startsWith("cpu, instance #")){
+				in.seekg(pos);
+				break;
+			}
+			else if(buffer.startsWith("name='brand-string'")){
+				in.getline(buf, 1024);
+				buffer = buf;
+				buffer.trimLeft(' ');
+				buffer.biteLeft(7);
+
+				Tokenizer t0(buffer, " ");
+				dummy.vendor = t0.next();
+				dummy.model = t0.next();
+				t0.next();
+				t0.next();
+				t0.next();
+				//Get CPU speed
+				String sp = t0.next();
+				sp.biteRight(3);
+				dummy.clockSpeed = sp.toDouble() * 1000.0 * 1000.0;
+				if(dummy.vendor.equals("GenuineIntel")){
+					dummy.vendor = "Intel(R)";
+				}
+			}
+			//How about cache size?
+		}
+		return CPU(dummy);
+	}
+#else
 #error Unsupported platform
+#endif
 #endif
 };
 };
