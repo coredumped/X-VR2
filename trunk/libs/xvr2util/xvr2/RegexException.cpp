@@ -27,9 +27,6 @@ namespace xvr2 {
 		static const char *__rexp_REG_ESPACE = "The regex routines ran out of memory.";
 
 		RegexException::RegexException(){
-#ifdef USE_EMBEDDED_CLASSNAMES
-			setClassName(__xvr2_Util_RegexException);
-#endif
 			description = (char *)excepRegex;
 		}
 
@@ -37,9 +34,6 @@ namespace xvr2 {
 
 
 		RegexException::RegexException(int errx){
-#ifdef USE_EMBEDDED_CLASSNAMES
-			setClassName((char *)_xvr2RegexException);
-#endif
 			switch(errx){
 				case REG_BADRPT:
 					description = (char *)__rexp_REG_BADRPT;
