@@ -17,7 +17,7 @@ GENERIC_LIBRARY_NAME=xvr2
 GENERIC_MAJOR_VERSION=0
 GENERIC_MINOR_VERSION=7
 GENERIC_MICRO_VERSION=1
-GENERIC_PATCH_LEVEL=0
+GENERIC_PATCH_LEVEL=1
 
 #API version (often = GENERIC_MAJOR_VERSION.GENERIC_MINOR_VERSION)
 #GENERIC_API_VERSION=0.7.1
@@ -75,7 +75,7 @@ AC_ARG_ENABLE(debug, AC_HELP_STRING([--enable-debug          Build library in de
 	]
 )
 
-xvr2core_required_version=0.7.1.0
+xvr2core_required_version=0.7.1.1
 
 dnl -----------------------------------------------
 dnl Verify that xvr2core library is already installed
