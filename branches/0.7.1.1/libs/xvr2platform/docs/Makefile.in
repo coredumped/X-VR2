@@ -1,0 +1,11 @@
+doxygen_path=@DOXYGEN@
+
+all: html/index.html
+
+html/index.html:
+	$(doxygen_path) Doxyfile
+
+clean:
+	rm -rf html/*
+
+rebuild: clean all
