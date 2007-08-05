@@ -975,78 +975,6 @@ namespace xvr2{
 			return ret;
 		}
 	
-	
-		/*const Timestamp *Field::toTimestamp(){
-			Timestamp *ret = 0;
-			if(isNull())
-				return 0;
-			switch(dataType){
-				case  TINYINT:
-					throw DateParseException();
-					break;
-				case  INTEGER:
-				case  BIGINT:
-					UInt32 n1;
-					n1 = *((UInt32 *)dataPtr);
-					if(tmpTimestamp != 0)
-						xvr2_delete(tmpTimestamp);
-					tmpTimestamp = new Timestamp(n1);
-					ret = tmpTimestamp;
-					break;
-				case  FLOAT:
-					throw DateParseException();
-					break;
-				case  DOUBLE:
-					throw DateParseException();
-					break;
-				case  CHAR:
-				case  VARCHAR:
-					UInt32 nx1;
-					nx1 = strtoul((const char *)dataPtr, (char **)0, 10);
-					if(errno == ERANGE)
-						throw NumberException();
-					if(tmpTimestamp != 0)
-						xvr2_delete(tmpTimestamp);
-					tmpTimestamp = new Timestamp(nx1);
-					ret = tmpTimestamp;
-					break;
-				case  STRING:
-				case  TEXT:
-					UInt32 nx2;
-					nx2 = ((String *)dataPtr)->toUInt();
-					if(tmpTimestamp != 0)
-						xvr2_delete(tmpTimestamp);
-					tmpTimestamp = new Timestamp(nx2);
-					ret = tmpTimestamp;
-					break;
-				case  BLOB:
-					throw DateParseException();
-					break;
-				case  DATE:
-					if(tmpTimestamp != 0)
-						xvr2_delete(tmpTimestamp);
-					tmpTimestamp = new Timestamp(((Date *)dataPtr)->unixTime());
-					ret = tmpTimestamp;
-					break;
-				case  TIME:
-					if(tmpTimestamp != 0)
-						xvr2_delete(tmpTimestamp);
-					tmpTimestamp = new Timestamp(((Time *)dataPtr)->timestamp());
-					ret = tmpTimestamp;
-					break;
-				case  TIMESTAMP:
-					ret = (Timestamp *)dataPtr;
-					break;
-				case  BIT:
-					throw DateParseException();
-					break;
-				case  BYTE:
-					throw DateParseException();
-					break;
-			}
-			return ret;
-		}*/
-
 		Timestamp Field::toTimestamp() const {
 			//Timestamp *ret = 0;
 			if(isNull()){
@@ -1276,44 +1204,12 @@ namespace xvr2{
 			}
 			return ret;
 		}
-	/*
-		void Field::toTinyInt(){
-			Int16 val;
-			switch(dataType){
-				case  TINYINT:
-					break;
-				case  INTEGER:
-					break;
-				case  BIGINT:
-					break;
-				case  FLOAT:
-					break;
-				case  DOUBLE:
-					break;
-				case  CHAR:
-					break;
-				case  VARCHAR:
-					break;
-				case  STRING:
-					break;
-				case  BLOB:
-					break;
-				case  TEXT:
-					break;
-				case  DATE:
-					break;
-				case  TIME:
-					break;
-				case  TIMESTAMP:
-					break;
-				case  BIT:
-					break;
-				case  BYTE:
-					break;
-			}
-		}*/
 
 		const int Field::getDatatype(){
+			return dataType;
+		}
+
+		const int Field::getDatatype() const {
 			return dataType;
 		}
 	
@@ -1321,7 +1217,15 @@ namespace xvr2{
 			return dataLen;
 		}
 	
+		const UInt32 Field::size() const{
+			return dataLen;
+		}
+	
 		const UInt32 Field::dataSize(){
+			return dataLen;
+		}
+	
+		const UInt32 Field::dataSize() const{
 			return dataLen;
 		}
 	

@@ -240,12 +240,21 @@ namespace xvr2{
 				/** Returns a constant like SQLtypes describing the datatype
 				 *  currently stored */
 				const int	getDatatype();
+				/** Returns a constant like SQLtypes describing the datatype
+				 *  currently stored */
+				const int	getDatatype() const;
 				/** Returns the size in bytes of the currently stored 
 				 *  object */
 				const UInt32	size();
 				/** Returns the size in bytes of the currently stored 
 				 *  object */
+				const UInt32	size() const;
+				/** Returns the size in bytes of the currently stored 
+				 *  object */
 				const UInt32	dataSize();
+				/** Returns the size in bytes of the currently stored 
+				 *  object */
+				const UInt32	dataSize() const;
 				/** This will set the column name to <b>nam</b> */
 				void setFieldName(const String &nam);
 				/** This will be the name for this field as configured 
