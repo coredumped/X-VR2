@@ -18,8 +18,11 @@
 #include"ChecksumExceptions.h"
 
 namespace xvr2 {
-	namespace Util {
-		ChecksumingException::ChecksumingException(const String &msg):Exception(msg.toCharPtr()){}
+	namespace Text {
+		ChecksumingException::ChecksumingException(const String &msg):
+			Exception(msg.toCharPtr()){
+			
+		}
 	};
 };
 

@@ -10,6 +10,7 @@
 
 #include<xvr2/Object.h>
 #include<xvr2/TraceDumper.h>
+#include<xvr2/String.h>
 
 namespace xvr2{
 	/**

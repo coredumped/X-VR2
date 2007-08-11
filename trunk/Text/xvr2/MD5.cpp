@@ -17,7 +17,7 @@
 #include"MD5.h"
 
 namespace xvr2 {
-	namespace Util {
+	namespace Text {
 ////////////////////////// MD5Hash code starts here /////////////////////
 
 		static inline int hex2num(int v){

@@ -15,13 +15,13 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef __XVR2_UTIL_CHECKSUM_EXCEPTIONS_H__
-#define __XVR2_UTIL_CHECKSUM_EXCEPTIONS_H__
+#ifndef __XVR2_TEXT_CHECKSUM_EXCEPTIONS_H__
+#define __XVR2_TEXT_CHECKSUM_EXCEPTIONS_H__
 #include<xvr2/String.h>
 #include<xvr2/CoreExceptions.h>
 
 namespace xvr2 {
-	namespace Util {
+	namespace Text {
 
 		/** TODO: Document me please!!!! */
 		class ChecksumingException : public Exception {

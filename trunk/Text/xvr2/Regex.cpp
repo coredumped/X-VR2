@@ -3,17 +3,11 @@
  */
 #include<regex.h>
 #include"config.h"
-#include<xvr2/Regex.h>
-#ifdef USE_EMBEDDED_CLASSNAMES
-#include<xvr2/_xvr2utilClassNames.h>
-#endif
+#include"Regex.h"
 
 namespace xvr2 {
-	namespace Util {
+	namespace Text {
 		Regex::Regex(){
-#ifdef USE_EMBEDDED_CLASSNAMES
-			setClassName(__xvr2_Util_Regex);
-#endif
 			compiled = false;
 			cflags = 0;
 			_pattern = 0;
@@ -21,9 +15,6 @@ namespace xvr2 {
 		}
 
 		Regex::Regex(const char *pat){
-#ifdef USE_EMBEDDED_CLASSNAMES
-			setClassName(__xvr2_Util_Regex);
-#endif
 			compiled = false;
 			cflags = 0;
 			_pattern = new String(pat);
@@ -32,9 +23,6 @@ namespace xvr2 {
 		}
 
 		Regex::Regex(const String &pat){
-#ifdef USE_EMBEDDED_CLASSNAMES
-			setClassName(__xvr2_Util_Regex);
-#endif
 			compiled = false;
 			cflags = 0;
 			_pattern = new String(pat);
