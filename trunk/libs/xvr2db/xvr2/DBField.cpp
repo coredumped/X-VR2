@@ -1324,6 +1324,18 @@ namespace xvr2{
 		const UInt32 Field::dataSize(){
 			return dataLen;
 		}
+		
+		const int Field::getDatatype() const{
+			return dataType;
+		}
+	
+		const UInt32 Field::size() const{
+			return dataLen;
+		}
+	
+		const UInt32 Field::dataSize() const{
+			return dataLen;
+		}
 	
 		void Field::setFieldName(const String &nam){
 			colname = nam.toCharPtr();
