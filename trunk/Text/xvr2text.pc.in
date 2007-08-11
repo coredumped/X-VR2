@@ -1,0 +1,12 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+Name: xvr2text
+Description: X-VR2 Text Manipulation Library
+Version: @VERSION@
+Requires: xvr2core = @VERSION@
+Libs: -L${libdir} -l@GENERIC_LIBRARY_NAME@core
+Cflags: -Wall -I${includedir}/@GENERIC_LIBRARY_NAME@ -I${libdir}/@GENERIC_LIBRARY_NAME@/include
+

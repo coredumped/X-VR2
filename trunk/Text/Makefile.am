@@ -7,6 +7,6 @@ SUBDIRS= $(GENERIC_LIBRARY_NAME) $(DOXYGEN_INPUT_DIR)
 DIST_SUBDIRS = $(GENERIC_LIBRARY_NAME)
 
 pkgconfigdir = $(libdir)/pkgconfig
-pkgconfig_DATA = xvr2core.pc
+pkgconfig_DATA = xvr2text.pc
 
 rebuild: clean all
