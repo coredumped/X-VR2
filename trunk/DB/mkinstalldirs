@@ -4,7 +4,7 @@
 # Created: 1993-05-16
 # Public domain
 
-# $Id$
+# $Id:mkinstalldirs 531 2007-08-11 09:05:29Z mindstorm2600 $
 
 errstatus=0
 

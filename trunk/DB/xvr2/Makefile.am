@@ -11,7 +11,7 @@ cc_sources = DatabaseException.cpp DBConnection.cpp DBConnectionMT.cpp DBDriver.
 library_includedir=$(includedir)/$(GENERIC_LIBRARY_NAME)/DB
 library_include_HEADERS = $(h_sources)
 
-INCLUDES = -I$(top_srcdir)
+INCLUDES = -I$(top_srcdir) ../../Core
 
 lib_LTLIBRARIES=libxvr2db.la
 libxvr2db_la_SOURCES= $(h_sources) $(cc_sources)

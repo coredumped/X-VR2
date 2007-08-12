@@ -1,7 +1,7 @@
 /*
  * Multitype container for SQL single data
  *
- * $Id$
+ * $Id:DBField.cpp 531 2007-08-11 09:05:29Z mindstorm2600 $
  */
 #ifndef _XOPEN_SOURCE
 #define _XOPEN_SOURCE

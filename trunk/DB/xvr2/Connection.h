@@ -1,38 +1,46 @@
 /*
- * $Id$
+ * $Id:Connection.h 531 2007-08-11 09:05:29Z mindstorm2600 $
  */
-#ifndef __XVR2_DB_ConnectionMT_H__
-#define __XVR2_DB_ConnectionMT_H__
+#ifndef __XVR2_DB_Connection_H__
+#define __XVR2_DB_Connection_H__
 
 #include<xvr2/xvr2config.h>
 #include<xvr2/DB/Driver.h>
-#include<xvr2/DB/Connection.h>
-#include<xvr2/Mutex.h>
+#include<xvr2/DB/DatabaseException.h>
+#include<xvr2/StringBuffer.h>
 
 namespace xvr2{
 	namespace DB {
 		/**
-		 * This class encapsulates the Connection class and provides a much more 
-		 * complete interface to the SQL database connection paradigm in addition
-		 * to a thread safe environment.
+		 * This class encapsulates the Driver class and provides a much more 
+		 * complete interface to the SQL database connection paradigm
+		 *
 		 */
-		class ConnectionMT:public Connection {
+		class Connection:public Object{
 			private:
-				Mutex mt;
+				void *__conn;
 			protected:
+				Driver	*driver;
+				String		_server;
+				String		_user;
+				String		_password;
+				String		_dbname;
+				int		_port;
+				bool		__connected;
+				String		*bulk_delim;
 			public:
 				/** This constructor will require an instatiated Driver */
-				ConnectionMT(Driver *drv);
+				Connection(Driver *drv);
 				/** This constructor will initialize the internal driver 
 				 *  also will attempt to make a connection to the backend
 				 *  database as soon as possible */
-				ConnectionMT(Driver *drv, const String &server, 
+				Connection(Driver *drv, const String &server, 
 					      const String &dbname,
 					      const String &u, const String &p, 
 					      int port = 0);
 				/** cleanup routine */
-				~ConnectionMT();
-				ConnectionMT();
+				~Connection();
+				Connection();
 				/** This routine will connect you to the specified <b>server</b>
 				 *  using the username <b>u</b>, password <b>p</b> and port
 				 *  <b>port</b>.
@@ -67,13 +75,13 @@ namespace xvr2{
 				 *  to know if the call succeeded or not*/
 				ResultSet *query(const String &cmd);
 				ResultSet *query(const StringBuffer &cmd);
-				/** Use this method to execute command which do not return
+				/** Use this method to execute commands which do not return
 				 *  row information such as INSERT, UPDATE, DELETE, etc. The
-				 *  method will return the number of affected rows. */
+				 *  method will only return the number of affected rows. */
 				int execCommand(const String &cmd);
-				/** Use this method to execute command which do not return
+				/** Use this method to execute commands which do not return
 				 *  row information such as INSERT, UPDATE, DELETE, etc. The
-				 *  method will return the number of affected rows. */
+				 *  method will only return the number of affected rows. */
 				int execCommand(const StringBuffer &cmd);
 				/** This will commit any transaction based 
 				 *  command to the database, when you call 

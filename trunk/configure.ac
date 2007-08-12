@@ -197,20 +197,32 @@ AC_OUTPUT(Makefile \
 	Text/Makefile \
 	Text/xvr2/Makefile \
 	Text/xvr2text.pc \
+	DB/Makefile \
+	DB/xvr2/Makefile \
+	DB/xvr2db.pc \
 	SDK_Docs/Doxyfile \
 	SDK_Docs/Makefile
 )
 
 mkdir -p Core/xvr2/xvr2
 mkdir -p Text/xvr2/xvr2/Text
+mkdir -p DB/xvr2/xvr2/DB
 cd Core/xvr2/xvr2
 ln -sf ../*.h .
-
 cd ../../..
+
 cd Text/xvr2/xvr2/Text
 ln -sf ../../*.h .
 cd ..
 ln -sf ../../../Core/xvr2/*.h .
+cd ../../..
+
+cd DB/xvr2/xvr2/DB
+ln -sf ../../*.h .
+cd ..
+ln -sf ../../../Core/xvr2/*.h .
+cd ../../..
+
 
 echo
 echo "######################################"

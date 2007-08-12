@@ -1,5 +1,5 @@
 /*
- * $Id$
+ * $Id:_xvr2dbClassNames.h 531 2007-08-11 09:05:29Z mindstorm2600 $
  */
  
 #ifndef __XVR2_DB_EMDEDDED_CLASS_NAMES_H__

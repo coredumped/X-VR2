@@ -1,5 +1,5 @@
 /*
- * $Id$
+ * $Id:DriverInfo.h 531 2007-08-11 09:05:29Z mindstorm2600 $
  */
 
 #include<xvr2/xvr2config.h>

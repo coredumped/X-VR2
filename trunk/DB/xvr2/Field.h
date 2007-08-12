@@ -1,5 +1,5 @@
 /*
- * $Id$
+ * $Id:Field.h 531 2007-08-11 09:05:29Z mindstorm2600 $
  */
 #ifndef __XVR2_DB_FIELD_H__
 #define __XVR2_DB_FIELD_H__

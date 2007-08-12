@@ -1,7 +1,7 @@
 /*
  * This class encapsulates the Driver class and provides a much more complete interface to the SQL database connection paradigm
  *
- * $Id$
+ * $Id:DBConnection.cpp 531 2007-08-11 09:05:29Z mindstorm2600 $
  */
 #include"config.h"
 #include<xvr2/xvr2config.h>

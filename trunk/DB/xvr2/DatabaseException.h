@@ -1,5 +1,5 @@
 /*
- * $Id$
+ * $Id:DatabaseException.h 531 2007-08-11 09:05:29Z mindstorm2600 $
  */
 #ifndef __XVR2_DATABASE_EXCEPTION_H__
 #define __XVR2_DATABASE_EXCEPTION_H__

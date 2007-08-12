@@ -1,5 +1,5 @@
 #!/bin/bash
-# $Id$
+# $Id:gen_classnames.sh 531 2007-08-11 09:05:29Z mindstorm2600 $
 # Classname sourcefiles generator to be used if your C++ implementation does
 # not support method to investigate ck
 
@@ -12,7 +12,7 @@ egrep 'class.*{' xvr2/*h | sed 's/.*class[:blank:]*\(.*\):.*/\1/' | tr -s ' ' | 
 echo -ne "Generating header"
 #Generate header file
 echo '/*'				>  xvr2/_xvr2${namespace}ClassNames.h
-echo ' * $Id$'				>> xvr2/_xvr2${namespace}ClassNames.h
+echo ' * $Id:gen_classnames.sh 531 2007-08-11 09:05:29Z mindstorm2600 $'				>> xvr2/_xvr2${namespace}ClassNames.h
 echo ' */'				>> xvr2/_xvr2${namespace}ClassNames.h
 echo ' '				>> xvr2/_xvr2${namespace}ClassNames.h
 echo "#ifndef __XVR2_${cpp_namespace}_EMDEDDED_CLASS_NAMES_H__"	>> xvr2/_xvr2${namespace}ClassNames.h
@@ -38,7 +38,7 @@ echo done
 
 echo -ne "Generating source"
 echo '/*'				>  xvr2/_xvr2${namespace}ClassNames.cpp
-echo ' * $Id$'				>> xvr2/_xvr2${namespace}ClassNames.cpp
+echo ' * $Id:gen_classnames.sh 531 2007-08-11 09:05:29Z mindstorm2600 $'				>> xvr2/_xvr2${namespace}ClassNames.cpp
 echo ' */'				>> xvr2/_xvr2${namespace}ClassNames.cpp
 echo '#include<xvr2/xvr2config.h>'	>> xvr2/_xvr2${namespace}ClassNames.cpp
 echo ' '				>> xvr2/_xvr2${namespace}ClassNames.cpp
