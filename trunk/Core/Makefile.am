@@ -1,7 +1,7 @@
-# $Id$
+# $Id:Makefile.am 531 2007-08-11 09:05:29Z mindstorm2600 $
 
 #Build in these directories:
-SUBDIRS= $(GENERIC_LIBRARY_NAME) $(DOXYGEN_INPUT_DIR)
+SUBDIRS= $(GENERIC_LIBRARY_NAME)
 
 #Distribute these directories:
 DIST_SUBDIRS = $(GENERIC_LIBRARY_NAME)

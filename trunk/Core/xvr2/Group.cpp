@@ -1,5 +1,5 @@
 /*
- * $Id$
+ * $Id:Group.cpp 531 2007-08-11 09:05:29Z mindstorm2600 $
  */
 #include"config.h"
 #include"Group.h"
@@ -42,16 +42,16 @@ namespace xvr2{
 #endif
 
 	char *Group::getGroupName(int gid){
-		struct group *g;
+		struct group g;
 		struct group *g2;
 		char *buffer;
 		char *g_ptr;
 		int ret;
 		buffer = new char[GROUP_INFO_BUFFER_SIZE];
 #ifdef DONT_HAVE_REENTRANT_GETGRGID
-		ret = my_getgrgid_r(gid, g, buffer, GROUP_INFO_BUFFER_SIZE, &g2);
+		ret = my_getgrgid_r(gid, &g, buffer, GROUP_INFO_BUFFER_SIZE, &g2);
 #else
-		ret = getgrgid_r(gid, g, buffer, GROUP_INFO_BUFFER_SIZE, &g2);
+		ret = getgrgid_r(gid, &g, buffer, GROUP_INFO_BUFFER_SIZE, &g2);
 #endif
 		if(ret != 0){
 			if(errno == ERANGE){

@@ -1,5 +1,5 @@
 /*
- * $Id$
+ * $Id:CoreExceptions.h 531 2007-08-11 09:05:29Z mindstorm2600 $
  */
 /*
  *  This program is free software; you can redistribute it and/or modify
@@ -57,8 +57,8 @@ namespace xvr2{
 			BufferTooSmall();
 	};
 	/** \class ArrayIndexOutOfLimits CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  \brief Throw this exception when an operation over an array exceeds is 
-	 *  inbound and outbound limits. */
+	 *  \brief Throw this exception when an operation over an array exceeds its 
+	 *  inbound or outbound limits. */
 	class ArrayIndexOutOfLimits:public Exception{
 		private:
 			int _i;
