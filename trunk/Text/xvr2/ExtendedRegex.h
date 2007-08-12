@@ -29,6 +29,15 @@ namespace xvr2 {
 			public:
 				ExtendedRegex();
 				ExtendedRegex(const String &pattern);
+				/** @brief Verifies that a given string matches a specified paramter.
+				 *  This method makes use of extended regular expressions to 
+				 *  achieve its goals.
+				 *  @param pattern The regex to be used for verifying matches
+				 *  @param str The string to be matched against the pattern
+				 *  @param case_sensitive If true then the pattern matching will
+				 *  be case sensitive, if false, then it will be case insensitive.
+				 *  @return true If the given string matches the patter, false
+				 *  otherwise. */ 
 				static bool match(const String &pattern, const String &str, bool case_sensitive = true);
 		};
 

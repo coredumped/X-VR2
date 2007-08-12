@@ -3,9 +3,13 @@
  */
 #include"config.h"
 #include "Tokenizer.h"
-#include "_xvr2ClassNames.h"
+#if __GNUC__ < 3
 #include<string.h>
 #include<stdlib.h>
+#else
+#include<string>
+#include<cstdlib>
+#endif
 #include<limits.h>
 
 namespace xvr2{

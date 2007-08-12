@@ -1,0 +1,36 @@
+/**
+ @mainpage X-VR2 Framework
+ @section libs_sec Introduction
+ X-VR2 is a C/C++ set of development libraries and components which can be used
+ to create all kind of applications whether they are networked, multi-threaded, or
+ database driven is up to you and your imagination what the limits are with the
+ current set of tools provided in this current version.\n
+ This framework is also the evolution of the former clawlib library 
+ http://sourceforge.net/projects/clawlib which was aimed as a cross-platform
+ library for multithreaded/networked and database driven applications for the
+ Linux and Solaris operating environments only. Today X-VR2 has lost a lot of
+ code from clawlib and is in the process of being cross-platform as its predecessor
+ was.
+ @section xvr2_feats Features
+ @subsection core_sub Core library
+ This is X-VR2's heart, it holds the code for the multi-threading facilities, 
+ String class, exception handling foundation, dynamic object loading, date/time
+ manipulation, file i/o, etc. You will not see here container classes like 
+ vector and the other, for that please use the standard library.
+ @see xvr2 namespace
+ @subsection text_sub Text library
+ General text-manipulation classes live here, regular expression stuff and some
+ text-hashing facilities too.
+ @see xvr2::Text namespace
+ @subsection db_sub DB library
+ Provides access to SQL based databases, currently X-VR2 makes use of drivers 
+ for database connectivity, an API for developing your own driver is provided
+ as well.
+ @see xvr2::DB namespace
+ @subsection plat_sub Platform library
+ 
+ @see xvr2::Platform
+ @subsection net_sub Network library
+ 
+ @see xvr2::Net
+*/

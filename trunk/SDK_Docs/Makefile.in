@@ -1,11 +1,17 @@
+#Documentation Makefile
+
+
 doxygen_path=@DOXYGEN@
 
-all: html/index.html
+all: html/index.html sdk_mainpage.txt
 
-html/index.html: ../Core/xvr2/*.h ../Text/xvr2/*.h
+html/index.html: ../Core/xvr2/*.h ../Text/xvr2/*.h  sdk_mainpage.txt
 	$(doxygen_path) Doxyfile
 
 clean:
 	rm -rf html/*
 
 rebuild: clean all
+
+install:
+

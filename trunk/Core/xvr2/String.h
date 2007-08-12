@@ -29,7 +29,7 @@ namespace xvr2{
 		public:
 			/** Default constructor, it initializes buffer and len to zero */
 			String();
-			/** \fn String(String &s)
+			/** \fn String(const String &s)
 			 *  This constructor initializes an instance of this class
 			 *  by taking a another reference of the same class as
 			 *  parameter

@@ -185,6 +185,38 @@ AC_ARG_ENABLE(docs, AC_HELP_STRING([--enable-docs          Build library documen
 AC_SUBST(DOXYGEN_INPUT_DIR)
 
 
+
+ODBC_DRIVER_ENABLED=no
+
+
+dnl --------------------------------------------------------------
+dnl Verify that PostgreSQL development files are already installed
+dnl --------------------------------------------------------------
+PGSQL_INCLUDES=""
+PGSQL_CFLAGS=""
+PGSQL_LIBDIR=""
+PGSQL_LIBS=""
+PGSQL_DRIVER_ENABLED=no
+PGSQL_DRIVER_DIR=""
+AC_PATH_PROG([PG_CONFIG], [pg_config], no, []
+             [$PATH:/usr/local/bin:/opt:/opt/doxygen:/bin:/opt/bin:/opt/sfw/bin:/usr/ccs/bin])
+
+if test "$PG_CONFIG" = "no"
+then
+	AC_MSG_RESULT([ PostgreSQL development libraries not found, skipping build of pgsql driver ])
+else
+	PGSQL_INCLUDES=`pg_config --includedir`
+	PGSQL_LIBDIR=`pg_config --libdir`
+	PGSQL_LIBS="-L $PGSQL_LIBDIR -lpq"
+	PGSQL_DRIVER_ENABLED=yes
+	PGSQL_DRIVER_DIR=pgsql
+fi
+AC_SUBST(PGSQL_DRIVER_DIR)
+AC_SUBST(PGSQL_INCLUDES)
+AC_SUBST(PGSQL_LIBS)
+
+
+
 dnl -----------------------------------------------
 dnl Generates Makefile's, configuration files and scripts
 dnl -----------------------------------------------
@@ -200,6 +232,14 @@ AC_OUTPUT(Makefile \
 	DB/Makefile \
 	DB/xvr2/Makefile \
 	DB/xvr2db.pc \
+	DB/drivers/Makefile \
+	DB/drivers/pgsql/Makefile \
+	Platform/Makefile \
+	Platform/xvr2/Makefile \
+	Platform/xvr2platform.pc \
+	Net/Makefile \
+	Net/xvr2/Makefile \
+	Net/xvr2net.pc \
 	SDK_Docs/Doxyfile \
 	SDK_Docs/Makefile
 )
@@ -207,6 +247,8 @@ AC_OUTPUT(Makefile \
 mkdir -p Core/xvr2/xvr2
 mkdir -p Text/xvr2/xvr2/Text
 mkdir -p DB/xvr2/xvr2/DB
+mkdir -p Net/xvr2/xvr2/Net
+mkdir -p Platform/xvr2/xvr2/Platform
 cd Core/xvr2/xvr2
 ln -sf ../*.h .
 cd ../../..
@@ -223,9 +265,20 @@ cd ..
 ln -sf ../../../Core/xvr2/*.h .
 cd ../../..
 
+cd Platform/xvr2/xvr2/Platform
+ln -sf ../../*.h .
+cd ..
+ln -sf ../../../Core/xvr2/*.h .
+cd ../../..
+
+cd Net/xvr2/xvr2/Net
+ln -sf ../../*.h .
+cd ..
+ln -sf ../../../Core/xvr2/*.h .
+cd ../../..
 
 echo
-echo "######################################"
+echo "###################################################"
 echo "# X-VR2 Framework $GENERIC_VERSION"
 echo "#"
 echo "#  Platform:              $host"
@@ -233,3 +286,7 @@ echo "#  Endianness:            $xvr2_endianness"
 echo "#  Debug mode:            $debug_mode_activated"
 echo "#  Thread platform:       $threads_library"
 echo "#  Generate docs:         $doxygen_docs"
+echo "#-------------------------------------------------#"
+echo "# DB Drivers:"
+echo "# PostgreSQL Provider:    $PGSQL_DRIVER_ENABLED"
+echo "# ODBC Provider:          $ODBC_DRIVER_ENABLED"

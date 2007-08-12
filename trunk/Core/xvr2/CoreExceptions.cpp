@@ -20,7 +20,6 @@
 #include"CoreExceptions.h"
 #include"MessageStrings.h"
 #include"Memory.h"
-#include"_xvr2ClassNames.h"
 #if __GNUC__ < 3
 #include<errno.h>
 #include<stdio.h>

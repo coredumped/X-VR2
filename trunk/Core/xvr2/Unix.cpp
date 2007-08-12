@@ -76,16 +76,16 @@ namespace xvr2{
 
 	int Unix::getgid(const String &groupname){
 		int groupid;
-		struct group *p1;
+		struct group p1;
 		struct group *p2;
 		char *buffer;
 		buffer = new char[1024];
 		//getpwnam_r(u->toCharPtr(), &p1, buffer, 1024, &p2);
-		getgrnam_r(groupname.toCharPtr(), p1, buffer, 1024, &p2);
+		getgrnam_r(groupname.toCharPtr(), &p1, buffer, 1024, &p2);
 		if(p2 == 0){
 			//TODO: remember to code whatever goes here
 		}
-		groupid = p1->gr_gid;
+		groupid = p1.gr_gid;
 		delete[] buffer;
 		return groupid;
 	}

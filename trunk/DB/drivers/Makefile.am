@@ -1,0 +1,3 @@
+#$Id$
+
+SUBDIRS= $(PGSQL_DRIVER_DIR)

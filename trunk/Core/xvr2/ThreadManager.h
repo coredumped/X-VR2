@@ -21,12 +21,12 @@ namespace xvr2 {
 		protected:
 		public:
 			/** Spawns thread t execution.
-			 *  \param t Thread to be started */
+			 *  @param t Thread to be started */
 			static void start(Thread *t);
 			static void start(Thread &t);
-			/** Spawns thread t execution. 
-			 *  \param t Thread object to be started.
-			 *  \param arg The arguments to be passed to the thread being started. */
+			/** @brief Spawns a thread object execution. 
+			 *  @param t Thread object to be started.
+			 *  @param pol Scheduling policy */
 			static void start(Thread *t, const SchedPolicy pol);
 			static void start(Thread &t, const SchedPolicy pol);
 			/** Runs a Background function in a dedicated Thread of execution.

@@ -1,20 +1,15 @@
 /*
  * $Id:CoreExceptions.h 531 2007-08-11 09:05:29Z mindstorm2600 $
- */
-/*
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ * X-VR2 
+ * 
+ * Copyright (C) Juan V. Guerrero 2007
+ * 
+ * Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
+ * 
+ * This program is free software, distributed under the terms of
+ * the GNU General Public License Version 2. See the LICENSE file
+ * at the top of the source tree.
  */
 #ifndef __XVR2_CORE_EXCEPTIONS_H__
 #define __XVR2_CORE_EXCEPTIONS_H__
@@ -23,7 +18,7 @@
 
 namespace xvr2{
 
-	/** \class Exception Exception.h <xvr2/CoreExceptions.h>
+	/** \class Exception CoreExceptions.h <xvr2/CoreExceptions.h>
 	 *  \brief This is the parent class of all the exceptions. */
 	class Exception:public ExceptionTracer {
 		private:

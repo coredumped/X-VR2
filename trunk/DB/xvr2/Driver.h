@@ -124,19 +124,19 @@ namespace xvr2 {
 				 *  \param str The string to be escaped
 				 *  \return The escaped string, you must free this pointer after used */
 				virtual char *quoteString(const char *str) = 0;
-				/** \deprecated Please use String escapeString(const String &s, void *conn_handle);
+				/** @deprecated Please use String escapeString(const String &s, void *conn_handle);
 				 *  Quotes a string to be passed in an SQL query this is neccesary since
 				 *  some chars can confuse the SQL command parser in the RDBMS, after 
 				 *  calling this method you must free all memory allocated from the it.
-				 *  \param str The string to be escaped
-				 *  \return The escaped string, you must free this pointer after used */
+				 *  @param s The string to be escaped
+				 *  @return The escaped string, you must free this pointer after used */
 				virtual String escapeString(const String &s) = 0;
 				/** Quotes a string to be passed in an SQL query this is neccesary since
 				 *  some chars can confuse the SQL command parser in the RDBMS, after 
 				 *  calling this method you must free all memory allocated from the it.
-				 *  \param str The string to be escaped
-				 *  \param conn_handle The RDBMS connection from where you're connecting
-				 *  \return The escaped string, you must free this pointer after used */
+				 *  @param s The string to be escaped
+				 *  @param conn_handle The RDBMS connection from where you're connecting
+				 *  @return The escaped string, you must free this pointer after used */
 				virtual String escapeString(const String &s, void *conn_handle) = 0;
 
 				/** Returns a specific error message returned by the latest operation

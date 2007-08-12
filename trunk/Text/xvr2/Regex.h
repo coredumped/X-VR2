@@ -127,13 +127,15 @@ namespace xvr2{
 				 *  The method internally creates a Regex object
 				 *  compiles the given pattern and verifies if the
 				 *  given string matches or not.
-				 *  \param pattern Is the regular expression to be used
-				 *  \param str The string to test for matches against
+				 *  @param pattern Is the regular expression to be used
+				 *  @param str The string to test for matches against
 				 *  pattern.
-				 *  \return true if it str matches, false if not
-				 *  \throws exception::nullpointer if the regex pattern
+				 *  @param case_sensitive Wheter pattern matching should should
+				 *  be case-sensitive or not.
+				 *  @return true if it str matches, false if not
+				 *  @throws xvr2::NullPointer if the regex pattern
 				 *  has not been initialized yet
-				 *  \throws exception::regex if regex compilation or
+				 *  @throws xvr2::RegexException if regex compilation or
 				 *  matching fails at library level. */
 				static bool match(const String &pattern, const String &str, bool case_sensitive = true);
 				/** By using the compiled regex it attempts to check
