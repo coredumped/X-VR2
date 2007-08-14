@@ -1,5 +1,15 @@
 /*
- $Id$
+ * $Id$
+ *
+ * X-VR2 
+ * 
+ * Copyright (C) Juan V. Guerrero 2007
+ * 
+ * Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
+ * 
+ * This program is free software, distributed under the terms of
+ * the GNU General Public License Version 2. See the LICENSE file
+ * at the top of the source tree.
  */
 #ifndef __XVR2_STRING_H__
 #define __XVR2_STRING_H__
@@ -8,7 +18,7 @@
 #include<xvr2/CoreExceptions.h>
 
 namespace xvr2{
-	/**
+	/** @brief The String class!!!
 	 * This a string treatment class, it has a lot of methods and the
 	 * main idea is eliminate de use of the common tricks we use everyday
 	 * while we work with strings.
@@ -17,7 +27,7 @@ namespace xvr2{
 	 * by providing here a very complete strig treatment tool for
 	 * everyday use.
 	 *
-	 * TODO
+	 * @todo
 	 * reimplement all conversions and use the fastest algorithms possible, if
 	 * you think that is possible to use standard C library conversion functions
 	 * and that his functions as portable across al platforms targeted, then use

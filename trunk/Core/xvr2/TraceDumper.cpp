@@ -1,5 +1,15 @@
 /*
  * $Id$
+ *
+ * X-VR2 
+ * 
+ * Copyright (C) Juan V. Guerrero 2007
+ * 
+ * Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
+ * 
+ * This program is free software, distributed under the terms of
+ * the GNU General Public License Version 2. See the LICENSE file
+ * at the top of the source tree.
  */
 #include"config.h"
 #include"Object.h"
@@ -10,6 +20,7 @@
 #include"ThreadManager.h"
 #include"Tokenizer.h"
 #include"Mutex.h"
+#include"StringBuffer.h"
 #ifdef USING_LINUX
 #include<execinfo.h>
 #else
@@ -25,7 +36,7 @@
 #include<cxxabi.h>
 
 #ifndef EXCEPTION_DEPTH_TRACE
-#define EXCEPTION_DEPTH_TRACE 50
+#define EXCEPTION_DEPTH_TRACE 1024
 #endif
 
 
@@ -44,6 +55,8 @@ namespace xvr2{
 	static bool __inited = false;
 	static pthread_mutexattr_t _tm_attr;
 #endif
+	
+	static StringBuffer __StackTrace;
 
 	static char *demangle_symbol(const char *symbol){
 		char *ret, *dm;
@@ -128,8 +141,9 @@ namespace xvr2{
 #ifdef USE_POSIX_THREADS
 		pthread_mutex_lock(&_tm);
 #endif
+		__StackTrace.clear();
 		bzero((char *)array, EXCEPTION_DEPTH_TRACE);
-	        nSize = backtrace(array, EXCEPTION_DEPTH_TRACE);
+	        nSize = ::backtrace(array, EXCEPTION_DEPTH_TRACE);
 	        symbols = backtrace_symbols(array, nSize);
 		debugConsole << "\n [EE] [THREAD: ";
 		tid = ThreadManager::getCurrentThreadID();
@@ -147,21 +161,21 @@ namespace xvr2{
 			demangled = demangle_symbol(symbols[i]);
 #if defined(__linux__) || defined(__linux) || defined(_linux)
 			if(strstr(demangled, __gxx_p1) == 0 && strstr(demangled, __gxx_p2) == 0 && strstr(demangled, __gxx_p3) == 0){
-				debugConsole << " [EE] \t" << demangled << "\n";
+				debugConsole << " " << demangled << "\n";
+				__StackTrace << " " << demangled << "\n";
 			}
 #else
 #ifdef __GNUC__
 			if(strstr(demangled, __gxx_p1) == 0){
-				debugConsole << " [EE] \t" << demangled << "\n";
+				debugConsole << " " << demangled << "\n";
+				__StackTrace << " " << demangled << "\n";
 			}
 #else
-			debugConsole << " [EE] \t" << demangled << "\n";
+			__StackTrace << " " << demangled << "\n";
 #endif
 #endif
 			free(demangled);
 		}
-		//debugConsole << " [EE] Exception thrown was: " << getClassName() << "\n";
-		//debugConsole << " [EE]          description: " << toString() << "\n";
 		free(symbols);
 #ifdef USE_POSIX_THREADS
 		pthread_mutex_unlock(&_tm);
@@ -172,7 +186,7 @@ namespace xvr2{
 #ifdef USING_SOLARIS
 	////////////////////// SOLARIS CODE STARTS HERE ////////////////////////////
 	void ExceptionTracer::dumpTrace(){
-		//TODO: Implement walkcontext
+		//@todo: Implement OpenSolaris walkcontext
 		printstack(2);
 	}
 	/////////////////////// SOLARIS CODE ENDS HERE /////////////////////////////
@@ -196,4 +210,7 @@ namespace xvr2{
 #endif
 	}
 
+	const char *ExceptionTracer::backtrace(){
+		return __StackTrace.toString().toCharPtr();
+	}
 };
