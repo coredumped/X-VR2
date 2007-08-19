@@ -16,3 +16,5 @@ pgsql_driver_la_SOURCES= $(h_sources) $(cc_sources)
 pgsql_driver_la_LDFLAGS= -module -version-info $(GENERIC_LIBRARY_VERSION) -release $(GENERIC_RELEASE) $(PGSQL_LIBS)
 
 #LDADD=
+
+rebuild: clean all

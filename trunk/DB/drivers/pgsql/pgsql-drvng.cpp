@@ -1,4 +1,4 @@
-/* $Id$ */
+/* $Id:pgsql-drvng.cpp 535 2007-08-12 10:49:40Z mindstorm2600 $ */
 #include"pg_config.h"
 #include"libpq-fe.h"
 #include"pgsql-drvng.h"
@@ -222,7 +222,7 @@ void *PostgreSQLDriver::connect(const String &server, const String &__dbname, co
 	String cstr;
 	int pport;
 	pport = port;
-	if(port == 0)
+	if(port <= 0)
 		pport = 5432;
 	cstr = "host=";
 	cstr += server;
@@ -231,7 +231,7 @@ void *PostgreSQLDriver::connect(const String &server, const String &__dbname, co
 	cstr += " password=";
 	cstr += pass;
 	cstr += " port=";
-	cstr += port;
+	cstr += pport;
 	cstr += " dbname=";
 	cstr += __dbname;
 	if(!(conn = PQconnectdb(cstr.toCharPtr()))){
@@ -251,7 +251,43 @@ void *PostgreSQLDriver::connect(const String &server, const String &__dbname, co
 		throw;
 	}
 	return (void *)connx;
+}
 
+void *PostgreSQLDriver::connect(const String &dbsock, 
+						const String &_dbname, const String &_user, 
+						const String &_pass){
+	PGconn *conn;
+	__pgsql_conn *connx;
+	String cstr;
+	cstr = "host=";
+	cstr += dbsock;
+	cstr += " user=";
+	cstr += _user;
+	cstr += " password=";
+	cstr += _pass;
+	cstr += " dbname=";
+	cstr += _dbname;
+	if(!(conn = PQconnectdb(cstr.toCharPtr()))){
+		throw DB::DBConnectionFailed();
+		return 0;
+	}
+	connx = new __pgsql_conn(conn);
+	try{
+		connx->requestMappings();
+	}
+	catch(DB::SQLQueryException esql){
+		PQfinish(conn);
+		throw DB::DBConnectionFailed();
+	}
+	catch(...){
+		PQfinish(conn);
+		throw;
+	}
+	return (void *)connx;
+}
+
+void *PostgreSQLDriver::open(const String &dbfile){
+	throw DB::DriverOperationNotSupported("open");
 }
 ////////////////////// CONNECT ENDS HERE /////////////////////
 

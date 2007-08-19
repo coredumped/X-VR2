@@ -5,7 +5,7 @@ h_sources = CoreExceptions.h BasicStringBuffer.h \
 	ConditionVar.h Console.h DataTypes.h Date.h DebugConsole.h __Destruct.h \
 	DetachedThread.h DSObject.h DSO.h Group.h \
 	JoinableThread.h Log.h Memory.h MessageStrings.h Mutex.h Object.h \
-	Process.h  Semaphore.h SharedVar.h StandardError.h StandardInput.h \
+	Semaphore.h SharedVar.h StandardError.h StandardInput.h \
 	StandardOutput.h StringBuffer.h String.h Syslog.h System.h \
 	TextInput.h TextOutput.h Thread.h Threading.h \
 	ThreadManager.h Time.h Timestamp.h Tokenizer.h TraceDumper.h Unix.h \

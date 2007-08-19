@@ -1,9 +1,18 @@
 /*
- * $Id:DBResultSet.cpp 531 2007-08-11 09:05:29Z mindstorm2600 $
+ * $Id$
+ *
+ * X-VR2 
+ * 
+ * Copyright (C) Juan V. Guerrero 2007
+ * 
+ * Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
+ * 
+ * This program is free software, distributed under the terms of
+ * the GNU General Public License Version 2. See the LICENSE file
+ * at the top of the source tree.
  */
 #include"config.h"
 #include<xvr2/xvr2config.h>
-#include"_xvr2dbClassNames.h"
 #include"ResultSet.h"
 
 namespace xvr2{
@@ -11,9 +20,6 @@ namespace xvr2{
 	namespace DB {
 
 		ResultSet::ResultSet(Driver *drv, void *__handle, bool __status, UInt64 _afrows){
-#if __GNUC__ < 3
-			setClassName(__xvr2_DB_ResultSet);
-#endif
 			r_handle = __handle;
 			if(drv == 0)
 				throw NullPointer();
@@ -24,15 +30,11 @@ namespace xvr2{
 				fetchNextRow();
 	
 			afrows = _afrows;
-			nrows = afrows;
 			ncols = 0;
 			is_a_select = false;
 		}
 	
 		ResultSet::ResultSet(Driver *drv, void *__handle, bool __status){
-#if __GNUC__ < 3
-			setClassName(__xvr2_DB_ResultSet);
-#endif
 			driver = drv;
 			_status = __status;
 			row = 0;
@@ -42,9 +44,8 @@ namespace xvr2{
 					throw NullPointer();
 				if(_status == true && r_handle != 0)
 					fetchNextRow();
-				nrows = driver->numRows(__handle);
 				ncols = driver->numCols(__handle);
-				afrows = nrows;
+				afrows = -1;
 				is_a_select = true;
 			}
 		}
@@ -67,7 +68,7 @@ namespace xvr2{
 		}
 	
 		const int ResultSet::numRows(){
-			return nrows;
+			return driver->numRows(r_handle);
 		}
 	
 		const int ResultSet::numCols(){

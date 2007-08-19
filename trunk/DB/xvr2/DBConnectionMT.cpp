@@ -1,9 +1,18 @@
 /*
- * $Id:DBConnectionMT.cpp 531 2007-08-11 09:05:29Z mindstorm2600 $
+ * $Id$
+ *
+ * X-VR2 
+ * 
+ * Copyright (C) Juan V. Guerrero 2007
+ * 
+ * Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
+ * 
+ * This program is free software, distributed under the terms of
+ * the GNU General Public License Version 2. See the LICENSE file
+ * at the top of the source tree.
  */
 #include"config.h"
 #include<xvr2/xvr2config.h>
-#include"_xvr2dbClassNames.h"
 #include"ConnectionMT.h"
 
 namespace xvr2{
@@ -12,26 +21,13 @@ namespace xvr2{
 
 	namespace DB {
 
-#ifdef USE_EMBEDDED_CLASSNAMES
-		_xvr2ConnectionMT = "ConnectionMT";
-#endif
-
 		ConnectionMT::ConnectionMT():Connection(){
-#ifdef USE_EMBEDDED_CLASSNAMES
-			setClassName(_xvr2ConnectionMT);
-#endif
 		}
 	
 		ConnectionMT::ConnectionMT(Driver *d):Connection(d){
-#ifdef USE_EMBEDDED_CLASSNAMES
-			setClassName(_xvr2ConnectionMT);
-#endif
 		}
 	
 		ConnectionMT::ConnectionMT(Driver *d, const String &s, const String &dbname, const String &u, const String &p, int port):Connection(d, s, dbname, u, p, port){
-#ifdef USE_EMBEDDED_CLASSNAMES
-			setClassName(_xvr2ConnectionMT);
-#endif
 		}
 	
 		ConnectionMT::~ConnectionMT(){
@@ -269,7 +265,6 @@ namespace xvr2{
 			return ret;
 		}
 
-	//End implementation of class: ConnectionMT
 	};
 };
 

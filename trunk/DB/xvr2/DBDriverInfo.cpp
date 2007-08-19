@@ -1,12 +1,19 @@
 /*
- * This class holds information on database driver devices
+ * $Id$
  *
- * $Id:DBDriverInfo.cpp 531 2007-08-11 09:05:29Z mindstorm2600 $
+ * X-VR2 
+ * 
+ * Copyright (C) Juan V. Guerrero 2007
+ * 
+ * Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
+ * 
+ * This program is free software, distributed under the terms of
+ * the GNU General Public License Version 2. See the LICENSE file
+ * at the top of the source tree.
  */
 #include"config.h"
 #include<xvr2/xvr2config.h>
 #include<xvr2/MessageStrings.h>
-#include"_xvr2dbClassNames.h"
 #include"DriverInfo.h"
 
 namespace xvr2{
@@ -24,27 +31,18 @@ namespace xvr2{
 		//Start implementation of class: DriverInfo
 	
 		DriverInfo::DriverInfo(){
-#ifdef USE_EMBEDDED_CLASSNAMES
-			setClassName(xvr2::_xvr2DBDriverInfo);
-#endif
 			__version = 0;
 			__revision = 0;
 			__vendor = constNOVENDOR;
 		}
 	
 		DriverInfo::DriverInfo(int ver, int rev, const String &vend){
-#ifdef USE_EMBEDDED_CLASSNAMES
-			setClassName(xvr2::_xvr2DBDriverInfo);
-#endif
 			__version = ver;
 			__revision = rev;
 			__vendor = vend.toCharPtr();
 		}
 	
 		DriverInfo::DriverInfo(int ver, int rev, const String &vend, const String &desc){
-#ifdef USE_EMBEDDED_CLASSNAMES
-			setClassName(xvr2::_xvr2DBDriverInfo);
-#endif
 			__version = ver;
 			__revision = rev;
 			__vendor = vend.toCharPtr();

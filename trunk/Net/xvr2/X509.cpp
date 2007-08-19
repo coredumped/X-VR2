@@ -38,17 +38,17 @@ namespace Net {
 		//Get Issuer
 		tmp = X509_NAME_oneline(X509_get_issuer_name((::X509 *)idata), 0, 0);
 		_issuer = new X509Issuer(tmp);
-		Memory::freeBuffer((void **)&tmp);
+		free((void *)tmp);
 		//Get subject
 		tmp = X509_NAME_oneline(X509_get_subject_name((::X509 *)idata), 0, 0);
 		_subject = new X509Subject(tmp);
-		Memory::freeBuffer((void **)&tmp);
+		free((void *)tmp);
 		//Get serial number
 		BIGNUM *serialBN = ASN1_INTEGER_to_BN(X509_get_serialNumber((::X509 *)idata),NULL);
 		tmp = BN_bn2hex(serialBN);
 		_serial = tmp;
 		BN_free(serialBN);
-		Memory::freeBuffer((void **)&tmp);
+		free((void *)tmp);
 
 		//Read subject hash
 #if __WORDSIZE == 64 && defined(__x86_64__)

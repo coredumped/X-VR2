@@ -1,7 +1,15 @@
 /*
- * Multitype container for SQL single data
+ * $Id$
  *
- * $Id:DBField.cpp 531 2007-08-11 09:05:29Z mindstorm2600 $
+ * X-VR2 
+ * 
+ * Copyright (C) Juan V. Guerrero 2007
+ * 
+ * Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
+ * 
+ * This program is free software, distributed under the terms of
+ * the GNU General Public License Version 2. See the LICENSE file
+ * at the top of the source tree.
  */
 #ifndef _XOPEN_SOURCE
 #define _XOPEN_SOURCE
@@ -12,7 +20,6 @@
 #include<unistd.h>
 #include<xvr2/xvr2config.h>
 #include<xvr2/Memory.h>
-#include"_xvr2dbClassNames.h"
 #include"Field.h"
 #include"DatabaseException.h"
 #include<errno.h>
@@ -38,9 +45,6 @@ namespace xvr2{
 		//Start implementation of class: Field
 	
 		Field::Field(const void *data, const UInt32 size){
-#ifdef USE_EMBEDDED_CLASSNAMES
-			setClassName(xvr2::__xvr2_DB_Field);
-#endif
 			tmpStrTINYINT = 0;
 			tmpStrINTEGER = 0;
 			tmpStrBIGINT = 0;
@@ -80,22 +84,13 @@ namespace xvr2{
 		}
 	
 		Field::Field(){
-#ifdef USE_EMBEDDED_CLASSNAMES
-			setClassName(xvr2::__xvr2_DB_Field);
-#endif
 		}
 	
 		Field::Field(const int type, const void *data, const UInt32 size){
-#ifdef USE_EMBEDDED_CLASSNAMES
-			setClassName(xvr2::__xvr2_DB_Field);
-#endif
 			init(type, data, size);
 		}
 	
 		void Field::init(const int type, const void *data, const UInt32 size){
-#if __GNUC__ < 3
-			setClassName(xvr2::_xvr2Field);
-#endif
 			void *ttmp;
 			tmpStrTINYINT = 0;
 			tmpStrINTEGER = 0;

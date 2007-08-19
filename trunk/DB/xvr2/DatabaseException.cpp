@@ -1,102 +1,162 @@
 /*
- * $Id:DatabaseException.cpp 531 2007-08-11 09:05:29Z mindstorm2600 $
+ * $Id$
+ *
+ * X-VR2 
+ * 
+ * Copyright (C) Juan V. Guerrero 2007
+ * 
+ * Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
+ * 
+ * This program is free software, distributed under the terms of
+ * the GNU General Public License Version 2. See the LICENSE file
+ * at the top of the source tree.
  */
 #include"config.h"
 #include<xvr2/xvr2config.h>
 #include<xvr2/MessageStrings.h>
-#include"_xvr2dbClassNames.h"
 #include"DatabaseException.h"
 #include"ResultSet.h"
 
 namespace xvr2 {
 	namespace DB {
-		const char *_excepblkf = "Bulk data loading failed";
-		const char *_excepblk_dp = "Bulk data parse error";
-		const char *_excepblk_st = "Bulk load initialization error";
+		static const char *_excepblkf = "Bulk data loading failed";
+		static const char *_excepblk_dp = "Bulk data parse error";
+		static const char *_excepblk_st = "Bulk load initialization error";
+		static const char *_noop_ex = "Requested operation is not supported at driver level.";
 
+		DatabaseException::ConnectionParams::ConnectionParams(){
+			port = -1;
+			type = DatabaseException::NET;
+		}
+		DatabaseException::ConnectionParams::ConnectionParams(
+								DatabaseException::ConnectionType t,
+								const String &h, int p, const String &db,
+								const String &u, const String &_p,
+								const String &_path){
+			type = t;
+			host = h;
+			port = p;
+			database = db;
+			username = u;
+			password = _p;
+			path = _path;
+		}
+		DatabaseException::ConnectionParams::ConnectionParams(
+				const ConnectionParams &c){
+			type = c.type;
+			host = c.host;
+			port = c.port;
+			database = c.database;
+			username = c.username;
+			password = c.password;
+			path = c.path;
+		}
+		DatabaseException::ConnectionParams &DatabaseException::ConnectionParams::operator=(
+				const ConnectionParams &c){
+			type = c.type;
+			host = c.host;
+			port = c.port;
+			database = c.database;
+			username = c.username;
+			password = c.password;
+			path = c.path;
+			return *this;
+		}
+		
+		
 		DatabaseException::DatabaseException(){
-#ifdef USE_EMBEDDED_CLASSNAMES
-			setClassName((char *)__xvr2_DB_DatabaseException);
-#endif
 			description = (char *)xvr2::excepDatabaseException;
 		}
 
 		DatabaseException::DatabaseException(const String &error_message){
-#ifdef USE_EMBEDDED_CLASSNAMES
-			setClassName((char *)__xvr2_DB_DatabaseException);
-#endif
 			description = (char *)error_message.toCharPtr();
+			_err_msg = error_message;
+		}
+		
+		DatabaseException::DatabaseException(const String &error_message, 
+							const DatabaseException::ConnectionParams &__conn_p){
+			_conn_params = __conn_p;
+			_err_msg = error_message;
+		}
+		
+		DatabaseException::DatabaseException( 
+									const DatabaseException::ConnectionParams &__conn_p){
+			_conn_params = __conn_p;
+		}
+		
+		const DatabaseException::ConnectionParams &DatabaseException::connParams(){
+			return _conn_params;
+		}
+		
+		const String &DatabaseException::errorMessage(){
+			return _err_msg;
+		}
+		
+		DriverOperationNotSupported::DriverOperationNotSupported(){
+			description = (char *)_noop_ex;
 		}
 
+		DriverOperationNotSupported::DriverOperationNotSupported(
+				const String &_op){
+			description = (char *)_noop_ex;
+			op = _op;
+		}
+		
+		const String &DriverOperationNotSupported::operation(){
+			return op;
+		}
 
 		DBServerUnreachable::DBServerUnreachable(){
-#ifdef USE_EMBEDDED_CLASSNAMES
-			setClassName((char *)__xvr2_DB_DBServerUnreachableException);
-#endif
 			description = (char *)xvr2::excepDBServerUnreachable;
 		}
 
 
 		AlreadyConnected2DB::AlreadyConnected2DB(){
-#ifdef USE_EMBEDDED_CLASSNAMES
-			setClassName((char *)__xvr2_DB_AlreadyConnected2DBException);
-#endif
 			description = (char *)xvr2::excepAlreadyConnected2DB;
 		}
 
 
 		DBConnectFirst::DBConnectFirst(){
-#ifdef USE_EMBEDDED_CLASSNAMES
-			setClassName((char *)__xvr2_DB_DBConnectFirstException);
-#endif
 			description = (char *)xvr2::excepDBConnectFirst;
 		}
 
 		NoDataFetch::NoDataFetch(){
-#ifdef USE_EMBEDDED_CLASSNAMES
-			setClassName((char *)__xvr2_DB_NoDataFetchException);
-#endif
 			description = (char *)xvr2::excepNoDataFetch;
 		}
 
 
 		NoMoreRows::NoMoreRows(){
-#ifdef USE_EMBEDDED_CLASSNAMES
-			setClassName((char *)__xvr2_DB_NoMoreRowsException);
-#endif
 			description = (char *)xvr2::excepNoMoreRows;
 		}
 
 
 		DBConnectionFailed::DBConnectionFailed(){
-#ifdef USE_EMBEDDED_CLASSNAMES
-			setClassName((char *)__xvr2_DB_DBConnectionFailedException);
-#endif
 			description = (char *)xvr2::excepDBConnectionFailed;
 		}
-
+		
+		ConnectionFailure::ConnectionFailure(){
+			
+		}
+		
+		ConnectionFailure::ConnectionFailure(const ConnectionParams &__conn_p):DatabaseException(__conn_p){
+			
+		}
+		
+		ConnectionFailure::ConnectionFailure(const ConnectionParams &__conn_p, 
+							const String &__cause){
+			_err_msg = __cause;
+		}
 
 		ServerDisconnected::ServerDisconnected(){
-#ifdef USE_EMBEDDED_CLASSNAMES
-			setClassName((char *)__xvr2_DB_ServerDisconnectedException);
-#endif
 			description = (char *)xvr2::excepServerDisconnected;
 		}
 
-#ifdef USE_EMBEDDED_CLASSNAMES
-		static const char *__xvr2_DB_DBFieldIsNull = "xvr2::DB::FieldIsNull";
-#endif
-
 		FieldIsNull::FieldIsNull(){
-#ifdef USE_EMBEDDED_CLASSNAMES
-			setClassName((char *)__xvr2_DB_DBFieldIsNull);
-#endif
+
 		}
 
 		FieldIsNull::FieldIsNull(const String &fn){
-#ifdef USE_EMBEDDED_CLASSNAMES
-			setClassName((char *)__xvr2_DB_DBFieldIsNull);
-#endif
+
 			field_name = fn;
 		}
 
@@ -105,34 +165,22 @@ namespace xvr2 {
 		}
 
 		SQLQueryException::SQLQueryException(){
-#ifdef USE_EMBEDDED_CLASSNAMES
-			setClassName((char *)__xvr2_DB_SQLQueryException);
-#endif
 			description = (char *)xvr2::excepSQLQuery;
 			result = 0;
 		}
 
-		SQLQueryException::SQLQueryException(const char *msg){
-#ifdef USE_EMBEDDED_CLASSNAMES
-			setClassName((char *)__xvr2_DB_SQLQueryException);
-#endif
+		SQLQueryException::SQLQueryException(const char *msg):DatabaseException(msg){
 			description = (char *)msg;
 			result = 0;
 		}
 
-		SQLQueryException::SQLQueryException(const char *msg, DB::ResultSet *_result, const String &__query){
-#ifdef USE_EMBEDDED_CLASSNAMES
-			setClassName((char *)__xvr2_DB_SQLQueryException);
-#endif
+		SQLQueryException::SQLQueryException(const char *msg, DB::ResultSet *_result, const String &__query):DatabaseException(msg){
 			description = (char *)msg;
 			result = _result;
 			_query = __query;
 		}
 
-		SQLQueryException::SQLQueryException(const char *msg, const String &__query){
-#ifdef USE_EMBEDDED_CLASSNAMES
-			setClassName((char *)__xvr2_DB_SQLQueryException);
-#endif
+		SQLQueryException::SQLQueryException(const char *msg, const String &__query):DatabaseException(msg){
 			description = (char *)msg;
 			result = 0;
 			_query = __query;
@@ -140,10 +188,7 @@ namespace xvr2 {
 		const String &SQLQueryException::query(){
 			return _query;
 		}
-		SQLQueryException::SQLQueryException(const char *msg, DB::ResultSet *_result){
-#ifdef USE_EMBEDDED_CLASSNAMES
-			setClassName((char *)__xvr2_DB_SQLQueryException);
-#endif
+		SQLQueryException::SQLQueryException(const char *msg, DB::ResultSet *_result):DatabaseException(msg){
 			description = (char *)msg;
 			result = _result;
 		}
@@ -154,39 +199,24 @@ namespace xvr2 {
 		}
 
 		SQLQueryRDBMSDisconnected::SQLQueryRDBMSDisconnected(){
-#ifdef USE_EMBEDDED_CLASSNAMES
-			setClassName((char *)__xvr2_DB_SQLQueryRDBMSDisconnectedException);
-#endif
 			description = (char *)xvr2::excepSQLQueryRDBMSDisconnected;
 		}
 
 
 		UnableToParseQuery::UnableToParseQuery(){
-#ifdef USE_EMBEDDED_CLASSNAMES
-			setClassName((char *)__xvr2_DB_UnableToParseQueryException);
-#endif
 			description = (char *)xvr2::excepUnableToParseQuery;
 		}
 
 		BulkUploadFailed::BulkUploadFailed():SQLQueryException(){
-#ifdef USE_EMBEDDED_CLASSNAMES
-			setClassName((char *)__xvr2_DB_BulkUploadFailed);
-#endif
 			description = (char *)_excepblkf;
 		}
 
 		BulkDataParse::BulkDataParse():SQLQueryException(){
-#ifdef USE_EMBEDDED_CLASSNAMES
-			setClassName((char *)__xvr2_DB_BulkDataParse);
-#endif
 			description = (char *)_excepblk_dp;
 		}
 
 
 		BulkUploadStart::BulkUploadStart():SQLQueryException(){
-#ifdef USE_EMBEDDED_CLASSNAMES
-			setClassName((char *)__xvr2_DB_BulkUploadStart);
-#endif
 			description = (char *)_excepblk_st;
 		}
 	};

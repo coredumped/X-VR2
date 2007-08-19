@@ -1,5 +1,15 @@
 /*
- * $Id:DatabaseException.h 531 2007-08-11 09:05:29Z mindstorm2600 $
+ * $Id$
+ *
+ * X-VR2 
+ * 
+ * Copyright (C) Juan V. Guerrero 2007
+ * 
+ * Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
+ * 
+ * This program is free software, distributed under the terms of
+ * the GNU General Public License Version 2. See the LICENSE file
+ * at the top of the source tree.
  */
 #ifndef __XVR2_DATABASE_EXCEPTION_H__
 #define __XVR2_DATABASE_EXCEPTION_H__
@@ -12,12 +22,68 @@ namespace xvr2 {
 		class ResultSet;
 		/** Generic database exception */
 		class DatabaseException:public Exception{
+			protected:
+				String _err_msg;
 			public:
+				enum ConnectionType {
+					NET,
+					FIFO,
+					EMBEDDED
+				};
+				struct ConnectionParams {
+					DatabaseException::ConnectionType type;
+					String host;
+					int port;
+					String username;
+					String password;
+					String database;
+					String path;
+					ConnectionParams();
+					ConnectionParams(DatabaseException::ConnectionType t,
+									const String &h, int port, const String &db,
+									const String &u, const String &p,
+									const String &_path = "");
+					ConnectionParams(const ConnectionParams &c);
+					ConnectionParams &operator=(const ConnectionParams &c);
+				};
 				/**
 				 * Default constructor
 				 */
 				DatabaseException();
 				DatabaseException(const String &error_message);
+				DatabaseException(const String &error_message, 
+									const ConnectionParams &__conn_p);
+				DatabaseException(const ConnectionParams &__conn_p);
+				/** @brief Gets the connection parameters used at the time of 
+				 *  failure. 
+				 *  @return A ConnectionFailure::ConnectionParams object 
+				 *  containing the details of the connection failure.
+				 *  @warning The password field will always be left blank
+				 *  unless you explicitly allow support for displaying it by 
+				 *  calling enablePasswordDisplay. */
+				const ConnectionParams &connParams();
+				/** @brief Gives an specific error message regarding the reason
+				 *  why this exception was thrown.
+				 *  Depending from where the exception was thrown it is quite
+				 *  possible that the message might even be generated at driver
+				 *  level which is good since it will give more accurate 
+				 *  information.
+				 *  @return The error message itself */
+				const String &errorMessage();
+			protected:
+				ConnectionParams _conn_params;
+		};
+		
+		/** @brief Thrown when a unsupported operation has been requested to 
+		 *  the underliying SQL driver. */
+		class DriverOperationNotSupported : public DatabaseException {
+			private:
+				String op;
+			public:
+				DriverOperationNotSupported();
+				DriverOperationNotSupported(const String &_op);
+				/** @brief The name of the failed operation. */
+				const String &operation();
 		};
 
 
@@ -70,13 +136,26 @@ namespace xvr2 {
 		};
 
 
-		/** Unable to connect to the specified database server */
+		/** @brief Exception thrown whenever a database connection fails.
+		 *  @deprecated Is going to be replaced by xvr2::DB::ConnectionFailure
+		 *  @todo Replace with ConnectionFailure. */
 		class DBConnectionFailed:public DatabaseException{
 			public:
 				/**
 				 * Default constructor
 				 */
 				DBConnectionFailed();
+		};
+		
+		/** @brief Exception thrown whenever a connection attempt to a remote
+		 *  database fails. */
+		class ConnectionFailure:public DatabaseException{
+			private:
+			public:
+				ConnectionFailure();
+				ConnectionFailure(const ConnectionParams &__conn_p);
+				ConnectionFailure(const ConnectionParams &__conn_p, 
+									const String &__cause);
 		};
 
 
@@ -89,6 +168,7 @@ namespace xvr2 {
 				ServerDisconnected();
 		};
 
+		/** @todo Document FieldIsNull exception's description */
 		class FieldIsNull:public  DatabaseException {
 			private:
 				String field_name;

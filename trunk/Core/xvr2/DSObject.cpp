@@ -12,5 +12,9 @@ namespace xvr2 {
 		DSObjectFactory::create<String>(0);
 		DSObjectFactory::destroy<String>(0, 0);
 	}
+	
+	void __dummy_func_only_used_to_clear_a_warning(){
+		forced_verification();
+	}
 
 };

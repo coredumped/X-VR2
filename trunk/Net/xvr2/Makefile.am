@@ -21,7 +21,7 @@ cc_sources = IPv4Address.cpp IPv4Resolver.cpp NetworkExceptions.cpp Socket.cpp \
 library_includedir=$(includedir)/$(GENERIC_LIBRARY_NAME)/Net
 library_include_HEADERS = $(h_sources)
 
-INCLUDES = -I$(top_srcdir)
+INCLUDES = -I$(top_srcdir) -I../../Core/xvr2 -I../../Text/xvr2 
 
 lib_LTLIBRARIES=libxvr2net.la
 libxvr2net_la_SOURCES= $(h_sources) $(cc_sources)

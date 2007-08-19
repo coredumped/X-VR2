@@ -216,6 +216,22 @@ AC_SUBST(PGSQL_INCLUDES)
 AC_SUBST(PGSQL_LIBS)
 
 
+dnl --------------------------------------------------------------
+dnl Verify that SQLite development files are already installed
+dnl --------------------------------------------------------------
+SQLITE_INCLUDES=""
+SQLITE_CFLAGS=""
+SQLITE_LIBDIR=""
+SQLITE_LIBS=""
+SQLITE_DRIVER_ENABLED=no
+SQLITE_DRIVER_DIR=""
+
+AC_CHECK_HEADERS(sqlite3.h, [
+	SQLITE_DRIVER_ENABLED=yes
+	SQLITE_DRIVER_DIR=sqlite
+])
+
+AC_SUBST(SQLITE_DRIVER_DIR)
 
 dnl -----------------------------------------------
 dnl Generates Makefile's, configuration files and scripts
@@ -234,6 +250,7 @@ AC_OUTPUT(Makefile \
 	DB/xvr2db.pc \
 	DB/drivers/Makefile \
 	DB/drivers/pgsql/Makefile \
+	DB/drivers/sqlite/Makefile \
 	Platform/Makefile \
 	Platform/xvr2/Makefile \
 	Platform/xvr2platform.pc \
@@ -287,6 +304,7 @@ echo "#  Debug mode:            $debug_mode_activated"
 echo "#  Thread platform:       $threads_library"
 echo "#  Generate docs:         $doxygen_docs"
 echo "#-------------------------------------------------#"
-echo "# DB Drivers:"
+echo "# SQL Drivers:"
 echo "# PostgreSQL Provider:    $PGSQL_DRIVER_ENABLED"
+echo "# SQLite Provider:        $SQLITE_DRIVER_ENABLED"
 echo "# ODBC Provider:          $ODBC_DRIVER_ENABLED"

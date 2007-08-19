@@ -1,5 +1,15 @@
 /*
- * $Id:ResultSet.h 531 2007-08-11 09:05:29Z mindstorm2600 $
+ * $Id$
+ *
+ * X-VR2 
+ * 
+ * Copyright (C) Juan V. Guerrero 2007
+ * 
+ * Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
+ * 
+ * This program is free software, distributed under the terms of
+ * the GNU General Public License Version 2. See the LICENSE file
+ * at the top of the source tree.
  */
 #ifndef __XVR2_RESULTSET_H__
 #define __XVR2_RESULTSET_H__
@@ -13,22 +23,20 @@ namespace xvr2{
 	namespace DB {
 
 		class Driver;
-		//class BasicDriver;
-	
 		/**
-		 * This class deals with result sets obtained from select queries
+		 * @brief Implements result set handling from SELECT-type queries.
 		 *
 		 */
 		class ResultSet:public Object{
 			private:
 			protected:
 				bool _status;
+				/** A generic handle to the driver's specific resultset object */ 
 				void *r_handle;
 				/** Points to the SQL driver in use */
 				Driver *driver;
 				/** Holds the currect row in the stream */
 				Field *row;
-				int nrows;
 				int ncols;
 				UInt64 afrows;
 				bool is_a_select;

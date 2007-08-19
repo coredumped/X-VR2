@@ -1,5 +1,15 @@
 /*
- * $Id:Driver.h 531 2007-08-11 09:05:29Z mindstorm2600 $
+ * $Id$
+ *
+ * X-VR2 
+ * 
+ * Copyright (C) Juan V. Guerrero 2007
+ * 
+ * Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
+ * 
+ * This program is free software, distributed under the terms of
+ * the GNU General Public License Version 2. See the LICENSE file
+ * at the top of the source tree.
  */
 #ifndef __XVR2_DB_DRIVER_H__
 #define __XVR2_DB_DRIVER_H__
@@ -14,42 +24,66 @@ namespace xvr2 {
 		class ResultSet;
 		class Field;
 
-		/* Interface class for database drivers */
+		/* @brief Interface class for database drivers. */
 		class Driver:public Object {
 			private:
 			protected:
 			public:
+				/** @internal A flag that specifies wheter a explicit mutex
+				 *  should be used when allocating multiple connection
+				 *  concurrently. */
 				bool conn_requires_lock;
+				/** @internal A flag that says wheter or not a explict mutex
+				 *  lock is required at the time a SQL query is to be exectuted */
 				bool query_requires_lock;
 				bool bulk_requires_specific_lock;
 				bool resultset_requires_lock;
 				Driver();
-				/** Use this function to retrieve verion 
-				 *  and/or vendor informaton for the 
-				 *  driver */
+				/** @brief Use this function to retrieve version and/or vendor 
+				 *  informaton for the driver. */
 				virtual const DB::DriverInfo &getVersionInfo() = 0;
-				/** Driver supplied database connection 
-				 *  function, it will return a <b>handler</b>
-				 *  to the current connection if it is 
-				 *  successfull.
-				 *  The parameter <b>server</b> stands for
-				 *  the server IP address or hostname.
-				 *  <b>user</b> is the username as to whom
-				 *  be connected, <b>pass</b> is the password
-				 *  to be used and <b>port</b> is the port
-				 *  to be used if there is a need to specify it
-				 *  if you send the default <b>0</b> then the
-				 *  port used is going to be the default for
-				 *  the backend database.
-				 */
+				/** @brief Attempts to make a connection the specified database
+				 *  server.
+				 *  Driver supplied database connection function, it will try
+				 *  to make a remote (networked) connection to the database
+				 *  server.
+				 *  @param server Should be the server's IP address or hostname
+				 *  @param user Username to connect to the database as
+				 *  @param pass User's login password
+				 *  @param port Connection port, if 0, then the driver will use
+				 *  the default connection port for the specified database.
+				 *  @return A connection handler. */
 				virtual void *connect(const String &server, 
 						      const String &__dbname,
 						      const String &user, const String &pass,
 						      int port = 0) = 0;
+				/** @brief Attempts to make a connection to a local database 
+				 *  instance.
+				 *  Driver supplied database connection function, it will try 
+				 *  to connect to a locally running database instance, commonly
+				 *  this is performed by connection to a FIFO file.
+				 *  @param dbsock FIFO file to open for connection.
+				 *  @param user Username to connect to the database as
+				 *  @param pass User's login password
+				 *  @param port Connection port, if 0, then the driver will use
+				 *  the default connection port for the specified database.
+				 *  @return A connection handler. */
+				virtual void *connect(const String &dbsock, 
+								const String &_dbname, const String &_user, 
+								const String &_pass) = 0;
+				/** @brief Opens a connection to a local (embedded) database
+				 *  engine.
+				 *  Driver supplied database connection function, this method
+				 *  will attempt to open a datafile as if it was a networked
+				 *  connection, this is very useful for embedded database
+				 *  engines which implement the SQL query language.
+				 *  @param dbfile A path to the datafile to the opened.
+				 *  @return A connection handler. */
+				virtual void *open(const String &dbfile) = 0;
 				/** Use this method to send a command to 
-				 *  the backend server. <b>__handle</b> is
-				 *  the connection handler and <b>command</b>
-				 *  is the command to be send to the backend
+				 *  the backend server.
+				 *  @param __handle Connection handler as returned from connect
+				 *  @param command The command to be send to the backend
 				 *  database */
 				virtual ResultSet *query(void *__handle, 
 							 const String &command) = 0;
