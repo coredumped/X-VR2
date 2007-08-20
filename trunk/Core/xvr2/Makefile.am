@@ -3,8 +3,8 @@
 h_sources = CoreExceptions.h BasicStringBuffer.h \
 	BasicString.h Byte.h Calendar.h Chronograph.h Chronometer.h \
 	ConditionVar.h Console.h DataTypes.h Date.h DebugConsole.h __Destruct.h \
-	DetachedThread.h DSObject.h DSO.h Group.h \
-	JoinableThread.h Log.h Memory.h MessageStrings.h Mutex.h Object.h \
+	DSObject.h DSO.h Group.h DetachedThread.h JoinableThread.h\
+	Log.h Memory.h MessageStrings.h Mutex.h Object.h \
 	Semaphore.h SharedVar.h StandardError.h StandardInput.h \
 	StandardOutput.h StringBuffer.h String.h Syslog.h System.h \
 	TextInput.h TextOutput.h Thread.h Threading.h \
@@ -18,8 +18,8 @@ h_sources = CoreExceptions.h BasicStringBuffer.h \
 
 cc_sources = CoreExceptions.cpp BasicString.cpp \
 	Byte.cpp Chronometer.cpp ConditionVar.cpp Console.cpp Date.cpp \
-	DebugConsole.cpp DetachedThread.cpp DSObject.cpp DSO.cpp \
-	Group.cpp JoinableThread.cpp Log.cpp Memory.cpp \
+	DebugConsole.cpp DSObject.cpp DSO.cpp \
+	Group.cpp Log.cpp Memory.cpp DetachedThread.cpp JoinableThread.cpp \
 	MessageStrings.cpp Mutex.cpp Object.cpp Semaphore.cpp StandardError.cpp \
 	StandardInput.cpp StandardOutput.cpp StringBuffer.cpp String.cpp \
 	Syslog.cpp System.cpp TextInput.cpp TextOutput.cpp \

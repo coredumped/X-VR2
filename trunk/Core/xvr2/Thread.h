@@ -21,14 +21,15 @@
 #include<pth.h>
 #endif
 
-#include<xvr2/Threading.h>
 #include<xvr2/Mutex.h>
 #include<xvr2/SharedVar.h>
 #include<xvr2/CoreExceptions.h>
 #include<xvr2/ThreadFinalizator.h>
+#include<xvr2/Threading.h>
 
 namespace xvr2{
-	class Thread:public Threading, public ThreadFinalizator{
+	
+	class Thread:public ThreadFinalizator{
 		private:
 		protected:
 			/** Default constructor */
@@ -55,12 +56,9 @@ namespace xvr2{
 			 * the thread process itself
 			 * whatever you define this method does, in your 
 			 * subclass is what the thread
-			 * will start doing when you call start() */
+			 * will start doing when you call start()
+			 * @deprecated use the operator()() method instead. */
 			virtual void run() = 0;
-			/** \deprecated Terminates this thread execution. The 
-			 *  best approach will be to call return from inside 
-			 *  the overriden run method. */
-			void killMe();
 			/**
 			 * Use this method to verify if your thread 
 			 * is running; */

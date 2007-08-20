@@ -47,6 +47,8 @@ namespace xvr2 {
 			Thread *ptr;
 			int policy;
 			int priority;
+#else
+#error Currently POSIX threads are the only supported concurrency method
 #endif
 	};
 	static std::vector<__ThreadData_t *> activeThreads;
@@ -355,6 +357,8 @@ namespace xvr2 {
 		}
 #ifdef USE_POSIX_THREADS
 		pthread_join(info->thread, 0);
+#else
+#error Currently POSIX threads are the only supported concurrency method
 #endif
 	}
 	void ThreadManager::join(JoinableThread &t){
@@ -370,9 +374,11 @@ namespace xvr2 {
 		pthread_detach(info->thread);
 #endif
 	}
+	
 	void ThreadManager::detach(JoinableThread &t){
 		ThreadManager::detach(&t);
 	}
+	
 	void ThreadManager::setSchedulingPolicy(Thread *t, Threading::SchedPolicy pol){
 		__ThreadData_t *info;
 		info = findThread(t);
@@ -391,9 +397,11 @@ namespace xvr2 {
 		pthread_getschedparam(info->thread, &info->policy, (struct sched_param *)&info->priority);
 #endif
 	}
+	
 	void ThreadManager::setSchedulingPolicy(Thread &t, Threading::SchedPolicy pol){
 		ThreadManager::setSchedulingPolicy(&t, pol);
 	}
+	
 	void ThreadManager::setSchedulingParams(Thread *t, Threading::SchedPolicy pol, int prio){
 		__ThreadData_t *info;
 		info = findThread(t);

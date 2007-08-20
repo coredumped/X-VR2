@@ -13,15 +13,11 @@
 namespace xvr2{
 
 	Memory::Memory(){
-		usingGC = false;
-		garbage = 0;
+
 	}
 	
 	Memory::~Memory(){
-		if(usingGC){
-			xvr2_delete(garbage);
-			usingGC = false;
-		}
+
 	}
 
 	void *Memory::allocBuffer(UInt32 size){
@@ -60,16 +56,6 @@ namespace xvr2{
 			throw ReallocFailed();
 		}
 		return p;
-	}
-
-	void *Memory::temporaryAlloc(UInt32 size, UInt32 timeout){
-		if(!usingGC){
-			garbage = new AutomatedGC(GC_SCAN_PERIOD);
-			usingGC = true;
-		}
-		TemporalBuffer *buf = new TemporalBuffer(size, timeout);
-		garbage->add(buf);
-		return buf->buffer;
 	}
 
 	void Memory::clearBuffer(void *buf, UInt32 siz, UInt8 value){

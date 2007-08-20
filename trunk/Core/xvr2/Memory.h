@@ -14,26 +14,12 @@
 #ifndef __XVR2_MEMORY_H__
 #define __XVR2_MEMORY_H__
 #include<xvr2/System.h>
-#include<xvr2/AutomatedGC.h>
 #include<xvr2/CoreExceptions.h>
 #include<xvr2/Buffer.h>
 
 namespace xvr2{
-	/**
-	 * This class deals with memory management and temporary
-	 * allocated buffer.
-	 * Temporary allocated buffer are like normal in-memory buffer
-	 * structures, but as the name says they are temporary, after a
-	 * specified ammount of time this buffers will be deleted from
-	 * from memory so please be carefull while using them, they can
-	 * help a lot but if you dont take the necesary safety measures
-	 * they can <b>hurt</b> you a lot.
-	 *
-	 */
+	/** This class implement basic memory management tasks. */
 	class Memory:public System{
-		private:
-			AutomatedGC *garbage;
-			bool usingGC;
 		public:
 			/**
 			 * Calling this will initialize some 
@@ -42,10 +28,8 @@ namespace xvr2{
 			 */
 			Memory();
 			~Memory();
-			/**
-			 * Using this will allocate <b>size</b>
-			 * bytes in memory
-			 */
+			/** Using this will allocate <b>size</b>
+			 *  bytes in memory. */
 			static void *allocBuffer(UInt32 size);
 			static Buffer alloc(UInt32 size);
 			/**
@@ -59,12 +43,6 @@ namespace xvr2{
 			 * allocated by allocBuffer
 			 */
 			static void freeBuffer(void **buf);
-			/**
-			 * This will allocate a temporary memory buffer
-			 * if <b>size</b> bytes with an expiration period
-			 * of <b>timeout</b> seconds
-			 */
-			void *temporaryAlloc(UInt32 size, UInt32 timeout = 60);
 			/**
 			 * Use this method to clear or set every byte in a buffer
 			 * to a specific value

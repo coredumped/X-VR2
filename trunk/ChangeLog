@@ -14,3 +14,4 @@ of them is on the way also.
 * Added two more connect methods to the SQL driver abstract superclass, one
 which enables to connection to database FIFOs and another for opening embedded
 databases.
+* Eliminating the potentially dangerous killMe() method from the Thread class.

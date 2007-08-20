@@ -1,8 +1,15 @@
 /*
  * $Id$
+ *
+ * X-VR2 
  * 
- * This class encapsulates the thread library functionality through 
- * POSIX Threads and GNU Pth
+ * Copyright (C) Juan V. Guerrero 2007
+ * 
+ * Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
+ * 
+ * This program is free software, distributed under the terms of
+ * the GNU General Public License Version 2. See the LICENSE file
+ * at the top of the source tree.
  */
 #include"config.h"
 #if __GNUC__ >= 3
@@ -11,9 +18,6 @@
 #include<iostream.h>
 #endif
 #include<errno.h>
-#ifdef USE_GNUPTH
-#include<pth.h>
-#endif
 #include<stdlib.h>
 #include<errno.h>
 #include "Thread.h"
@@ -45,14 +49,6 @@ namespace xvr2{
 		catch(...){
 			throw;
 		}
-	}
-
-	void Thread::killMe(){
-#ifdef USE_POSIX_THREADS
-		pthread_exit(0x00);	
-#else
-		pth_cancel(thread);
-#endif
 	}
 
 	bool Thread::isRunning(){
