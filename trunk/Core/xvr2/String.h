@@ -25,14 +25,7 @@ namespace xvr2{
 	 * Many times when we work with strings we leave BIG memory leaks
 	 * in our programs, the main idea here is to help the programmer
 	 * by providing here a very complete strig treatment tool for
-	 * everyday use.
-	 *
-	 * @todo
-	 * reimplement all conversions and use the fastest algorithms possible, if
-	 * you think that is possible to use standard C library conversion functions
-	 * and that his functions as portable across al platforms targeted, then use
-	 * them as needed.
-	 */
+	 * everyday use. */
 	class String:public BasicString<char> {
 		private:
 		protected:

@@ -73,10 +73,7 @@ namespace xvr2{
 	 *        debug-level message<br>
 	 * <p><b>IN GLIBC THE ABOVE VALUES ARE DEFINED IN syslog.h</b><br>
 	 *
-	 * <p><b>TODO:</b><br>
-	 *  Add portability for BSD based unices<br>
-	 *  verify that the glibc function <b>syslog</b> is reentrant<br>
-	 */
+	 * @todo Verify syslog portability */
 	class Syslog:public Unix{
 		private:
 		protected:

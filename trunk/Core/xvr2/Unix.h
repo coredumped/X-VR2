@@ -20,7 +20,8 @@
 
 namespace xvr2{
 
-	/** This class implements the most common Unix system calls */
+	/** This class implements the most common Unix system calls
+	 *  @todo Find a place for the Unix class. */
 	class Unix:public System{
 		protected:
 			/** Pointer to system name */

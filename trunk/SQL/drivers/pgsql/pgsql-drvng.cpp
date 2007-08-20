@@ -235,7 +235,10 @@ void *PostgreSQLDriver::connect(const String &server, const String &__dbname, co
 	cstr += " dbname=";
 	cstr += __dbname;
 	if(!(conn = PQconnectdb(cstr.toCharPtr()))){
-		throw SQL::DBConnectionFailed();
+		throw SQL::ConnectionFailure(DatabaseException::ConnectionParams(
+								DatabaseException::NET, server, pport, 
+								__dbname, user, "********", 
+								""));
 		return 0;
 	}
 	connx = new __pgsql_conn(conn);
@@ -244,7 +247,10 @@ void *PostgreSQLDriver::connect(const String &server, const String &__dbname, co
 	}
 	catch(SQL::SQLQueryException esql){
 		PQfinish(conn);
-		throw SQL::DBConnectionFailed();
+		throw SQL::ConnectionFailure(DatabaseException::ConnectionParams(
+										DatabaseException::NET, server, pport, 
+										__dbname, user, "********", 
+										""), PQerrorMessage (connx->conn));
 	}
 	catch(...){
 		PQfinish(conn);
@@ -268,7 +274,10 @@ void *PostgreSQLDriver::connect(const String &dbsock,
 	cstr += " dbname=";
 	cstr += _dbname;
 	if(!(conn = PQconnectdb(cstr.toCharPtr()))){
-		throw SQL::DBConnectionFailed();
+		throw SQL::ConnectionFailure(SQL::DatabaseException::ConnectionParams(
+										SQL::DatabaseException::FIFO, "", 
+										-1, _dbname, _user, "********", 
+										dbsock));
 		return 0;
 	}
 	connx = new __pgsql_conn(conn);
@@ -277,7 +286,10 @@ void *PostgreSQLDriver::connect(const String &dbsock,
 	}
 	catch(SQL::SQLQueryException esql){
 		PQfinish(conn);
-		throw SQL::DBConnectionFailed();
+		throw SQL::ConnectionFailure(SQL::DatabaseException::ConnectionParams(
+										SQL::DatabaseException::FIFO, "", 
+										-1,	_dbname, _user, "********", 
+										dbsock), PQerrorMessage (connx->conn));
 	}
 	catch(...){
 		PQfinish(conn);
