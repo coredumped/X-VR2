@@ -11,16 +11,16 @@
  * the GNU General Public License Version 2. See the LICENSE file
  * at the top of the source tree.
  */
-#ifndef __XVR2_DB_DRIVER_H__
-#define __XVR2_DB_DRIVER_H__
+#ifndef __XVR2_SQL_DRIVER_H__
+#define __XVR2_SQL_DRIVER_H__
  
 
 #include<xvr2/xvr2config.h>
-#include<xvr2/DB/DriverInfo.h>
+#include<xvr2/SQL/DriverInfo.h>
 
 
 namespace xvr2 {
-	namespace DB {
+	namespace SQL {
 		class ResultSet;
 		class Field;
 
@@ -41,7 +41,7 @@ namespace xvr2 {
 				Driver();
 				/** @brief Use this function to retrieve version and/or vendor 
 				 *  informaton for the driver. */
-				virtual const DB::DriverInfo &getVersionInfo() = 0;
+				virtual const SQL::DriverInfo &getVersionInfo() = 0;
 				/** @brief Attempts to make a connection the specified database
 				 *  server.
 				 *  Driver supplied database connection function, it will try

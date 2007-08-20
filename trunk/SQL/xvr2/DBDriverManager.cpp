@@ -16,7 +16,7 @@
 #include"DriverManager.h"
 
 namespace xvr2 {
-	namespace DB {
+	namespace SQL {
 		
 		DriverManager::DriverManager(const String &dsopath){
 			dso = new DSO(dsopath);

@@ -14,13 +14,13 @@
 #ifndef __XVR2_RESULTSET_H__
 #define __XVR2_RESULTSET_H__
 #include<xvr2/xvr2config.h>
-#include<xvr2/DB/Driver.h>
-#include<xvr2/DB/Field.h>
-#include<xvr2/DB/DatabaseException.h>
+#include<xvr2/SQL/Driver.h>
+#include<xvr2/SQL/Field.h>
+#include<xvr2/SQL/DatabaseException.h>
 
 namespace xvr2{
 
-	namespace DB {
+	namespace SQL {
 
 		class Driver;
 		/**

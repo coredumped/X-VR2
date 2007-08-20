@@ -11,36 +11,38 @@
  * the GNU General Public License Version 2. See the LICENSE file
  * at the top of the source tree.
  */
-#ifndef __XVR2_DB_DRV_SQLITE_H__
-#define __XVR2_DB_DRV_SQLITE_H__
-#include<xvr2/DB/Field.h>
-#include<xvr2/DB/ResultSet.h>
-#include<xvr2/DB/Driver.h>
+#ifndef __XVR2_PGSQL_DRV_NG_H__
+#define __XVR2_PGSQL_DRV_NG_H__
+#include"xvr2/SQL/Field.h"
+#include"xvr2/SQL/ResultSet.h"
+#include"xvr2/SQL/Driver.h"
 
-using namespace xvr2::DB;
+using namespace xvr2::SQL;
 using xvr2::String;
 
-class SQLiteDriver : public Driver {
+class PostgreSQLDriver : public Driver {
 	private:
-		xvr2::DB::DriverInfo *dinfo;
+		xvr2::SQL::DriverInfo *dinfo;
 	protected:
 	public:
-		SQLiteDriver();
-		~SQLiteDriver();
-		const xvr2::DB::DriverInfo &getVersionInfo();
-		void *connect(const xvr2::String &server, const xvr2::String &__dbname,	const xvr2::String &user, const xvr2::String &pass, int port = 0);
-		xvr2::DB::ResultSet *query(void *__conn_handle, const xvr2::String &command);
+		PostgreSQLDriver();
+		~PostgreSQLDriver();
+		const xvr2::SQL::DriverInfo &getVersionInfo();
+		void *connect(const xvr2::String &server, const xvr2::String &__dbname,	
+						const xvr2::String &user, const xvr2::String &pass, 
+						int port = 0);
 		void *connect(const String &dbsock, 
 						const String &_dbname, const String &_user, 
 						const String &_pass);
 		void *open(const String &dbfile);
+		xvr2::SQL::ResultSet *query(void *__conn_handle, const xvr2::String &command);
 		int execCommand(void *__conn_handle, const xvr2::String &command);
 		bool disconnect(void *__conn_handle);
 		void setAutoCommit(bool val = true);
 		void commit(void *__conn_handle);
 		const int numRows(void *__res_handle);
 		const int numCols(void *__res_handle);
-		xvr2::DB::Field *fetchRow(void *__res_handle);
+		xvr2::SQL::Field *fetchRow(void *__res_handle);
 		const bool freeResultSet(void *__res_handle);
 		const bool bulkBegin(void *conn_handle, const char *tablename, const char *cols, const char *delim);
 		const bool bulkAddData(void *conn_handle, const char *data, const char *delim);
@@ -55,8 +57,8 @@ class SQLiteDriver : public Driver {
 };
 
 extern "C" {
-	SQLiteDriver *create_dbdriver_instance();
-	void destroy_dbdriver_instance(SQLiteDriver *obj);
+	PostgreSQLDriver *create_dbdriver_instance();
+	void destroy_dbdriver_instance(PostgreSQLDriver *obj);
 };
 
 #endif

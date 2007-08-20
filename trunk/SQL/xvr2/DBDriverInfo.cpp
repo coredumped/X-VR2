@@ -17,7 +17,7 @@
 #include"DriverInfo.h"
 
 namespace xvr2{
-	namespace DB {
+	namespace SQL {
 
 		// Start definition of local variables
 		// End definition of local variables

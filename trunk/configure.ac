@@ -245,12 +245,12 @@ AC_OUTPUT(Makefile \
 	Text/Makefile \
 	Text/xvr2/Makefile \
 	Text/xvr2text.pc \
-	DB/Makefile \
-	DB/xvr2/Makefile \
-	DB/xvr2db.pc \
-	DB/drivers/Makefile \
-	DB/drivers/pgsql/Makefile \
-	DB/drivers/sqlite/Makefile \
+	SQL/Makefile \
+	SQL/xvr2/Makefile \
+	SQL/xvr2sql.pc \
+	SQL/drivers/Makefile \
+	SQL/drivers/pgsql/Makefile \
+	SQL/drivers/sqlite/Makefile \
 	Platform/Makefile \
 	Platform/xvr2/Makefile \
 	Platform/xvr2platform.pc \
@@ -263,7 +263,7 @@ AC_OUTPUT(Makefile \
 
 mkdir -p Core/xvr2/xvr2
 mkdir -p Text/xvr2/xvr2/Text
-mkdir -p DB/xvr2/xvr2/DB
+mkdir -p SQL/xvr2/xvr2/SQL
 mkdir -p Net/xvr2/xvr2/Net
 mkdir -p Platform/xvr2/xvr2/Platform
 cd Core/xvr2/xvr2
@@ -276,7 +276,7 @@ cd ..
 ln -sf ../../../Core/xvr2/*.h .
 cd ../../..
 
-cd DB/xvr2/xvr2/DB
+cd SQL/xvr2/xvr2/SQL
 ln -sf ../../*.h .
 cd ..
 ln -sf ../../../Core/xvr2/*.h .

@@ -18,7 +18,7 @@
 #include"ResultSet.h"
 
 namespace xvr2 {
-	namespace DB {
+	namespace SQL {
 		static const char *_excepblkf = "Bulk data loading failed";
 		static const char *_excepblk_dp = "Bulk data parse error";
 		static const char *_excepblk_st = "Bulk load initialization error";
@@ -174,7 +174,7 @@ namespace xvr2 {
 			result = 0;
 		}
 
-		SQLQueryException::SQLQueryException(const char *msg, DB::ResultSet *_result, const String &__query):DatabaseException(msg){
+		SQLQueryException::SQLQueryException(const char *msg, SQL::ResultSet *_result, const String &__query):DatabaseException(msg){
 			description = (char *)msg;
 			result = _result;
 			_query = __query;
@@ -188,7 +188,7 @@ namespace xvr2 {
 		const String &SQLQueryException::query(){
 			return _query;
 		}
-		SQLQueryException::SQLQueryException(const char *msg, DB::ResultSet *_result):DatabaseException(msg){
+		SQLQueryException::SQLQueryException(const char *msg, SQL::ResultSet *_result):DatabaseException(msg){
 			description = (char *)msg;
 			result = _result;
 		}

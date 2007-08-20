@@ -1,8 +1,18 @@
 /*
- * $Id:Field.h 531 2007-08-11 09:05:29Z mindstorm2600 $
+ * $Id$
+ *
+ * X-VR2 
+ * 
+ * Copyright (C) Juan V. Guerrero 2007
+ * 
+ * Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
+ * 
+ * This program is free software, distributed under the terms of
+ * the GNU General Public License Version 2. See the LICENSE file
+ * at the top of the source tree.
  */
-#ifndef __XVR2_DB_FIELD_H__
-#define __XVR2_DB_FIELD_H__
+#ifndef __XVR2_SQL_FIELD_H__
+#define __XVR2_SQL_FIELD_H__
 
 #include<xvr2/xvr2config.h>
 #include<xvr2/Date.h>
@@ -11,10 +21,10 @@
 #include<xvr2/Byte.h>
 #include<xvr2/String.h>
 #include<xvr2/CoreExceptions.h>
-#include<xvr2/DB/Driver.h>
+#include<xvr2/SQL/Driver.h>
 
 namespace xvr2{
-	namespace DB {
+	namespace SQL {
 		/**
 		 * Multitype container for SQL single data.
 		 * The purpose of Field is to provide a multitype container, because

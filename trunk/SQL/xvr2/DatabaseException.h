@@ -11,14 +11,14 @@
  * the GNU General Public License Version 2. See the LICENSE file
  * at the top of the source tree.
  */
-#ifndef __XVR2_DATABASE_EXCEPTION_H__
-#define __XVR2_DATABASE_EXCEPTION_H__
+#ifndef __XVR2_SQL_DATABASE_EXCEPTION_H__
+#define __XVR2_SQL_DATABASE_EXCEPTION_H__
 #include<xvr2/xvr2config.h>
 #include<xvr2/CoreExceptions.h>
 #include<xvr2/String.h>
 
 namespace xvr2 {
-	namespace DB {
+	namespace SQL {
 		class ResultSet;
 		/** Generic database exception */
 		class DatabaseException:public Exception{
@@ -187,7 +187,7 @@ namespace xvr2 {
 		/** Generic SQL query exception */
 		class SQLQueryException:public DatabaseException{
 			private:
-				DB::ResultSet *result;
+				SQL::ResultSet *result;
 				String _query;
 			public:
 				/**
@@ -197,8 +197,8 @@ namespace xvr2 {
 				~SQLQueryException();
 				SQLQueryException(const char *msg);
 				SQLQueryException(const char *msg, const String &__query);
-				SQLQueryException(const char *msg, DB::ResultSet *_result);
-				SQLQueryException(const char *msg, DB::ResultSet *_result, const String &__query);
+				SQLQueryException(const char *msg, SQL::ResultSet *_result);
+				SQLQueryException(const char *msg, SQL::ResultSet *_result, const String &__query);
 				const String &query();
 		};
 

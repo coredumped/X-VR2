@@ -20,7 +20,7 @@ namespace xvr2{
 
 	//Start implementation of class: Connection
 
-	namespace DB {
+	namespace SQL {
 
 
 		Connection::Connection(){

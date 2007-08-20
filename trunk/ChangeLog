@@ -1,3 +1,8 @@
+2007-08-20  Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
+* DB namespace changed to SQL, consecuently the xvr2db library has been renamed
+to xvr2sql. This was needed because that namespace was used only for SQL stuff
+DB was a too generic name also.
+
 2007-08-19  Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
 
 * Build system reorganized, now we have a single configure script instead of

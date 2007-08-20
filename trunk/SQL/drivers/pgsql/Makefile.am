@@ -6,7 +6,7 @@ h_sources = pgsql-drvng.h
 cc_sources = pgsql-drvng.cpp
 
 
-INCLUDES = -I$(top_srcdir) -I../../../Core/xvr2 -I../../../DB/xvr2 \
+INCLUDES = -I$(top_srcdir) -I../../../Core/xvr2 -I../../../SQL/xvr2 \
 			-I $(PGSQL_INCLUDES)
 
 lib_LTLIBRARIES=pgsql_driver.la

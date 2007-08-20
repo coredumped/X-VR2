@@ -1,16 +1,26 @@
 /*
- * $Id:ConnectionMT.h 531 2007-08-11 09:05:29Z mindstorm2600 $
+ * $Id$
+ *
+ * X-VR2 
+ * 
+ * Copyright (C) Juan V. Guerrero 2007
+ * 
+ * Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
+ * 
+ * This program is free software, distributed under the terms of
+ * the GNU General Public License Version 2. See the LICENSE file
+ * at the top of the source tree.
  */
-#ifndef __XVR2_DB_ConnectionMT_H__
-#define __XVR2_DB_ConnectionMT_H__
+#ifndef __XVR2_SQL_ConnectionMT_H__
+#define __XVR2_SQL_ConnectionMT_H__
 
 #include<xvr2/xvr2config.h>
-#include<xvr2/DB/Driver.h>
-#include<xvr2/DB/Connection.h>
+#include<xvr2/SQL/Driver.h>
+#include<xvr2/SQL/Connection.h>
 #include<xvr2/Mutex.h>
 
 namespace xvr2{
-	namespace DB {
+	namespace SQL {
 		/**
 		 * This class encapsulates the Connection class and provides a much more 
 		 * complete interface to the SQL database connection paradigm in addition

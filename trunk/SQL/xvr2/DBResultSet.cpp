@@ -17,7 +17,7 @@
 
 namespace xvr2{
 
-	namespace DB {
+	namespace SQL {
 
 		ResultSet::ResultSet(Driver *drv, void *__handle, bool __status, UInt64 _afrows){
 			r_handle = __handle;

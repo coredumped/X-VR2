@@ -31,11 +31,11 @@ struct dmap_func {
 static std::map<int, int, dmap_func> __data_map;
 
 SQLiteDriver *create_dbdriver_instance(){
-	__data_map[SQLITE_INTEGER] = DB::Field::INTEGER;
-	__data_map[SQLITE_FLOAT] = DB::Field::DOUBLE;
-	__data_map[SQLITE_TEXT] = DB::Field::CHAR;
-	__data_map[SQLITE_BLOB] = DB::Field::BLOB;
-	__data_map[SQLITE_NULL] = DB::Field::CHAR;
+	__data_map[SQLITE_INTEGER] = SQL::Field::INTEGER;
+	__data_map[SQLITE_FLOAT] = SQL::Field::DOUBLE;
+	__data_map[SQLITE_TEXT] = SQL::Field::CHAR;
+	__data_map[SQLITE_BLOB] = SQL::Field::BLOB;
+	__data_map[SQLITE_NULL] = SQL::Field::CHAR;
 #ifdef USE_DEBUG
 	SQLiteDriver *p = 0;
 	p = new SQLiteDriver();
@@ -56,8 +56,8 @@ void destroy_dbdriver_instance(SQLiteDriver *obj){
 
 struct __sqlite_conn {
 	sqlite3 *conn;
-	DB::DatabaseException::ConnectionParams c_params;
-	__sqlite_conn(sqlite3 *_conn, DB::DatabaseException::ConnectionParams _c_params){
+	SQL::DatabaseException::ConnectionParams c_params;
+	__sqlite_conn(sqlite3 *_conn, SQL::DatabaseException::ConnectionParams _c_params){
 		conn = _conn;
 		c_params = _c_params;
 	}
@@ -87,7 +87,7 @@ class __sqlite_res {
 
 
 SQLiteDriver::SQLiteDriver(){
-	dinfo = new DB::DriverInfo(DRV_VERSION, DRV_REVISION, 
+	dinfo = new SQL::DriverInfo(DRV_VERSION, DRV_REVISION, 
 			"Juan V. Guerrero <ryoma dot nagare at gmail dot com>", 
 			SQLITE_VERSION);
 }
@@ -99,25 +99,25 @@ SQLiteDriver::~SQLiteDriver(){
 	delete dinfo;
 }
 
-const DB::DriverInfo &SQLiteDriver::getVersionInfo(){
+const SQL::DriverInfo &SQLiteDriver::getVersionInfo(){
 	return *dinfo;
 }
 
 ////////////////////// CONNECT STARTS HERE /////////////////////
 void *SQLiteDriver::connect(const String &server, const String &__dbname, const String &user, const String &pass, int port){
-	throw DB::DriverOperationNotSupported("connect");
+	throw SQL::DriverOperationNotSupported("connect");
 }
 void *SQLiteDriver::connect(const String &dbsock, 
 				const String &_dbname, const String &_user, 
 				const String &_pass){
-	throw DB::DriverOperationNotSupported("connect");
+	throw SQL::DriverOperationNotSupported("connect");
 }
 
 void *SQLiteDriver::open(const String &dbfile){
 	sqlite3 *conn;
 	__sqlite_conn *connx = 0;
 	if(sqlite3_open(dbfile.toCharPtr(), &conn) != SQLITE_OK){
-		throw DB::ConnectionFailure(DatabaseException::ConnectionParams(
+		throw SQL::ConnectionFailure(DatabaseException::ConnectionParams(
 						DatabaseException::EMBEDDED, "", -1, "", "", "", 
 						dbfile.toCharPtr()), sqlite3_errmsg(conn));
 	}
@@ -140,7 +140,7 @@ int SQLiteDriver::execCommand(void *__conn_handle, const String &command){
 	//Prepare statement
 	if(sqlite3_prepare_v2(conn->conn, command.toCharPtr(), command.size(), 
 			&statement, (const char **)&tail) != SQLITE_OK){
-		throw DB::SQLQueryException(sqlite3_errmsg(conn->conn), command);
+		throw SQL::SQLQueryException(sqlite3_errmsg(conn->conn), command);
 	}
 	//Evaluate
 	switch(sqlite3_step(statement)){
@@ -150,20 +150,20 @@ int SQLiteDriver::execCommand(void *__conn_handle, const String &command){
 			break;
 		case SQLITE_BUSY:
 			if(sqlite3_errcode(conn->conn) == SQLITE_OK){
-				throw DB::DatabaseException(__msg_unable_to_lock, conn->c_params);
+				throw SQL::DatabaseException(__msg_unable_to_lock, conn->c_params);
 			}
 			else{
-				throw DB::DatabaseException(sqlite3_errmsg(conn->conn), conn->c_params);
+				throw SQL::DatabaseException(sqlite3_errmsg(conn->conn), conn->c_params);
 			}
 			break;
 		default:
-			throw DB::SQLQueryException(sqlite3_errmsg(conn->conn), command);
+			throw SQL::SQLQueryException(sqlite3_errmsg(conn->conn), command);
 	}
 	return ret;
 }
 
 ResultSet *SQLiteDriver::query(void *__conn_handle, const String &command){
-	DB::ResultSet *r = 0;
+	SQL::ResultSet *r = 0;
 	__sqlite_conn *conn;
 	__sqlite_res *_res;
 	conn = (__sqlite_conn *)__conn_handle;
@@ -172,14 +172,14 @@ ResultSet *SQLiteDriver::query(void *__conn_handle, const String &command){
 	//Prepare statement
 	if(sqlite3_prepare_v2(conn->conn, command.toCharPtr(), command.size(), 
 			&statement, (const char **)&tail) != SQLITE_OK){
-		throw DB::SQLQueryException(sqlite3_errmsg(conn->conn), command);
+		throw SQL::SQLQueryException(sqlite3_errmsg(conn->conn), command);
 	}
 	_res = new __sqlite_res(conn, statement);
 	if(sqlite3_column_count(statement) == 0){
-		r = new DB::ResultSet(this, 0, true, sqlite3_changes(conn->conn));
+		r = new SQL::ResultSet(this, 0, true, sqlite3_changes(conn->conn));
 	}
 	else{
-		r = new DB::ResultSet(this, (void *)_res, true);
+		r = new SQL::ResultSet(this, (void *)_res, true);
 	}
 	return r;
 }
@@ -202,7 +202,7 @@ void SQLiteDriver::commit(void *){
 
 const int SQLiteDriver::numRows(void *__res_handle){
 	//SQLite does not provide this functionality
-	throw DB::DriverOperationNotSupported("numRows");
+	throw SQL::DriverOperationNotSupported("numRows");
 	return -1;
 }
 
@@ -218,7 +218,7 @@ const int SQLiteDriver::numCols(void *__res_handle){
 
 Field *SQLiteDriver::fetchRow(void *__res_handle){
 	//Will fetch the next row in a database
-	DB::Field *s = 0;
+	SQL::Field *s = 0;
 	char *data;
 	void *blobby;
 	unsigned int num, n;
@@ -240,7 +240,7 @@ Field *SQLiteDriver::fetchRow(void *__res_handle){
 	//Get the number of columns
 	num = sqlite3_column_count(r->statement);
 	//Allocate the field array
-	s = new DB::Field[num];
+	s = new SQL::Field[num];
 	//Open a loop to instatiate every data field
 	for(n = 0; n < num; n++){
 		s[n].setFieldName(sqlite3_column_name(r->statement, n));
@@ -254,26 +254,26 @@ Field *SQLiteDriver::fetchRow(void *__res_handle){
 			if(thetype == SQLITE_BLOB){
 				//DATA IS TEXT
 				switch(__data_map[thetype]){
-					case DB::Field::INTEGER:
+					case SQL::Field::INTEGER:
 						valx = sqlite3_column_int(r->statement, n);
-						s[n].init(xvr2::DB::Field::INTEGER, (void *)&valx, 
+						s[n].init(xvr2::SQL::Field::INTEGER, (void *)&valx, 
 									sizeof(Int32));
 						break;
-					case DB::Field::DOUBLE:
+					case SQL::Field::DOUBLE:
 						float8 = sqlite3_column_double(r->statement, n);
-						s[n].init(xvr2::DB::Field::DOUBLE, (void *)&float8, 
+						s[n].init(xvr2::SQL::Field::DOUBLE, (void *)&float8, 
 									sizeof(double));
 						break;
-					case DB::Field::CHAR:
+					case SQL::Field::CHAR:
 					default:
 						data = (char *)sqlite3_column_text(r->statement, n);
-						s[n].init(xvr2::DB::Field::VARCHAR, (void *)data, sqlite3_column_bytes(r->statement, n));
+						s[n].init(xvr2::SQL::Field::VARCHAR, (void *)data, sqlite3_column_bytes(r->statement, n));
 				}
 			}
 			else{
 				//DATA IS BINARY
 				blobby = (void *)sqlite3_column_blob(r->statement, n);
-				s[n].init(xvr2::DB::Field::BLOB, blobby, sqlite3_column_bytes(r->statement, n));
+				s[n].init(xvr2::SQL::Field::BLOB, blobby, sqlite3_column_bytes(r->statement, n));
 			}
 		}
 	}
@@ -290,17 +290,17 @@ const bool SQLiteDriver::freeResultSet(void *__res_handle){
 }
 
 const bool SQLiteDriver::bulkBegin(void *conn_handle, const char *table, const char *columns, const char *delim){
-	throw DB::DriverOperationNotSupported("bulkBegin");
+	throw SQL::DriverOperationNotSupported("bulkBegin");
 	return false;
 }
 
 const bool SQLiteDriver::bulkAddData(void *conn_handle, const char *data, const char *delim){
-	throw DB::DriverOperationNotSupported("bulkAddData");
+	throw SQL::DriverOperationNotSupported("bulkAddData");
 	return false;
 }
 
 const bool SQLiteDriver::bulkEnd(void *conn_handle){
-	throw DB::DriverOperationNotSupported("bulkEnd");
+	throw SQL::DriverOperationNotSupported("bulkEnd");
 	return false;
 }
 
@@ -325,7 +325,7 @@ static String __generic_quote(const String &s){
 }
 
 char *SQLiteDriver::quoteString(const char *in){
-	throw DB::DriverOperationNotSupported("quoteString");
+	throw SQL::DriverOperationNotSupported("quoteString");
 	return 0;
 }
 

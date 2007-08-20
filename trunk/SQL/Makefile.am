@@ -7,6 +7,6 @@ SUBDIRS= $(GENERIC_LIBRARY_NAME) drivers
 DIST_SUBDIRS = $(GENERIC_LIBRARY_NAME)
 
 pkgconfigdir = $(libdir)/pkgconfig
-pkgconfig_DATA = xvr2db.pc
+pkgconfig_DATA = xvr2sql.pc
 
 rebuild: clean all

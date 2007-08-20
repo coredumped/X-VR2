@@ -132,7 +132,7 @@ namespace xvr2 {
 			 *  threads and the main() function. */
 			static bool currentIsMain();
 
-			/** @brief. Performs a test to see if the current thread has been 
+			/** @brief Performs a test to see if the current thread has been 
 			 *  asked to be cancelled.
 			 *  When this event occurs no finalization callbacks will by run,
 			 *  not even the onTerminate() handler, only the cancellation

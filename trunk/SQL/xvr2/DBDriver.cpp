@@ -3,7 +3,7 @@
 
 
 namespace xvr2 {
-	namespace DB {
+	namespace SQL {
 		Driver::Driver(){
 			conn_requires_lock = false;
 			query_requires_lock = true;

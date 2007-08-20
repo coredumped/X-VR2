@@ -6,7 +6,7 @@ h_sources = sqlite-drv.h
 cc_sources = sqlite-drv.cpp
 
 
-INCLUDES = -I$(top_srcdir) -I../../../Core/xvr2 -I../../../DB/xvr2 \
+INCLUDES = -I$(top_srcdir) -I../../../Core/xvr2 -I../../../SQL/xvr2 \
 			-I $(SQLITE_INCLUDES)
 
 lib_LTLIBRARIES=sqlite_driver.la

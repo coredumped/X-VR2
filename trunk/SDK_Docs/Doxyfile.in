@@ -72,7 +72,7 @@ WARN_LOGFILE =
 #---------------------------------------------------------------------------
 # configuration options related to the input files
 #---------------------------------------------------------------------------
-INPUT = sdk_mainpage.txt ../Core/xvr2/ ../Text/xvr2/ ../DB/xvr2/ ../Net/xvr2 ../Platform/xvr2/ 
+INPUT = sdk_mainpage.txt ../Core/xvr2/ ../Text/xvr2/ ../SQL/xvr2/ ../Net/xvr2 ../Platform/xvr2/ 
                          
 FILE_PATTERNS = *.h *.hh *.hxx *.hpp *.h++ *.H *.HH *.H++
 RECURSIVE = NO

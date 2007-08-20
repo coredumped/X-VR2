@@ -12,6 +12,6 @@ library_include_HEADERS = $(h_sources)
 
 INCLUDES = -I$(top_srcdir) ../../Core
 
-lib_LTLIBRARIES=libxvr2db.la
-libxvr2db_la_SOURCES= $(h_sources) $(cc_sources)
-libxvr2db_la_LDFLAGS= -version-info $(GENERIC_LIBRARY_VERSION) -release $(GENERIC_RELEASE)
+lib_LTLIBRARIES=libxvr2sql.la
+libxvr2sql_la_SOURCES= $(h_sources) $(cc_sources)
+libxvr2sql_la_LDFLAGS= -version-info $(GENERIC_LIBRARY_VERSION) -release $(GENERIC_RELEASE)
