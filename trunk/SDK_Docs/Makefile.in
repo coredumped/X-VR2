@@ -5,7 +5,7 @@ doxygen_path=@DOXYGEN@
 
 all: html/index.html sdk_mainpage.txt
 
-html/index.html: ../Core/xvr2/*.h ../Text/xvr2/*.h  sdk_mainpage.txt
+html/index.html: ../Core/xvr2/*.h ../Text/xvr2/*.h  sdk_mainpage.txt ../Net/xvr2/*.h ../DB/xvr2/*.h
 	$(doxygen_path) Doxyfile
 
 clean:

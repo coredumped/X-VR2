@@ -1,6 +1,6 @@
 2007-08-19  Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
 
-* Build system reorganized, now we have a single confugure script instead of
+* Build system reorganized, now we have a single configure script instead of
 the complex multi-configure monster we used to.
 * Mayor directory reorganization, more intuitive each library is located on
 a subdirectory named as its namespace.
@@ -8,7 +8,7 @@ a subdirectory named as its namespace.
 * Lots of useless classes got deprecated, some even eliminated.
 * Support for the "experimental" (should I say crappy?) garbage collector has
 been dropped.
-* More information has benn added to some exception classes, a review of all
+* More information has been added to some exception classes, a review of all
 of them is on the way also.
 * A single Doxygen config file for documentation has been implemented.
 * Added two more connect methods to the SQL driver abstract superclass, one

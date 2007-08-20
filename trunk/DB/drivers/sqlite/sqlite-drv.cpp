@@ -220,9 +220,11 @@ Field *SQLiteDriver::fetchRow(void *__res_handle){
 	//Will fetch the next row in a database
 	DB::Field *s = 0;
 	char *data;
+	void *blobby;
 	unsigned int num, n;
 	int thetype;
 	int errcode;
+	int valx;
 	double float8;
 	__sqlite_res *r;
 	r = (__sqlite_res *)__res_handle;
@@ -252,22 +254,26 @@ Field *SQLiteDriver::fetchRow(void *__res_handle){
 			if(thetype == SQLITE_BLOB){
 				//DATA IS TEXT
 				switch(__data_map[thetype]){
-
 					case DB::Field::INTEGER:
-						s[n].init(xvr2::DB::Field::INTEGER, 0, sizeof(Int32));
+						valx = sqlite3_column_int(r->statement, n);
+						s[n].init(xvr2::DB::Field::INTEGER, (void *)&valx, 
+									sizeof(Int32));
 						break;
 					case DB::Field::DOUBLE:
-						float8 = atof(data);
-						s[n].init(xvr2::DB::Field::DOUBLE, (void *)&float8, sizeof(double));
+						float8 = sqlite3_column_double(r->statement, n);
+						s[n].init(xvr2::DB::Field::DOUBLE, (void *)&float8, 
+									sizeof(double));
 						break;
 					case DB::Field::CHAR:
 					default:
+						data = (char *)sqlite3_column_text(r->statement, n);
 						s[n].init(xvr2::DB::Field::VARCHAR, (void *)data, sqlite3_column_bytes(r->statement, n));
 				}
 			}
 			else{
 				//DATA IS BINARY
-				s[n].init(xvr2::DB::Field::BLOB, (void *)data, sqlite3_column_bytes(r->statement, n));
+				blobby = (void *)sqlite3_column_blob(r->statement, n);
+				s[n].init(xvr2::DB::Field::BLOB, blobby, sqlite3_column_bytes(r->statement, n));
 			}
 		}
 	}

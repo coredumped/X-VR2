@@ -1,18 +1,15 @@
-/* $Id$ */
 /*
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
+ * $Id$
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ * X-VR2 
+ * 
+ * Copyright (C) Juan V. Guerrero 2007
+ * 
+ * Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
+ * 
+ * This program is free software, distributed under the terms of
+ * the GNU General Public License Version 2. See the LICENSE file
+ * at the top of the source tree.
  */
 #ifndef __XVR2_NETWORK_EXCEPTION_H__
 #define __XVR2_NETWORK_EXCEPTION_H__
@@ -121,11 +118,7 @@ namespace xvr2 {
 				/** Default constructor */
 				CertificateLookupPending();
 		};
-		/**
-		 * \class ConnectionResetByPeer
-		 * \version $Revision$
-		 * \brief The current connection suffered a reset from the peer
-		 */
+		/** \brief The current connection suffered a reset from the peer */
 		class ConnectionResetByPeer:public NetworkException{
 			public:
 				/**
@@ -133,11 +126,8 @@ namespace xvr2 {
 				 */
 				ConnectionResetByPeer();
 		};
-		/**
-		 * \class HostNotFound HostNotFoundException.h
-		 * \version $Revision$
-		 * \brief Unable to find the specified host please check your /etc/hosts file or your DNS client config 
-		 */
+		/** @brief Unable to find the specified host please check your 
+		 *  /etc/hosts file or your DNS client config */
 		class HostNotFound:public NetworkException{
 			public:
 				/**
@@ -155,10 +145,8 @@ namespace xvr2 {
 				/** Default constructor */
 				NoDataForReading();
 		};
-		/**
-		 * \class NoIPForYou
-		 * \version $Revision$
-		 * \brief The requested name is valid but does not have an IP address. */
+		/** @brief The requested name is valid but does not have an 
+		 *  IP address. */
 		class NoIPForYou:public NetworkException{
 			public:
 				/**
@@ -176,10 +164,7 @@ namespace xvr2 {
 				/** Default constructor */
 				NoValidCipherInList();
 		};
-		/**
-		 * \class NSFatal
-		 * \version $Revision$
-		 * \brief A non-recoverable name server error occurred. */
+		/** \brief A non-recoverable name server error occurred. */
 		class NSFatal:public NetworkException{
 			public:
 				/**
@@ -187,10 +172,7 @@ namespace xvr2 {
 				 */
 				NSFatal();
 		};
-		/**
-		 * \class NSTryAgain
-		 * \version $Revision$
-		 * \brief A temporary error occurred on an authoritative name server.  Try */
+		/** \brief A temporary error occurred on an authoritative name server.*/
 		class NSTryAgain:public NetworkException{
 			public:
 				/**

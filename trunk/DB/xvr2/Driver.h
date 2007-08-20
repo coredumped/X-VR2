@@ -48,6 +48,7 @@ namespace xvr2 {
 				 *  to make a remote (networked) connection to the database
 				 *  server.
 				 *  @param server Should be the server's IP address or hostname
+				 *  @param __dbname Database name to connect to.
 				 *  @param user Username to connect to the database as
 				 *  @param pass User's login password
 				 *  @param port Connection port, if 0, then the driver will use
@@ -63,10 +64,9 @@ namespace xvr2 {
 				 *  to connect to a locally running database instance, commonly
 				 *  this is performed by connection to a FIFO file.
 				 *  @param dbsock FIFO file to open for connection.
-				 *  @param user Username to connect to the database as
-				 *  @param pass User's login password
-				 *  @param port Connection port, if 0, then the driver will use
-				 *  the default connection port for the specified database.
+				 *  @param _dbname Database name to connect to.
+				 *  @param _user Username to connect to the database as
+				 *  @param _pass User's login password
 				 *  @return A connection handler. */
 				virtual void *connect(const String &dbsock, 
 								const String &_dbname, const String &_user, 
