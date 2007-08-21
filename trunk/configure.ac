@@ -251,6 +251,7 @@ AC_OUTPUT(Makefile \
 	SQL/drivers/Makefile \
 	SQL/drivers/pgsql/Makefile \
 	SQL/drivers/sqlite/Makefile \
+	SQL/examples/Makefile \
 	Platform/Makefile \
 	Platform/xvr2/Makefile \
 	Platform/xvr2platform.pc \
