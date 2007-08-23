@@ -1,3 +1,8 @@
+2007-08-23  Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
+* An example program was made to test the SQLite driver.
+* Deprecated the ResultSet::fetchNextRow method in favor of ResultSet::FetchRow
+* Renamed some source files in the SQL namespace/dir 
+
 2007-08-20  Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
 * DB namespace changed to SQL, consecuently the xvr2db library has been renamed
 to xvr2sql. This was needed because that namespace was used only for SQL stuff

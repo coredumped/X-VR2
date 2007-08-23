@@ -1,8 +1,9 @@
-#include "common.h"
+#include<xvr2/StringBuffer.h>
+#include "common_ng.h"
 #include<iostream>
 
-static const char *MYSQL_DRIVER_LOCATION = __XVR2_PREFIX_DIR"/lib/xvr2/mysql_driver_old.so." __XVR2_VERSION_STRING;
-static const char *PGSQL_DRIVER_LOCATION = __XVR2_PREFIX_DIR"/lib/xvr2/pgsql_driver_old.so." __XVR2_VERSION_STRING;
+static const char *MYSQL_DRIVER_LOCATION = __XVR2_PREFIX_DIR"/lib/mysql_driver-"__XVR2_VERSION_STRING".so."__XVR2_MINOR_VERSION_STRING;
+static const char *PGSQL_DRIVER_LOCATION = __XVR2_PREFIX_DIR"/lib/pgsql_driver-"__XVR2_VERSION_STRING".so."__XVR2_MINOR_VERSION_STRING;
 
 
 using namespace xvr2;
@@ -32,11 +33,11 @@ const char *dnames[] = {
 };
 
 static char *driver_location;
-static char *select_statement;
-static char *server_location;
-static char *db_user;
-static char *db_pass;
-static char *db_name;
+static std::string select_statement;
+static std::string server_location;
+static std::string db_user;
+static std::string db_pass;
+static std::string db_name;
 static int db_port;
 
 static bool loopit;
@@ -66,23 +67,23 @@ bool parse_args(int argc, char *argv[]){
 		else if(s.startsWith("host=")){
 			tmp = t->next();
 			tmp = t->next();
-			server_location = strdup(tmp.toCharPtr());
+			server_location = tmp.toCharPtr();
 		}
 		else if(s.startsWith("user=")){
 			tmp = t->next();
 			tmp = t->next();
-			db_user = strdup(tmp.toCharPtr());
+			db_user = tmp.toCharPtr();
 		}
 		else if(s.startsWith("database=")){
 			tmp = t->next();
 			tmp = t->next();
-			db_name = strdup(tmp.toCharPtr());
+			db_name = tmp.toCharPtr();
 		}
 		else if(s.startsWith("password=")){
 			tmp = t->next();
 			tmp = t->next();
 			if(tmp.toCharPtr() != 0){
-				db_pass = strdup(tmp.toCharPtr());
+				db_pass = tmp.toCharPtr();
 			}
 			else{
 				db_pass = "";
@@ -92,7 +93,7 @@ bool parse_args(int argc, char *argv[]){
 			tmp = t->next();
 			tmp = t->next();
 			if(tmp.toCharPtr() != 0){
-				select_statement = strdup(tmp.toCharPtr());
+				select_statement = tmp;
 			}
 		}
 		else if(s.endsWith("loop")){
@@ -100,46 +101,52 @@ bool parse_args(int argc, char *argv[]){
 		}
 		xvr2_delete(t);
 	}
-	if(server_location == 0){
+	if(server_location.size() == 0){
 		std::cout << "Server address: ";
 		std::cin >> foo;
-		server_location = strdup(foo.c_str());
+		server_location = foo.c_str();
 	}
-	if(db_name == 0){
+	if(db_name.size() == 0){
 		std::cout << "Database name: ";
 		std::cin >> foo;
-		db_name = strdup(foo.c_str());
+		db_name = foo.c_str();
 	}
-	if(db_user == 0){
+	if(db_user.size() == 0){
 		std::cout << "Username: ";
 		std::cin >> foo;
-		db_user = strdup(foo.c_str());
+		db_user = foo.c_str();
 	}
-	if(db_pass == 0){
+	/*if(db_pass.size() == 0){
 		std::cout << "Password: \033[8m";
 		std::cin >> foo;
 		std::cout << "\033[0m";
 		std::cout.flush();
-		db_pass = strdup(foo.c_str());
-	}
-	if(select_statement == 0){
+		db_pass = foo.c_str();
+	}*/
+	if(select_statement.size() == 0){
+		char *ss;
 		std::cout << "Enter select statement below:" << std::endl;
-		select_statement = new char(4096);
-		select_statement[0] = 0;
+		/*select_statement = new char(4096);
+		select_statement[0] = 0;*/
+		ss = new char[4096];
+		ss[0] = 0;
 		std::cin.ignore();
-		std::cin.getline(select_statement, 4096);
+		std::cin.getline(ss, 4096);
+		select_statement = ss;
+		delete[] ss;
 	}
+	return true;
 }
 
 int rundemo(int demo_type){
-	DB::OldDriver *drv;
+	DB::Driver *drv;
+	DB::DriverManager *manager;
 	DB::Connection *conn = 0;
-	DB::DriverInfo *q = 0;
+	DB::DriverInfo q;
 	DB::ResultSet *r = 0;
-	void *dbhandle;
 	int ci, cj;
 	bool capshown;
-	Exception::ExceptionTracer::enable();
+	ExceptionTracer::enable();
 	switch(demo_type){
 		case XVR2_MYSQL:
 			if(driver_location == 0)
@@ -152,16 +159,19 @@ int rundemo(int demo_type){
 			db_port = 5432;
 			break;
 	}
-	drv = new DB::OldDriver(driver_location);
+
+	manager = new DB::DriverManager(driver_location);
+	
 	try{
-		drv->load();
+		//drv->load();
+		drv = manager->load();
 	}
-	catch(DSOSymbol e){
+	catch(DSOSymbolException e){
 		std::cerr << e.getClassName() << ": " << e.toString() << std::endl;
 		return 1;
 	}
-	drv->getVersionInfo(&q);
-	std::cout << "X-VR2 " << dnames[demo_type] << " " << q->version() << "." << q->revision() << " by: " << q->vendor().toCharPtr() << " using: " << q->description().toCharPtr() << std::endl;
+	q = drv->getVersionInfo();
+	std::cout << "X-VR2 " << dnames[demo_type] << " " << q.version() << "." << q.revision() << " by: " << q.vendor() << " using: " << q.description() << std::endl;
 
 	conn = new DB::Connection(drv, server_location, db_name, db_user, db_pass, db_port);
 
@@ -267,6 +277,16 @@ int rundemo(int demo_type){
 	}
 	std::cout << "succeeded" << std::endl;
 
+/******* PERFOMING SOME COMMANDS ********/
+	conn->execCommand("create table testx (id serial, name text)");
+	for(int ni = 0; ni < 1000; ni++){
+		StringBuffer cmd;
+		cmd << "INSERT INTO testx (name) values ('" << ni << "')";
+		conn->execCommand(cmd);
+	}
+	int num = conn->execCommand("DELETE FROM testx");
+	std::cout << num << " rows deleted from testx" << std::endl;
+	conn->execCommand("drop table testx");
 	std::cout << "6. Disconnecting from database... ";
 	std::cout.flush();
 	try{
@@ -278,7 +298,8 @@ int rundemo(int demo_type){
 	}
 	std::cout << "succeeded" << std::endl;
 	xvr2_delete(conn);
-	xvr2_delete(drv);
+	manager->unload(drv);
+	delete manager;
 	if(loopit){
 		sleep(180);
 	}

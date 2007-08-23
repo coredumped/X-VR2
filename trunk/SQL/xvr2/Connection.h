@@ -1,5 +1,5 @@
 /*
- * $Id$
+ * $Id:Connection.h 540 2007-08-20 07:51:56Z mindstorm2600 $
  *
  * X-VR2 
  * 
@@ -21,21 +21,20 @@
 
 namespace xvr2{
 	namespace SQL {
-		/**
-		 * This class encapsulates the Driver class and provides a much more 
-		 * complete interface to the SQL database connection paradigm
-		 *
-		 */
+		/** This class encapsulates the Driver class and provides a much more 
+		 *  complete interface to the SQL database connection paradigm. */
 		class Connection:public Object{
 			private:
+				/** @brief Opaque pointer to the "real" connection object. */
 				void *__conn;
 			protected:
+				/** @brief Current driver in use by this Connection instance. */
 				Driver	*driver;
 				String		_server;
 				String		_user;
 				String		_password;
 				String		_dbname;
-				int		_port;
+				int			_port;
 				bool		__connected;
 				String		*bulk_delim;
 			public:
@@ -71,6 +70,7 @@ namespace xvr2{
 				 *  username, server, password and port supplied in a call
 				 *  connect or the one used in the constructor */
 				void connect();
+				void open(const String &datafile);
 				/** A call to this method will inmediately disconnect you
 				 *  from the backend database */
 				void disconnect();
@@ -104,7 +104,7 @@ namespace xvr2{
 				void bulkUploadEnd();
 
 				String escapeString(const String &s);
-				char *escapeString(const char *);
+				//char *escapeString(const char *);
 				const char *errorMessage();
 				/** Checks to see if the connection is still ok */
 				const bool isConnected();

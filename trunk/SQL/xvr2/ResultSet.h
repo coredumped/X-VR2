@@ -1,5 +1,5 @@
 /*
- * $Id$
+ * $Id:ResultSet.h 540 2007-08-20 07:51:56Z mindstorm2600 $
  *
  * X-VR2 
  * 
@@ -23,10 +23,25 @@ namespace xvr2{
 	namespace SQL {
 
 		class Driver;
-		/**
-		 * @brief Implements result set handling from SELECT-type queries.
-		 *
-		 */
+		/** @brief Implements result set handling from SELECT-type queries.
+		 *  A ResultSet is like a table which holds the query result rows, in 
+		 *  order to read such information you might have done something like:
+		 *  @code
+		 *  xvr2::DB::Connection *conn;
+		 *  .
+		 *  .
+		 *  //You will always obtain a ResultSet from query
+		 *  xvr2::DB::ResultSet *result = conn->query("SELECT * FROM table");
+		 *  //Retrieve each row in the set until fetchRow returns 0
+		 *  while(result->fetchRow()){
+		 *     //Read a colum from the row
+		 *     std::cout << result->get(0).toString();
+		 *     .
+		 *     //Do whatever else you need with the rows in your set.
+		 *     .
+		 *  }
+		 *  delete result; //Release ResultSet resources
+		 *  @endcode */
 		class ResultSet:public Object{
 			private:
 			protected:
@@ -40,6 +55,7 @@ namespace xvr2{
 				int ncols;
 				UInt64 afrows;
 				bool is_a_select;
+				int ridx;
 			public:
 				/* Constructor, please do not call it directly */
 				ResultSet(Driver *drv, void *__rhandle, bool __status);
@@ -66,11 +82,21 @@ namespace xvr2{
 				/** This will return the value of the given column name:
 				 *  <b>colname</b> in the currently retrieved row */
 				const Field &get(const String &colname);
+				/** @brief Retrieves a row from an SQL result set.
+				 *  After you get a ResultSet as a result from a 
+				 *  Connection::query call you must call this method so you can
+				 *  start reading the result set iteratively until you reach the
+				 *  last row in the set.
+				 *  @return An array of Field elements each one matching a 
+				 *  column from your ResultSet or 0 if there are no more rows
+				 *  to read from the ResultSet. */
+				const Field *fetchRow();
 				/** Use this method to move to next row to be read from the
 				 *  result stream. This method will also return an array
 				 *  of Field elements representing the cells of the
 				 *  current row.<p>In case you reached the last row this
-				 *  method will return NULL instead of the Field array*/
+				 *  method will return NULL instead of the Field array.
+				 *  @deprecated Use fetchrow instead. */
 				const Field *fetchNextRow();
 				/** In the case you ran an update, delete or another query
 				 *  which does not return a ResultSet but alters the 

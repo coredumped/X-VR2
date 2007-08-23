@@ -108,7 +108,7 @@ dnl -----------------------------------------------
 
 LIBS="$LIBS -ldl"
 
-AC_ARG_ENABLE(debug, AC_HELP_STRING([--enable-debug          Build library in debug mode]), [
+AC_ARG_ENABLE(debug, AC_HELP_STRING([--enable-debug		Build library in debug mode]), [
 		AC_DEFINE(USE_DEBUG, 1, [Activates debug mode])
 		debug_mode_activated=on
 		AC_MSG_RESULT([ *** This library will be compiled with debug support activated *** ])
@@ -117,6 +117,19 @@ AC_ARG_ENABLE(debug, AC_HELP_STRING([--enable-debug          Build library in de
 		debug_mode_activated=off
 	]
 )
+
+BUILD_EXAMPLES="no"
+EXAMPLES_DIR=""
+
+AC_ARG_ENABLE(examples, AC_HELP_STRING([--enable-examples	Build example programs]), [
+		BUILD_EXAMPLES="yes"
+		EXAMPLES_DIR="examples"		
+	], [
+		BUILD_EXAMPLES="no"
+	]
+)
+
+AC_SUBST(EXAMPLES_DIR)
 
 dnl -----------------------------------------------
 dnl Miscellaneous function checking
@@ -229,9 +242,11 @@ SQLITE_DRIVER_DIR=""
 AC_CHECK_HEADERS(sqlite3.h, [
 	SQLITE_DRIVER_ENABLED=yes
 	SQLITE_DRIVER_DIR=sqlite
+	SQLITE_LIBS=-lsqlite3
 ])
 
 AC_SUBST(SQLITE_DRIVER_DIR)
+AC_SUBST(SQLITE_LIBS)
 
 dnl -----------------------------------------------
 dnl Generates Makefile's, configuration files and scripts
@@ -304,8 +319,9 @@ echo "#  Endianness:            $xvr2_endianness"
 echo "#  Debug mode:            $debug_mode_activated"
 echo "#  Thread platform:       $threads_library"
 echo "#  Generate docs:         $doxygen_docs"
+echo "#  Build example progs:   $BUILD_EXAMPLES"
 echo "#-------------------------------------------------#"
-echo "# SQL Drivers:"
-echo "# PostgreSQL Provider:    $PGSQL_DRIVER_ENABLED"
-echo "# SQLite Provider:        $SQLITE_DRIVER_ENABLED"
-echo "# ODBC Provider:          $ODBC_DRIVER_ENABLED"
+echo "#  SQL Drivers:"
+echo "#  PostgreSQL Provider:   $PGSQL_DRIVER_ENABLED"
+echo "#  SQLite Provider:       $SQLITE_DRIVER_ENABLED"
+echo "#  ODBC Provider:         $ODBC_DRIVER_ENABLED"

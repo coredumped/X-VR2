@@ -1,8 +1,9 @@
+#include<xvr2/DB/DriverManager.h>
 #include<xvr2/Tokenizer.h>
-#include<xvr2/DBConnection.h>
-#include<xvr2/DBField.h>
-#include<xvr2/DBResultSet.h>
-#include<xvr2/DBOldDriver.h>
+#include<xvr2/DB/Connection.h>
+#include<xvr2/DB/Field.h>
+#include<xvr2/DB/ResultSet.h>
+#include<xvr2/DB/Driver.h>
 #ifndef __DB_DEMO_COMMON_H__
 #define __DB_DEMO_COMMON_H__
 

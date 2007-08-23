@@ -80,12 +80,6 @@ class __sqlite_res {
 //////// SUPPORT CLASSES AND FUNCTIONS ENDS HERE /////////
 
 
-
-
-
-
-
-
 SQLiteDriver::SQLiteDriver(){
 	dinfo = new SQL::DriverInfo(DRV_VERSION, DRV_REVISION, 
 			"Juan V. Guerrero <ryoma dot nagare at gmail dot com>", 
@@ -252,12 +246,17 @@ Field *SQLiteDriver::fetchRow(void *__res_handle){
 		else{
 			//data = PQgetvalue(r->statement, r->curr_row, n);
 			if(thetype == SQLITE_BLOB){
+				//DATA IS BINARY
+				blobby = (void *)sqlite3_column_blob(r->statement, n);
+				s[n].init(xvr2::SQL::Field::BLOB, blobby, sqlite3_column_bytes(r->statement, n));
+			}
+			else{
 				//DATA IS TEXT
 				switch(__data_map[thetype]){
 					case SQL::Field::INTEGER:
 						valx = sqlite3_column_int(r->statement, n);
 						s[n].init(xvr2::SQL::Field::INTEGER, (void *)&valx, 
-									sizeof(Int32));
+									sizeof(int));
 						break;
 					case SQL::Field::DOUBLE:
 						float8 = sqlite3_column_double(r->statement, n);
@@ -267,13 +266,8 @@ Field *SQLiteDriver::fetchRow(void *__res_handle){
 					case SQL::Field::CHAR:
 					default:
 						data = (char *)sqlite3_column_text(r->statement, n);
-						s[n].init(xvr2::SQL::Field::VARCHAR, (void *)data, sqlite3_column_bytes(r->statement, n));
+						s[n].init(xvr2::SQL::Field::CHAR, (void *)data, sqlite3_column_bytes(r->statement, n));
 				}
-			}
-			else{
-				//DATA IS BINARY
-				blobby = (void *)sqlite3_column_blob(r->statement, n);
-				s[n].init(xvr2::SQL::Field::BLOB, blobby, sqlite3_column_bytes(r->statement, n));
 			}
 		}
 	}

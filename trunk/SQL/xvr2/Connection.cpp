@@ -1,5 +1,5 @@
 /*
- * $Id$
+ * $Id:DBConnection.cpp 540 2007-08-20 07:51:56Z mindstorm2600 $
  *
  * X-VR2 
  * 
@@ -111,6 +111,11 @@ namespace xvr2{
 			catch(...){
 				throw;
 			}
+		}
+		
+		void Connection::open(const String &datafile){
+			__conn = driver->open(datafile);
+			__connected = true;
 		}
 	
 		void Connection::disconnect(){
@@ -230,9 +235,10 @@ namespace xvr2{
 			return driver->escapeString(str, __conn);
 		}
 
-		char *Connection::escapeString(const char *str){
-			return driver->quoteString(str);
-		}
+		/*char *Connection::escapeString(const char *str){
+			String tmp = driver->escapeString(str, __conn);
+			return strdup(tmp.)
+		}*/
 
 		const char *Connection::errorMessage(){
 			return driver->errorMessage(__conn);

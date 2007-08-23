@@ -1,5 +1,5 @@
 /*
- * $Id$
+ * $Id:DBResultSet.cpp 540 2007-08-20 07:51:56Z mindstorm2600 $
  *
  * X-VR2 
  * 
@@ -32,12 +32,14 @@ namespace xvr2{
 			afrows = _afrows;
 			ncols = 0;
 			is_a_select = false;
+			ridx = 0;
 		}
 	
 		ResultSet::ResultSet(Driver *drv, void *__handle, bool __status){
 			driver = drv;
 			_status = __status;
 			row = 0;
+			ridx = 0;
 			if(__status){
 				r_handle = __handle;
 				if(drv == 0 || __handle == 0)
@@ -145,6 +147,17 @@ namespace xvr2{
 				xvr2_delete_array(row);
 			}
 			row = driver->fetchRow(r_handle);
+			return row;
+		}
+		
+		const Field *ResultSet::fetchRow(){
+			if(ridx != 0){
+				if(row != 0){
+					xvr2_delete_array(row);
+				}
+				row = driver->fetchRow(r_handle);
+			}
+			ridx++;
 			return row;
 		}
 	

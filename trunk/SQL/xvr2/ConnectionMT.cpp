@@ -1,5 +1,5 @@
 /*
- * $Id$
+ * $Id:DBConnectionMT.cpp 540 2007-08-20 07:51:56Z mindstorm2600 $
  *
  * X-VR2 
  * 
@@ -195,7 +195,7 @@ namespace xvr2{
 			return ret;
 		}
 
-		char *ConnectionMT::escapeString(const char *str){
+		/*char *ConnectionMT::escapeString(const char *str){
 			char *ret = 0;
 			//mt.lock();
 			try{
@@ -207,7 +207,7 @@ namespace xvr2{
 			}
 			//mt.unlock();
 			return ret;
-		}
+		}*/
 
 		const char *ConnectionMT::errorMessage(){
 			char *ret;
