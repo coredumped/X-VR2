@@ -1,5 +1,5 @@
 /*
- * $Id: simple_udpreceiver.cpp,v 1.1 2005/09/07 16:28:54 mindstorm2600 Exp $
+ * $Id$
  */
 #include<xvr2/UDP.h>
 #include<iostream>

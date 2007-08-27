@@ -30,117 +30,261 @@ namespace xvr2{
 		private:
 		protected:
 		public:
-			/** Default constructor, it initializes buffer and len to zero */
+			/** @brief Mandatory Default constructor. */
 			String();
-			/** \fn String(const String &s)
-			 *  This constructor initializes an instance of this class
-			 *  by taking a another reference of the same class as
-			 *  parameter
-			 *  \param s is the String to be copied */
+			/** @brief Instantiates a String object by copying another.
+			 *  @param s The String to be copied */
 			String(const String &s);
-			/** This constructor initializes an instance of this class
-			 *  by taking an array of chars */
+			/** @brief Instantiates an String object by copying an array of 
+			 *  characters.
+			 *  @param s A null-terminated array of characters to be copied */
 			String(const char *s);
-			/** This constructor initializes an instance of this class
-			 *  by transforming an integer to an array of chars and
-			 *  then calling assign(const char *s); */
+			/** @brief Instantiates an String object from a numeric data-type.
+			 *  This method will try to convert the given argument to a valid
+			 *  string equivalent.
+			 *  @param n An Int32 integer. */  
 			String(const Int32 n);
+			/** @brief Instantiates an String object from a numeric data-type.
+			 *  This method will try to convert the given argument to a valid
+			 *  string equivalent.
+			 *  @param n An UInt32 integer. */
 			String(const UInt32 n);
+			/** @brief Instantiates an String object from a numeric data-type.
+			 *  This method will try to convert the given argument to a valid
+			 *  string equivalent.
+			 *  @param n An Int64 integer. */
 			String(const Int64 n);
+			/** @brief Instantiates an String object from a numeric data-type.
+			 *  This method will try to convert the given argument to a valid
+			 *  string equivalent.
+			 *  @param n An UInt64 integer. */
 			String(const UInt64 n);
-			/** This constructor initializes an instance of this class
-			 *  by transforming a float to an array of chars and
-			 *  then calling assign(const char *s); */
+			/** @brief Instantiates an String object from a floating-point
+			 *  data-type.
+			 *  This method will try to convert the given argument to a valid
+			 *  string equivalent.
+			 *  @param n The float number. */
 			String(const float n);
-			/** This constructor initializes an instance of this class
-			 *  by transforming a double to an array of chars and
-			 *  then calling assign(const char *s); */
+			/** @brief Instantiates an String object from a floating-point
+			 *  data-type.
+			 *  This method will try to convert the given argument to a valid
+			 *  string equivalent.
+			 *  @param n The double number. */
 			String(const double n);
-			/** This constructor initializes an instance of this class
-			 *  by transforming a long double to an array of chars and
-			 *  then calling assign(const char *s); */
+			/** @brief Instantiates an String object from a floating-point
+			 *  data-type.
+			 *  This method will try to convert the given argument to a valid
+			 *  string equivalent.
+			 *  @param n The long double number. */
 			String(const long double n);
-	
-			/** Compatibility constructors for the std::string class */
+			/** @brief Instantiates a String object from a std::string object
+			 *  @param s The String to be copied */
 			String(const std::string &s);
+			/** @brief Instantiates a String object from a std::string object
+			 *  @param s The String to be copied */
 			String(const std::string *s);
-			/** Destructor, eliminates the contents of buffer and
-			 *  sets len to zero by calling the method destroy(); */
-			~String();
-			/** Assigns the contents of <b>s</b> to buffer */
-			/** Transforms and assigns <b>n</b> to the current String */
+			/** @brief Transforms the given argument and sets it to the current
+			 *  String.
+			 *  @param n The numeric value to be converted.
+			 *  @return A reference to the current String object after
+			 *  modified. */
 			String &assign(const Int32 n);
+			/** @brief Transforms the given argument and sets it to the current
+			 *  String.
+			 *  @param n The numeric value to be converted.
+			 *  @return A reference to the current String object after
+			 *  modified. */
 			String &assign(const Int64 n);
+			/** @brief Transforms the given argument and sets it to the current
+			 *  String.
+			 *  @param n The numeric value to be converted.
+			 *  @return A reference to the current String object after
+			 *  modified. */
 			String &assign(const UInt32 n);
+			/** @brief Transforms the given argument and sets it to the current
+			 *  String.
+			 *  @param n The numeric value to be converted.
+			 *  @return A reference to the current String object after
+			 *  modified. */
 			String &assign(const UInt64 n);
-			/** Transforms and assigns <b>n</b> to the current String */
+			/** @brief Transforms the given argument and sets it to the current
+			 *  String.
+			 *  @param n The numeric value to be converted.
+			 *  @return A reference to the current String object after
+			 *  modified. */
 			String &assign(const float n);
-			/** Transforms and assigns <b>n</b> to the current String */
+			/** @brief Transforms the given argument and sets it to the current
+			 *  String.
+			 *  @param n The numeric value to be converted.
+			 *  @return A reference to the current String object after
+			 *  modified. */
 			String &assign(const double n);
-			/** Transforms and assigns <b>n</b> to the current String */
+			/** @brief Transforms the given argument and sets it to the current
+			 *  String.
+			 *  @param n The numeric value to be converted.
+			 *  @return A reference to the current String object after
+			 *  modified. */
 			String &assign(const long double n);
-			/** Transforms and assigns <b>n</b> to the current String */
-			/** replaces the contents of the string with sstr */
+			/** @brief Replaces the contents of the String with the given
+			 *  character.
+			 *  @param c The character to use.
+			 *  @return A reference to the current String object after
+			 *  modified. */
 			String &assign(const char c);
+			/** @brief Replaces the contents of the String with the given
+			 *  array of characters.
+			 *  @param sstr The array of characters to use.
+			 *  @return A reference to the current String object after
+			 *  modified. */
 			String &assign(const char *sstr);
+			/** @brief Replaces the contents of the String with the contents of
+			 *  the given std::string object.
+			 *  @param s A pointer to a std::string object.
+			 *  @return A reference to the current String object after
+			 *  modified. */
 			String &assign(const std::string *s);
+			/** @brief Replaces the contents of the String with the contents of
+			 *  another String object
+			 *  @param sstr A reference to the String to be copied.
+			 *  @return A reference to the current String object after
+			 *  modified. */
 			String &assign(const String &sstr);
-			/** transforms and concatenates s to the current String */
+			/** @brief Concatenates (appends) the given argument to the 
+			 *  contents of the String.
+			 *  @param s An array of characters
+			 *  @return A reference to the current String object after
+			 *  modified. */ 
 			String &concat(const char *s);
+			/** @brief Concatenates (appends) the given argument to the 
+			 *  contents of the String.
+			 *  @param c A single character.
+			 *  @return A reference to the current String object after
+			 *  modified. */
 			String &concat(const char c);
-			/** transforms and concatenates s to the current String */
+			/** @brief Concatenates (appends) the given argument to the 
+			 *  contents of the String.
+			 *  @param s An String.
+			 *  @return A reference to the current String object after
+			 *  modified. */
 			String &concat(const String &s);
-			/** Transforms and concatenates n to the current String */
+			/** @brief Concatenates (appends) the given numeric argument (after
+			 *  transforming it) to the contents of the String.
+			 *  @param n An Int32 number.
+			 *  @return A reference to the current String object after
+			 *  modified. */
 			String &concat(const Int32 n);
+			/** @brief Concatenates (appends) the given numeric argument (after
+			 *  transforming it) to the contents of the String.
+			 *  @param n An Int64 number.
+			 *  @return A reference to the current String object after
+			 *  modified. */
 			String &concat(const Int64 n);
+			/** @brief Concatenates (appends) the given numeric argument (after
+			 *  transforming it) to the contents of the String.
+			 *  @param n An UInt32 number.
+			 *  @return A reference to the current String object after
+			 *  modified. */
 			String &concat(const UInt32 n);
+			/** @brief Concatenates (appends) the given numeric argument (after
+			 *  transforming it) to the contents of the String.
+			 *  @param n An UInt64 number.
+			 *  @return A reference to the current String object after
+			 *  modified. */
 			String &concat(const UInt64 n);
-			/** transforms and concatenates n to the current String */
+			/** @brief Concatenates (appends) the given numeric argument (after
+			 *  transforming it) to the contents of the String.
+			 *  @param n A float number.
+			 *  @return A reference to the current String object after
+			 *  modified. */
 			String &concat(const float n);
-			/** transforms and concatenates n to the current String */
+			/** @brief Concatenates (appends) the given numeric argument (after
+			 *  transforming it) to the contents of the String.
+			 *  @param n A double number.
+			 *  @return A reference to the current String object after
+			 *  modified. */
 			String &concat(const double n);
-			/** transforms and concatenates n to the current String */
+			/** @brief Concatenates (appends) the given numeric argument (after
+			 *  transforming it) to the contents of the String.
+			 *  @param n A long double number.
+			 *  @return A reference to the current String object after
+			 *  modified. */
 			String &concat(const long double n);
+			/** @brief Same as the String::assign methods.
+			 *  @see String::assign. */
 			String& operator=(const Int32 n);
+			/** @brief Same as the String::assign methods.
+			 *  @see String::assign. */
 			String& operator=(const UInt32 n);
+			/** @brief Same as the String::assign methods.
+			 *  @see String::assign. */
 			String& operator=(const Int64 n);
+			/** @brief Same as the String::assign methods.
+			 *  @see String::assign. */
 			String& operator=(const UInt64 n);
+			/** @brief Same as the String::assign methods.
+			 *  @see String::assign. */
 			String& operator=(const float n);
+			/** @brief Same as the String::assign methods.
+			 *  @see String::assign. */
 			String& operator=(const double n);
+			/** @brief Same as the String::assign methods.
+			 *  @see String::assign. */
 			String& operator=(const long double n);
+			/** @brief Same as the String::assign methods.
+			 *  @see String::assign. */
 			String& operator=(const String &s);
 			const String& operator+=(const String &s);
-			/** Transforms <b>n</b> and concatenates it to the current String */
+			/** @brief Same as the String::concat methods.
+			 *  @see String::concat. */
 			const String& operator+=(const Int32 n);
+			/** @brief Same as the String::concat methods.
+			 *  @see String::concat. */
 			const String& operator+=(const UInt32 n);
+			/** @brief Same as the String::concat methods.
+			 *  @see String::concat. */
 			const String& operator+=(const Int64 n);
+			/** @brief Same as the String::concat methods.
+			 *  @see String::concat. */
 			const String& operator+=(const UInt64 n);
-			/** Transforms <b>n</b> and concatenates it to the current String */
+			/** @brief Same as the String::concat methods.
+			 *  @see String::concat. */
 			const String& operator+=(const float n);
-			/** Transforms <b>n</b> and concatenates it to the current String */
+			/** @brief Same as the String::concat methods.
+			 *  @see String::concat. */
 			const String& operator+=(const double n);
-			/** Transforms <b>n</b> and concatenates it to the current String */
+			/** @brief Same as the String::concat methods.
+			 *  @see String::concat. */
 			const String& operator+=(const long double n);
-			/** The main idea behind this is take advantage of the
-			 * << operator of the ostream class, this way, you can
-			 * use this class with streams<br>
-			 * <b>String a = "hello world";</b><br>
-			 * you would normally do:<br>
-			 * <b>cout << a.toCharPtr() << endl;</b><br>
-			 * with this operator you can just:<br>
-			 * <b>cout << a << endl;</b> */
-			friend std::ostream& operator<<(std::ostream& stream, const String &s);
-			/** Transforms the string to uppercase letters only */
+			/** @brief Lets you send the contents of a String an std::ostream.
+			 *  This method allows you to do something like:
+			 *  @code
+			 *  String a = "hello world";
+			 *  std::cout << a << std::endl;
+			 *  @endcode
+			 *  @param stream The std::ostream which is to receive the String
+			 *  contents.
+			 *  @param s The String to be sent.
+			 *  @return A reference to the std::ostream object after modified.*/
+			friend std::ostream& operator<<(std::ostream& stream, 
+											const String &s);
+			/** @brief Transforms all characters to uppercase.
+			 *  @return A reference to the current String object after
+			 *  modified. */
 			const String& toUpperCase();
-			/** Transforms the string to lowercase letters only */
+			/** @brief Transforms all characters to lowercase.
+			 *  @return A reference to the current String object after
+			 *  modified. */
 			const String& toLowerCase();
-			/** Transforms the contents of the string to an integer
-			 * if the string can't be translated to a number then
-			 * the exception NumberException is thrown */
+			/** @brief Converts the string contents to an integer if possible.
+			 *  @exception xvr2::NumberException if the String couldn't be
+			 *  converted.
+			 *  @return The converted integer. */
 			const int toInt();
-			/** Transforms the contents of the string to an unsigned
-			 * integer if the string can't be translated to a number
-			 * then the exception NumberException is thrown */
+			/** @brief Converts the string contents to an unsigned integer
+			 *  if possible.
+			 *  @exception xvr2::NumberException if the String couldn't be
+			 *  converted.
+			 *  @return The converted unsigned integer. */
 			const unsigned int toUInt();
 			/** Transforms the contents of the string to a float
 			 * if the string can't be translated to a number then
@@ -158,75 +302,154 @@ namespace xvr2{
 			 * if the string can't be translated to a number then
 			 * the exception NumberException is thrown */
 			const Int64 toInt64();
-			/** Transforms and checks if the parameter <b>n</b> is equal 
-			 * to <b>buffer</b> */
+			/** @brief Same as the String::equals methods. */
 			const bool operator==(const Int32 n);
+			/** @brief Same as the String::equals methods. */
 			const bool operator==(const UInt32 n);
+			/** @brief Same as the String::equals methods. */
 			const bool operator==(const Int64 n);
+			/** @brief Same as the String::equals methods. */
 			const bool operator==(const UInt64 n);
-			/** Transforms and checks if the parameter <b>n</b> is equal 
-			 *  to <b>buffer</b> */
+			/** @brief Same as the String::equals methods. */
 			const bool operator==(const float n);
-			/** Transforms and checks if the parameter <b>n</b> is equal 
-			 * to <b>buffer</b> */
+			/** @brief Same as the String::equals methods. */
 			const bool operator==(const double n);
-			/** Transforms and checks if the parameter <b>n</b> is equal 
-			 * to <b>buffer</b> */
+			/** @brief Same as the String::equals methods. */
 			const bool operator==(const long double n);
-			/** Transforms and checks if the parameter <b>n</b> is not equal 
-			 * to <b>buffer</b> */
+			/** @brief Inequality operator, compares if the "textual" form of
+			 *  the given argument is not the same as the String contents.
+			 *  @param n An Int32 whose textual form will be used for 
+			 *  comparison.
+			 *  @return true If they are NOT equal, false if they are. */
 			const bool operator!=(const Int32 n);
+			/** @brief Inequality operator, compares if the "textual" form of
+			 *  the given argument is not the same as the String contents.
+			 *  @param n An UInt32 whose textual form will be used for 
+			 *  comparison.
+			 *  @return true If they are NOT equal, false if they are. */
 			const bool operator!=(const UInt32 n);
+			/** @brief Inequality operator, compares if the "textual" form of
+			 *  the given argument is not the same as the String contents.
+			 *  @param n An Int64 whose textual form will be used for 
+			 *  comparison.
+			 *  @return true If they are NOT equal, false if they are. */
 			const bool operator!=(const Int64 n);
+			/** @brief Inequality operator, compares if the "textual" form of
+			 *  the given argument is not the same as the String contents.
+			 *  @param n An UInt64 whose textual form will be used for 
+			 *  comparison.
+			 *  @return true If they are NOT equal, false if they are. */
 			const bool operator!=(const UInt64 n);
-			/** Transforms and checks if the parameter <b>n</b> is not equal 
-			 *  to <b>buffer</b> */
+			/** @brief Inequality operator, compares if the "textual" form of
+			 *  the given argument is not the same as the String contents.
+			 *  @param n A float whose textual form will be used for 
+			 *  comparison.
+			 *  @return true If they are NOT equal, false if they are. */
 			const bool operator!=(const float n);
-			/** Transforms and checks if the parameter <b>n</b> is not equal 
-			 * to <b>buffer</b> */
+			/** @brief Inequality operator, compares if the "textual" form of
+			 *  the given argument is not the same as the String contents.
+			 *  @param n A double whose textual form will be used for 
+			 *  comparison.
+			 *  @return true If they are NOT equal, false if they are. */
 			const bool operator!=(const double n);
-			/** Transforms and checks if the parameter <b>n</b> is not equal 
-			 * to <b>buffer</b> */
+			/** @brief Inequality operator, compares if the "textual" form of
+			 *  the given argument is not the same as the String contents.
+			 *  @param n A long double whose textual form will be used for 
+			 *  comparison.
+			 *  @return true If they are NOT equal, false if they are. */
 			const bool operator!=(const long double n);
-			bool equals(const char c) const;
-
-			bool equals(const String &s) const;
-			bool equals(const String &s);
+			/** @brief Performs a lexicographic comparison between two String.
+			 *  @param s The String to be compared with.
+			 *  @return 0 if their contents are the same, less than zero if
+			 *  if the current String length is less than the lenght of s, in
+			 *  any other case returns a positive number. */
 			int compare(const String &s) const;
-			/** Transforms and checks if the parameter <b>n</b> is equal 
-			 * to <b>buffer</b> */
+			/** @brief Verifies if the String contents are the same as textual
+			 *  form of the given argument.
+			 *  @param c A character to be compared with.
+			 *  @return true if both are equal, false if not. */
+			bool equals(const char c) const;
+			/** @brief Tells wheter two String have the same contents
+			 *  @param s A String to be compared with.
+			 *  @return true if both are equal, false if not. */
+			bool equals(const String &s) const;
+			/** @brief Tells wheter two String have the same contents
+			 *  @param s A String to be compared with.
+			 *  @return true if both are equal, false if not. */
+			bool equals(const String &s);
+			/** @brief Verifies if the String contents are the same as textual
+			 *  form of the given argument.
+			 *  @param n An Int32 to be compared with.
+			 *  @return true if both are equal, false if not. */
 			const bool equals(const Int32 n);
+			/** @brief Verifies if the String contents are the same as textual
+			 *  form of the given argument.
+			 *  @param n An UInt32 to be compared with.
+			 *  @return true if both are equal, false if not. */
 			const bool equals(const UInt32 n);
+			/** @brief Verifies if the String contents are the same as textual
+			 *  form of the given argument.
+			 *  @param n An Int64 to be compared with.
+			 *  @return true if both are equal, false if not. */
 			const bool equals(const Int64 n);
+			/** @brief Verifies if the String contents are the same as textual
+			 *  form of the given argument.
+			 *  @param n An UInt64 to be compared with.
+			 *  @return true if both are equal, false if not. */
 			const bool equals(const UInt64 n);
-			/** Transforms and checks if the parameter <b>n</b> is equal 
-			 * to <b>buffer</b> */
+			/** @brief Verifies if the String contents are the same as textual
+			 *  form of the given argument.
+			 *  @param n A float to be compared with.
+			 *  @return true if both are equal, false if not. */
 			const bool equals(const float n);
-			/** Transforms and checks if the parameter <b>n</b> is equal 
-			 * to <b>buffer</b> */
+			/** @brief Verifies if the String contents are the same as textual
+			 *  form of the given argument.
+			 *  @param n A double to be compared with.
+			 *  @return true if both are equal, false if not. */
 			const bool equals(const double n);
-			/** Transforms and checks if the parameter <b>n</b> is equal 
-			 * to <b>buffer</b> */
+			/** @brief Verifies if the String contents are the same as textual
+			 *  form of the given argument.
+			 *  @param n A long double to be compared with.
+			 *  @return true if both are equal, false if not. */
 			const bool equals(const long double n);
-			/** This method checks if the current string starts with the string
-			 * stored in <b>s</b> without taking care if <b>s</b> is uppercase
-			 * or no */
+			/** @brief Tells if the string starts with the given substring 
+			 *  regardless of its case (upper or lower).
+			 *  @param s substring to look at the beginning.
+			 *  @return true if the string starts with the specified substring,
+			 *  false otherwise. */
 			bool startsIWith(const char *s) const;
+			/** @brief Tells if the string starts with the given substring
+			 *  taking care that each character case matches.
+			 *  @param s substring to look at the beginning.
+			 *  @return true if the string starts with the specified substring,
+			 *  false otherwise. */
 			bool startsWith(const String &s) const;
-	
+			/** @brief Tells if the string ends with the given substring
+			 *  regardless of its case (upper or lower).
+			 *  @param s substring to look at the end.
+			 *  @return true if the string ends with the specified substring,
+			 *  false otherwise. */
 			bool endsIWith(const char *s) const;
+			/** @brief Tells if the string ends with the given substring
+			 *  taking care that each character case matches.
+			 *  @param s substring to look at the end.
+			 *  @return true if the string ends with the specified substring,
+			 *  false otherwise. */
 			bool endsWith(const String &s) const;
-	
-			/** Will return a substring contained between the specified limits
-			 * \param start is the starting point to search for the begining of the substring
-			 * \param end is the end of the substring, it should not exceed the length of the main string
-			 * \note Since this is a newly created pointer please dont forget
-			 * to free it after you use it while calling the Memory::freeBuffer
-			 * method */
+			/** @brief Lets you retrieve a substring from the current string.
+			 *  @param start The position where the initial part of the 
+			 *  substring we want to extract is located at.
+			 *  @param end The position at where the last character from our
+			 *  substring is located at.
+			 *  @return The extracted substring. */
 			String getSubstr(int start, int end);
+			/** @brief Converts this String to a std::string.
+			 *  @return A std:string equivalent to this String. */
 			virtual std::string toString();
-			
-			/** Will append to the String len characters from the data buffer */
+			/** @brief Will append an arbitrary amount characters from the 
+			 *  given array.
+			 *  @param data The array from where we will be copying,
+			 *  @param len The amount of chars to be copied from there. */
 			void eat(const char *data, int len);
 	};
 	extern const String NL;

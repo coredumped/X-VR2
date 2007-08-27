@@ -18,7 +18,7 @@ namespace xvr2{
 
 		/**
 		 * \class OldTCPSocket
-		 * \version $Revision$
+		 * \version $Revision: 531 $
 		 * \brief This class provides all the functionality for working with TCP 
 		 * sockets, from connection to sending a receiving data from a connected
 		 * peer.

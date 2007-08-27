@@ -1,4 +1,4 @@
-/* $Id: template-drv.cpp 419 2006-10-10 15:55:50Z mindstorm2600 $*/
+/* $Id$*/
 /*
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by

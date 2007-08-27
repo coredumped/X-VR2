@@ -27,11 +27,12 @@ namespace xvr2{
 		 *  A ResultSet is like a table which holds the query result rows, in 
 		 *  order to read such information you might have done something like:
 		 *  @code
-		 *  xvr2::DB::Connection *conn;
+		 *  xvr2::SQL::Connection *conn;
 		 *  .
+		 *  //Connect to a database successfully
 		 *  .
 		 *  //You will always obtain a ResultSet from query
-		 *  xvr2::DB::ResultSet *result = conn->query("SELECT * FROM table");
+		 *  xvr2::SQL::ResultSet *result = conn->query("SELECT * FROM table");
 		 *  //Retrieve each row in the set until fetchRow returns 0
 		 *  while(result->fetchRow()){
 		 *     //Read a colum from the row

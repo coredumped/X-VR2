@@ -1,3 +1,8 @@
+2007-08-27  Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
+* Some documentation added to the String, BasicString and BackgroundFunction
+class
+* Renamed the demos subdirectory in the Core namespace to examples. 
+
 2007-08-23  Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
 * An example program was made to test the SQLite driver.
 * Deprecated the ResultSet::fetchNextRow method in favor of ResultSet::FetchRow

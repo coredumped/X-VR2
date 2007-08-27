@@ -1,5 +1,5 @@
 /*
- * $Id$
+ * $Id:DriverInfo.h 540 2007-08-20 07:51:56Z mindstorm2600 $
  *
  * X-VR2 
  * 

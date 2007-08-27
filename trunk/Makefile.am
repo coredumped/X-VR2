@@ -1,4 +1,4 @@
-# $Id: Makefile.am 529 2007-08-11 05:46:02Z mindstorm2600 $
+# $Id$
 
 
 SUBDIRS=Core Text SQL Platform Net $(DOXYGEN_INPUT_DIR)

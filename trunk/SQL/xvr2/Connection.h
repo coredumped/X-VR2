@@ -21,8 +21,14 @@
 
 namespace xvr2{
 	namespace SQL {
-		/** This class encapsulates the Driver class and provides a much more 
-		 *  complete interface to the SQL database connection paradigm. */
+		/** @brief Handles SQL database connections for RDBMS and embedded 
+		 *  engines.
+		 *  Tipically you'll get a Connection object after you have an 
+		 *  instatiated driver, by the time you have the Connection object
+		 *  instatiated you'll still need to perform the database connection
+		 *  (if its an RDBMS) or opening (if it is an embbeded db engine), 
+		 *  then after successfull usage you'll disconnect or close the
+		 *  connection itself. */
 		class Connection:public Object{
 			private:
 				/** @brief Opaque pointer to the "real" connection object. */
@@ -30,13 +36,13 @@ namespace xvr2{
 			protected:
 				/** @brief Current driver in use by this Connection instance. */
 				Driver	*driver;
-				String		_server;
-				String		_user;
-				String		_password;
-				String		_dbname;
-				int			_port;
-				bool		__connected;
-				String		*bulk_delim;
+				String	_server;
+				String	_user;
+				String	_password;
+				String	_dbname;
+				int		_port;
+				bool	__connected;
+				String	*bulk_delim;
 			public:
 				/** This constructor will require an instatiated Driver */
 				Connection(Driver *drv);
@@ -70,6 +76,14 @@ namespace xvr2{
 				 *  username, server, password and port supplied in a call
 				 *  connect or the one used in the constructor */
 				void connect();
+				/** @brief Opens a connection to a local (embedded) database
+				 *  engine.
+				 *  Driver supplied database connection function, this method
+				 *  will attempt to open a datafile as if it was a networked
+				 *  connection, this is very useful for embedded database
+				 *  engines which implement the SQL query language.
+				 *  @param datafile A path to the datafile to the opened.
+				 *  @return A connection handler. */
 				void open(const String &datafile);
 				/** A call to this method will inmediately disconnect you
 				 *  from the backend database */

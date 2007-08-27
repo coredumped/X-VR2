@@ -1,5 +1,5 @@
 /*
- * $Id$
+ * $Id:X509Name.cpp 535 2007-08-12 10:49:40Z mindstorm2600 $
  */
 #include"config.h"
 #include<xvr2/xvr2config.h>

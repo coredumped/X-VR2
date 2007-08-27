@@ -1,6 +1,6 @@
 #! /bin/sh
 
-# $Id: autogen.sh,v 1.1 2006/01/26 17:09:17 mindstorm2600 Exp $
+# $Id$
 #
 # Copyright (c) 2002  Daniel Elstner  <daniel.elstner@gmx.net>
 #

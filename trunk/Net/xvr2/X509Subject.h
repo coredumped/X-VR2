@@ -1,5 +1,5 @@
 /*
- * $Id$
+ * $Id:X509Subject.h 535 2007-08-12 10:49:40Z mindstorm2600 $
  */
 #ifndef  __XVR2_SSL_X509_SUBJECT_H__
 #define  __XVR2_SSL_X509_SUBJECT_H__

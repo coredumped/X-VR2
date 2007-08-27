@@ -1,5 +1,5 @@
 /*
- * $Id$
+ * $Id:OldUDPServerSocket.h 535 2007-08-12 10:49:40Z mindstorm2600 $
  */
 #ifndef __XVR2_OLD_UDP_SERVER_SOCKET_H__
 #define __XVR2_OLD_UDP_SERVER_SOCKET_H__

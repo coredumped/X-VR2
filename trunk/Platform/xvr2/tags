@@ -5358,109 +5358,109 @@ l00001	../../xvr2util/docs/html/__xvr2utilClassNames_8h-source.html	/^<h1>_xvr2u
 l00001	../../xvr2util/docs/html/c__utilities_8cpp-source.html	/^<h1>c_utilities.cpp<\/h1><a href="c__utilities_8cpp.html">Go to the documentation of this file.<\/a><div class="fragment"><pre class="fragment"><a name="l00001"><\/a>00001 <span class="comment">\/*<\/span>$/;"	a
 l00001	../../xvr2util/docs/html/c__utilities_8h-source.html	/^<h1>c_utilities.h<\/h1><a href="c__utilities_8h.html">Go to the documentation of this file.<\/a><div class="fragment"><pre class="fragment"><a name="l00001"><\/a>00001 <span class="comment">\/*<\/span>$/;"	a
 l00001	../../xvr2util/docs/html/config-parser_8cpp_8h-source.html	/^<h1>config-parser.cpp.h<\/h1><a href="config-parser_8cpp_8h.html">Go to the documentation of this file.<\/a><div class="fragment"><pre class="fragment"><a name="l00001"><\/a>00001 <span class="preprocessor">#ifndef YYERRCODE<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/ArrayIndexOutOfLimitsException_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: ArrayIndexOutOfLimitsException.h 276 2006-01-26 17:10:47Z mindstorm2600 $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/AutomatedGC_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: AutomatedGC.h,v 1.3 2006\/02\/18 18:35:37 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/BackgroundFunction_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: BackgroundFunction.h,v 1.2 2006\/02\/17 07:25:05 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/BaseFile_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: BaseFile.h 347 2006-08-26 00:26:04Z mindstorm2600 $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/BasicStringBuffer_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: BasicStringBuffer.h,v 1.2 2006\/05\/17 03:10:16 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/BasicString_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: BasicString.h 346 2006-08-26 00:25:20Z mindstorm2600 $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/BufferTooSmall_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: BufferTooSmall.h,v 1.2 2006\/02\/08 14:35:01 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/Byte_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: Byte.h,v 1.2 2006\/02\/08 21:02:27 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/Calendar_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: Calendar.h,v 1.2 2006\/02\/08 14:38:10 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/Chronograph_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: Chronograph.h,v 1.2 2006\/02\/08 14:38:10 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/Chronometer_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: Chronometer.h,v 1.2 2006\/02\/08 14:38:10 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/ConditionVar_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: ConditionVar.h,v 1.2 2006\/02\/08 14:39:25 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/Console_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: Console.h,v 1.2 2006\/02\/08 14:39:25 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/Conversion_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: Conversion.h,v 1.2 2006\/02\/08 14:39:25 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/CoreExceptions_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: CoreExceptions.h,v 1.4 2006\/02\/18 18:37:01 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/DSOException_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: DSOException.h 276 2006-01-26 17:10:47Z mindstorm2600 $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/DSO_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: DSO.h,v 1.2 2006\/02\/08 18:23:33 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/DSObject_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: DSObject.h,v 1.2 2006\/02\/08 21:03:08 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/DataTypes_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: DataTypes.h,v 1.1 2006\/01\/26 17:09:20 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/Date_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: Date.h 348 2006-08-26 00:26:41Z mindstorm2600 $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/DebugConsole_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: DebugConsole.h,v 1.3 2006\/05\/17 03:31:56 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/DetachedThread_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: DetachedThread.h,v 1.2 2006\/02\/08 14:41:31 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/ElementNotFoundException_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: ElementNotFoundException.h 276 2006-01-26 17:10:47Z mindstorm2600 $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/Exception_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: Exception.h 276 2006-01-26 17:10:47Z mindstorm2600 $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/FileException_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: FileException.h 276 2006-01-26 17:10:47Z mindstorm2600 $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/Function_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: Function.h,v 1.1 2006\/02\/11 18:13:49 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/GarbageCollector_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: GarbageCollector.h,v 1.2 2006\/02\/08 14:41:31 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/GroupException_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: GroupException.h 276 2006-01-26 17:10:47Z mindstorm2600 $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/Group_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: Group.h,v 1.2 2006\/02\/08 21:03:08 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/IOException_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: IOException.h 276 2006-01-26 17:10:47Z mindstorm2600 $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/InvalidParameterException_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: InvalidParameterException.h 276 2006-01-26 17:10:47Z mindstorm2600 $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/JoinableThread_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: JoinableThread.h,v 1.2 2006\/02\/08 14:43:13 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/Log_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: Log.h,v 1.2 2006\/02\/08 14:43:13 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/MemoryException_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: MemoryException.h 276 2006-01-26 17:10:47Z mindstorm2600 $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/Memory_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: Memory.h,v 1.2 2006\/02\/08 14:43:13 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/MessageStrings_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: MessageStrings.h,v 1.1 2006\/01\/26 17:09:20 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/MutexException_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: MutexException.h 276 2006-01-26 17:10:47Z mindstorm2600 $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/Mutex_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: Mutex.h,v 1.2 2006\/02\/08 14:44:54 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/NoMoreTokensException_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: NoMoreTokensException.h 276 2006-01-26 17:10:47Z mindstorm2600 $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/NullPointerException_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: NullPointerException.h 276 2006-01-26 17:10:47Z mindstorm2600 $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/NumberException_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: NumberException.h 284 2006-01-31 19:46:17Z mindstorm2600 $<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/ArrayIndexOutOfLimitsException_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/AutomatedGC_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/BackgroundFunction_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/BaseFile_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/BasicStringBuffer_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/BasicString_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/BufferTooSmall_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/Byte_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/Calendar_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/Chronograph_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/Chronometer_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/ConditionVar_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/Console_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/Conversion_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/CoreExceptions_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/DSOException_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/DSO_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/DSObject_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/DataTypes_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/Date_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/DebugConsole_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/DetachedThread_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/ElementNotFoundException_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/Exception_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/FileException_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/Function_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/GarbageCollector_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/GroupException_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/Group_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/IOException_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/InvalidParameterException_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/JoinableThread_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/Log_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/MemoryException_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/Memory_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/MessageStrings_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/MutexException_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/Mutex_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/NoMoreTokensException_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/NullPointerException_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/NumberException_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
 l00002	../../xvr2core/docs/html/Number_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/Object_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> $Id: Object.h 350 2006-08-26 00:29:21Z mindstorm2600 $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/OldThread_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: OldThread.h,v 1.1 2006\/02\/18 18:37:46 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/ParseException_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: ParseException.h 276 2006-01-26 17:10:47Z mindstorm2600 $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/Plugin_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: Plugin.h,v 1.2 2006\/02\/08 14:44:54 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/Process_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: Process.h,v 1.2 2006\/02\/08 14:44:54 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/SecurityException_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: SecurityException.h 276 2006-01-26 17:10:47Z mindstorm2600 $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/SemaphoreException_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: SemaphoreException.h 276 2006-01-26 17:10:47Z mindstorm2600 $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/Semaphore_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: Semaphore.h,v 1.2 2006\/02\/08 14:44:54 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/SharedVar_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: SharedVar.h,v 1.4 2006\/02\/17 07:19:37 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/StandardError_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: StandardError.h,v 1.2 2006\/02\/08 14:49:28 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/StandardInput_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: StandardInput.h,v 1.2 2006\/02\/08 14:49:28 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/StandardOutput_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: StandardOutput.h,v 1.2 2006\/02\/08 14:49:28 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/StringBuffer_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: StringBuffer.h,v 1.1 2006\/01\/26 17:09:20 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/StringException_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: StringException.h 276 2006-01-26 17:10:47Z mindstorm2600 $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/String_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> $Id: String.h,v 1.3 2006\/02\/08 18:21:47 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/Syslog_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: Syslog.h,v 1.2 2006\/02\/08 14:49:28 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/System_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: System.h,v 1.2 2006\/02\/08 14:49:28 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/TemporalBuffer_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: TemporalBuffer.h,v 1.2 2006\/02\/08 14:49:28 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/TextInput_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: TextInput.h,v 1.2 2006\/02\/08 14:49:28 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/TextOutput_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: TextOutput.h,v 1.2 2006\/02\/08 14:49:28 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/ThreadException_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: ThreadException.h 276 2006-01-26 17:10:47Z mindstorm2600 $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/ThreadManager_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: ThreadManager.h,v 1.4 2006\/05\/17 03:48:26 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/Thread_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: Thread.h 349 2006-08-26 00:28:45Z mindstorm2600 $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/Threading_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: Threading.h,v 1.3 2006\/02\/18 18:38:58 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/Time_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: Time.h,v 1.2 2006\/02\/08 14:36:32 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/Timestamp_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: Timestamp.h,v 1.2 2006\/02\/08 14:36:32 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/Tokenizer_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: Tokenizer.h,v 1.3 2006\/02\/17 07:26:04 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/TraceDumper_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: TraceDumper.h,v 1.1 2006\/01\/26 17:09:20 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/UndefinedClass_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: UndefinedClass.h,v 1.2 2006\/02\/08 14:51:42 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/Unix_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: Unix.h,v 1.2 2006\/02\/08 14:51:42 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/UserException_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: UserException.h 276 2006-01-26 17:10:47Z mindstorm2600 $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/User_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: User.h,v 1.2 2006\/02\/08 21:03:08 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/____Destruct_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment">  $Id: __Destruct.h,v 1.1 2006\/01\/26 17:09:20 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2core/docs/html/__xvr2ClassNames_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: _xvr2ClassNames.h,v 1.3 2006\/02\/18 18:43:46 mindstorm2600 Exp $<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/Object_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/OldThread_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/ParseException_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/Plugin_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/Process_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/SecurityException_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/SemaphoreException_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/Semaphore_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/SharedVar_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/StandardError_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/StandardInput_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/StandardOutput_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/StringBuffer_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/StringException_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/String_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/Syslog_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/System_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/TemporalBuffer_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/TextInput_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/TextOutput_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/ThreadException_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/ThreadManager_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/Thread_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/Threading_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/Time_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/Timestamp_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/Tokenizer_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/TraceDumper_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/UndefinedClass_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/Unix_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/UserException_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/User_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/____Destruct_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment">  $Id$<\/span>$/;"	a
+l00002	../../xvr2core/docs/html/__xvr2ClassNames_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
 l00002	../../xvr2core/docs/html/xvr2config_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment">  This software is protected under the terms of the GNU General<\/span>$/;"	a
-l00002	../../xvr2db/docs/html/DBConnectionMT_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: DBConnectionMT.h,v 1.1 2006\/01\/26 17:09:49 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2db/docs/html/DBConnection_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: DBConnection.h,v 1.1 2006\/01\/26 17:09:49 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2db/docs/html/DBDriverInfo_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: DBDriverInfo.h,v 1.1 2006\/01\/26 17:09:49 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2db/docs/html/DBDriverManager_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: DBDriverManager.h,v 1.1 2006\/01\/26 17:09:49 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2db/docs/html/DBDriver_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: DBDriver.h,v 1.1 2006\/01\/26 17:09:49 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2db/docs/html/DBField_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: DBField.h,v 1.2 2006\/02\/09 16:09:25 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2db/docs/html/DBOldDriver_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: DBOldDriver.h,v 1.1 2006\/01\/26 17:09:49 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2db/docs/html/DBResultSet_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: DBResultSet.h,v 1.1 2006\/01\/26 17:09:49 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2db/docs/html/DatabaseException_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: DatabaseException.h,v 1.2 2006\/02\/09 16:09:25 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2db/docs/html/__xvr2dbClassNames_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: _xvr2dbClassNames.h,v 1.1 2006\/01\/26 17:09:49 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2util/docs/html/Array_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: Array.h,v 1.1 2006\/01\/26 18:45:43 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2util/docs/html/ConfigFile_8cpp-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: ConfigFile.cpp,v 1.2 2006\/05\/17 17:13:23 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2util/docs/html/ConfigFile_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: ConfigFile.h,v 1.2 2006\/02\/09 16:15:29 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2util/docs/html/Container_8cpp-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: Container.cpp,v 1.1 2006\/01\/26 18:45:44 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2util/docs/html/Container_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: Container.h,v 1.2 2006\/02\/09 16:15:29 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2util/docs/html/List_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> $Id: List.h,v 1.2 2006\/02\/09 16:15:29 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2util/docs/html/RegexException_8cpp-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: RegexException.cpp,v 1.1 2006\/01\/26 18:45:44 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2util/docs/html/RegexException_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: RegexException.h,v 1.2 2006\/02\/09 16:15:29 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2util/docs/html/Regex_8cpp-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: Regex.cpp,v 1.1 2006\/01\/26 18:45:44 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2util/docs/html/Regex_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: Regex.h,v 1.2 2006\/02\/09 16:15:29 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2util/docs/html/StringCollection_8cpp-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: StringCollection.cpp,v 1.1 2006\/02\/11 18:15:49 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2util/docs/html/StringCollection_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: StringCollection.h,v 1.1 2006\/02\/11 18:15:49 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2util/docs/html/__xvr2utilClassNames_8cpp-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: _xvr2utilClassNames.cpp 345 2006-08-26 00:23:49Z mindstorm2600 $<\/span>$/;"	a
-l00002	../../xvr2util/docs/html/__xvr2utilClassNames_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: _xvr2utilClassNames.h 345 2006-08-26 00:23:49Z mindstorm2600 $<\/span>$/;"	a
-l00002	../../xvr2util/docs/html/c__utilities_8cpp-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: c_utilities.cpp,v 1.1 2006\/01\/26 18:45:44 mindstorm2600 Exp $<\/span>$/;"	a
-l00002	../../xvr2util/docs/html/c__utilities_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id: c_utilities.h,v 1.1 2006\/01\/26 18:45:44 mindstorm2600 Exp $<\/span>$/;"	a
+l00002	../../xvr2db/docs/html/DBConnectionMT_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2db/docs/html/DBConnection_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2db/docs/html/DBDriverInfo_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2db/docs/html/DBDriverManager_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2db/docs/html/DBDriver_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2db/docs/html/DBField_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2db/docs/html/DBOldDriver_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2db/docs/html/DBResultSet_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2db/docs/html/DatabaseException_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2db/docs/html/__xvr2dbClassNames_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2util/docs/html/Array_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2util/docs/html/ConfigFile_8cpp-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2util/docs/html/ConfigFile_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2util/docs/html/Container_8cpp-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2util/docs/html/Container_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2util/docs/html/List_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> $Id$<\/span>$/;"	a
+l00002	../../xvr2util/docs/html/RegexException_8cpp-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2util/docs/html/RegexException_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2util/docs/html/Regex_8cpp-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2util/docs/html/Regex_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2util/docs/html/StringCollection_8cpp-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2util/docs/html/StringCollection_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2util/docs/html/__xvr2utilClassNames_8cpp-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2util/docs/html/__xvr2utilClassNames_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2util/docs/html/c__utilities_8cpp-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
+l00002	../../xvr2util/docs/html/c__utilities_8h-source.html	/^<a name="l00002"><\/a>00002 <span class="comment"> * $Id$<\/span>$/;"	a
 l00002	../../xvr2util/docs/html/config-parser_8cpp_8h-source.html	/^<a name="l00002"><\/a><a class="code" href="config-parser_8cpp_8h.html#552f295255821fa7dea11b0237e1d61a">00002<\/a> <span class="preprocessor"><\/span><span class="preprocessor">#define YYERRCODE 256<\/span>$/;"	a
 l00003	../../xvr2core/docs/html/ArrayIndexOutOfLimitsException_8h-source.html	/^<a name="l00003"><\/a>00003 <span class="comment"> *\/<\/span>$/;"	a
 l00003	../../xvr2core/docs/html/AutomatedGC_8h-source.html	/^<a name="l00003"><\/a>00003 <span class="comment"> *\/<\/span>$/;"	a

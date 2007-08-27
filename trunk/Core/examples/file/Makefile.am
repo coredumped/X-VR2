@@ -1,6 +1,6 @@
-# $LastChangedDate$
-# $LastChangedRevision$
-# $LastChangedBy$
+# $LastChangedDate: 2007-08-11 04:05:29 -0500 (Sat, 11 Aug 2007) $
+# $LastChangedRevision: 531 $
+# $LastChangedBy: mindstorm2600 $
 #
 
 bin_PROGRAMS = stdio_in stdio_cp

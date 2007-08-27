@@ -1,4 +1,4 @@
-/* $Id: loader.cpp,v 1.2 2005/06/04 13:15:35 mindstorm2600 Exp $ */
+/* $Id$ */
 /* TODO
  * Parse command-line arguments in order to permit the user to load the driver
  * he/she wants */

@@ -1,6 +1,6 @@
 #! /bin/sh
 
-# $Id: autogen.sh,v 1.4 2002/12/02 01:39:49 murrayc Exp $
+# $Id$
 #
 # Copyright (c) 2002  Daniel Elstner  <daniel.elstner@gmx.net>
 #

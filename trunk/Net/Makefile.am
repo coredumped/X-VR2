@@ -1,4 +1,4 @@
-#$Id$
+#$Id:Makefile.am 535 2007-08-12 10:49:40Z mindstorm2600 $
 
 #Build in these directories:
 SUBDIRS= $(GENERIC_LIBRARY_NAME)

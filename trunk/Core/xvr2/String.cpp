@@ -49,14 +49,7 @@ namespace xvr2{
 			throw NumberException();
 		return num;
 	}
-	////////////////////////////// DESTRUCTOR ///////////////////////////
-	String::~String(){
-#ifdef USE_DEBUG
-	#if DEBUG_LEVEL == 5
-		debugmsg(this, " String::~String()\n");
-	#endif
-#endif
-	}
+	
 	
 	/////////////////////////////// CONSTRUCTOR /////////////////////////
 	String::String(){

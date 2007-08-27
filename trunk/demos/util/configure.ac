@@ -1,4 +1,4 @@
-dnl $Id: configure.ac 317 2006-02-11 18:16:24Z mindstorm2600 $
+dnl $Id$
 
 dnl --------------------------------
 dnl Initialization macros.
