@@ -1,7 +1,11 @@
 2007-08-27  Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
 * Some documentation added to the String, BasicString and BackgroundFunction
 class
-* Renamed the demos subdirectory in the Core namespace to examples. 
+* Renamed the demos subdirectory in the Core namespace to examples.
+* Fixed old SQL example program for RDBMS connectivity.
+* Replaced some important macros with constant String values, these constants
+where the ones holding things like X-VR2 version string, version numbers,
+compile-time installation path, etc.
 
 2007-08-23  Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
 * An example program was made to test the SQLite driver.

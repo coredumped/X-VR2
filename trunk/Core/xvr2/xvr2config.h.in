@@ -13,9 +13,6 @@
 #ifndef __XVR2_CONFIG_HEADER__
 #define __XVR2_CONFIG_HEADER__
 
-/** @namespace xvr2 
- *  @brief This is the main namespace, al core stuff happens here. */
-
 #define ENABLE_XVR2_POSIX_THREADS_SUPPORT @ENABLE_XVR2_POSIX_THREADS_SUPPORT@
 
 #if @ENABLE_XVR2_POSIX_THREADS_SUPPORT@ == 1
@@ -65,34 +62,33 @@
 #endif
 
 
-#ifndef __XVR2_PREFIX_DIR
-#define __XVR2_PREFIX_DIR "@prefix@"
-#endif
-#ifndef __XVR2_VERSION_STRING
-#define __XVR2_VERSION_STRING "@GENERIC_RELEASE@"
-#endif
-#ifndef __XVR2_MAJOR_VERSION
-#define __XVR2_MAJOR_VERSION @GENERIC_MAJOR_VERSION@
-#endif
-#ifndef __XVR2_MINOR_VERSION
-#define __XVR2_MINOR_VERSION @GENERIC_MINOR_VERSION@
-#endif
-#ifndef __XVR2_MICRO_VERSION
-#define __XVR2_MICRO_VERSION @GENERIC_MICRO_VERSION@
-#endif
-#ifndef __XVR2_PATCH_LEVEL
-#define __XVR2_PATCH_LEVEL @GENERIC_PATCH_LEVEL@
-#endif
-#ifndef __XVR2_MAJOR_VERSION_STRING
-#define __XVR2_MAJOR_VERSION_STRING "@GENERIC_MAJOR_VERSION@"
-#endif
-#ifndef __XVR2_MINOR_VERSION_STRING
-#define __XVR2_MINOR_VERSION_STRING "@GENERIC_MINOR_VERSION@"
-#endif
-#ifndef __XVR2_MICRO_VERSION_STRING
-#define __XVR2_MICRO_VERSION_STRING "@GENERIC_MICRO_VERSION@"
-#endif
-#ifndef __XVR2_PATCH_LEVEL_STRING
-#define __XVR2_PATCH_LEVEL_STRING "@GENERIC_PATCH_LEVEL@"
-#endif
+/** @brief This is the main namespace, al core stuff happens here. */
+namespace xvr2 {
+	class String;
+	/** @brief X-VR2 Framework installation prefix. */
+	extern const String InstallationPrefix;
+	/** @brief X-VR2 Framework version string.
+	 *  The Version String might be composed of three or four numbers 
+	 *  separed by dots, like this:\n
+	 *  X.Y.Z.W\n
+	 *  Where X corresponds to the version major number, Y is the minor, Z the
+	 *  micro and W the patch level. */
+	extern const String VersionString;
+	/** @brief Version major number, look at xvr2::VersionString */
+	extern const int VersionMajor;
+	/** @brief Version minor number, look at xvr2::VersionString */
+	extern const int VersionMinor;
+	/** @brief Version micro number, look at xvr2::VersionString */
+	extern const int VersionMicro;
+	/** @brief Version patch level, look at xvr2::VersionString */
+	extern const int VersionPatchLevel;
+	/** @brief Version major number, look at xvr2::VersionString */
+	extern const String VersionMajorString;
+	/** @brief Version minor number, look at xvr2::VersionString */
+	extern const String VersionMinorString;
+	/** @brief Version patch level, look at xvr2::VersionString */
+	extern const String VersionMicroString;
+	/** @brief Version patch level, look at xvr2::VersionString */
+	extern const String VersionPatchLevelString;
+};
 #endif

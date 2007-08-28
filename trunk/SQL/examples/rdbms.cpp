@@ -1,46 +1,53 @@
+/*
+ * $Id$
+ *
+ * X-VR2 
+ * 
+ * Copyright (C) Juan V. Guerrero 2007
+ * 
+ * Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
+ * 
+ * This program is free software, distributed under the terms of
+ * the GNU General Public License Version 2. See the LICENSE file
+ * at the top of the source tree.
+ */
 #include<xvr2/StringBuffer.h>
-#include "common_ng.h"
+#include<xvr2/SQL/DriverManager.h>
+#include<xvr2/Tokenizer.h>
+#include<xvr2/SQL/Connection.h>
+#include<xvr2/SQL/Field.h>
+#include<xvr2/SQL/ResultSet.h>
+#include<xvr2/SQL/Driver.h>
 #include<iostream>
 
-static const char *MYSQL_DRIVER_LOCATION = __XVR2_PREFIX_DIR"/lib/mysql_driver-"__XVR2_VERSION_STRING".so."__XVR2_MINOR_VERSION_STRING;
-static const char *PGSQL_DRIVER_LOCATION = __XVR2_PREFIX_DIR"/lib/pgsql_driver-"__XVR2_VERSION_STRING".so."__XVR2_MINOR_VERSION_STRING;
 
 
 using namespace xvr2;
-
-static const char *SS_TYPES[] = {
-	"NOTYPE",
-	"TINYINT",
-	"INTEGER",
-	"BIGINT",
-	"FLOAT",
-	"DOUBLE",
-	"CHAR",
-	"VARCHAR",
-	"STRING",
-	"BLOB",
-	"TEXT0",
-	"DATE1",
-	"TIME",
-	"TIMESTAMP",
-	"BIT",
-	"BYTE"
-};
 
 const char *dnames[] = {
 	"MySQL",
 	"PostgreSQL"
 };
 
-static char *driver_location;
 static std::string select_statement;
 static std::string server_location;
 static std::string db_user;
 static std::string db_pass;
 static std::string db_name;
 static int db_port;
+StringBuffer drv_path;
 
 static bool loopit;
+int demo_type;
+
+static const char *drv_arr[] = {
+		"pgsql",
+		"mysql"
+};
+
+static const int port_arr[] = { 5432, 3306 }; 
+
+static const int n_drv = 2;
 
 bool parse_args(int argc, char *argv[]){
 	int i;
@@ -48,20 +55,32 @@ bool parse_args(int argc, char *argv[]){
 	String tmp;
 	std::string foo;
 	loopit = false;
+	demo_type = -1;
 	for(i = 1; i < argc; i++){
 		s = argv[i];
 		Tokenizer *t;
 		t = new Tokenizer(argv[i], "=");
 		if(s.startsWith("--help")){
 			std::cout << "Syntax: " << std::endl;
-			std::cout << argv[0] << " [host=LOC] [database=DBNAME] [user=DBUSER] [pass=PASSWORD] [select=STMT]" << std::endl;
+			std::cout << argv[0] << " <driver=DRIVER> [host=LOC] "
+						<< "[database=DBNAME] "
+						<< "[user=DBUSER] [password=PASSWORD] "
+						<< "[query=STMT]" << std::endl;
 			std::cout << "where..." << std::endl;
-			std::cout << "LOC is the ip address or hostname corresponding to your test database server" << std::endl;
+			std::cout << "DRIVER is the SQL driver to use, in this case, you"
+						 " should provide an rdbms driver and not one for"
+						 " embedded database engines, to get a list of"
+						 " available drivers, use the --list-drivers"
+						 " argument." << std::endl;
+			std::cout << "LOC is the ip address or hostname corresponding to"
+							" your test database server" << std::endl;
 			std::cout << "DBNAME is the database name to be used" << std::endl;
-			std::cout << "DBUSER correspond to a valid user in that database" << std::endl;
-			std::cout << "PASSWORD correspond to the user's password" << std::endl;
-			std::cout << "STMT is a valid select statement for that database" << std::endl;
-			//std::cout << "" << std::endl;
+			std::cout << "DBUSER correspond to a valid user in that database" 
+						<< std::endl;
+			std::cout << "PASSWORD correspond to the user's password" 
+						<< std::endl;
+			std::cout << "STMT is a valid select statement for that database" 
+						<< std::endl;
 			exit(0);
 		}
 		else if(s.startsWith("host=")){
@@ -89,15 +108,31 @@ bool parse_args(int argc, char *argv[]){
 				db_pass = "";
 			}
 		}
-		else if(s.startsWith("select=")){
+		else if(s.startsWith("query=")){
 			tmp = t->next();
 			tmp = t->next();
 			if(tmp.toCharPtr() != 0){
 				select_statement = tmp;
 			}
 		}
-		else if(s.endsWith("loop")){
-			loopit = true;
+		else if(s.startsWith("--list-drivers")){
+			for(int k = 0; k < n_drv; k++){
+				std::cout << drv_arr[k] << std::endl;
+			}
+			return false;
+		}
+		else if(s.startsWith("driver=")){
+			tmp = t->next();
+			tmp = t->next();
+			if(tmp.toCharPtr() != 0){
+				drv_path << xvr2::InstallationPrefix << "/lib/" << tmp << "_driver-" << xvr2::VersionString << ".so." << xvr2::VersionMinor;
+				for(int k = 0; k < n_drv; k++){
+					if(tmp.equals(drv_arr[k])){
+						db_port = port_arr[k];
+					}
+				}
+			}
+			
 		}
 		xvr2_delete(t);
 	}
@@ -116,19 +151,19 @@ bool parse_args(int argc, char *argv[]){
 		std::cin >> foo;
 		db_user = foo.c_str();
 	}
-	/*if(db_pass.size() == 0){
+	if(db_pass.size() == 0){
 		std::cout << "Password: \033[8m";
+		std::cout.flush();
 		std::cin >> foo;
 		std::cout << "\033[0m";
 		std::cout.flush();
 		db_pass = foo.c_str();
-	}*/
+	}
 	if(select_statement.size() == 0){
 		char *ss;
-		std::cout << "Enter select statement below:" << std::endl;
-		/*select_statement = new char(4096);
-		select_statement[0] = 0;*/
-		ss = new char[4096];
+		std::cout << "Enter select statement below (no more than"
+							" 4096 chars please):" << std::endl;
+		ss = new char[4097];
 		ss[0] = 0;
 		std::cin.ignore();
 		std::cin.getline(ss, 4096);
@@ -138,33 +173,30 @@ bool parse_args(int argc, char *argv[]){
 	return true;
 }
 
-int rundemo(int demo_type){
-	DB::Driver *drv;
-	DB::DriverManager *manager;
-	DB::Connection *conn = 0;
-	DB::DriverInfo q;
-	DB::ResultSet *r = 0;
-	int ci, cj;
+int main(int argc, char *argv[]){
+	SQL::Driver *drv;
+	SQL::DriverManager *manager;
+	SQL::Connection *conn = 0;
+	SQL::DriverInfo q;
+	SQL::ResultSet *r = 0;
+	int cj;
 	bool capshown;
-	ExceptionTracer::enable();
-	switch(demo_type){
-		case XVR2_MYSQL:
-			if(driver_location == 0)
-				driver_location = (char *)MYSQL_DRIVER_LOCATION;
-			db_port = 3306;
-			break;
-		case XVR2_POSTGRESQL:
-			if(driver_location == 0)
-				driver_location = (char *)PGSQL_DRIVER_LOCATION;
-			db_port = 5432;
-			break;
+	if(!parse_args(argc, argv)){
+		return 1;
 	}
+	if(drv_path.toString().size() == 0){
+		std::cerr << "No driver given, aborting, please run: " << std::endl;
+		std::cerr << argv[0] << " --list-drivers" << std::endl << std::endl;
+		return 1;
+	}
+	ExceptionTracer::enable();
+	
 
-	manager = new DB::DriverManager(driver_location);
+	manager = new SQL::DriverManager(drv_path.toString());
 	
 	try{
-		//drv->load();
 		drv = manager->load();
+		
 	}
 	catch(DSOSymbolException e){
 		std::cerr << e.getClassName() << ": " << e.toString() << std::endl;
@@ -173,7 +205,7 @@ int rundemo(int demo_type){
 	q = drv->getVersionInfo();
 	std::cout << "X-VR2 " << dnames[demo_type] << " " << q.version() << "." << q.revision() << " by: " << q.vendor() << " using: " << q.description() << std::endl;
 
-	conn = new DB::Connection(drv, server_location, db_name, db_user, db_pass, db_port);
+	conn = new SQL::Connection(drv, server_location, db_name, db_user, db_pass, db_port);
 
 	std::cout << "\n1. Connecting to database... ";
 	std::cout.flush();
@@ -201,8 +233,8 @@ int rundemo(int demo_type){
 
 	std::cout << "3. Reading ResultSet with r->getRow()" << std::endl;
 	capshown = false;
-	for(ci = 0; ci < r->numRows(); ci++){
-		DB::Field *ff = (DB::Field *)r->getRow();
+	while(r->fetchRow()){
+		SQL::Field *ff = (SQL::Field *)r->getRow();
 		if(!capshown){
 			for(cj = 0; cj < r->numCols(); cj++){
 				std::cout << ff[cj].getFieldName().toCharPtr() << "\t";
@@ -223,7 +255,6 @@ int rundemo(int demo_type){
 			std::cout.flush();
 		}
 		std::cout << std::endl;
-		r->fetchNextRow();
 	}
 	std::cout << "suceeded" << std::endl;
 	std::cout << "4. Reading ResultSet with r->get()" << std::endl;
@@ -237,7 +268,7 @@ int rundemo(int demo_type){
 		return 1;
 	}
 	capshown = false;
-	for(ci = 0; ci < r->numRows(); ci++){
+	while(r->fetchRow()){
 		if(!capshown){
 			for(cj = 0; cj < r->numCols(); cj++){
 				std::cout << r->get(cj).getFieldName().toCharPtr() << "\t";
@@ -276,17 +307,6 @@ int rundemo(int demo_type){
 		return 1;
 	}
 	std::cout << "succeeded" << std::endl;
-
-/******* PERFOMING SOME COMMANDS ********/
-	conn->execCommand("create table testx (id serial, name text)");
-	for(int ni = 0; ni < 1000; ni++){
-		StringBuffer cmd;
-		cmd << "INSERT INTO testx (name) values ('" << ni << "')";
-		conn->execCommand(cmd);
-	}
-	int num = conn->execCommand("DELETE FROM testx");
-	std::cout << num << " rows deleted from testx" << std::endl;
-	conn->execCommand("drop table testx");
 	std::cout << "6. Disconnecting from database... ";
 	std::cout.flush();
 	try{
@@ -300,8 +320,5 @@ int rundemo(int demo_type){
 	xvr2_delete(conn);
 	manager->unload(drv);
 	delete manager;
-	if(loopit){
-		sleep(180);
-	}
 	return 0;
 }

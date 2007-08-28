@@ -1,0 +1,30 @@
+/*
+ * $Id:CoreExceptions.h 531 2007-08-11 09:05:29Z mindstorm2600 $
+ *
+ * X-VR2 
+ * 
+ * Copyright (C) Juan V. Guerrero 2007
+ * 
+ * Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
+ * 
+ * This program is free software, distributed under the terms of
+ * the GNU General Public License Version 2. See the LICENSE file
+ * at the top of the source tree.
+ */
+#include<xvr2/String.h>
+
+namespace xvr2 {
+
+	const String VersionString = "@GENERIC_RELEASE@";
+	const int VersionMajor = @GENERIC_MAJOR_VERSION@;
+	const int VersionMinor = @GENERIC_MINOR_VERSION@;
+	const int VersionMicro = @GENERIC_MICRO_VERSION@;
+	const int VersionPatchLevel = @GENERIC_PATCH_LEVEL@;
+	const String VersionMajorString = "@GENERIC_MAJOR_VERSION@";
+	const String VersionMinorString = "@GENERIC_MINOR_VERSION@";
+	const String VersionMicroString = "@GENERIC_MICRO_VERSION@";
+	const String VersionPatchLevelString = "@GENERIC_PATCH_LEVEL@";
+	
+	const String InstallationPrefix = "@prefix@";
+	
+};

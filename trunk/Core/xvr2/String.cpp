@@ -290,98 +290,48 @@ namespace xvr2{
 	}
 	
 	const String& String::toUpperCase(){
-		std::transform(std::string::begin(), std::string::end(), std::string::begin(), (int(*)(int)) toupper);
+		std::transform(
+				std::string::begin(), 
+				std::string::end(), 
+				std::string::begin(), 
+				(int(*)(int)) toupper
+			);
 		return *this;
 	}
 	
 	const String& String::toLowerCase(){
-		std::transform(std::string::begin(), std::string::end(), std::string::begin(), (int(*)(int)) tolower);
+		std::transform(
+				std::string::begin(), 
+				std::string::end(), 
+				std::string::begin(), 
+				(int(*)(int)) tolower
+			);
 		return *this;
 	}
 	
 	//////////////////////////////////////////// STRING TO NUMERIC CONVERSIONS ///////////////////////////////////////
 	const int String::toInt(){
 		return char2num<int>(this);
-		/*
-#ifdef HAVE_STRTOL
-		int num = 0;
-#endif
-		if(size() == 0)
-			return 0;
-		if(at(0) == 0)
-			return 0;
-#ifdef HAVE_STRTOL
-		num = strtol(c_str(), 0, 10);
-		return num;
-#else
-		return atoi(c_str());
-#endif*/
 	}
 	
 	const unsigned int String::toUInt(){
 		return char2num<unsigned int>(this);
-		/*unsigned int num = 0, low = 0;
-		unsigned int i, j;
-		char first_char = at(0);
-		if(size() == 0)
-			return 0;
-		if(first_char == 0)
-			return 0;
-#ifdef HAVE_STRTOUL
-		num = strtoul(c_str(), 0, 10);
-#else
-		if(first_char == '+')
-			low = 1;
-		if(isdigit(first_char) || first_char == '+'){
-			for(i = (size() - 1), j = 0; i >= low; i--, j++){
-				if(!isdigit(at(i))){
-					throw NumberException();
-				}
-				num = num + (at(i) - '0')* pow(10.0, (double)j);
-			}
-		}
-		else
-			if(first_char != '+'){
-				throw NumberException();
-			}
-#endif
-		return num;*/
 	}
 	
 	const float String::toFloat(){
 		return char2num<float>(this);
-		/*if(size() == 0)
-			return 0;
-		if(at(0) == 0)
-			return 0;
-		return (float)toDouble();*/
 	}
 	
 	const double String::toDouble(){
 		return char2num<double>(this);
-		/*if(size() == 0)
-			return 0;
-		if(at(0) == 0)
-			return 0;
-		return atof(c_str());*/
 	}
 	
 	const long double String::toLongDouble(){
 		return char2num<long double>(this);
-		/*if(size() == 0)
-			return 0;
-		if(at(0) == 0)
-			return 0;
-		return strtold(c_str(), 0);*/
 	}
 	
 	const Int64 String::toInt64(){
 		return char2num<Int64>(this);
-		/*if(size() == 0)
-			return 0;
-		if(at(0) == 0)
-			return 0;
-		return atoll(c_str());*/
 	}
 	
 	/////////////////////////////// ::operator==() /////////////////////////
@@ -507,10 +457,6 @@ namespace xvr2{
 	}
 
 	std::string String::toString(){
-		/*if(string_representation == 0){
-			string_representation = new std::string(toCharPtr());
-		}
-		return *string_representation;*/
 		return std::string(c_str());
 	}
 

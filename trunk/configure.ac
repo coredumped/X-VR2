@@ -257,6 +257,7 @@ AC_OUTPUT(Makefile \
 	Core/xvr2/Makefile \
 	Core/xvr2core.pc \
 	Core/xvr2/xvr2config.h \
+	Core/xvr2/xvr2config.cpp \
 	Text/Makefile \
 	Text/xvr2/Makefile \
 	Text/xvr2text.pc \

@@ -56,8 +56,8 @@ int main(int argc, char *argv[]){
 		String arg = argv[i];
 		if(arg == "--driver"){
 			StringBuffer tmp;
-			tmp << __XVR2_PREFIX_DIR << "/lib/" << argv[i + 1] << "_driver-" <<
-				__XVR2_VERSION_STRING << ".so." << __XVR2_MINOR_VERSION_STRING;
+			tmp << InstallationPrefix << "/lib/" << argv[i + 1] << "_driver-" <<
+				VersionString << ".so." << VersionMinor;
 			so_driver = tmp.toString();
 			dbfile = argv[i + 1];
 			dbfile += "-local.db";
