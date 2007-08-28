@@ -1,8 +1,8 @@
 # $Id$
 
-doc_PROGRAMS = vector
+doc_PROGRAMS = vector-test
 
-vector_SOURCES = vector.cpp
+vector_test_SOURCES = vector-test.cpp
 
 INCLUDES = -I$(top_srcdir) -I../../Core/xvr2 -I../xvr2 
 
