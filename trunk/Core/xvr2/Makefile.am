@@ -14,7 +14,7 @@ h_sources = CoreExceptions.h BasicStringBuffer.h \
 	StdioInterface.h StdioInputFile.h StdioOutputFile.h FinalizerCallback.h \
 	RawInputStream.h RawOutputStream.h RawStreamInterface.h StreamException.h \
 	BufferedTextInputStream.h InvalidParameterException.h \
-	ThreadFinalizator.h FileException.h
+	ThreadFinalizator.h FileException.h Vector.h
 
 cc_sources = CoreExceptions.cpp BasicString.cpp \
 	Byte.cpp Chronometer.cpp ConditionVar.cpp Console.cpp Date.cpp \

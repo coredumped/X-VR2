@@ -39,6 +39,7 @@
 #define EXCEPTION_DEPTH_TRACE 1024
 #endif
 
+/*TODO: Add source address translation, like addr2line on Linux systems. */
 
 namespace xvr2{
 #ifdef __GNUC__
@@ -77,7 +78,10 @@ namespace xvr2{
 			else{
 				//Has parameters
 				Tokenizer tok2(tmp, "+");
-				dm = abi::__cxa_demangle(tok2.next().toCharPtr(), 0, 0, &status);
+				dm = abi::__cxa_demangle(
+										tok2.next().toCharPtr(), 
+										0, 0, &status
+									);
 				if(status == 0){
 					first.concat("(");
 					first.concat(dm);
@@ -147,11 +151,11 @@ namespace xvr2{
 	        symbols = backtrace_symbols(array, nSize);
 		debugConsole << "\n [EE] [THREAD: ";
 		tid = ThreadManager::getCurrentThreadID();
-		if(tid != 0){
-			debugConsole << (Int64)tid << "] ";
+		if(ThreadManager::currentIsMain()){
+			debugConsole << "MAIN] ";
 		}
 		else{
-			debugConsole << "MAIN] ";
+			debugConsole << (Int64)tid << "] ";
 		}
 		debugConsole << t.toString() << "\n";
 		for (int i = 0; i < nSize; i++){
@@ -160,7 +164,9 @@ namespace xvr2{
 			}
 			demangled = demangle_symbol(symbols[i]);
 #if defined(__linux__) || defined(__linux) || defined(_linux)
-			if(strstr(demangled, __gxx_p1) == 0 && strstr(demangled, __gxx_p2) == 0 && strstr(demangled, __gxx_p3) == 0){
+			if(strstr(demangled, __gxx_p1) == 0 && 
+						strstr(demangled, __gxx_p2) == 0 && 
+						strstr(demangled, __gxx_p3) == 0){
 				debugConsole << " " << demangled << "\n";
 				__StackTrace << " " << demangled << "\n";
 			}

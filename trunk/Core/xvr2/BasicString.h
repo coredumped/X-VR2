@@ -21,7 +21,8 @@
 #include<string>
 
 namespace xvr2 {
-	/** @brief Abstract string base class. */
+	/** @brief Abstract string base class. 
+	 *  @todo Add wide-characters support. */
 	template<class _charT>
 	class BasicString : public Object, public std::basic_string<_charT> {
 		protected:
