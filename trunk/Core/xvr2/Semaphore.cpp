@@ -5,6 +5,7 @@
 #include"Semaphore.h"
 #include"Thread.h"
 #include"ThreadManager.h"
+#include"DebugConsole.h"
 #ifdef USE_POSIX_THREADS
 #include<pthread.h>
 #endif
@@ -19,15 +20,9 @@ namespace xvr2{
 #ifdef USE_POSIX_THREADS
 		ret = sem_init(&__sem, 0, x);
 #endif
-#ifdef USE_DEBUG
-		debugmsg(this, "Initializing");
-#endif
 		if(ret == -1){
 			switch(errno){
 				case EINVAL:
-#ifdef USE_DEBUG
-					debugmsg(this, "invalid value.");
-#endif
 					throw SemaphoreInitValueException();
 					break;
 				default:
@@ -47,6 +42,7 @@ namespace xvr2{
 	}
 
 	Semaphore::Semaphore(int x){
+		getClassName();
 		try{
 			init(x);
 		}
@@ -96,26 +92,4 @@ namespace xvr2{
 #endif
 	}
 
-	void Semaphore::debugmsg(Semaphore *obj, const char *msg){
-		int y;
-		Thread *t;
-		getvalue(&y);
-		t = (Thread *)ThreadManager::getCurrentThread();
-#if __WORDSIZE == 64 && defined(__x86_64__)
-		if(t == 0){
-			std::cout << obj->getClassName() << "[ptr=" << (unsigned long)obj << ",tid=[MAIN],val=" << y << "]: " << msg;
-		}
-		else{
-			std::cout << obj->getClassName() << "[ptr=" << (unsigned long)obj << ",tid=" << t->numericID() << ",val=" << y << "]: " << msg;
-		}
-#else
-		if(t == 0){
-			std::cout << obj->getClassName() << "[ptr=" << (unsigned int)obj << ",tid=[MAIN],val=" << y << "]: " << msg;
-		}
-		else{
-			std::cout << obj->getClassName() << "[ptr=" << (unsigned int)obj << ",tid=" << t->numericID() << ",val=" << y << "]: " << msg;
-		}
-#endif
-		std::cout.flush();
-	}
 };

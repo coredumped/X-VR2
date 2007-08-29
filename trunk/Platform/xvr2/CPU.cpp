@@ -94,7 +94,8 @@ namespace Platform {
 				Tokenizer t3(buffer, ":");
 				t3.next();
 				String spd = t3.next();
-				Tokenizer t4(spd.trim(' '), " ");
+				spd.trim(' ');
+				Tokenizer t4(spd, " ");
 				String v = t4.next();
 				String unit = t4.next();
 				dummy.cacheSize = (UInt64)v.toInt64();

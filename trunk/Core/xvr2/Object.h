@@ -26,18 +26,20 @@ namespace xvr2{
 	class Object{
 		private:
 		protected:
+			std::string __cls_name;
 		public:
 			/** Default constructor, it does nothing. */
 			Object();
 			/**
 			 * Returns the name of the current class
 			 */
-			const char *getClassName();
+			virtual const char *getClassName();
 			virtual ~Object();
 			/**
 			 * Will print a debug message to the screen */
 			static void debugmsg(Object *obj, const char *msg, int linenumber = __LINE__, const char *srcfile = __FILE__);
 			static void debugmsgln(Object *obj, const char *msg, int linenumber = __LINE__, const char *srcfile = __FILE__);
+			//virtual std::string toString();
 			virtual std::string toString();
 			friend std::ostream& operator<<(std::ostream& stream, const Object &s);
 	};

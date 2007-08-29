@@ -83,6 +83,7 @@ namespace xvr2{
 			/** @brief Instantiates a String object from a std::string object
 			 *  @param s The String to be copied */
 			String(const std::string *s);
+			String(const xvr2::Object &o);
 			/** @brief Transforms the given argument and sets it to the current
 			 *  String.
 			 *  @param n The numeric value to be converted.
@@ -451,6 +452,16 @@ namespace xvr2{
 			 *  @param data The array from where we will be copying,
 			 *  @param len The amount of chars to be copied from there. */
 			void eat(const char *data, int len);
+			/** @brief Erases all contiguous occurrences of a specified 
+			 *  character from the beginning of the string to the right.
+			 *  @param c The character to look for and erase.
+			 *  @return A reference to string after modified. */
+			virtual String &trimLeft(const char c = ' ');
+			/** @brief Erases all contiguous occurrences of a specified 
+			 *  character from the end of the string to the left.
+			 *  @param c The character to look for and erase.
+			 *  @return A reference to string after modified. */
+			virtual String &trimRight(const char c = ' ');
 	};
 	extern const String NL;
 };

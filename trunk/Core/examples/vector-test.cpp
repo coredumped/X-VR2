@@ -27,7 +27,7 @@ void print_r(const std::vector<_Tp> &arr){
 }
 
 int main(int argc, char *argv[]){
-	
+	xvr2::String h = "hello world";
 	xvr2::Vector<int> a;
 	a.push_back(0);
 	a.push_back(1);
@@ -39,5 +39,6 @@ int main(int argc, char *argv[]){
 	std::cout << "a: " << a.toString() << std::endl;
 	std::cout << "b: ";
 	print_r<int>(b);
+	std::cout << h << std::endl;
 	return 0;
 }

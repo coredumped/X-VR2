@@ -180,7 +180,8 @@ namespace xvr2 {
 					xvr2::Tokenizer t0(buffer, ":");
 					t0.next();
 					buffer = t0.next();
-					xvr2::Tokenizer t1(buffer.trim(' '), " ");
+					buffer.trim(' ');
+					xvr2::Tokenizer t1(buffer, " ");
 					buffer = t1.next();
 					__swap_size = buffer.toInt64();
 					buffer = t1.next();

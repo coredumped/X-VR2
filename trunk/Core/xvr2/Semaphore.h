@@ -23,7 +23,7 @@
 namespace xvr2{
 	/**
 	 * This class implements mutual exclusion semaphore objects
-	 *
+	 * @todo Document the Semaphore class plz
 	 */
 	class Semaphore:public Threading{
 		private:
@@ -40,7 +40,6 @@ namespace xvr2{
 			void trywait();
 			void post();
 			void getvalue(int *x);
-			void debugmsg(Semaphore *obj, const char *msg);
 	};
 };
 

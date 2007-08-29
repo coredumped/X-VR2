@@ -95,6 +95,10 @@ namespace xvr2{
 		std::string::assign(s->c_str());
 	}
 	
+	String::String(const xvr2::Object &o){
+		std::string::assign(((Object *)&o)->toString());
+	}
+	
 	/////////////////////////////// ::assign() /////////////////////////
 	String &String::assign(const char *s){
 		BasicString<char>::assign(s);
@@ -466,5 +470,19 @@ namespace xvr2{
 
 	void String::eat(const char *data, int len){
 		BasicString<char>::append(data, len);
+	}
+	
+	String &String::trimLeft(const char c){
+		while(size() > 0 &&	at(0) == c){
+			erase(begin(), begin() + 1);
+		}
+		return *this;
+	}
+	
+	String &String::trimRight(const char c){
+		while(size() > 0 && at(size() - 1) == c){
+			erase(end() - 1, end());
+		}
+		return *this;
 	}
 };

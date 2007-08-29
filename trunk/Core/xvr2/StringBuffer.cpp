@@ -12,7 +12,7 @@ namespace xvr2 {
 		buffer = new String(s.toCharPtr());
 	}
 	StringBuffer::StringBuffer(const StringBuffer &s){
-		buffer = new String(s.toString().toCharPtr());
+		buffer = new String(s.toString());
 	}
 	const char StringBuffer::operator[](int idx) const{
 		return buffer->charAt(idx);
@@ -27,8 +27,8 @@ namespace xvr2 {
 		buffer->concat(s.toCharPtr());
 		return *this;
 	}
-	const String &StringBuffer::toString() const {
-		return *buffer;
+	std::string StringBuffer::toString() const {
+		return std::string(*buffer);
 	}
 	void StringBuffer::eat(char *data, int len){
 		buffer->eat(data, len);

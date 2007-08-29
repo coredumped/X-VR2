@@ -30,13 +30,22 @@ namespace xvr2{
 		}
 #endif
 #endif
+		this->getClassName();
 	}
 
 	const char *Object::getClassName(){
-		char *__cls_name;
+		/*char *__cls_name;
 		int status;
 		__cls_name = abi::__cxa_demangle(typeid(*this).name(), 0, 0, &status);
-		return (const char *)__cls_name;
+		return (const char *)__cls_name;*/
+		char *tmp;
+		int status;
+		tmp = abi::__cxa_demangle(typeid(*this).name(), 0, 0, &status);
+		if(status == 0){
+			__cls_name = tmp;
+			free(tmp);
+		}
+		return __cls_name.c_str();
 	}
 
 	void Object::debugmsg(Object *obj, const char *msg, int linenumber, const char *srcfile){
@@ -69,8 +78,15 @@ namespace xvr2{
 	Object::~Object(){
 	}
 
-	std::string Object::toString(){
+	/*std::string Object::toString(){
 		return std::string(getClassName());
+	}*/
+	
+	std::string Object::toString() {
+		getClassName();
+		//return std::string(getClassName());
+		//return std::string(abi::__cxa_demangle(typeid(*this).name(), 0, 0, &status));
+		return __cls_name;
 	}
 
 	std::ostream& operator<<(std::ostream& stream, const Object &s){

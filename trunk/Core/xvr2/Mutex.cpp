@@ -25,7 +25,7 @@ using std::endl;
 
 namespace xvr2{
 
-	Mutex::Mutex(int autoinit){
+	Mutex::Mutex(int autoinit):Object(){
 		if(autoinit)
 			init();
 	}

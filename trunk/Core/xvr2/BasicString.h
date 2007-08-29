@@ -26,9 +26,9 @@ namespace xvr2 {
 	template<class _charT>
 	class BasicString : public Object, public std::basic_string<_charT> {
 		protected:
-			BasicString(){
+			BasicString() : xvr2::Object(){
 			}
-			BasicString(const _charT *s){
+			BasicString(const _charT *s) : xvr2::Object(){
 				std::basic_string<_charT>::assign(s);
 			}
 		public:

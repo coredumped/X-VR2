@@ -75,7 +75,7 @@ namespace xvr2{
 
 	void Log::flush(){
 		if(ldata.toString().size() > 0){
-			write((void *)ldata.toString().toCharPtr(), ldata.toString().size());
+			write((void *)ldata.toString().c_str(), ldata.toString().size());
 		}
 		StdioOutputFile::flush();
 	}

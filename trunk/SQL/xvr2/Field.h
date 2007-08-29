@@ -218,7 +218,7 @@ namespace xvr2{
 				/** Returns the data as a String if the data is numeric
 				 *  then it will be translated also if it is a Date, Time
 				 *  Byte, Bit or Timestamp */
-				const String	&toString() const;
+				std::string toString() const;
 				/** Returns the data as a String if the data is numeric
 				 *  then it will be translated also if it is a Date, Time
 				 *  Byte, Bit or Timestamp */

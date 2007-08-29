@@ -217,6 +217,6 @@ namespace xvr2{
 	}
 
 	const char *ExceptionTracer::backtrace(){
-		return __StackTrace.toString().toCharPtr();
+		return __StackTrace.toString().c_str();
 	}
 };

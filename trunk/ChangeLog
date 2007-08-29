@@ -1,3 +1,6 @@
+2007-08-29  Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
+* Added a String example program based on earlier demos. 
+
 2007-08-27  Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
 * Some documentation added to the String, BasicString and BackgroundFunction
 class

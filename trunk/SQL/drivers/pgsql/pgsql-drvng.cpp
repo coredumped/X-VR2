@@ -246,11 +246,12 @@ void *PostgreSQLDriver::connect(const String &server, const String &__dbname, co
 		connx->requestMappings();
 	}
 	catch(SQL::SQLQueryException esql){
+		String e = PQerrorMessage (connx->conn);
 		PQfinish(conn);
 		throw SQL::ConnectionFailure(DatabaseException::ConnectionParams(
 										DatabaseException::NET, server, pport, 
 										__dbname, user, "********", 
-										""), PQerrorMessage (connx->conn));
+										""), e);
 	}
 	catch(...){
 		PQfinish(conn);
@@ -285,11 +286,12 @@ void *PostgreSQLDriver::connect(const String &dbsock,
 		connx->requestMappings();
 	}
 	catch(SQL::SQLQueryException esql){
+		String e = PQerrorMessage (connx->conn);
 		PQfinish(conn);
 		throw SQL::ConnectionFailure(SQL::DatabaseException::ConnectionParams(
 										SQL::DatabaseException::FIFO, "", 
 										-1,	_dbname, _user, "********", 
-										dbsock), PQerrorMessage (connx->conn));
+										dbsock), e);
 	}
 	catch(...){
 		PQfinish(conn);
@@ -549,7 +551,7 @@ const bool PostgreSQLDriver::bulkBegin(void *conn_handle, const char *table, con
 	//sqlcmd = new char[500 + strlen(table) + strlen(columns) + strlen(delim)];
 	//sprintf(sqlcmd, "COPY %s (%s) FROM STDIN WITH DELIMITER '%s'", table, columns, delim);
 	sqlcmd << "COPY " << table << " (" << columns << ") FROM STDIN WITH DELIMITER '" << delim << "'";
-	result = PQexec (conn->conn, sqlcmd.toString().toCharPtr());
+	result = PQexec (conn->conn, sqlcmd.toCharPtr());
 	//xvr2_delete_array(sqlcmd);
 	if(result == NULL){
 		throw SQL::SQLQueryException(PQerrorMessage (conn->conn), sqlcmd.toString());

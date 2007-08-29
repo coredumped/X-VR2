@@ -30,8 +30,9 @@ namespace xvr2{
 
 	/** This classes handle MUTEX (MUTual EXclusion) sinchronization devices<br>
 	 * This classes are designed to work with SDL's Thread encapsulation, 
-	 * GNU Pth or POSIX Threads */
-	class Mutex:public Threading{
+	 * GNU Pth or POSIX Threads.
+	 * @todo Polish documentation. */
+	class Mutex:public Object{
 	 private:
 	  /** Destroys the current mutex, freeing all the resources allocated
 	   * by it */

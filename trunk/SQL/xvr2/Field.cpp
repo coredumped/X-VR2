@@ -728,8 +728,8 @@ namespace xvr2{
 		}
 	
 	
-		const String &Field::toString() const{
-			return tmpString;
+		std::string Field::toString() const{
+			return std::string(tmpString);
 		}
 	
 	
