@@ -16,15 +16,10 @@ GENERIC_LIBRARY_NAME=xvr2
 #release versioning
 GENERIC_MAJOR_VERSION=0
 GENERIC_MINOR_VERSION=7
-GENERIC_MICRO_VERSION=1
-GENERIC_PATCH_LEVEL=1
+GENERIC_MICRO_VERSION=2
+GENERIC_PATCH_LEVEL=0
 
-#API version (often = GENERIC_MAJOR_VERSION.GENERIC_MINOR_VERSION)
-#GENERIC_API_VERSION=0.7.1
-#AC_SUBST(GENERIC_API_VERSION)
 
-#shared library versioning
-#GENERIC_LIBRARY_VERSION=0:7:0
 GENERIC_LIBRARY_VERSION=$GENERIC_MINOR_VERSION:$GENERIC_MICRO_VERSION:$GENERIC_PATCH_LEVEL
 
 
@@ -77,7 +72,7 @@ AC_ARG_ENABLE(debug, AC_HELP_STRING([--enable-debug          Build library in de
 	]
 )
 
-xvr2core_required_version=0.7.1.1
+xvr2core_required_version=0.7.2.0
 openssl_required_version=0.9.7
 
 dnl -----------------------------------------------
