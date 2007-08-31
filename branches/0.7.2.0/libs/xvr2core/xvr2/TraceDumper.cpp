@@ -123,11 +123,11 @@ namespace xvr2{
 	        symbols = backtrace_symbols(array, nSize);
 		debugConsole << "\n [EE] [THREAD: ";
 		tid = ThreadManager::getCurrentThreadID();
-		if(tid != 0){
-			debugConsole << (Int64)tid << "] ";
+		if(ThreadManager::currentIsMain()){
+			debugConsole << "MAIN] ";
 		}
 		else{
-			debugConsole << "MAIN] ";
+			debugConsole << (Int64)tid << "] ";
 		}
 		debugConsole << t.toString() << "\n";
 		for (int i = 0; i < nSize; i++){
@@ -150,8 +150,6 @@ namespace xvr2{
 #endif
 			free(demangled);
 		}
-		//debugConsole << " [EE] Exception thrown was: " << getClassName() << "\n";
-		//debugConsole << " [EE]          description: " << toString() << "\n";
 		free(symbols);
 #ifdef USE_POSIX_THREADS
 		pthread_mutex_unlock(&_tm);
