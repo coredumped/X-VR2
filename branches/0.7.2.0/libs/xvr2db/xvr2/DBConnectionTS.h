@@ -1,8 +1,8 @@
 /*
  * $Id$
  */
-#ifndef __XVR2_DB_Connection_H__
-#define __XVR2_DB_Connection_H__
+#ifndef __XVR2_DB_Connection_TS_H__
+#define __XVR2_DB_Connection_TS_H__
 
 #include<xvr2/xvr2config.h>
 #include<xvr2/DBDriver.h>
