@@ -6,10 +6,10 @@ CFLAGS+=`pkg-config xvr2core --cflags`
 all: config-lexer.o config-parser.o
 
 config-lexer.o: config-lexer.cpp config-parser.h
-	/bin/sh ../../libtool --mode=compile g++ $(CFLAGS) -I../.. -I.. -I. -c -o config-lexer.o config-lexer.cpp
+	/bin/sh ../../libtool --mode=compile $(CXX) $(CFLAGS) -I../.. -I.. -I. -c -o config-lexer.o config-lexer.cpp
 
 config-parser.o: config-parser.cpp 
-	/bin/sh ../../libtool --mode=compile g++ $(CFLAGS) -I../.. -I.. -I. -c -o config-parser.o config-parser.cpp
+	/bin/sh ../../libtool --mode=compile $(CXX) $(CFLAGS) -I../.. -I.. -I. -c -o config-parser.o config-parser.cpp
 
 config-lexer.cpp: config.lex
 	$(LEX) -P__xvr2_cfg_yy -oconfig-lexer.cpp config.lex

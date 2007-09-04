@@ -17,21 +17,21 @@ namespace xvr2{
 		 * complete interface to the SQL database connection paradigm.
 		 * @note This is different from ConnectionMT in that this construct
 		 * does not implement explicit resource locking, beware you must 
-		 * lock()/unluck() access to it manually.
+		 * lock()/unlock() access to it manually.
 		 */
 		class ConnectionTS:public Object{
 			private:
-				void *__conn;
+				void	*__conn;
 			protected:
 				Driver	*driver;
-				String		_server;
-				String		_user;
-				String		_password;
-				String		_dbname;
+				String	_server;
+				String	_user;
+				String	_password;
+				String	_dbname;
 				int		_port;
-				bool		__connected;
-				String		*bulk_delim;
-				Mutex dbcm;
+				bool	__connected;
+				String	*bulk_delim;
+				Mutex	dbcm;
 			public:
 				/** This constructor will require an instatiated Driver */
 				ConnectionTS(Driver *drv);

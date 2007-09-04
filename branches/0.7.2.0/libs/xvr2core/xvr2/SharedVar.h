@@ -45,7 +45,7 @@ namespace xvr2{
 				var = v;
 			}
 			/** Increases the shared variable's value in one unit*/
-			T operator++(int XXX = 0){
+			T operator++(){
 				T u= 0;
 				lock();
 				u = var;
@@ -55,7 +55,7 @@ namespace xvr2{
 				return u;
 			}
 			/** Decreases the shared variable's value in one unit*/
-			T operator--(int XXX = 0){
+			T operator--(){
 				T u= 0;
 				lock();
 				u = var;
