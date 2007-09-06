@@ -82,13 +82,13 @@ AR="ar"
 AR_FLAGS="cru"
 
 # A C compiler.
-LTCC="/opt/intel/cc/10.0.023/bin/icc"
+LTCC="icc"
 
 # LTCC compiler flags.
 LTCFLAGS="-g -O2"
 
 # A language-specific compiler.
-CC="/opt/intel/cc/10.0.023/bin/icc"
+CC="icc"
 
 # Is the compiler the GNU C compiler?
 with_gcc=yes
@@ -7261,13 +7261,13 @@ AR="ar"
 AR_FLAGS="cru"
 
 # A C compiler.
-LTCC="/opt/intel/cc/10.0.023/bin/icc"
+LTCC="icc"
 
 # LTCC compiler flags.
 LTCFLAGS="-g -O2"
 
 # A language-specific compiler.
-CC="icc"
+CC="icpc"
 
 # Is the compiler the GNU C compiler?
 with_gcc=yes
@@ -7390,8 +7390,8 @@ old_archive_from_new_cmds=""
 old_archive_from_expsyms_cmds=""
 
 # Commands used to build and install a shared archive.
-archive_cmds="\$CC -shared -nostdlib \$predep_objects \$libobjs \$deplibs \$postdep_objects \$compiler_flags \${wl}-soname \$wl\$soname -o \$lib"
-archive_expsym_cmds="\$CC -shared -nostdlib \$predep_objects \$libobjs \$deplibs \$postdep_objects \$compiler_flags \${wl}-soname \$wl\$soname \${wl}-retain-symbols-file \$wl\$export_symbols -o \$lib"
+archive_cmds="\$CC -shared \$libobjs \$deplibs \$compiler_flags \${wl}-soname \$wl\$soname -o \$lib"
+archive_expsym_cmds="\$CC -shared \$libobjs \$deplibs \$compiler_flags \${wl}-soname \$wl\$soname \${wl}-retain-symbols-file \$wl\$export_symbols -o \$lib"
 postinstall_cmds=""
 postuninstall_cmds=""
 
@@ -7405,7 +7405,7 @@ striplib="strip --strip-unneeded"
 
 # Dependencies to place before the objects being linked to create a
 # shared library.
-predep_objects="-mIPOPT_obj_output_file_name=/tmp/ipo_icc8nnTrV.o -mGLOB_obj_output_file=/tmp/ipo_icc8nnTrV.o"
+predep_objects="-mIPOPT_obj_output_file_name=/tmp/ipo_icpcu7q0Or.o -mGLOB_obj_output_file=/tmp/ipo_icpcu7q0Or.o"
 
 # Dependencies to place after the objects being linked to create a
 # shared library.
@@ -7417,7 +7417,7 @@ predeps=""
 
 # Dependencies to place after the objects being linked to create a
 # shared library.
-postdeps="-L/opt/intel/cc/10.0.023/lib -L/usr/lib/gcc/i486-linux-gnu/4.1.2/ -L/usr/lib/gcc/i486-linux-gnu/4.1.2/../../../ -limf -lm -lipgo -lgcc_s -lintlc -lc -lgcc_s -lirc_s -ldl -lc"
+postdeps="-L/opt/intel/cc/10.0.023/lib -L/usr/lib/gcc/i486-linux-gnu/4.1.2/ -L/usr/lib/gcc/i486-linux-gnu/4.1.2/../../../ -limf -lm -lipgo -lstdc++ -lgcc_s -lcxaguard -lintlc -lc -lgcc_s -lirc_s -ldl -lc"
 
 # The library search path used internally by the compiler when linking
 # a shared library.
@@ -7467,7 +7467,7 @@ hardcode_into_libs=yes
 
 # Flag to hardcode $libdir into a binary during linking.
 # This must work even if $libdir does not exist.
-hardcode_libdir_flag_spec="\${wl}--rpath \${wl}\$libdir"
+hardcode_libdir_flag_spec="\${wl}-rpath,\$libdir"
 
 # If ld is used when linking, flag to hardcode $libdir into
 # a binary during linking. This must work even if $libdir does
