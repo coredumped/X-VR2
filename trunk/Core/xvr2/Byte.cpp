@@ -259,4 +259,4 @@ namespace xvr2{
 		return std::string(string_representation->c_str());
 	}
 	//End implementation of class: Byte
-};
+}

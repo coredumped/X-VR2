@@ -21,7 +21,9 @@ namespace xvr2{
 	/**
 	 * \class Group Group.h
 	 * \brief This class deals with group management and also provides means
-	 * to search the system's user group database
+	 * to search the system's user group database.
+	 * @todo Move this class out of the main namespace, probably to 
+	 * xvr2::Platform
 	 */
 	class Group:protected Unix{
 		protected:
@@ -80,6 +82,6 @@ namespace xvr2{
 			/** This will return the corresponding groupname as a string */
 			std::string toString();
 	};
-};
+}
 
 #endif

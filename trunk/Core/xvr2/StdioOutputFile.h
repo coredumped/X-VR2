@@ -20,7 +20,8 @@
 #include<cstdio>
 
 namespace xvr2 {
-	/** TODO: Document this class */
+	
+	/** @todo Document the StdioOutputFile class please */
 	class StdioOutputFile : public WriteableStream, public StdioInterface {
 		public:
 			StdioOutputFile();
@@ -45,7 +46,7 @@ namespace xvr2 {
 			
 			bool eof();
 	};
-};
+}
 
 #endif /*STDIOOUTPUTFILE_H_*/
 

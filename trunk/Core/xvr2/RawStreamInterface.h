@@ -28,7 +28,7 @@ namespace xvr2 {
 			virtual bool opened();
 			virtual bool ready(int t = 100) = 0;
 	};
-};
+}
 
 #endif
 

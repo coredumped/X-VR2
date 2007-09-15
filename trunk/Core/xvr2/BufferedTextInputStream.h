@@ -19,6 +19,7 @@
 
 namespace xvr2 {
 
+	/** @todo Document BufferedTextInputStream */
 	class BufferedTextInputStream : public RawInputStream {
 		protected:
 			UInt32 _bufsize;
@@ -36,7 +37,7 @@ namespace xvr2 {
 			/** Returns the amount of remaining bytes to be read */
 			UInt32 remaining();
 	};
-};
+}
 
 #endif
 

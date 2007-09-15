@@ -58,6 +58,6 @@ namespace xvr2{
 			const UInt32 timestamp();
 	};
 
-};
+}
 
 #endif

@@ -90,6 +90,6 @@ namespace xvr2{
 			//const String &toString();
 			std::string toString();
 	};
-};
+}
 
 #endif

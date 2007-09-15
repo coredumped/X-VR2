@@ -26,5 +26,5 @@ namespace xvr2 {
 
 	void BackgroundFunction::onTerminate(){
 	}
-};
+}
 

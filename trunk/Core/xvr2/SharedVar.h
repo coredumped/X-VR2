@@ -20,7 +20,8 @@
 namespace xvr2{
 
 	/**
-	 * This class is define template to implemented Shared varibles*/
+	 * This class is define template to implemented Shared varibles.
+	 * @todo Polish the SharedVar class docs. */
 	template <class T> 
 	class SharedVar:protected Mutex{
 		private:
@@ -49,7 +50,7 @@ namespace xvr2{
 				var = v;
 			}
 			/** Increases the shared variable's value in one unit*/
-			T operator++(int XXX = 0){
+			T operator++(){
 				T u= 0;
 				lock();
 				u = var;
@@ -59,7 +60,7 @@ namespace xvr2{
 				return u;
 			}
 			/** Decreases the shared variable's value in one unit*/
-			T operator--(int XXX = 0){
+			T operator--(){
 				T u= 0;
 				lock();
 				u = var;
@@ -89,6 +90,6 @@ namespace xvr2{
 				return ret;
 			}
 	};
-};
+}
 
 #endif

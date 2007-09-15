@@ -18,7 +18,7 @@
 #include<xvr2/SystemException.h>
 
 namespace xvr2 {
-	
+/** @todo Document RawOutputStream class */
 	class RawOutputStream : public WriteableStream, public RawStreamInterface {
 		public:
 			RawOutputStream();
@@ -36,6 +36,6 @@ namespace xvr2 {
 			bool eof();
 			virtual bool ready(int timeout = 100);
 	};
-};
+}
 #endif
 

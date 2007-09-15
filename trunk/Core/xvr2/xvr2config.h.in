@@ -90,5 +90,5 @@ namespace xvr2 {
 	extern const String VersionMicroString;
 	/** @brief Version patch level, look at xvr2::VersionString */
 	extern const String VersionPatchLevelString;
-};
+}
 #endif

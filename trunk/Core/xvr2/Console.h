@@ -107,6 +107,6 @@ namespace xvr2{
 			const Console &operator<<(const String &s) const;
 			const Console &operator<<(const Object &s) const;
 	};
-};
+}
 
 #endif

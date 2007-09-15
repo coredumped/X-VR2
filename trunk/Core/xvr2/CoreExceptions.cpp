@@ -223,4 +223,4 @@ namespace xvr2 {
 	UserNotFound::UserNotFound(){
 		description = (char *)xvr2::excepUserNotFound;
 	}
-};
+}

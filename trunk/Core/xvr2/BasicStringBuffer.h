@@ -42,6 +42,6 @@ namespace xvr2 {
 				}
 			}
 	};
-};
+}
 
 #endif

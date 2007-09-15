@@ -118,4 +118,4 @@ namespace xvr2 {
 	}
 
 	//Numeric to string conversions
-};
+}

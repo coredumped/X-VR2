@@ -43,7 +43,7 @@ namespace xvr2{
 			void flush();
 			virtual void close();
 	};
-};
+}
 
 #endif
 

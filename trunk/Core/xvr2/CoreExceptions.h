@@ -377,7 +377,7 @@ namespace xvr2{
 			/** Default constructor */
 			UserNotFound();
 	};
-};
+}
 
 #endif
 

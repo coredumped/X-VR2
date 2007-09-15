@@ -250,4 +250,4 @@ namespace xvr2{
 		return *this;
 	}
 
-};
+}

@@ -314,5 +314,5 @@ namespace xvr2{
 	std::string Buffer::toString(){
 		return std::string((const char *)_data, _size - 1);
 	}
-};
+}
 

@@ -61,9 +61,9 @@ namespace xvr2{
 	extern const char *excepMaximumNumberOfOpenFilesForThisSystem;
 	extern const char *excepFile;
 	extern const char *excepFileNotOpened;
-        extern const char *excepUserIDDoesNotMatch;
-        extern const char *excepSecurity;
-        extern const char *excepFileTooBig;
+    extern const char *excepUserIDDoesNotMatch;
+    extern const char *excepSecurity;
+    extern const char *excepFileTooBig;
 
 
 
@@ -121,6 +121,6 @@ namespace xvr2{
 	extern const char *excepNoIPForYou;
 
 	extern const char *excepConnectionResetByPeer;
-};
+}
 
 #endif

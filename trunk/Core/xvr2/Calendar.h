@@ -24,6 +24,6 @@ namespace xvr2{
 	 */
 	class Calendar:protected Date{
 	};
-};
+}
 
 #endif

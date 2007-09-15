@@ -22,7 +22,8 @@
 namespace xvr2{
 	/** \class Object Object.h <xvr2/Object.h> 
 	 * This one is the most primitive of all the classes, the first ancestor.
-	 * All X-VR2 classes are derived from this guy.  */
+	 * All X-VR2 classes are derived from this guy.
+	 * @todo Polish Object documentation.  */
 	class Object{
 		private:
 		protected:
@@ -44,5 +45,5 @@ namespace xvr2{
 			friend std::ostream& operator<<(std::ostream& stream, const Object &s);
 	};
 
-};
+}
 #endif

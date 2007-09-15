@@ -52,6 +52,6 @@ namespace xvr2 {
 			 *  after execution. */
 			//void callFinalizers();
 	};
-};
+}
 
 #endif

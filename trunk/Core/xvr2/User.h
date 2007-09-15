@@ -74,6 +74,6 @@ namespace xvr2{
 
 			std::string toString();
 	};
-};
+}
 
 #endif

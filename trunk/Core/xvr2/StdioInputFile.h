@@ -21,6 +21,7 @@
 
 namespace xvr2 {
 
+	/** @todo Document the StdioInputFile class please */
 	class StdioInputFile : public ReadableStream, public StdioInterface {
 		public:
 			StdioInputFile();
@@ -39,7 +40,7 @@ namespace xvr2 {
 			void flush();
 	};
 
-};
+}
 
 #endif
 

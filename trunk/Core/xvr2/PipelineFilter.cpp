@@ -11,18 +11,9 @@
  * the GNU General Public License Version 2. See the LICENSE file
  * at the top of the source tree.
  */
-#include"config.h"
-#include "StandardError.h"
-#include<iostream>
+#include"PipelineFilter.h"
 
-namespace xvr2{
-	StandardError::StandardError(){
-	}
+namespace xvr2 {
 
-	void StandardError::outputMethod(const void *buf, UInt32 size){
-		if(size > 0){
-			std::cerr.write((const char *)buf, size);
-			std::cerr.flush();
-		}
-	}
+
 }

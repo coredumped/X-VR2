@@ -72,6 +72,6 @@ namespace xvr2{
 		public:
 			MutexAlreadyLocked();
 	};
-};
+}
 
 #endif

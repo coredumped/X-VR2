@@ -21,6 +21,6 @@ namespace xvr2 {
 		public:
 			JoinableThread();
 	};
-};
+}
 
 #endif

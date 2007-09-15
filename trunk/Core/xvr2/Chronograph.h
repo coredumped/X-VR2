@@ -24,6 +24,6 @@ namespace xvr2{
 	 */
 	class Chronograph:public Time{
 	};
-};
+}
 
 #endif

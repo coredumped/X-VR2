@@ -41,6 +41,6 @@ namespace xvr2{
 			void post();
 			void getvalue(int *x);
 	};
-};
+}
 
 #endif

@@ -182,7 +182,7 @@ namespace xvr2 {
 			int fd();
 	};
 
-};
+}
 
 
 #endif

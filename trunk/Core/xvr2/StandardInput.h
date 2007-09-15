@@ -21,6 +21,8 @@ namespace xvr2{
 	/**
 	 * This class represents the standard input stream as a 
 	 * TextInput object
+	 * @todo See if we can express the StandardInput class in terms of the new
+	 * stream classes
 	 */
 	class StandardInput:public TextInput{
 		protected:
@@ -38,6 +40,6 @@ namespace xvr2{
 			
 	};
 
-};
+}
 
 #endif

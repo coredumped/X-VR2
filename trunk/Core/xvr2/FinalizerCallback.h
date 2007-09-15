@@ -18,12 +18,13 @@
 
 namespace xvr2{
 
+	/** @todo Document the FinalizerCallback class */
 	class FinalizerCallback : public Function {
 		public:
 			FinalizerCallback();
 			virtual ~FinalizerCallback();
 			virtual void operator()();
 	};
-};
+}
 
 #endif

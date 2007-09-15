@@ -168,6 +168,6 @@ namespace xvr2{
 			void clear();
 	};
 
-};
+}
 
 #endif

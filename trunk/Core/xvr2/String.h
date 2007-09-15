@@ -464,5 +464,5 @@ namespace xvr2{
 			virtual String &trimRight(const char c = ' ');
 	};
 	extern const String NL;
-};
+}
 #endif

@@ -27,6 +27,6 @@ namespace xvr2 {
 			/** Default constructor */
 			Function();
 	};
-};
+}
 
 #endif

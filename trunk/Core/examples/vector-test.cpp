@@ -12,6 +12,8 @@
  * at the top of the source tree.
  */
 #include<xvr2/Vector.h>
+#include<xvr2/String.h>
+#include<xvr2/Mutex.h>
 #include<iostream>
 
 template<typename _Tp>
@@ -40,5 +42,10 @@ int main(int argc, char *argv[]){
 	std::cout << "b: ";
 	print_r<int>(b);
 	std::cout << h << std::endl;
+	
+	xvr2::Vector< xvr2::Vector<int> > c;
+	c.push_back(a);
+	c.push_back(a);
+	std::cout << "c: " << c.toString() << std::endl;
 	return 0;
 }

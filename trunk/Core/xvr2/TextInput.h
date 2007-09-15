@@ -38,7 +38,7 @@ namespace xvr2{
 			virtual void readLine(char **buf, UInt32 *size);
 			virtual void readLine(String &s);
 	};
-};
+}
 
 #endif
 

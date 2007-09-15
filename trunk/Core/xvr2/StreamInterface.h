@@ -20,6 +20,7 @@
 #include<xvr2/StreamException.h>
 
 namespace xvr2 {
+	/** @todo Document all classes in StreamInterface.h */
 	
 	/** File interface class. */
 	class StreamInterface : public Object {
@@ -96,7 +97,7 @@ namespace xvr2 {
 
 	//class RandomAccessStream : public virtual StreamInterface {
 	//};
-};
+}
 
 #endif
 

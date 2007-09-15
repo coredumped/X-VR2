@@ -32,6 +32,6 @@ namespace xvr2{
 			/** Returns the name of the faulty parameter */
 			const String &param();
 	};
-};
+}
 
 #endif

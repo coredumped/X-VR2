@@ -94,6 +94,6 @@ namespace xvr2{
 			 */
 			static void Log(const String &logmsg, int logtype=-666);
 	};
-};
+}
 
 #endif

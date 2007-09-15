@@ -30,6 +30,6 @@ namespace xvr2 {
 			/** Will append to the String len characters from the data buffer */
 			void eat(char *data, int len);
 	};
-};
+}
 
 #endif

@@ -92,6 +92,6 @@ namespace xvr2{
 	};
 
 	//extern Unix *OS;
-};
+}
 
 #endif

@@ -18,7 +18,8 @@
 #include<xvr2/Buffer.h>
 
 namespace xvr2{
-	/** This class implement basic memory management tasks. */
+	/** This class implement basic memory management tasks.
+	 *  @todo See if there is really a need for this class. */
 	class Memory:public System{
 		public:
 			/**
@@ -56,6 +57,6 @@ namespace xvr2{
 			 *  into destination */
 			static void copy(void *destination, const void *source, UInt32 siz);
 	};
-};
+}
 
 #endif

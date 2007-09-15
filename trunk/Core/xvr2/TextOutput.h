@@ -48,6 +48,6 @@ namespace xvr2{
 			void writeLine(const String &text);
 	};
 
-};
+}
 
 #endif

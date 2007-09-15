@@ -42,6 +42,6 @@ namespace xvr2{
 			UInt32 timestamp();
 			//const std::string &toString();
 	};
-};
+}
 
 #endif

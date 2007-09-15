@@ -141,7 +141,7 @@ namespace xvr2 {
 			static void testCancellation();
 	};
 
-};
+}
 
 
 #endif

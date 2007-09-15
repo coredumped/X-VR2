@@ -59,6 +59,7 @@ namespace xvr2{
 			 * will start doing when you call start()
 			 * @deprecated use the operator()() method instead. */
 			virtual void run() = 0;
+			virtual void operator()(){ }
 			/**
 			 * Use this method to verify if your thread 
 			 * is running; */
@@ -77,6 +78,6 @@ namespace xvr2{
 			const bool joinable();
 	};	
 
-};
+}
 
 #endif

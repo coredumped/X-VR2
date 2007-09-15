@@ -11,21 +11,29 @@
  * the GNU General Public License Version 2. See the LICENSE file
  * at the top of the source tree.
  */
-#ifndef __XVR2_EXCEPTION_TRACE_DUMPER_H__
-#define __XVR2_EXCEPTION_TRACE_DUMPER_H__
-#include<xvr2/Object.h>
+#ifndef __XVR2_QUEUE_H__
+#define __XVR2_QUEUE_H__
+#include<xvr2/Mutex.h>
+#include<xvr2/String.h>
+#include<queue>
 
-namespace xvr2{
-	class ExceptionTracer : public Object {
+namespace xvr2 {
+
+	template<typename _Tp>
+	class Queue : public xvr2::Object, public std::queue<_Tp> {
 		private:
-			static bool isEnabled();
 		protected:
-			virtual void dumpTrace();
+			Mutex mq;
 		public:
-			ExceptionTracer();
-			static void enable();
-			static void disable();
-			const char *backtrace();
+			Queue() : std::queue<_Tp>() { }
+			
+			void lock(){
+				mq.lock();
+			}
+			
+			void unlock(){
+				mq.unlock();
+			}
 	};
 }
 

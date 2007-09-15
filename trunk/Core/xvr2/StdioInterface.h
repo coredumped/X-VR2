@@ -20,7 +20,7 @@
 #include<cstdio>
 
 namespace xvr2 {
-	/** TODO: Document this class */
+	/** @todo: Document the StdioInterface class please */
 	class StdioInterface : public virtual StreamInterface {
 		private:
 		protected:
@@ -50,13 +50,13 @@ namespace xvr2 {
 			void flush();
 	};
 	
-	/** TODO: Document this class */
+	/** @todo Document the StdioInterfaceException class please */
 	class StdioInterfaceException : public SystemException {
 		private:
 		protected:
 		public:
 			StdioInterfaceException(int _code);
 	};
-};
+}
 
 #endif

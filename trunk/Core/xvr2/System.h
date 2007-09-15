@@ -19,6 +19,7 @@
 namespace xvr2{
 	/**
 	 * This class is an interface for all System classes
+	 * @todo See if there is really a need for the System class
 	 */
 	class System:public Object{
 		public:

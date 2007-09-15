@@ -14,7 +14,8 @@ h_sources = CoreExceptions.h BasicStringBuffer.h \
 	StdioInterface.h StdioInputFile.h StdioOutputFile.h FinalizerCallback.h \
 	RawInputStream.h RawOutputStream.h RawStreamInterface.h StreamException.h \
 	BufferedTextInputStream.h InvalidParameterException.h \
-	ThreadFinalizator.h FileException.h Vector.h
+	ThreadFinalizator.h FileException.h Vector.h PipelineFilter.h \
+	Pipeline.h Queue.h HashMap.h Map.h Deque.h
 
 cc_sources = CoreExceptions.cpp BasicString.cpp \
 	Byte.cpp Chronometer.cpp ConditionVar.cpp Console.cpp Date.cpp \
@@ -30,7 +31,8 @@ cc_sources = CoreExceptions.cpp BasicString.cpp \
 	BackgroundFunction.cpp RawInputStream.cpp RawOutputStream.cpp \
 	RawStreamInterface.cpp StreamException.cpp FinalizerCallback.cpp\
 	BufferedTextInputStream.cpp InvalidParameterException.cpp \
-	ThreadFinalizator.cpp FileException.cpp Function.cpp xvr2config.cpp
+	ThreadFinalizator.cpp FileException.cpp Function.cpp xvr2config.cpp \
+	PipelineFilter.cpp
 
 library_includedir=$(includedir)/$(GENERIC_LIBRARY_NAME)
 library_include_HEADERS = $(h_sources)

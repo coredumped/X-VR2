@@ -22,5 +22,5 @@ namespace xvr2 {
 			/** Instantiates a thread which will be run in detached state. */
 			DetachedThread();
 	};
-};
+}
 #endif

@@ -1,5 +1,15 @@
 /*
  * $Id$
+ *
+ * X-VR2 
+ * 
+ * Copyright (C) Juan V. Guerrero 2007
+ * 
+ * Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
+ * 
+ * This program is free software, distributed under the terms of
+ * the GNU General Public License Version 2. See the LICENSE file
+ * at the top of the source tree.
  */
 #include"config.h"
 #include"Object.h"
@@ -163,6 +173,17 @@ namespace xvr2 {
 		delete info;
 		return 0;
 	}
+	
+	void *runMethod_ref(Thread &tx){
+		//pthread_getschedparam(info->thread, tx., (struct sched_param *)&info->priority);
+		//__addThread_ref(tx); //Add the thread to the thread list
+		tx._started = true;
+		tx();
+		tx.callFinalizers();
+		tx._terminated = true;
+		//__removeThread_ref(tx); //Remove thread from the thread list
+		return 0;
+	}
 #endif
 
 	void bf_cancellation_remover(void *arg){
@@ -220,7 +241,25 @@ namespace xvr2 {
 		while(info->ptr->_started == false) System::usleep(100);
 	}
 	void ThreadManager::start(Thread &t){
-		ThreadManager::start(&t);
+		int pol;
+		pthread_t thread;
+		pthread_attr_t attr;
+		pthread_attr_init(&attr);
+		pthread_attr_getschedpolicy(&attr, &pol);
+		if(t.joinable()){
+#ifdef USE_POSIX_THREADS
+			pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
+#endif
+		}
+		else{
+#ifdef USE_POSIX_THREADS
+			pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_DETACHED);
+#endif
+		}
+		if(pthread_create(&thread, &attr, (void* (*)(void*))runMethod_ref, (void *)&t) == EAGAIN){
+			throw ThreadNotRunning();
+		}
+		while(t._started == false) System::usleep(100);
 	}
 
 	static const char *_iparm = "Policy";
@@ -449,4 +488,4 @@ namespace xvr2 {
 		pthread_testcancel();
 #endif
 	}
-};
+}

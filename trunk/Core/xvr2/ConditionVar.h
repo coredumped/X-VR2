@@ -63,6 +63,6 @@ namespace xvr2{
 			/** This is the static version of the timedWait method */
 			static void timedWait(ConditionVar *cv, Mutex *mutex, long seconds = 1, long nanoseconds = 0);
 	};
-};
+}
 
 #endif

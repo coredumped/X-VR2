@@ -17,7 +17,7 @@
 #include<xvr2/SystemException.h>
 
 namespace xvr2 {
-
+	/** @todo Document all classes in StreamException.h */
 	class StreamException : public SystemException {
 		public:
 			StreamException();
@@ -35,7 +35,7 @@ namespace xvr2 {
 			StreamIsNotSeekable();
 			StreamIsNotSeekable(int c);
 	};
-};
+}
 
 #endif
 

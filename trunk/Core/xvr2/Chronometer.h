@@ -52,6 +52,6 @@ namespace xvr2{
 			/** This will return the elapsed microsecond since you called start */
 			long int elapsedMicrosecond();
 	};
-};
+}
 
 #endif

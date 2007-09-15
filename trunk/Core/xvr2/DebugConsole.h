@@ -32,5 +32,5 @@ namespace xvr2 {
 
 	/** Standard X-VR2 debug console */
 	extern DebugConsole debugConsole;
-};
+}
 #endif

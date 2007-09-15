@@ -20,7 +20,7 @@
 
 namespace xvr2 {
 
-	/** TODO: Document this class */
+	/** @todo Document RawInputStream class */
 	class RawInputStream : public ReadableStream, public RawStreamInterface {
 		private:
 			bool reached_eof;
@@ -53,7 +53,7 @@ namespace xvr2 {
 			int fd();
 			int millis();
 	};
-};
+}
 
 #endif
 

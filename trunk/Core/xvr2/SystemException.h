@@ -204,7 +204,7 @@ namespace xvr2 {
 			/** Default constructor */
 			DSOSymbolException();
 	};
-};
+}
 
 
 #endif

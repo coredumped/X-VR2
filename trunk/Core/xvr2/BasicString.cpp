@@ -8,4 +8,4 @@
 namespace xvr2 {
 
 
-};
+}

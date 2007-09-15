@@ -22,7 +22,8 @@ namespace xvr2 {
 
 	/* DSObject stands for Dynamic Shared Object and is a for to load a C++ object
 	 * from a shared library, in the same way you load a funciotns using the Plugin
-	 * class */
+	 * class.
+	 * @todo Document the DSObjectFactory class better. */
 	class DSObjectFactory : public Object {
 		private:
 		protected:
@@ -43,6 +44,6 @@ namespace xvr2 {
 			}
 	};
 
-};
+}
 
 #endif

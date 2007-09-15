@@ -120,7 +120,7 @@ namespace xvr2{
 			static Date Now();
 	};
 
-};
+}
 
 
 #endif

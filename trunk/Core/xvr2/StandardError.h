@@ -24,6 +24,6 @@ namespace xvr2{
 		public:
 			StandardError();
 	};
-};
+}
 
 #endif

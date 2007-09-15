@@ -69,4 +69,4 @@ namespace xvr2{
 	const bool Thread::joinable(){
 		return (_detached == true)?false:true;
 	}
-};
+}

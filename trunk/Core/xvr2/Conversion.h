@@ -37,6 +37,6 @@ namespace xvr2 {
 	const long double String2longdouble(const String &s);
 
 	//Numeric to string conversions
-};
+}
 
 #endif

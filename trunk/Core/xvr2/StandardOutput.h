@@ -17,13 +17,15 @@
 #include<xvr2/CoreExceptions.h>
 
 namespace xvr2{
-	/** This class represents the Standard Output output stream */
+	/** This class represents the Standard Output output stream
+	 * @todo See if we can express the StandardOutput class in terms of the new
+	 * stream classes */
 	class StandardOutput:public TextOutput{
 		protected:
 			void outputMethod(const void *buff, UInt32 size);
 		public:
 			StandardOutput();
 	};
-};
+}
 
 #endif
