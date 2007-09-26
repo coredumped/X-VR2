@@ -23,7 +23,7 @@ namespace xvr2 {
 	const char *StringBuffer::toCharPtr() const{
 		return buffer->toCharPtr();
 	}
-	const StringBuffer &StringBuffer::operator<<(const String &s) const {
+	StringBuffer &StringBuffer::operator<<(const String &s) {
 		buffer->concat(s.toCharPtr());
 		return *this;
 	}
