@@ -54,6 +54,17 @@ namespace xvr2 {
 
 #endif
 
+#ifndef __XVR2_VERSION_MAJOR
+#define __XVR2_VERSION_MAJOR @GENERIC_MAJOR_VERSION@
+#endif
+
+#ifndef __XVR2_VERSION_MINOR
+#define __XVR2_VERSION_MINOR @GENERIC_MINOR_VERSION@
+#endif
+
+#ifndef __XVR2_VERSION_MICRO
+#define __XVR2_VERSION_MICRO @GENERIC_MICRO_VERSION@
+#endif
 
 #ifndef __XVR2_PREFIX_DIR
 #define __XVR2_PREFIX_DIR "@prefix@"
