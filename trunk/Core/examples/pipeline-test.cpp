@@ -45,11 +45,14 @@ int main(int argc, char *argv[]){
 	xvr2::Pipeline<xvr2::String> p;
 	p.addFilter(new ChangeSpaces());
 	p.addFilter(new ToLowercase());
-	xvr2::ThreadManager::start(p);
+	//xvr2::ThreadManager::start(p);
+	p.start();
 	xvr2::Pipeline<xvr2::String>::Reader result = p.write(val);
 	std::cout << "Before: " << val << std::endl;
 	while(!result.finished()) usleep(100);
 	val = result.read();
 	std::cout << "After: " << val << std::endl;
+	p.shutdown();
+	
 	return 0;
 }

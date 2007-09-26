@@ -61,6 +61,17 @@
 	#define XVR2_LITTLE_ENDIAN
 #endif
 
+#ifndef __XVR2_VERSION_MAJOR
+#define __XVR2_VERSION_MAJOR @GENERIC_MAJOR_VERSION@
+#endif
+
+#ifndef __XVR2_VERSION_MINOR
+#define __XVR2_VERSION_MINOR @GENERIC_MINOR_VERSION@
+#endif
+
+#ifndef __XVR2_VERSION_MICRO
+#define __XVR2_VERSION_MICRO @GENERIC_MICRO_VERSION@
+#endif
 
 /** @brief This is the main namespace, al core stuff happens here. */
 namespace xvr2 {

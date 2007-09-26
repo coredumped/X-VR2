@@ -65,6 +65,7 @@ namespace xvr2 {
 			};
 			/** @brief A map containing which tasks have been completed. */
 			xvr2::Map<Int64, bool, lt> fones;
+			/** @brief A map containing filtering results. */
 			xvr2::Map<Int64, _Tp, lt> dones;
 		public:
 			class Reader {
@@ -72,7 +73,6 @@ namespace xvr2 {
 					MyPipelineT *pipeline;
 				protected:
 					Int64 id;
-					
 				public:
 					Reader(){ }
 					Reader(Int64 pid, MyPipelineT *_pipe){
@@ -92,10 +92,10 @@ namespace xvr2 {
 						pipeline->fones.unlock();
 						return ret;
 					}
-					_Tp read(){
-						/*if(!finished){
-							//Throw an exception
-						}*/
+					_Tp read(bool wait = false){
+						if(!finished() && wait){
+							while(!finished()) usleep(100);
+						}
 						pipeline->dones.lock();
 						_Tp v = pipeline->dones[id];
 						pipeline->dones.unlock();
@@ -105,6 +105,10 @@ namespace xvr2 {
 			/** @brief Mandatory default constructor. */
 			Pipeline() : xvr2::Thread() {
 				id_counter = time(0);
+			}
+			
+			~Pipeline(){
+				
 			}
 			
 			/** @brief Turns off this Pipeline processing. */

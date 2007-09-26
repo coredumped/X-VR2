@@ -59,7 +59,8 @@ namespace xvr2{
 				Timestamp t;
 				ldata << t.toString();
 			}
-			ldata << __lsep1 << ThreadManager::getCurrentThreadID() << __lsep2 << line;
+			ldata << __lsep1 << ThreadManager::getCurrentThreadID()
+					<< __lsep2 << line;
 			Log::flush();
 			ldata.clear();
 		}

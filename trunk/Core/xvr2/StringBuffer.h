@@ -25,7 +25,7 @@ namespace xvr2 {
 			const char operator[](int idx) const;
 			const char operator[](int idx);
 			const char *toCharPtr() const;
-			const StringBuffer &operator<<(const String &s) const;
+			StringBuffer &operator<<(const String &s);
 			virtual std::string toString() const;
 			/** Will append to the String len characters from the data buffer */
 			void eat(char *data, int len);

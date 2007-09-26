@@ -22,6 +22,7 @@
 #else
 #include<vector.h>
 #endif
+#include"Vector.h"
 #include"Mutex.h"
 
 namespace xvr2 {
@@ -61,8 +62,8 @@ namespace xvr2 {
 #error Currently POSIX threads are the only supported concurrency method
 #endif
 	};
-	static std::vector<__ThreadData_t *> activeThreads;
-	static std::vector<BackgroundFunction *> activeBFs;
+	static xvr2::Vector<__ThreadData_t *> activeThreads;
+	static xvr2::Vector<BackgroundFunction *> activeBFs;
 	static Mutex lm;
 
 #ifdef USE_POSIX_THREADS
@@ -97,21 +98,20 @@ namespace xvr2 {
 #endif
 
 	void __addThread(__ThreadData_t *info){
-		lm.lock();
+		activeThreads.lock();
 		activeThreads.push_back(info);
-		lm.unlock();
+		activeThreads.unlock();
 	}
 	void __removeThread(__ThreadData_t *info){
 		unsigned int i;
-		lm.lock();
+		activeThreads.lock();
 		for(i = 0; i < activeThreads.size(); i++){
 			if(info == activeThreads[i]){
 				activeThreads.erase(activeThreads.begin() + i);
 			}
 		}
-		lm.unlock();
+		activeThreads.unlock();
 	}
-
 
 	static void _addBF(BackgroundFunction *bf){
 		lm.lock();
@@ -246,20 +246,21 @@ namespace xvr2 {
 		pthread_attr_t attr;
 		pthread_attr_init(&attr);
 		pthread_attr_getschedpolicy(&attr, &pol);
-		if(t.joinable()){
+	
+//		if(t.joinable()){
 #ifdef USE_POSIX_THREADS
 			pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
 #endif
-		}
+/*		}
 		else{
 #ifdef USE_POSIX_THREADS
 			pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_DETACHED);
 #endif
-		}
+		}*/
 		if(pthread_create(&thread, &attr, (void* (*)(void*))runMethod_ref, (void *)&t) == EAGAIN){
 			throw ThreadNotRunning();
 		}
-		while(t._started == false) System::usleep(100);
+		while(t._started == false) usleep(100);
 	}
 
 	static const char *_iparm = "Policy";

@@ -107,12 +107,12 @@ CPPFLAGS =  -DUSE_POSIX_THREADS -D_REENTRANT -D_THREAD_SAFE
 CXX = g++
 CXXCPP = g++ -E
 CXXDEPMODE = depmode=gcc3
-CXXFLAGS = -gstabs+ -Wall 
+CXXFLAGS = -g -O2 -Wall 
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
 DOXYGEN = /usr/bin/doxygen
-DOXYGEN_INPUT_DIR = SDK_Docs
+DOXYGEN_INPUT_DIR = 
 ECHO = echo
 ECHO_C = 
 ECHO_N = -n

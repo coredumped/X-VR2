@@ -12,10 +12,10 @@
  * at the top of the source tree.
  */
 #include"config.h"
-#if __GNUC__ >= 3
-#include<iostream>
-#else
+#if __GNUC__ < 3
 #include<iostream.h>
+#else
+#include<iostream>
 #endif
 #include<errno.h>
 #include<stdlib.h>
@@ -68,5 +68,9 @@ namespace xvr2{
 	
 	const bool Thread::joinable(){
 		return (_detached == true)?false:true;
+	}
+	
+	void Thread::join(){
+		//ThreadManager::join()
 	}
 }

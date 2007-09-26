@@ -76,6 +76,8 @@ namespace xvr2{
 			const bool terminated();
 			const bool running();
 			const bool joinable();
+			
+			void join();
 	};	
 
 }

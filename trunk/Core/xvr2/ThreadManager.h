@@ -64,7 +64,7 @@ namespace xvr2 {
 			static const UInt64 getCurrentThreadID();
 			/** @brief Obtains a count of the currently running concurrent
 			 *  tasks.
-			 *  @Returns how many Thread or BackgroundFunction objects are 
+			 *  @returns how many Thread or BackgroundFunction objects are 
 			 *  concurrently running. */
 			static unsigned int activeCount();
 			/** @brief Obtains the numeric of the given Thread object.

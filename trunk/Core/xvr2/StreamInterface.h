@@ -20,9 +20,9 @@
 #include<xvr2/StreamException.h>
 
 namespace xvr2 {
-	/** @todo Document all classes in StreamInterface.h */
 	
-	/** File interface class. */
+	/** @brief File interface class.
+	 *  @todo Document all classes in StreamInterface.h */
 	class StreamInterface : public Object {
 		private:
 		protected:
