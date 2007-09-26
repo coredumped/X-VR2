@@ -11,25 +11,25 @@ namespace xvr2 {
 	template<class StringT>
 	class BasicStringBuffer:public Object {
 		protected:
-			StringT *buffer;
+			StringT buffer;
 		public:
 			BasicStringBuffer(){
-				buffer = 0;
+				//buffer = 0;
 			}
 			~BasicStringBuffer(){
-				if(buffer != 0){
+				/*if(buffer != 0){
 					delete buffer;
 					buffer = 0;
-				}
+				}*/
 			}
 			BasicStringBuffer(const StringT &s){
-				buffer = new StringT();
-				buffer->assign(s.toCharPtr());
+				//buffer = new StringT();
+				buffer = s;
 			}
 			void clear(){
-				if(buffer != 0){
-					buffer->clear();
-				}
+				//if(buffer != 0){
+					buffer.clear();
+				//}
 			}
 	};
 };
