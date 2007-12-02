@@ -24,6 +24,7 @@
 #endif
 #include"Vector.h"
 #include"Mutex.h"
+#include"Map.h"
 
 namespace xvr2 {
 	void *runMethod(void *tx);
@@ -130,6 +131,14 @@ namespace xvr2 {
 		}
 		lm.unlock();
 	}
+	
+	struct _x_ucmp {
+		bool operator()(UInt64 a, UInt64 b) const{
+			return (a < b)?true:false;
+		}
+	};
+	
+	xvr2::Map<UInt64, Thread *, _x_ucmp> __TRefs;
 
 	static __ThreadData_t *findThread_id(UInt64 id){
 		unsigned int i;
@@ -176,12 +185,16 @@ namespace xvr2 {
 	
 	void *runMethod_ref(Thread &tx){
 		//pthread_getschedparam(info->thread, tx., (struct sched_param *)&info->priority);
-		//__addThread_ref(tx); //Add the thread to the thread list
+		__TRefs.lock();
+		__TRefs[ThreadManager::getCurrentThreadID()] = &tx;
+		__TRefs.unlock();
 		tx._started = true;
 		tx();
 		tx.callFinalizers();
+		__TRefs.lock();
+		__TRefs.erase(ThreadManager::getCurrentThreadID());
+		__TRefs.unlock();
 		tx._terminated = true;
-		//__removeThread_ref(tx); //Remove thread from the thread list
 		return 0;
 	}
 #endif
