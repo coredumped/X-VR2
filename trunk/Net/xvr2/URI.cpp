@@ -18,10 +18,34 @@ namespace xvr2 {
 
 	namespace Net {
 
+		struct __smap {
+			bool operator()(const char *a, const char *b){
+				return strcmp(a, b) < 0;
+			}
+		};
+
+		static Map<const char *, int, __smap> _scheme_port;
+
 		URI::URI(){
 		}
 		
 		URI::URI(const String &uri){
+			_scheme_port.lock();
+			if(_scheme_port.size() <= 0){
+				_scheme_port["http:"] = 80;
+				_scheme_port["https:"] = 443;
+				_scheme_port["ftp:"] = 21;
+				_scheme_port["h323:"] = 1720;
+				_scheme_port["imap:"] = 143;
+				_scheme_port["smtp:"] = 25;
+				_scheme_port["ldap:"] = 389;
+				_scheme_port["pop:"] = 110;
+				_scheme_port["pop3:"] = 110;
+				_scheme_port["sip:"] = 5060;
+				_scheme_port["sips:"] = 5061;
+				_scheme_port["snmp:"] = 161;
+			}
+			_scheme_port.unlock();
 			_uri = uri;
 			parse();
 		}
@@ -171,6 +195,14 @@ namespace xvr2 {
 			
 			
 			
+			if(_scheme.size() > 0){
+				_scheme.toLowerCase();
+			}
+			if(_port == -1){
+				_scheme_port.lock();
+				_port = _scheme_port[_scheme.c_str()];
+				_scheme_port.unlock();
+			}
 		}
 
 	}
