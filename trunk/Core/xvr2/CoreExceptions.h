@@ -18,13 +18,15 @@
 
 namespace xvr2{
 
+	class String;
+
 	/** \class Exception CoreExceptions.h <xvr2/CoreExceptions.h>
 	 *  \brief This is the parent class of all the exceptions. */
 	class Exception:public ExceptionTracer {
 		private:
 		protected:
 			/** Stores the exception's description as a string */
-			char *description;
+			std::string description;
 		public:
 			/** Default constructor */
 			Exception();
@@ -33,7 +35,7 @@ namespace xvr2{
 			 *  contained in d.
 			 *  \param d Description string (the name and or description
 			 *  of the exception. */
-			Exception(const char *d);
+			Exception(const std::string &d);
 			/** Displays the description of the exception */
 			std::string toString();
 	};
@@ -126,9 +128,14 @@ namespace xvr2{
 	/** \class ParseException CoreExceptions.h <xvr2/CoreExceptions.h>
 	 *  Generic parsing exception */
 	class ParseException:public Exception{
+		protected:
+			std::string orig_text;
 		public:
 			/** Default constructor */
 			ParseException();
+			ParseException(const std::string &_original_text);
+			const std::string &text();
+			const std::string &text() const;
 	};
 	/** \class SecurityException CoreExceptions.h <xvr2/CoreExceptions.h>
 	 *  This is a generic exception for security-related events. */

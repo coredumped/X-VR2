@@ -221,8 +221,7 @@ namespace xvr2{
 
 	void Unix::getKernelInfo(){
 		//
-		// TODO
-		// Verify that the uname() system call is thread safe
+		// TODO: Verify that the uname() system call is thread safe
 		//
 		struct utsname data;
 		try{

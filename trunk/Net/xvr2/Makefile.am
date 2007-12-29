@@ -6,7 +6,8 @@ h_sources = IPv4Address.h IPv4Resolver.h netdefs.h NetworkExceptions.h \
 	    X509Name.h X509Subject.h OldSocket.h OldTCPSocket.h OldTCPServerSocket.h \
 	    OldUDPSocket.h OldUDPServerSocket.h SocketExceptions.h IPAddress.h \
 	    ClientSocket.h SocketProtocol.h RawSocketInputStream.h \
-	    BufferedSocketInputStream.h RawSocketOutputStream.h
+	    BufferedSocketInputStream.h RawSocketOutputStream.h HTTPClient.h \
+	    HTTPResponse.h URI.h
 
 cc_sources = IPv4Address.cpp IPv4Resolver.cpp NetworkExceptions.cpp Socket.cpp \
 	     SSLContext.cpp SSLSocket.cpp TCPServerSocket.cpp \
@@ -14,7 +15,8 @@ cc_sources = IPv4Address.cpp IPv4Resolver.cpp NetworkExceptions.cpp Socket.cpp \
 	     X509Issuer.cpp X509Name.cpp X509Subject.cpp OldSocket.cpp OldTCPSocket.cpp \
 	     OldTCPServerSocket.cpp OldUDPSocket.cpp OldUDPServerSocket.cpp \
 	     SocketExceptions.cpp IPAddress.cpp ClientSocket.cpp SocketProtocol.cpp \
-	     RawSocketInputStream.cpp BufferedSocketInputStream.cpp RawSocketOutputStream.cpp
+	     RawSocketInputStream.cpp BufferedSocketInputStream.cpp RawSocketOutputStream.cpp \
+	     HTTPClient.cpp URI.cpp
 
 
 

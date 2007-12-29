@@ -35,15 +35,12 @@ namespace xvr2 {
 	};
 
 	Exception::Exception():ExceptionTracer(){
-		description = (char *)xvr2::strGenericException;
+		description = xvr2::strGenericException;
 	}
 	Exception::~Exception(){
 	}
-	Exception::Exception(const char *d):ExceptionTracer(){
-		if(d == 0)
-			description = (char *)xvr2::strGenericException;
-		else
-			description = (char *)d;
+	Exception::Exception(const std::string &d):ExceptionTracer(){
+		description = d;
 	}
 	std::string Exception::toString() {
 		return std::string(description);
@@ -80,9 +77,24 @@ namespace xvr2 {
 	NumberException::NumberException(){
 		description = (char *)xvr2::excepNumeric;
 	}
+	
 	ParseException::ParseException(){
 		description = (char *)xvr2::excepParse;
 	}
+	
+	ParseException::ParseException(const std::string &_orig_text){
+		description = (char *)xvr2::excepParse;
+		orig_text = _orig_text;
+	}
+	
+	const std::string &ParseException::text(){
+		return orig_text;
+	}
+	
+	const std::string &ParseException::text() const {
+		return orig_text;
+	}
+	
 	UndefinedClassException::UndefinedClassException(){
 		description = (char *)xvr2::excepUndefinedClass;
 	}

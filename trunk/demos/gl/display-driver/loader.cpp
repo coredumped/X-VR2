@@ -1,7 +1,5 @@
 /* $Id$ */
-/* TODO
- * Parse command-line arguments in order to permit the user to load the driver
- * he/she wants */
+/* TODO: Parse command-line arguments in order to permit the user to load the driver it wants */
 #include<xvr2.h>
 #include<xglDisplayDriver.h>
 

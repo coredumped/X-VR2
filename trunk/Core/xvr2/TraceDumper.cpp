@@ -211,7 +211,7 @@ namespace xvr2{
 #ifdef USE_DEBUG
 		dumpTrace();
 #else
-		if(ExceptionTracer::isEnabled())
+		if(ExceptionTracer::isEnabled() || getenv("XVR2_DEBUG_DUMPTRACE") != 0)
 			dumpTrace();
 #endif
 	}

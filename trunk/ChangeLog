@@ -1,3 +1,10 @@
+2007-12-27 Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
+* It is now possible to enable a stacktrace dump when the environment variable
+XVR2_DEBUG_DUMPTRACE is defined
+
+2007-12-27 Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
+* Added a class for handling URIs to the xvr2::Net namespace
+
 2007-08-29  Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
 * Added a String example program based on earlier demos. 
 

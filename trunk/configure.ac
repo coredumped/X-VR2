@@ -131,6 +131,25 @@ AC_ARG_ENABLE(examples, AC_HELP_STRING([--enable-examples	Build example programs
 
 AC_SUBST(EXAMPLES_DIR)
 
+CURL_ENABLED=0
+CURL_VERSION=""
+USED_HTTP_CLIENT="Native"
+AC_ARG_ENABLE(curl, AC_HELP_STRING([--enable-curl    	Build example programs]), [
+		
+		AC_PATH_PROG([CURL_CONFIG], [curl-config], no, []
+			 		 [$PATH:/usr/local/bin:/opt:/opt/doxygen:/bin:/opt/bin:/opt/sfw/bin:/usr/ccs/bin])
+		if test "$CURL_CONFIG" = "no"
+		then
+			AC_MSG_RESULT([No libcurl found])
+		else
+			CURL_ENABLED=1
+			CURL_VERSION=`curl-config --version`
+			USED_HTTP_CLIENT=$CURL_VERSION
+		fi
+	]
+)
+AC_SUBST(CURL_ENABLED)
+
 dnl -----------------------------------------------
 dnl Miscellaneous function checking
 dnl -----------------------------------------------
@@ -273,6 +292,7 @@ AC_OUTPUT(Makefile \
 	Platform/xvr2/Makefile \
 	Platform/xvr2platform.pc \
 	Net/Makefile \
+	Net/examples/Makefile \
 	Net/xvr2/Makefile \
 	Net/xvr2net.pc \
 	SDK_Docs/Doxyfile \
@@ -322,6 +342,9 @@ echo "#  Debug mode:            $debug_mode_activated"
 echo "#  Thread platform:       $threads_library"
 echo "#  Generate docs:         $doxygen_docs"
 echo "#  Build example progs:   $BUILD_EXAMPLES"
+echo "#-------------------------------------------------#"
+echo "#  Network Options:"
+echo "#  HTTPClient:            $USED_HTTP_CLIENT"
 echo "#-------------------------------------------------#"
 echo "#  SQL Drivers:"
 echo "#  PostgreSQL Provider:   $PGSQL_DRIVER_ENABLED"

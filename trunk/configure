@@ -881,6 +881,8 @@ LIBTOOL
 SYSTEM_IS_BIGENDIAN
 SYSTEM_IS_LITTLEENDIAN
 EXAMPLES_DIR
+CURL_CONFIG
+CURL_ENABLED
 ENABLE_XVR2_POSIX_THREADS_SUPPORT
 DOXYGEN
 DOXYGEN_INPUT_DIR
@@ -1495,6 +1497,8 @@ Optional Features:
   --enable-debug		Build library in debug mode
 
   --enable-examples	Build example programs
+
+  --enable-curl    	Build example programs
 
   --enable-docs          Build library documentation
 
@@ -4892,7 +4896,7 @@ ia64-*-hpux*)
   ;;
 *-*-irix6*)
   # Find out which ABI we are using.
-  echo '#line 4895 "configure"' > conftest.$ac_ext
+  echo '#line 4899 "configure"' > conftest.$ac_ext
   if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
   (eval $ac_compile) 2>&5
   ac_status=$?
@@ -7157,11 +7161,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:7160: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:7164: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>conftest.err)
    ac_status=$?
    cat conftest.err >&5
-   echo "$as_me:7164: \$? = $ac_status" >&5
+   echo "$as_me:7168: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s "$ac_outfile"; then
      # The compiler can only warn and ignore the option if not recognized
      # So say no if there are warnings other than the usual output.
@@ -7447,11 +7451,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:7450: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:7454: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>conftest.err)
    ac_status=$?
    cat conftest.err >&5
-   echo "$as_me:7454: \$? = $ac_status" >&5
+   echo "$as_me:7458: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s "$ac_outfile"; then
      # The compiler can only warn and ignore the option if not recognized
      # So say no if there are warnings other than the usual output.
@@ -7551,11 +7555,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:7554: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:7558: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>out/conftest.err)
    ac_status=$?
    cat out/conftest.err >&5
-   echo "$as_me:7558: \$? = $ac_status" >&5
+   echo "$as_me:7562: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s out/conftest2.$ac_objext
    then
      # The compiler can only warn and ignore the option if not recognized
@@ -9913,7 +9917,7 @@ else
   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
   lt_status=$lt_dlunknown
   cat > conftest.$ac_ext <<EOF
-#line 9916 "configure"
+#line 9920 "configure"
 #include "confdefs.h"
 
 #if HAVE_DLFCN_H
@@ -10013,7 +10017,7 @@ else
   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
   lt_status=$lt_dlunknown
   cat > conftest.$ac_ext <<EOF
-#line 10016 "configure"
+#line 10020 "configure"
 #include "confdefs.h"
 
 #if HAVE_DLFCN_H
@@ -12433,11 +12437,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:12436: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:12440: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>conftest.err)
    ac_status=$?
    cat conftest.err >&5
-   echo "$as_me:12440: \$? = $ac_status" >&5
+   echo "$as_me:12444: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s "$ac_outfile"; then
      # The compiler can only warn and ignore the option if not recognized
      # So say no if there are warnings other than the usual output.
@@ -12537,11 +12541,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:12540: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:12544: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>out/conftest.err)
    ac_status=$?
    cat out/conftest.err >&5
-   echo "$as_me:12544: \$? = $ac_status" >&5
+   echo "$as_me:12548: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s out/conftest2.$ac_objext
    then
      # The compiler can only warn and ignore the option if not recognized
@@ -14114,11 +14118,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:14117: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:14121: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>conftest.err)
    ac_status=$?
    cat conftest.err >&5
-   echo "$as_me:14121: \$? = $ac_status" >&5
+   echo "$as_me:14125: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s "$ac_outfile"; then
      # The compiler can only warn and ignore the option if not recognized
      # So say no if there are warnings other than the usual output.
@@ -14218,11 +14222,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:14221: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:14225: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>out/conftest.err)
    ac_status=$?
    cat out/conftest.err >&5
-   echo "$as_me:14225: \$? = $ac_status" >&5
+   echo "$as_me:14229: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s out/conftest2.$ac_objext
    then
      # The compiler can only warn and ignore the option if not recognized
@@ -16418,11 +16422,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:16421: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:16425: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>conftest.err)
    ac_status=$?
    cat conftest.err >&5
-   echo "$as_me:16425: \$? = $ac_status" >&5
+   echo "$as_me:16429: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s "$ac_outfile"; then
      # The compiler can only warn and ignore the option if not recognized
      # So say no if there are warnings other than the usual output.
@@ -16708,11 +16712,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:16711: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:16715: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>conftest.err)
    ac_status=$?
    cat conftest.err >&5
-   echo "$as_me:16715: \$? = $ac_status" >&5
+   echo "$as_me:16719: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s "$ac_outfile"; then
      # The compiler can only warn and ignore the option if not recognized
      # So say no if there are warnings other than the usual output.
@@ -16812,11 +16816,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:16815: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:16819: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>out/conftest.err)
    ac_status=$?
    cat out/conftest.err >&5
-   echo "$as_me:16819: \$? = $ac_status" >&5
+   echo "$as_me:16823: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s out/conftest2.$ac_objext
    then
      # The compiler can only warn and ignore the option if not recognized
@@ -19855,6 +19859,71 @@ fi
 
 
 
+CURL_ENABLED=0
+CURL_VERSION=""
+USED_HTTP_CLIENT="Native"
+# Check whether --enable-curl was given.
+if test "${enable_curl+set}" = set; then
+  enableval=$enable_curl;
+
+		# Extract the first word of "curl-config", so it can be a program name with args.
+set dummy curl-config; ac_word=$2
+{ echo "$as_me:$LINENO: checking for $ac_word" >&5
+echo $ECHO_N "checking for $ac_word... $ECHO_C" >&6; }
+if test "${ac_cv_path_CURL_CONFIG+set}" = set; then
+  echo $ECHO_N "(cached) $ECHO_C" >&6
+else
+  case $CURL_CONFIG in
+  [\\/]* | ?:[\\/]*)
+  ac_cv_path_CURL_CONFIG="$CURL_CONFIG" # Let the user override the test with a path.
+  ;;
+  *)
+  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+as_dummy="
+			 		 $PATH:/usr/local/bin:/opt:/opt/doxygen:/bin:/opt/bin:/opt/sfw/bin:/usr/ccs/bin"
+for as_dir in $as_dummy
+do
+  IFS=$as_save_IFS
+  test -z "$as_dir" && as_dir=.
+  for ac_exec_ext in '' $ac_executable_extensions; do
+  if { test -f "$as_dir/$ac_word$ac_exec_ext" && $as_test_x "$as_dir/$ac_word$ac_exec_ext"; }; then
+    ac_cv_path_CURL_CONFIG="$as_dir/$ac_word$ac_exec_ext"
+    echo "$as_me:$LINENO: found $as_dir/$ac_word$ac_exec_ext" >&5
+    break 2
+  fi
+done
+done
+IFS=$as_save_IFS
+
+  test -z "$ac_cv_path_CURL_CONFIG" && ac_cv_path_CURL_CONFIG="no"
+  ;;
+esac
+fi
+CURL_CONFIG=$ac_cv_path_CURL_CONFIG
+if test -n "$CURL_CONFIG"; then
+  { echo "$as_me:$LINENO: result: $CURL_CONFIG" >&5
+echo "${ECHO_T}$CURL_CONFIG" >&6; }
+else
+  { echo "$as_me:$LINENO: result: no" >&5
+echo "${ECHO_T}no" >&6; }
+fi
+
+
+		if test "$CURL_CONFIG" = "no"
+		then
+			{ echo "$as_me:$LINENO: result: No libcurl found" >&5
+echo "${ECHO_T}No libcurl found" >&6; }
+		else
+			CURL_ENABLED=1
+			CURL_VERSION=`curl-config --version`
+			USED_HTTP_CLIENT=$CURL_VERSION
+		fi
+
+
+fi
+
+
+
 
 
 
@@ -20616,7 +20685,7 @@ done
 
 
 
-ac_config_files="$ac_config_files Makefile Core/Makefile Core/xvr2/Makefile Core/xvr2core.pc Core/xvr2/xvr2config.h Core/xvr2/xvr2config.cpp Core/examples/Makefile Text/Makefile Text/xvr2/Makefile Text/xvr2text.pc SQL/Makefile SQL/xvr2/Makefile SQL/xvr2sql.pc SQL/drivers/Makefile SQL/drivers/pgsql/Makefile SQL/drivers/sqlite/Makefile SQL/examples/Makefile Platform/Makefile Platform/xvr2/Makefile Platform/xvr2platform.pc Net/Makefile Net/xvr2/Makefile Net/xvr2net.pc SDK_Docs/Doxyfile SDK_Docs/Makefile"
+ac_config_files="$ac_config_files Makefile Core/Makefile Core/xvr2/Makefile Core/xvr2core.pc Core/xvr2/xvr2config.h Core/xvr2/xvr2config.cpp Core/examples/Makefile Text/Makefile Text/xvr2/Makefile Text/xvr2text.pc SQL/Makefile SQL/xvr2/Makefile SQL/xvr2sql.pc SQL/drivers/Makefile SQL/drivers/pgsql/Makefile SQL/drivers/sqlite/Makefile SQL/examples/Makefile Platform/Makefile Platform/xvr2/Makefile Platform/xvr2platform.pc Net/Makefile Net/examples/Makefile Net/xvr2/Makefile Net/xvr2net.pc SDK_Docs/Doxyfile SDK_Docs/Makefile"
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
@@ -21225,6 +21294,7 @@ do
     "Platform/xvr2/Makefile") CONFIG_FILES="$CONFIG_FILES Platform/xvr2/Makefile" ;;
     "Platform/xvr2platform.pc") CONFIG_FILES="$CONFIG_FILES Platform/xvr2platform.pc" ;;
     "Net/Makefile") CONFIG_FILES="$CONFIG_FILES Net/Makefile" ;;
+    "Net/examples/Makefile") CONFIG_FILES="$CONFIG_FILES Net/examples/Makefile" ;;
     "Net/xvr2/Makefile") CONFIG_FILES="$CONFIG_FILES Net/xvr2/Makefile" ;;
     "Net/xvr2net.pc") CONFIG_FILES="$CONFIG_FILES Net/xvr2net.pc" ;;
     "SDK_Docs/Doxyfile") CONFIG_FILES="$CONFIG_FILES SDK_Docs/Doxyfile" ;;
@@ -21446,6 +21516,8 @@ LIBTOOL!$LIBTOOL$ac_delim
 SYSTEM_IS_BIGENDIAN!$SYSTEM_IS_BIGENDIAN$ac_delim
 SYSTEM_IS_LITTLEENDIAN!$SYSTEM_IS_LITTLEENDIAN$ac_delim
 EXAMPLES_DIR!$EXAMPLES_DIR$ac_delim
+CURL_CONFIG!$CURL_CONFIG$ac_delim
+CURL_ENABLED!$CURL_ENABLED$ac_delim
 ENABLE_XVR2_POSIX_THREADS_SUPPORT!$ENABLE_XVR2_POSIX_THREADS_SUPPORT$ac_delim
 DOXYGEN!$DOXYGEN$ac_delim
 DOXYGEN_INPUT_DIR!$DOXYGEN_INPUT_DIR$ac_delim
@@ -21459,7 +21531,7 @@ LIBOBJS!$LIBOBJS$ac_delim
 LTLIBOBJS!$LTLIBOBJS$ac_delim
 _ACEOF
 
-  if test `sed -n "s/.*$ac_delim\$/X/p" conf$$subs.sed | grep -c X` = 28; then
+  if test `sed -n "s/.*$ac_delim\$/X/p" conf$$subs.sed | grep -c X` = 30; then
     break
   elif $ac_last_try; then
     { { echo "$as_me:$LINENO: error: could not make $CONFIG_STATUS" >&5
@@ -22101,6 +22173,9 @@ echo "#  Debug mode:            $debug_mode_activated"
 echo "#  Thread platform:       $threads_library"
 echo "#  Generate docs:         $doxygen_docs"
 echo "#  Build example progs:   $BUILD_EXAMPLES"
+echo "#-------------------------------------------------#"
+echo "#  Network Options:"
+echo "#  HTTPClient:            $USED_HTTP_CLIENT"
 echo "#-------------------------------------------------#"
 echo "#  SQL Drivers:"
 echo "#  PostgreSQL Provider:   $PGSQL_DRIVER_ENABLED"

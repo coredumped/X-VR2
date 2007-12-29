@@ -22,16 +22,21 @@
  General text-manipulation classes live here, regular expression stuff and some
  text-hashing facilities too.
  @see xvr2::Text namespace
- @subsection db_sub DB library
+ @subsection sql_sub SQL library
  Provides access to SQL based databases, currently X-VR2 makes use of drivers 
  for database connectivity, an API for developing your own driver is provided
  as well.
- @see xvr2::DB namespace
+ As of this installment we have drivers for PostgreSQL and SQLite, eventually
+ we will support MySQL as well as other major RDBMSes.
+ @see xvr2::SQL namespace
  @subsection plat_sub Platform library
  
  @see xvr2::Platform
  @subsection net_sub Network library
- 
+ The Network library is being revised now, must of what it currently has are some
+ bits remaining from clawlib not that many changes, not really advanced at all
+ and with a non-working SSL implementation, but this is about to change pretty
+ quickly. 
  @see xvr2::Net
  
  @htmlonly

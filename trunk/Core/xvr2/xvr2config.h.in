@@ -61,6 +61,10 @@
 	#define XVR2_LITTLE_ENDIAN
 #endif
 
+#if @CURL_ENABLED@ == 1
+	#define USING_LIBCURL
+#endif
+
 #ifndef __XVR2_VERSION_MAJOR
 #define __XVR2_VERSION_MAJOR @GENERIC_MAJOR_VERSION@
 #endif
