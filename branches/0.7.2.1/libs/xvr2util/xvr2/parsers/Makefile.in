@@ -1,0 +1,30 @@
+LEX=flex
+YACC=bison
+
+CFLAGS+=`pkg-config xvr2core --cflags`
+
+all: config-lexer.o config-parser.o
+
+config-lexer.o: config-lexer.cpp config-parser.h
+	/bin/sh ../../libtool --mode=compile $(CXX) $(CFLAGS) -I../.. -I.. -I. -c -o config-lexer.o config-lexer.cpp
+
+config-parser.o: config-parser.cpp 
+	/bin/sh ../../libtool --mode=compile $(CXX) $(CFLAGS) -I../.. -I.. -I. -c -o config-parser.o config-parser.cpp
+
+config-lexer.cpp: config.lex
+	$(LEX) -P__xvr2_cfg_yy -oconfig-lexer.cpp config.lex
+
+config-parser.cpp: config.y
+	$(YACC) -p__xvr2_cfg_yy -d -oconfig-parser.cpp config.y
+	@mv -f config-parser.hpp config-parser.h
+
+config-parser.h: config.y
+	$(YACC) -p__xvr2_cfg_yy -d -oconfig-parser.cpp config.y
+	@mv -f config-parser.hpp config-parser.h
+
+install: all
+
+clean:
+	@rm -vf config-lexer.cpp config-parser.cpp config-parser.h *.o
+
+rebuild: clean all

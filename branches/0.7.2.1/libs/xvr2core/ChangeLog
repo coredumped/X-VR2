@@ -1,0 +1,41 @@
+VERSION 0.7.0.1
+Juan V. Guerrero <mindstorm2600@users.sourceforge.net> - Feb 8 2006
+	* Lots of changes has goind on with the String class, now it is
+	derived from BasicString which is derived from std::basic_string this
+	will give us the flexibility of also being able to wrapper the
+	std::wstring class, which is good.
+	* There's also being some work with the Exceptions in fact, I've tried
+	to trim down the number of source files as much as possible, so far
+	I've been able to generate 2 files the CoreExceptions.h and the
+	CoreExceptions.cpp, I'm not entirely sure if this has to be this way
+	since now when yo include CoreExceptions.h your codesize will increase
+	I think this will be changed, we'll see.
+Juan V. Guerrero <mindstorm2600@users.sourceforge.net> - Jan 17 2006
+	* Timestamp class is now derived from Date instead of Time, this
+	change has to be performed before, sorry for the inconvinience.
+
+VERSION 0.7.0 
+Juan V. Guerrero <mindstorm2600@users.sourceforge.net> - Jan 16 2006
+	* SQL Driver Interface has been updated to be more object oriented
+	* The String class is now based on the BasicString class template in
+	order to permit character types different than char, like w_char
+	* Now every class derived from Object has a String representation
+	* It is now possible to "print" any type of Object to the Console or
+	to a std::ostream (like std::cout)
+	* The work towards interfacing std::string and xvr2::String has begun
+	* The thread interface has suffered big changes, it is not needed any
+	more to define your threads as classes, you still can do it but now
+	you'll also have the option to just define the threadable routine.
+	* Inline exception tracing has been added trough the ExceptionTracer
+	class
+	* Finally I've started to work with SSL Sockets, the work is not
+	finished yet.
+	* X-VR2 has been succesfully compiled under AMD64, it is unknown if
+	this release is still compatible with SUN Solaris.
+
+Juan V. Guerrero <mindstorm2600@users.sourceforge.net> - May 31 2005
+	* Finally fixed the weirdest type casting expressions, basically (as
+	allways) it was my fault for not taking the time to learn C++ as it
+	should be. Some other parts of the code in the String class might
+	still be broken, I'll be writing some demo programs to test which
+	pieces are still broken
