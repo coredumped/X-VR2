@@ -31,21 +31,30 @@ do
 	if [ $? -ne 0 ]; then
 		exit 1
 	fi
-	echo -ne "\n\nDo you wish to install this library ($library) [Y/n] "
+	#echo -ne "\n\nDo you wish to install this library ($library) [Y/n] "
 	#read yesno
 	if [ "$yesno" != 'n' ]; then
-		cmd=`which sudo`
+		cmd=`which gksudo`
 		if [ -x ${cmd} ]; then
-			sudo make install
+			gksudo make install
 			if [ $? -ne 0 ]; then
 				exit 1
 			fi
 		else
-			su - root -c make install
-			if [ $? -ne 0 ]; then
-				exit 1
+			cmd=`which sudo`
+			if [ -x ${cmd} ]; then
+				sudo make install
+				if [ $? -ne 0 ]; then
+					exit 1
+				fi
+			else
+				su - root -c make install
+				if [ $? -ne 0 ]; then
+					exit 1
+				fi
 			fi
 		fi
 	fi
 	cd ..
 done
+echo "Build complete, now go and build the db drivers on your own"

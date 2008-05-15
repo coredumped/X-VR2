@@ -487,6 +487,18 @@ const bool MySQLDriver::bulkEnd(void *conn_handle){
 	return true;
 }
 
+const bool MySQLDriver::bulkDownloadBegin(void *conn_handle, const char *tablename, const char *cols, const char *delim){
+	return false;
+}
+
+const bool MySQLDriver::bulkDownloadData(void *conn_handle, xvr2::String &data){
+	return false;
+}
+
+const bool MySQLDriver::bulkDownloadEnd(void *conn_handle){
+	return false;
+}
+
 char *MySQLDriver::quoteString(const char *in){
 	char *buf;
 	int len;

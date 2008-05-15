@@ -13,6 +13,8 @@ namespace xvr2 {
 		const char *_excepblkf = "Bulk data loading failed";
 		const char *_excepblk_dp = "Bulk data parse error";
 		const char *_excepblk_st = "Bulk load initialization error";
+		const char *_excepblk_dn_st = "Bulk downloadload initialization error";
+		const char *_excepblkf_dn = "Bulk data downloading failed";
 
 		DatabaseException::DatabaseException(){
 #ifdef USE_EMBEDDED_CLASSNAMES
@@ -188,6 +190,57 @@ namespace xvr2 {
 			setClassName((char *)__xvr2_DB_BulkUploadStart);
 #endif
 			description = (char *)_excepblk_st;
+		}
+
+#ifdef USE_EMBEDDED_CLASSNAMES
+		static const char *__xvr2_DB_BulkDownloadStart = "xvr2::DB::BulkDownloadStart";
+#endif
+		
+		BulkDownloadStart::BulkDownloadStart(){
+#ifdef USE_EMBEDDED_CLASSNAMES
+			setClassName((char *)__xvr2_DB_BulkDownloadStart);
+#endif
+			description = (char *)_excepblk_dn_st;			
+		}
+		
+		BulkDownloadStart::BulkDownloadStart(const xvr2::String &__tablename, 
+											 const xvr2::String &__cols, 
+											 const xvr2::String &__error) : SQLQueryException(__error.toCharPtr()) {
+#ifdef USE_EMBEDDED_CLASSNAMES
+			setClassName((char *)__xvr2_DB_BulkDownloadStart);
+#endif
+			description = (char *)_excepblk_dn_st;
+			_tname = __tablename;
+			_tcols = __cols;
+		}
+		BulkDownloadStart::BulkDownloadStart(const xvr2::String &__query, 
+											 const xvr2::String &__tablename, 
+											 const xvr2::String &__cols, 
+											 const xvr2::String &__error) : SQLQueryException(__error.toCharPtr(), __query) {
+#ifdef USE_EMBEDDED_CLASSNAMES
+			setClassName((char *)__xvr2_DB_BulkDownloadStart);
+#endif
+			description = (char *)_excepblk_dn_st;
+			_tname = __tablename;
+			_tcols = __cols;
+		}
+		
+		const String &BulkDownloadStart::tablename(){
+			return _tname;
+		}
+		
+		const String &BulkDownloadStart::columns(){
+			return _tcols;
+		}
+		
+#ifdef USE_EMBEDDED_CLASSNAMES
+		static const char *__xvr2_DB_BulkDownloadFailed = "xvr2::DB::BulkDownloadFailed";
+#endif
+		BulkDownloadFailed::BulkDownloadFailed():SQLQueryException(){
+#ifdef USE_EMBEDDED_CLASSNAMES
+			setClassName((char *)__xvr2_DB_BulkDownloadFailed);
+#endif
+			description = (char *)_excepblkf_dn;
 		}
 	};
 };

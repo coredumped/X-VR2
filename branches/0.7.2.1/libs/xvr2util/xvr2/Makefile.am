@@ -16,7 +16,7 @@ library_include_HEADERS = $(h_sources)
 
 INCLUDES = -I$(top_srcdir)
 
-lib_LTLIBRARIES=libxvr2util-0.7.2.0.la
-libxvr2util_0_7_2_0_la_SOURCES= $(h_sources) $(cc_sources)
-libxvr2util_0_7_2_0_la_LDFLAGS= -version-info $(GENERIC_LIBRARY_VERSION) -release $(GENERIC_RELEASE)
-libxvr2util_0_7_2_0_la_LIBADD= parsers/*.lo
+lib_LTLIBRARIES=libxvr2util-0.7.2.1.la
+libxvr2util_0_7_2_1_la_SOURCES= $(h_sources) $(cc_sources)
+libxvr2util_0_7_2_1_la_LDFLAGS= -version-info $(GENERIC_LIBRARY_VERSION) -release $(GENERIC_RELEASE)
+libxvr2util_0_7_2_1_la_LIBADD= parsers/*.lo

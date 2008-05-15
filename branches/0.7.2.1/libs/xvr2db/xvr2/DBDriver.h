@@ -117,6 +117,9 @@ namespace xvr2 {
 				 *  insert it into the table.
 				 *  \param conn_handle The connection handle */
 				virtual const bool bulkEnd(void *conn_handle) = 0;
+				virtual const bool bulkDownloadBegin(void *conn_handle, const char *tablename, const char *cols, const char *delim) = 0;
+				virtual const bool bulkDownloadData(void *conn_handle, xvr2::String &data) = 0;
+				virtual const bool bulkDownloadEnd(void *conn_handle) = 0;
 				/** \deprecated Please use String escapeString(const String &s, void *conn_handle);
 				 *  Quotes a string to be passed in an SQL query this is neccesary since
 				 *  some chars can confuse the SQL command parser in the RDBMS, after 

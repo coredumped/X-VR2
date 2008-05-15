@@ -153,11 +153,11 @@ namespace xvr2{
 				if(driver->conn_requires_lock || driver->query_requires_lock) mt.unlock();
 				throw;
 			}
-			if(driver->conn_requires_lock || driver->query_requires_lock) mt.unlock();
+			//if(driver->conn_requires_lock || driver->query_requires_lock) mt.unlock();
 		}
 
 		void ConnectionMT::bulkUploadData(const String &data){
-			if(driver->conn_requires_lock || driver->query_requires_lock) mt.lock();
+			//if(driver->conn_requires_lock || driver->query_requires_lock) mt.lock();
 			try{
 				Connection::bulkUploadData(data);
 			}
@@ -165,11 +165,11 @@ namespace xvr2{
 				if(driver->conn_requires_lock || driver->query_requires_lock) mt.unlock();
 				throw;
 			}
-			if(driver->conn_requires_lock || driver->query_requires_lock) mt.unlock();
+			//if(driver->conn_requires_lock || driver->query_requires_lock) mt.unlock();
 		}
 
 		void ConnectionMT::bulkUploadEnd(){
-			if(driver->conn_requires_lock || driver->query_requires_lock) mt.lock();
+			//if(driver->conn_requires_lock || driver->query_requires_lock) mt.lock();
 			try{
 #ifdef USE_DEBUG
 #ifdef DEBUG_SQL
@@ -268,6 +268,44 @@ namespace xvr2{
 			if(driver->query_requires_lock) mt.unlock();
 			return ret;
 		}
+		
+		void ConnectionMT::bulkDownloadBegin(const String &table, const String &cols, const String &_delim){
+			if(driver->query_requires_lock) mt.lock();
+			try{
+				xvr2::DB::Connection::bulkDownloadBegin(table, cols, _delim);
+			}
+			catch(...){
+				if(driver->conn_requires_lock) mt.unlock();
+				throw;
+			}
+			//if(driver->query_requires_lock) mt.unlock();
+		}
+		
+		xvr2::String ConnectionMT::bulkDownloadData(){
+			xvr2::String data;
+			//if(driver->query_requires_lock) mt.lock();
+			try{
+				data = xvr2::DB::Connection::bulkDownloadData();
+			}
+			catch(...){
+				if(driver->conn_requires_lock) mt.unlock();
+				throw;
+			}			
+			//if(driver->query_requires_lock) mt.unlock();
+			return xvr2::String(data);
+		}
+		
+		void ConnectionMT::bulkDownloadEnd(){
+			//if(driver->query_requires_lock) mt.lock();
+			try{
+				xvr2::DB::Connection::bulkDownloadEnd();
+			}
+			catch(...){
+				if(driver->conn_requires_lock) mt.unlock();
+				throw;
+			}			
+			if(driver->query_requires_lock) mt.unlock();			
+		}		
 
 	//End implementation of class: ConnectionMT
 	};

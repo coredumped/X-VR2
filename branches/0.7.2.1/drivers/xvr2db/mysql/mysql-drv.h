@@ -44,6 +44,9 @@ class MySQLDriver : public Driver {
 		const bool bulkBegin(void *conn_handle, const char *tablename, const char *cols, const char *delim);
 		const bool bulkAddData(void *conn_handle, const char *data, const char *delim);
 		const bool bulkEnd(void *conn_handle);
+		const bool bulkDownloadBegin(void *conn_handle, const char *tablename, const char *cols, const char *delim);
+		const bool bulkDownloadData(void *conn_handle, xvr2::String &data);
+		const bool bulkDownloadEnd(void *conn_handle);
 		char *quoteString(const char *str);
 		String escapeString(const String &s);
 		String escapeString(const String &s, void *conn_handle);

@@ -200,7 +200,7 @@ class __pgsql_res {
 PostgreSQLDriver::PostgreSQLDriver(){
 	dinfo = new DB::DriverInfo(DRV_VERSION, DRV_REVISION, "Juan V. Guerrero", PG_VERSION_STR);
 	//Set date format to ISO YYYY-MM-DD HH:MM:SS.M
-	putenv("PGDATESTYLE=ISO");
+	putenv((char *)"PGDATESTYLE=ISO");
 }
 
 PostgreSQLDriver::~PostgreSQLDriver(){
@@ -258,7 +258,7 @@ void *PostgreSQLDriver::connect(const String &server, const String &__dbname, co
 int PostgreSQLDriver::execCommand(void *__conn_handle, const String &command){
 	int ret = 0;
 	DB::ResultSet *r = 0;
-	__pgsql_res *rres;
+	__pgsql_res *rres = 0;
 	/*ResultSet *r = this->query(__conn_handle, command);
 	ret = r->affectedRows();
 	delete r;*/
@@ -300,7 +300,7 @@ ResultSet *PostgreSQLDriver::query(void *__conn_handle, const String &command){
 	//of a library self-pointer
 	DB::ResultSet *r = 0;
 	PGresult *result;
-	__pgsql_res *rres;
+	__pgsql_res *rres = 0;
 	__pgsql_conn *conn;
 	conn = (__pgsql_conn *)__conn_handle;
 
@@ -555,6 +555,83 @@ const bool PostgreSQLDriver::bulkEnd(void *conn_handle){
 	}
 	throw DB::SQLQueryException(PQerrorMessage (conn->conn));
 	return false;
+}
+
+const bool PostgreSQLDriver::bulkDownloadBegin(void *conn_handle, const char *tablename, const char *cols, const char *delim){
+	bool ret;
+	xvr2::StringBuffer sqlcmd;
+	PGresult *result;
+	__pgsql_conn *conn;
+	conn = (__pgsql_conn *)conn_handle;
+	sqlcmd << "COPY " << tablename << " (" << cols << ") TO STDOUT WITH DELIMITER '" << delim << "'";
+	result = PQexec (conn->conn, sqlcmd.toCharPtr());
+	if(result == NULL){
+		throw DB::SQLQueryException(PQerrorMessage (conn->conn), sqlcmd.toString());
+	}
+	switch(PQresultStatus(result)){
+		case PGRES_TUPLES_OK:
+		case PGRES_COMMAND_OK:
+		case PGRES_COPY_OUT:
+			ret = true;
+			break;
+		default:
+			ret = false;
+	}
+	PQclear(result);
+	if(!ret) throw xvr2::DB::BulkDownloadStart(sqlcmd.toString(), tablename, cols, PQerrorMessage(conn->conn));
+	return ret;
+}
+
+const bool PostgreSQLDriver::bulkDownloadData(void *conn_handle, xvr2::String &data){
+	int ret;
+	__pgsql_conn *conn;
+	char *buffer = 0;
+	conn = (__pgsql_conn *)conn_handle;
+	ret = PQgetCopyData(conn->conn, &buffer, 0);
+	if(buffer != 0){
+		data.assign(buffer);
+#ifdef USE_DEBUG
+		debugConsole << "PostgreSQLDriver::bulkDownloadData -> " << data << " [(size=" << ret << ") " << buffer << "]";
+#endif
+		PQfreemem(buffer);
+	}
+	if(ret == -1){
+		PGresult *result = PQgetResult(conn->conn);
+		if(result == NULL){
+			throw xvr2::DB::SQLQueryException(PQerrorMessage (conn->conn));
+		}
+		else {
+			if(PQresultStatus(result) != PGRES_COMMAND_OK){
+				PQclear(result);
+				throw xvr2::DB::SQLQueryException(PQerrorMessage (conn->conn));
+			}
+			PQclear(result);
+		}
+		return false;
+	}
+	else if(ret == -2){
+		throw xvr2::DB::SQLQueryException(PQerrorMessage (conn->conn));
+	}
+	return true;
+}
+
+const bool PostgreSQLDriver::bulkDownloadEnd(void *conn_handle){
+	/*PGresult *result;
+	__pgsql_conn *conn;
+	conn = (__pgsql_conn *)conn_handle;
+	result = PQgetResult(conn->conn);
+	if(result == NULL){
+		throw DB::SQLQueryException(PQerrorMessage (conn->conn));
+	}
+	else {
+		if(PQresultStatus(result) == PGRES_COMMAND_OK){
+			PQclear(result);
+			return true;
+		}
+		PQclear(result);
+	}
+	throw DB::SQLQueryException(PQerrorMessage (conn->conn));*/
+	return true;	
 }
 
 char *PostgreSQLDriver::quoteString(const char *in){

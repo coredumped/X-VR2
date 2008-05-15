@@ -258,6 +258,41 @@ namespace xvr2{
 			dbcm.unlock();
 		}
 
+		void ConnectionTS::bulkDownloadBegin(const String &table, const String &cols, const String &_delim){
+			if(!isConnected())
+				throw DBConnectFirst();
+			try{
+				if(bulk_delim != 0)
+					xvr2_delete(bulk_delim);
+				bulk_delim = new String(_delim.toCharPtr());
+				if(!driver->bulkDownloadBegin(__conn, table.toCharPtr(), cols.toCharPtr(), bulk_delim->toCharPtr()))
+					throw BulkDownloadStart(table, cols, errorMessage());
+			}
+			catch(...){
+				throw;
+			}
+		}
+		
+		xvr2::String ConnectionTS::bulkDownloadData(){
+			xvr2::String data;
+			if(!isConnected())
+				throw DBConnectFirst();
+			driver->bulkDownloadData(__conn, data);
+			return xvr2::String(data);
+		}
+		
+		void ConnectionTS::bulkDownloadEnd(){
+			if(!isConnected())
+				throw DBConnectFirst();
+			try{
+				if(!driver->bulkDownloadEnd(__conn))
+					throw BulkUploadFailed();
+			}
+			catch(...){
+				throw;
+			}
+		}		
+
 	//End implementation of class: ConnectionTS
 	};
 };

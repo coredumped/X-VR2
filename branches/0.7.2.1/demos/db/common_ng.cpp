@@ -7,28 +7,6 @@
 static const char *MYSQL_DRIVER_LOCATION = __XVR2_PREFIX_DIR"/lib/mysql_driver-"__XVR2_VERSION_STRING".so";
 static const char *PGSQL_DRIVER_LOCATION = __XVR2_PREFIX_DIR"/lib/pgsql_driver-"__XVR2_VERSION_STRING".so";
 
-
-using namespace xvr2;
-
-static const char *SS_TYPES[] = {
-	"NOTYPE",
-	"TINYINT",
-	"INTEGER",
-	"BIGINT",
-	"FLOAT",
-	"DOUBLE",
-	"CHAR",
-	"VARCHAR",
-	"STRING",
-	"BLOB",
-	"TEXT0",
-	"DATE1",
-	"TIME",
-	"TIMESTAMP",
-	"BIT",
-	"BYTE"
-};
-
 const char *dnames[] = {
 	"MySQL",
 	"PostgreSQL"
@@ -46,14 +24,14 @@ static bool loopit;
 
 bool parse_args(int argc, char *argv[]){
 	int i;
-	String s;
-	String tmp;
+	xvr2::String s;
+	xvr2::String tmp;
 	std::string foo;
 	loopit = false;
 	for(i = 1; i < argc; i++){
 		s = argv[i];
-		Tokenizer *t;
-		t = new Tokenizer(argv[i], "=");
+		xvr2::Tokenizer *t;
+		t = new xvr2::Tokenizer(argv[i], (char *)"=");
 		if(s.startsWith("--help")){
 			std::cout << "Syntax: " << std::endl;
 			std::cout << argv[0] << " [host=LOC] [database=DBNAME] [user=DBUSER] [password=PASSWORD] [select=STMT]" << std::endl;
@@ -141,14 +119,14 @@ bool parse_args(int argc, char *argv[]){
 }
 
 int rundemo(int demo_type){
-	DB::Driver *drv;
-	DB::DriverManager *manager;
-	DB::Connection *conn = 0;
-	DB::DriverInfo q;
-	DB::ResultSet *r = 0;
+	xvr2::DB::Driver *drv;
+	xvr2::DB::DriverManager *manager;
+	xvr2::DB::Connection *conn = 0;
+	xvr2::DB::DriverInfo q;
+	xvr2::DB::ResultSet *r = 0;
 	int ci, cj;
 	bool capshown;
-	ExceptionTracer::enable();
+	xvr2::ExceptionTracer::enable();
 	switch(demo_type){
 		case XVR2_MYSQL:
 			if(driver_location == 0)
@@ -162,27 +140,27 @@ int rundemo(int demo_type){
 			break;
 	}
 
-	manager = new DB::DriverManager(driver_location);
+	manager = new xvr2::DB::DriverManager(driver_location);
 	
 	try{
 		//drv->load();
 		drv = manager->load();
 	}
-	catch(DSOSymbolException e){
+	catch(xvr2::DSOSymbolException e){
 		std::cerr << e.getClassName() << ": " << e.toString() << std::endl;
 		return 1;
 	}
 	q = drv->getVersionInfo();
 	std::cout << "X-VR2 " << dnames[demo_type] << " " << q.version() << "." << q.revision() << " by: " << q.vendor() << " using: " << q.description() << std::endl;
 
-	conn = new DB::Connection(drv, server_location, db_name, db_user, db_pass, db_port);
+	conn = new xvr2::DB::Connection(drv, server_location, db_name, db_user, db_pass, db_port);
 
 	std::cout << "\n1. Connecting to database... ";
 	std::cout.flush();
 	try{
 		conn->connect();
 	}
-	catch(Exception econn){
+	catch(xvr2::Exception econn){
 		std::cout << " " << econn.toString();
 		std::cout << " failed" << std::endl;
 		return 1;
@@ -194,7 +172,7 @@ int rundemo(int demo_type){
 	try{
 		r = conn->query(select_statement);
 	}
-	catch(Exception e){
+	catch(xvr2::Exception e){
 		std::cout << "failed" << std::endl;
 		std::cerr << e.toString() << std::endl;
 		return 1;
@@ -204,7 +182,7 @@ int rundemo(int demo_type){
 	std::cout << "3. Reading ResultSet with r->getRow()" << std::endl;
 	capshown = false;
 	for(ci = 0; ci < r->numRows(); ci++){
-		DB::Field *ff = (DB::Field *)r->getRow();
+		xvr2::DB::Field *ff = (xvr2::DB::Field *)r->getRow();
 		if(!capshown){
 			for(cj = 0; cj < r->numCols(); cj++){
 				std::cout << ff[cj].getFieldName().toCharPtr() << "\t";
@@ -233,7 +211,7 @@ int rundemo(int demo_type){
 	try{
 		r = conn->query(select_statement);
 	}
-	catch(Exception ex1){
+	catch(xvr2::Exception ex1){
 		std::cout << "failed" << std::endl;
 		std::cerr << ex1.toString() << std::endl;
 		return 1;
@@ -280,16 +258,49 @@ int rundemo(int demo_type){
 	std::cout << "succeeded" << std::endl;
 
 /******* PERFOMING SOME COMMANDS ********/
-	conn->execCommand("create table testx (id serial, name text)");
+	std::cout << "6. Creating a table and performing 1000 inserts..." << std::endl;
+	conn->execCommand("create table testx (id serial, name integer)");
 	for(int ni = 0; ni < 1000; ni++){
-		StringBuffer cmd;
-		cmd << "INSERT INTO testx (name) values ('" << ni << "')";
+		xvr2::StringBuffer cmd;
+		cmd << "INSERT INTO testx (name) values ('" << rand() << "')";
 		conn->execCommand(cmd);
 	}
 	int num = conn->execCommand("DELETE FROM testx");
 	std::cout << num << " rows deleted from testx" << std::endl;
 	conn->execCommand("drop table testx");
-	std::cout << "6. Disconnecting from database... ";
+/******* TEST BULK UPLOADING/DOWNLOADING *******/
+	
+	xvr2::StringBuffer cmd;
+	xvr2::StringBuffer tname;
+	tname << "bulk_test_" << (int)time(0);
+	cmd << "CREATE TABLE " << tname.toString() << " (id serial, x integer, y integer)";
+	conn->execCommand(cmd);
+	try{
+		std::cout << "7. Bulk loading data..." << std::endl;
+		conn->bulkUploadBegin(tname.toString(), "x,y", "|");
+		for(int ni = 0; ni < 1000; ni++){
+			xvr2::StringBuffer data;
+			data << rand() << "|" << rand() << "\n";
+			conn->bulkUploadData(data.toString());
+		}
+		conn->bulkUploadEnd();
+		std::cout << "8. Bulk downloading data..." << std::endl;
+		conn->bulkDownloadBegin(tname.toString(), "x,y", "|");
+		xvr2::String dataline;
+		while(true){
+			dataline = conn->bulkDownloadData();
+			if(dataline.size() == 0) break;
+			std::cout << dataline << std::endl;
+		}
+		conn->bulkDownloadEnd();
+	}
+	catch(xvr2::DB::SQLQueryException &sqe1){
+		std::cout << "Unable to perform operation: " << sqe1.toString() << "\n" << sqe1.query();
+	}
+	cmd.clear();
+	cmd << "DROP TABLE " << tname.toString();
+	conn->execCommand(cmd);
+	std::cout << "9. Disconnecting from database... ";
 	std::cout.flush();
 	try{
 		conn->disconnect();
