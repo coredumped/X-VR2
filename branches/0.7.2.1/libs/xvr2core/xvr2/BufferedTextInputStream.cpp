@@ -105,16 +105,21 @@ namespace xvr2 {
 			debugConsole << "BufferedTextInputStream: buffer has: \"" << buffer << "\"" << xvr2::NL;
 #endif
 			bufptr = (char *)buffer.toCharPtr();
-			while(buffer.size() > 0 && !buffer.startsWith(_lterm)){
-				if(buffer[0] != 0) s.eat(buffer.toCharPtr(), 1);
-				if(buffer.size() == 1){
+			//while(buffer.size() > 0 && !buffer.startsWith(_lterm)){
+			while(bufptr != 0 && strncmp(bufptr, _lterm.toCharPtr(), 2) != 0){
+				//if(buffer[0] != 0) s.eat(buffer.toCharPtr(), 1);
+				if(buffer[0] != 0) s.eat(bufptr, 1);
+				//if(buffer.size() == 1){
+				if(bufptr[1] == 0){
 					buffer.clear();
 					return;
 				}
 				else{
-					buffer.biteLeft(1);
+					//buffer.biteLeft(1);
+					bufptr++;
 				}
 			}
+			buffer = bufptr;
 			s.eat(buffer.toCharPtr(), _lterm.size());
 			if(buffer.size() == _lterm.size()){
 				buffer.clear();
