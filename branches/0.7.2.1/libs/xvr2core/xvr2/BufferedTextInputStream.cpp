@@ -82,15 +82,14 @@ namespace xvr2 {
 		char *bufptr = 0;
 		s.clear();
 		if(buffer.size() == 1 && buffer[0] == 0) buffer.clear();
-		while(ready()){
-			//_buf = new char[_bufsize];
-			//Memory::clearBuffer(_buf, _bufsize);
-			UInt32 siz = read(_buf, _bufsize);
+		if(!remaining()){
+			while(ready()){
+				UInt32 siz = read(_buf, _bufsize);
 #ifdef USE_DEBUG
-			debugConsole << "BufferedTextInputStream: read1(fd=" << fd() << " siz=" << siz << " ) = " << _buf << xvr2::NL;
+				debugConsole << "BufferedTextInputStream: read1(fd=" << fd() << " siz=" << siz << " ) = " << _buf << xvr2::NL;
 #endif
-			buffer.eat(_buf, siz);
-			//delete[] _buf;
+				buffer.eat(_buf, siz);
+			}
 		}
 		if(buffer.equals(_lterm)){
 			s.eat((char *)buffer.toCharPtr(), _lterm.size());
