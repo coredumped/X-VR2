@@ -265,7 +265,11 @@ int rundemo(int demo_type){
 		cmd << "INSERT INTO testx (name) values ('" << rand() << "')";
 		conn->execCommand(cmd);
 	}
-	int num = conn->execCommand("DELETE FROM testx");
+	int num;
+	xvr2::DB::Command pcmd(conn);
+	pcmd << "DELETE FROM testx";
+	//num = conn->execCommand("DELETE FROM testx");
+	num = pcmd.exec();
 	std::cout << num << " rows deleted from testx" << std::endl;
 	conn->execCommand("drop table testx");
 /******* TEST BULK UPLOADING/DOWNLOADING *******/

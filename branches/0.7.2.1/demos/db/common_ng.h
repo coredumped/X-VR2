@@ -4,6 +4,7 @@
 #include<xvr2/DBField.h>
 #include<xvr2/DBResultSet.h>
 #include<xvr2/DBDriver.h>
+#include<xvr2/DBCommand.h>
 #ifndef __DB_DEMO_COMMON_H__
 #define __DB_DEMO_COMMON_H__
 
