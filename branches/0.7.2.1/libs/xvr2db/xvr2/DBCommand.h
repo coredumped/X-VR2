@@ -30,9 +30,9 @@ namespace xvr2 {
 				xvr2::StringBuffer real_cmd;
 			protected:
 				xvr2::DB::ConnectionMT *conn;
-				Command();
+				CommandMT();
 			public:
-				CommandMT(xvr2::DB::Connection *c);
+				CommandMT(xvr2::DB::ConnectionMT *c);
 				CommandMT(const xvr2::DB::CommandMT &c);
 				int exec();
 				xvr2::DB::CommandMT &operator<<(const xvr2::String &);

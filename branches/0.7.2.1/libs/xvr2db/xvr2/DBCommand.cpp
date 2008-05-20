@@ -47,7 +47,7 @@ namespace xvr2 {
 			real_cmd.clear();
 		}
 		
-		CommandMT::CommandMT(xvr2::DB::Connection *c){
+		CommandMT::CommandMT(xvr2::DB::ConnectionMT *c){
 			conn = c;
 			real_cmd.clear();
 		}
