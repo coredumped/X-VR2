@@ -264,12 +264,12 @@ namespace xvr2{
 		}
 
 		String Connection::escapeString(const String &str){
-			return driver->escapeString(str, __conn);
+			return String(driver->escapeString(str, __conn));
 		}
 
-		char *Connection::escapeString(const char *str){
-			return driver->quoteString(str);
-		}
+		/*char *Connection::escapeString(const char *str){
+			return driver->escapeString(str, __conn);
+		}*/
 
 		const char *Connection::errorMessage(){
 			return driver->errorMessage(__conn);

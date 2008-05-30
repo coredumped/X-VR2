@@ -169,7 +169,7 @@ namespace xvr2{
 				void bulkDownloadEnd();
 
 				String escapeString(const String &s);
-				char *escapeString(const char *);
+				//char *escapeString(const char *);
 				const char *errorMessage();
 				/** Checks to see if the connection is still ok */
 				const bool isConnected();

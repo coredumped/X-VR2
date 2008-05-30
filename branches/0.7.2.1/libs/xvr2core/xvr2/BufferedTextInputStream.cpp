@@ -76,6 +76,13 @@ namespace xvr2 {
 	UInt32 BufferedTextInputStream::remaining(){
 		return buffer.size();
 	}
+	
+	void BufferedTextInputStream::setLineTermStr(const String &__lterm){
+		_lterm = __lterm;
+		while(_bufsize % _lterm.size() != 0){
+			_bufsize++;
+		}
+	}
 
 	void BufferedTextInputStream::operator>>(String &s){
 		char _buf[_bufsize];
@@ -104,17 +111,13 @@ namespace xvr2 {
 			debugConsole << "BufferedTextInputStream: buffer has: \"" << buffer << "\"" << xvr2::NL;
 #endif
 			bufptr = (char *)buffer.toCharPtr();
-			//while(buffer.size() > 0 && !buffer.startsWith(_lterm)){
-			while(bufptr != 0 && strncmp(bufptr, _lterm.toCharPtr(), 2) != 0){
-				//if(buffer[0] != 0) s.eat(buffer.toCharPtr(), 1);
+			while(bufptr != 0 && strncmp(bufptr, _lterm.toCharPtr(), _lterm.size()) != 0){
 				if(buffer[0] != 0) s.eat(bufptr, 1);
-				//if(buffer.size() == 1){
 				if(bufptr[1] == 0){
 					buffer.clear();
 					return;
 				}
 				else{
-					//buffer.biteLeft(1);
 					bufptr++;
 				}
 			}

@@ -196,10 +196,10 @@ namespace xvr2{
 				throw;
 			}
 			mt.unlock();
-			return ret;
+			return String(ret);
 		}
 
-		char *ConnectionMT::escapeString(const char *str){
+		/*char *ConnectionMT::escapeString(const char *str){
 			char *ret = 0;
 			//mt.lock();
 			try{
@@ -211,7 +211,7 @@ namespace xvr2{
 			}
 			//mt.unlock();
 			return ret;
-		}
+		}*/
 
 		const char *ConnectionMT::errorMessage(){
 			char *ret;

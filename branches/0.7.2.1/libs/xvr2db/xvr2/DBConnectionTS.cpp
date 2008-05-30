@@ -229,12 +229,12 @@ namespace xvr2{
 		}
 
 		String ConnectionTS::escapeString(const String &str){
-			return driver->escapeString(str, __conn);
+			return String(driver->escapeString(str, __conn));
 		}
 
-		char *ConnectionTS::escapeString(const char *str){
+		/*char *ConnectionTS::escapeString(const char *str){
 			return driver->quoteString(str);
-		}
+		}*/
 
 		const char *ConnectionTS::errorMessage(){
 			return driver->errorMessage(__conn);

@@ -183,7 +183,7 @@ namespace xvr2{
 				/** Formats the given string escaping any characters that need 
 				 *  to be so. 
 				 *  @param s The string to be escaped. */
-				char *escapeString(const char *s);
+				//char *escapeString(const char *s);
 				const char *errorMessage();
 				/** Checks to see if the connection is still ok */
 				const bool isConnected();

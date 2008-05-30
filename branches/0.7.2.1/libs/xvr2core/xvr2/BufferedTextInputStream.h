@@ -36,6 +36,7 @@ namespace xvr2 {
 			void operator>>(String &s);
 			static void setDefaultBufferSize(UInt32 _size);
 			void setBufferSize(UInt32 _size);
+			void setLineTermStr(const String &__lterm);
 			/** Returns the amount of remaining bytes to be read */
 			UInt32 remaining();
 	};
