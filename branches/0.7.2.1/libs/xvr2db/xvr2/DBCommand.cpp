@@ -26,6 +26,13 @@ namespace xvr2 {
 			return retval;
 		}
 		
+		xvr2::DB::ResultSet *Command::query(){
+			xvr2::DB::ResultSet *r = 0x00;
+			r = conn->query(real_cmd);
+			real_cmd.clear();
+			return r;
+		}
+		
 		Command &Command::operator<<(const xvr2::String &s){
 			real_cmd << s;
 			return *this;
@@ -62,6 +69,13 @@ namespace xvr2 {
 			retval = conn->execCommand(real_cmd);
 			real_cmd.clear();
 			return retval;
+		}
+		
+		xvr2::DB::ResultSet *CommandMT::query(){
+			xvr2::DB::ResultSet *r = 0x00;
+			r = conn->query(real_cmd);
+			real_cmd.clear();
+			return r;
 		}
 		
 		CommandMT &CommandMT::operator<<(const xvr2::String &s){
