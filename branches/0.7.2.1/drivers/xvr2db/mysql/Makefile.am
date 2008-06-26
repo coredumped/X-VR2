@@ -7,7 +7,7 @@ cc_sources = mysql-drv.cpp
 
 INCLUDES = -I$(top_srcdir)
 
-lib_LTLIBRARIES=mysql_driver-0.7.2.0.la
+lib_LTLIBRARIES=mysql_driver-0.7.2.1.la
 
 mysql_driver_0_7_2_1_la_SOURCES= $(h_sources) $(cc_sources)
 
