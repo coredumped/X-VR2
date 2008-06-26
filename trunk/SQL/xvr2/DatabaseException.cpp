@@ -23,6 +23,8 @@ namespace xvr2 {
 		static const char *_excepblk_dp = "Bulk data parse error";
 		static const char *_excepblk_st = "Bulk load initialization error";
 		static const char *_noop_ex = "Requested operation is not supported at driver level.";
+		static const char *_excepblk_dn_st = "Bulk downloadload initialization error";
+		static const char *_excepblkf_dn = "Bulk data downloading failed";
 
 		DatabaseException::ConnectionParams::ConnectionParams(){
 			port = -1;
@@ -218,6 +220,41 @@ namespace xvr2 {
 
 		BulkUploadStart::BulkUploadStart():SQLQueryException(){
 			description = (char *)_excepblk_st;
+		}
+
+		BulkDownloadStart::BulkDownloadStart(){
+			description = (char *)_excepblk_dn_st;			
+		}
+		
+		BulkDownloadStart::BulkDownloadStart(const xvr2::String &__tablename, 
+						 const xvr2::String &__cols, 
+						 const xvr2::String &__error) : SQLQueryException(__error.toCharPtr()) {
+			description = (char *)_excepblk_dn_st;
+			_tname = __tablename;
+			_tcols = __cols;
+		}
+		BulkDownloadStart::BulkDownloadStart(const xvr2::String &__query, 
+						 const xvr2::String &__tablename, 
+						 const xvr2::String &__cols, 
+						 const xvr2::String &__error) : SQLQueryException(__error.toCharPtr(), __query) {
+#ifdef USE_EMBEDDED_CLASSNAMES
+			setClassName((char *)__xvr2_DB_BulkDownloadStart);
+#endif
+			description = (char *)_excepblk_dn_st;
+			_tname = __tablename;
+			_tcols = __cols;
+		}
+		
+		const String &BulkDownloadStart::tablename(){
+			return _tname;
+		}
+		
+		const String &BulkDownloadStart::columns(){
+			return _tcols;
+		}
+
+		BulkDownloadFailed::BulkDownloadFailed():SQLQueryException(){
+			description = (char *)_excepblkf_dn;
 		}
 	};
 };

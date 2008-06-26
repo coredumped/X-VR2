@@ -231,6 +231,14 @@ namespace xvr2 {
 				BulkUploadFailed();
 		};
 
+		class BulkDownloadFailed:public SQLQueryException{
+			public:
+				/**
+				 * Default constructor
+				 */
+				BulkDownloadFailed();
+		};
+
 		class BulkDataParse:public SQLQueryException{
 			public:
 				/**
@@ -245,6 +253,21 @@ namespace xvr2 {
 				 * Default constructor
 				 */
 				BulkUploadStart();
+		};
+		
+		class BulkDownloadStart:public SQLQueryException{
+			private:
+				xvr2::String _tname;
+				xvr2::String _tcols;
+			public:
+				/**
+				 * Default constructor
+				 */
+				BulkDownloadStart();
+				BulkDownloadStart(const xvr2::String &__tablename, const xvr2::String &__cols, const xvr2::String &__error);
+				BulkDownloadStart(const xvr2::String &__query, const xvr2::String &__tablename, const xvr2::String &__cols, const xvr2::String &__error);
+				const String &tablename();
+				const String &columns();
 		};
 	};
 };

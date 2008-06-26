@@ -298,6 +298,21 @@ const bool SQLiteDriver::bulkEnd(void *conn_handle){
 	return false;
 }
 
+const bool SQLiteDriver::bulkDownloadBegin(void *conn_handle, const char *tablename, const char *cols, const char *delim){
+	throw SQL::DriverOperationNotSupported("bulkDownloadBegin");
+	return false;
+}
+
+const bool SQLiteDriver::bulkDownloadData(void *conn_handle, xvr2::String &data){
+	throw SQL::DriverOperationNotSupported("bulkDownloadData");
+	return false;
+}
+
+const bool SQLiteDriver::bulkDownloadEnd(void *conn_handle){
+	throw SQL::DriverOperationNotSupported("bulkDownloadEnd");
+	return false;
+}
+
 static String __generic_quote(const String &s){
 	String tmp;
 	char buf[2];
