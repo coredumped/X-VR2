@@ -265,6 +265,39 @@ namespace xvr2{
 			return ret;
 		}
 
+		void ConnectionMT::bulkDownloadBegin(const String &table, const String &cols, const String &_delim){
+			if(driver->query_requires_lock) mt.lock();
+			try{
+				xvr2::DB::Connection::bulkDownloadBegin(table, cols, _delim);
+			}
+			catch(...){
+				if(driver->conn_requires_lock) mt.unlock();
+				throw;
+			}
+		}
+		
+		xvr2::String ConnectionMT::bulkDownloadData(){
+			xvr2::String data;
+			try{
+				data = xvr2::DB::Connection::bulkDownloadData();
+			}
+			catch(...){
+				if(driver->conn_requires_lock) mt.unlock();
+				throw;
+			}			
+			return xvr2::String(data);
+		}
+		
+		void ConnectionMT::bulkDownloadEnd(){
+			try{
+				xvr2::DB::Connection::bulkDownloadEnd();
+			}
+			catch(...){
+				if(driver->conn_requires_lock) mt.unlock();
+				throw;
+			}			
+			if(driver->query_requires_lock) mt.unlock();			
+		}		
 	};
 };
 

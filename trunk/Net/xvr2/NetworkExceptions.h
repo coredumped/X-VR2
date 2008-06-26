@@ -118,7 +118,7 @@ namespace xvr2 {
 				/** Default constructor */
 				CertificateLookupPending();
 		};
-		/** \brief The current connection suffered a reset from the peer */
+		/** @brief The current connection suffered a reset from the peer */
 		class ConnectionResetByPeer:public NetworkException{
 			public:
 				/**
@@ -164,7 +164,7 @@ namespace xvr2 {
 				/** Default constructor */
 				NoValidCipherInList();
 		};
-		/** \brief A non-recoverable name server error occurred. */
+		/** @brief A non-recoverable name server error occurred. */
 		class NSFatal:public NetworkException{
 			public:
 				/**
@@ -172,7 +172,7 @@ namespace xvr2 {
 				 */
 				NSFatal();
 		};
-		/** \brief A temporary error occurred on an authoritative name server.*/
+		/** @brief A temporary error occurred on an authoritative name server.*/
 		class NSTryAgain:public NetworkException{
 			public:
 				/**

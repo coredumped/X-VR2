@@ -199,19 +199,6 @@ namespace xvr2{
 			return String(ret);
 		}
 
-		/*char *ConnectionMT::escapeString(const char *str){
-			char *ret = 0;
-			//mt.lock();
-			try{
-				ret = Connection::escapeString(str);
-			}
-			catch(...){
-				//mt.unlock();
-				throw;
-			}
-			//mt.unlock();
-			return ret;
-		}*/
 
 		const char *ConnectionMT::errorMessage(){
 			char *ret;

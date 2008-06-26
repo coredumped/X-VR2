@@ -174,7 +174,8 @@ namespace xvr2{
 				 *      //Do something with the returned data row.
 				 *    }
 				 *  }
-				 *  conn->bulkDownloadEnd(); */
+				 *  conn->bulkDownloadEnd();
+				 *  @endcode */
 				xvr2::String bulkDownloadData();
 				/** Moves the connection from bulk download mode to @e normal
 				 *  mode. */

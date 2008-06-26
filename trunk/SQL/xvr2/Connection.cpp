@@ -231,14 +231,44 @@ namespace xvr2{
 			}
 		}
 
+		void Connection::bulkDownloadBegin(const String &table, const String &cols, const String &_delim){
+			if(!isConnected())
+				throw DBConnectFirst();
+			try{
+				if(bulk_delim != 0)
+					xvr2_delete(bulk_delim);
+				bulk_delim = new String(_delim.toCharPtr());
+				if(!driver->bulkDownloadBegin(__conn, table.toCharPtr(), cols.toCharPtr(), bulk_delim->toCharPtr()))
+					throw BulkDownloadStart(table, cols, errorMessage());
+			}
+			catch(...){
+				throw;
+			}
+		}
+		
+		xvr2::String Connection::bulkDownloadData(){
+			xvr2::String data;
+			if(!isConnected())
+				throw DBConnectFirst();
+			driver->bulkDownloadData(__conn, data);
+			return xvr2::String(data);
+		}
+		
+		void Connection::bulkDownloadEnd(){
+			if(!isConnected())
+				throw DBConnectFirst();
+			try{
+				if(!driver->bulkDownloadEnd(__conn))
+					throw BulkUploadFailed();
+			}
+			catch(...){
+				throw;
+			}
+		}
+
 		String Connection::escapeString(const String &str){
 			return driver->escapeString(str, __conn);
 		}
-
-		/*char *Connection::escapeString(const char *str){
-			String tmp = driver->escapeString(str, __conn);
-			return strdup(tmp.)
-		}*/
 
 		const char *Connection::errorMessage(){
 			return driver->errorMessage(__conn);

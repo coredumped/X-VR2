@@ -134,29 +134,32 @@ namespace xvr2 {
 				 *  perform a lot of insert commands, this method is usually
 				 *  faster and recommended in scenarios where you load data
 				 *  which is contained in files, like .csv stuff
-				 *  \param conn_handle The connection handle
-				 *  \param tablename The table where you want to upload your data
-				 *  \param cols A comma delimited list of column names specifiying
-				 *  \param delim The string used to separate every field
+				 *  @param conn_handle The connection handle
+				 *  @param tablename The table where you want to upload your data
+				 *  @param cols A comma delimited list of column names specifiying
+				 *  @param delim The string used to separate every field
 				 *  which columns are to be affected by the operation. */
 				virtual const bool bulkBegin(void *conn_handle, const char *tablename, const char *cols, const char *delim) = 0;
 				/** Use this method to actually load data during a bolk load process
 				 *  started by the bulkBegin method.
-				 *  \param conn_handle Connection handle
-				 *  \param data The data to be loaded, every field must be delimited
-				 *  \param delim The string used to separate every field
+				 *  @param conn_handle Connection handle
+				 *  @param data The data to be loaded, every field must be delimited
+				 *  @param delim The string used to separate every field
 				 *  as previuosly specified during the bulkBegin method call. */
 				virtual const bool bulkAddData(void *conn_handle, const char *data, const char *delim) = 0;
 				/** Flushes all data sent by bulkAddData and tells the server to actually
 				 *  insert it into the table.
-				 *  \param conn_handle The connection handle */
+				 *  @param conn_handle The connection handle */
 				virtual const bool bulkEnd(void *conn_handle) = 0;
-				/** \deprecated Please use String escapeString(const String &s, void *conn_handle);
+				virtual const bool bulkDownloadBegin(void *conn_handle, const char *tablename, const char *cols, const char *delim) = 0;
+				virtual const bool bulkDownloadData(void *conn_handle, xvr2::String &data) = 0;
+				virtual const bool bulkDownloadEnd(void *conn_handle) = 0;
+				/** @deprecated Please use String escapeString(const String &s, void *conn_handle);
 				 *  Quotes a string to be passed in an SQL query this is neccesary since
 				 *  some chars can confuse the SQL command parser in the RDBMS, after 
 				 *  calling this method you must free all memory allocated from the it.
-				 *  \param str The string to be escaped
-				 *  \return The escaped string, you must free this pointer after used */
+				 *  @param str The string to be escaped
+				 *  @return The escaped string, you must free this pointer after used */
 				virtual char *quoteString(const char *str) = 0;
 				/** @deprecated Please use String escapeString(const String &s, void *conn_handle);
 				 *  Quotes a string to be passed in an SQL query this is neccesary since
@@ -175,13 +178,13 @@ namespace xvr2 {
 
 				/** Returns a specific error message returned by the latest operation
 				 *  executed at the connection level.
-				 *  \param conn_handle The connection handle
-				 *  \return The error string*/
+				 *  @param conn_handle The connection handle
+				 *  @return The error string*/
 				virtual const char *errorMessage(void *conn_handle) = 0;
 				/** Returns a specific error message returned by the latest operation
 				 *  executed at the query's ResultSet level.
-				 *  \param res_handle The ResultSet handle
-				 *  \return The error string*/
+				 *  @param res_handle The ResultSet handle
+				 *  @return The error string*/
 				virtual const char *resultErrorMessage(void *res_handle) = 0;
 				/** Verifies wheter the connection is still live or not. */
 				virtual const bool isConnected(void *conn_handle) = 0;

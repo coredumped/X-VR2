@@ -69,9 +69,9 @@ namespace xvr2 {
 				CertificateLookupPending();
 		};
 		/**
-		 * \class ConnectionResetByPeer
-		 * \version $Revision$
-		 * \brief The current connection suffered a reset from the peer
+		 * @class ConnectionResetByPeer
+		 * @version $Revision$
+		 * @brief The current connection suffered a reset from the peer
 		 */
 		class ConnectionResetByPeer:public NetworkException{
 			public:
@@ -81,9 +81,9 @@ namespace xvr2 {
 				ConnectionResetByPeer();
 		};
 		/**
-		 * \class HostNotFound HostNotFoundException.h
-		 * \version $Revision$
-		 * \brief Unable to find the specified host please check your /etc/hosts file or your DNS client config 
+		 * @class HostNotFound
+		 * @version $Revision$
+		 * @brief Unable to find the specified host please check your /etc/hosts file or your DNS client config 
 		 */
 		class HostNotFound:public NetworkException{
 			public:
@@ -103,9 +103,9 @@ namespace xvr2 {
 				NoDataForReading();
 		};
 		/**
-		 * \class NoIPForYou
-		 * \version $Revision$
-		 * \brief The requested name is valid but does not have an IP address. */
+		 * @class NoIPForYou
+		 * @version $Revision$
+		 * @brief The requested name is valid but does not have an IP address. */
 		class NoIPForYou:public NetworkException{
 			public:
 				/**
@@ -124,9 +124,9 @@ namespace xvr2 {
 				NoValidCipherInList();
 		};
 		/**
-		 * \class NSFatal
-		 * \version $Revision$
-		 * \brief A non-recoverable name server error occurred. */
+		 * @class NSFatal
+		 * @version $Revision$
+		 * @brief A non-recoverable name server error occurred. */
 		class NSFatal:public NetworkException{
 			public:
 				/**
@@ -135,9 +135,9 @@ namespace xvr2 {
 				NSFatal();
 		};
 		/**
-		 * \class NSTryAgain
-		 * \version $Revision$
-		 * \brief A temporary error occurred on an authoritative name server.  Try */
+		 * @class NSTryAgain
+		 * @version $Revision$
+		 * @brief A temporary error occurred on an authoritative name server.  Try */
 		class NSTryAgain:public NetworkException{
 			public:
 				/**
