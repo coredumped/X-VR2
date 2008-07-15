@@ -7,7 +7,7 @@ dnl --------------------------------
 AC_INIT(info/info.cpp)
 AM_CONFIG_HEADER(config.h)
 
-GENERIC_VERSION=0.7.1.0
+GENERIC_VERSION=0.7.2.1
 PACKAGE=demos
 
 VERSION=$GENERIC_VERSION
@@ -42,8 +42,8 @@ AC_ARG_ENABLE(debug, AC_HELP_STRING([--enable-debug          Build library in de
 	]
 )
 
-xvr2core_required_version=0.7.1.0
-xvr2platform_required_version=0.7.1.0
+xvr2core_required_version=0.7.2.1
+xvr2platform_required_version=0.7.2.1
 
 dnl -----------------------------------------------
 dnl Verify that xvr2core library is already installed

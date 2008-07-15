@@ -76,7 +76,44 @@ namespace xvr2 {
 #endif
 			description = (char *)xvr2::excepDBConnectionFailed;
 		}
-
+		
+		DBConnectionFailed::DBConnectionFailed(const String &_errmsg, const String &__host, 
+										   const String &__db, const String &__user, 
+										   const String &__pwd, int __port){
+#ifdef USE_EMBEDDED_CLASSNAMES
+			setClassName((char *)__xvr2_DB_DBConnectionFailedException);
+#endif
+			description = (char *)_errmsg.toCharPtr();
+			_host = __host;
+			_user = __user;
+#ifdef REVEAL_SENSITIVE_INFORMATION
+			_pwd = __pwd;
+#else
+			_pwd = "*hidden*";
+#endif
+			_dbname = __db;
+			_port = __port;
+		}
+		
+		const String &DBConnectionFailed::host() const {
+			return _host;
+		}
+		
+		const int DBConnectionFailed::port() const {
+			return _port;
+		}
+		
+		const String &DBConnectionFailed::dbname() const {
+			return _dbname;
+		}
+		
+		const String &DBConnectionFailed::user() const {
+			return _user;
+		}
+		
+		const String &DBConnectionFailed::password() const {
+			return _pwd;
+		}
 
 		ServerDisconnected::ServerDisconnected(){
 #ifdef USE_EMBEDDED_CLASSNAMES

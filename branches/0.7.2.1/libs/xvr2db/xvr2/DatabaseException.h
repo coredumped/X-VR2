@@ -72,11 +72,25 @@ namespace xvr2 {
 
 		/** Unable to connect to the specified database server */
 		class DBConnectionFailed:public DatabaseException{
+			private:
+				xvr2::String _user;
+				xvr2::String _pwd;
+				xvr2::String _dbname;
+				int _port;
+				xvr2::String _host;
 			public:
 				/**
 				 * Default constructor
 				 */
 				DBConnectionFailed();
+				DBConnectionFailed(const String &_errmsg, const String &__host, 
+								   const String &__db, const String &__user, 
+								   const String &__pwd, int __port);
+				const String &host() const;
+				const int port() const;
+				const String &dbname() const;
+				const String &user() const;
+				const String &password() const;
 		};
 
 
