@@ -156,6 +156,8 @@ namespace xvr2 {
 				virtual const bool isConnected(void *conn_handle) = 0;
 				/** Says if the driver's connection can be polled for connection or not. */
 				virtual const bool hasConnPolling() = 0;
+				/** Will attempt to close and the re-open the connection to the server. */
+				virtual void resetConnection(void *conn_handle) = 0;
 		};
 	};
 };

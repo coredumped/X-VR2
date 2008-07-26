@@ -55,6 +55,7 @@ class MySQLDriver : public Driver {
 		const bool isConnected(void *conn_handle);
 		const bool hasConnPolling();
 		int execCommand(void*, const xvr2::String&);
+		void resetConnection(void *conn_handle);
 };
 
 extern "C" {

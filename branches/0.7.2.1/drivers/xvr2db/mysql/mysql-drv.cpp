@@ -581,3 +581,7 @@ int MySQLDriver::execCommand(void *__conn_handle, const xvr2::String &command){
 	}
 	return mysql_affected_rows(conn->conn);
 }
+
+void MySQLDriver::resetConnection(void *conn_handle){
+	throw xvr2::DB::DatabaseException("MySQL driver does not support connection resets yet.");
+}

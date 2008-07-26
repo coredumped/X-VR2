@@ -8,6 +8,10 @@
 using namespace xvr2;
 //using namespace xvr2::Exception;
 
+#ifndef DEFAULT_PGSQL_CONNECTION_TIMEOUT
+#define DEFAULT_PGSQL_CONNECTION_TIMEOUT 30
+#endif
+
 //////// INSTANCE CREATION AND DESTRUCTION STARTS HERE /////////
 
 PostgreSQLDriver *create_dbdriver_instance(){
@@ -222,7 +226,7 @@ void *PostgreSQLDriver::connect(const String &server, const String &__dbname, co
 	String cstr;
 	int pport;
 	pport = port;
-	if(port == 0)
+	if(port <= 0)
 		pport = 5432;
 	cstr = "host=";
 	cstr += server;
@@ -234,15 +238,17 @@ void *PostgreSQLDriver::connect(const String &server, const String &__dbname, co
 	cstr += port;
 	cstr += " dbname=";
 	cstr += __dbname;
+	cstr += " connect_timeout=";
+	cstr += DEFAULT_PGSQL_CONNECTION_TIMEOUT;
 	if(!(conn = PQconnectdb(cstr.toCharPtr()))){
-		throw DB::DBConnectionFailed();
+		throw DB::DBConnectionFailed(PQerrorMessage());
 		return 0;
 	}
 	connx = new __pgsql_conn(conn);
 	try{
 		connx->requestMappings();
 	}
-	catch(DB::SQLQueryException esql){
+	catch(DB::SQLQueryException &esql){
 		PQfinish(conn);
 		throw DB::DBConnectionFailed();
 	}
@@ -685,3 +691,8 @@ const bool PostgreSQLDriver::hasConnPolling(){
 	return true;
 }
 
+void PostgreSQLDriver::resetConnection(void *__conn_handle){
+	__pgsql_conn *conn;
+	conn = (__pgsql_conn *)__conn_handle;
+	PQreset(conn->conn);
+}
