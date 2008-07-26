@@ -241,7 +241,15 @@ void *PostgreSQLDriver::connect(const String &server, const String &__dbname, co
 	cstr += " connect_timeout=";
 	cstr += DEFAULT_PGSQL_CONNECTION_TIMEOUT;
 	if(!(conn = PQconnectdb(cstr.toCharPtr()))){
-		throw DB::DBConnectionFailed(PQerrorMessage());
+		throw DB::DBConnectionFailed(PQerrorMessage(conn), 
+				 					server, __dbname, user,
+				 					pass, port);
+		return 0;
+	}
+	if(PQstatus(conn) == CONNECTION_BAD){
+		throw DB::DBConnectionFailed(PQerrorMessage(conn), 
+				 					server, __dbname, user,
+				 					pass, port);
 		return 0;
 	}
 	connx = new __pgsql_conn(conn);
@@ -250,7 +258,9 @@ void *PostgreSQLDriver::connect(const String &server, const String &__dbname, co
 	}
 	catch(DB::SQLQueryException &esql){
 		PQfinish(conn);
-		throw DB::DBConnectionFailed();
+		throw DB::DBConnectionFailed("Unable to get datatype mappings", 
+									 server, __dbname, user,
+									 pass, port);
 	}
 	catch(...){
 		PQfinish(conn);
