@@ -55,6 +55,7 @@ class SQLiteDriver : public Driver {
 		const char *resultErrorMessage(void *res_handle);
 		const bool isConnected(void *conn_handle);
 		const bool hasConnPolling();
+		void resetConnection(void *conn_handle);
 };
 
 extern "C" {

@@ -145,7 +145,7 @@ namespace xvr2 {
 		}
 		
 		ConnectionFailure::ConnectionFailure(const ConnectionParams &__conn_p, 
-							const String &__cause){
+											 const String &__cause):DatabaseException(__conn_p){
 			_err_msg = __cause;
 		}
 

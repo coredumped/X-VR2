@@ -366,3 +366,6 @@ const bool SQLiteDriver::hasConnPolling(){
 	return false;
 }
 
+void SQLiteDriver::resetConnection(void *conn_handle){
+	throw SQL::DriverOperationNotSupported("resetConnection");
+}

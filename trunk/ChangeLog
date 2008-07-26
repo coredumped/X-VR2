@@ -1,3 +1,17 @@
+2008-07-26 Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
+* Many changes to the abstract xvr2::SQL::Driver class
+  * Added support for data extraction in bulk, also implemented in the 
+    PostgreSQL driver.
+  * Adding a method for resetting database connections (diconnecting, then 
+    reconnecting).
+* PostgreSQL driver changes:
+  * Adding default timeout of 30 seconds (configurable at compile time with the 
+    DEFAULT_PGSQL_CONNECTION_TIMEOUT macro.
+  * Better error checking on connection attempts, also better exception 
+    reporting in such events.
+* And some other undocumented changes which I can't remember right now :-(
+
+
 2007-12-27 Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
 * It is now possible to enable a stacktrace dump when the environment variable
 XVR2_DEBUG_DUMPTRACE is defined

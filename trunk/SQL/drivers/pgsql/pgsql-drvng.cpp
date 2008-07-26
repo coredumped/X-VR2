@@ -6,7 +6,10 @@
 #include<xvr2/StringBuffer.h>
 
 using namespace xvr2;
-//using namespace xvr2::Exception;
+
+#ifndef DEFAULT_PGSQL_CONNECTION_TIMEOUT
+#define DEFAULT_PGSQL_CONNECTION_TIMEOUT 30
+#endif
 
 //////// INSTANCE CREATION AND DESTRUCTION STARTS HERE /////////
 
@@ -234,11 +237,20 @@ void *PostgreSQLDriver::connect(const String &server, const String &__dbname, co
 	cstr += pport;
 	cstr += " dbname=";
 	cstr += __dbname;
+	cstr += " connect_timeout=";
+	cstr += DEFAULT_PGSQL_CONNECTION_TIMEOUT;
 	if(!(conn = PQconnectdb(cstr.toCharPtr()))){
 		throw SQL::ConnectionFailure(DatabaseException::ConnectionParams(
 								DatabaseException::NET, server, pport, 
 								__dbname, user, "********", 
-								""));
+								""), PQerrorMessage (conn));
+		return 0;
+	}
+	if(PQstatus(conn) == CONNECTION_BAD){
+		throw SQL::ConnectionFailure(DatabaseException::ConnectionParams(
+				DatabaseException::NET, server, pport, 
+				__dbname, user, "********", 
+				""), PQerrorMessage (conn));
 		return 0;
 	}
 	connx = new __pgsql_conn(conn);
@@ -718,3 +730,8 @@ const bool PostgreSQLDriver::hasConnPolling(){
 	return true;
 }
 
+void PostgreSQLDriver::resetConnection(void *__conn_handle){
+	__pgsql_conn *conn;
+	conn = (__pgsql_conn *)__conn_handle;
+	PQreset(conn->conn);
+}
