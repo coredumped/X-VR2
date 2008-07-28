@@ -1,3 +1,7 @@
+2008-07-28 Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
+* Implementing the xvr2:SQL::Driver::resetConnection() method at Connection 
+  class level.
+
 2008-07-26 Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
 * Many changes to the abstract xvr2::SQL::Driver class
   * Added support for data extraction in bulk, also implemented in the 

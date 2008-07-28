@@ -292,6 +292,10 @@ namespace xvr2{
 				throw;
 			}
 		}		
+		
+		void ConnectionTS::reset(){
+			driver->resetConnection(__conn);
+		}
 
 	//End implementation of class: ConnectionTS
 	};

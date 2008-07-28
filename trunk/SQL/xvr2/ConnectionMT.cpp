@@ -297,7 +297,19 @@ namespace xvr2{
 				throw;
 			}			
 			if(driver->query_requires_lock) mt.unlock();			
-		}		
+		}
+		
+		void ConnectionMT::reset(){
+			if(driver->query_requires_lock) mt.lock();
+			try{
+				xvr2::SQL::Connection::bulkDownloadEnd();
+			}
+			catch(...){
+				if(driver->conn_requires_lock) mt.unlock();
+				throw;
+			}			
+			if(driver->query_requires_lock) mt.unlock();
+		}
 	};
 };
 

@@ -191,6 +191,9 @@ namespace xvr2{
 				/** Unlocks exclusive access to this resource so other threads
 				 *  can reach it. */
 				void unlock();
+				/** Resets the current connection by closing it and then 
+				 *  re-opening it. */
+				void reset();
 		};
 	};
 };

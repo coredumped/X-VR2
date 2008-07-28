@@ -284,6 +284,10 @@ namespace xvr2{
 			}
 			return __connected;
 		}
+		
+		void Connection::reset(){
+			driver->resetConnection(__conn);
+		}
 
 	//End implementation of class: Connection
 	};

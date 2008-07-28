@@ -174,6 +174,9 @@ namespace xvr2{
 				const char *errorMessage();
 				/** Checks to see if the connection is still ok */
 				const bool isConnected();
+				/** Resets the current connection by closing it and then 
+				 *  re-opening it. */
+				void reset();
 		};
 	};
 };
