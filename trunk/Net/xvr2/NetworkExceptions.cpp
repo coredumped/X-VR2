@@ -229,16 +229,13 @@ namespace xvr2 {
 #endif
 			description = (char *)_desc_SSLConnectionIsBusy;
 		}
-		
+
 		SSLContextCreation::SSLContextCreation(){
 #ifdef USE_EMBEDDED_CLASSNAMES
 			setClassName((char *)__xvr2_Net_SSLContextCreation);
 #endif
 			//description = _desc_SSLContextCreation;
 			description = (char *)ERR_lib_error_string(ERR_get_error());
-#ifdef USE_DEBUG
-			debugmsgln(this, description);
-#endif
 		}
 
 		SSLGeneric::SSLGeneric(){

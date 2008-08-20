@@ -1,12 +1,12 @@
 /*
  * $Id$
  *
- * X-VR2 
- * 
+ * X-VR2
+ *
  * Copyright (C) Juan V. Guerrero 2007
- * 
+ *
  * Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
- * 
+ *
  * This program is free software, distributed under the terms of
  * the GNU General Public License Version 2. See the LICENSE file
  * at the top of the source tree.
@@ -62,11 +62,11 @@ namespace xvr2 {
 #endif
 		return String(buf);
 	}
-	
+
 	int SystemException::code(){
 		return os_errno;
 	}
-	
+
 	String SystemException::message(){
 		char buf[XVR2_ERRNO_DESCRIPTION_MAXLEN];
 		strerror_r(code(), buf, XVR2_ERRNO_DESCRIPTION_MAXLEN);
@@ -95,7 +95,7 @@ namespace xvr2 {
 	}
 
 	CantLoadDSO::CantLoadDSO(){
-#ifdef _WIN32		
+#ifdef _WIN32
 		description = (char *)xvr2::excepNoLoadDSO;
 #else
 		description = dlerror();
@@ -103,7 +103,7 @@ namespace xvr2 {
 	}
 
 	CantUnloadDSO::CantUnloadDSO(){
-#ifdef _WIN32		
+#ifdef _WIN32
 		description = (char *)xvr2::excepNoUnloadDSO;
 #else
 		description = dlerror();
@@ -117,9 +117,7 @@ namespace xvr2 {
 		description = dlerror();
 #endif
 	}
-	ElementNotFound::ElementNotFound(){
-		description = (char *)xvr2::excepNoElem;
-	}
+
 
 
 ///////////////////////////////////////

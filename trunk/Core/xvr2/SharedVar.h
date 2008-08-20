@@ -1,12 +1,12 @@
 /*
  * $Id$
  *
- * X-VR2 
- * 
+ * X-VR2
+ *
  * Copyright (C) Juan V. Guerrero 2007
- * 
+ *
  * Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
- * 
+ *
  * This program is free software, distributed under the terms of
  * the GNU General Public License Version 2. See the LICENSE file
  * at the top of the source tree.
@@ -22,7 +22,7 @@ namespace xvr2{
 	/**
 	 * This class is define template to implemented Shared varibles.
 	 * @todo Polish the SharedVar class docs. */
-	template <class T> 
+	template <class T>
 	class SharedVar:protected Mutex{
 		private:
 			/**T var is the shared variable*/
@@ -45,31 +45,13 @@ namespace xvr2{
 			SharedVar(){
 			}
 			/**This constructor initializes the value of the shared variable */
-			SharedVar(T v){
+			SharedVar(const T &v){
 				//setValue(v);
-				var = v;
+				v.lock();
+				var = v.var;
+				v.unlock();
 			}
-			/** Increases the shared variable's value in one unit*/
-			T operator++(){
-				T u= 0;
-				lock();
-				u = var;
-				u++;
-				var = u;
-				unlock();
-				return u;
-			}
-			/** Decreases the shared variable's value in one unit*/
-			T operator--(){
-				T u= 0;
-				lock();
-				u = var;
-				u--;
-				var = u;
-				unlock();
-				return u;
-			}
-			T operator=(T v){
+			T operator=(const T &v){
 				lock();
 				var = v;
 				unlock();

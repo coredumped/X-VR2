@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/sh
 
 # libtoolT - Provide generalized library-building support services.
 # Generated automatically by  (GNU xvr2 0.8.0)
@@ -47,7 +47,7 @@ available_tags=" CXX"
 # Libtool was configured on host coredumped-laptop:
 
 # Shell to use when invoking shell scripts.
-SHELL="/bin/bash"
+SHELL="/bin/sh"
 
 # Whether or not to build shared libraries.
 build_libtool_libs=yes
@@ -332,7 +332,7 @@ link_all_deplibs=no
 sys_lib_search_path_spec="/usr/lib/gcc/x86_64-linux-gnu/4.2.3 /usr/lib /lib"
 
 # Run-time system search path for libraries
-sys_lib_dlsearch_path_spec="/lib /usr/lib /usr/local/lib /lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu "
+sys_lib_dlsearch_path_spec="/lib /usr/lib /usr/lib/kde4/lib /usr/local/lib /lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu "
 
 # Fix the shell variable $srcfile for the compiler.
 fix_srcfile_path=""
@@ -7323,7 +7323,7 @@ disable_libs=static
 # Libtool was configured on host coredumped-laptop:
 
 # Shell to use when invoking shell scripts.
-SHELL="/bin/bash"
+SHELL="/bin/sh"
 
 # Whether or not to build shared libraries.
 build_libtool_libs=yes
@@ -7605,7 +7605,7 @@ link_all_deplibs=no
 sys_lib_search_path_spec="/usr/lib/gcc/x86_64-linux-gnu/4.2.3 /usr/lib /lib"
 
 # Run-time system search path for libraries
-sys_lib_dlsearch_path_spec="/lib /usr/lib /usr/local/lib /lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu "
+sys_lib_dlsearch_path_spec="/lib /usr/lib /usr/lib/kde4/lib /usr/local/lib /lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu "
 
 # Fix the shell variable $srcfile for the compiler.
 fix_srcfile_path=""

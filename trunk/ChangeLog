@@ -1,3 +1,23 @@
+2008-08-19 Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
+* At Thread classes:
+  * The Thread class now stores its scheduling policy internally.
+  * The ThreadManager is now using an xvr2::Map to store Thread information
+  * We've made it impossible to start a Thread by pointer, now it can only be
+    started by referencing a Thread Object.
+  * Finally fixed the ThreadManager::currentIsMain() method to determine if it
+    is being called from the main thread (main function?).
+* Now we have a base abstract Logger class
+* The Log class has been renamed to FileLogger and is an implementation of
+  xvr2::Logger.
+* Added some operators for interaction between the Date classes and integers.
+* Added a method for substracting two xvr2::Timestamp objects, such function
+  returns the amount of seconds.
+* Added two more example programs datentime.cpp and file_logger.cpp
+* Eliminated the Unix class, for portability concerns.
+* Extended the ElementNotFound exception to bring more information.
+* Removed the dangerous ++ and -- operators from the SharedVar class
+* The Syslog class is no longer a part of the xvr2 main namespace.
+
 2008-07-28 Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
 * Implementing the xvr2:SQL::Driver::resetConnection() method at Connection 
   class level.

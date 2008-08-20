@@ -1,12 +1,12 @@
 /*
  * $Id$
  *
- * X-VR2 
- * 
+ * X-VR2
+ *
  * Copyright (C) Juan V. Guerrero 2007
- * 
+ *
  * Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
- * 
+ *
  * This program is free software, distributed under the terms of
  * the GNU General Public License Version 2. See the LICENSE file
  * at the top of the source tree.
@@ -22,8 +22,8 @@ namespace xvr2{
 	 * This class handles the Syslog daemon
 	 *
 	 * At the moment this class is very system dependent
-	 * for the <b>log types</b> accepted, right now we are using 
-	 * the current C library implementation in your 
+	 * for the <b>log types</b> accepted, right now we are using
+	 * the current C library implementation in your
 	 * platform, under glibc it is an ORed combination of
 	 * facility and level, the facility can be any one of:
 	 *
@@ -74,7 +74,7 @@ namespace xvr2{
 	 * <p><b>IN GLIBC THE ABOVE VALUES ARE DEFINED IN syslog.h</b><br>
 	 *
 	 * @todo Verify syslog portability */
-	class Syslog:public Unix{
+	class Syslog:public Object {
 		private:
 		protected:
 		public:
@@ -82,14 +82,14 @@ namespace xvr2{
 			Syslog();
 			~Syslog();
 			/** This will append a new log message to the syslog
-			 *  daemon queue if you use the default logtype value it 
-			 *  will use the facility LOG_USER and the priority 
+			 *  daemon queue if you use the default logtype value it
+			 *  will use the facility LOG_USER and the priority
 			 * LOG_INFO
 			 */
 			static void Log(const char *logmsg, int logtype=-666);
 			/** This will append a new log message to the syslog
-			 *  daemon queue if you use the default logtype value it 
-			 *  will use the facility LOG_USER and the priority 
+			 *  daemon queue if you use the default logtype value it
+			 *  will use the facility LOG_USER and the priority
 			 * LOG_INFO
 			 */
 			static void Log(const String &logmsg, int logtype=-666);

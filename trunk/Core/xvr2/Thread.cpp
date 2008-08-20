@@ -1,12 +1,12 @@
 /*
  * $Id$
  *
- * X-VR2 
- * 
+ * X-VR2
+ *
  * Copyright (C) Juan V. Guerrero 2007
- * 
+ *
  * Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
- * 
+ *
  * This program is free software, distributed under the terms of
  * the GNU General Public License Version 2. See the LICENSE file
  * at the top of the source tree.
@@ -35,7 +35,7 @@ namespace xvr2{
 
 	void Thread::start(){
 		try{
-			ThreadManager::start(this);
+			ThreadManager::start(*this);
 		}
 		catch(...){
 			throw;
@@ -44,7 +44,7 @@ namespace xvr2{
 
 	void Thread::start(Threading::SchedPolicy pol){
 		try{
-			ThreadManager::start(this, pol);
+			ThreadManager::start(*this, pol);
 		}
 		catch(...){
 			throw;
@@ -65,12 +65,24 @@ namespace xvr2{
 	UInt64 Thread::numericID() const {
 		return ThreadManager::numericID(this);
 	}
-	
-	const bool Thread::joinable(){
+
+	bool Thread::joinable(){
 		return (_detached == true)?false:true;
 	}
-	
+
 	void Thread::join(){
 		//ThreadManager::join()
+	}
+
+	bool Thread::terminated(){
+		return _terminated.getValue();
+	}
+
+	bool Thread::running(){
+		return !terminated();
+	}
+
+	bool Thread::started(){
+		return _started.getValue();
 	}
 }

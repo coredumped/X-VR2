@@ -1,12 +1,12 @@
 /*
  * $Id$
  *
- * X-VR2 
- * 
+ * X-VR2
+ *
  * Copyright (C) Juan V. Guerrero 2007
- * 
+ *
  * Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
- * 
+ *
  * This program is free software, distributed under the terms of
  * the GNU General Public License Version 2. See the LICENSE file
  * at the top of the source tree.
@@ -131,30 +131,16 @@ namespace xvr2 {
 		}
 		lm.unlock();
 	}
-	
+
 	struct _x_ucmp {
 		bool operator()(UInt64 a, UInt64 b) const{
 			return (a < b)?true:false;
 		}
 	};
-	
+
 	xvr2::Map<UInt64, Thread *, _x_ucmp> __TRefs;
 
-	static __ThreadData_t *findThread_id(UInt64 id){
-		unsigned int i;
-		__ThreadData_t *ret = 0;
-		lm.lock();
-		for(i = 0; i < activeThreads.size(); i++){
-			if((UInt64)activeThreads[i]->thread == id){
-				ret = activeThreads[i];
-				break;
-			}
-		}
-		lm.unlock();
-		return ret;
-	}
-
-	static __ThreadData_t *findThread(const Thread *t){
+	/*static __ThreadData_t *findThread(const Thread *t){
 		unsigned int i;
 		__ThreadData_t *ret = 0;
 		lm.lock();
@@ -166,10 +152,25 @@ namespace xvr2 {
 		}
 		lm.unlock();
 		return ret;
+	}*/
+
+	static UInt64 __getThreadId(const Thread *t){
+		UInt64 ret = 0;
+		__TRefs.lock();
+		xvr2::Map<UInt64, Thread *, _x_ucmp>::iterator iter;
+		for(iter = __TRefs.begin(); iter != __TRefs.end(); iter++){
+			if(iter->second == t){
+				ret = iter->first;
+				break;
+			}
+
+		}
+		__TRefs.unlock();
+		return ret;
 	}
 
 #ifdef USE_POSIX_THREADS
-	void *runMethod(void *tx){
+	/*void *runMethod(void *tx){
 		__ThreadData_t *info;
 		info = (__ThreadData_t *)tx;
 		pthread_getschedparam(info->thread, &info->policy, (struct sched_param *)&info->priority);
@@ -181,10 +182,9 @@ namespace xvr2 {
 		__removeThread(info); //Remove thread from the thread list
 		delete info;
 		return 0;
-	}
-	
+	}*/
+
 	void *runMethod_ref(Thread &tx){
-		//pthread_getschedparam(info->thread, tx., (struct sched_param *)&info->priority);
 		__TRefs.lock();
 		__TRefs[ThreadManager::getCurrentThreadID()] = &tx;
 		__TRefs.unlock();
@@ -228,7 +228,7 @@ namespace xvr2 {
 		return 0;
 	}
 
-	void ThreadManager::start(Thread *t){
+	/*void ThreadManager::start(Thread *t){
 		int pol;
 		pthread_t thread;
 		pthread_attr_t attr;
@@ -252,38 +252,35 @@ namespace xvr2 {
 			throw ThreadNotRunning();
 		}
 		while(info->ptr->_started == false) System::usleep(100);
-	}
+	}*/
+
 	void ThreadManager::start(Thread &t){
+#ifdef USE_POSIX_THREADS
 		int pol;
 		pthread_t thread;
 		pthread_attr_t attr;
 		pthread_attr_init(&attr);
 		pthread_attr_getschedpolicy(&attr, &pol);
-	
-//		if(t.joinable()){
-#ifdef USE_POSIX_THREADS
-			pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
-#endif
-/*		}
-		else{
-#ifdef USE_POSIX_THREADS
-			pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_DETACHED);
-#endif
-		}*/
+		t.schedPolicy == __from_posix(pol);
+		pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
 		if(pthread_create(&thread, &attr, (void* (*)(void*))runMethod_ref, (void *)&t) == EAGAIN){
 			throw ThreadNotRunning();
 		}
 		while(t._started == false) usleep(100);
+#else
+#error Unable to build thread support for this platform
+#endif
 	}
 
 	static const char *_iparm = "Policy";
 
-	void ThreadManager::start(Thread *t, Threading::SchedPolicy pol){
+	void ThreadManager::start(Thread &t, Threading::SchedPolicy pol){
+		int err_code;
+		t.schedPolicy = pol;
+#ifdef USE_POSIX_THREADS
 		pthread_t thread;
 		pthread_attr_t attr;
 		pthread_attr_init(&attr);
-		int err_code;
-#ifdef USE_POSIX_THREADS
 		err_code = pthread_attr_setschedpolicy(&attr, __to_posix(pol));
 #endif
 		if(err_code != 0){
@@ -292,28 +289,20 @@ namespace xvr2 {
 			else
 				throw InvalidParameter(_iparm);
 		}
-		if(t->joinable()){
 #ifdef USE_POSIX_THREADS
+		if(t.joinable()){
 			pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
-#endif
 		}
 		else{
-#ifdef USE_POSIX_THREADS
 			pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_DETACHED);
-#endif
+
 		}
-		__ThreadData_t *info;
-#ifdef USE_POSIX_THREADS
-		info = new __ThreadData_t(thread, attr, t, pol);
-#endif
-		if(pthread_create(&thread, &attr, runMethod, info) == EAGAIN){
+		if(pthread_create(&thread, &attr, (void* (*)(void*))runMethod_ref, (void *)&t) == EAGAIN){
 			throw ThreadNotRunning();
 		}
-		while(info->ptr->_started == false) System::usleep(100);
-	}
+		while(t._started == false) usleep(100);
+#endif
 
-	void ThreadManager::start(Thread &t, Threading::SchedPolicy pol){
-		ThreadManager::start(&t, pol);
 	}
 
 	UInt64 ThreadManager::start(BackgroundFunction &bf, bool waitfor){
@@ -332,16 +321,11 @@ namespace xvr2 {
 		return (UInt64)thread;
 #endif
 	}
+
 	bool ThreadManager::isRunning(Thread *t){
-		__ThreadData_t *info;
-		info = findThread(t);
-		if(info != 0){
-			if(info->ptr->isRunning()){
-				return true;
-			}
-		}
-		return false;
+		return t->running();
 	}
+
 	unsigned int ThreadManager::activeCount(){
 		unsigned int n;
 		lm.lock();
@@ -349,18 +333,21 @@ namespace xvr2 {
 		lm.unlock();
 		return n;
 	}
+
 	Thread *ThreadManager::getCurrentThread(){
-		__ThreadData_t *info;
-#ifdef USE_POSIX_THREADS
-		info = findThread_id((UInt64)pthread_self());
-#endif
-		return (info == 0)?0:info->ptr;
+		Thread *ret = 0;
+		__TRefs.lock();
+		ret = __TRefs[getCurrentThreadID()];
+		__TRefs.unlock();
+		return ret;
 	}
+
 	const UInt64 ThreadManager::getCurrentThreadID(){
 #ifdef USE_POSIX_THREADS
 		return (UInt64)pthread_self();
 #endif
 	}
+
 	BackgroundFunction *ThreadManager::getCurrentBackgroundFunction(){
 		BackgroundFunction *ret = 0;
 		lm.lock();
@@ -373,113 +360,89 @@ namespace xvr2 {
 		lm.unlock();
 		return ret;
 	}
-	void ThreadManager::setPriority(Thread *t, int prio){
 
-		__ThreadData_t *info;
-		info = findThread(t);
-		if(info == 0){
-			throw InvalidThread();
-		}
-		else{
+	void ThreadManager::setPriority(Thread *t, int prio){
 #ifdef USE_POSIX_THREADS
-			pthread_setschedparam(info->thread, info->policy, (sched_param *)&prio);
+			UInt64 tid = __getThreadId(t);
+			pthread_setschedparam(tid, __to_posix(t->schedPolicy.getValue()), (sched_param *)&prio);
 #endif
-		}
 	}
+
 	void ThreadManager::setPriority(Thread &t, int prio){
 		ThreadManager::setPriority(&t, prio);
 	}
+
 	UInt64 ThreadManager::numericID(const Thread *t){
-		__ThreadData_t *info;
-		info = findThread(t);
-#ifdef USE_POSIX_THREADS
-		if(info == 0){
-			throw InvalidThread();
-		}
-		return (UInt64)info->thread;
-#endif
+		return __getThreadId(t);
 	}
+
 	UInt64 ThreadManager::numericID(const Thread &t){
 		return ThreadManager::numericID(&t);
 	}
+
 	void ThreadManager::join(JoinableThread *t){
-		__ThreadData_t *info;
-		info = findThread(t);
-		if(info == 0){
-			throw InvalidThread();
-		}
 #ifdef USE_POSIX_THREADS
-		pthread_join(info->thread, 0);
+		pthread_join(__getThreadId(t), 0);
 #else
 #error Currently POSIX threads are the only supported concurrency method
 #endif
 	}
+
 	void ThreadManager::join(JoinableThread &t){
 		ThreadManager::join(&t);
 	}
 	void ThreadManager::detach(JoinableThread *t){
-		__ThreadData_t *info;
-		info = findThread(t);
-		if(info == 0){
-			throw InvalidThread();
-		}
 #ifdef USE_POSIX_THREADS
-		pthread_detach(info->thread);
+		pthread_detach(__getThreadId(t));
 #endif
 	}
-	
+
 	void ThreadManager::detach(JoinableThread &t){
 		ThreadManager::detach(&t);
 	}
-	
+
 	void ThreadManager::setSchedulingPolicy(Thread *t, Threading::SchedPolicy pol){
-		__ThreadData_t *info;
-		info = findThread(t);
-		if(info == 0){
-			throw InvalidThread();
-		}
 #ifdef USE_POSIX_THREADS
-		int ret;
-		ret = pthread_setschedparam(info->thread, __to_posix(pol), (struct sched_param *)&info->priority);
+		int ret = 0;
+		UInt64 tid = __getThreadId(t);
+		ret = pthread_setschedparam(tid, __to_posix(pol), (struct sched_param *)&ret);
 		if(ret == EINVAL){
 			throw InvalidParameter(_iparm);
 		}
 		else if(ret == EPERM){
 			throw SecurityException();
 		}
-		pthread_getschedparam(info->thread, &info->policy, (struct sched_param *)&info->priority);
+		int newpol;
+		int newprio;
+		pthread_getschedparam(tid, &newpol, (struct sched_param *)&newprio);
+		t->schedPolicy = __from_posix(newpol);
 #endif
 	}
-	
+
 	void ThreadManager::setSchedulingPolicy(Thread &t, Threading::SchedPolicy pol){
 		ThreadManager::setSchedulingPolicy(&t, pol);
 	}
-	
+
 	void ThreadManager::setSchedulingParams(Thread *t, Threading::SchedPolicy pol, int prio){
-		__ThreadData_t *info;
-		info = findThread(t);
-		if(info == 0){
-			throw InvalidThread();
-		}
 #ifdef USE_POSIX_THREADS
+		UInt64 tid = __getThreadId(t);
 		int ret;
-		ret = pthread_setschedparam(info->thread, __to_posix(pol), (struct sched_param *)&prio);
-		pthread_getschedparam(info->thread, &info->policy, (struct sched_param *)&info->priority);
+		ret = pthread_setschedparam(tid, __to_posix(pol), (struct sched_param *)&prio);
+		int newpol;
+		int newprio;
+		pthread_getschedparam(tid, &newpol, (struct sched_param *)&newprio);
+		t->schedPolicy = __from_posix(newpol);
 #endif
 	}
+
 	void ThreadManager::setSchedulingParams(Thread &t, Threading::SchedPolicy pol, int prio){
 		ThreadManager::setSchedulingParams(&t, pol, prio);
 	}
+
 	Threading::SchedPolicy ThreadManager::getSchedulingPolicy(Thread *t){
-		__ThreadData_t *info;
-		info = findThread(t);
-		if(info == 0){
-			throw InvalidThread();
-		}
-#ifdef USE_POSIX_THREADS
-		return __from_posix(info->policy);
-#endif
+		return (Threading::SchedPolicy)t->schedPolicy.getValue();
 	}
+
 	Threading::SchedPolicy ThreadManager::getSchedulingPolicy(Thread &t){
 		return ThreadManager::getSchedulingPolicy(&t);
 	}
@@ -489,14 +452,20 @@ namespace xvr2 {
 		if(getCurrentThread() == 0) return false;
 		return true;
 	}
+
 	bool ThreadManager::currentIsBackgroundFunction(){
 		if(getCurrentBackgroundFunction() == 0) return false;
 		return true;
 	}
+
 	bool ThreadManager::currentIsMain(){
-		if(!currentIsThread() && !currentIsBackgroundFunction()) return true;
-		return false;
+		bool ret = false;
+		if(getCurrentThread() == 0 && getCurrentBackgroundFunction() == 0){
+			ret = true;
+		}
+		return ret;
 	}
+
 	void ThreadManager::testCancellation(){
 #ifdef USE_POSIX_THREADS
 		pthread_testcancel();

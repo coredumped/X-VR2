@@ -1,12 +1,12 @@
 /*
  * $Id:CoreExceptions.h 531 2007-08-11 09:05:29Z mindstorm2600 $
  *
- * X-VR2 
- * 
+ * X-VR2
+ *
  * Copyright (C) Juan V. Guerrero 2007
- * 
+ *
  * Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
- * 
+ *
  * This program is free software, distributed under the terms of
  * the GNU General Public License Version 2. See the LICENSE file
  * at the top of the source tree.
@@ -46,7 +46,7 @@ namespace xvr2{
 	 * EXCEPTIONS DERIVED FROM xvr2::Exception
 	 *********************************************************************/
 	/** \class BufferTooSmall CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  \brief To be thrown when you are trying to write data in a buffer whose 
+	 *  \brief To be thrown when you are trying to write data in a buffer whose
 	 *  storage size is too small. */
 	class BufferTooSmall:public Exception{
 		public:
@@ -54,7 +54,7 @@ namespace xvr2{
 			BufferTooSmall();
 	};
 	/** \class ArrayIndexOutOfLimits CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  \brief Throw this exception when an operation over an array exceeds its 
+	 *  \brief Throw this exception when an operation over an array exceeds its
 	 *  inbound or outbound limits. */
 	class ArrayIndexOutOfLimits:public Exception{
 		private:
@@ -67,14 +67,20 @@ namespace xvr2{
 			int index();
 			int maxval();
 	};
-	
+
 	/** \class ElementNotFound CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  \brief Use this exception when a search for an element returned no 
+	 *  \brief Use this exception when a search for an element returned no
 	 *  results or the results given doens't match what you were looking for. */
 	class ElementNotFound:public Exception{
+		private:
+			std::string element_name;
 		public:
 			/** Default constructor */
 			ElementNotFound();
+			ElementNotFound(const std::string &_ename);
+			/** Retrieves the name of the failed element.
+			 *  @return the element name as a std::string. */
+			std::string element();
 	};
 	/** \class GroupException CoreExceptions.h <xvr2/CoreExceptions.h>
 	 *  \brief Generic exception for the group class. */
@@ -102,7 +108,7 @@ namespace xvr2{
 			MutexException();
 	};
 	/** \class NoMoreTokens CoreExceptions.h <xvr2/CoreExceptions.h>
-	 * Use or trap this exception when you need to check if a Tokenizer has no 
+	 * Use or trap this exception when you need to check if a Tokenizer has no
 	 * more tokens to find in the current string. */
 	class NoMoreTokens:public Exception{
 		public:
@@ -159,7 +165,7 @@ namespace xvr2{
 			UserException();
 	};
 	/** \class UndefinedClass CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  \brief This exception is thrown whenever you try to access a class by a 
+	 *  \brief This exception is thrown whenever you try to access a class by a
      *  name which is not the class's name. */
 	class UndefinedClassException:public Exception{
 		public:
@@ -176,8 +182,8 @@ namespace xvr2{
 	 * EXCEPTIONS DERIVED FROM xvr2::GroupException
 	 *************************************************************************/
 	/** \class GroupNotFound CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  This exception is thrown whenever you are trying to browse the group 
-	 *  database for a specific entry and that entry is not available or 
+	 *  This exception is thrown whenever you are trying to browse the group
+	 *  database for a specific entry and that entry is not available or
 	 *  non-existent */
 	class GroupNotFound:public GroupException{
 		public:
@@ -191,8 +197,8 @@ namespace xvr2{
 	 *************************************************************************/
 	/** \class AllocationFailed CoreExceptions.h <xvr2/CoreExceptions.h>
 	 *  \brief This exceptions might be thrown if a call to malloc or any other
-	 *  memory allocation routine has just failed, it may be posible that you 
-	 *  are running out of memory or that this process is trying to allocate 
+	 *  memory allocation routine has just failed, it may be posible that you
+	 *  are running out of memory or that this process is trying to allocate
 	 *  the maximum allowable memory size in the current system, sorry */
 	class AllocationFailed:public MemoryException{
 		public:
@@ -306,7 +312,7 @@ namespace xvr2{
 			ThreadNotRunning();
 	};
 	/** \class MaximumNumberOfRunningThreadsReached CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  \brief Tbis exception is thrown if while attempting to start a new thread the maximum
+	 *  \brief This exception is thrown if while attempting to start a new thread the maximum
 	 *  number of threads supported by the OS has been reached. */
 	class MaximumNumberOfRunningThreadsReached:public ThreadException{
 		public:
@@ -314,7 +320,7 @@ namespace xvr2{
 			MaximumNumberOfRunningThreadsReached();
 	};
 	/** \class ConditionVarWaitTimedOut CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  The condition variable was signaled before wait interval has been reached, as a 
+	 *  The condition variable was signaled before wait interval has been reached, as a
 	 *  consecuence the controlled Mutex will be re-acquired */
 	class ConditionVarWaitTimedOut:public ThreadException{
 		public:
@@ -322,7 +328,7 @@ namespace xvr2{
 			ConditionVarWaitTimedOut();
 	};
 	/** \class InvalidThread CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  The user provided thread object is not being managed by the ThreadManager	
+	 *  The user provided thread object is not being managed by the ThreadManager
 	 *  so its is invalid */
 	class InvalidThread:public ThreadException{
 		public:
@@ -335,7 +341,7 @@ namespace xvr2{
 	 * EXCEPTIONS DERIVED FROM xvr2::SemaphoreException
 	 *************************************************************************/
 	/** \class SemaphoreInitValueException CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  The initialization value for this semaphore is too big, unable to create 
+	 *  The initialization value for this semaphore is too big, unable to create
 	 *  semaphore, sorry */
 	class SemaphoreInitValueException:public SemaphoreException{
 		public:
@@ -377,7 +383,7 @@ namespace xvr2{
 	 * EXCEPTIONS DERIVED FROM xvr2::UserException
 	 *************************************************************************/
 	/** \class UserNotFound CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  This exception is thrown whenever you are trying to browse the user database for a 
+	 *  This exception is thrown whenever you are trying to browse the user database for a
 	 *  specific entry and that entry is not available or non-existent */
 	class UserNotFound:public UserException{
 		public:

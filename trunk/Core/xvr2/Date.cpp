@@ -1,12 +1,12 @@
 /*
  * $Id$
  *
- * X-VR2 
- * 
+ * X-VR2
+ *
  * Copyright (C) Juan V. Guerrero 2007
- * 
+ *
  * Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
- * 
+ *
  * This program is free software, distributed under the terms of
  * the GNU General Public License Version 2. See the LICENSE file
  * at the top of the source tree.
@@ -268,5 +268,18 @@ namespace xvr2{
 	Date Date::Now(){
 		return Date();
 	}
+
+	Date operator+(const Date &d, UInt32 secs){
+		return Date(d.unixTime() + secs);
+	}
+
+	Date operator-(const Date &d, UInt32 secs){
+		return Date(d.unixTime() - secs);
+	}
+
+	UInt32 operator+(UInt32 secs, const Date &d){
+		return secs + d.unixTime();
+	}
+
 }
 

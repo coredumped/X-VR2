@@ -1,12 +1,12 @@
 /*
  * $Id$
  *
- * X-VR2 
- * 
+ * X-VR2
+ *
  * Copyright (C) Juan V. Guerrero 2007
- * 
+ *
  * Juan V. Guerrero <mindstorm2600@users.sourceforge.net>
- * 
+ *
  * This program is free software, distributed under the terms of
  * the GNU General Public License Version 2. See the LICENSE file
  * at the top of the source tree.
@@ -50,12 +50,12 @@ namespace xvr2 {
 		description = (char *)xvr2::excepBufferTooSmall;
 	}
 	ArrayIndexOutOfLimits::ArrayIndexOutOfLimits(){
-		description = (char *)xvr2::excepAOB;	
+		description = (char *)xvr2::excepAOB;
 		_i = -1;
 		_m = -1;
 	}
 	ArrayIndexOutOfLimits::ArrayIndexOutOfLimits(int _index, int _maxval){
-		description = (char *)xvr2::excepAOB;	
+		description = (char *)xvr2::excepAOB;
 		_i = _index;
 		_m = _maxval;
 	}
@@ -77,26 +77,39 @@ namespace xvr2 {
 	NumberException::NumberException(){
 		description = (char *)xvr2::excepNumeric;
 	}
-	
+
 	ParseException::ParseException(){
 		description = (char *)xvr2::excepParse;
 	}
-	
+
 	ParseException::ParseException(const std::string &_orig_text){
 		description = (char *)xvr2::excepParse;
 		orig_text = _orig_text;
 	}
-	
+
 	const std::string &ParseException::text(){
 		return orig_text;
 	}
-	
+
 	const std::string &ParseException::text() const {
 		return orig_text;
 	}
-	
+
 	UndefinedClassException::UndefinedClassException(){
 		description = (char *)xvr2::excepUndefinedClass;
+	}
+
+	ElementNotFound::ElementNotFound(){
+		description = (char *)xvr2::excepNoElem;
+	}
+
+	ElementNotFound::ElementNotFound(const std::string &_ename){
+		description = (char *)xvr2::excepNoElem;
+		element_name = _ename;
+	}
+
+	std::string ElementNotFound::element(){
+		return std::string(element_name);
 	}
 
 
@@ -165,7 +178,7 @@ namespace xvr2 {
 	ByteParseException::ByteParseException(){
 		description = (char *)xvr2::excepByteParse;
 	}
-	
+
 
 ///////////////////////////////////////
 /////// SecurityException //////////////////
@@ -177,7 +190,7 @@ namespace xvr2 {
 		description = (char *)xvr2::excepUserIDDoesNotMatch;
 	}
 
-	
+
 ///////////////////////////////////////
 /////// SemaphoreException //////////////////
 	SemaphoreException::SemaphoreException(){
