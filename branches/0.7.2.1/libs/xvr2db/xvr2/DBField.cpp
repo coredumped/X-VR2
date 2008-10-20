@@ -31,12 +31,12 @@ namespace xvr2{
 
 		// Start definition of local variables
 		// End definition of local variables
-	
+
 		// Start definition of local functions
 		// End definition of local functions
-	
+
 		//Start implementation of class: Field
-	
+
 		Field::Field(const void *data, const UInt32 size){
 #ifdef USE_EMBEDDED_CLASSNAMES
 			setClassName(xvr2::__xvr2_DB_Field);
@@ -78,20 +78,20 @@ namespace xvr2{
 					dataType = VARCHAR;
 			}
 		}
-	
+
 		Field::Field(){
 #ifdef USE_EMBEDDED_CLASSNAMES
 			setClassName(xvr2::__xvr2_DB_Field);
 #endif
 		}
-	
+
 		Field::Field(const int type, const void *data, const UInt32 size){
 #ifdef USE_EMBEDDED_CLASSNAMES
 			setClassName(xvr2::__xvr2_DB_Field);
 #endif
 			init(type, data, size);
 		}
-	
+
 		void Field::init(const int type, const void *data, const UInt32 size){
 #if __GNUC__ < 3
 			setClassName(xvr2::_xvr2Field);
@@ -255,7 +255,7 @@ namespace xvr2{
 					tmpString.assign(tmpTime->toString());
 					break;
 				case TIMESTAMP:
-					tmpTimestamp = new Timestamp((Timestamp *)data);
+					tmpTimestamp = new Timestamp(((Timestamp *)data)->unixTime());
 					dataPtr = (void *)tmpTimestamp;
 					//tmpString.assign(tmpTimestamp->toString().toCharPtr());
 					tmpString.assign(tmpTimestamp->toString());
@@ -273,9 +273,9 @@ namespace xvr2{
 					break;
 				default:
 					dataPtr = (void *)data;
-			};		
+			};
 		}
-	
+
 		Field::~Field(){
 			void *ttmp;
 			//Destroy datacell completely
@@ -296,6 +296,10 @@ namespace xvr2{
 			}
 			if(tmpStrFLOAT!= 0){
 				ttmp = tmpStrFLOAT;
+				Memory::freeBuffer(&ttmp);
+			}
+			if(tmpStrDOUBLE != 0){
+				ttmp = tmpStrDOUBLE;
 				Memory::freeBuffer(&ttmp);
 			}
 			if(tmpStrBIT!= 0){
@@ -325,7 +329,7 @@ namespace xvr2{
 			if(tmpDouble != 0)
 				xvr2_delete(tmpDouble);
 		}
-	
+
 		Int16 Field::toTinyInt() const{
 			Int16 val = 0;
 			Time   *t = 0;
@@ -384,11 +388,11 @@ namespace xvr2{
 			}
 			return val;
 		}
-	
+
 		UInt16 Field::toUTinyInt() const{
 			return (UInt16)toTinyInt();
 		}
-	
+
 		Int32 Field::toInteger() const{
 			Int32 val = 0;
 			Time   *t;
@@ -451,11 +455,11 @@ namespace xvr2{
 			}
 			return val;
 		}
-	
+
 		UInt32 Field::toUInteger() const{
 			return (UInt32)toInteger();
 		}
-	
+
 		Int64 Field::toBigInt() const{
 			Int64 val = 0;
 			Time   *t;
@@ -518,11 +522,11 @@ namespace xvr2{
 			}
 			return val;
 		}
-	
+
 		UInt64 Field::toUBigInt() const{
 			return (UInt64)toBigInt();
 		}
-	
+
 		float Field::toFloat() const{
 			float val = 0;
 			Time   *t;
@@ -585,7 +589,7 @@ namespace xvr2{
 			}
 			return val;
 		}
-	
+
 		double Field::toDouble() const{
 			double val = 0;
 			Time   *t;
@@ -648,7 +652,7 @@ namespace xvr2{
 			}
 			return val;
 		}
-	
+
 		char *Field::toChar() const{
 			char *ret = 0;
 			//void *ttmp;
@@ -731,17 +735,17 @@ namespace xvr2{
 			}
 			return ret;
 		}
-	
-	
+
+
 		const String &Field::toString() const{
 			return tmpString;
 		}
-	
-	
+
+
 		const String &Field::toText() const{
 			return tmpString;
 		}
-	
+
 		const Date *Field::toDate(){
 			Date *ret = 0;
 			struct tm tt;
@@ -867,7 +871,7 @@ namespace xvr2{
 			}
 			return ret;
 		}
-	
+
 		const Time *Field::toTime(){
 			Time *ret = 0;
 			struct tm tt;
@@ -974,11 +978,9 @@ namespace xvr2{
 			}
 			return ret;
 		}
-	
+
 		Timestamp Field::toTimestamp() const {
-			//Timestamp *ret = 0;
 			if(isNull()){
-				//return 0;
 				throw FieldIsNull(colname);
 			}
 			switch(dataType){
@@ -1114,11 +1116,11 @@ namespace xvr2{
 			//return ret;
 			return Timestamp();
 		}
-	
+
 		bool Field::toBool() const{
 			return toBit();
 		}
-	
+
 		bool Field::toBit() const{
 			bool ret = 0;
 			if(isNull())
@@ -1170,8 +1172,8 @@ namespace xvr2{
 			}
 			return ret;
 		}
-	
-	
+
+
 		const Byte *Field::toByte(){
 			Byte *ret = 0;
 			if(isNull())
@@ -1212,37 +1214,37 @@ namespace xvr2{
 		const int Field::getDatatype() const {
 			return dataType;
 		}
-	
+
 		const UInt32 Field::size(){
 			return dataLen;
 		}
-	
+
 		const UInt32 Field::size() const{
 			return dataLen;
 		}
-	
+
 		const UInt32 Field::dataSize(){
 			return dataLen;
 		}
-	
+
 		const UInt32 Field::dataSize() const{
 			return dataLen;
 		}
-	
+
 		void Field::setFieldName(const String &nam){
 			colname = nam.toCharPtr();
 		}
-	
+
 		const String &Field::getFieldName() const {
 			return colname;
 		}
-	
+
 		bool Field::isNull() const{
 			if(dataPtr == 0)
 				return true;
 			return false;
 		}
-	
+
 		//End implementation of class: Field
 	};
 };
