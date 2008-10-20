@@ -8,20 +8,9 @@
 namespace xvr2{
 
 	void Time::encode(){
-		/*if(hour <= 9)
-			drep.concat(0);
-		drep.concat(hour);
-		drep.concat(":");
-		if(minute <= 9)
-			drep.concat(0);
-		drep.concat(minute);
-		drep.concat(":");
-		if(second <= 9)
-			drep.concat(0);
-		drep.concat(second);*/
-		if(string_representation != 0){
+		/*if(string_representation != 0){
 			delete string_representation;
-		}
+		}*/
 		std::stringstream stream;
 		if(hour <= 9)
 			stream << "0";
@@ -32,7 +21,7 @@ namespace xvr2{
 		if(second <= 9)
 			stream << "0";
 		stream << second;
-		string_representation = new std::string(stream.str());
+		string_representation = stream.str();
 	}
 	Time::Time(){
 #if __GNUC__ < 3
@@ -111,7 +100,7 @@ namespace xvr2{
 		getCurrentTime();
 		return second;
 	}
-	
+
 	/*const String &Time::toString() const{
 		//return drep;
 		return *string_representation;

@@ -9,7 +9,7 @@
 #include<xvr2/CoreExceptions.h>
 
 namespace xvr2{
-	
+
 	/**
 	 * This class implements the basic date/time handling facilities
 	 */
@@ -17,13 +17,13 @@ namespace xvr2{
 		protected:
 			/** This variable stores the time queried by getCurrentTime(); */
 			time_t unixtime;
-			/** This member holds the String representation of the 
+			/** This member holds the String representation of the
 			 *  current Date */
 			//String drep;
 			void setTStamp(UInt32 tstamp);
 			void decode(const char *format, const char *date_text);
 			virtual void encode();
-			std::string *string_representation;
+			std::string string_representation;
 		public:
 			enum DateAMPM{
 				AM,
@@ -78,7 +78,7 @@ namespace xvr2{
 			 *  more information on the format string read the manpage for
 			 *  strptime.
 			 *  \param format The format as a valid strptime format string
-			 *  \param date_text The date as a string matching the given 
+			 *  \param date_text The date as a string matching the given
 			 *  format */
 			Date(const char *format, const char *date_text);
 			/** By calling this constructor you'll be able to initialize a
@@ -87,7 +87,7 @@ namespace xvr2{
 			 *  more information on the format string read the manpage for
 			 *  strptime.
 			 *  \param format The format as a valid strptime format string
-			 *  \param date_text The date as a string matching the given 
+			 *  \param date_text The date as a string matching the given
 			 *  format */
 			Date(const String &format, const String &date_text);
 			Date(const Date &d);
@@ -96,7 +96,7 @@ namespace xvr2{
 			Date &operator=(const Date &_d);
 			/** This method will update the value of unixtime and all the other <i>broken-time</i> values */
 			virtual time_t getCurrentTime();
-			
+
 			/** This methid will give you the numeric representation of
 			 *  the date in the unix time format */
 			const UInt32 unixTime();

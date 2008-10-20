@@ -12,9 +12,6 @@
 namespace xvr2{
 
 	void Date::encode(){
-		if(string_representation != 0){
-			delete string_representation;
-		}
 		std::stringstream stream;
 		stream << year << "-";
 		if(month <= 9)
@@ -32,8 +29,9 @@ namespace xvr2{
 		if(second <= 9)
 			stream << "0";
 		stream << second;
-		string_representation = new std::string(stream.str());
+		string_representation = stream.str();
 	}
+
 	void Date::setTStamp(UInt32 tstamp){
 		struct tm t;
 		unixtime = tstamp;
@@ -65,8 +63,7 @@ namespace xvr2{
 #if __GNUC__ < 3
 		setClassName(xvr2::_xvr2Date);
 #endif
-		//drep = 0;
-		string_representation = 0;
+		//string_representation = 0;
 		getCurrentTime();
 	}
 
@@ -74,7 +71,7 @@ namespace xvr2{
 #if __GNUC__ < 3
 		setClassName(xvr2::_xvr2Date);
 #endif
-		string_representation = 0;
+		//string_representation = 0;
 		//drep = 0;
 		minute = d->minute;
 		second = d->second;
@@ -94,7 +91,7 @@ namespace xvr2{
 #if __GNUC__ < 3
 		setClassName(xvr2::_xvr2Date);
 #endif
-		string_representation = 0;
+		//string_representation = 0;
 		//drep = 0;
 		hour       = __h;
 		if(hour > 12){
@@ -133,7 +130,7 @@ namespace xvr2{
 #if __GNUC__ < 3
 		setClassName(xvr2::_xvr2Date);
 #endif
-		string_representation = 0;
+		//string_representation = 0;
 		//drep = 0;
 		setTStamp(__unixtime);
 	}
@@ -142,25 +139,23 @@ namespace xvr2{
 #if __GNUC__ < 3
 		setClassName(xvr2::_xvr2Date);
 #endif
-		string_representation = 0;
+		//string_representation = 0;
 		//drep = 0;
 		setTStamp(_d.unixtime);
 	}
 
 	Date &Date::operator=(const Date &_d){
-		string_representation = 0;
+		//string_representation = 0;
 		setTStamp(_d.unixtime);
 		return *this;
 	}
 
 	void Date::decode(const char *format, const char *date_text){
-		struct tm *t = 0;
-		t = new tm();
-		if(strptime(date_text, format, t) == NULL){
-			xvr2_delete(t);
+		struct tm t;
+		if(strptime(date_text, format, &t) == NULL){
 			throw DateParseException();
 		}
-		hour = t->tm_hour;
+		hour = t.tm_hour;
 		if(hour > 12){
 			hr12hour = hour - 12;
 			hr12ampm = Date::PM;
@@ -174,20 +169,20 @@ namespace xvr2{
 			}
 			hr12ampm = Date::AM;
 		}
-		minute = t->tm_min;
-		second = t->tm_sec;
-		dayofweek = t->tm_wday;
-		dayofyear = t->tm_yday;
-		dayofmonth = t->tm_mday;
-		month = t->tm_mon + 1;
-		if(t->tm_year < 1900){
-			year = t->tm_year + 1900;
+		minute = t.tm_min;
+		second = t.tm_sec;
+		dayofweek = t.tm_wday;
+		dayofyear = t.tm_yday;
+		dayofmonth = t.tm_mday;
+		month = t.tm_mon + 1;
+		if(t.tm_year < 1900){
+			year = t.tm_year + 1900;
 		}
 		else{
-			year = t->tm_year;
+			year = t.tm_year;
 		}
-		unixtime = mktime(t);
-		xvr2_delete(t);
+		unixtime = mktime(&t);
+		//xvr2_delete(t);
 		encode();
 	}
 
@@ -196,7 +191,7 @@ namespace xvr2{
 #if __GNUC__ < 3
 		setClassName(xvr2::_xvr2Date);
 #endif
-		string_representation = 0;
+		//string_representation = 0;
 		decode(format, date_text);
 		encode();
 	}
@@ -205,18 +200,16 @@ namespace xvr2{
 #if __GNUC__ < 3
 		setClassName(xvr2::_xvr2Date);
 #endif
-		string_representation = 0;
+		//string_representation = 0;
 		decode(format.toCharPtr(), date_text.toCharPtr());
 		encode();
 	}
 
 	Date::~Date(){
-		/*if(drep != 0)
-			xvr2_delete(drep);*/
-		if(string_representation != 0){
+		/*if(string_representation != 0){
 			delete string_representation;
 			string_representation = 0;
-		}
+		}*/
 	}
 
 	time_t Date::getCurrentTime(){
@@ -258,7 +251,7 @@ namespace xvr2{
 	std::string Date::toString(){
 		//return drep.toString();
 		//return *string_representation;
-		return std::string(string_representation->c_str());
+		return std::string(string_representation);
 	}
 
 	void Date::add(DateARITHParts component, int value){

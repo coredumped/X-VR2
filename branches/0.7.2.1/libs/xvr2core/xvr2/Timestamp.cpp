@@ -9,7 +9,7 @@ namespace xvr2{
 #if __GNUC__ < 3
 		setClassName(_xvr2Timestamp);
 #endif
-		string_representation = 0;
+		//string_representation = 0;
 		setTStamp(tstamp);
 	}
 
@@ -23,7 +23,7 @@ namespace xvr2{
 #if __GNUC__ < 3
 		setClassName(_xvr2Timestamp);
 #endif
-		string_representation = 0;
+		//string_representation = 0;
 		setTStamp(d.unixtime);
 	}
 
