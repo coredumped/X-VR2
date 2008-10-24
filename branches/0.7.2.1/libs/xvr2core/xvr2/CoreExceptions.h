@@ -34,7 +34,7 @@ namespace xvr2{
 	 * EXCEPTIONS DERIVED FROM xvr2::Exception
 	 *********************************************************************/
 	/** \class BufferTooSmall CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  \brief To be thrown when you are trying to write data in a buffer whose 
+	 *  \brief To be thrown when you are trying to write data in a buffer whose
 	 *  storage size is too small. */
 	class BufferTooSmall:public Exception{
 		public:
@@ -42,7 +42,7 @@ namespace xvr2{
 			BufferTooSmall();
 	};
 	/** \class ArrayIndexOutOfLimits CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  \brief Throw this exception when an operation over an array exceeds is 
+	 *  \brief Throw this exception when an operation over an array exceeds is
 	 *  inbound and outbound limits. */
 	class ArrayIndexOutOfLimits:public Exception{
 		private:
@@ -55,9 +55,9 @@ namespace xvr2{
 			int index();
 			int maxval();
 	};
-	
+
 	/** \class ElementNotFound CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  \brief Use this exception when a search for an element returned no 
+	 *  \brief Use this exception when a search for an element returned no
 	 *  results or the results given doens't match what you were looking for. */
 	class ElementNotFound:public Exception{
 		public:
@@ -99,7 +99,7 @@ namespace xvr2{
 			MutexException();
 	};
 	/** \class NoMoreTokens CoreExceptions.h <xvr2/CoreExceptions.h>
-	 * Use or trap this exception when you need to check if a Tokenizer has no 
+	 * Use or trap this exception when you need to check if a Tokenizer has no
 	 * more tokens to find in the current string. */
 	class NoMoreTokens:public Exception{
 		public:
@@ -151,7 +151,7 @@ namespace xvr2{
 			UserException();
 	};
 	/** \class UndefinedClass CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  \brief This exception is thrown whenever you try to access a class by a 
+	 *  \brief This exception is thrown whenever you try to access a class by a
      *  name which is not the class's name. */
 	class UndefinedClassException:public Exception{
 		public:
@@ -161,7 +161,7 @@ namespace xvr2{
 
 
 	/*************************************************************************
-	 * EXCEPTIONS DERIVED FROM xvr2::IOException 
+	 * EXCEPTIONS DERIVED FROM xvr2::IOException
 	 *************************************************************************/
 	/** \class DSOException CoreExceptions.h <xvr2/CoreExceptions.h>
 	 *  \brief Use this exception whenever you want to throw a generic exception
@@ -173,7 +173,7 @@ namespace xvr2{
 	};
 
 	/** \class FileException CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  \brief You will only be seeing this exception if a generic 
+	 *  \brief You will only be seeing this exception if a generic
 	 *  (undetermined) exception has occurred on a file-based class. */
 	class FileException:public IOException{
 		public:
@@ -181,7 +181,7 @@ namespace xvr2{
 			FileException();
 	};
 	/** \class NotEnoughKernelMemory CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  \brief This exception will be thrown only if there is not enough memory 
+	 *  \brief This exception will be thrown only if there is not enough memory
 	 *  for kernel use. */
 	class NotEnoughKernelMemory:public IOException{
 		public:
@@ -190,8 +190,8 @@ namespace xvr2{
 	};
 
 	/** \class BrokenPipe CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  \brief This exception is thrown whenever the other end of communication 
-     *  has died or in the case of a socket when the remote host has closed 
+	 *  \brief This exception is thrown whenever the other end of communication
+     *  has died or in the case of a socket when the remote host has closed
 	 *  connection without warning. */
 	class BrokenPipe:public IOException{
 		public:
@@ -200,7 +200,7 @@ namespace xvr2{
 	};
 
 	/** \class ProcOutOfFileDescriptors CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  \brief This exception is thrown when the process is going out of 
+	 *  \brief This exception is thrown when the process is going out of
      *  files. */
 	class ProcOutOfFileDescriptors:public IOException{
 		public:
@@ -209,7 +209,7 @@ namespace xvr2{
 	};
 
 	/** \class SysOutOfFileDescriptors CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  \brief This exception is thrown when the system is going out of 
+	 *  \brief This exception is thrown when the system is going out of
      *  files. */
 	class SysOutOfFileDescriptors:public IOException{
 		public:
@@ -228,8 +228,8 @@ namespace xvr2{
 			DeviceOrFIFONotFound();
 	};
 	/** \class DeviceNotFound CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  \brief This exception will be thrown only if while trying to open a 
-     * special device file the associated hardware is not properly connected to 
+	 *  \brief This exception will be thrown only if while trying to open a
+     * special device file the associated hardware is not properly connected to
      * the system. */
 	class DeviceNotFound:public IOException{
 		public:
@@ -238,7 +238,7 @@ namespace xvr2{
 	};
 
 	/** \class InterruptedSystemCall CoreExceptions.h <xvr2/CoreExceptions.h>
-     *  \brief This exception is thrown whenever a system call is interrupted 
+     *  \brief This exception is thrown whenever a system call is interrupted
      *  by another */
 	class InterruptedSystemCall:public IOException{
 		public:
@@ -249,7 +249,7 @@ namespace xvr2{
 	};
 
 	/** \class SocketUnableToWrite CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  \brief This exception is thrown if it is not possible to write data to 
+	 *  \brief This exception is thrown if it is not possible to write data to
      *  the other end of communications. */
 	class SocketUnableToWrite:public IOException{
 		public:
@@ -258,7 +258,7 @@ namespace xvr2{
 	};
 
 	/** \class SocketUnableToRead CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  \brief This exception is thrown if it is not possible to read data from 
+	 *  \brief This exception is thrown if it is not possible to read data from
      *  the other end of communications. */
 	class SocketUnableToRead:public IOException{
 		public:
@@ -270,7 +270,7 @@ namespace xvr2{
 	 * EXCEPTIONS DERIVED FROM xvr2::DSOException
 	 *************************************************************************/
 	/** \class CantLoadDSO CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  \brief This exception is thown whenever you're trying to load a 
+	 *  \brief This exception is thown whenever you're trying to load a
      *  DSOException and some error ocurred. */
 	class CantLoadDSO:public DSOException{
 		public:
@@ -279,7 +279,7 @@ namespace xvr2{
 	};
 
 	/** \class CantUnloadDSO CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  \brief If a DSOException cannot be unloaded, this exception is 
+	 *  \brief If a DSOException cannot be unloaded, this exception is
      *  thrown. */
 	class CantUnloadDSO:public DSOException{
 		public:
@@ -291,9 +291,14 @@ namespace xvr2{
 	 *  \brief This is a common error appearing whenever you cant load
 	 *  a symbol from a DSOException. */
 	class DSOSymbolException:public DSOException{
+		protected:
+			std::string _symbol_name;
 		public:
 			/** Default constructor */
 			DSOSymbolException();
+			DSOSymbolException(const std::string &symbol_name);
+			const std::string &symbolName();
+			const std::string &symbolName() const;
 	};
 
 	/*************************************************************************
@@ -301,7 +306,7 @@ namespace xvr2{
 	 *************************************************************************/
 	/** \class FileExists CoreExceptions.h <xvr2/CoreExceptions.h>
 	 *  \brief Exception thrown when the file to be used alreadyeady exists.
-     *  This exception will be thrown only if you enable the checking 
+     *  This exception will be thrown only if you enable the checking
      *  while creating a new file in write or append mode. */
 	class FileExists:public FileException{
 		public:
@@ -335,7 +340,7 @@ namespace xvr2{
 			PermissionDenied();
 	};
 	/** \class FilenameTooLong CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  This exception will be thrown only if you are attempting to open a 
+	 *  This exception will be thrown only if you are attempting to open a
 	 *  very large filename. */
 	class FilenameTooLong:public FileException{
 		public:
@@ -351,7 +356,7 @@ namespace xvr2{
 			FileOrDirectoryNotFound();
 	};
 	/** \class ThisIsNotADirectory CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  This exception will be thrown only if you are attempting to open a 
+	 *  This exception will be thrown only if you are attempting to open a
 	 *  directory and the given filename is not a directory. */
 	class ThisIsNotADirectory:public FileException{
 		public:
@@ -383,7 +388,7 @@ namespace xvr2{
 			UnableToWriteOnRunningExecutableFile();
 	};
 	/** \class FilenameExceedsAddressSpace CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  This exception will be thrown only if you are trying to reach file 
+	 *  This exception will be thrown only if you are trying to reach file
 	 *  which is outside of the address provided by its parent directory. */
 	class FilenameExceedsAddressSpace:public FileException{
 		public:
@@ -399,7 +404,7 @@ namespace xvr2{
 			TooManySymlinks();
 	};
 	/** \class NotEnoughStorageSpace CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  This exception will be thrown only if there is not enough room to 
+	 *  This exception will be thrown only if there is not enough room to
 	 *  to open this file. */
 	class NotEnoughStorageSpace:public FileException{
 		public:
@@ -426,8 +431,8 @@ namespace xvr2{
 	};
 
 	/** \class FileTooBig CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  This exception is thrown whenever you attempt to write pass the maximum offset 
-	 *  allowed or while writing a file will make it grow pass the implementation 
+	 *  This exception is thrown whenever you attempt to write pass the maximum offset
+	 *  allowed or while writing a file will make it grow pass the implementation
 	 *  defined size for the current OS. */
 	class FileTooBig:public FileException{
 	        public:
@@ -436,7 +441,7 @@ namespace xvr2{
 	};
 
 	/** \class WriteWillBlock CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  The file was opened with NON-BLOCKING feature but if u write the process will 
+	 *  The file was opened with NON-BLOCKING feature but if u write the process will
 	 *  block every I/O. */
 	class WriteWillBlock:public FileException{
 		public:
@@ -457,8 +462,8 @@ namespace xvr2{
 	 * EXCEPTIONS DERIVED FROM xvr2::GroupException
 	 *************************************************************************/
 	/** \class GroupNotFound CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  This exception is thrown whenever you are trying to browse the group 
-	 *  database for a specific entry and that entry is not available or 
+	 *  This exception is thrown whenever you are trying to browse the group
+	 *  database for a specific entry and that entry is not available or
 	 *  non-existent */
 	class GroupNotFound:public GroupException{
 		public:
@@ -472,8 +477,8 @@ namespace xvr2{
 	 *************************************************************************/
 	/** \class AllocationFailed CoreExceptions.h <xvr2/CoreExceptions.h>
 	 *  \brief This exceptions might be thrown if a call to malloc or any other
-	 *  memory allocation routine has just failed, it may be posible that you 
-	 *  are running out of memory or that this process is trying to allocate 
+	 *  memory allocation routine has just failed, it may be posible that you
+	 *  are running out of memory or that this process is trying to allocate
 	 *  the maximum allowable memory size in the current system, sorry */
 	class AllocationFailed:public MemoryException{
 		public:
@@ -595,7 +600,7 @@ namespace xvr2{
 			MaximumNumberOfRunningThreadsReached();
 	};
 	/** \class ConditionVarWaitTimedOut CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  The condition variable was signaled before wait interval has been reached, as a 
+	 *  The condition variable was signaled before wait interval has been reached, as a
 	 *  consecuence the controlled Mutex will be re-acquired */
 	class ConditionVarWaitTimedOut:public ThreadException{
 		public:
@@ -603,7 +608,7 @@ namespace xvr2{
 			ConditionVarWaitTimedOut();
 	};
 	/** \class InvalidThread CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  The user provided thread object is not being managed by the ThreadManager	
+	 *  The user provided thread object is not being managed by the ThreadManager
 	 *  so its is invalid */
 	class InvalidThread:public ThreadException{
 		public:
@@ -616,7 +621,7 @@ namespace xvr2{
 	 * EXCEPTIONS DERIVED FROM xvr2::SemaphoreException
 	 *************************************************************************/
 	/** \class SemaphoreInitValueException CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  The initialization value for this semaphore is too big, unable to create 
+	 *  The initialization value for this semaphore is too big, unable to create
 	 *  semaphore, sorry */
 	class SemaphoreInitValueException:public SemaphoreException{
 		public:
@@ -658,7 +663,7 @@ namespace xvr2{
 	 * EXCEPTIONS DERIVED FROM xvr2::UserException
 	 *************************************************************************/
 	/** \class UserNotFound CoreExceptions.h <xvr2/CoreExceptions.h>
-	 *  This exception is thrown whenever you are trying to browse the user database for a 
+	 *  This exception is thrown whenever you are trying to browse the user database for a
 	 *  specific entry and that entry is not available or non-existent */
 	class UserNotFound:public UserException{
 		public:

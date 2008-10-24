@@ -27,7 +27,7 @@ namespace xvr2{
 #endif
 		unload();
 	}
-	
+
 	DSO::DSO(const String &plName){
 		loaded = false;
 		handle = 0;
@@ -69,7 +69,7 @@ namespace xvr2{
 	void *DSO::getSymbol(const String &sym){
 		void *ptr;
 		if(!handle)
-			throw DSO("Load the DSO first!!!");
+			throw DSOException("Load the DSO first!!!");
 #ifdef USE_DEBUG
 		debugConsole << "\tloading: " << sym << "... ";
 #endif

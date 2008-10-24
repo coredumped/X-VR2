@@ -66,7 +66,7 @@ namespace xvr2 {
 #ifdef USE_EMBEDDED_CLASSNAMES
 		setClassName((char *)xvr2::_xvr2ArrayIndexOutOfLimitsException);
 #endif
-		description = (char *)xvr2::excepAOB;	
+		description = (char *)xvr2::excepAOB;
 		_i = -1;
 		_m = -1;
 	}
@@ -74,7 +74,7 @@ namespace xvr2 {
 #ifdef USE_EMBEDDED_CLASSNAMES
 		setClassName((char *)xvr2::_xvr2ArrayIndexOutOfLimitsException);
 #endif
-		description = (char *)xvr2::excepAOB;	
+		description = (char *)xvr2::excepAOB;
 		_i = _index;
 		_m = _maxval;
 	}
@@ -135,7 +135,7 @@ namespace xvr2 {
 #ifdef USE_EMBEDDED_CLASSNAMES
 		setClassName((char *)xvr2::_xvr2CantLoadDSOException);
 #endif
-#ifdef _WIN32		
+#ifdef _WIN32
 		description = (char *)xvr2::excepNoLoadDSO;
 #else
 		description = dlerror();
@@ -146,7 +146,7 @@ namespace xvr2 {
 #ifdef USE_EMBEDDED_CLASSNAMES
 		setClassName((char *)xvr2::_xvr2CantUnloadDSOException);
 #endif
-#ifdef _WIN32		
+#ifdef _WIN32
 		description = (char *)xvr2::excepNoUnloadDSO;
 #else
 		description = dlerror();
@@ -163,6 +163,28 @@ namespace xvr2 {
 		description = dlerror();
 #endif
 	}
+
+	DSOSymbolException::DSOSymbolException(const std::string &symbol_name){
+#ifdef USE_EMBEDDED_CLASSNAMES
+		setClassName((char *)xvr2::_xvr2DSOSymbolException);
+#endif
+#ifdef _WIN32
+		description = (char *)xvr2::excepNoLoadSymbol;
+#else
+		description = dlerror();
+#endif
+		_symbol_name = symbol_name;
+	}
+
+	const std::string &DSOSymbolException::symbolName(){
+		return _symbol_name;
+	}
+
+	const std::string &DSOSymbolException::symbolName() const {
+		return _symbol_name;
+	}
+
+
 	ElementNotFound::ElementNotFound(){
 #ifdef USE_EMBEDDED_CLASSNAMES
 		setClassName((char *)xvr2::_xvr2ElementNotFoundException);
@@ -475,7 +497,7 @@ namespace xvr2 {
 #endif
 		description = (char *)xvr2::excepByteParse;
 	}
-	
+
 
 ///////////////////////////////////////
 /////// SecurityException //////////////////
@@ -493,7 +515,7 @@ namespace xvr2 {
 		description = (char *)xvr2::excepUserIDDoesNotMatch;
 	}
 
-	
+
 ///////////////////////////////////////
 /////// SemaphoreException //////////////////
 	SemaphoreException::SemaphoreException(){
