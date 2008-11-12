@@ -9,12 +9,17 @@
 #include<pwd.h>
 #include<grp.h>
 #include<unistd.h>
+#include<cstdlib>
 #include<sys/utsname.h>
 #if __GNUC__ < 3
 #include<string.h>
 #include<stdlib.h>
 #else
+#if ((__GLIBC__ == 2) && (__GLIBC_MINOR__ > 7))
+#include<cstring>
+#else
 #include<string>
+#endif
 #endif
 
 #if __GNUC__ >= 3
@@ -22,6 +27,7 @@
 #else
 #include<errno.h>
 #endif
+
 
 
 namespace xvr2{

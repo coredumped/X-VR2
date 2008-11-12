@@ -15,6 +15,12 @@
 #include <exception>
 #include <iostream>
 #include<cxxabi.h>
+#if ((__GLIBC__ == 2) && (__GLIBC_MINOR__ > 7))
+#include<cstring>
+#include<cstdlib>
+#else
+#include<string>
+#endif
 
 #ifndef EXCEPTION_DEPTH_TRACE
 #define EXCEPTION_DEPTH_TRACE 50

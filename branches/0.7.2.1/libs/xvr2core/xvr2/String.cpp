@@ -3,7 +3,6 @@
  */
 #include"config.h"
 #include<stdlib.h>
-//#include<stdio.h>
 #include<ctype.h>
 #include "_xvr2ClassNames.h"
 #include "String.h"
@@ -13,7 +12,11 @@
 #include<string.h>
 #else
 #include<iostream>
+#if ((__GLIBC__ == 2) && (__GLIBC_MINOR__ > 7))
+#include<cstring>
+#else
 #include<string>
+#endif
 #include<sstream>
 #endif
 #include<errno.h>
@@ -25,6 +28,7 @@
 #error Unable to make numeric conversions
 #endif
 #endif
+#include<algorithm>
 
 namespace xvr2{
 

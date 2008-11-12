@@ -18,6 +18,11 @@
 #include"StringBuffer.h"
 #include"Memory.h"
 #include"DebugConsole.h"
+#if ((__GLIBC__ == 2) && (__GLIBC_MINOR__ > 7))
+#include<cstring>
+#else
+#include<string>
+#endif
 
 #ifndef BUFFERED_INPUT_STREAM_DEFAULT_BUFSIZE
 #define BUFFERED_INPUT_STREAM_DEFAULT_BUFSIZE 1024

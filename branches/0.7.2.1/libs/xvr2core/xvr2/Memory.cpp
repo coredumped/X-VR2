@@ -4,7 +4,11 @@
 #include"config.h"
 #include"Memory.h"
 #include<cstdlib>
+#if ((__GLIBC__ == 2) && (__GLIBC_MINOR__ > 7))
+#include<cstring>
+#else
 #include<string>
+#endif
 
 #ifndef GC_SCAN_PERIOD
 #define GC_SCAN_PERIOD 250

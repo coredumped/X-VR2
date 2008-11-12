@@ -4,6 +4,12 @@
 #include"pgsql-drvng.h"
 #include<xvr2/DebugConsole.h>
 #include<xvr2/StringBuffer.h>
+#include<cstdlib>
+#if ((__GLIBC__ == 2) && (__GLIBC_MINOR__ > 7))
+#include<cstring>
+#else
+#include<string>
+#endif
 
 using namespace xvr2;
 //using namespace xvr2::Exception;

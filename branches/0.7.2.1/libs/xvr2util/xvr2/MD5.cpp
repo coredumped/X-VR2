@@ -15,6 +15,11 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 #include"MD5.h"
+#if ((__GLIBC__ == 2) && (__GLIBC_MINOR__ > 7))
+#include<cstring>
+#else
+#include<string>
+#endif
 
 namespace xvr2 {
 	namespace Util {

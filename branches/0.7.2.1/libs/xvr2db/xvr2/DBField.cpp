@@ -24,6 +24,12 @@
 #ifdef GCC_REVISION4
 #include<cerrno>
 #endif
+#if ((__GLIBC__ == 2) && (__GLIBC_MINOR__ > 7))
+#include<cstring>
+#else
+#include<string>
+#endif
+#include<cstdlib>
 
 namespace xvr2{
 

@@ -23,6 +23,11 @@
 #else
 #include<errno.h>
 #endif
+
+#if ((__GLIBC__ == 2) && (__GLIBC_MINOR__ > 7))
+#include<cstring>
+#include<cstdlib>
+#endif
 namespace xvr2{
 
 #ifdef DONT_HAVE_REENTRANT_GETGRGID

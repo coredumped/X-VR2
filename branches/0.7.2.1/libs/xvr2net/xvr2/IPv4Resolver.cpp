@@ -14,6 +14,11 @@
 #include<xvr2/IPv4Address.h>
 #include"xvr2/IPv4Resolver.h"
 #include<errno.h>
+#if ((__GLIBC__ == 2) && (__GLIBC_MINOR__ > 7))
+#include<cstring>
+#else
+#include<string>
+#endif
 
 namespace xvr2 {
 namespace Net {

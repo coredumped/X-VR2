@@ -32,6 +32,11 @@
 #include<sys/poll.h>
 #endif
 #include<fcntl.h>
+#if ((__GLIBC__ == 2) && (__GLIBC_MINOR__ > 7))
+#include<cstring>
+#else
+#include<string>
+#endif
 #include"IPv4Address.h"
 
 #ifndef SOCK_CHUNK_SIZE

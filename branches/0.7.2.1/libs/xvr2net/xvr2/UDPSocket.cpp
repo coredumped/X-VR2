@@ -14,6 +14,7 @@
 #include<sys/socket.h>
 #include<sys/types.h>
 #include<errno.h>
+#include<strings.h>
 
 namespace xvr2 {
 	namespace Net {

@@ -138,7 +138,7 @@ namespace xvr2 {
 			throw StreamException(errno);
 		}
 		else if(r > 0){
-			if(d.revents & POLLIN == POLLIN || d.revents & POLLPRI == POLLPRI){
+			if(((d.revents & POLLIN) == POLLIN) || ((d.revents & POLLPRI) == POLLPRI)){
 				ret = true;
 			}
 		}

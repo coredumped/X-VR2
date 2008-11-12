@@ -1,4 +1,9 @@
 #include "Buffer.h"
+#if ((__GLIBC__ == 2) && (__GLIBC_MINOR__ > 7))
+#include<cstring>
+#else
+#include<string>
+#endif
 
 namespace xvr2{
 

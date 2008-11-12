@@ -12,6 +12,7 @@
 #include"xvr2/Mutex.h"
 #include<sys/poll.h>
 #include<errno.h>
+#include<strings.h>
 
 namespace xvr2 {
 	namespace Net {

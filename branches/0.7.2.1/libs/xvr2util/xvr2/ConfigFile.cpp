@@ -17,6 +17,11 @@
 #endif
 #include<limits.h>
 #include<unistd.h>
+#if ((__GLIBC__ == 2) && (__GLIBC_MINOR__ > 7))
+#include<cstring>
+#else
+#include<string>
+#endif
 
 extern int config_parse(xvr2::Util::ConfigFile *store, const char *);
 
