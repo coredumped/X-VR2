@@ -28,6 +28,10 @@
 #include<sys/types.h>
 #include<sys/stat.h>
 #include"mysql-drv.h"
+#if __GLIBC__ >= 2 && __GLIBC_MINOR__ >= 8
+#include<cstdlib>
+#include<cstring>
+#endif
 
 using namespace xvr2;
 //using namespace xvr2::Exception;
@@ -548,9 +552,6 @@ const bool MySQLDriver::hasConnPolling(){
 }
 
 int MySQLDriver::execCommand(void *__conn_handle, const xvr2::String &command){
-	DB::ResultSet *r = 0;
-	MYSQL_RES *result;
-	__rdbms_result_set *rres;
 	__rdbms_conn *conn;
 	conn = (__rdbms_conn *)__conn_handle;
 	//Verify that MySQL's TSD is in place before attemtping to run the query
@@ -585,3 +586,4 @@ int MySQLDriver::execCommand(void *__conn_handle, const xvr2::String &command){
 void MySQLDriver::resetConnection(void *conn_handle){
 	throw xvr2::DB::DatabaseException("MySQL driver does not support connection resets yet.");
 }
+
