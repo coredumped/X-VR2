@@ -9,3 +9,6 @@ clean:
 	rm -rf html/*
 
 rebuild: clean all
+
+install:
+	@echo Not installing documentation, look at the docs directory.
