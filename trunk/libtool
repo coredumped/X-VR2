@@ -82,13 +82,13 @@ AR="ar"
 AR_FLAGS="cru"
 
 # A C compiler.
-LTCC="gcc"
+LTCC="icc"
 
 # LTCC compiler flags.
 LTCFLAGS="-g -O2"
 
 # A language-specific compiler.
-CC="gcc"
+CC="icc"
 
 # Is the compiler the GNU C compiler?
 with_gcc=yes
@@ -174,7 +174,7 @@ dlopen_self_static=no
 link_static_flag="-static"
 
 # Compiler flag to turn off builtin functions.
-no_builtin_flag=" -fno-builtin"
+no_builtin_flag=" -fno-builtin -fno-rtti -fno-exceptions"
 
 # Compiler flag to allow reflexive dlopens.
 export_dynamic_flag_spec="\${wl}--export-dynamic"
@@ -329,7 +329,7 @@ variables_saved_for_relink="PATH LD_LIBRARY_PATH LD_RUN_PATH GCC_EXEC_PREFIX COM
 link_all_deplibs=no
 
 # Compile-time system search path for libraries
-sys_lib_search_path_spec="/usr/lib/gcc/x86_64-linux-gnu/4.2.3 /usr/lib /lib"
+sys_lib_search_path_spec="/opt/intel/cce/10.1.015/lib /usr/lib64"
 
 # Run-time system search path for libraries
 sys_lib_dlsearch_path_spec="/lib /usr/lib /usr/lib/kde4/lib /usr/local/lib /lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu "
@@ -7358,13 +7358,13 @@ AR="ar"
 AR_FLAGS="cru"
 
 # A C compiler.
-LTCC="gcc"
+LTCC="icc"
 
 # LTCC compiler flags.
 LTCFLAGS="-g -O2"
 
 # A language-specific compiler.
-CC="g++"
+CC="icpc"
 
 # Is the compiler the GNU C compiler?
 with_gcc=yes
@@ -7487,8 +7487,8 @@ old_archive_from_new_cmds=""
 old_archive_from_expsyms_cmds=""
 
 # Commands used to build and install a shared archive.
-archive_cmds="\$CC -shared -nostdlib \$predep_objects \$libobjs \$deplibs \$postdep_objects \$compiler_flags \${wl}-soname \$wl\$soname -o \$lib"
-archive_expsym_cmds="\$CC -shared -nostdlib \$predep_objects \$libobjs \$deplibs \$postdep_objects \$compiler_flags \${wl}-soname \$wl\$soname \${wl}-retain-symbols-file \$wl\$export_symbols -o \$lib"
+archive_cmds="\$CC -shared \$libobjs \$deplibs \$compiler_flags \${wl}-soname \$wl\$soname -o \$lib"
+archive_expsym_cmds="\$CC -shared \$libobjs \$deplibs \$compiler_flags \${wl}-soname \$wl\$soname \${wl}-retain-symbols-file \$wl\$export_symbols -o \$lib"
 postinstall_cmds=""
 postuninstall_cmds=""
 
@@ -7502,11 +7502,11 @@ striplib="strip --strip-unneeded"
 
 # Dependencies to place before the objects being linked to create a
 # shared library.
-predep_objects="/usr/lib/gcc/x86_64-linux-gnu/4.2.3/../../../../lib/crti.o /usr/lib/gcc/x86_64-linux-gnu/4.2.3/crtbeginS.o"
+predep_objects="-mIPOPT_obj_output_file_name=/tmp/ipo_icpc3l5Pcv.o -mGLOB_obj_output_file=/tmp/ipo_icpc3l5Pcv.o"
 
 # Dependencies to place after the objects being linked to create a
 # shared library.
-postdep_objects="/usr/lib/gcc/x86_64-linux-gnu/4.2.3/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/4.2.3/../../../../lib/crtn.o"
+postdep_objects="/usr/lib/gcc/x86_64-linux-gnu/4.2.3/../../../../lib64/crti.o /usr/lib/gcc/x86_64-linux-gnu/4.2.3/crtbeginS.o /usr/lib/gcc/x86_64-linux-gnu/4.2.3/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/4.2.3/../../../../lib64/crtn.o"
 
 # Dependencies to place before the objects being linked to create a
 # shared library.
@@ -7514,15 +7514,15 @@ predeps=""
 
 # Dependencies to place after the objects being linked to create a
 # shared library.
-postdeps="-lstdc++ -lm -lgcc_s -lc -lgcc_s"
+postdeps="-L/opt/intel/cce/10.1.015/lib -L/usr/lib/gcc/x86_64-linux-gnu/4.2.3/ -L/usr/lib/gcc/x86_64-linux-gnu/4.2.3/../../../../lib64 -limf -lsvml -lm -lipgo -lstdc++ -lintlc -lgcc_s -lintlc -lc -lgcc_s -lirc_s -ldl -lc"
 
 # The directories searched by this compiler when creating a shared
 # library
-compiler_lib_search_dirs="/usr/lib/gcc/x86_64-linux-gnu/4.2.3 /usr/lib/gcc/x86_64-linux-gnu/4.2.3 /usr/lib/gcc/x86_64-linux-gnu/4.2.3/../../../../lib /lib/../lib /usr/lib/../lib /usr/lib/gcc/x86_64-linux-gnu/4.2.3/../../.."
+compiler_lib_search_dirs=""
 
 # The library search path used internally by the compiler when linking
 # a shared library.
-compiler_lib_search_path="-L/usr/lib/gcc/x86_64-linux-gnu/4.2.3 -L/usr/lib/gcc/x86_64-linux-gnu/4.2.3 -L/usr/lib/gcc/x86_64-linux-gnu/4.2.3/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/4.2.3/../../.."
+compiler_lib_search_path=""
 
 # Method to check whether dependent libraries are shared objects.
 deplibs_check_method="pass_all"
@@ -7568,7 +7568,7 @@ hardcode_into_libs=yes
 
 # Flag to hardcode $libdir into a binary during linking.
 # This must work even if $libdir does not exist.
-hardcode_libdir_flag_spec="\${wl}--rpath \${wl}\$libdir"
+hardcode_libdir_flag_spec="\${wl}-rpath,\$libdir"
 
 # If ld is used when linking, flag to hardcode $libdir into
 # a binary during linking. This must work even if $libdir does
@@ -7602,7 +7602,7 @@ variables_saved_for_relink="PATH LD_LIBRARY_PATH LD_RUN_PATH GCC_EXEC_PREFIX COM
 link_all_deplibs=no
 
 # Compile-time system search path for libraries
-sys_lib_search_path_spec="/usr/lib/gcc/x86_64-linux-gnu/4.2.3 /usr/lib /lib"
+sys_lib_search_path_spec="/opt/intel/cce/10.1.015/lib /usr/lib64"
 
 # Run-time system search path for libraries
 sys_lib_dlsearch_path_spec="/lib /usr/lib /usr/lib/kde4/lib /usr/local/lib /lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu "

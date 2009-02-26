@@ -32,7 +32,7 @@ fi
 rm -f config.cache acconfig.h
 
 echo "- libtoolize."		&& \
-libtoolize --force		&& \
+libtoolize -c --force		&& \
 echo "- aclocal."		&& \
 aclocal				&& \
 echo "- autoconf."		&& \
@@ -40,7 +40,7 @@ autoconf			&& \
 echo "- autoheader."		&& \
 autoheader			&& \
 echo "- automake."		&& \
-automake --add-missing --gnu	&& exit 0
+automake -c --add-missing --gnu	&& exit 0
 
 exit 1
 
