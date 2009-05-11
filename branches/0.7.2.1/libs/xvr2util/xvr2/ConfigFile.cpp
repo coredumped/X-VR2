@@ -23,6 +23,14 @@
 #include<string>
 #endif
 
+#warning
+#warning #############################################################################
+#warning
+#warning Please refrain from using the xvr2::ConfigFile class, it has been deprecated
+#warning
+#warning #############################################################################
+#warning
+
 extern int config_parse(xvr2::Util::ConfigFile *store, const char *);
 
 int param_value_add(xvr2::Util::ConfigFile *store, const char *param_name, const char *data){

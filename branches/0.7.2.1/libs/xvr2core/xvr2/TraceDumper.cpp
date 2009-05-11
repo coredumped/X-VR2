@@ -15,6 +15,7 @@
 #include <exception>
 #include <iostream>
 #include<cxxabi.h>
+#include<strings.h>
 #if ((__GLIBC__ == 2) && (__GLIBC_MINOR__ > 7))
 #include<cstring>
 #include<cstdlib>
