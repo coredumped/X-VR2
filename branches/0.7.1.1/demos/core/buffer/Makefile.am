@@ -1,9 +1,0 @@
-# $Id$
-
-bin_PROGRAMS = t1
-
-t1_SOURCES = t1.cpp
-
-INCLUDES = $(CPPFLAGS)
-
-LDADD = $(DEPS_LIBS)
